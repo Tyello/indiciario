@@ -37,9 +37,13 @@ def test_project_operational_files_exist():
     assert not missing, f"Arquivos operacionais ausentes: {missing}"
 
 
-def test_legacy_root_python_files_are_compatibility_wrappers():
+def test_legacy_root_python_files_are_optional_compatibility_wrappers():
+    """Arquivos legados na raiz são opcionais; se existirem, devem ser wrappers."""
     for filename in ["models.py", "validator.py"]:
-        content = (ROOT / filename).read_text(encoding="utf-8")
+        path = ROOT / filename
+        if not path.exists():
+            continue
+        content = path.read_text(encoding="utf-8")
         assert "Compatibilidade temporária" in content
         assert "generator." in content
 
