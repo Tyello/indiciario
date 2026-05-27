@@ -1,0 +1,532 @@
+{
+  "titulo": "A Noite do Acervo",
+  "subtitulo": "Roubo no Museu Municipal de Arte",
+  "genero": "roubo em museu",
+  "tom": "policial",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "medio_alto",
+  "tempo_estimado_min": 70,
+  "numero_jogadores": "3-5",
+  "formato_envelopes": 2,
+
+  "premissa": "Na tarde de uma quarta-feira, durante uma manutenção programada que desligou as câmeras por 45 minutos, o quadro 'Véspera' — avaliado em R$ 3 milhões — desapareceu da Galeria Principal do Museu Municipal. O museu estava fechado ao público. Apenas quatro funcionários e dois fornecedores tinham acesso.",
+
+  "verdade_real": "Marcelo Faria, analista de segurança, combinou com Paulo Leite, motorista da empresa TransArte, a retirada do quadro durante a janela de câmeras offline. Marcelo usou o crachá de emergência da supervisora Helena para liberar a sala restrita sem gerar registro em seu próprio ID. Paulo tinha um van estacionada na entrada de serviço. O quadro foi levado para um galpão em Osasco, onde seria vendido para um colecionador via intermediária Galeria Sombria.",
+
+  "executor_id": "14",
+  "planejador_id": "14",
+  "beneficiario_id": "14",
+  "motivacao": "Dívida de jogo de R$ 80.000 com cobrador violento.",
+  "metodo_ocultacao": "Usou crachá de Helena para não gerar registro próprio. Justificou presença na área como 'ronda de rotina'.",
+  "erro_que_permite_descobrir": "O crachá de Helena foi usado às 15h22, mas ela registrou saída do prédio às 14h50 pelo registro físico biométrico.",
+
+  "cadeia_causal": [
+    "Marcelo combina com Paulo a operação durante um almoço três dias antes.",
+    "Marcelo identifica que a janela de manutenção das câmeras seria na quarta às 15h.",
+    "Marcelo pega o crachá de emergência de Helena do armário da segurança sem autorização.",
+    "Às 15h22, Marcelo usa o crachá de Helena para abrir a Galeria Principal.",
+    "Paulo entra pela entrada de serviço com van enquanto Marcelo carrega o quadro.",
+    "Marcelo devolve o crachá e volta à sala de segurança como se nada tivesse acontecido.",
+    "Paulo leva o quadro para galpão em Osasco.",
+    "O sumiço é descoberto às 16h40 quando o técnico entra para ajustar a iluminação."
+  ],
+
+  "personagens": [
+    {
+      "id": "14",
+      "nome": "Marcelo Faria",
+      "funcao": "Analista de Segurança",
+      "papel": "executor",
+      "suspeita_aparente": "Estava de plantão e conhece os sistemas de segurança",
+      "verdade": "Executou o roubo usando o crachá de Helena durante a janela de câmeras offline",
+      "documento_ancoragem": ["E1-05", "E1-06"]
+    },
+    {
+      "id": "09",
+      "nome": "Helena Vasconcelos",
+      "funcao": "Supervisora de Segurança",
+      "papel": "red_herring",
+      "suspeita_aparente": "Seu crachá foi usado no horário do roubo",
+      "verdade": "Havia saído do prédio antes do evento — crachá foi usado por outra pessoa",
+      "documento_ancoragem": ["E1-05", "E1-06"]
+    },
+    {
+      "id": "22",
+      "nome": "Roberta Lins",
+      "funcao": "Curadora",
+      "papel": "narrador",
+      "suspeita_aparente": "Tem acesso privilegiado às obras e beneficiária do seguro institucional",
+      "verdade": "Não tem envolvimento. Pediu investigação pois teme ser responsabilizada",
+      "documento_ancoragem": ["E1-01", "E1-02"]
+    },
+    {
+      "id": "31",
+      "nome": "Túlio Menezes",
+      "funcao": "Técnico de Iluminação (fornecedor)",
+      "papel": "red_herring",
+      "suspeita_aparente": "Descobriu o sumiço e demorou para avisar",
+      "verdade": "Descobriu honestamente — demorou porque ficou em choque",
+      "documento_ancoragem": ["E1-03", "E2-04"]
+    },
+    {
+      "id": "27",
+      "nome": "Paulo Leite",
+      "funcao": "Motorista — TransArte Logística",
+      "papel": "cumplice",
+      "suspeita_aparente": "Fez entrega no museu no dia — van captada em câmera externa",
+      "verdade": "Cúmplice de Marcelo. Transportou o quadro para Osasco",
+      "documento_ancoragem": ["E2-03", "E2-05"]
+    }
+  ],
+
+  "linha_tempo_real": [
+    {
+      "data_hora": "Qua 14h20",
+      "evento": "Roberta envia e-mail ao detetive pedindo investigação discreta",
+      "personagem_id": "22",
+      "documento_prova": "E1-02",
+      "confirmacao_independente": null
+    },
+    {
+      "data_hora": "Qua 14h50",
+      "evento": "Helena registra saída biométrica na entrada principal",
+      "personagem_id": "09",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-03"
+    },
+    {
+      "data_hora": "Qua 15h00",
+      "evento": "Câmeras ficam offline — manutenção programada",
+      "personagem_id": null,
+      "documento_prova": "E1-04",
+      "confirmacao_independente": "E1-06"
+    },
+    {
+      "data_hora": "Qua 15h22",
+      "evento": "Crachá ID-09 (Helena) abre a Galeria Principal",
+      "personagem_id": "14",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-06"
+    },
+    {
+      "data_hora": "Qua 15h28",
+      "evento": "Van da TransArte registrada em câmera externa na entrada de serviço",
+      "personagem_id": "27",
+      "documento_prova": "E2-05",
+      "confirmacao_independente": "E2-03"
+    },
+    {
+      "data_hora": "Qua 16h40",
+      "evento": "Túlio descobre sumiço do quadro ao entrar para ajustar iluminação",
+      "personagem_id": "31",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": null
+    }
+  ],
+
+  "linha_tempo_percebida": [
+    {
+      "data_hora": "Qua 15h22",
+      "evento": "Helena parece ter aberto a Galeria Principal",
+      "personagem_id": "09",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": null
+    }
+  ],
+
+  "linha_tempo_documental": [
+    {
+      "data_hora": "Qua 14h50",
+      "evento": "Saída biométrica de ID-09 confirmada",
+      "personagem_id": "09",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": null
+    }
+  ],
+
+  "pilares_validacao": [
+    {
+      "nome": "Presença física na área",
+      "documento_principal": "E1-05",
+      "confirmacao": "E1-03",
+      "personagem_id": "14"
+    },
+    {
+      "nome": "Uso indevido de crachá",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-05",
+      "personagem_id": "14"
+    },
+    {
+      "nome": "Contradição de álibi",
+      "documento_principal": "E1-07",
+      "confirmacao": "E1-05",
+      "personagem_id": "14"
+    },
+    {
+      "nome": "Ausência de registro próprio",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-04",
+      "personagem_id": "14"
+    }
+  ],
+
+  "intervalo_critico_inicio": "15:00",
+  "intervalo_critico_fim": "16:40",
+
+  "documentos": [
+    {
+      "codigo": "E1-01",
+      "titulo": "Protocolo de Investigação — Envelope 1",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "orientacao e urgencia",
+      "objetivo_narrativo": "Orientar o jogador, definir os quatro pilares e o critério de avanço",
+      "pistas_contidas": ["intervalo crítico 15h-16h40", "quatro pilares nomeados"],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "E-mail de Roberta — Pedido de Investigação",
+      "envelope": "E1",
+      "tipo": "email_narrador",
+      "emocao_esperada": "urgencia e suspeita sobre o narrador",
+      "objetivo_narrativo": "Contextualizar o crime, plantar suspeita em Helena e revelar que câmeras estavam offline",
+      "pistas_contidas": ["câmeras offline às 15h", "crachá de Helena usado", "suspeita em Helena"],
+      "confirma": ["E1-04"],
+      "confirmado_por": [],
+      "red_herring_potencial": "Roberta parece saber demais sobre os detalhes",
+      "ids_citados": ["09", "14", "22"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-03",
+      "titulo": "Mapa do Museu",
+      "envelope": "E1",
+      "tipo": "mapa",
+      "emocao_esperada": "orientacao espacial",
+      "objetivo_narrativo": "Mostrar localização da Galeria Principal, entradas e câmeras",
+      "pistas_contidas": ["entrada de serviço fora do ângulo das câmeras internas", "Galeria Principal tem apenas uma entrada controlada"],
+      "confirma": ["E1-05"],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Comunicado de Manutenção — Câmeras Offline",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "compreensao da vulnerabilidade",
+      "objetivo_narrativo": "Confirmar que câmeras ficaram offline entre 15h e 16h30 por manutenção programada",
+      "pistas_contidas": ["janela offline: 15h00 a 16h30", "câmeras de entrada de serviço não afetadas"],
+      "confirma": ["E1-05"],
+      "confirmado_por": ["E1-02"],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Registro de Acesso Físico",
+      "envelope": "E1",
+      "tipo": "log_acesso",
+      "emocao_esperada": "primeira suspeita concreta",
+      "objetivo_narrativo": "Provar que Helena saiu às 14h50 e que o crachá dela foi usado às 15h22 por outra pessoa",
+      "pistas_contidas": [
+        "ID-09 Helena: SAÍDA biométrica 14h50",
+        "Crachá ID-09: ENTRADA Galeria Principal 15h22",
+        "ID-14 Marcelo: presença contínua no corredor"
+      ],
+      "confirma": ["E1-06"],
+      "confirmado_por": ["E1-02", "E1-03"],
+      "red_herring_potencial": "Log mostra crachá de Helena — parece que ela voltou",
+      "risco_ambiguidade": "medio",
+      "ids_citados": ["09", "14", "22", "31"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Escala de Turno",
+      "envelope": "E1",
+      "tipo": "escala",
+      "emocao_esperada": "confirmacao de alíbi ou derrubada",
+      "objetivo_narrativo": "Confirmar quem estava de plantão e quem tinha acesso autorizado na tarde de quarta",
+      "pistas_contidas": [
+        "Marcelo: plantão 13h-21h",
+        "Helena: turno encerrado às 14h30",
+        "Crachá de emergência de Helena estava no armário da segurança"
+      ],
+      "confirma": ["E1-05"],
+      "confirmado_por": [],
+      "ids_citados": ["09", "14", "22"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Depoimento de Túlio Menezes",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "confusao produtiva e suspeita em Túlio",
+      "objetivo_narrativo": "Humanizar a descoberta e criar suspeita inicial em Túlio (red herring)",
+      "pistas_contidas": [
+        "Túlio diz ter visto 'alguém saindo rápido' sem descrever quem",
+        "Admite que demorou para avisar — 'fiquei em choque'"
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "Túlio parece estar escondendo algo sobre o que viu",
+      "risco_ambiguidade": "alto",
+      "ids_citados": ["31"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Folha de Cruzamento",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "sensacao de controle sobre a investigacao",
+      "objetivo_narrativo": "Ferramenta de organização — suspeitos, pilares e linha do tempo",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-01",
+      "titulo": "E-mail da Diretoria — A Van e o Destino",
+      "envelope": "E2",
+      "tipo": "email_institucional",
+      "emocao_esperada": "mudanca de perspectiva",
+      "objetivo_narrativo": "Reorientar para a cadeia completa — van captada, galpão em Osasco",
+      "pistas_contidas": ["van TransArte captada na câmera externa às 15h28", "quadro não está mais no museu nem em Osasco"],
+      "confirma": ["E2-03"],
+      "confirmado_por": [],
+      "ids_citados": ["27"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-02",
+      "titulo": "Boletim Policial de Inspeção",
+      "envelope": "E2",
+      "tipo": "boletim",
+      "emocao_esperada": "peso institucional",
+      "objetivo_narrativo": "Confirmar furto qualificado, ausência de arrombamento e hipótese de envolvimento interno",
+      "pistas_contidas": ["sem arrombamento", "acesso com crachá válido", "hipótese de envolvimento interno"],
+      "confirma": ["E1-05", "E1-06"],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-03",
+      "titulo": "Cadastro de Terceiros — TransArte Logística",
+      "envelope": "E2",
+      "tipo": "cadastro_terceiros",
+      "emocao_esperada": "expansao do universo de suspeitos",
+      "objetivo_narrativo": "Documentar Paulo Leite como funcionário da TransArte com acesso à entrada de serviço",
+      "pistas_contidas": [
+        "Paulo Leite: motorista, ID externo 30527",
+        "TransArte: contrato de logística com o museu",
+        "Autorização de entrada na data do crime"
+      ],
+      "confirma": ["E2-05"],
+      "confirmado_por": ["E2-01"],
+      "ids_citados": ["27"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-04",
+      "titulo": "Depoimento de Túlio — Versão Completa",
+      "envelope": "E2",
+      "tipo": "depoimento",
+      "emocao_esperada": "humanizacao e descarte do red herring",
+      "objetivo_narrativo": "Descartar Túlio como suspeito e revelar que ele viu uma van saindo",
+      "pistas_contidas": [
+        "Viu van branca saindo às 15h30 pela entrada de serviço",
+        "Não sabia que era suspeito — achava que era retirada normal",
+        "Confirma que Marcelo estava no corredor próximo à galeria"
+      ],
+      "confirma": ["E2-03", "E2-05"],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "ids_citados": ["31", "14", "27"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-05",
+      "titulo": "Imagem de Câmera Externa — Entrada de Serviço",
+      "envelope": "E2",
+      "tipo": "outro",
+      "emocao_esperada": "cruzamento que conecta os pontos",
+      "objetivo_narrativo": "Provar que a van TransArte de Paulo estava na entrada de serviço às 15h28",
+      "pistas_contidas": [
+        "Placa da van: AAA-1234 (TransArte)",
+        "Horário: 15h28 — dentro da janela crítica",
+        "Nenhuma outra van no período"
+      ],
+      "confirma": ["E2-03"],
+      "confirmado_por": ["E2-01", "E2-04"],
+      "ids_citados": ["27"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-06",
+      "titulo": "Extrato de Repasses — Conta de Marcelo",
+      "envelope": "E2",
+      "tipo": "extrato",
+      "emocao_esperada": "surpresa justa — o plano financeiro",
+      "objetivo_narrativo": "Revelar dívida de Marcelo e pagamento recebido após o crime",
+      "pistas_contidas": [
+        "Saque de R$ 80.000 agendado D+3 após o crime",
+        "Depósito de R$ 15.000 em conta desconhecida D+1",
+        "Histórico mostra dívidas recorrentes"
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["14"],
+      "codigos_citados": []
+    }
+  ],
+
+  "matriz_pistas": [
+    {
+      "descricao": "Crachá de Helena usado 32 minutos após a saída biométrica dela",
+      "documento": "E1-05",
+      "o_que_sugere": "Helena voltou ao museu secretamente",
+      "o_que_prova": "O crachá foi usado por outra pessoa — Marcelo estava presente no corredor",
+      "confirmacao": "E1-06",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "frustração produtiva ao perceber que Helena é inocente"
+    },
+    {
+      "descricao": "Marcelo presente no corredor adjacente à galeria no horário crítico",
+      "documento": "E1-06",
+      "o_que_sugere": "Estava fazendo ronda de rotina",
+      "o_que_prova": "Única pessoa com acesso físico + crachá de emergência disponível no armário",
+      "confirmacao": "E1-05",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "adrenalina ao cruzar presença física com crachá indevido"
+    },
+    {
+      "descricao": "Van da TransArte na entrada de serviço às 15h28",
+      "documento": "E2-05",
+      "o_que_sugere": "Entrega rotineira",
+      "o_que_prova": "Cúmplice aguardando para transportar o quadro",
+      "confirmacao": "E2-03",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "satisfação ao fechar a cadeia de escoamento"
+    }
+  ],
+
+  "red_herrings": [
+    {
+      "personagem_id": "09",
+      "motivo_aparente": "Seu crachá aparece no registro de acesso da Galeria Principal no horário do crime",
+      "como_descartar": "Registro biométrico confirma que ela saiu 32 minutos antes do uso do crachá",
+      "documento_descarte": "E1-05",
+      "categoria": "oportunidade_sem_presenca"
+    },
+    {
+      "personagem_id": "31",
+      "motivo_aparente": "Descobriu o crime e demorou para avisar — parece saber mais do que conta",
+      "como_descartar": "Depoimento completo no E2 explica o choque e o que ele realmente viu",
+      "documento_descarte": "E2-04",
+      "categoria": "comportamento_suspeito_sem_evidencia"
+    }
+  ],
+
+  "cadeia_financeira": [
+    {
+      "de": "Museu Municipal de Arte",
+      "para": "Marcelo Faria (via roubo)",
+      "valor_ou_item": "Quadro 'Véspera' — R$ 3 milhões",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": null,
+      "is_salto_final": false
+    },
+    {
+      "de": "Marcelo Faria",
+      "para": "Paulo Leite / TransArte",
+      "valor_ou_item": "Quadro físico transportado em van",
+      "documento_prova": "E2-05",
+      "confirmacao_independente": "E2-03",
+      "is_salto_final": false
+    },
+    {
+      "de": "Comprador via Galeria Sombria",
+      "para": "Conta de Marcelo",
+      "valor_ou_item": "R$ 15.000 depósito inicial (parcela)",
+      "documento_prova": "E2-06",
+      "confirmacao_independente": "E2-03",
+      "is_salto_final": true
+    }
+  ],
+
+  "codigos": [],
+
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo focado apenas no crachá de Helena sem checar o registro biométrico",
+      "texto": "Aparecer num log de crachá não é o mesmo que estar presente. Compare os dois tipos de registro disponíveis.",
+      "o_que_desbloqueia": "Perceber que Helena saiu antes do uso do crachá"
+    },
+    {
+      "numero": 2,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo ignorando o mapa",
+      "texto": "A galeria tem apenas uma entrada controlada. Quem entrou ali naquele horário precisava estar no corredor antes.",
+      "o_que_desbloqueia": "Usar o mapa para localizar quem estava próximo"
+    },
+    {
+      "numero": 3,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo acusando Helena mas sem conseguir defender o quarto pilar",
+      "texto": "Se alguém saiu às 14h50, quem poderia ter pegado o crachá de emergência no armário da segurança depois disso?",
+      "o_que_desbloqueia": "Conectar crachá de emergência com quem tinha acesso ao armário"
+    },
+    {
+      "numero": 4,
+      "intensidade": "forte",
+      "envelope": "E1",
+      "condicao_uso": "Grupo travado sem conseguir fechar o quarto pilar",
+      "texto": "Os quatro pilares devem apontar para o mesmo nome: quem estava de plantão, tinha acesso ao armário, estava no corredor e não gerou registro próprio.",
+      "o_que_desbloqueia": "Chegar a Marcelo Faria"
+    },
+    {
+      "numero": 5,
+      "intensidade": "leve",
+      "envelope": "E2",
+      "condicao_uso": "Grupo satisfeito com Marcelo como único culpado",
+      "texto": "Um quadro de 180cm x 120cm não sai num elevador. Como ele saiu do prédio sem ser visto pelas câmeras internas?",
+      "o_que_desbloqueia": "Abrir busca pelo cúmplice e rota de saída"
+    },
+    {
+      "numero": 6,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não conectando a van com Paulo",
+      "texto": "Câmeras externas não estavam offline. O que a câmera da entrada de serviço capturou no intervalo crítico?",
+      "o_que_desbloqueia": "Encontrar a imagem da van no E2-05"
+    },
+    {
+      "numero": 7,
+      "intensidade": "quase_gabarito",
+      "envelope": "E2",
+      "condicao_uso": "Grupo sabe de Marcelo e Paulo mas não fecha a cadeia financeira",
+      "texto": "A cadeia fecha quando você conecta: crachá indevido → rota de saída → van do cúmplice → depósito na conta. Qual documento prova cada salto?",
+      "o_que_desbloqueia": "Fechar a solução completa"
+    }
+  ],
+
+  "versao": "0.1",
+  "observacoes_producao": "Colorido discreto. Legível em tela de celular. Mapa simples com 4-5 salas."
+}

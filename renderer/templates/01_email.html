@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-mail — {{ASSUNTO}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: #f6f8fc;
+    color: #202124;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .app-bar {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .app-logo {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+
+  .app-logo span:first-child { color: #4285F4; }
+  .app-logo span:nth-child(2) { color: #EA4335; }
+  .app-logo span:nth-child(3) { color: #FBBC05; }
+  .app-logo span:nth-child(4) { color: #4285F4; }
+  .app-logo span:nth-child(5) { color: #34A853; }
+  .app-logo span:nth-child(6) { color: #EA4335; }
+  .app-logo span:nth-child(7) { color: #4285F4; }
+
+  .recipient-bar {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 20px;
+    font-size: 12px;
+    color: #5f6368;
+  }
+
+  .email-container {
+    max-width: 860px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.08);
+    overflow: hidden;
+  }
+
+  .email-header {
+    padding: 24px 28px 16px;
+    border-bottom: 1px solid #f1f3f4;
+  }
+
+  .email-subject {
+    font-size: 22px;
+    font-weight: 400;
+    color: #202124;
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+
+  .sender-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: {{AVATAR_COR}};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .sender-info {
+    flex: 1;
+  }
+
+  .sender-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #202124;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sender-email-inline {
+    font-weight: 400;
+    color: #5f6368;
+    font-size: 13px;
+  }
+
+  .sender-meta {
+    font-size: 12px;
+    color: #5f6368;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .date-right {
+    font-size: 12px;
+    color: #5f6368;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  .email-body {
+    padding: 24px 28px 24px 80px;
+    font-size: 14px;
+    color: #202124;
+    line-height: 1.7;
+  }
+
+  .email-body p {
+    margin-bottom: 14px;
+  }
+
+  .email-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .attachments {
+    padding: 16px 28px 20px 80px;
+    border-top: 1px solid #f1f3f4;
+  }
+
+  .attachments-label {
+    font-size: 12px;
+    color: #5f6368;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .attachments-label strong {
+    color: #202124;
+  }
+
+  .attachment-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .attachment-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+    border: 1px solid #e8eaed;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #202124;
+    min-width: 140px;
+  }
+
+  .attachment-icon {
+    width: 24px;
+    height-: 24px;
+    color: #EA4335;
+    font-size: 18px;
+  }
+
+  .attachment-info { line-height: 1.3; }
+  .attachment-name { font-weight: 500; font-size: 12px; }
+  .attachment-size { color: #5f6368; font-size: 11px; }
+
+  .confidential-footer {
+    padding: 10px 28px;
+    background: #fafafa;
+    border-top: 1px solid #f1f3f4;
+    font-size: 10px;
+    color: #9aa0a6;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="app-bar">
+  <div class="app-logo">
+    <span>M</span><span>a</span><span>i</span><span>l</span>
+  </div>
+  <div style="font-size:13px; color:#5f6368; font-weight:500;">{{DESTINATARIO_LABEL}}</div>
+</div>
+
+<div class="email-container">
+  <div class="email-header">
+    <div class="email-subject">{{ASSUNTO}}</div>
+    <div class="sender-row">
+      <div class="avatar">{{AVATAR_INICIAL}}</div>
+      <div class="sender-info">
+        <div class="sender-name">
+          {{REMETENTE_NOME}}
+          <span class="sender-email-inline">&lt;{{REMETENTE_EMAIL}}&gt;</span>
+        </div>
+        <div class="sender-meta">
+          Para: <strong>{{DESTINATARIO_EMAIL}}</strong>
+          {{#COPIA}}&nbsp;· Cc: {{COPIA}}{{/COPIA}}
+        </div>
+      </div>
+      <div class="date-right">{{DATA_HORA}}</div>
+    </div>
+  </div>
+
+  <div class="email-body">
+    {{CORPO_EMAIL}}
+  </div>
+
+  {{#ANEXOS}}
+  <div class="attachments">
+    <div class="attachments-label"><strong>{{TOTAL_ANEXOS}} anexos</strong></div>
+    <div class="attachment-grid">
+      {{#CADA_ANEXO}}
+      <div class="attachment-item">
+        <div class="attachment-icon">📄</div>
+        <div class="attachment-info">
+          <div class="attachment-name">{{NOME_ARQUIVO}}</div>
+          <div class="attachment-size">{{TAMANHO_KB}}K</div>
+        </div>
+      </div>
+      {{/CADA_ANEXO}}
+    </div>
+  </div>
+  {{/ANEXOS}}
+
+  <div class="confidential-footer">{{NOTA_RODAPE}}</div>
+</div>
+
+</body>
+</html>

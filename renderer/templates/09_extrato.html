@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extrato — {{NOME_BANCO}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    padding: 24px;
+    font-size: 13px;
+  }
+
+  .page {
+    background: #fff;
+    max-width: 780px;
+    margin: 0 auto;
+    box-shadow: 0 1px 8px rgba(0,0,0,.1);
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  /* Bank header */
+  .bank-header {
+    background: {{COR_BANCO}};
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+  }
+
+  .bank-left { display: flex; align-items: center; gap: 16px; }
+
+  .bank-logo-box {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+
+  .bank-name { font-size: 20px; font-weight: 700; line-height: 1.1; }
+  .bank-tagline { font-size: 11px; opacity: .75; margin-top: 2px; }
+
+  .bank-right { text-align: right; }
+  .stmt-title { font-size: 14px; font-weight: 600; letter-spacing: .5px; }
+  .stmt-period { font-size: 12px; opacity: .8; margin-top: 4px; }
+  .stmt-generated { font-size: 10px; opacity: .6; margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+
+  /* Account summary */
+  .account-bar {
+    background: #f8f9fc;
+    border-bottom: 1px solid #e4e8f0;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .account-field {}
+  .account-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 3px;
+  }
+
+  .account-value {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1a1a2e;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Balance cards */
+  .balance-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid #e4e8f0;
+  }
+
+  .balance-card {
+    padding: 16px 28px;
+    border-right: 1px solid #e4e8f0;
+  }
+
+  .balance-card:last-child { border-right: none; }
+
+  .balance-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 6px;
+  }
+
+  .balance-amount {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .balance-amount.positive { color: #16a34a; }
+  .balance-amount.negative { color: #dc2626; }
+  .balance-amount.neutral { color: #1a1a2e; }
+
+  .balance-date { font-size: 11px; color: #888; margin-top: 4px; }
+
+  /* Table header */
+  .table-section {
+    padding: 0 28px 24px;
+  }
+
+  .table-section-title {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    padding: 16px 0 10px;
+    border-bottom: 1px solid #e4e8f0;
+    margin-bottom: 0;
+  }
+
+  table.stmt {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table.stmt thead tr {
+    background: #f4f6fb;
+    border-bottom: 1px solid #dde2ee;
+  }
+
+  table.stmt th {
+    padding: 9px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: #666;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  table.stmt th.right,
+  table.stmt td.right { text-align: right; }
+
+  table.stmt tbody tr {
+    border-bottom: 1px solid #f0f2f8;
+    transition: background .08s;
+  }
+
+  table.stmt tbody tr:hover { background: #fafbfd; }
+
+  /* Highlighted row (suspicious) */
+  table.stmt tbody tr.flagged {
+    background: rgba(220, 38, 38, .04);
+    border-left: 3px solid #dc2626;
+  }
+
+  table.stmt tbody tr.flagged:hover { background: rgba(220, 38, 38, .06); }
+
+  table.stmt td {
+    padding: 10px 10px;
+    font-size: 12.5px;
+    color: #333;
+    vertical-align: middle;
+  }
+
+  .td-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #666;
+    white-space: nowrap;
+  }
+
+  .td-desc strong {
+    display: block;
+    font-weight: 500;
+    color: #1a1a2e;
+    font-size: 12.5px;
+  }
+
+  .td-desc small {
+    font-size: 10.5px;
+    color: #999;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .td-type {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  .type-pix { color: #16a34a; }
+  .type-ted { color: #2563eb; }
+  .type-doc { color: #7c3aed; }
+  .type-deb { color: #dc2626; }
+  .type-dep { color: #059669; }
+  .type-tarifa { color: #9a3412; }
+
+  .td-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .td-value.debit { color: #dc2626; }
+  .td-value.credit { color: #16a34a; }
+
+  .td-balance {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #555;
+    white-space: nowrap;
+  }
+
+  .td-balance.negative { color: #dc2626; }
+
+  /* Summary footer */
+  .summary-footer {
+    background: #f8f9fc;
+    border-top: 2px solid #e4e8f0;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .summary-item { text-align: center; }
+  .summary-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .summary-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .summary-value.credit-total { color: #16a34a; }
+  .summary-value.debit-total { color: #dc2626; }
+  .summary-value.balance { color: #1a1a2e; }
+
+  /* Legal footer */
+  .legal-footer {
+    padding: 12px 28px;
+    font-size: 10px;
+    color: #aaa;
+    border-top: 1px solid #eee;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Bank header -->
+  <div class="bank-header">
+    <div class="bank-left">
+      <div class="bank-logo-box">{{LOGO_SIGLA}}</div>
+      <div>
+        <div class="bank-name">{{NOME_BANCO}}</div>
+        <div class="bank-tagline">{{TAGLINE_BANCO}}</div>
+      </div>
+    </div>
+    <div class="bank-right">
+      <div class="stmt-title">EXTRATO DE CONTA</div>
+      <div class="stmt-period">{{PERIODO_INICIO}} a {{PERIODO_FIM}}</div>
+      <div class="stmt-generated">Gerado em {{DATA_GERACAO}} às {{HORA_GERACAO}}</div>
+    </div>
+  </div>
+
+  <!-- Account info -->
+  <div class="account-bar">
+    <div class="account-field">
+      <div class="account-label">Titular</div>
+      <div class="account-value">{{NOME_TITULAR}}</div>
+    </div>
+    <div class="account-field">
+      <div class="account-label">CPF / CNPJ</div>
+      <div class="account-value">{{DOC_TITULAR}}</div>
+    </div>
+    <div class="account-field">
+      <div class="account-label">Agência</div>
+      <div class="account-value">{{AGENCIA}}</div>
+    </div>
+    <div class="account-field">
+      <div class="account-label">Conta</div>
+      <div class="account-value">{{NUMERO_CONTA}}</div>
+    </div>
+    <div class="account-field">
+      <div class="account-label">Tipo</div>
+      <div class="account-value">{{TIPO_CONTA}}</div>
+    </div>
+  </div>
+
+  <!-- Balance cards -->
+  <div class="balance-row">
+    <div class="balance-card">
+      <div class="balance-label">Saldo Inicial</div>
+      <div class="balance-amount neutral">{{SALDO_INICIAL}}</div>
+      <div class="balance-date">em {{DATA_SALDO_INICIAL}}</div>
+    </div>
+    <div class="balance-card">
+      <div class="balance-label">Movimentação Líquida</div>
+      <div class="balance-amount {{COR_MOVIMENTACAO}}">{{MOVIMENTACAO_LIQUIDA}}</div>
+      <div class="balance-date">no período</div>
+    </div>
+    <div class="balance-card">
+      <div class="balance-label">Saldo Final</div>
+      <div class="balance-amount {{COR_SALDO_FINAL}}">{{SALDO_FINAL}}</div>
+      <div class="balance-date">em {{DATA_SALDO_FINAL}}</div>
+    </div>
+  </div>
+
+  <!-- Transactions -->
+  <div class="table-section">
+    <div class="table-section-title">Lançamentos do Período</div>
+    <table class="stmt">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Descrição</th>
+          <th>Tipo</th>
+          <th class="right">Valor</th>
+          <th class="right">Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#LANCAMENTOS}}
+        <tr class="{{CLASSE_LINHA}}">
+          <td class="td-date">{{DATA}}</td>
+          <td class="td-desc">
+            <strong>{{DESCRICAO}}</strong>
+            <small>{{DETALHE}}</small>
+          </td>
+          <td class="td-type type-{{TIPO_LOWER}}">{{TIPO}}</td>
+          <td class="td-value right {{DIRECAO}}">{{VALOR}}</td>
+          <td class="td-balance right {{COR_SALDO}}">{{SALDO_ACUMULADO}}</td>
+        </tr>
+        {{/LANCAMENTOS}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-footer">
+    <div class="summary-item">
+      <div class="summary-label">Total de Entradas</div>
+      <div class="summary-value credit-total">{{TOTAL_CREDITOS}}</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Total de Saídas</div>
+      <div class="summary-value debit-total">{{TOTAL_DEBITOS}}</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Nº de Lançamentos</div>
+      <div class="summary-value balance">{{TOTAL_LANCAMENTOS}}</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Saldo Final</div>
+      <div class="summary-value balance">{{SALDO_FINAL}}</div>
+    </div>
+  </div>
+
+  <div class="legal-footer">
+    {{NOTA_LEGAL}} · CNPJ {{CNPJ_BANCO}} · {{ENDERECO_BANCO}}
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orçamento — {{NUMERO_ORCAMENTO}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Caveat:wght@400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0ece4;
+    color: #1a1a1a;
+    padding: 24px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .page {
+    background: #fff;
+    max-width: 760px;
+    margin: 0 auto;
+    box-shadow: 0 2px 16px rgba(0,0,0,.1);
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  /* Top accent bar */
+  .accent-bar {
+    height: 6px;
+    background: linear-gradient(90deg, {{COR_PRIMARIA}} 0%, {{COR_SECUNDARIA}} 100%);
+  }
+
+  /* Header */
+  .header {
+    padding: 28px 32px 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid #ece8e0;
+  }
+
+  .logo-area {}
+
+  .company-name {
+    font-size: 26px;
+    font-weight: 700;
+    color: {{COR_PRIMARIA}};
+    letter-spacing: -.5px;
+    line-height: 1.1;
+  }
+
+  .company-type {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-top: 4px;
+  }
+
+  .company-contact {
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: #666;
+    line-height: 1.8;
+  }
+
+  .orcamento-info {
+    text-align: right;
+  }
+
+  .orcamento-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .orcamento-num {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  .orcamento-num span {
+    font-weight: 600;
+    color: {{COR_PRIMARIA}};
+  }
+
+  .orcamento-dates {
+    margin-top: 14px;
+    font-size: 11.5px;
+    color: #666;
+    line-height: 1.8;
+    border: 1px solid #e8e4dc;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+
+  .orcamento-dates strong {
+    color: #333;
+    display: inline-block;
+    width: 72px;
+  }
+
+  /* Client / For section */
+  .client-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #ece8e0;
+  }
+
+  .client-box {
+    padding: 18px 32px;
+    border-right: 1px solid #ece8e0;
+  }
+
+  .client-box:last-child { border-right: none; }
+
+  .box-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: {{COR_PRIMARIA}};
+    margin-bottom: 8px;
+  }
+
+  .client-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+
+  .client-details {
+    font-size: 11.5px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* Description / scope */
+  .scope-section {
+    padding: 20px 32px;
+    border-bottom: 1px solid #ece8e0;
+    background: #fafaf8;
+  }
+
+  .scope-title {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .scope-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  /* Items table */
+  .items-section {
+    padding: 0 32px 20px;
+  }
+
+  table.items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  table.items thead tr {
+    background: {{COR_PRIMARIA}};
+    color: #fff;
+  }
+
+  table.items th {
+    padding: 10px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
+  }
+
+  table.items th:last-child,
+  table.items td.value { text-align: right; }
+
+  table.items tbody tr {
+    border-bottom: 1px solid #ece8e0;
+  }
+
+  table.items tbody tr:nth-child(even) {
+    background: #fafaf8;
+  }
+
+  table.items td {
+    padding: 10px 12px;
+    font-size: 12.5px;
+    color: #333;
+    vertical-align: top;
+  }
+
+  td.item-desc strong {
+    display: block;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 2px;
+  }
+
+  td.item-desc small {
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* Totals block */
+  .totals-block {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 32px 24px;
+  }
+
+  .totals-table {
+    min-width: 260px;
+    border: 1px solid #ece8e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .totals-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    font-size: 12.5px;
+    color: #555;
+    border-bottom: 1px solid #ece8e0;
+  }
+
+  .totals-row:last-child {
+    border-bottom: none;
+    background: {{COR_PRIMARIA}};
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 16px;
+  }
+
+  /* Conditions */
+  .conditions {
+    padding: 16px 32px;
+    background: #fafaf8;
+    border-top: 1px solid #ece8e0;
+    border-bottom: 1px solid #ece8e0;
+  }
+
+  .conditions-title {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+
+  .conditions ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .conditions li {
+    font-size: 12px;
+    color: #555;
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .conditions li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: {{COR_PRIMARIA}};
+    font-weight: 700;
+  }
+
+  /* Footer units */
+  .locations {
+    padding: 14px 32px;
+    font-size: 11px;
+    color: #888;
+    border-top: 1px solid #ece8e0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .locations strong {
+    color: #555;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  .location-tag {
+    background: #f0ece4;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10.5px;
+    color: #666;
+  }
+
+  /* Signature / approval */
+  .approval {
+    padding: 20px 32px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border-top: 1px solid #ece8e0;
+  }
+
+  .approval-box .label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .sig-line {
+    border-bottom: 1px solid #aaa;
+    min-height: 40px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+  }
+
+  .sig-name {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  .sig-role {
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* Manuscript note */
+  .manuscript-note {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: #1a4a9a;
+    padding: 0 32px 16px;
+    transform: rotate(-1deg);
+    display: block;
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="accent-bar"></div>
+
+  <div class="header">
+    <div class="logo-area">
+      <div class="company-name">{{NOME_EMPRESA}}</div>
+      <div class="company-type">{{TIPO_EMPRESA}}</div>
+      <div class="company-contact">
+        CNPJ: {{CNPJ}}<br>
+        {{ENDERECO}}<br>
+        {{SITE_EMAIL}}
+      </div>
+    </div>
+    <div class="orcamento-info">
+      <div class="orcamento-title">Orçamento</div>
+      <div class="orcamento-num">Nº <span>{{NUMERO_ORCAMENTO}}</span></div>
+      <div class="orcamento-dates">
+        <strong>Data:</strong> {{DATA_EMISSAO}}<br>
+        <strong>Válido até:</strong> {{DATA_VALIDADE}}<br>
+        <strong>Revisão:</strong> {{REVISAO}}
+      </div>
+    </div>
+  </div>
+
+  <div class="client-section">
+    <div class="client-box">
+      <div class="box-label">Para</div>
+      <div class="client-name">{{NOME_CLIENTE}}</div>
+      <div class="client-details">
+        {{ENDERECO_CLIENTE}}<br>
+        CNPJ/CPF: {{DOC_CLIENTE}}<br>
+        Contato: {{CONTATO_CLIENTE}}
+      </div>
+    </div>
+    <div class="client-box">
+      <div class="box-label">Referência</div>
+      <div class="client-name">{{TITULO_PROJETO}}</div>
+      <div class="client-details">{{DESCRICAO_REFERENCIA}}</div>
+    </div>
+  </div>
+
+  {{#ESCOPO}}
+  <div class="scope-section">
+    <div class="scope-title">Escopo dos Serviços</div>
+    <div class="scope-text">{{ESCOPO}}</div>
+  </div>
+  {{/ESCOPO}}
+
+  <div class="items-section">
+    <table class="items">
+      <thead>
+        <tr>
+          <th>Nº</th>
+          <th style="width:42%">Descrição do Serviço / Produto</th>
+          <th>Equipe / Qtd.</th>
+          <th>Valor da Diária / Unit.</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#ITENS}}
+        <tr>
+          <td>{{NUMERO_ITEM}}</td>
+          <td class="item-desc">
+            <strong>{{NOME_ITEM}}</strong>
+            <small>{{DESC_ITEM}}</small>
+          </td>
+          <td>{{QUANTIDADE}}</td>
+          <td class="value">{{VALOR_UNITARIO}}</td>
+          <td class="value">{{VALOR_TOTAL_ITEM}}</td>
+        </tr>
+        {{/ITENS}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="totals-block">
+    <div class="totals-table">
+      {{#SUBTOTAL}}<div class="totals-row"><span>Subtotal</span><span>{{SUBTOTAL}}</span></div>{{/SUBTOTAL}}
+      {{#DESCONTO}}<div class="totals-row"><span>Desconto</span><span>- {{DESCONTO}}</span></div>{{/DESCONTO}}
+      {{#IMPOSTOS}}<div class="totals-row"><span>Impostos</span><span>{{IMPOSTOS}}</span></div>{{/IMPOSTOS}}
+      <div class="totals-row"><span>TOTAL</span><span>{{VALOR_TOTAL}}</span></div>
+    </div>
+  </div>
+
+  <div class="conditions">
+    <div class="conditions-title">Condições e Observações</div>
+    <ul>
+      {{#CONDICOES}}
+      <li>{{CONDICAO}}</li>
+      {{/CONDICOES}}
+    </ul>
+  </div>
+
+  {{#UNIDADES}}
+  <div class="locations">
+    <strong>Nossas Unidades:</strong>
+    {{#LISTA_UNIDADES}}<span class="location-tag">{{UNIDADE}}</span>{{/LISTA_UNIDADES}}
+  </div>
+  {{/UNIDADES}}
+
+  {{#NOTA_MANUSCRITA}}
+  <span class="manuscript-note">"{{NOTA_MANUSCRITA}}"</span>
+  {{/NOTA_MANUSCRITA}}
+
+  <div class="approval">
+    <div class="approval-box">
+      <div class="label">Responsável Comercial</div>
+      <div class="sig-line"><span class="sig-name">{{ASSINATURA_RESPONSAVEL}}</span></div>
+      <div class="sig-role">{{NOME_RESPONSAVEL}} — {{CARGO_RESPONSAVEL}}</div>
+    </div>
+    <div class="approval-box">
+      <div class="label">Aprovação do Cliente</div>
+      <div class="sig-line"><span class="sig-name">{{ASSINATURA_CLIENTE}}</span></div>
+      <div class="sig-role">Data: {{DATA_APROVACAO}}</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

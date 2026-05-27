@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversa — {{NOME_GRUPO}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&family=Noto+Sans:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-chat: #0b141a;
+    --bg-header: #202c33;
+    --bg-input: #202c33;
+    --bg-msg-out: #005c4b;
+    --bg-msg-in: #202c33;
+    --text-primary: #e9edef;
+    --text-secondary: #8696a0;
+    --text-timestamp: #8696a0;
+    --tick-color: #53bdeb;
+    --separator: #364046;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    background: var(--bg-chat);
+    color: var(--text-primary);
+    font-size: 14.5px;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5C16 5 5 16 5 30s11 25 25 25 25-11 25-25S44 5 30 5zm0 45C18.95 50 10 41.05 10 30S18.95 10 30 10s20 8.95 20 20-8.95 20-20 20z' fill='%23182229' fill-opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Header */
+  .header {
+    background: var(--bg-header);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--separator);
+  }
+
+  .back-arrow {
+    font-size: 20px;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .group-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #6b7c85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .group-info { flex: 1; }
+
+  .group-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  .group-members {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .header-icons {
+    display: flex;
+    gap: 20px;
+    color: var(--text-secondary);
+    font-size: 20px;
+  }
+
+  /* Status bar */
+  .status-bar {
+    background: var(--bg-header);
+    padding: 4px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--separator);
+  }
+
+  /* Messages area */
+  .messages {
+    padding: 12px 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Date separator */
+  .date-separator {
+    text-align: center;
+    margin: 12px 0;
+  }
+
+  .date-separator span {
+    background: #182229;
+    color: var(--text-secondary);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  /* Message bubble */
+  .message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2px;
+    max-width: 78%;
+  }
+
+  .message.in { align-self: flex-start; align-items: flex-start; }
+  .message.out { align-self: flex-end; align-items: flex-end; margin-left: auto; }
+
+  .message + .message { margin-top: 2px; }
+  .message.gap { margin-top: 8px; }
+
+  .sender-name-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    padding-left: 12px;
+  }
+
+  .bubble {
+    padding: 6px 10px 8px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 100%;
+    min-width: 80px;
+    word-wrap: break-word;
+    line-height: 1.5;
+    font-size: 14.2px;
+  }
+
+  .message.in .bubble {
+    background: var(--bg-msg-in);
+    border-top-left-radius: 2px;
+  }
+
+  .message.out .bubble {
+    background: var(--bg-msg-out);
+    border-top-right-radius: 2px;
+  }
+
+  /* First bubble gets tail */
+  .message.gap.in .bubble::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -8px;
+    border: 8px solid transparent;
+    border-right: 8px solid var(--bg-msg-in);
+    border-top: 0;
+    border-left: 0;
+  }
+
+  .message.gap.out .bubble::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -8px;
+    border: 8px solid transparent;
+    border-left: 8px solid var(--bg-msg-out);
+    border-top: 0;
+    border-right: 0;
+  }
+
+  .bubble-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .timestamp {
+    font-size: 11px;
+    color: var(--text-timestamp);
+    white-space: nowrap;
+  }
+
+  .ticks {
+    font-size: 13px;
+    color: var(--tick-color);
+    line-height: 1;
+  }
+
+  /* Colors for different senders */
+  .color-1 { color: #53bdeb; }
+  .color-2 { color: #e9777e; }
+  .color-3 { color: #c8a227; }
+  .color-4 { color: #7bc67e; }
+  .color-5 { color: #cf9adb; }
+  .color-6 { color: #f0a048; }
+
+  /* Input bar */
+  .input-bar {
+    background: var(--bg-input);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    border-top: 1px solid var(--separator);
+  }
+
+  .input-field {
+    flex: 1;
+    background: #2a3942;
+    border-radius: 24px;
+    padding: 9px 16px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .input-icon {
+    font-size: 22px;
+    color: var(--text-secondary);
+  }
+</style>
+</head>
+<body>
+
+<!-- Status bar -->
+<div class="status-bar">
+  <span>{{HORA_TELA}}</span>
+  <span>●●● 📶 🔋</span>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="back-arrow">‹ {{CONTADOR_NAOVISTOS}}</div>
+  <div class="group-avatar">👥</div>
+  <div class="group-info">
+    <div class="group-name">{{NOME_GRUPO}}</div>
+    <div class="group-members">{{MEMBROS_LISTA}}</div>
+  </div>
+  <div class="header-icons">
+    <span>🎬</span>
+    <span>📞</span>
+    <span>⋮</span>
+  </div>
+</div>
+
+<!-- Messages -->
+<div class="messages">
+
+  <div class="date-separator"><span>{{DATA_CONVERSA}}</span></div>
+
+  <!-- 
+    INSTRUÇÕES PARA O LLM:
+    Para cada mensagem, use a estrutura abaixo.
+    - class "in" = mensagem de outro participante
+    - class "out" = mensagem do "usuário" (ponto de vista da captura)
+    - class "gap" = primeira mensagem de um novo remetente (gera cauda no balão)
+    - sender-name-label: só aparece em mensagens "in" com class "gap"
+    - color-1 a color-6: cor do nome do remetente (um por participante)
+    - ticks: ✓ = enviado, ✓✓ = entregue, ticks em azul = lido
+  -->
+
+  {{#MENSAGENS}}
+  <div class="message {{DIRECAO}} {{CLASSE_GAP}}">
+    {{#MOSTRAR_NOME}}<div class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</div>{{/MOSTRAR_NOME}}
+    <div class="bubble">
+      {{TEXTO_MENSAGEM}}
+      <div class="bubble-footer">
+        <span class="timestamp">{{HORARIO}}</span>
+        {{#DIRECAO_OUT}}<span class="ticks">{{TICKS}}</span>{{/DIRECAO_OUT}}
+      </div>
+    </div>
+  </div>
+  {{/MENSAGENS}}
+
+</div>
+
+<!-- Input bar (decorativo) -->
+<div class="input-bar">
+  <span class="input-icon">☺</span>
+  <div class="input-field">Mensagem</div>
+  <span class="input-icon">📎</span>
+  <span class="input-icon">📷</span>
+  <span class="input-icon" style="color:#00a884; font-size:26px;">🎤</span>
+</div>
+
+</body>
+</html>

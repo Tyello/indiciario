@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recibo — {{NUMERO_RECIBO}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Caveat:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #e8e4dc;
+    color: #1a1a1a;
+    padding: 24px;
+    font-size: 13px;
+  }
+
+  .page {
+    background: #fff;
+    max-width: 720px;
+    margin: 0 auto;
+    border: 1px solid #d0c8b8;
+    box-shadow: 0 2px 12px rgba(0,0,0,.12);
+    overflow: hidden;
+  }
+
+  /* Header stripe */
+  .header-stripe {
+    background: {{COR_EMPRESA}};
+    padding: 0 28px;
+    display: flex;
+    align-items: stretch;
+    min-height: 80px;
+  }
+
+  .company-block {
+    flex: 1;
+    padding: 16px 0;
+    color: #fff;
+  }
+
+  .company-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.3px;
+    line-height: 1.1;
+  }
+
+  .company-tagline {
+    font-size: 11px;
+    opacity: .8;
+    margin-top: 4px;
+    letter-spacing: .5px;
+  }
+
+  .company-details {
+    font-size: 10.5px;
+    opacity: .75;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  .recibo-badge {
+    background: rgba(0,0,0,.2);
+    margin: 12px 0 12px 24px;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #fff;
+  }
+
+  .recibo-badge .word {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: .85;
+  }
+
+  .recibo-badge .number {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+
+  /* Parties grid */
+  .parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #e0d8cc;
+  }
+
+  .party-box {
+    padding: 18px 28px;
+    border-right: 1px solid #e0d8cc;
+  }
+
+  .party-box:last-child { border-right: none; }
+
+  .party-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: {{COR_EMPRESA}};
+    margin-bottom: 8px;
+  }
+
+  .party-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+
+  .party-details {
+    font-size: 11.5px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* Value highlight */
+  .value-bar {
+    background: #f8f6f2;
+    border-bottom: 1px solid #e0d8cc;
+    border-top: 1px solid #e0d8cc;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .value-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+  }
+
+  .value-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: {{COR_EMPRESA}};
+    letter-spacing: -.5px;
+  }
+
+  .value-written {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: #444;
+    font-style: italic;
+  }
+
+  /* Description table */
+  .desc-section {
+    padding: 20px 28px;
+    border-bottom: 1px solid #e0d8cc;
+  }
+
+  .section-title {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ece8e0;
+  }
+
+  table.items {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table.items thead tr {
+    background: #f4f2ee;
+    border-bottom: 1px solid #e0d8cc;
+  }
+
+  table.items th {
+    padding: 8px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    text-align: left;
+  }
+
+  table.items th:last-child,
+  table.items td:last-child { text-align: right; }
+
+  table.items td {
+    padding: 9px 10px;
+    font-size: 12.5px;
+    color: #333;
+    border-bottom: 1px solid #f0ece6;
+  }
+
+  .total-row td {
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 13.5px;
+    border-top: 2px solid #d0c8b8;
+    border-bottom: none;
+    padding-top: 12px;
+  }
+
+  /* Payment method */
+  .payment-row {
+    padding: 14px 28px;
+    border-bottom: 1px solid #e0d8cc;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: #555;
+  }
+
+  .payment-badge {
+    background: {{COR_EMPRESA}};
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* Date and signature */
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 18px 28px;
+  }
+
+  .footer-cell { padding-right: 20px; }
+
+  .footer-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .footer-value {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: #1a1a1a;
+    border-bottom: 1px solid #999;
+    padding-bottom: 6px;
+    min-height: 32px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  /* Watermark */
+  .watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-35deg);
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(0,0,0,.04);
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+  }
+
+  .page { position: relative; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="watermark">{{WATERMARK_TEXTO}}</div>
+
+  <div class="header-stripe">
+    <div class="company-block">
+      <div class="company-name">{{NOME_EMPRESA}}</div>
+      <div class="company-tagline">{{TAGLINE_EMPRESA}}</div>
+      <div class="company-details">
+        CNPJ: {{CNPJ}} &nbsp;|&nbsp; {{ENDERECO_EMPRESA}}<br>
+        {{CONTATO_EMPRESA}}
+      </div>
+    </div>
+    <div class="recibo-badge">
+      <span class="word">Recibo</span>
+      <span class="number">Nº {{NUMERO_RECIBO}}</span>
+    </div>
+  </div>
+
+  <div class="parties">
+    <div class="party-box">
+      <div class="party-label">Dados do Contratante</div>
+      <div class="party-name">{{NOME_CONTRATANTE}}</div>
+      <div class="party-details">
+        {{ENDERECO_CONTRATANTE}}<br>
+        CNPJ/CPF: {{DOC_CONTRATANTE}}<br>
+        {{CONTATO_CONTRATANTE}}
+      </div>
+    </div>
+    <div class="party-box">
+      <div class="party-label">Data</div>
+      <div class="party-name">{{DATA_RECIBO}}</div>
+      <div class="party-details">Referente a: {{PERIODO_REFERENCIA}}</div>
+    </div>
+  </div>
+
+  <div class="value-bar">
+    <div>
+      <div class="value-label">Valor do Serviço</div>
+      <div class="value-written">{{VALOR_POR_EXTENSO}}</div>
+    </div>
+    <div class="value-amount">{{VALOR_TOTAL}}</div>
+  </div>
+
+  <div class="desc-section">
+    <div class="section-title">Descrição dos Serviços Prestados</div>
+    <table class="items">
+      <thead>
+        <tr>
+          <th style="width:50%">Descrição</th>
+          <th>Qtd.</th>
+          <th>Valor Unit.</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#ITENS}}
+        <tr>
+          <td>{{DESCRICAO_ITEM}}</td>
+          <td>{{QUANTIDADE}}</td>
+          <td>{{VALOR_UNITARIO}}</td>
+          <td>{{VALOR_ITEM}}</td>
+        </tr>
+        {{/ITENS}}
+        <tr class="total-row">
+          <td colspan="3">Total</td>
+          <td>{{VALOR_TOTAL}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="payment-row">
+    <span class="payment-badge">{{FORMA_PAGAMENTO}}</span>
+    <span>{{DESCRICAO_PAGAMENTO}}</span>
+  </div>
+
+  <div class="footer-row">
+    <div class="footer-cell">
+      <div class="footer-label">Assinatura do Prestador</div>
+      <div class="footer-value">{{ASSINATURA_PRESTADOR}}</div>
+    </div>
+    <div class="footer-cell">
+      <div class="footer-label">Assinatura do Contratante</div>
+      <div class="footer-value">{{ASSINATURA_CONTRATANTE}}</div>
+    </div>
+    <div class="footer-cell">
+      <div class="footer-label">Data e Hora</div>
+      <div class="footer-value">{{DATA_ASSINATURA}}</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

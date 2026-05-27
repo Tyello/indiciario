@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boletim de Ocorrência — #{{NUMERO_CASO}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Source+Serif+4:wght@400;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: #f0eee8;
+    color: #1a1a1a;
+    font-size: 13.5px;
+    line-height: 1.5;
+    padding: 20px;
+  }
+
+  .page {
+    background: #fefce8;
+    max-width: 760px;
+    margin: 0 auto;
+    border: 1px solid #d4c89a;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18), inset 0 0 60px rgba(180,160,80,.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Aged paper texture */
+  .page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 10%, rgba(200,180,100,.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 90% 90%, rgba(160,140,80,.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* Header */
+  .header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .escudo {
+    width: 64px;
+    height: 64px;
+    border: 3px solid rgba(255,255,255,.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,.08);
+  }
+
+  .header-text h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .header-text h2 {
+    font-size: 13px;
+    font-weight: 400;
+    opacity: .85;
+    letter-spacing: .5px;
+    margin-top: 3px;
+  }
+
+  .case-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 6px;
+    padding: 8px 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .case-badge .label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: .75;
+    display: block;
+  }
+
+  .case-badge .number {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* Doc type */
+  .doc-type-bar {
+    background: #2c5282;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 7px;
+  }
+
+  /* Fields grid */
+  .fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #c8b87a;
+  }
+
+  .field-box {
+    border-right: 1px solid #c8b87a;
+    border-bottom: 1px solid #c8b87a;
+    padding: 10px 14px;
+  }
+
+  .field-box:nth-child(even) { border-right: none; }
+  .field-box.full { grid-column: 1 / -1; border-right: none; }
+
+  .field-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #555;
+    margin-bottom: 6px;
+  }
+
+  .field-value {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: #1a1a1a;
+    line-height: 1.3;
+    min-height: 22px;
+    border-bottom: 1px dashed #b8a060;
+    padding-bottom: 4px;
+  }
+
+  .field-value.empty { color: #999; font-style: italic; }
+
+  /* Body text */
+  .body-section {
+    padding: 18px 24px;
+    border-bottom: 1px solid #c8b87a;
+  }
+
+  .body-section .section-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #555;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #d4c48a;
+  }
+
+  .body-text {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    line-height: 2.0;
+    color: #1a1a1a;
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      #c8b87a55 31px,
+      #c8b87a55 32px
+    );
+    padding: 0 4px;
+    min-height: 180px;
+  }
+
+  /* Footer signature */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid #c8b87a;
+  }
+
+  .footer-cell {
+    padding: 12px 14px;
+    border-right: 1px solid #c8b87a;
+  }
+
+  .footer-cell:last-child { border-right: none; }
+
+  .footer-cell .label {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  .signature-line {
+    border-bottom: 1px solid #888;
+    height: 38px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+  }
+
+  .signature-text {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  .footer-name {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: #333;
+    margin-top: 4px;
+  }
+
+  /* Stamp */
+  .stamp {
+    position: absolute;
+    bottom: 60px;
+    right: 30px;
+    border: 3px solid #b91c1c;
+    border-radius: 4px;
+    padding: 8px 14px;
+    color: #b91c1c;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transform: rotate(-4deg);
+    opacity: 0.75;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="content">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="escudo">⚖</div>
+      <div class="header-text">
+        <h1>{{ORGAO_NOME}}</h1>
+        <h2>{{ORGAO_SUBTITULO}}</h2>
+      </div>
+      <div class="case-badge">
+        <span class="label">Número do Caso</span>
+        <span class="number">#{{NUMERO_CASO}}</span>
+      </div>
+    </div>
+
+    <div class="doc-type-bar">{{TIPO_DOCUMENTO}}</div>
+
+    <!-- Fields -->
+    <div class="fields-grid">
+      <div class="field-box">
+        <div class="field-label">Tipo de Ocorrência</div>
+        <div class="field-value">{{TIPO_OCORRENCIA}}</div>
+      </div>
+      <div class="field-box">
+        <div class="field-label">Data</div>
+        <div class="field-value">{{DATA}}</div>
+      </div>
+      <div class="field-box">
+        <div class="field-label">Localização</div>
+        <div class="field-value">{{LOCALIZACAO}}</div>
+      </div>
+      <div class="field-box">
+        <div class="field-label">Hora da Ocorrência</div>
+        <div class="field-value">{{HORA_OCORRENCIA}}</div>
+      </div>
+      {{#CAMPO_NOME}}
+      <div class="field-box">
+        <div class="field-label">Nome</div>
+        <div class="field-value">{{NOME_ENVOLVIDO}}</div>
+      </div>
+      <div class="field-box">
+        <div class="field-label">Data de Nascimento</div>
+        <div class="field-value">{{DATA_NASC}}</div>
+      </div>
+      <div class="field-box">
+        <div class="field-label">Condição</div>
+        <div class="field-value">{{CONDICAO}}</div>
+      </div>
+      <div class="field-box">
+        <div class="field-label">CPF / RG</div>
+        <div class="field-value">{{DOCUMENTO_PESSOAL}}</div>
+      </div>
+      {{/CAMPO_NOME}}
+    </div>
+
+    <!-- Body -->
+    <div class="body-section">
+      <div class="section-title">Descrição da Ocorrência</div>
+      <div class="body-text">{{DESCRICAO_OCORRENCIA}}</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-grid">
+      <div class="footer-cell">
+        <div class="label">Relatado por</div>
+        <div class="signature-line">
+          <div class="signature-text">{{ASSINATURA_RESPONSAVEL}}</div>
+        </div>
+        <div class="footer-name">{{NOME_RESPONSAVEL}}</div>
+      </div>
+      <div class="footer-cell">
+        <div class="label">Assinatura</div>
+        <div class="signature-line">
+          <div class="signature-text">{{ASSINATURA_GLIFO}}</div>
+        </div>
+        <div class="footer-name">&nbsp;</div>
+      </div>
+      <div class="footer-cell">
+        <div class="label">Data e Hora</div>
+        <div class="signature-line">
+          <div class="signature-text">{{DATA_HORA_ASSINATURA}}</div>
+        </div>
+        <div class="footer-name">&nbsp;</div>
+      </div>
+    </div>
+
+    {{#MOSTRAR_CARIMBO}}
+    <div class="stamp">{{TEXTO_CARIMBO}}</div>
+    {{/MOSTRAR_CARIMBO}}
+
+  </div>
+</div>
+</body>
+</html>

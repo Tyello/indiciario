@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilhete</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Patrick+Hand&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Caveat', cursive;
+    background: #c8c0a8;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  /* ── VARIANT A: Post-it / Sticky note ── */
+  .sticky {
+    width: 320px;
+    min-height: 320px;
+    padding: 28px 24px 36px;
+    position: relative;
+    box-shadow: 3px 4px 16px rgba(0,0,0,.25), inset 0 -2px 4px rgba(0,0,0,.08);
+    transform: rotate({{ROTACAO_STICKY}}deg);
+    background: {{COR_STICKY}};
+  }
+
+  /* Folded corner */
+  .sticky::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 0 28px 28px;
+    border-color: transparent transparent rgba(0,0,0,.18) transparent;
+  }
+
+  .sticky-lines {
+    position: absolute;
+    inset: 0;
+    padding: 28px 24px;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 35px,
+      rgba(0,0,0,.06) 35px, rgba(0,0,0,.06) 36px
+    );
+    pointer-events: none;
+  }
+
+  .sticky-text {
+    font-size: 22px;
+    line-height: 1.55;
+    color: #2a2a2a;
+    white-space: pre-wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sticky-from {
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    font-size: 17px;
+    color: #555;
+    font-style: italic;
+  }
+
+  /* ── VARIANT B: Torn paper note ── */
+  .torn-note {
+    width: 340px;
+    min-height: 240px;
+    background: #fefdf8;
+    padding: 24px 28px 28px;
+    position: relative;
+    box-shadow: 2px 3px 12px rgba(0,0,0,.2);
+    transform: rotate({{ROTACAO_TORN}}deg);
+  }
+
+  /* Torn top edge */
+  .torn-note::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: 0; right: 0;
+    height: 14px;
+    background: #fefdf8;
+    clip-path: polygon(
+      0% 100%, 2% 20%, 4% 80%, 6% 10%, 8% 70%, 10% 30%, 12% 90%,
+      14% 20%, 16% 75%, 18% 15%, 20% 65%, 22% 25%, 24% 80%, 26% 10%,
+      28% 60%, 30% 30%, 32% 85%, 34% 20%, 36% 70%, 38% 15%, 40% 65%,
+      42% 35%, 44% 90%, 46% 20%, 48% 55%, 50% 25%, 52% 75%, 54% 10%,
+      56% 70%, 58% 30%, 60% 85%, 62% 20%, 64% 60%, 66% 35%, 68% 80%,
+      70% 15%, 72% 65%, 74% 30%, 76% 80%, 78% 20%, 80% 70%, 82% 40%,
+      84% 85%, 86% 25%, 88% 65%, 90% 20%, 92% 75%, 94% 35%, 96% 80%,
+      98% 20%, 100% 60%, 100% 100%
+    );
+  }
+
+  .torn-note-lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 29px,
+      #e0d8c0 29px, #e0d8c0 30px
+    );
+    pointer-events: none;
+  }
+
+  .torn-text {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    white-space: pre-wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .torn-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 1;
+  }
+
+  .torn-from {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: #555;
+    font-style: italic;
+  }
+
+  .torn-date {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: #888;
+  }
+
+  /* ── VARIANT C: Index card / notecard ── */
+  .notecard {
+    width: 380px;
+    background: #fff;
+    border: 1px solid #d8d0c0;
+    position: relative;
+    box-shadow: 2px 3px 10px rgba(0,0,0,.15);
+    transform: rotate({{ROTACAO_NOTECARD}}deg);
+    overflow: hidden;
+  }
+
+  .notecard-header {
+    background: {{COR_NOTECARD}};
+    height: 10px;
+  }
+
+  .notecard-body {
+    padding: 18px 20px 20px;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 27px, #d4cfc0 27px, #d4cfc0 28px
+    );
+  }
+
+  .notecard-subject {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 10px;
+    font-style: italic;
+    background: #fff;
+    padding-bottom: 4px;
+  }
+
+  .notecard-subject span {
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 2px;
+    display: inline-block;
+    min-width: 200px;
+  }
+
+  .notecard-text {
+    font-family: 'Caveat', cursive;
+    font-size: 19px;
+    line-height: 1.68;
+    color: #1a1a1a;
+    white-space: pre-wrap;
+  }
+
+  .notecard-sig {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: #444;
+    text-align: right;
+    margin-top: 16px;
+    padding: 0 20px 16px;
+    font-style: italic;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Tape / paperclip decorations ── */
+  .tape {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate({{ROTACAO_TAPE}}deg);
+    width: 60px;
+    height: 20px;
+    background: rgba(220,200,120,.45);
+    border-radius: 2px;
+    z-index: 10;
+  }
+
+  .tape.left {
+    left: 20px;
+    transform: rotate(-8deg);
+  }
+
+  .tape.right {
+    left: auto;
+    right: 20px;
+    transform: rotate(5deg);
+  }
+
+  /* Annotation marks */
+  .circle-mark {
+    position: absolute;
+    border: 2px solid #dc2626;
+    border-radius: 50%;
+    opacity: .7;
+    pointer-events: none;
+  }
+
+  .underline-mark {
+    border-bottom: 2px solid #dc2626;
+    opacity: .6;
+    display: inline;
+  }
+
+  .arrow-mark {
+    position: absolute;
+    font-size: 24px;
+    color: #dc2626;
+    opacity: .7;
+    font-family: serif;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sticky Note (Variant A) -->
+<div class="sticky" style="background: {{COR_STICKY}}; transform: rotate({{ROTACAO_STICKY}}deg)">
+  <div class="sticky-lines"></div>
+  <div class="sticky-text">{{TEXTO_BILHETE_A}}</div>
+  <div class="sticky-from">— {{REMETENTE_A}}</div>
+</div>
+
+<!-- Torn Paper (Variant B) -->
+<div class="torn-note" style="transform: rotate({{ROTACAO_TORN}}deg)">
+  <div class="torn-note-lines"></div>
+  <div class="torn-text">{{TEXTO_BILHETE_B}}</div>
+  <div class="torn-footer">
+    <div class="torn-from">{{REMETENTE_B}}</div>
+    <div class="torn-date">{{DATA_BILHETE_B}}</div>
+  </div>
+</div>
+
+<!-- Notecard (Variant C) -->
+<div class="notecard" style="transform: rotate({{ROTACAO_NOTECARD}}deg)">
+  <div class="tape left"></div>
+  <div class="notecard-header" style="background: {{COR_NOTECARD}}"></div>
+  <div class="notecard-body">
+    <div class="notecard-subject">Assunto: <span>{{ASSUNTO_NOTECARD}}</span></div>
+    <div class="notecard-text">{{TEXTO_BILHETE_C}}</div>
+  </div>
+  <div class="notecard-sig">{{REMETENTE_C}}</div>
+</div>
+
+<!--
+  INSTRUÇÕES PARA O LLM:
+
+  Use apenas a variante mais adequada ao contexto do caso:
+
+  VARIANT A (sticky/post-it):
+  - Mensagem curta, urgente ou informal
+  - Ex.: aviso rápido, instrução de última hora
+  - COR_STICKY: #FFEB3B (amarelo), #FF8A65 (laranja), #81D4FA (azul), #A5D6A7 (verde)
+  - ROTACAO_STICKY: entre -4 e 4 (graus)
+
+  VARIANT B (papel rasgado):
+  - Mensagem secreta, escondida, encontrada no local
+  - Ex.: recado deixado às escondidas, confissão parcial
+  - ROTACAO_TORN: entre -3 e 3
+
+  VARIANT C (ficha/notecard):
+  - Anotação mais organizada, lista de itens, código ou esquema
+  - Ex.: combinação de cofre, lista de nomes, código
+  - COR_NOTECARD: #1976D2 (azul), #C62828 (vermelho), #2E7D32 (verde)
+  - ROTACAO_NOTECARD: entre -2 e 2
+
+  Para máximo realismo:
+  - Texto com erros leves de ortografia ou rasuras simuladas (~~texto~~ → <s>texto</s>)
+  - Abreviações naturais
+  - Ausência de pontuação em algumas frases
+  - Pressão de escrita variável (simulada pela variação de font-weight)
+-->
+
+</body>
+</html>

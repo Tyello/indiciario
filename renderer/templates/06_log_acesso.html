@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log de Acesso — {{NOME_SISTEMA}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 24px;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Header */
+  .log-header {
+    background: #1c2128;
+    border-bottom: 1px solid #30363d;
+    padding: 16px 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .system-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .system-icon {
+    width: 40px;
+    height: 40px;
+    background: {{COR_SISTEMA}};
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .system-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e6edf3;
+    letter-spacing: -.3px;
+  }
+
+  .system-subtitle {
+    font-size: 12px;
+    color: #7d8590;
+    margin-top: 2px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .export-info {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #7d8590;
+    line-height: 1.8;
+  }
+
+  .export-info .highlight {
+    color: #58a6ff;
+  }
+
+  /* Period bar */
+  .period-bar {
+    background: {{COR_SISTEMA}};
+    background: linear-gradient(90deg, {{COR_SISTEMA}} 0%, {{COR_SISTEMA_DARK}} 100%);
+    padding: 8px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: rgba(255,255,255,.9);
+    letter-spacing: .5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .period-bar .label { opacity: .75; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  thead tr {
+    background: #1c2128;
+    border-bottom: 2px solid {{COR_SISTEMA}};
+  }
+
+  thead th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7d8590;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #21262d;
+    transition: background .1s;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #161b22;
+  }
+
+  tbody tr:nth-child(odd) {
+    background: #1c2128;
+  }
+
+  /* Highlight anomaly rows */
+  tbody tr.anomaly {
+    background: rgba(248,81,73,.06);
+    border-left: 3px solid #f85149;
+  }
+
+  tbody tr.highlight {
+    background: rgba(88,166,255,.06);
+    border-left: 3px solid #58a6ff;
+  }
+
+  td {
+    padding: 9px 16px;
+    color: #c9d1d9;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  /* Cell types */
+  .cell-date { color: #7d8590; font-size: 11.5px; }
+  .cell-time { color: #e6edf3; font-weight: 500; }
+  .cell-door {
+    font-weight: 600;
+    color: #f0f6fc;
+    background: #21262d;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 11px;
+    display: inline-block;
+  }
+  .cell-id {
+    font-weight: 700;
+    color: #58a6ff;
+  }
+  .cell-action-in {
+    color: #3fb950;
+    font-weight: 600;
+  }
+  .cell-action-out {
+    color: #f85149;
+    font-weight: 600;
+  }
+  .cell-action-denied {
+    color: #ff7b72;
+    font-weight: 600;
+  }
+  .cell-note {
+    color: #7d8590;
+    font-size: 11px;
+    font-style: italic;
+  }
+
+  /* Stats footer */
+  .stats-bar {
+    background: #1c2128;
+    border-top: 1px solid #30363d;
+    padding: 12px 24px;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #e6edf3;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: #7d8590;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+  }
+
+  .stat-item.anomaly .stat-value { color: #f85149; }
+  .stat-item.highlight .stat-value { color: #58a6ff; }
+
+  /* Legend */
+  .legend {
+    background: #161b22;
+    border-top: 1px solid #30363d;
+    padding: 10px 24px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .legend-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #7d8590;
+    margin-right: 4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #7d8590;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="log-header">
+    <div class="system-badge">
+      <div class="system-icon">🔐</div>
+      <div>
+        <div class="system-name">{{NOME_SISTEMA}}</div>
+        <div class="system-subtitle">{{SUBTITULO_SISTEMA}}</div>
+      </div>
+    </div>
+    <div class="export-info">
+      <div>EXPORTADO EM <span class="highlight">{{DATA_EXPORTACAO}} ÀS {{HORA_EXPORTACAO}}</span></div>
+      <div>OPERADOR: <span class="highlight">{{OPERADOR_EXPORT}}</span></div>
+      <div>HASH: <span class="highlight">{{HASH_REGISTRO}}</span></div>
+    </div>
+  </div>
+
+  <!-- Period bar -->
+  <div class="period-bar">
+    <div>
+      <div class="label">Período</div>
+      <div>{{PERIODO_INICIO}} — {{PERIODO_FIM}}</div>
+    </div>
+    <div>
+      <div class="label">Localização</div>
+      <div>{{LOCALIZACAO_SISTEMA}}</div>
+    </div>
+    <div>
+      <div class="label">Total de registros</div>
+      <div>{{TOTAL_REGISTROS}}</div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Hora</th>
+          <th>Porta / Zona</th>
+          <th>ID Usuário</th>
+          {{#COLUNA_NOME}}<th>Nome</th>{{/COLUNA_NOME}}
+          <th>Evento</th>
+          {{#COLUNA_TERMINAL}}<th>Terminal</th>{{/COLUNA_TERMINAL}}
+          {{#COLUNA_METODO}}<th>Método</th>{{/COLUNA_METODO}}
+          {{#COLUNA_OBS}}<th>Observação</th>{{/COLUNA_OBS}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#REGISTROS}}
+        <tr class="{{CLASSE_LINHA}}">
+          <td class="cell-date">{{DATA}}</td>
+          <td class="cell-time">{{HORA}}</td>
+          <td><span class="cell-door">{{PORTA}}</span></td>
+          <td class="cell-id">{{ID_USUARIO}}</td>
+          {{#COLUNA_NOME}}<td>{{NOME_USUARIO}}</td>{{/COLUNA_NOME}}
+          <td class="cell-action-{{TIPO_EVENTO}}">{{EVENTO}}</td>
+          {{#COLUNA_TERMINAL}}<td class="cell-note">{{TERMINAL}}</td>{{/COLUNA_TERMINAL}}
+          {{#COLUNA_METODO}}<td class="cell-note">{{METODO}}</td>{{/COLUNA_METODO}}
+          {{#COLUNA_OBS}}<td class="cell-note">{{OBSERVACAO}}</td>{{/COLUNA_OBS}}
+        </tr>
+        {{/REGISTROS}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Stats footer -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-value">{{TOTAL_REGISTROS}}</span>
+      <span class="stat-label">Registros</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">{{TOTAL_USUARIOS}}</span>
+      <span class="stat-label">Usuários únicos</span>
+    </div>
+    <div class="stat-item highlight">
+      <span class="stat-value">{{TOTAL_ENTRADAS}}</span>
+      <span class="stat-label">Entradas</span>
+    </div>
+    <div class="stat-item anomaly">
+      <span class="stat-value">{{TOTAL_NEGADOS}}</span>
+      <span class="stat-label">Acessos negados</span>
+    </div>
+    <div class="stat-item anomaly">
+      <span class="stat-value">{{TOTAL_ANOMALIAS}}</span>
+      <span class="stat-label">Anomalias</span>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="legend-title">Legenda:</span>
+    <div class="legend-item"><div class="legend-dot" style="background:#3fb950"></div> Entrada autorizada</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f85149"></div> Saída / Acesso negado</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#58a6ff"></div> Registro destacado</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f85149; opacity:.4"></div> Linha com anomalia</div>
+  </div>
+
+</div>
+</body>
+</html>

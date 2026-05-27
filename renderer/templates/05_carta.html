@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta — {{ASSUNTO}}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: #e8e4dc;
+    color: #1a1a1a;
+    padding: 30px 20px;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  .page {
+    background: #fdfaf4;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 72px;
+    min-height: 960px;
+    box-shadow: 0 3px 20px rgba(0,0,0,.15), 0 1px 4px rgba(0,0,0,.1);
+    position: relative;
+    border-top: 5px solid {{COR_TOPO}};
+  }
+
+  /* Paper texture lines (optional) */
+  .page.lined {
+    background-image: repeating-linear-gradient(
+      transparent, transparent 27px, #d4ccb0 27px, #d4ccb0 28px
+    );
+  }
+
+  /* Letterhead */
+  .letterhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #c8bea0;
+  }
+
+  .org-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: {{COR_TOPO}};
+    letter-spacing: -.3px;
+    line-height: 1.2;
+  }
+
+  .org-subtitle {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #777;
+    margin-top: 4px;
+  }
+
+  .org-details {
+    text-align: right;
+    font-size: 11.5px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* Date and place */
+  .date-line {
+    text-align: right;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+
+  /* Protocol number */
+  .protocol {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  /* Subject line */
+  .subject-line {
+    margin-bottom: 28px;
+  }
+
+  .subject-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  .subject-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    border-bottom: 2px solid {{COR_TOPO}};
+    padding-bottom: 6px;
+    display: inline-block;
+  }
+
+  /* Salutation */
+  .salutation {
+    font-size: 14px;
+    margin-bottom: 22px;
+    color: #222;
+  }
+
+  /* Body */
+  .body-text p {
+    margin-bottom: 18px;
+    font-size: 13.5px;
+    color: #222;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .body-text p:first-letter {
+    font-size: 16px;
+  }
+
+  /* Closing */
+  .closing {
+    margin-top: 40px;
+    font-size: 13.5px;
+    color: #333;
+  }
+
+  .closing-formula {
+    margin-bottom: 56px;
+    font-style: italic;
+  }
+
+  /* Signature block */
+  .signature-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+  }
+
+  .signature-area { min-width: 220px; }
+
+  .signature-script {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .signature-underline {
+    border-bottom: 1px solid #888;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+  }
+
+  .signer-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  .signer-title {
+    font-size: 11.5px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  /* Stamp (optional) */
+  .stamp {
+    border: 2.5px solid {{COR_TOPO}};
+    border-radius: 6px;
+    padding: 10px 18px;
+    color: {{COR_TOPO}};
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    transform: rotate(-6deg);
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+
+  /* Footnotes */
+  .footnotes {
+    margin-top: 60px;
+    padding-top: 16px;
+    border-top: 1px solid #c8bea0;
+    font-size: 10.5px;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* Annotations (handwritten notes on the letter) */
+  .annotation {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: #1a4a9a;
+    transform: rotate(-2deg);
+    display: inline-block;
+    margin: 8px 0;
+    padding: 2px 4px;
+  }
+</style>
+</head>
+<body>
+<div class="page {{ESTILO_LINHAS}}">
+
+  <!-- Letterhead -->
+  <div class="letterhead">
+    <div>
+      <div class="org-name">{{NOME_ORGANIZACAO}}</div>
+      <div class="org-subtitle">{{SUBTITULO_ORGANIZACAO}}</div>
+    </div>
+    <div class="org-details">
+      {{ENDERECO_LINHA1}}<br>
+      {{ENDERECO_LINHA2}}<br>
+      {{CONTATO}}<br>
+      {{CNPJ}}
+    </div>
+  </div>
+
+  <!-- Date -->
+  <div class="date-line">{{LOCAL_DATA}}</div>
+
+  <!-- Protocol -->
+  {{#PROTOCOLO}}
+  <div class="protocol">Ref.: {{PROTOCOLO}}</div>
+  {{/PROTOCOLO}}
+
+  <!-- Subject -->
+  {{#ASSUNTO}}
+  <div class="subject-line">
+    <div class="subject-label">Assunto</div>
+    <div class="subject-text">{{ASSUNTO}}</div>
+  </div>
+  {{/ASSUNTO}}
+
+  <!-- Salutation -->
+  <div class="salutation">{{SAUDACAO}}</div>
+
+  <!-- Body -->
+  <div class="body-text">
+    {{CORPO_CARTA}}
+  </div>
+
+  <!-- Annotation (handwritten) -->
+  {{#ANOTACAO}}
+  <div class="annotation">{{ANOTACAO}}</div>
+  {{/ANOTACAO}}
+
+  <!-- Closing -->
+  <div class="closing">
+    <div class="closing-formula">{{FORMULA_ENCERRAMENTO}}</div>
+    <div class="signature-block">
+      <div class="signature-area">
+        <div class="signature-underline">
+          <div class="signature-script">{{ASSINATURA_CURSIVA}}</div>
+        </div>
+        <div class="signer-name">{{NOME_ASSINANTE}}</div>
+        <div class="signer-title">{{CARGO_ASSINANTE}}</div>
+      </div>
+      {{#CARIMBO}}
+      <div class="stamp">{{TEXTO_CARIMBO}}</div>
+      {{/CARIMBO}}
+    </div>
+  </div>
+
+  <!-- Footnotes -->
+  {{#NOTAS_RODAPE}}
+  <div class="footnotes">{{NOTAS_RODAPE}}</div>
+  {{/NOTAS_RODAPE}}
+
+</div>
+</body>
+</html>
