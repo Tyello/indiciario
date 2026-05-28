@@ -121,6 +121,187 @@ Emoção esperada: [emoção]
 
 Regras de formato por tipo de documento:
 
+## Campo obrigatório: conteudo
+
+Cada documento no JSON deve incluir o campo `conteudo` com os dados reais
+que preenchem os placeholders do template correspondente.
+
+As chaves do `conteudo` devem corresponder EXATAMENTE aos placeholders
+`{{VARIAVEL}}` do template HTML.
+
+Exemplos por tipo:
+
+### email_narrador / email_institucional
+```json
+"conteudo": {
+  "REMETENTE_NOME": "Helena Moraes",
+  "REMETENTE_EMAIL": "helena.moraes@chalesdocedro.com.br",
+  "DESTINATARIO_EMAIL": "detetive@indiciarios.com",
+  "DESTINATARIO_LABEL": "Investigação",
+  "DATA_HORA": "14 de agosto de 2026 às 23:58",
+  "ASSUNTO": "URGENTE — Hóspede desaparecido no Chalé 6",
+  "AVATAR_INICIAL": "H",
+  "AVATAR_COR": "#1A2E4A",
+  "CORPO_EMAIL": "<p>Preciso de ajuda imediata...</p>",
+  "TOTAL_ANEXOS": "3",
+  "ANEXOS": true,
+  "CADA_ANEXO": [
+    {"NOME_ARQUIVO": "log_acesso.pdf", "TAMANHO_KB": "142"},
+    {"NOME_ARQUIVO": "escala_turnos.pdf", "TAMANHO_KB": "88"}
+  ],
+  "NOTA_RODAPE": "Caso fictício — experiência offline Indiciários"
+}
+```
+
+### boletim / depoimento
+```json
+"conteudo": {
+  "ORGAO_NOME": "POLÍCIA CIVIL DO ESTADO",
+  "ORGAO_SUBTITULO": "Delegacia de Crimes Contra a Pessoa",
+  "NUMERO_CASO": "061-15",
+  "TIPO_DOCUMENTO": "BOLETIM DE INSPEÇÃO INICIAL",
+  "TIPO_OCORRENCIA": "Desaparecimento suspeito",
+  "DATA": "15/08/2026",
+  "LOCALIZACAO": "Chalés do Cedro — Serra Gaúcha, RS",
+  "HORA_OCORRENCIA": "00h30",
+  "CAMPO_NOME": false,
+  "DESCRICAO_OCORRENCIA": "A equipe foi acionada após...",
+  "NOME_RESPONSAVEL": "Dra. Fernanda Luz",
+  "ASSINATURA_RESPONSAVEL": "Fernanda Luz",
+  "ASSINATURA_GLIFO": "FL",
+  "DATA_HORA_ASSINATURA": "15/08/2026 01h45",
+  "MOSTRAR_CARIMBO": true,
+  "TEXTO_CARIMBO": "PRELIMINAR"
+}
+```
+
+### log_acesso / log_sistema
+```json
+"conteudo": {
+  "NOME_SISTEMA": "CONTROLE DE ACESSOS — POUSADA VALE DO CEDRO",
+  "SUBTITULO_SISTEMA": "Exportação auditada — uso investigativo",
+  "COR_SISTEMA": "#1A2E4A",
+  "COR_SISTEMA_DARK": "#0d1a2e",
+  "DATA_EXPORTACAO": "15/08/2026",
+  "HORA_EXPORTACAO": "01:12",
+  "OPERADOR_EXPORT": "SISTEMA",
+  "HASH_REGISTRO": "a3f9c1...",
+  "PERIODO_INICIO": "14/08/2026 20:00",
+  "PERIODO_FIM": "15/08/2026 01:12",
+  "LOCALIZACAO_SISTEMA": "Chalés 4, 5 e 6 — Bloco B",
+  "TOTAL_REGISTROS": "24",
+  "COLUNA_NOME": true,
+  "COLUNA_TERMINAL": false,
+  "COLUNA_METODO": false,
+  "COLUNA_OBS": true,
+  "TOTAL_USUARIOS": "7",
+  "TOTAL_ENTRADAS": "18",
+  "TOTAL_NEGADOS": "1",
+  "TOTAL_ANOMALIAS": "2",
+  "REGISTROS": [
+    {
+      "CLASSE_LINHA": "",
+      "DATA": "14/08/2026",
+      "HORA": "23:12:04",
+      "PORTA": "P3-Chalé6",
+      "ID_USUARIO": "ID-14",
+      "NOME_USUARIO": "Renato Figueiredo",
+      "TIPO_EVENTO": "in",
+      "EVENTO": "ENTRADA",
+      "OBSERVACAO": ""
+    },
+    {
+      "CLASSE_LINHA": "anomaly",
+      "DATA": "14/08/2026",
+      "HORA": "23:47:31",
+      "PORTA": "P3-Chalé6",
+      "ID_USUARIO": "ID-09",
+      "NOME_USUARIO": "Carla Drumond",
+      "TIPO_EVENTO": "in",
+      "EVENTO": "ENTRADA",
+      "OBSERVACAO": "sem saída registrada"
+    }
+  ]
+}
+```
+
+### carta / protocolo / glossario / folha_cruzamento
+```json
+"conteudo": {
+  "NOME_ORGANIZACAO": "Chalés do Cedro",
+  "SUBTITULO_ORGANIZACAO": "Pousada e Retiro de Montanha",
+  "ENDERECO_LINHA1": "Estrada do Pinheiro, 412 — Serra Gaúcha, RS",
+  "ENDERECO_LINHA2": "",
+  "CONTATO": "contato@chalesdocedro.com.br",
+  "CNPJ": "12.345.678/0001-90",
+  "COR_TOPO": "#1A2E4A",
+  "ESTILO_LINHAS": "",
+  "LOCAL_DATA": "Serra Gaúcha, 15 de agosto de 2026",
+  "PROTOCOLO": "PV-061/2026",
+  "ASSUNTO": "Protocolo de Investigação — Envelope 1",
+  "SAUDACAO": "Prezado(a) Investigador(a),",
+  "CORPO_CARTA": "<p>Este dossiê contém os documentos do primeiro envelope...</p>",
+  "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+  "ASSINATURA_CURSIVA": "Chalés do Cedro",
+  "NOME_ASSINANTE": "Administração",
+  "CARGO_ASSINANTE": "Pousada Vale do Cedro",
+  "CARIMBO": false,
+  "TEXTO_CARIMBO": ""
+}
+```
+
+### extrato
+```json
+"conteudo": {
+  "LOGO_SIGLA": "BC",
+  "NOME_BANCO": "Banco Confiança",
+  "TAGLINE_BANCO": "Sua segurança em primeiro lugar",
+  "COR_BANCO": "#1A2E4A",
+  "PERIODO_INICIO": "01/08/2026",
+  "PERIODO_FIM": "15/08/2026",
+  "DATA_GERACAO": "15/08/2026",
+  "HORA_GERACAO": "09:14",
+  "NOME_TITULAR": "Renato Figueiredo",
+  "DOC_TITULAR": "***.***.456-78",
+  "AGENCIA": "0042",
+  "NUMERO_CONTA": "12345-6",
+  "TIPO_CONTA": "Conta Corrente",
+  "SALDO_INICIAL": "R$ 4.230,00",
+  "DATA_SALDO_INICIAL": "01/08/2026",
+  "MOVIMENTACAO_LIQUIDA": "- R$ 3.800,00",
+  "COR_MOVIMENTACAO": "negative",
+  "SALDO_FINAL": "R$ 430,00",
+  "DATA_SALDO_FINAL": "15/08/2026",
+  "COR_SALDO_FINAL": "negative",
+  "LANCAMENTOS": [
+    {
+      "CLASSE_LINHA": "",
+      "DATA": "12/08/2026",
+      "DESCRICAO": "PIX ENVIADO",
+      "DETALHE": "CHAVE: renato.fig@email.com",
+      "TIPO": "PIX",
+      "TIPO_LOWER": "pix",
+      "DIRECAO": "debit",
+      "VALOR": "- R$ 3.800,00",
+      "COR_SALDO": "negative",
+      "SALDO_ACUMULADO": "R$ 430,00"
+    }
+  ],
+  "TOTAL_CREDITOS": "R$ 0,00",
+  "TOTAL_DEBITOS": "R$ 3.800,00",
+  "TOTAL_LANCAMENTOS": "1",
+  "NOTA_LEGAL": "Documento gerado automaticamente",
+  "CNPJ_BANCO": "00.000.000/0001-00",
+  "ENDERECO_BANCO": "Av. Fictícia, 1000 — São Paulo, SP"
+}
+```
+
+IMPORTANTE: cada documento deve incluir o campo “conteudo” com os dados
+reais que preenchem o template HTML correspondente. Use os exemplos do
+framework/07_PROMPT_GERADOR_DE_CASO.md como referência de chaves por tipo.
+O campo “conteudo” é obrigatório — sem ele, o PDF não será gerado.
+
+
 - E-mail: incluir De / Para / Data / Assunto / corpo / lista de anexos com tamanhos fictícios
 - Chat: incluir nome do grupo, horários por mensagem, identificação de remetente
 - Log de acesso: tabela com DATA / HORA / PORTA / ID / SENTIDO, cabeçalho com período exportado
