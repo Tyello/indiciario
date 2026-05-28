@@ -111,30 +111,34 @@ class BlueprintValidator:
 
     def _verificar_elenco(self) -> None:
         papeis = {p.papel for p in self.bp.personagens}
-        for papel in [
-            PapelPersonagem.EXECUTOR,
-            PapelPersonagem.PLANEJADOR,
-            PapelPersonagem.BENEFICIARIO,
-        ]:
-            if papel not in papeis:
-                self.resultado.adicionar(Erro(
-                    codigo="ELENCO_001",
-                    severidade=Severidade.CRITICO,
-                    mensagem=f"Papel obrigatório ausente no elenco: {papel.value}",
-                    detalhe="Todo caso precisa diferenciar executor, planejador e beneficiário.",
-                ))
-
-        for campo, valor_id in [
-            ("executor_id", self.bp.executor_id),
-            ("planejador_id", self.bp.planejador_id),
-            ("beneficiario_id", self.bp.beneficiario_id),
-        ]:
+        ids_obrigatorios = {
+            "executor_id": self.bp.executor_id,
+            "planejador_id": self.bp.planejador_id,
+            "beneficiario_id": self.bp.beneficiario_id,
+        }
+        for campo, valor_id in ids_obrigatorios.items():
             if valor_id not in self._ids_personagens:
                 self.resultado.adicionar(Erro(
                     codigo="ELENCO_002",
                     severidade=Severidade.CRITICO,
                     mensagem=f"ID '{valor_id}' em '{campo}' não existe no elenco.",
                 ))
+
+        ids_unicos = len(set(ids_obrigatorios.values()))
+        if ids_unicos == 1:
+            self.resultado.adicionar(Erro(
+                codigo="ELENCO_001",
+                severidade=Severidade.AVISO,
+                mensagem="Executor, planejador e beneficiário apontam para o mesmo personagem.",
+                detalhe="Caso com culpado único; válido quando a concentração dos papéis for intencional.",
+            ))
+        elif ids_unicos == 2:
+            self.resultado.adicionar(Erro(
+                codigo="ELENCO_001",
+                severidade=Severidade.AVISO,
+                mensagem="Executor, planejador e beneficiário usam apenas dois personagens.",
+                detalhe="Verifique se o acúmulo parcial de papéis no gabarito foi intencional.",
+            ))
 
         if PapelPersonagem.NARRADOR not in papeis:
             self.resultado.adicionar(Erro(

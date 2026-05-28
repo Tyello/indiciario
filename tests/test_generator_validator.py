@@ -132,6 +132,21 @@ def test_blueprint_validator_accepts_minimum_valid_blueprint():
     assert resultado.pode_gerar is True
 
 
+def test_blueprint_validator_accepts_single_culprit_for_all_required_roles():
+    blueprint = blueprint_valido()
+    blueprint.executor_id = "01"
+    blueprint.planejador_id = "01"
+    blueprint.beneficiario_id = "01"
+    blueprint.personagens[2].papel = PapelPersonagem.TESTEMUNHA
+    blueprint.personagens[3].papel = PapelPersonagem.TESTEMUNHA
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert not any(e.codigo == "ELENCO_001" for e in resultado.criticos)
+    assert any(e.codigo == "ELENCO_001" for e in resultado.avisos)
+    assert resultado.pode_gerar is True
+
+
 def test_blueprint_validator_blocks_missing_executor():
     blueprint = blueprint_valido()
     blueprint.executor_id = "99"

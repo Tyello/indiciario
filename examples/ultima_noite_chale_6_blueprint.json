@@ -1,0 +1,716 @@
+{
+  "titulo": "Última Noite no Chalé 6",
+  "subtitulo": "Morte por monóxido, silêncio comprado e uma pousada à venda",
+  "genero": "morte em pousada",
+  "tom": "policial",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "medio",
+  "tempo_estimado_min": 60,
+  "numero_jogadores": "3",
+  "formato_envelopes": 2,
+  "premissa": "Laura Vidal, hóspede do Chalé 6 da Pousada Vale do Cedro, foi encontrada morta às 7h20. A primeira versão fala em falha acidental no aquecedor a gás durante uma madrugada fria. A gerente Helena Moraes entrega o dossiê inicial alegando pressa para limpar o nome da pousada antes da chegada da perícia complementar.",
+  "verdade_real": "Laura Vidal era consultora de seguros e descobriu que Helena Moraes falsificava laudos de manutenção para reduzir custos antes da venda da pousada. Helena planejou a morte para impedir o envio do relatório à seguradora e preservar a bonificação da venda. Ela contratou Bruno Reis, técnico terceirizado da Caldera Sul, para desligar a exaustão do Chalé 6 e registrar a intervenção como teste de purga. Bruno executou a ação no painel MAN-02, entre 23h40 e 23h47. Helena ocultou o plano criando uma chamada falsa de manutenção e realocando Laura para o Chalé 6. O dinheiro saiu da pousada para Caldera Sul e depois para Bruma Alta Consultoria, empresa controlada por Helena por meio de procurador. O erro foi que os logs preservaram o ID terceirizado de Bruno e o extrato preservou o repasse final.",
+  "executor_id": "731",
+  "planejador_id": "101",
+  "beneficiario_id": "101",
+  "motivacao": "Impedir que Laura entregasse à seguradora um relatório sobre laudos falsificados e preservar a bonificação de venda da pousada.",
+  "metodo_ocultacao": "Criou um chamado interno de manutenção sem ordem pública, realocou Laura para o Chalé 6 e atribuiu a suspeita inicial a Caio e Ítalo.",
+  "erro_que_permite_descobrir": "O ID T-731 aparece tanto no acesso físico pela porta P3 quanto na operação do painel MAN-02, e a cadeia financeira preserva o repasse final para Helena.",
+  "cadeia_causal": [
+    "Helena identifica que Laura descobriu inconsistências nos laudos de manutenção.",
+    "Helena assina contrato emergencial com a Caldera Sul antes da morte.",
+    "Helena realoca Laura do Chalé 2 para o Chalé 6.",
+    "Helena abre o chamado 1842 como purga preventiva dos chalés 4 a 6.",
+    "Bruno Reis entra pela porta P3 com a credencial T-731.",
+    "Bruno opera o painel MAN-02, desliga o exaustor do Chalé 6 e isola o sensor de CO.",
+    "Laura morre por concentração de monóxido durante a madrugada.",
+    "Helena direciona a suspeita para Caio e Ítalo no e-mail inicial.",
+    "O pagamento sai da pousada para Caldera Sul, passa pela Bruma Alta e volta a Helena como reembolso operacional."
+  ],
+  "personagens": [
+    {
+      "id": "101",
+      "nome": "Helena Moraes",
+      "funcao": "Gerente geral da Pousada Vale do Cedro",
+      "papel": "narrador",
+      "suspeita_aparente": "Parece uma gerente tentando proteger a pousada e organizar os documentos para a polícia.",
+      "verdade": "Planejou a morte de Laura, criou o chamado falso, realocou a vítima e recebeu o benefício final via Bruma Alta.",
+      "documento_ancoragem": ["E1-01", "E2-02", "E2-04", "E2-05", "E2-06"]
+    },
+    {
+      "id": "102",
+      "nome": "Laura Vidal",
+      "funcao": "Hóspede e consultora de seguros",
+      "papel": "testemunha",
+      "suspeita_aparente": "Não é suspeita; sua presença como consultora explica o risco para a pousada.",
+      "verdade": "Vítima. Descobriu laudos falsificados antes da venda da pousada.",
+      "documento_ancoragem": ["E1-02", "E2-02"]
+    },
+    {
+      "id": "103",
+      "nome": "Caio Nunes",
+      "funcao": "Recepcionista noturno",
+      "papel": "red_herring",
+      "suspeita_aparente": "Abandonou a recepção e mentiu sobre uma saída curta durante a madrugada.",
+      "verdade": "Mentiu por medo de advertência, mas não entrou pela P3 nem operou o MAN-02.",
+      "documento_ancoragem": ["E1-04", "E1-05", "E1-07"]
+    },
+    {
+      "id": "104",
+      "nome": "Mara Couto",
+      "funcao": "Camareira",
+      "papel": "testemunha",
+      "suspeita_aparente": "Encontrou o corpo e chamou a gerente.",
+      "verdade": "Testemunha da descoberta, sem envolvimento no plano.",
+      "documento_ancoragem": ["E1-04", "E1-07"]
+    },
+    {
+      "id": "105",
+      "nome": "Ítalo Freire",
+      "funcao": "Hóspede",
+      "papel": "red_herring",
+      "suspeita_aparente": "Discutiu com Laura e tinha conflito financeiro com ela.",
+      "verdade": "Tinha motivo aparente, mas não tinha acesso técnico nem credencial para a sabotagem.",
+      "documento_ancoragem": ["E1-05", "E1-07"]
+    },
+    {
+      "id": "106",
+      "nome": "Vicente Lobo",
+      "funcao": "Sócio comprador da pousada",
+      "papel": "red_herring",
+      "suspeita_aparente": "Lucraria com uma venda sem escândalo e pressionava por silêncio.",
+      "verdade": "Beneficiado comercial indireto, mas sem prova de chamado, execução ou repasse final.",
+      "documento_ancoragem": ["E2-01", "E2-06"]
+    },
+    {
+      "id": "731",
+      "nome": "Bruno Reis",
+      "funcao": "Técnico de campo da Caldera Sul",
+      "papel": "executor",
+      "suspeita_aparente": "Seu ID aparece no acesso de serviço e no painel técnico.",
+      "verdade": "Executor operacional que desligou o exaustor e isolou o sensor do Chalé 6.",
+      "documento_ancoragem": ["E1-05", "E1-06", "E2-04"]
+    },
+    {
+      "id": "742",
+      "nome": "Sônia Prado",
+      "funcao": "Supervisora da Caldera Sul",
+      "papel": "intermediario",
+      "suspeita_aparente": "Assinou contrato e aparece na conversa sobre o repasse.",
+      "verdade": "Intermediária administrativa da Caldera Sul, responsável por viabilizar o chamado e a nota.",
+      "documento_ancoragem": ["E2-01", "E2-04", "E2-06"]
+    },
+    {
+      "id": "755",
+      "nome": "Davi Roque",
+      "funcao": "Mensageiro e responsável formal da Bruma Alta",
+      "papel": "intermediario",
+      "suspeita_aparente": "Aparece ligado à empresa que recebeu dinheiro da Caldera.",
+      "verdade": "Suporte logístico e formal da Bruma Alta, usada para repassar dinheiro a Helena.",
+      "documento_ancoragem": ["E2-04", "E2-05", "E2-06"]
+    }
+  ],
+  "linha_tempo_real": [
+    {
+      "data_hora": "14/08 16:10",
+      "evento": "Helena realoca Laura Vidal para o Chalé 6.",
+      "personagem_id": "101",
+      "documento_prova": "E2-02",
+      "confirmacao_independente": "E1-01"
+    },
+    {
+      "data_hora": "14/08 18:30",
+      "evento": "Helena abre o chamado 1842 como purga preventiva.",
+      "personagem_id": "101",
+      "documento_prova": "E2-04",
+      "confirmacao_independente": "E1-06"
+    },
+    {
+      "data_hora": "14/08 23:36",
+      "evento": "Bruno Reis entra pela porta P3 com o ID 731.",
+      "personagem_id": "731",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-03"
+    },
+    {
+      "data_hora": "14/08 23:43",
+      "evento": "Bruno opera o painel MAN-02.",
+      "personagem_id": "731",
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E1-05"
+    },
+    {
+      "data_hora": "14/08 23:45",
+      "evento": "O exaustor do Chalé 6 é colocado em rotação zero.",
+      "personagem_id": "731",
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E1-08"
+    },
+    {
+      "data_hora": "15/08 07:20",
+      "evento": "Mara encontra Laura sem resposta no Chalé 6.",
+      "personagem_id": "104",
+      "documento_prova": "E1-02",
+      "confirmacao_independente": "E1-07"
+    },
+    {
+      "data_hora": "16/08 09:10",
+      "evento": "A pousada quita o plantão especial da Caldera Sul.",
+      "personagem_id": "101",
+      "documento_prova": "E2-03",
+      "confirmacao_independente": "E2-01"
+    },
+    {
+      "data_hora": "17/08 10:05",
+      "evento": "Bruma Alta reembolsa Helena por HM-17.",
+      "personagem_id": "101",
+      "documento_prova": "E2-05",
+      "confirmacao_independente": "E2-06"
+    }
+  ],
+  "linha_tempo_percebida": [
+    {
+      "data_hora": "14/08 23:19",
+      "evento": "Caio parece ter criado oportunidade ao sair da recepção.",
+      "personagem_id": "103",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-07"
+    },
+    {
+      "data_hora": "14/08 23:08",
+      "evento": "Ítalo parece suspeito por sair após discutir com Laura.",
+      "personagem_id": "105",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-07"
+    },
+    {
+      "data_hora": "15/08 09:12",
+      "evento": "Helena apresenta a morte como fatalidade e aponta suspeitas laterais.",
+      "personagem_id": "101",
+      "documento_prova": "E1-01",
+      "confirmacao_independente": "E1-07"
+    }
+  ],
+  "linha_tempo_documental": [
+    {
+      "data_hora": "14/08 23:36",
+      "evento": "ID 731 entrou pela porta P3.",
+      "personagem_id": "731",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-03"
+    },
+    {
+      "data_hora": "14/08 23:43",
+      "evento": "Usuário 731 operou o objeto C6-EXAUSTOR no MAN-02.",
+      "personagem_id": "731",
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E1-05"
+    },
+    {
+      "data_hora": "17/08 10:05",
+      "evento": "Helena recebeu reembolso operacional HM-17.",
+      "personagem_id": "101",
+      "documento_prova": "E2-05",
+      "confirmacao_independente": "E2-06"
+    }
+  ],
+  "pilares_validacao": [
+    {
+      "nome": "Presença física",
+      "documento_principal": "E1-05",
+      "confirmacao": "E1-03",
+      "personagem_id": "731"
+    },
+    {
+      "nome": "Credencial",
+      "documento_principal": "E1-05",
+      "confirmacao": "E2-04",
+      "personagem_id": "731"
+    },
+    {
+      "nome": "Terminal",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-03",
+      "personagem_id": "731"
+    },
+    {
+      "nome": "Ação crítica",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-08",
+      "personagem_id": "731"
+    }
+  ],
+  "intervalo_critico_inicio": "14/08 23:30",
+  "intervalo_critico_fim": "15/08 00:30",
+  "documentos": [
+    {
+      "codigo": "E1-00",
+      "titulo": "Protocolo de Abertura do Envelope 1",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "urgencia",
+      "objetivo_narrativo": "Definir o objetivo do Envelope 1, a contagem de documentos e os quatro pilares de avanço.",
+      "pistas_contidas": ["intervalo critico 23h30 a 00h30", "quatro pilares de validacao"],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-01",
+      "titulo": "E-mail de Helena Moraes à Delegacia",
+      "envelope": "E1",
+      "tipo": "email_narrador",
+      "emocao_esperada": "urgencia enviesada",
+      "objetivo_narrativo": "Abrir o caso por uma narradora interessada e plantar suspeitas em Caio e Ítalo.",
+      "pistas_contidas": ["Helena tenta controlar a narrativa", "cita chamado tecnico", "desvia foco para Caio e Italo"],
+      "confirma": ["E2-02"],
+      "confirmado_por": ["E2-06"],
+      "red_herring_potencial": "O e-mail induz o grupo a focar em Caio e Ítalo.",
+      "risco_ambiguidade": "medio",
+      "ids_citados": ["101", "103", "105"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "Boletim Policial Preliminar PV-061-15",
+      "envelope": "E1",
+      "tipo": "boletim",
+      "emocao_esperada": "gravidade",
+      "objetivo_narrativo": "Confirmar a morte, o ambiente do Chalé 6 e a hipótese material de monóxido.",
+      "pistas_contidas": ["Chale 6", "monoxido elevado", "sem arrombamento"],
+      "confirma": ["E1-08"],
+      "confirmado_por": ["E1-07"],
+      "ids_citados": ["102", "104"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-03",
+      "titulo": "Mapa Técnico da Pousada Vale do Cedro",
+      "envelope": "E1",
+      "tipo": "mapa",
+      "emocao_esperada": "orientacao",
+      "objetivo_narrativo": "Mostrar que P3 dá acesso ao corredor técnico e que MAN-02 controla os chalés 4 a 6.",
+      "pistas_contidas": ["P3 leva ao corredor tecnico", "MAN-02 controla o Chale 6", "C-SERV aponta para P3"],
+      "confirma": ["E1-05", "E1-06"],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Escala de Turnos 14/08-15/08",
+      "envelope": "E1",
+      "tipo": "escala",
+      "emocao_esperada": "suspeita",
+      "objetivo_narrativo": "Mostrar a escala com legenda de nomes e a ausência de funcionário interno no corredor técnico durante o intervalo crítico.",
+      "pistas_contidas": ["Caio na recepcao", "Mara apenas pela manha", "chamados externos exigem autorizacao da gerencia"],
+      "confirma": ["E1-05"],
+      "confirmado_por": [],
+      "ids_citados": ["101", "103", "104"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Log de Acesso Físico - Portas P1, P2, P3",
+      "envelope": "E1",
+      "tipo": "log_acesso",
+      "emocao_esperada": "adrenalina",
+      "objetivo_narrativo": "Provar que o ID 731 entrou e saiu pela P3 dentro do intervalo crítico.",
+      "pistas_contidas": ["ID 731 entra por P3 as 23h36", "ID 731 sai por P3 as 23h58", "Caio nao usa P3", "Italo usa P2"],
+      "confirma": ["E1-06"],
+      "confirmado_por": ["E1-03"],
+      "red_herring_potencial": "Caio e Ítalo aparecem em horários próximos, mas em portas erradas.",
+      "risco_ambiguidade": "baixo",
+      "ids_citados": ["103", "105", "731"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Log de Sistema MAN-02",
+      "envelope": "E1",
+      "tipo": "log_sistema",
+      "emocao_esperada": "satisfacao de cruzamento",
+      "objetivo_narrativo": "Provar que o usuário 731 operou o MAN-02, desligou o exaustor e isolou o sensor.",
+      "pistas_contidas": ["usuario 731 autentica no MAN-02", "C6-EXAUSTOR vai para zero", "C6-SENSOR-CO isolado"],
+      "confirma": ["E1-05", "E1-08"],
+      "confirmado_por": ["E2-04"],
+      "risco_ambiguidade": "baixo",
+      "ids_citados": ["731"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Termos de Depoimento Preliminar",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "frustracao produtiva",
+      "objetivo_narrativo": "Plantar e descartar red herrings por meio de versões pessoais compatíveis com os logs.",
+      "pistas_contidas": ["Caio admite saida curta", "Italo admite discussao", "Mara encontra o corpo"],
+      "confirma": ["E1-02", "E1-05"],
+      "confirmado_por": [],
+      "red_herring_potencial": "Caio e Ítalo parecem culpados por comportamento e motivo.",
+      "risco_ambiguidade": "medio",
+      "ids_citados": ["103", "104", "105"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Manual de Segurança dos Chalés 4-6",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "confirmacao tecnica",
+      "objetivo_narrativo": "Explicar por que desligar exaustor e isolar sensor com hóspede presente é ação crítica.",
+      "pistas_contidas": ["exaustor deve ficar automatico", "sensor nao pode ser isolado com hospede", "risco de monoxido letal"],
+      "confirma": ["E1-06", "E1-02"],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-09",
+      "titulo": "Folha de Cruzamento do Envelope 1",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "controle investigativo",
+      "objetivo_narrativo": "Dar ao grupo uma matriz para comparar suspeitos, portas, IDs, terminal e ação crítica.",
+      "pistas_contidas": ["matriz de suspeitos", "colunas dos quatro pilares"],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["101", "103", "105", "731"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E1-10",
+      "titulo": "Glossário Operacional de Acesso e Manutenção",
+      "envelope": "E1",
+      "tipo": "glossario",
+      "emocao_esperada": "clareza",
+      "objetivo_narrativo": "Definir termos de log, painel, sentido de acesso, sensor de CO e modo manual sem exigir conhecimento externo.",
+      "pistas_contidas": ["sentido entrada e saida", "painel MAN", "sensor CO", "modo manual"],
+      "confirma": ["E1-05", "E1-06"],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-00",
+      "titulo": "Protocolo de Abertura do Envelope 2",
+      "envelope": "E2",
+      "tipo": "protocolo",
+      "emocao_esperada": "surpresa justa",
+      "objetivo_narrativo": "Reabrir a pergunta para planejador, beneficiário e cadeia completa.",
+      "pistas_contidas": ["pergunta sobre planejador", "pergunta sobre beneficiario", "pergunta sobre cadeia financeira"],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-01",
+      "titulo": "Contrato Emergencial de Manutenção",
+      "envelope": "E2",
+      "tipo": "contrato",
+      "emocao_esperada": "planejamento anterior",
+      "objetivo_narrativo": "Mostrar que a Caldera Sul foi contratada antes do crime e que Helena tinha cláusula para acionar visita sem ordem pública.",
+      "pistas_contidas": ["contrato de 11/08", "clausula 4.3", "Caldera Sul", "assinaturas de Helena e Sonia"],
+      "confirma": ["E2-03", "E2-04"],
+      "confirmado_por": [],
+      "ids_citados": ["101", "742"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-02",
+      "titulo": "E-mail de Reservas - Alteração de Quarto",
+      "envelope": "E2",
+      "tipo": "email_institucional",
+      "emocao_esperada": "inevitabilidade",
+      "objetivo_narrativo": "Provar que Helena colocou Laura no Chalé 6 antes da morte.",
+      "pistas_contidas": ["Laura sai do Chale 2 para o Chale 6", "ordem de Helena", "evitar escritorio antigo"],
+      "confirma": ["E1-01"],
+      "confirmado_por": ["E2-06"],
+      "ids_citados": ["101", "102"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-03",
+      "titulo": "Extrato Financeiro Consolidado",
+      "envelope": "E2",
+      "tipo": "extrato",
+      "emocao_esperada": "suspeita",
+      "objetivo_narrativo": "Documentar a cadeia financeira Pousada, Caldera, Bruma Alta e Helena.",
+      "pistas_contidas": ["pagamento para Caldera", "repasse para Bruma Alta", "reembolso HM-17 para Helena"],
+      "confirma": ["E2-01", "E2-04", "E2-05"],
+      "confirmado_por": ["E2-06"],
+      "ids_citados": ["101"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-04",
+      "titulo": "Cadastro de Terceiros e Chamados",
+      "envelope": "E2",
+      "tipo": "cadastro_terceiros",
+      "emocao_esperada": "cruzamento",
+      "objetivo_narrativo": "Ancorar os IDs terceirizados, o chamado 1842, Caldera Sul e Bruma Alta.",
+      "pistas_contidas": ["731 e Bruno Reis", "742 e Sonia Prado", "755 e Davi Roque", "Bruma Alta indicada por Helena", "chamado 1842 aberto por Helena"],
+      "confirma": ["E1-06", "E2-03"],
+      "confirmado_por": ["E2-01"],
+      "ids_citados": ["101", "731", "742", "755"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-05",
+      "titulo": "Recibo de Reembolso Bruma Alta",
+      "envelope": "E2",
+      "tipo": "recibo",
+      "emocao_esperada": "satisfacao de cruzamento",
+      "objetivo_narrativo": "Provar o salto final da Bruma Alta para Helena.",
+      "pistas_contidas": ["Bruma Alta", "Helena favorecida", "reembolso HM-17", "R$ 12.000"],
+      "confirma": ["E2-03"],
+      "confirmado_por": ["E2-06"],
+      "ids_citados": ["101", "755"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-06",
+      "titulo": "Chat Venda Cedro - Núcleo",
+      "envelope": "E2",
+      "tipo": "chat",
+      "emocao_esperada": "surpresa justa",
+      "objetivo_narrativo": "Confirmar a realocação de Laura, o chamado oculto e a sequência Caldera depois Bruma.",
+      "pistas_contidas": ["mover Laura para o Chale 6", "chamado 1842", "primeiro Caldera depois Bruma", "reembolso HM-17"],
+      "confirma": ["E2-02", "E2-03", "E2-05"],
+      "confirmado_por": [],
+      "ids_citados": ["101", "106", "742", "755"],
+      "codigos_citados": []
+    },
+    {
+      "codigo": "E2-07",
+      "titulo": "Folha de Auditoria de Cruzamentos",
+      "envelope": "E2",
+      "tipo": "auditoria",
+      "emocao_esperada": "fechamento",
+      "objetivo_narrativo": "Organizar os cruzamentos finais: escolha do quarto, chamado, execução, repasses e beneficiário final.",
+      "pistas_contidas": ["tabela de cruzamento final", "perguntas sobre executor planejador e beneficiario"],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["101", "731"],
+      "codigos_citados": []
+    }
+  ],
+  "matriz_pistas": [
+    {
+      "descricao": "ID 731 entrou pela P3 no intervalo crítico.",
+      "documento": "E1-05",
+      "o_que_sugere": "Um terceirizado esteve no corredor técnico.",
+      "o_que_prova": "Presença física do executor no acesso técnico.",
+      "confirmacao": "E1-03",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "adrenalina"
+    },
+    {
+      "descricao": "Usuário 731 operou o MAN-02 e desligou o exaustor do Chalé 6.",
+      "documento": "E1-06",
+      "o_que_sugere": "A morte não foi acidente simples.",
+      "o_que_prova": "Ação crítica que tornou o ambiente letal.",
+      "confirmacao": "E1-08",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "satisfacao de cruzamento"
+    },
+    {
+      "descricao": "O cadastro de terceiros identifica 731 como Bruno Reis.",
+      "documento": "E2-04",
+      "o_que_sugere": "O ID do log tem dono rastreável.",
+      "o_que_prova": "Bruno é o executor operacional.",
+      "confirmacao": "E1-05",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "clareza"
+    },
+    {
+      "descricao": "Helena ordenou a troca de Laura para o Chalé 6.",
+      "documento": "E2-02",
+      "o_que_sugere": "A vítima foi posicionada intencionalmente.",
+      "o_que_prova": "Helena preparou a condição espacial do crime.",
+      "confirmacao": "E2-06",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "surpresa justa"
+    },
+    {
+      "descricao": "Helena abriu o chamado 1842 para a visita de Bruno.",
+      "documento": "E2-04",
+      "o_que_sugere": "A manutenção foi criada de dentro da pousada.",
+      "o_que_prova": "Helena conectou o executor ao local.",
+      "confirmacao": "E1-06",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "inevitabilidade"
+    },
+    {
+      "descricao": "A pousada pagou Caldera Sul e Caldera repassou à Bruma Alta.",
+      "documento": "E2-03",
+      "o_que_sugere": "Houve escoamento financeiro.",
+      "o_que_prova": "A cadeia financeira não termina no executor.",
+      "confirmacao": "E2-04",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "suspeita"
+    },
+    {
+      "descricao": "Bruma Alta reembolsou Helena por HM-17.",
+      "documento": "E2-05",
+      "o_que_sugere": "Helena recebeu o benefício final.",
+      "o_que_prova": "Helena é a beneficiária final documentada.",
+      "confirmacao": "E2-06",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "fechamento"
+    }
+  ],
+  "red_herrings": [
+    {
+      "personagem_id": "103",
+      "motivo_aparente": "Saiu da recepção e mentiu sobre o motivo.",
+      "como_descartar": "O log não mostra acesso dele pela P3 nem operação no MAN-02.",
+      "documento_descarte": "E1-05",
+      "categoria": "erro_real_nao_criminoso"
+    },
+    {
+      "personagem_id": "105",
+      "motivo_aparente": "Discutiu com Laura e tinha conflito financeiro.",
+      "como_descartar": "Aparece na P2, não na P3, e não tem credencial técnica.",
+      "documento_descarte": "E1-05",
+      "categoria": "motivo_sem_oportunidade"
+    },
+    {
+      "personagem_id": "106",
+      "motivo_aparente": "Lucraria com a venda sem escândalo.",
+      "como_descartar": "Não abriu chamado, não operou o sistema e não recebeu o repasse final.",
+      "documento_descarte": "E2-03",
+      "categoria": "beneficio_indireto_sem_execucao"
+    }
+  ],
+  "cadeia_financeira": [
+    {
+      "de": "Pousada Vale do Cedro",
+      "para": "Caldera Sul Manutenção",
+      "valor_ou_item": "R$ 18.600,00 em duas parcelas",
+      "documento_prova": "E2-03",
+      "confirmacao_independente": "E2-01",
+      "is_salto_final": false
+    },
+    {
+      "de": "Caldera Sul Manutenção",
+      "para": "Bruma Alta Consultoria",
+      "valor_ou_item": "R$ 14.880,00",
+      "documento_prova": "E2-03",
+      "confirmacao_independente": "E2-04",
+      "is_salto_final": false
+    },
+    {
+      "de": "Bruma Alta Consultoria",
+      "para": "Helena Moraes",
+      "valor_ou_item": "R$ 12.000,00 como reembolso HM-17",
+      "documento_prova": "E2-05",
+      "confirmacao_independente": "E2-06",
+      "is_salto_final": true
+    }
+  ],
+  "codigos": [],
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo lendo logs sem cruzar horários.",
+      "texto": "Compare os documentos que têm horário. A resposta do primeiro envelope está no intervalo em que porta, painel e ação se sobrepõem.",
+      "o_que_desbloqueia": "Montar a linha do tempo do E1."
+    },
+    {
+      "numero": 2,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo acusa o recepcionista.",
+      "texto": "Sair da recepção é comportamento suspeito, mas não prova acesso técnico. Verifique se a pessoa chegou ao corredor certo.",
+      "o_que_desbloqueia": "Descartar o falso suspeito da recepção."
+    },
+    {
+      "numero": 3,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo ignora o mapa.",
+      "texto": "O terminal importa tanto quanto o usuário. Localize o painel citado no log antes de decidir quem podia usá-lo.",
+      "o_que_desbloqueia": "Cruzar P3 e MAN-02."
+    },
+    {
+      "numero": 4,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo tem nome provável, mas não defende com documentos.",
+      "texto": "A resposta precisa fechar quatro pilares: presença física, credencial, terminal e ação crítica. Se faltar um, ainda é hipótese.",
+      "o_que_desbloqueia": "Validar formalmente o E1."
+    },
+    {
+      "numero": 5,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo acusa o hóspede com conflito pessoal.",
+      "texto": "Motivo pessoal pesa, mas não substitui método. Procure qual documento mostra acesso ao mecanismo que tornou a morte possível.",
+      "o_que_desbloqueia": "Separar motivo de método."
+    },
+    {
+      "numero": 6,
+      "intensidade": "forte",
+      "envelope": "E1",
+      "condicao_uso": "Grupo já tentou duas hipóteses erradas.",
+      "texto": "O mesmo ID aparece na porta de serviço e no painel que alterou o Chalé 6. Esse cruzamento é o centro do primeiro envelope.",
+      "o_que_desbloqueia": "Identificar o executor operacional."
+    },
+    {
+      "numero": 7,
+      "intensidade": "leve",
+      "envelope": "E2",
+      "condicao_uso": "Grupo acha que o executor é toda a solução.",
+      "texto": "Quem aperta o botão nem sempre escolheu a vítima, o quarto e o motivo do chamado.",
+      "o_que_desbloqueia": "Buscar o planejador."
+    },
+    {
+      "numero": 8,
+      "intensidade": "leve",
+      "envelope": "E2",
+      "condicao_uso": "Grupo ignora datas anteriores ao crime.",
+      "texto": "Documentos assinados antes da morte ajudam a separar acidente de preparação.",
+      "o_que_desbloqueia": "Usar contrato e cadastro como prova de preparação."
+    },
+    {
+      "numero": 9,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não segue o dinheiro.",
+      "texto": "Compare quem recebeu da pousada com quem recebeu depois. A primeira transferência não é necessariamente o destino final.",
+      "o_que_desbloqueia": "Montar a cadeia financeira."
+    },
+    {
+      "numero": 10,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo para na empresa de manutenção.",
+      "texto": "Procure a empresa que aparece tanto em cadastro quanto em repasse. Ela serve de ponte.",
+      "o_que_desbloqueia": "Identificar a intermediária."
+    },
+    {
+      "numero": 11,
+      "intensidade": "forte",
+      "envelope": "E2",
+      "condicao_uso": "Grupo mistura executor e mandante.",
+      "texto": "Separe três perguntas: quem operou o painel, quem colocou a vítima no Chalé 6 e quem recebeu o dinheiro final.",
+      "o_que_desbloqueia": "Separar os papéis principais."
+    },
+    {
+      "numero": 12,
+      "intensidade": "quase_gabarito",
+      "envelope": "E2",
+      "condicao_uso": "Usar apenas se o grupo já chegou perto da cadeia, mas não consegue fechar.",
+      "texto": "A cadeia fecha quando você conecta a troca de quarto, o chamado 1842, o ID 731 no MAN-02 e o reembolso HM-17 vindo da Bruma Alta.",
+      "o_que_desbloqueia": "Fechar a solução completa."
+    }
+  ],
+  "versao": "0.1",
+  "observacoes_producao": "Legível em celular, colorido, com tabelas amplas. Nenhuma pista essencial depende de cor. IDs internos usam 100-199; IDs terceirizados usam 700-799."
+}

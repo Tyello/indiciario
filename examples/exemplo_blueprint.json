@@ -296,6 +296,23 @@
       "codigos_citados": []
     },
     {
+      "codigo": "E1-09",
+      "titulo": "Glossário Operacional do Museu",
+      "envelope": "E1",
+      "tipo": "glossario",
+      "emocao_esperada": "clareza sobre termos operacionais",
+      "objetivo_narrativo": "Definir termos usados nos registros de acesso e nos comunicados de segurança sem exigir conhecimento técnico externo",
+      "pistas_contidas": [
+        "crachá de emergência: credencial física guardada no armário da segurança para uso excepcional",
+        "biometria: registro físico de entrada ou saída feito pela própria pessoa",
+        "câmera offline: câmera temporariamente indisponível durante manutenção programada"
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": []
+    },
+    {
       "codigo": "E2-01",
       "titulo": "E-mail da Diretoria — A Van e o Destino",
       "envelope": "E2",
