@@ -145,7 +145,9 @@ def renderizar_caso(
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    grupos: dict[str, list[Path]] = {"E1": [], "E2": [], "E3": [], "dicas": [], "gabarito": []}
+    grupos: dict[str, list[Path]] = {
+        "E1": [], "E2": [], "E3": [], "dicas": [], "gabarito": []
+    }
 
     for doc in blueprint.get("documentos", []):
         codigo = doc["codigo"]
@@ -153,17 +155,21 @@ def renderizar_caso(
         envelope = doc.get("envelope", "E1")
         template = TIPO_PARA_TEMPLATE.get(tipo, "05_carta.html")
 
-        # Dados disponíveis para o template
+        conteudo = doc.get("conteudo", {})
+
+        if not conteudo:
+            print(f"  ⚠️  {codigo} — campo 'conteudo' vazio, PDF não gerado")
+            continue
+
         dados = {
             "TITULO_DOCUMENTO": doc.get("titulo", codigo),
             "CODIGO_DOCUMENTO": codigo,
             "NOME_CASO": blueprint["titulo"],
             "ENVELOPE": envelope,
-            # Adicione aqui os campos específicos conforme o template
-            **doc,
+            **conteudo,
         }
 
-        pdf_path = output_dir / f"{codigo}_{titulo_slug}.pdf"
+        pdf_path = output_dir / f"{codigo}.pdf"
         try:
             caminho = renderizar_documento(template, dados, pdf_path)
             grupos[envelope].append(caminho)
@@ -172,6 +178,7 @@ def renderizar_caso(
             print(f"  ❌ {codigo} — erro: {e}")
 
     return grupos
+
 
 
 # ─────────────────────────────────────────

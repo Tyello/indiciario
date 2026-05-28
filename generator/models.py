@@ -8,7 +8,7 @@ validador e pelo futuro renderizador.
 from __future__ import annotations
 
 from enum import Enum
-from typing import Optional
+from typing import Any, Optional
 
 from pydantic import BaseModel, Field
 
@@ -167,6 +167,14 @@ class Documento(BaseModel):
     codigos_citados: list[str] = Field(
         default_factory=list,
         description="Números/letras usados em códigos/puzzles neste documento.",
+    )
+    conteudo: dict[str, Any] = Field(
+        default_factory=dict,
+        description=(
+            "Dados reais que preenchem os placeholders {{VARIAVEL}} do template HTML. "
+            "As chaves devem corresponder exatamente aos placeholders do template usado. "
+            "Ex: {'REMETENTE_NOME': 'Helena Moraes', 'ASSUNTO': 'Urgente: sumiu...'}.",
+        ),
     )
 
 
