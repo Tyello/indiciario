@@ -170,3 +170,19 @@ def test_validator_cli_json_output(tmp_path):
     assert result.returncode == 0, result.stderr
     output = json.loads(result.stdout)
     assert output["pode_gerar"] is True
+
+
+def test_validator_cli_accepts_example_blueprint_from_examples_folder():
+    exemplo_path = ROOT / "examples" / "exemplo_blueprint.json"
+    assert exemplo_path.exists(), "Arquivo de exemplo esperado em examples/exemplo_blueprint.json"
+
+    result = subprocess.run(
+        [sys.executable, "generator/validator.py", str(exemplo_path)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "Risco: Baixo" in result.stdout or "Risco: Médio-baixo" in result.stdout

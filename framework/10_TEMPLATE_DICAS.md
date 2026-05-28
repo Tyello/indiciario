@@ -13,6 +13,8 @@ Imprimir uma dica por folha ou cartão, sem deixar a próxima visível.
 
 Nunca inclua dicas no mesmo PDF do material do jogador.
 
+Antes de cada bloco de dicas por envelope no PDF de dicas progressivas, inserir uma capa visual de envelope em papel kraft/pardo, ocupando página inteira, com nome do caso e identificação `Dicas`, sem numerar a capa como envelope do jogo.
+
 ---
 
 ## Regras de uso
