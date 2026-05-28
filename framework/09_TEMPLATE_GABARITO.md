@@ -2,6 +2,8 @@
 
 **CONFIDENCIAL — Somente para o facilitador. Nunca incluir no material do jogador.**
 
+Se o gabarito for produzido com capa visual/envelope próprio, a capa deve identificar o material como `Gabarito`, sem número de envelope do jogo.
+
 ---
 
 ## 1. Resposta curta

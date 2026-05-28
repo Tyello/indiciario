@@ -9,6 +9,7 @@ Esta pasta contém os templates usados para transformar documentos do caso em p�
 - Cada tipo de evidência deve ganhar identidade própria: protocolo, e-mail, chat, log, mapa, contrato, extrato, depoimento e folha de cruzamento.
 - Templates devem ser autossuficientes para renderização local/offline.
 - Evite scripts remotos, `&nbsp;`, QR decorativo e dependências externas obrigatórias.
+- `00_envelope_capa.html` é a capa visual de envelopes e blocos de apoio: envelopes do jogo devem exibir `Envelope N`; capas de dicas e gabarito devem exibir `Dicas` ou `Gabarito`, sem número de envelope.
 
 ## Próximos templates recomendados
 

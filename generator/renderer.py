@@ -177,6 +177,26 @@ def renderizar_caso(
         except Exception as e:
             print(f"  ❌ {codigo} — erro: {e}")
 
+    dicas_por_envelope = sorted(
+        {dica.get("envelope") for dica in blueprint.get("dicas", []) if dica.get("envelope")}
+    )
+    for envelope_dica in dicas_por_envelope:
+        dados_capa = {
+            "NOME_CASO": blueprint["titulo"],
+            "ENVELOPE": envelope_dica,
+            "case_name": blueprint["titulo"],
+            "section_label": "DICAS",
+            "section_ref": "Material de apoio ao facilitador",
+            "warning_label": "ABRIR SOMENTE QUANDO NECESSÁRIO",
+        }
+        pdf_path = output_dir / f"DICAS-{envelope_dica}-00_CAPA.pdf"
+        try:
+            caminho = renderizar_documento("00_envelope_capa.html", dados_capa, pdf_path)
+            grupos["dicas"].append(caminho)
+            print(f"  ✅ DICAS-{envelope_dica}-CAPA → {caminho.name}")
+        except Exception as e:
+            print(f"  ❌ DICAS-{envelope_dica}-CAPA — erro: {e}")
+
     return grupos
 
 
