@@ -290,18 +290,16 @@
     - ticks: ✓ = enviado, ✓✓ = entregue, ticks em azul = lido
   -->
 
-  {{#MENSAGENS}}
   <div class="message {{DIRECAO}} {{CLASSE_GAP}}">
-    {{#MOSTRAR_NOME}}<div class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</div>{{/MOSTRAR_NOME}}
+    <div class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</div>
     <div class="bubble">
       {{TEXTO_MENSAGEM}}
       <div class="bubble-footer">
         <span class="timestamp">{{HORARIO}}</span>
-        {{#DIRECAO_OUT}}<span class="ticks">{{TICKS}}</span>{{/DIRECAO_OUT}}
+        <span class="ticks">{{TICKS}}</span>
       </div>
     </div>
   </div>
-  {{/MENSAGENS}}
 
 </div>
 

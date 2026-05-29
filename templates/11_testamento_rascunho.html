@@ -466,13 +466,11 @@
       {{TEXTO_INTRODUCAO}}
     </div>
 
-    {{#ARTIGOS}}
     <div class="article">
       <div class="article-number">{{NUMERO_ARTIGO}}</div>
       <div class="article-title">{{TITULO_ARTIGO}}</div>
       <div class="article-text">{{TEXTO_ARTIGO}}</div>
 
-      {{#BENEFICIARIO}}
       <div class="beneficiary-block">
         <div class="ben-name">{{NOME_BENEFICIARIO}}</div>
         <div class="ben-details">
@@ -480,17 +478,11 @@
         </div>
         <div class="ben-inheritance">{{DESCRICAO_HERANCA}}</div>
       </div>
-      {{/BENEFICIARIO}}
 
-      {{#CONDICOES}}
       <ul class="conditions-list">
-        {{#LISTA_CONDICOES}}
         <li>{{CONDICAO}}</li>
-        {{/LISTA_CONDICOES}}
       </ul>
-      {{/CONDICOES}}
     </div>
-    {{/ARTIGOS}}
 
     <div class="testament-closing">
       {{TEXTO_ENCERRAMENTO}}
@@ -512,22 +504,18 @@
     <div class="witnesses">
       <div class="witnesses-title">Testemunhas</div>
       <div class="witnesses-grid">
-        {{#TESTEMUNHAS}}
         <div class="witness-box">
           <div class="witness-sig">{{ASSINATURA_TESTEMUNHA}}</div>
           <div class="witness-name">{{NOME_TESTEMUNHA}}</div>
           <div class="witness-doc">CPF: {{CPF_TESTEMUNHA}}</div>
         </div>
-        {{/TESTEMUNHAS}}
       </div>
     </div>
 
-    {{#MOSTRAR_SELO}}
     <div class="notary-seal">
       <div class="seal-text">{{NOME_CARTORIO}}</div>
       <div class="seal-num">Nº {{NUMERO_REGISTRO}}</div>
     </div>
-    {{/MOSTRAR_SELO}}
 
   </div>
 </div>
@@ -557,11 +545,9 @@
 
     <div class="draft-text">{{CORPO_RASCUNHO}}</div>
 
-    {{#ASSINATURA_RASCUNHO}}
     <div style="margin-top: 28px; font-family: 'Caveat', cursive; font-size: 22px; color: #1a1a1a; font-weight: 600;">
       {{ASSINATURA_RASCUNHO}}
     </div>
-    {{/ASSINATURA_RASCUNHO}}
   </div>
 </div>
 

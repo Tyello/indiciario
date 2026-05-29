@@ -239,17 +239,13 @@
   <div class="date-line">{{LOCAL_DATA}}</div>
 
   <!-- Protocol -->
-  {{#PROTOCOLO}}
   <div class="protocol">Ref.: {{PROTOCOLO}}</div>
-  {{/PROTOCOLO}}
 
   <!-- Subject -->
-  {{#ASSUNTO}}
   <div class="subject-line">
     <div class="subject-label">Assunto</div>
     <div class="subject-text">{{ASSUNTO}}</div>
   </div>
-  {{/ASSUNTO}}
 
   <!-- Salutation -->
   <div class="salutation">{{SAUDACAO}}</div>
@@ -260,9 +256,7 @@
   </div>
 
   <!-- Annotation (handwritten) -->
-  {{#ANOTACAO}}
   <div class="annotation">{{ANOTACAO}}</div>
-  {{/ANOTACAO}}
 
   <!-- Closing -->
   <div class="closing">
@@ -275,16 +269,12 @@
         <div class="signer-name">{{NOME_ASSINANTE}}</div>
         <div class="signer-title">{{CARGO_ASSINANTE}}</div>
       </div>
-      {{#CARIMBO}}
       <div class="stamp">{{TEXTO_CARIMBO}}</div>
-      {{/CARIMBO}}
     </div>
   </div>
 
   <!-- Footnotes -->
-  {{#NOTAS_RODAPE}}
   <div class="footnotes">{{NOTAS_RODAPE}}</div>
-  {{/NOTAS_RODAPE}}
 
 </div>
 </body>

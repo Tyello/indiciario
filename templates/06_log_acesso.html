@@ -305,27 +305,25 @@
           <th>Hora</th>
           <th>Porta / Zona</th>
           <th>ID Usuário</th>
-          {{#COLUNA_NOME}}<th>Nome</th>{{/COLUNA_NOME}}
+          <th>Nome</th>
           <th>Evento</th>
-          {{#COLUNA_TERMINAL}}<th>Terminal</th>{{/COLUNA_TERMINAL}}
-          {{#COLUNA_METODO}}<th>Método</th>{{/COLUNA_METODO}}
-          {{#COLUNA_OBS}}<th>Observação</th>{{/COLUNA_OBS}}
+          <th>Terminal</th>
+          <th>Método</th>
+          <th>Observação</th>
         </tr>
       </thead>
       <tbody>
-        {{#REGISTROS}}
         <tr class="{{CLASSE_LINHA}}">
           <td class="cell-date">{{DATA}}</td>
           <td class="cell-time">{{HORA}}</td>
           <td><span class="cell-door">{{PORTA}}</span></td>
           <td class="cell-id">{{ID_USUARIO}}</td>
-          {{#COLUNA_NOME}}<td>{{NOME_USUARIO}}</td>{{/COLUNA_NOME}}
+          <td>{{NOME_USUARIO}}</td>
           <td class="cell-action-{{TIPO_EVENTO}}">{{EVENTO}}</td>
-          {{#COLUNA_TERMINAL}}<td class="cell-note">{{TERMINAL}}</td>{{/COLUNA_TERMINAL}}
-          {{#COLUNA_METODO}}<td class="cell-note">{{METODO}}</td>{{/COLUNA_METODO}}
-          {{#COLUNA_OBS}}<td class="cell-note">{{OBSERVACAO}}</td>{{/COLUNA_OBS}}
+          <td class="cell-note">{{TERMINAL}}</td>
+          <td class="cell-note">{{METODO}}</td>
+          <td class="cell-note">{{OBSERVACAO}}</td>
         </tr>
-        {{/REGISTROS}}
       </tbody>
     </table>
   </div>

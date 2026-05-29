@@ -409,12 +409,10 @@
     </div>
   </div>
 
-  {{#ESCOPO}}
   <div class="scope-section">
     <div class="scope-title">Escopo dos Serviços</div>
     <div class="scope-text">{{ESCOPO}}</div>
   </div>
-  {{/ESCOPO}}
 
   <div class="items-section">
     <table class="items">
@@ -428,7 +426,6 @@
         </tr>
       </thead>
       <tbody>
-        {{#ITENS}}
         <tr>
           <td>{{NUMERO_ITEM}}</td>
           <td class="item-desc">
@@ -439,16 +436,15 @@
           <td class="value">{{VALOR_UNITARIO}}</td>
           <td class="value">{{VALOR_TOTAL_ITEM}}</td>
         </tr>
-        {{/ITENS}}
       </tbody>
     </table>
   </div>
 
   <div class="totals-block">
     <div class="totals-table">
-      {{#SUBTOTAL}}<div class="totals-row"><span>Subtotal</span><span>{{SUBTOTAL}}</span></div>{{/SUBTOTAL}}
-      {{#DESCONTO}}<div class="totals-row"><span>Desconto</span><span>- {{DESCONTO}}</span></div>{{/DESCONTO}}
-      {{#IMPOSTOS}}<div class="totals-row"><span>Impostos</span><span>{{IMPOSTOS}}</span></div>{{/IMPOSTOS}}
+      <div class="totals-row"><span>Subtotal</span><span>{{SUBTOTAL}}</span></div>
+      <div class="totals-row"><span>Desconto</span><span>- {{DESCONTO}}</span></div>
+      <div class="totals-row"><span>Impostos</span><span>{{IMPOSTOS}}</span></div>
       <div class="totals-row"><span>TOTAL</span><span>{{VALOR_TOTAL}}</span></div>
     </div>
   </div>
@@ -456,22 +452,16 @@
   <div class="conditions">
     <div class="conditions-title">Condições e Observações</div>
     <ul>
-      {{#CONDICOES}}
       <li>{{CONDICAO}}</li>
-      {{/CONDICOES}}
     </ul>
   </div>
 
-  {{#UNIDADES}}
   <div class="locations">
     <strong>Nossas Unidades:</strong>
-    {{#LISTA_UNIDADES}}<span class="location-tag">{{UNIDADE}}</span>{{/LISTA_UNIDADES}}
+    <span class="location-tag">{{UNIDADE}}</span>
   </div>
-  {{/UNIDADES}}
 
-  {{#NOTA_MANUSCRITA}}
   <span class="manuscript-note">"{{NOTA_MANUSCRITA}}"</span>
-  {{/NOTA_MANUSCRITA}}
 
   <div class="approval">
     <div class="approval-box">

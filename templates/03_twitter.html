@@ -354,13 +354,13 @@
 <div class="profile-info">
   <div class="display-name">
     {{DISPLAY_NAME}}
-    {{#VERIFICADO}}<span class="verified-badge">✓</span>{{/VERIFICADO}}
+    <span class="verified-badge">✓</span>
   </div>
   <div class="handle">@{{USUARIO_HANDLE}}</div>
   <div class="bio">{{BIO}}</div>
   <div class="profile-meta">
-    {{#LOCALIZACAO}}<span>📍 {{LOCALIZACAO}}</span>{{/LOCALIZACAO}}
-    {{#SITE}}<span>🔗 {{SITE}}</span>{{/SITE}}
+    <span>📍 {{LOCALIZACAO}}</span>
+    <span>🔗 {{SITE}}</span>
     <span>📅 Ingressou em {{DATA_INGRESSO}}</span>
   </div>
   <div class="followers-row">
@@ -376,14 +376,13 @@
 </div>
 
 <!-- Posts -->
-{{#POSTS}}
 <div class="tweet">
   <div class="tweet-header">
     <div class="tweet-avatar">{{AVATAR_INICIAL}}</div>
     <div class="tweet-meta">
       <div class="tweet-name">
         {{DISPLAY_NAME}}
-        {{#VERIFICADO}}<span style="color:#1d9bf0; font-size:16px;">✓</span>{{/VERIFICADO}}
+        <span style="color:#1d9bf0; font-size:16px;">✓</span>
       </div>
       <div class="tweet-handle-time">@{{USUARIO_HANDLE}} · {{DATA_POST}}</div>
     </div>
@@ -398,21 +397,16 @@
     <div class="action"><span class="action-icon">↑</span></div>
   </div>
 </div>
-{{/POSTS}}
 
 <!-- Trending sidebar (opcional) -->
-{{#TRENDING}}
 <div class="sidebar-note">
   <h3>O que está acontecendo</h3>
-  {{#TRENDS}}
   <div class="trend-item">
     <div class="trend-category">{{CATEGORIA}} · Assunto do Momento</div>
     <div class="trend-name">{{NOME_TREND}}</div>
     <div class="trend-posts">{{TOTAL_POSTS}} posts</div>
   </div>
-  {{/TRENDS}}
 </div>
-{{/TRENDING}}
 
 </body>
 </html>
