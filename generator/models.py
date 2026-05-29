@@ -229,7 +229,7 @@ class Blueprint(BaseModel):
     intervalo_critico_inicio: str
     intervalo_critico_fim: str
 
-    documentos: list[Documento] = Field(..., min_length=8)
+    documentos: list[Documento] = Field(..., min_length=1)
 
     matriz_pistas: list[Pista] = Field(..., min_length=3)
     red_herrings: list[RedHerring] = Field(..., min_length=2)

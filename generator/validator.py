@@ -371,6 +371,78 @@ class NivelRisco(str, Enum):
     ALTO = "Alto"
 
 
+EMAIL_CHAVES_OBRIGATORIAS = {
+    "REMETENTE_NOME",
+    "REMETENTE_EMAIL",
+    "DESTINATARIO_EMAIL",
+    "DESTINATARIO_LABEL",
+    "DATA_HORA",
+    "ASSUNTO",
+    "AVATAR_INICIAL",
+    "AVATAR_COR",
+    "CORPO_EMAIL",
+    "NOTA_RODAPE",
+}
+
+BOLETIM_CHAVES_OBRIGATORIAS = {
+    "ORGAO_NOME",
+    "ORGAO_SUBTITULO",
+    "NUMERO_CASO",
+    "TIPO_DOCUMENTO",
+    "TIPO_OCORRENCIA",
+    "DATA",
+    "LOCALIZACAO",
+    "HORA_OCORRENCIA",
+    "DESCRICAO_OCORRENCIA",
+    "NOME_RESPONSAVEL",
+    "ASSINATURA_RESPONSAVEL",
+    "ASSINATURA_GLIFO",
+    "DATA_HORA_ASSINATURA",
+}
+
+LOG_CHAVES_OBRIGATORIAS = {
+    "NOME_SISTEMA",
+    "SUBTITULO_SISTEMA",
+    "COR_SISTEMA",
+    "COR_SISTEMA_DARK",
+    "DATA_EXPORTACAO",
+    "HORA_EXPORTACAO",
+    "OPERADOR_EXPORT",
+    "HASH_REGISTRO",
+    "PERIODO_INICIO",
+    "PERIODO_FIM",
+    "LOCALIZACAO_SISTEMA",
+    "TOTAL_REGISTROS",
+    "COLUNA_NOME",
+    "COLUNA_TERMINAL",
+    "COLUNA_METODO",
+    "COLUNA_OBS",
+    "TOTAL_USUARIOS",
+    "TOTAL_ENTRADAS",
+    "TOTAL_NEGADOS",
+    "TOTAL_ANOMALIAS",
+    "REGISTROS",
+}
+
+CHAT_CHAVES_OBRIGATORIAS = {
+    "HORA_TELA",
+    "CONTADOR_NAOVISTOS",
+    "NOME_GRUPO",
+    "MEMBROS_LISTA",
+    "DATA_CONVERSA",
+    "MENSAGENS",
+}
+
+SCHEMAS_CONTEUDO: dict[TipoDocumento, tuple[set[str], set[str], set[str]]] = {
+    TipoDocumento.EMAIL_N: (EMAIL_CHAVES_OBRIGATORIAS, set(), {"CORPO_EMAIL"}),
+    TipoDocumento.EMAIL_I: (EMAIL_CHAVES_OBRIGATORIAS, set(), {"CORPO_EMAIL"}),
+    TipoDocumento.CHAT: (CHAT_CHAVES_OBRIGATORIAS, {"MENSAGENS"}, set()),
+    TipoDocumento.BOL: (BOLETIM_CHAVES_OBRIGATORIAS, set(), {"DESCRICAO_OCORRENCIA"}),
+    TipoDocumento.DEPO: (BOLETIM_CHAVES_OBRIGATORIAS, set(), {"DESCRICAO_OCORRENCIA"}),
+    TipoDocumento.LOG_ACESSO: (LOG_CHAVES_OBRIGATORIAS, {"REGISTROS"}, set()),
+    TipoDocumento.LOG_SISTEMA: (LOG_CHAVES_OBRIGATORIAS, {"REGISTROS"}, set()),
+}
+
 @dataclass
 class Erro:
     codigo: str
@@ -416,6 +488,7 @@ class BlueprintValidator:
     def validar(self) -> ResultadoValidacao:
         self._verificar_elenco()
         self._verificar_documentos()
+        self._verificar_conteudo()
         self._verificar_pilares()
         self._verificar_pistas()
         self._verificar_red_herrings()
@@ -571,6 +644,61 @@ class BlueprintValidator:
         if id_citado in self._ids_personagens:
             return True
         return id_citado.isdigit() and len(id_citado) >= 5
+
+    def _verificar_conteudo(self) -> None:
+        if not any(doc.conteudo for doc in self.bp.documentos):
+            return
+
+        for doc in self.bp.documentos:
+            if not doc.conteudo:
+                self.resultado.adicionar(Erro(
+                    "CONT_001",
+                    Severidade.CRITICO,
+                    f"Documento '{doc.codigo}' está sem conteúdo para renderização.",
+                    documento=doc.codigo,
+                ))
+                continue
+
+            schema = SCHEMAS_CONTEUDO.get(doc.tipo)
+            if schema is None:
+                self.resultado.adicionar(Erro(
+                    "CONT_002",
+                    Severidade.AVISO,
+                    f"Tipo '{doc.tipo.value}' ainda não possui schema de conteúdo no validador.",
+                    documento=doc.codigo,
+                ))
+                continue
+
+            obrigatorias, listas_obrigatorias, campos_html = schema
+            ausentes = sorted(chave for chave in obrigatorias if chave not in doc.conteudo)
+            if ausentes:
+                self.resultado.adicionar(Erro(
+                    "CONT_003",
+                    Severidade.CRITICO,
+                    f"Documento '{doc.codigo}' não preenche chaves obrigatórias de conteúdo.",
+                    detalhe=", ".join(ausentes),
+                    documento=doc.codigo,
+                ))
+
+            for chave in sorted(listas_obrigatorias):
+                valor = doc.conteudo.get(chave)
+                if not isinstance(valor, list) or not valor:
+                    self.resultado.adicionar(Erro(
+                        "CONT_004",
+                        Severidade.CRITICO,
+                        f"Documento '{doc.codigo}' deve preencher a lista obrigatória '{chave}'.",
+                        documento=doc.codigo,
+                    ))
+
+            for chave in sorted(campos_html):
+                valor = doc.conteudo.get(chave)
+                if isinstance(valor, str) and "<p" not in valor.lower():
+                    self.resultado.adicionar(Erro(
+                        "CONT_005",
+                        Severidade.AVISO,
+                        f"Campo '{chave}' do documento '{doc.codigo}' deveria usar parágrafos HTML.",
+                        documento=doc.codigo,
+                    ))
 
     def _verificar_pilares(self) -> None:
         if len(self.bp.pilares_validacao) != 4:
