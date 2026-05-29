@@ -119,202 +119,6 @@ Emoção esperada: [emoção]
 
 ---
 
-Regras de formato por tipo de documento:
-
-## Campo obrigatório: conteudo
-
-Cada documento no JSON deve incluir o campo `conteudo` com os dados reais
-que preenchem os placeholders do template correspondente.
-
-As chaves do `conteudo` devem corresponder EXATAMENTE aos placeholders
-`{{VARIAVEL}}` do template HTML.
-
-Exemplos por tipo:
-
-### email_narrador / email_institucional
-```json
-"conteudo": {
-  "REMETENTE_NOME": "Helena Moraes",
-  "REMETENTE_EMAIL": "helena.moraes@chalesdocedro.com.br",
-  "DESTINATARIO_EMAIL": "detetive@indiciarios.com",
-  "DESTINATARIO_LABEL": "Investigação",
-  "DATA_HORA": "14 de agosto de 2026 às 23:58",
-  "ASSUNTO": "URGENTE — Hóspede desaparecido no Chalé 6",
-  "AVATAR_INICIAL": "H",
-  "AVATAR_COR": "#1A2E4A",
-  "CORPO_EMAIL": "<p>Preciso de ajuda imediata...</p>",
-  "TOTAL_ANEXOS": "3",
-  "ANEXOS": true,
-  "CADA_ANEXO": [
-    {"NOME_ARQUIVO": "log_acesso.pdf", "TAMANHO_KB": "142"},
-    {"NOME_ARQUIVO": "escala_turnos.pdf", "TAMANHO_KB": "88"}
-  ],
-  "NOTA_RODAPE": "Caso fictício — experiência offline Indiciários"
-}
-```
-
-### boletim / depoimento
-```json
-"conteudo": {
-  "ORGAO_NOME": "POLÍCIA CIVIL DO ESTADO",
-  "ORGAO_SUBTITULO": "Delegacia de Crimes Contra a Pessoa",
-  "NUMERO_CASO": "061-15",
-  "TIPO_DOCUMENTO": "BOLETIM DE INSPEÇÃO INICIAL",
-  "TIPO_OCORRENCIA": "Desaparecimento suspeito",
-  "DATA": "15/08/2026",
-  "LOCALIZACAO": "Chalés do Cedro — Serra Gaúcha, RS",
-  "HORA_OCORRENCIA": "00h30",
-  "CAMPO_NOME": false,
-  "DESCRICAO_OCORRENCIA": "A equipe foi acionada após...",
-  "NOME_RESPONSAVEL": "Dra. Fernanda Luz",
-  "ASSINATURA_RESPONSAVEL": "Fernanda Luz",
-  "ASSINATURA_GLIFO": "FL",
-  "DATA_HORA_ASSINATURA": "15/08/2026 01h45",
-  "MOSTRAR_CARIMBO": true,
-  "TEXTO_CARIMBO": "PRELIMINAR"
-}
-```
-
-### log_acesso / log_sistema
-```json
-"conteudo": {
-  "NOME_SISTEMA": "CONTROLE DE ACESSOS — POUSADA VALE DO CEDRO",
-  "SUBTITULO_SISTEMA": "Exportação auditada — uso investigativo",
-  "COR_SISTEMA": "#1A2E4A",
-  "COR_SISTEMA_DARK": "#0d1a2e",
-  "DATA_EXPORTACAO": "15/08/2026",
-  "HORA_EXPORTACAO": "01:12",
-  "OPERADOR_EXPORT": "SISTEMA",
-  "HASH_REGISTRO": "a3f9c1...",
-  "PERIODO_INICIO": "14/08/2026 20:00",
-  "PERIODO_FIM": "15/08/2026 01:12",
-  "LOCALIZACAO_SISTEMA": "Chalés 4, 5 e 6 — Bloco B",
-  "TOTAL_REGISTROS": "24",
-  "COLUNA_NOME": true,
-  "COLUNA_TERMINAL": false,
-  "COLUNA_METODO": false,
-  "COLUNA_OBS": true,
-  "TOTAL_USUARIOS": "7",
-  "TOTAL_ENTRADAS": "18",
-  "TOTAL_NEGADOS": "1",
-  "TOTAL_ANOMALIAS": "2",
-  "REGISTROS": [
-    {
-      "CLASSE_LINHA": "",
-      "DATA": "14/08/2026",
-      "HORA": "23:12:04",
-      "PORTA": "P3-Chalé6",
-      "ID_USUARIO": "ID-14",
-      "NOME_USUARIO": "Renato Figueiredo",
-      "TIPO_EVENTO": "in",
-      "EVENTO": "ENTRADA",
-      "OBSERVACAO": ""
-    },
-    {
-      "CLASSE_LINHA": "anomaly",
-      "DATA": "14/08/2026",
-      "HORA": "23:47:31",
-      "PORTA": "P3-Chalé6",
-      "ID_USUARIO": "ID-09",
-      "NOME_USUARIO": "Carla Drumond",
-      "TIPO_EVENTO": "in",
-      "EVENTO": "ENTRADA",
-      "OBSERVACAO": "sem saída registrada"
-    }
-  ]
-}
-```
-
-### carta / protocolo / glossario / folha_cruzamento
-```json
-"conteudo": {
-  "NOME_ORGANIZACAO": "Chalés do Cedro",
-  "SUBTITULO_ORGANIZACAO": "Pousada e Retiro de Montanha",
-  "ENDERECO_LINHA1": "Estrada do Pinheiro, 412 — Serra Gaúcha, RS",
-  "ENDERECO_LINHA2": "",
-  "CONTATO": "contato@chalesdocedro.com.br",
-  "CNPJ": "12.345.678/0001-90",
-  "COR_TOPO": "#1A2E4A",
-  "ESTILO_LINHAS": "",
-  "LOCAL_DATA": "Serra Gaúcha, 15 de agosto de 2026",
-  "PROTOCOLO": "PV-061/2026",
-  "ASSUNTO": "Protocolo de Investigação — Envelope 1",
-  "SAUDACAO": "Prezado(a) Investigador(a),",
-  "CORPO_CARTA": "<p>Este dossiê contém os documentos do primeiro envelope...</p>",
-  "FORMULA_ENCERRAMENTO": "Atenciosamente,",
-  "ASSINATURA_CURSIVA": "Chalés do Cedro",
-  "NOME_ASSINANTE": "Administração",
-  "CARGO_ASSINANTE": "Pousada Vale do Cedro",
-  "CARIMBO": false,
-  "TEXTO_CARIMBO": ""
-}
-```
-
-### extrato
-```json
-"conteudo": {
-  "LOGO_SIGLA": "BC",
-  "NOME_BANCO": "Banco Confiança",
-  "TAGLINE_BANCO": "Sua segurança em primeiro lugar",
-  "COR_BANCO": "#1A2E4A",
-  "PERIODO_INICIO": "01/08/2026",
-  "PERIODO_FIM": "15/08/2026",
-  "DATA_GERACAO": "15/08/2026",
-  "HORA_GERACAO": "09:14",
-  "NOME_TITULAR": "Renato Figueiredo",
-  "DOC_TITULAR": "***.***.456-78",
-  "AGENCIA": "0042",
-  "NUMERO_CONTA": "12345-6",
-  "TIPO_CONTA": "Conta Corrente",
-  "SALDO_INICIAL": "R$ 4.230,00",
-  "DATA_SALDO_INICIAL": "01/08/2026",
-  "MOVIMENTACAO_LIQUIDA": "- R$ 3.800,00",
-  "COR_MOVIMENTACAO": "negative",
-  "SALDO_FINAL": "R$ 430,00",
-  "DATA_SALDO_FINAL": "15/08/2026",
-  "COR_SALDO_FINAL": "negative",
-  "LANCAMENTOS": [
-    {
-      "CLASSE_LINHA": "",
-      "DATA": "12/08/2026",
-      "DESCRICAO": "PIX ENVIADO",
-      "DETALHE": "CHAVE: renato.fig@email.com",
-      "TIPO": "PIX",
-      "TIPO_LOWER": "pix",
-      "DIRECAO": "debit",
-      "VALOR": "- R$ 3.800,00",
-      "COR_SALDO": "negative",
-      "SALDO_ACUMULADO": "R$ 430,00"
-    }
-  ],
-  "TOTAL_CREDITOS": "R$ 0,00",
-  "TOTAL_DEBITOS": "R$ 3.800,00",
-  "TOTAL_LANCAMENTOS": "1",
-  "NOTA_LEGAL": "Documento gerado automaticamente",
-  "CNPJ_BANCO": "00.000.000/0001-00",
-  "ENDERECO_BANCO": "Av. Fictícia, 1000 — São Paulo, SP"
-}
-```
-
-IMPORTANTE: cada documento deve incluir o campo “conteudo” com os dados
-reais que preenchem o template HTML correspondente. Use os exemplos do
-framework/07_PROMPT_GERADOR_DE_CASO.md como referência de chaves por tipo.
-O campo “conteudo” é obrigatório — sem ele, o PDF não será gerado.
-
-
-- E-mail: incluir De / Para / Data / Assunto / corpo / lista de anexos com tamanhos fictícios
-- Chat: incluir nome do grupo, horários por mensagem, identificação de remetente
-- Log de acesso: tabela com DATA / HORA / PORTA / ID / SENTIDO, cabeçalho com período exportado
-- Log de sistema: tabela com HORA / OBJETO / EVENTO / USUÁRIO / TERMINAL / JUSTIFICATIVA
-- Escala: tabela de letras por dia + legenda de nomes no mesmo documento
-- Mapa: descrição textual detalhada das salas, portas numeradas, câmeras, sentido de acesso, legenda
-- Manual: título + revisão + data + assinatura + seções de regra normal / exceção / sanção
-- Contrato: partes + CNPJ fictício + objeto + data anterior ao crime + cláusula relevante + assinaturas
-- Boletim policial: número do caso + tipo + localização + data + corpo em tom manuscrito + assinatura
-- Depoimento: número do caso + nome + data nasc. + marcação vítima/suspeito + corpo em 1ª pessoa + assinaturas
-- Cartão: frente (código + frase) e verso (identidade + frase com duplo sentido) + instrução de corte
-- Cadastro de terceiros: bloco por fornecedor + tabela de funcionários com IDs
-
 Não inclua notas do autor dentro dos documentos do jogador.
 
 ### Fase 3 — Dicas progressivas
@@ -336,6 +140,359 @@ Use o formato do `09_TEMPLATE_GABARITO.md`:
 - pontos de travamento e dicas recomendadas
 - respostas erradas esperadas
 - fechamento narrativo
+
+---
+
+## Campo `conteudo` — OBRIGATÓRIO em cada documento
+
+O campo `conteudo` deve estar presente em **todos** os documentos do blueprint.
+Sem ele, o PDF não será gerado.
+
+As chaves do `conteudo` preenchem os placeholders `{{VARIAVEL}}` do template HTML.
+Use **exatamente** os nomes abaixo — diferença de maiúsculas ou underscore quebra a renderização.
+
+---
+
+### email_narrador / email_institucional → `01_email.html`
+
+```json
+"conteudo": {
+  "REMETENTE_NOME":     "Nome do remetente",
+  "REMETENTE_EMAIL":    "email@dominio.ficticio",
+  "DESTINATARIO_EMAIL": "detetive@indiciarios.com",
+  "DESTINATARIO_LABEL": "Investigação Interna",
+  "DATA_HORA":          "01 de março de 2026 às 17:05",
+  "ASSUNTO":            "Texto do assunto",
+  "AVATAR_INICIAL":     "J",
+  "AVATAR_COR":         "#1A2E4A",
+  "CORPO_EMAIL":        "<p>Parágrafo 1.</p><p>Parágrafo 2.</p>",
+  "NOTA_RODAPE":        "CONFIDENCIAL",
+  "COPIA":              "",
+  "TOTAL_ANEXOS":       "3",
+  "ANEXOS":             true,
+  "CADA_ANEXO": [
+    { "NOME_ARQUIVO": "arquivo.pdf", "TAMANHO_KB": "88" }
+  ]
+}
+```
+
+Regras: `CORPO_EMAIL` deve ser HTML com `<p>`. Se não houver anexos, omitir `CADA_ANEXO` e definir `"ANEXOS": false`.
+
+---
+
+### chat → `02_whatsapp.html`
+
+```json
+"conteudo": {
+  "HORA_TELA":          "16:57",
+  "CONTADOR_NAOVISTOS": "139",
+  "NOME_GRUPO":         "[Seg.] Turno da tarde",
+  "MEMBROS_LISTA":      "José, Marcello, Márcio, Miguel",
+  "DATA_CONVERSA":      "01 mar 2026",
+  "MENSAGENS": [
+    {
+      "DIRECAO":        "in",
+      "CLASSE_GAP":     "gap",
+      "MOSTRAR_NOME":   true,
+      "COR_REMETENTE":  "color-1",
+      "NOME_REMETENTE": "Márcio - Museu SP",
+      "TEXTO_MENSAGEM": "Texto da mensagem",
+      "HORARIO":        "16:40",
+      "DIRECAO_OUT":    false,
+      "TICKS":          ""
+    },
+    {
+      "DIRECAO":        "out",
+      "CLASSE_GAP":     "gap",
+      "MOSTRAR_NOME":   false,
+      "COR_REMETENTE":  "",
+      "NOME_REMETENTE": "",
+      "TEXTO_MENSAGEM": "Resposta enviada",
+      "HORARIO":        "16:41",
+      "DIRECAO_OUT":    true,
+      "TICKS":          "✓✓"
+    }
+  ]
+}
+```
+
+Regras: `CLASSE_GAP: "gap"` apenas na primeira mensagem de cada remetente consecutivo. `COR_REMETENTE` de `color-1` a `color-6`, um por participante, consistente ao longo de toda a conversa.
+
+---
+
+### boletim / depoimento → `04_boletim.html`
+
+```json
+"conteudo": {
+  "ORGAO_NOME":             "POLÍCIA CIVIL DO ESTADO",
+  "ORGAO_SUBTITULO":        "Delegacia de Crimes Patrimoniais",
+  "NUMERO_CASO":            "402FH",
+  "TIPO_DOCUMENTO":         "BOLETIM DE INSPEÇÃO INICIAL",
+  "TIPO_OCORRENCIA":        "Furto qualificado",
+  "DATA":                   "01/03/2026",
+  "LOCALIZACAO":            "São Paulo — SP",
+  "HORA_OCORRENCIA":        "16h40",
+  "DESCRICAO_OCORRENCIA":   "<p>Parágrafo 1.</p><p>Parágrafo 2.</p>",
+  "NOME_RESPONSAVEL":       "Bruno Rodrigues Souto",
+  "ASSINATURA_RESPONSAVEL": "Bruno R. Souto",
+  "ASSINATURA_GLIFO":       "BRS",
+  "DATA_HORA_ASSINATURA":   "01/03/2026 18h24",
+  "CAMPO_NOME":             false,
+  "MOSTRAR_CARIMBO":        true,
+  "TEXTO_CARIMBO":          "PRELIMINAR"
+}
+```
+
+Para depoimento: `"TIPO_DOCUMENTO": "TRANSCRIÇÃO DE DEPOIMENTO"`, `"CAMPO_NOME": true` e incluir `NOME_ENVOLVIDO`, `DATA_NASC`, `CONDICAO` (`"SUSPEITO"` ou `"VÍTIMA"`), `DOCUMENTO_PESSOAL`.
+
+---
+
+### protocolo / carta / manual / glossario / folha_cruzamento / contrato → `05_carta.html`
+
+```json
+"conteudo": {
+  "NOME_ORGANIZACAO":      "Nome da instituição",
+  "SUBTITULO_ORGANIZACAO": "Departamento ou tipo",
+  "ENDERECO_LINHA1":       "Endereço fictício, nº 123",
+  "ENDERECO_LINHA2":       "",
+  "CONTATO":               "contato@ficticio.com",
+  "CNPJ":                  "12.345.678/0001-90",
+  "COR_TOPO":              "#1A2E4A",
+  "ESTILO_LINHAS":         "",
+  "LOCAL_DATA":            "São Paulo, 01 de março de 2026",
+  "PROTOCOLO":             "REF-2026/001",
+  "ASSUNTO":               "Protocolo de Investigação — Envelope 1",
+  "SAUDACAO":              "Prezado(a) Investigador(a),",
+  "CORPO_CARTA":           "<p>Parágrafo 1.</p><p>Parágrafo 2.</p>",
+  "FORMULA_ENCERRAMENTO":  "Atenciosamente,",
+  "ASSINATURA_CURSIVA":    "Nome Cursivo",
+  "NOME_ASSINANTE":        "Nome Completo",
+  "CARGO_ASSINANTE":       "Cargo ou Função",
+  "CARIMBO":               false,
+  "TEXTO_CARIMBO":         "",
+  "ANOTACAO":              "",
+  "NOTAS_RODAPE":          ""
+}
+```
+
+Para `glossario`: `CORPO_CARTA` deve conter tabela HTML `<table>` com colunas Termo e Definição.
+
+Para `folha_cruzamento`: `CORPO_CARTA` deve conter tabelas HTML com células vazias para preenchimento manual.
+
+Para `protocolo`: `ASSUNTO` é obrigatório e deve nomear o objetivo do envelope.
+
+---
+
+### log_acesso / log_sistema / escala → `06_log_acesso.html`
+
+```json
+"conteudo": {
+  "NOME_SISTEMA":        "CONTROLE DE ACESSOS — MUSEU SP",
+  "SUBTITULO_SISTEMA":   "Exportação auditada — uso investigativo",
+  "COR_SISTEMA":         "#1A2E4A",
+  "COR_SISTEMA_DARK":    "#0d1a2e",
+  "DATA_EXPORTACAO":     "01/03/2026",
+  "HORA_EXPORTACAO":     "17:04",
+  "OPERADOR_EXPORT":     "SISTEMA",
+  "HASH_REGISTRO":       "a3f9c1d2",
+  "PERIODO_INICIO":      "01/03/2026 09:50",
+  "PERIODO_FIM":         "01/03/2026 17:04",
+  "LOCALIZACAO_SISTEMA": "Andar 3 — Sala N3",
+  "TOTAL_REGISTROS":     "3",
+  "COLUNA_NOME":         true,
+  "COLUNA_TERMINAL":     false,
+  "COLUNA_METODO":       false,
+  "COLUNA_OBS":          true,
+  "TOTAL_USUARIOS":      "3",
+  "TOTAL_ENTRADAS":      "3",
+  "TOTAL_NEGADOS":       "0",
+  "TOTAL_ANOMALIAS":     "1",
+  "REGISTROS": [
+    {
+      "CLASSE_LINHA":  "",
+      "DATA":          "01/03/2026",
+      "HORA":          "09:58:02",
+      "PORTA":         "1A",
+      "ID_USUARIO":    "27",
+      "NOME_USUARIO":  "Nome do Personagem",
+      "TIPO_EVENTO":   "in",
+      "EVENTO":        "ENTRADA",
+      "OBSERVACAO":    ""
+    },
+    {
+      "CLASSE_LINHA":  "anomaly",
+      "DATA":          "01/03/2026",
+      "HORA":          "15:22:11",
+      "PORTA":         "4A",
+      "ID_USUARIO":    "09",
+      "NOME_USUARIO":  "Outro Personagem",
+      "TIPO_EVENTO":   "in",
+      "EVENTO":        "ENTRADA",
+      "OBSERVACAO":    "sem saída correspondente"
+    }
+  ]
+}
+```
+
+Regras: `TOTAL_REGISTROS` deve bater com o número de itens em `REGISTROS`. `TIPO_EVENTO` aceita `in`, `out` ou `denied`. `CLASSE_LINHA` aceita `""`, `"anomaly"` (vermelho) ou `"highlight"` (azul). IDs em `ID_USUARIO` devem existir no elenco.
+
+---
+
+### recibo → `07_recibo.html`
+
+```json
+"conteudo": {
+  "NOME_EMPRESA":           "Razão Social Fictícia",
+  "TAGLINE_EMPRESA":        "Tipo de serviço",
+  "CNPJ":                   "12.345.678/0001-90",
+  "ENDERECO_EMPRESA":       "Rua Fictícia, 100 — SP",
+  "CONTATO_EMPRESA":        "contato@ficticio.com",
+  "NUMERO_RECIBO":          "0042",
+  "WATERMARK_TEXTO":        "RECIBO",
+  "COR_EMPRESA":            "#1A2E4A",
+  "NOME_CONTRATANTE":       "Museu de São Paulo",
+  "ENDERECO_CONTRATANTE":   "Rua das Palmeiras, 410 — SP",
+  "DOC_CONTRATANTE":        "12.345.678/0001-90",
+  "CONTATO_CONTRATANTE":    "diretoria@msp.ficticio",
+  "DATA_RECIBO":            "22/02/2026",
+  "PERIODO_REFERENCIA":     "Serviços de fevereiro/2026",
+  "VALOR_TOTAL":            "R$ 2.940,00",
+  "VALOR_POR_EXTENSO":      "Dois mil, novecentos e quarenta reais",
+  "FORMA_PAGAMENTO":        "TRANSFERÊNCIA",
+  "DESCRICAO_PAGAMENTO":    "Transferência bancária conforme acordo",
+  "ASSINATURA_PRESTADOR":   "Nome Cursivo",
+  "ASSINATURA_CONTRATANTE": "",
+  "DATA_ASSINATURA":        "22/02/2026",
+  "ITENS": [
+    {
+      "DESCRICAO_ITEM":  "Serviço de pintura e acabamento",
+      "QUANTIDADE":      "4",
+      "VALOR_UNITARIO":  "R$ 500,00",
+      "VALOR_ITEM":      "R$ 2.000,00"
+    }
+  ]
+}
+```
+
+---
+
+### orcamento → `08_orcamento.html`
+
+```json
+"conteudo": {
+  "NOME_EMPRESA":           "TransCargas Brasil",
+  "TIPO_EMPRESA":           "Transporte rodoviário especializado",
+  "CNPJ":                   "31.313.431/0001-987",
+  "ENDERECO":               "Av. Central, 1000 — BH, MG",
+  "SITE_EMAIL":             "transcargasbr@ficticio.com",
+  "COR_PRIMARIA":           "#E65100",
+  "COR_SECUNDARIA":         "#BF360C",
+  "NUMERO_ORCAMENTO":       "21321.02",
+  "DATA_EMISSAO":           "20/02/2026",
+  "DATA_VALIDADE":          "20/03/2026",
+  "REVISAO":                "3",
+  "NOME_CLIENTE":           "Museu de São Paulo",
+  "ENDERECO_CLIENTE":       "Rua das Palmeiras, 410 — SP",
+  "DOC_CLIENTE":            "12.345.678/0001-90",
+  "CONTATO_CLIENTE":        "diretoria@msp.ficticio",
+  "TITULO_PROJETO":         "BID Nº 1023 — Reforma Geral 2026",
+  "DESCRICAO_REFERENCIA":   "Movimentação e armazenamento de cargas especiais",
+  "VALOR_TOTAL":            "R$ 222.100,00",
+  "ESCOPO":                 "Serviços conforme descrito no BID.",
+  "CONDICOES": [
+    { "CONDICAO": "Preços válidos apenas para dias úteis." },
+    { "CONDICAO": "Não prestamos serviços em fins de semana." }
+  ],
+  "UNIDADES": true,
+  "LISTA_UNIDADES": [
+    { "UNIDADE": "São Paulo — SP" },
+    { "UNIDADE": "Belo Horizonte — MG" }
+  ],
+  "NOTA_MANUSCRITA": "",
+  "ASSINATURA_RESPONSAVEL": "Lucas Malta",
+  "NOME_RESPONSAVEL":       "Lucas Malta",
+  "CARGO_RESPONSAVEL":      "Gerente Comercial",
+  "ASSINATURA_CLIENTE":     "",
+  "DATA_APROVACAO":         "",
+  "ITENS": [
+    {
+      "NUMERO_ITEM":      "1",
+      "NOME_ITEM":        "Caminhão de Grande Porte",
+      "DESC_ITEM":        "Por km rodado",
+      "QUANTIDADE":       "1",
+      "VALOR_UNITARIO":   "R$ 8,50/km",
+      "VALOR_TOTAL_ITEM": "R$ 8.500,00"
+    }
+  ]
+}
+```
+
+---
+
+### extrato → `09_extrato.html`
+
+```json
+"conteudo": {
+  "LOGO_SIGLA":           "BC",
+  "NOME_BANCO":           "Banco Confiança",
+  "TAGLINE_BANCO":        "Sua segurança em primeiro lugar",
+  "COR_BANCO":            "#1A2E4A",
+  "PERIODO_INICIO":       "01/08/2026",
+  "PERIODO_FIM":          "15/08/2026",
+  "DATA_GERACAO":         "15/08/2026",
+  "HORA_GERACAO":         "09:14",
+  "NOME_TITULAR":         "Nome do Titular",
+  "DOC_TITULAR":          "***.456.789-**",
+  "AGENCIA":              "0042",
+  "NUMERO_CONTA":         "12345-6",
+  "TIPO_CONTA":           "Conta Corrente",
+  "SALDO_INICIAL":        "R$ 4.230,00",
+  "DATA_SALDO_INICIAL":   "01/08/2026",
+  "MOVIMENTACAO_LIQUIDA": "- R$ 3.800,00",
+  "COR_MOVIMENTACAO":     "negative",
+  "SALDO_FINAL":          "R$ 430,00",
+  "DATA_SALDO_FINAL":     "15/08/2026",
+  "COR_SALDO_FINAL":      "negative",
+  "TOTAL_CREDITOS":       "R$ 0,00",
+  "TOTAL_DEBITOS":        "R$ 3.800,00",
+  "TOTAL_LANCAMENTOS":    "1",
+  "NOTA_LEGAL":           "Documento gerado automaticamente — uso investigativo",
+  "CNPJ_BANCO":           "00.000.000/0001-00",
+  "ENDERECO_BANCO":       "Av. Fictícia, 1000 — São Paulo, SP",
+  "LANCAMENTOS": [
+    {
+      "CLASSE_LINHA":    "flagged",
+      "DATA":            "12/08/2026",
+      "DESCRICAO":       "PIX ENVIADO",
+      "DETALHE":         "Chave: ***.456.789-**",
+      "TIPO":            "PIX",
+      "TIPO_LOWER":      "pix",
+      "DIRECAO":         "debit",
+      "VALOR":           "- R$ 3.800,00",
+      "COR_SALDO":       "negative",
+      "SALDO_ACUMULADO": "R$ 430,00"
+    }
+  ]
+}
+```
+
+Regras: `COR_MOVIMENTACAO` e `COR_SALDO_FINAL` aceitam `"positive"`, `"negative"` ou `"neutral"`. `CLASSE_LINHA: "flagged"` para lançamentos suspeitos, com destaque vermelho. `TOTAL_LANCAMENTOS` deve bater com o número de itens.
+
+---
+
+## Checklist antes de entregar o blueprint
+
+Para cada documento, verifique:
+
+* [ ] Campo `conteudo` presente e não vazio.
+* [ ] Todas as chaves do tipo estão preenchidas.
+* [ ] `CORPO_CARTA` / `CORPO_EMAIL` / `DESCRICAO_OCORRENCIA` usam HTML com `<p>`.
+* [ ] Listas (`REGISTROS`, `LANCAMENTOS`, `ITENS`, `MENSAGENS`) têm ao menos 1 item.
+* [ ] Totais de string (`TOTAL_REGISTROS`, `TOTAL_LANCAMENTOS`) batem com o tamanho da lista.
+* [ ] IDs em `ID_USUARIO` existem no elenco do blueprint.
+* [ ] Cores no formato `#RRGGBB`.
+* [ ] Datas no formato `DD/MM/AAAA`.
+* [ ] Valores monetários no formato `R$ X.XXX,XX`.
 
 ---
 
