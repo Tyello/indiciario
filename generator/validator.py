@@ -84,6 +84,144 @@ class ResultadoValidacao:
             self.erros.append(erro)
 
 
+CHAVES_OBRIGATORIAS: dict[str, list[str]] = {
+    "email_narrador": [
+        "REMETENTE_NOME", "REMETENTE_EMAIL", "DESTINATARIO_EMAIL",
+        "DESTINATARIO_LABEL", "DATA_HORA", "ASSUNTO",
+        "AVATAR_INICIAL", "AVATAR_COR", "CORPO_EMAIL", "NOTA_RODAPE",
+    ],
+    "email_institucional": [
+        "REMETENTE_NOME", "REMETENTE_EMAIL", "DESTINATARIO_EMAIL",
+        "DESTINATARIO_LABEL", "DATA_HORA", "ASSUNTO",
+        "AVATAR_INICIAL", "AVATAR_COR", "CORPO_EMAIL", "NOTA_RODAPE",
+    ],
+    "chat": [
+        "HORA_TELA", "CONTADOR_NAOVISTOS", "NOME_GRUPO",
+        "MEMBROS_LISTA", "DATA_CONVERSA", "MENSAGENS",
+    ],
+    "boletim": [
+        "ORGAO_NOME", "ORGAO_SUBTITULO", "NUMERO_CASO", "TIPO_DOCUMENTO",
+        "TIPO_OCORRENCIA", "DATA", "LOCALIZACAO", "HORA_OCORRENCIA",
+        "DESCRICAO_OCORRENCIA", "NOME_RESPONSAVEL",
+        "ASSINATURA_RESPONSAVEL", "ASSINATURA_GLIFO", "DATA_HORA_ASSINATURA",
+    ],
+    "depoimento": [
+        "ORGAO_NOME", "ORGAO_SUBTITULO", "NUMERO_CASO", "TIPO_DOCUMENTO",
+        "TIPO_OCORRENCIA", "DATA", "LOCALIZACAO", "HORA_OCORRENCIA",
+        "DESCRICAO_OCORRENCIA", "NOME_RESPONSAVEL",
+        "ASSINATURA_RESPONSAVEL", "ASSINATURA_GLIFO", "DATA_HORA_ASSINATURA",
+        "CAMPO_NOME", "NOME_ENVOLVIDO", "DATA_NASC", "CONDICAO",
+    ],
+    "protocolo": [
+        "NOME_ORGANIZACAO", "SUBTITULO_ORGANIZACAO", "ENDERECO_LINHA1",
+        "CONTATO", "CNPJ", "COR_TOPO", "LOCAL_DATA",
+        "SAUDACAO", "CORPO_CARTA", "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA", "NOME_ASSINANTE", "CARGO_ASSINANTE", "ASSUNTO",
+    ],
+    "carta": [
+        "NOME_ORGANIZACAO", "SUBTITULO_ORGANIZACAO", "ENDERECO_LINHA1",
+        "CONTATO", "CNPJ", "COR_TOPO", "LOCAL_DATA",
+        "SAUDACAO", "CORPO_CARTA", "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA", "NOME_ASSINANTE", "CARGO_ASSINANTE",
+    ],
+    "manual": [
+        "NOME_ORGANIZACAO", "SUBTITULO_ORGANIZACAO", "ENDERECO_LINHA1",
+        "CONTATO", "CNPJ", "COR_TOPO", "LOCAL_DATA",
+        "SAUDACAO", "CORPO_CARTA", "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA", "NOME_ASSINANTE", "CARGO_ASSINANTE",
+    ],
+    "glossario": [
+        "NOME_ORGANIZACAO", "SUBTITULO_ORGANIZACAO", "ENDERECO_LINHA1",
+        "CONTATO", "CNPJ", "COR_TOPO", "LOCAL_DATA",
+        "SAUDACAO", "CORPO_CARTA", "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA", "NOME_ASSINANTE", "CARGO_ASSINANTE",
+    ],
+    "folha_cruzamento": [
+        "NOME_ORGANIZACAO", "SUBTITULO_ORGANIZACAO", "ENDERECO_LINHA1",
+        "CONTATO", "CNPJ", "COR_TOPO", "LOCAL_DATA",
+        "SAUDACAO", "CORPO_CARTA", "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA", "NOME_ASSINANTE", "CARGO_ASSINANTE",
+    ],
+    "contrato": [
+        "NOME_ORGANIZACAO", "SUBTITULO_ORGANIZACAO", "ENDERECO_LINHA1",
+        "CONTATO", "CNPJ", "COR_TOPO", "LOCAL_DATA",
+        "SAUDACAO", "CORPO_CARTA", "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA", "NOME_ASSINANTE", "CARGO_ASSINANTE",
+    ],
+    "log_acesso": [
+        "NOME_SISTEMA", "SUBTITULO_SISTEMA", "COR_SISTEMA", "COR_SISTEMA_DARK",
+        "DATA_EXPORTACAO", "HORA_EXPORTACAO", "OPERADOR_EXPORT", "HASH_REGISTRO",
+        "PERIODO_INICIO", "PERIODO_FIM", "LOCALIZACAO_SISTEMA", "TOTAL_REGISTROS",
+        "COLUNA_NOME", "COLUNA_TERMINAL", "COLUNA_METODO", "COLUNA_OBS",
+        "TOTAL_USUARIOS", "TOTAL_ENTRADAS", "TOTAL_NEGADOS", "TOTAL_ANOMALIAS",
+        "REGISTROS",
+    ],
+    "log_sistema": [
+        "NOME_SISTEMA", "SUBTITULO_SISTEMA", "COR_SISTEMA", "COR_SISTEMA_DARK",
+        "DATA_EXPORTACAO", "HORA_EXPORTACAO", "OPERADOR_EXPORT", "HASH_REGISTRO",
+        "PERIODO_INICIO", "PERIODO_FIM", "LOCALIZACAO_SISTEMA", "TOTAL_REGISTROS",
+        "COLUNA_NOME", "COLUNA_TERMINAL", "COLUNA_METODO", "COLUNA_OBS",
+        "TOTAL_USUARIOS", "TOTAL_ENTRADAS", "TOTAL_NEGADOS", "TOTAL_ANOMALIAS",
+        "REGISTROS",
+    ],
+    "escala": [
+        "NOME_SISTEMA", "SUBTITULO_SISTEMA", "COR_SISTEMA", "COR_SISTEMA_DARK",
+        "DATA_EXPORTACAO", "HORA_EXPORTACAO", "OPERADOR_EXPORT", "HASH_REGISTRO",
+        "PERIODO_INICIO", "PERIODO_FIM", "LOCALIZACAO_SISTEMA", "TOTAL_REGISTROS",
+        "COLUNA_NOME", "COLUNA_TERMINAL", "COLUNA_METODO", "COLUNA_OBS",
+        "TOTAL_USUARIOS", "TOTAL_ENTRADAS", "TOTAL_NEGADOS", "TOTAL_ANOMALIAS",
+        "REGISTROS",
+    ],
+    "recibo": [
+        "NOME_EMPRESA", "TAGLINE_EMPRESA", "CNPJ", "ENDERECO_EMPRESA",
+        "CONTATO_EMPRESA", "NUMERO_RECIBO", "WATERMARK_TEXTO", "COR_EMPRESA",
+        "NOME_CONTRATANTE", "ENDERECO_CONTRATANTE", "DOC_CONTRATANTE",
+        "CONTATO_CONTRATANTE", "DATA_RECIBO", "PERIODO_REFERENCIA",
+        "VALOR_TOTAL", "VALOR_POR_EXTENSO", "FORMA_PAGAMENTO",
+        "DESCRICAO_PAGAMENTO", "ITENS",
+        "ASSINATURA_PRESTADOR", "ASSINATURA_CONTRATANTE", "DATA_ASSINATURA",
+    ],
+    "orcamento": [
+        "NOME_EMPRESA", "TIPO_EMPRESA", "CNPJ", "ENDERECO", "SITE_EMAIL",
+        "COR_PRIMARIA", "COR_SECUNDARIA", "NUMERO_ORCAMENTO",
+        "DATA_EMISSAO", "DATA_VALIDADE", "REVISAO",
+        "NOME_CLIENTE", "ENDERECO_CLIENTE", "DOC_CLIENTE", "CONTATO_CLIENTE",
+        "TITULO_PROJETO", "DESCRICAO_REFERENCIA", "VALOR_TOTAL", "ITENS",
+        "ASSINATURA_RESPONSAVEL", "NOME_RESPONSAVEL", "CARGO_RESPONSAVEL",
+    ],
+    "extrato": [
+        "LOGO_SIGLA", "NOME_BANCO", "TAGLINE_BANCO", "COR_BANCO",
+        "PERIODO_INICIO", "PERIODO_FIM", "DATA_GERACAO", "HORA_GERACAO",
+        "NOME_TITULAR", "DOC_TITULAR", "AGENCIA", "NUMERO_CONTA", "TIPO_CONTA",
+        "SALDO_INICIAL", "DATA_SALDO_INICIAL", "MOVIMENTACAO_LIQUIDA",
+        "COR_MOVIMENTACAO", "SALDO_FINAL", "DATA_SALDO_FINAL", "COR_SALDO_FINAL",
+        "TOTAL_CREDITOS", "TOTAL_DEBITOS", "TOTAL_LANCAMENTOS",
+        "NOTA_LEGAL", "CNPJ_BANCO", "ENDERECO_BANCO", "LANCAMENTOS",
+    ],
+}
+
+
+CHAVES_LISTA: dict[str, str] = {
+    "email_narrador": "CADA_ANEXO",
+    "chat": "MENSAGENS",
+    "log_acesso": "REGISTROS",
+    "log_sistema": "REGISTROS",
+    "escala": "REGISTROS",
+    "recibo": "ITENS",
+    "orcamento": "ITENS",
+    "extrato": "LANCAMENTOS",
+}
+
+
+PLACEHOLDERS_INVALIDOS = {
+    "...",
+    "a preencher",
+    "lorem ipsum",
+    "placeholder",
+    "tbd",
+}
+
+
 class BlueprintValidator:
     """Executa validações narrativas, estruturais e offline sobre um blueprint."""
 
@@ -105,6 +243,7 @@ class BlueprintValidator:
         self._verificar_linha_do_tempo()
         self._verificar_dicas()
         self._verificar_autossuficiencia()
+        self._verificar_conteudo()
         self._calcular_risco()
         self._gerar_resumo()
         return self.resultado
@@ -344,6 +483,103 @@ class BlueprintValidator:
                         "AUTO_002",
                         Severidade.MODERADO,
                         f"Documento '{doc.codigo}' menciona QR/link/url em modo offline puro.",
+                        documento=doc.codigo,
+                    ))
+
+    @staticmethod
+    def _valor_conteudo_incompleto(valor: object) -> bool:
+        if valor is None:
+            return True
+        if isinstance(valor, str):
+            texto = " ".join(valor.strip().lower().split())
+            return (
+                not texto
+                or texto in PLACEHOLDERS_INVALIDOS
+                or texto.startswith("lorem ipsum")
+            )
+        if isinstance(valor, (list, tuple, set)):
+            return len(valor) == 0
+        if isinstance(valor, dict):
+            return len(valor) == 0
+        return False
+
+    def _verificar_conteudo(self) -> None:
+        """Verifica se cada documento tem conteudo renderizável para seu template."""
+        for doc in self.bp.documentos:
+            tipo = doc.tipo.value if hasattr(doc.tipo, "value") else str(doc.tipo)
+            conteudo = getattr(doc, "conteudo", None)
+
+            if not isinstance(conteudo, dict) or not conteudo:
+                self.resultado.adicionar(Erro(
+                    codigo="CONT_001",
+                    severidade=Severidade.CRITICO,
+                    mensagem=f"'{doc.codigo}' — campo 'conteudo' ausente ou vazio.",
+                    detalhe=(
+                        f"Tipo '{tipo}' requer conteudo preenchido. "
+                        "Consulte CONTEUDO_SCHEMA.md para as chaves obrigatórias."
+                    ),
+                    documento=doc.codigo,
+                ))
+                continue
+
+            chaves_obrigatorias = CHAVES_OBRIGATORIAS.get(tipo)
+            if chaves_obrigatorias is None:
+                self.resultado.adicionar(Erro(
+                    codigo="CONT_002",
+                    severidade=Severidade.AVISO,
+                    mensagem=f"'{doc.codigo}' — tipo '{tipo}' sem schema de conteudo definido.",
+                    detalhe="Verifique se o tipo está correto. Usando template 05_carta.html como fallback.",
+                    documento=doc.codigo,
+                ))
+                continue
+
+            incompletas = [
+                chave
+                for chave in chaves_obrigatorias
+                if chave not in conteudo or self._valor_conteudo_incompleto(conteudo[chave])
+            ]
+            if incompletas:
+                self.resultado.adicionar(Erro(
+                    codigo="CONT_003",
+                    severidade=Severidade.CRITICO,
+                    mensagem=(
+                        f"'{doc.codigo}' ({tipo}) — "
+                        f"{len(incompletas)} chave(s) obrigatória(s) ausente(s) "
+                        "ou incompleta(s): "
+                        f"{', '.join(incompletas[:5])}"
+                        f"{'...' if len(incompletas) > 5 else ''}."
+                    ),
+                    detalhe="Consulte CONTEUDO_SCHEMA.md para a lista completa por tipo.",
+                    documento=doc.codigo,
+                ))
+
+            chave_lista = CHAVES_LISTA.get(tipo)
+            deve_verificar_anexos = tipo == "email_narrador" and bool(conteudo.get("ANEXOS"))
+            if chave_lista and (chave_lista in conteudo or deve_verificar_anexos):
+                lista = conteudo.get(chave_lista)
+                lista_invalida = (
+                    not isinstance(lista, list)
+                    or len(lista) == 0
+                    or all(self._valor_conteudo_incompleto(item) for item in lista)
+                )
+                if lista_invalida:
+                    self.resultado.adicionar(Erro(
+                        codigo="CONT_004",
+                        severidade=Severidade.CRITICO,
+                        mensagem=f"'{doc.codigo}' — '{chave_lista}' deve ser lista com ao menos 1 item.",
+                        documento=doc.codigo,
+                    ))
+
+            for campo_html in ("CORPO_CARTA", "CORPO_EMAIL", "DESCRICAO_OCORRENCIA"):
+                valor = conteudo.get(campo_html, "")
+                if valor and isinstance(valor, str) and "<p>" not in valor.lower():
+                    self.resultado.adicionar(Erro(
+                        codigo="CONT_005",
+                        severidade=Severidade.AVISO,
+                        mensagem=(
+                            f"'{doc.codigo}' — '{campo_html}' não contém tags <p>. "
+                            "Use HTML com <p> por parágrafo para renderização correta."
+                        ),
                         documento=doc.codigo,
                     ))
 
