@@ -25,6 +25,106 @@ from generator.validator import BlueprintValidator, NivelRisco
 ROOT = Path(__file__).resolve().parents[1]
 
 
+CONTEUDO_EMAIL_VALIDO = {
+    "REMETENTE_NOME": "Bruno Narrador",
+    "REMETENTE_EMAIL": "bruno@ficcional.test",
+    "DESTINATARIO_EMAIL": "investigacao@ficcional.test",
+    "DESTINATARIO_LABEL": "Equipe de investigação",
+    "DATA_HORA": "01/01/2026 10:00",
+    "ASSUNTO": "Registro do incidente",
+    "AVATAR_INICIAL": "B",
+    "AVATAR_COR": "#1A2E4A",
+    "CORPO_EMAIL": "<p>Mensagem fictícia para validação.</p>",
+    "NOTA_RODAPE": "Documento fictício",
+}
+
+CONTEUDO_CARTA_VALIDO = {
+    "NOME_ORGANIZACAO": "Organização Fictícia",
+    "SUBTITULO_ORGANIZACAO": "Setor de Registros",
+    "ENDERECO_LINHA1": "Rua Inventada, 123",
+    "CONTATO": "contato@ficcional.test",
+    "CNPJ": "00.000.000/0001-00",
+    "COR_TOPO": "#1A2E4A",
+    "LOCAL_DATA": "São Paulo, 01 de janeiro de 2026",
+    "SAUDACAO": "À equipe",
+    "CORPO_CARTA": "<p>Texto fictício para validação.</p>",
+    "FORMULA_ENCERRAMENTO": "Atenciosamente",
+    "ASSINATURA_CURSIVA": "Assinatura Fictícia",
+    "NOME_ASSINANTE": "Responsável Fictício",
+    "CARGO_ASSINANTE": "Coordenação",
+}
+
+CONTEUDO_PROTOCOLO_VALIDO = {**CONTEUDO_CARTA_VALIDO, "ASSUNTO": "Abertura de investigação"}
+
+CONTEUDO_LOG_VALIDO = {
+    "NOME_SISTEMA": "Sistema Fictício",
+    "SUBTITULO_SISTEMA": "Exportação auditada",
+    "COR_SISTEMA": "#1A2E4A",
+    "COR_SISTEMA_DARK": "#0D1A2E",
+    "DATA_EXPORTACAO": "01/01/2026",
+    "HORA_EXPORTACAO": "10:05",
+    "OPERADOR_EXPORT": "Operador Fictício",
+    "HASH_REGISTRO": "abc123",
+    "PERIODO_INICIO": "01/01/2026 09:00",
+    "PERIODO_FIM": "01/01/2026 10:00",
+    "LOCALIZACAO_SISTEMA": "Sala Fictícia",
+    "TOTAL_REGISTROS": "1",
+    "COLUNA_NOME": True,
+    "COLUNA_TERMINAL": True,
+    "COLUNA_METODO": True,
+    "COLUNA_OBS": True,
+    "TOTAL_USUARIOS": "1",
+    "TOTAL_ENTRADAS": "1",
+    "TOTAL_NEGADOS": "0",
+    "TOTAL_ANOMALIAS": "0",
+    "REGISTROS": [{"NOME_USUARIO": "Ana Operadora", "EVENTO": "ENTRADA"}],
+}
+
+CONTEUDO_EXTRATO_VALIDO = {
+    "LOGO_SIGLA": "BF",
+    "NOME_BANCO": "Banco Fictício",
+    "TAGLINE_BANCO": "Extrato demonstrativo",
+    "COR_BANCO": "#1A2E4A",
+    "PERIODO_INICIO": "01/01/2026",
+    "PERIODO_FIM": "31/01/2026",
+    "DATA_GERACAO": "31/01/2026",
+    "HORA_GERACAO": "10:00",
+    "NOME_TITULAR": "Carla Beneficiária",
+    "DOC_TITULAR": "000.000.000-00",
+    "AGENCIA": "0001",
+    "NUMERO_CONTA": "12345-6",
+    "TIPO_CONTA": "Conta corrente",
+    "SALDO_INICIAL": "R$ 0,00",
+    "DATA_SALDO_INICIAL": "01/01/2026",
+    "MOVIMENTACAO_LIQUIDA": "R$ 100,00",
+    "COR_MOVIMENTACAO": "#14532D",
+    "SALDO_FINAL": "R$ 100,00",
+    "DATA_SALDO_FINAL": "31/01/2026",
+    "COR_SALDO_FINAL": "#14532D",
+    "TOTAL_CREDITOS": "R$ 100,00",
+    "TOTAL_DEBITOS": "R$ 0,00",
+    "TOTAL_LANCAMENTOS": "1",
+    "NOTA_LEGAL": "Documento fictício",
+    "CNPJ_BANCO": "00.000.000/0001-00",
+    "ENDERECO_BANCO": "Rua Inventada, 123",
+    "LANCAMENTOS": [{"DATA": "02/01/2026", "DESCRICAO": "Crédito fictício", "VALOR": "R$ 100,00"}],
+}
+
+
+def conteudo_para_tipo(tipo: TipoDocumento) -> dict[str, object]:
+    if tipo == TipoDocumento.EMAIL_N:
+        return dict(CONTEUDO_EMAIL_VALIDO)
+    if tipo == TipoDocumento.PROTO:
+        return dict(CONTEUDO_PROTOCOLO_VALIDO)
+    if tipo in {TipoDocumento.CRUZ, TipoDocumento.CONTR}:
+        return dict(CONTEUDO_CARTA_VALIDO)
+    if tipo in {TipoDocumento.LOG_ACESSO, TipoDocumento.LOG_SISTEMA}:
+        return dict(CONTEUDO_LOG_VALIDO)
+    if tipo == TipoDocumento.EXTRA:
+        return dict(CONTEUDO_EXTRATO_VALIDO)
+    return {"CONTEUDO_GENERICO": "Conteúdo fictício para tipo sem schema específico"}
+
+
 def _personagem(id_: str, nome: str, papel: PapelPersonagem, docs: list[str] | None = None) -> Personagem:
     return Personagem(
         id=id_,
@@ -46,6 +146,7 @@ def _documento(codigo: str, envelope: Envelope, tipo: TipoDocumento, ids: list[s
         emocao_esperada="cruzamento",
         objetivo_narrativo="Documento fictício autossuficiente e offline.",
         ids_citados=ids or [],
+        conteudo=conteudo_para_tipo(tipo),
     )
 
 

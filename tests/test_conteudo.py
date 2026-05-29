@@ -13,6 +13,14 @@ from generator.validator import BlueprintValidator
 
 def blueprint_minimo(documentos: list[dict]) -> Blueprint:
     """Retorna um blueprint válido mínimo com os documentos fornecidos."""
+    documentos = [*documentos]
+    while len(documentos) < 8:
+        documentos.append(doc_base(
+            codigo=f"E1-{len(documentos) + 1:02d}",
+            tipo="email_narrador",
+            conteudo=CONTEUDO_EMAIL_VALIDO,
+        ))
+
     base = {
         "titulo": "Teste",
         "subtitulo": "Sub",

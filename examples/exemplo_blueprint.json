@@ -8,18 +8,14 @@
   "tempo_estimado_min": 70,
   "numero_jogadores": "3-5",
   "formato_envelopes": 2,
-
   "premissa": "Na tarde de uma quarta-feira, durante uma manutenção programada que desligou as câmeras por 45 minutos, o quadro 'Véspera' — avaliado em R$ 3 milhões — desapareceu da Galeria Principal do Museu Municipal. O museu estava fechado ao público. Apenas quatro funcionários e dois fornecedores tinham acesso.",
-
   "verdade_real": "Marcelo Faria, analista de segurança, combinou com Paulo Leite, motorista da empresa TransArte, a retirada do quadro durante a janela de câmeras offline. Marcelo usou o crachá de emergência da supervisora Helena para liberar a sala restrita sem gerar registro em seu próprio ID. Paulo tinha um van estacionada na entrada de serviço. O quadro foi levado para um galpão em Osasco, onde seria vendido para um colecionador via intermediária Galeria Sombria.",
-
   "executor_id": "14",
   "planejador_id": "14",
   "beneficiario_id": "14",
   "motivacao": "Dívida de jogo de R$ 80.000 com cobrador violento.",
   "metodo_ocultacao": "Usou crachá de Helena para não gerar registro próprio. Justificou presença na área como 'ronda de rotina'.",
   "erro_que_permite_descobrir": "O crachá de Helena foi usado às 15h22, mas ela registrou saída do prédio às 14h50 pelo registro físico biométrico.",
-
   "cadeia_causal": [
     "Marcelo combina com Paulo a operação durante um almoço três dias antes.",
     "Marcelo identifica que a janela de manutenção das câmeras seria na quarta às 15h.",
@@ -30,7 +26,6 @@
     "Paulo leva o quadro para galpão em Osasco.",
     "O sumiço é descoberto às 16h40 quando o técnico entra para ajustar a iluminação."
   ],
-
   "personagens": [
     {
       "id": "14",
@@ -39,7 +34,10 @@
       "papel": "executor",
       "suspeita_aparente": "Estava de plantão e conhece os sistemas de segurança",
       "verdade": "Executou o roubo usando o crachá de Helena durante a janela de câmeras offline",
-      "documento_ancoragem": ["E1-05", "E1-06"]
+      "documento_ancoragem": [
+        "E1-05",
+        "E1-06"
+      ]
     },
     {
       "id": "09",
@@ -48,7 +46,10 @@
       "papel": "red_herring",
       "suspeita_aparente": "Seu crachá foi usado no horário do roubo",
       "verdade": "Havia saído do prédio antes do evento — crachá foi usado por outra pessoa",
-      "documento_ancoragem": ["E1-05", "E1-06"]
+      "documento_ancoragem": [
+        "E1-05",
+        "E1-06"
+      ]
     },
     {
       "id": "22",
@@ -57,7 +58,10 @@
       "papel": "narrador",
       "suspeita_aparente": "Tem acesso privilegiado às obras e beneficiária do seguro institucional",
       "verdade": "Não tem envolvimento. Pediu investigação pois teme ser responsabilizada",
-      "documento_ancoragem": ["E1-01", "E1-02"]
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-02"
+      ]
     },
     {
       "id": "31",
@@ -66,7 +70,10 @@
       "papel": "red_herring",
       "suspeita_aparente": "Descobriu o sumiço e demorou para avisar",
       "verdade": "Descobriu honestamente — demorou porque ficou em choque",
-      "documento_ancoragem": ["E1-03", "E2-04"]
+      "documento_ancoragem": [
+        "E1-03",
+        "E2-04"
+      ]
     },
     {
       "id": "27",
@@ -75,10 +82,12 @@
       "papel": "cumplice",
       "suspeita_aparente": "Fez entrega no museu no dia — van captada em câmera externa",
       "verdade": "Cúmplice de Marcelo. Transportou o quadro para Osasco",
-      "documento_ancoragem": ["E2-03", "E2-05"]
+      "documento_ancoragem": [
+        "E2-03",
+        "E2-05"
+      ]
     }
   ],
-
   "linha_tempo_real": [
     {
       "data_hora": "Qua 14h20",
@@ -123,7 +132,6 @@
       "confirmacao_independente": null
     }
   ],
-
   "linha_tempo_percebida": [
     {
       "data_hora": "Qua 15h22",
@@ -133,7 +141,6 @@
       "confirmacao_independente": null
     }
   ],
-
   "linha_tempo_documental": [
     {
       "data_hora": "Qua 14h50",
@@ -143,7 +150,6 @@
       "confirmacao_independente": null
     }
   ],
-
   "pilares_validacao": [
     {
       "nome": "Presença física na área",
@@ -170,10 +176,8 @@
       "personagem_id": "14"
     }
   ],
-
   "intervalo_critico_inicio": "15:00",
   "intervalo_critico_fim": "16:40",
-
   "documentos": [
     {
       "codigo": "E1-01",
@@ -182,11 +186,30 @@
       "tipo": "protocolo",
       "emocao_esperada": "orientacao e urgencia",
       "objetivo_narrativo": "Orientar o jogador, definir os quatro pilares e o critério de avanço",
-      "pistas_contidas": ["intervalo crítico 15h-16h40", "quatro pilares nomeados"],
+      "pistas_contidas": [
+        "intervalo crítico 15h-16h40",
+        "quatro pilares nomeados"
+      ],
       "confirma": [],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": []
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acervo Fictício",
+        "SUBTITULO_ORGANIZACAO": "Departamento de Registros",
+        "ENDERECO_LINHA1": "Rua Inventada, 123",
+        "CONTATO": "contato@ficcional.test",
+        "CNPJ": "00.000.000/0001-00",
+        "COR_TOPO": "#1A2E4A",
+        "LOCAL_DATA": "São Paulo, 01 de janeiro de 2026",
+        "SAUDACAO": "À equipe de investigação",
+        "CORPO_CARTA": "<p>Registro fictício para validação do caso.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente",
+        "ASSINATURA_CURSIVA": "Assinatura Fictícia",
+        "NOME_ASSINANTE": "Responsável Fictício",
+        "CARGO_ASSINANTE": "Coordenação",
+        "ASSUNTO": "Protocolo de investigação"
+      }
     },
     {
       "codigo": "E1-02",
@@ -195,12 +218,34 @@
       "tipo": "email_narrador",
       "emocao_esperada": "urgencia e suspeita sobre o narrador",
       "objetivo_narrativo": "Contextualizar o crime, plantar suspeita em Helena e revelar que câmeras estavam offline",
-      "pistas_contidas": ["câmeras offline às 15h", "crachá de Helena usado", "suspeita em Helena"],
-      "confirma": ["E1-04"],
+      "pistas_contidas": [
+        "câmeras offline às 15h",
+        "crachá de Helena usado",
+        "suspeita em Helena"
+      ],
+      "confirma": [
+        "E1-04"
+      ],
       "confirmado_por": [],
       "red_herring_potencial": "Roberta parece saber demais sobre os detalhes",
-      "ids_citados": ["09", "14", "22"],
-      "codigos_citados": []
+      "ids_citados": [
+        "09",
+        "14",
+        "22"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Bruno Narrador",
+        "REMETENTE_EMAIL": "bruno@ficcional.test",
+        "DESTINATARIO_EMAIL": "investigacao@ficcional.test",
+        "DESTINATARIO_LABEL": "Investigação",
+        "DATA_HORA": "01/01/2026 10:00",
+        "ASSUNTO": "Relato inicial",
+        "AVATAR_INICIAL": "B",
+        "AVATAR_COR": "#1A2E4A",
+        "CORPO_EMAIL": "<p>Mensagem fictícia do caso.</p>",
+        "NOTA_RODAPE": "Documento fictício"
+      }
     },
     {
       "codigo": "E1-03",
@@ -209,11 +254,19 @@
       "tipo": "mapa",
       "emocao_esperada": "orientacao espacial",
       "objetivo_narrativo": "Mostrar localização da Galeria Principal, entradas e câmeras",
-      "pistas_contidas": ["entrada de serviço fora do ângulo das câmeras internas", "Galeria Principal tem apenas uma entrada controlada"],
-      "confirma": ["E1-05"],
+      "pistas_contidas": [
+        "entrada de serviço fora do ângulo das câmeras internas",
+        "Galeria Principal tem apenas uma entrada controlada"
+      ],
+      "confirma": [
+        "E1-05"
+      ],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": []
+      "codigos_citados": [],
+      "conteudo": {
+        "CONTEUDO_GENERICO": "Conteúdo fictício para tipo sem schema específico"
+      }
     },
     {
       "codigo": "E1-04",
@@ -222,11 +275,33 @@
       "tipo": "manual",
       "emocao_esperada": "compreensao da vulnerabilidade",
       "objetivo_narrativo": "Confirmar que câmeras ficaram offline entre 15h e 16h30 por manutenção programada",
-      "pistas_contidas": ["janela offline: 15h00 a 16h30", "câmeras de entrada de serviço não afetadas"],
-      "confirma": ["E1-05"],
-      "confirmado_por": ["E1-02"],
+      "pistas_contidas": [
+        "janela offline: 15h00 a 16h30",
+        "câmeras de entrada de serviço não afetadas"
+      ],
+      "confirma": [
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E1-02"
+      ],
       "ids_citados": [],
-      "codigos_citados": []
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acervo Fictício",
+        "SUBTITULO_ORGANIZACAO": "Departamento de Registros",
+        "ENDERECO_LINHA1": "Rua Inventada, 123",
+        "CONTATO": "contato@ficcional.test",
+        "CNPJ": "00.000.000/0001-00",
+        "COR_TOPO": "#1A2E4A",
+        "LOCAL_DATA": "São Paulo, 01 de janeiro de 2026",
+        "SAUDACAO": "À equipe de investigação",
+        "CORPO_CARTA": "<p>Registro fictício para validação do caso.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente",
+        "ASSINATURA_CURSIVA": "Assinatura Fictícia",
+        "NOME_ASSINANTE": "Responsável Fictício",
+        "CARGO_ASSINANTE": "Coordenação"
+      }
     },
     {
       "codigo": "E1-05",
@@ -240,12 +315,52 @@
         "Crachá ID-09: ENTRADA Galeria Principal 15h22",
         "ID-14 Marcelo: presença contínua no corredor"
       ],
-      "confirma": ["E1-06"],
-      "confirmado_por": ["E1-02", "E1-03"],
+      "confirma": [
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E1-02",
+        "E1-03"
+      ],
       "red_herring_potencial": "Log mostra crachá de Helena — parece que ela voltou",
       "risco_ambiguidade": "medio",
-      "ids_citados": ["09", "14", "22", "31"],
-      "codigos_citados": []
+      "ids_citados": [
+        "09",
+        "14",
+        "22",
+        "31"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "Sistema Fictício",
+        "SUBTITULO_SISTEMA": "Exportação auditada",
+        "COR_SISTEMA": "#1A2E4A",
+        "COR_SISTEMA_DARK": "#0D1A2E",
+        "DATA_EXPORTACAO": "01/01/2026",
+        "HORA_EXPORTACAO": "10:05",
+        "OPERADOR_EXPORT": "Operador Fictício",
+        "HASH_REGISTRO": "abc123",
+        "PERIODO_INICIO": "01/01/2026 09:00",
+        "PERIODO_FIM": "01/01/2026 10:00",
+        "LOCALIZACAO_SISTEMA": "Sala Fictícia",
+        "TOTAL_REGISTROS": "1",
+        "COLUNA_NOME": true,
+        "COLUNA_TERMINAL": true,
+        "COLUNA_METODO": true,
+        "COLUNA_OBS": true,
+        "TOTAL_USUARIOS": "1",
+        "TOTAL_ENTRADAS": "1",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "REGISTROS": [
+          {
+            "NOME_USUARIO": "Personagem Fictício",
+            "EVENTO": "ENTRADA",
+            "DATA": "01/01/2026",
+            "HORA": "09:30"
+          }
+        ]
+      }
     },
     {
       "codigo": "E1-06",
@@ -259,10 +374,46 @@
         "Helena: turno encerrado às 14h30",
         "Crachá de emergência de Helena estava no armário da segurança"
       ],
-      "confirma": ["E1-05"],
+      "confirma": [
+        "E1-05"
+      ],
       "confirmado_por": [],
-      "ids_citados": ["09", "14", "22"],
-      "codigos_citados": []
+      "ids_citados": [
+        "09",
+        "14",
+        "22"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "Sistema Fictício",
+        "SUBTITULO_SISTEMA": "Exportação auditada",
+        "COR_SISTEMA": "#1A2E4A",
+        "COR_SISTEMA_DARK": "#0D1A2E",
+        "DATA_EXPORTACAO": "01/01/2026",
+        "HORA_EXPORTACAO": "10:05",
+        "OPERADOR_EXPORT": "Operador Fictício",
+        "HASH_REGISTRO": "abc123",
+        "PERIODO_INICIO": "01/01/2026 09:00",
+        "PERIODO_FIM": "01/01/2026 10:00",
+        "LOCALIZACAO_SISTEMA": "Sala Fictícia",
+        "TOTAL_REGISTROS": "1",
+        "COLUNA_NOME": true,
+        "COLUNA_TERMINAL": true,
+        "COLUNA_METODO": true,
+        "COLUNA_OBS": true,
+        "TOTAL_USUARIOS": "1",
+        "TOTAL_ENTRADAS": "1",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "REGISTROS": [
+          {
+            "NOME_USUARIO": "Personagem Fictício",
+            "EVENTO": "ENTRADA",
+            "DATA": "01/01/2026",
+            "HORA": "09:30"
+          }
+        ]
+      }
     },
     {
       "codigo": "E1-07",
@@ -279,8 +430,29 @@
       "confirmado_por": [],
       "red_herring_potencial": "Túlio parece estar escondendo algo sobre o que viu",
       "risco_ambiguidade": "alto",
-      "ids_citados": ["31"],
-      "codigos_citados": []
+      "ids_citados": [
+        "31"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Delegacia Fictícia",
+        "ORGAO_SUBTITULO": "Núcleo de Registros",
+        "NUMERO_CASO": "001",
+        "TIPO_DOCUMENTO": "Boletim",
+        "TIPO_OCORRENCIA": "Ocorrência fictícia",
+        "DATA": "01/01/2026",
+        "LOCALIZACAO": "Acervo Fictício",
+        "HORA_OCORRENCIA": "10:00",
+        "DESCRICAO_OCORRENCIA": "<p>Descrição fictícia da ocorrência.</p>",
+        "NOME_RESPONSAVEL": "Inspetor Fictício",
+        "ASSINATURA_RESPONSAVEL": "Inspetor Fictício",
+        "ASSINATURA_GLIFO": "IF",
+        "DATA_HORA_ASSINATURA": "01/01/2026 11:00",
+        "CAMPO_NOME": "Nome",
+        "NOME_ENVOLVIDO": "Pessoa Fictícia",
+        "DATA_NASC": "01/01/1990",
+        "CONDICAO": "Depoente"
+      }
     },
     {
       "codigo": "E1-08",
@@ -293,7 +465,22 @@
       "confirma": [],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": []
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acervo Fictício",
+        "SUBTITULO_ORGANIZACAO": "Departamento de Registros",
+        "ENDERECO_LINHA1": "Rua Inventada, 123",
+        "CONTATO": "contato@ficcional.test",
+        "CNPJ": "00.000.000/0001-00",
+        "COR_TOPO": "#1A2E4A",
+        "LOCAL_DATA": "São Paulo, 01 de janeiro de 2026",
+        "SAUDACAO": "À equipe de investigação",
+        "CORPO_CARTA": "<p>Registro fictício para validação do caso.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente",
+        "ASSINATURA_CURSIVA": "Assinatura Fictícia",
+        "NOME_ASSINANTE": "Responsável Fictício",
+        "CARGO_ASSINANTE": "Coordenação"
+      }
     },
     {
       "codigo": "E1-09",
@@ -310,7 +497,22 @@
       "confirma": [],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": []
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acervo Fictício",
+        "SUBTITULO_ORGANIZACAO": "Departamento de Registros",
+        "ENDERECO_LINHA1": "Rua Inventada, 123",
+        "CONTATO": "contato@ficcional.test",
+        "CNPJ": "00.000.000/0001-00",
+        "COR_TOPO": "#1A2E4A",
+        "LOCAL_DATA": "São Paulo, 01 de janeiro de 2026",
+        "SAUDACAO": "À equipe de investigação",
+        "CORPO_CARTA": "<p>Registro fictício para validação do caso.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente",
+        "ASSINATURA_CURSIVA": "Assinatura Fictícia",
+        "NOME_ASSINANTE": "Responsável Fictício",
+        "CARGO_ASSINANTE": "Coordenação"
+      }
     },
     {
       "codigo": "E2-01",
@@ -319,11 +521,30 @@
       "tipo": "email_institucional",
       "emocao_esperada": "mudanca de perspectiva",
       "objetivo_narrativo": "Reorientar para a cadeia completa — van captada, galpão em Osasco",
-      "pistas_contidas": ["van TransArte captada na câmera externa às 15h28", "quadro não está mais no museu nem em Osasco"],
-      "confirma": ["E2-03"],
+      "pistas_contidas": [
+        "van TransArte captada na câmera externa às 15h28",
+        "quadro não está mais no museu nem em Osasco"
+      ],
+      "confirma": [
+        "E2-03"
+      ],
       "confirmado_por": [],
-      "ids_citados": ["27"],
-      "codigos_citados": []
+      "ids_citados": [
+        "27"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Bruno Narrador",
+        "REMETENTE_EMAIL": "bruno@ficcional.test",
+        "DESTINATARIO_EMAIL": "investigacao@ficcional.test",
+        "DESTINATARIO_LABEL": "Investigação",
+        "DATA_HORA": "01/01/2026 10:00",
+        "ASSUNTO": "Relato inicial",
+        "AVATAR_INICIAL": "B",
+        "AVATAR_COR": "#1A2E4A",
+        "CORPO_EMAIL": "<p>Mensagem fictícia do caso.</p>",
+        "NOTA_RODAPE": "Documento fictício"
+      }
     },
     {
       "codigo": "E2-02",
@@ -332,11 +553,33 @@
       "tipo": "boletim",
       "emocao_esperada": "peso institucional",
       "objetivo_narrativo": "Confirmar furto qualificado, ausência de arrombamento e hipótese de envolvimento interno",
-      "pistas_contidas": ["sem arrombamento", "acesso com crachá válido", "hipótese de envolvimento interno"],
-      "confirma": ["E1-05", "E1-06"],
+      "pistas_contidas": [
+        "sem arrombamento",
+        "acesso com crachá válido",
+        "hipótese de envolvimento interno"
+      ],
+      "confirma": [
+        "E1-05",
+        "E1-06"
+      ],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": []
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Delegacia Fictícia",
+        "ORGAO_SUBTITULO": "Núcleo de Registros",
+        "NUMERO_CASO": "001",
+        "TIPO_DOCUMENTO": "Boletim",
+        "TIPO_OCORRENCIA": "Ocorrência fictícia",
+        "DATA": "01/01/2026",
+        "LOCALIZACAO": "Acervo Fictício",
+        "HORA_OCORRENCIA": "10:00",
+        "DESCRICAO_OCORRENCIA": "<p>Descrição fictícia da ocorrência.</p>",
+        "NOME_RESPONSAVEL": "Inspetor Fictício",
+        "ASSINATURA_RESPONSAVEL": "Inspetor Fictício",
+        "ASSINATURA_GLIFO": "IF",
+        "DATA_HORA_ASSINATURA": "01/01/2026 11:00"
+      }
     },
     {
       "codigo": "E2-03",
@@ -350,10 +593,19 @@
         "TransArte: contrato de logística com o museu",
         "Autorização de entrada na data do crime"
       ],
-      "confirma": ["E2-05"],
-      "confirmado_por": ["E2-01"],
-      "ids_citados": ["27"],
-      "codigos_citados": []
+      "confirma": [
+        "E2-05"
+      ],
+      "confirmado_por": [
+        "E2-01"
+      ],
+      "ids_citados": [
+        "27"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "CONTEUDO_GENERICO": "Conteúdo fictício para tipo sem schema específico"
+      }
     },
     {
       "codigo": "E2-04",
@@ -367,11 +619,37 @@
         "Não sabia que era suspeito — achava que era retirada normal",
         "Confirma que Marcelo estava no corredor próximo à galeria"
       ],
-      "confirma": ["E2-03", "E2-05"],
+      "confirma": [
+        "E2-03",
+        "E2-05"
+      ],
       "confirmado_por": [],
       "red_herring_potencial": null,
-      "ids_citados": ["31", "14", "27"],
-      "codigos_citados": []
+      "ids_citados": [
+        "31",
+        "14",
+        "27"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Delegacia Fictícia",
+        "ORGAO_SUBTITULO": "Núcleo de Registros",
+        "NUMERO_CASO": "001",
+        "TIPO_DOCUMENTO": "Boletim",
+        "TIPO_OCORRENCIA": "Ocorrência fictícia",
+        "DATA": "01/01/2026",
+        "LOCALIZACAO": "Acervo Fictício",
+        "HORA_OCORRENCIA": "10:00",
+        "DESCRICAO_OCORRENCIA": "<p>Descrição fictícia da ocorrência.</p>",
+        "NOME_RESPONSAVEL": "Inspetor Fictício",
+        "ASSINATURA_RESPONSAVEL": "Inspetor Fictício",
+        "ASSINATURA_GLIFO": "IF",
+        "DATA_HORA_ASSINATURA": "01/01/2026 11:00",
+        "CAMPO_NOME": "Nome",
+        "NOME_ENVOLVIDO": "Pessoa Fictícia",
+        "DATA_NASC": "01/01/1990",
+        "CONDICAO": "Depoente"
+      }
     },
     {
       "codigo": "E2-05",
@@ -385,10 +663,20 @@
         "Horário: 15h28 — dentro da janela crítica",
         "Nenhuma outra van no período"
       ],
-      "confirma": ["E2-03"],
-      "confirmado_por": ["E2-01", "E2-04"],
-      "ids_citados": ["27"],
-      "codigos_citados": []
+      "confirma": [
+        "E2-03"
+      ],
+      "confirmado_por": [
+        "E2-01",
+        "E2-04"
+      ],
+      "ids_citados": [
+        "27"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "CONTEUDO_GENERICO": "Conteúdo fictício para tipo sem schema específico"
+      }
     },
     {
       "codigo": "E2-06",
@@ -404,11 +692,47 @@
       ],
       "confirma": [],
       "confirmado_por": [],
-      "ids_citados": ["14"],
-      "codigos_citados": []
+      "ids_citados": [
+        "14"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "LOGO_SIGLA": "BF",
+        "NOME_BANCO": "Banco Fictício",
+        "TAGLINE_BANCO": "Extrato demonstrativo",
+        "COR_BANCO": "#1A2E4A",
+        "PERIODO_INICIO": "01/01/2026",
+        "PERIODO_FIM": "31/01/2026",
+        "DATA_GERACAO": "31/01/2026",
+        "HORA_GERACAO": "10:00",
+        "NOME_TITULAR": "Titular Fictício",
+        "DOC_TITULAR": "000.000.000-00",
+        "AGENCIA": "0001",
+        "NUMERO_CONTA": "12345-6",
+        "TIPO_CONTA": "Conta corrente",
+        "SALDO_INICIAL": "R$ 0,00",
+        "DATA_SALDO_INICIAL": "01/01/2026",
+        "MOVIMENTACAO_LIQUIDA": "R$ 100,00",
+        "COR_MOVIMENTACAO": "#14532D",
+        "SALDO_FINAL": "R$ 100,00",
+        "DATA_SALDO_FINAL": "31/01/2026",
+        "COR_SALDO_FINAL": "#14532D",
+        "TOTAL_CREDITOS": "R$ 100,00",
+        "TOTAL_DEBITOS": "R$ 0,00",
+        "TOTAL_LANCAMENTOS": "1",
+        "NOTA_LEGAL": "Documento fictício",
+        "CNPJ_BANCO": "00.000.000/0001-00",
+        "ENDERECO_BANCO": "Rua Inventada, 123",
+        "LANCAMENTOS": [
+          {
+            "DATA": "02/01/2026",
+            "DESCRICAO": "Crédito fictício",
+            "VALOR": "R$ 100,00"
+          }
+        ]
+      }
     }
   ],
-
   "matriz_pistas": [
     {
       "descricao": "Crachá de Helena usado 32 minutos após a saída biométrica dela",
@@ -438,7 +762,6 @@
       "emocao_esperada": "satisfação ao fechar a cadeia de escoamento"
     }
   ],
-
   "red_herrings": [
     {
       "personagem_id": "09",
@@ -455,7 +778,6 @@
       "categoria": "comportamento_suspeito_sem_evidencia"
     }
   ],
-
   "cadeia_financeira": [
     {
       "de": "Museu Municipal de Arte",
@@ -482,9 +804,7 @@
       "is_salto_final": true
     }
   ],
-
   "codigos": [],
-
   "dicas": [
     {
       "numero": 1,
@@ -543,7 +863,6 @@
       "o_que_desbloqueia": "Fechar a solução completa"
     }
   ],
-
   "versao": "0.1",
   "observacoes_producao": "Colorido discreto. Legível em tela de celular. Mapa simples com 4-5 salas."
 }
