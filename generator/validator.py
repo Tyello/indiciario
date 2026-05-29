@@ -203,6 +203,7 @@ CHAVES_OBRIGATORIAS: dict[str, list[str]] = {
 
 CHAVES_LISTA: dict[str, str] = {
     "email_narrador": "CADA_ANEXO",
+    "email_institucional": "CADA_ANEXO",
     "chat": "MENSAGENS",
     "log_acesso": "REGISTROS",
     "log_sistema": "REGISTROS",
@@ -554,7 +555,7 @@ class BlueprintValidator:
                 ))
 
             chave_lista = CHAVES_LISTA.get(tipo)
-            deve_verificar_anexos = tipo == "email_narrador" and bool(conteudo.get("ANEXOS"))
+            deve_verificar_anexos = tipo in {"email_narrador", "email_institucional"} and bool(conteudo.get("ANEXOS"))
             if chave_lista and (chave_lista in conteudo or deve_verificar_anexos):
                 lista = conteudo.get(chave_lista)
                 lista_invalida = (
