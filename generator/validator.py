@@ -38,6 +38,325 @@ except ImportError:  # Execução direta: python generator/validator.py
     )
 
 
+# Chaves obrigatórias por tipo de documento para renderização offline.
+CHAVES_OBRIGATORIAS: dict[str, list[str]] = {
+    "email_narrador": [
+        "REMETENTE_NOME",
+        "REMETENTE_EMAIL",
+        "DESTINATARIO_EMAIL",
+        "DESTINATARIO_LABEL",
+        "DATA_HORA",
+        "ASSUNTO",
+        "AVATAR_INICIAL",
+        "AVATAR_COR",
+        "CORPO_EMAIL",
+        "NOTA_RODAPE",
+    ],
+    "email_institucional": [
+        "REMETENTE_NOME",
+        "REMETENTE_EMAIL",
+        "DESTINATARIO_EMAIL",
+        "DESTINATARIO_LABEL",
+        "DATA_HORA",
+        "ASSUNTO",
+        "AVATAR_INICIAL",
+        "AVATAR_COR",
+        "CORPO_EMAIL",
+        "NOTA_RODAPE",
+    ],
+    "chat": [
+        "HORA_TELA",
+        "CONTADOR_NAOVISTOS",
+        "NOME_GRUPO",
+        "MEMBROS_LISTA",
+        "DATA_CONVERSA",
+        "MENSAGENS",
+    ],
+    "boletim": [
+        "ORGAO_NOME",
+        "ORGAO_SUBTITULO",
+        "NUMERO_CASO",
+        "TIPO_DOCUMENTO",
+        "TIPO_OCORRENCIA",
+        "DATA",
+        "LOCALIZACAO",
+        "HORA_OCORRENCIA",
+        "DESCRICAO_OCORRENCIA",
+        "NOME_RESPONSAVEL",
+        "ASSINATURA_RESPONSAVEL",
+        "ASSINATURA_GLIFO",
+        "DATA_HORA_ASSINATURA",
+    ],
+    "depoimento": [
+        "ORGAO_NOME",
+        "ORGAO_SUBTITULO",
+        "NUMERO_CASO",
+        "TIPO_DOCUMENTO",
+        "TIPO_OCORRENCIA",
+        "DATA",
+        "LOCALIZACAO",
+        "HORA_OCORRENCIA",
+        "DESCRICAO_OCORRENCIA",
+        "NOME_RESPONSAVEL",
+        "ASSINATURA_RESPONSAVEL",
+        "ASSINATURA_GLIFO",
+        "DATA_HORA_ASSINATURA",
+        "CAMPO_NOME",
+        "NOME_ENVOLVIDO",
+        "DATA_NASC",
+        "CONDICAO",
+    ],
+    "protocolo": [
+        "NOME_ORGANIZACAO",
+        "SUBTITULO_ORGANIZACAO",
+        "ENDERECO_LINHA1",
+        "CONTATO",
+        "CNPJ",
+        "COR_TOPO",
+        "LOCAL_DATA",
+        "SAUDACAO",
+        "CORPO_CARTA",
+        "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA",
+        "NOME_ASSINANTE",
+        "CARGO_ASSINANTE",
+        "ASSUNTO",
+    ],
+    "carta": [
+        "NOME_ORGANIZACAO",
+        "SUBTITULO_ORGANIZACAO",
+        "ENDERECO_LINHA1",
+        "CONTATO",
+        "CNPJ",
+        "COR_TOPO",
+        "LOCAL_DATA",
+        "SAUDACAO",
+        "CORPO_CARTA",
+        "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA",
+        "NOME_ASSINANTE",
+        "CARGO_ASSINANTE",
+    ],
+    "manual": [
+        "NOME_ORGANIZACAO",
+        "SUBTITULO_ORGANIZACAO",
+        "ENDERECO_LINHA1",
+        "CONTATO",
+        "CNPJ",
+        "COR_TOPO",
+        "LOCAL_DATA",
+        "SAUDACAO",
+        "CORPO_CARTA",
+        "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA",
+        "NOME_ASSINANTE",
+        "CARGO_ASSINANTE",
+    ],
+    "glossario": [
+        "NOME_ORGANIZACAO",
+        "SUBTITULO_ORGANIZACAO",
+        "ENDERECO_LINHA1",
+        "CONTATO",
+        "CNPJ",
+        "COR_TOPO",
+        "LOCAL_DATA",
+        "SAUDACAO",
+        "CORPO_CARTA",
+        "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA",
+        "NOME_ASSINANTE",
+        "CARGO_ASSINANTE",
+    ],
+    "folha_cruzamento": [
+        "NOME_ORGANIZACAO",
+        "SUBTITULO_ORGANIZACAO",
+        "ENDERECO_LINHA1",
+        "CONTATO",
+        "CNPJ",
+        "COR_TOPO",
+        "LOCAL_DATA",
+        "SAUDACAO",
+        "CORPO_CARTA",
+        "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA",
+        "NOME_ASSINANTE",
+        "CARGO_ASSINANTE",
+    ],
+    "contrato": [
+        "NOME_ORGANIZACAO",
+        "SUBTITULO_ORGANIZACAO",
+        "ENDERECO_LINHA1",
+        "CONTATO",
+        "CNPJ",
+        "COR_TOPO",
+        "LOCAL_DATA",
+        "SAUDACAO",
+        "CORPO_CARTA",
+        "FORMULA_ENCERRAMENTO",
+        "ASSINATURA_CURSIVA",
+        "NOME_ASSINANTE",
+        "CARGO_ASSINANTE",
+    ],
+    "log_acesso": [
+        "NOME_SISTEMA",
+        "SUBTITULO_SISTEMA",
+        "COR_SISTEMA",
+        "COR_SISTEMA_DARK",
+        "DATA_EXPORTACAO",
+        "HORA_EXPORTACAO",
+        "OPERADOR_EXPORT",
+        "HASH_REGISTRO",
+        "PERIODO_INICIO",
+        "PERIODO_FIM",
+        "LOCALIZACAO_SISTEMA",
+        "TOTAL_REGISTROS",
+        "COLUNA_NOME",
+        "COLUNA_TERMINAL",
+        "COLUNA_METODO",
+        "COLUNA_OBS",
+        "TOTAL_USUARIOS",
+        "TOTAL_ENTRADAS",
+        "TOTAL_NEGADOS",
+        "TOTAL_ANOMALIAS",
+        "REGISTROS",
+    ],
+    "log_sistema": [
+        "NOME_SISTEMA",
+        "SUBTITULO_SISTEMA",
+        "COR_SISTEMA",
+        "COR_SISTEMA_DARK",
+        "DATA_EXPORTACAO",
+        "HORA_EXPORTACAO",
+        "OPERADOR_EXPORT",
+        "HASH_REGISTRO",
+        "PERIODO_INICIO",
+        "PERIODO_FIM",
+        "LOCALIZACAO_SISTEMA",
+        "TOTAL_REGISTROS",
+        "COLUNA_NOME",
+        "COLUNA_TERMINAL",
+        "COLUNA_METODO",
+        "COLUNA_OBS",
+        "TOTAL_USUARIOS",
+        "TOTAL_ENTRADAS",
+        "TOTAL_NEGADOS",
+        "TOTAL_ANOMALIAS",
+        "REGISTROS",
+    ],
+    "escala": [
+        "NOME_SISTEMA",
+        "SUBTITULO_SISTEMA",
+        "COR_SISTEMA",
+        "COR_SISTEMA_DARK",
+        "DATA_EXPORTACAO",
+        "HORA_EXPORTACAO",
+        "OPERADOR_EXPORT",
+        "HASH_REGISTRO",
+        "PERIODO_INICIO",
+        "PERIODO_FIM",
+        "LOCALIZACAO_SISTEMA",
+        "TOTAL_REGISTROS",
+        "COLUNA_NOME",
+        "COLUNA_TERMINAL",
+        "COLUNA_METODO",
+        "COLUNA_OBS",
+        "TOTAL_USUARIOS",
+        "TOTAL_ENTRADAS",
+        "TOTAL_NEGADOS",
+        "TOTAL_ANOMALIAS",
+        "REGISTROS",
+    ],
+    "recibo": [
+        "NOME_EMPRESA",
+        "TAGLINE_EMPRESA",
+        "CNPJ",
+        "ENDERECO_EMPRESA",
+        "CONTATO_EMPRESA",
+        "NUMERO_RECIBO",
+        "WATERMARK_TEXTO",
+        "COR_EMPRESA",
+        "NOME_CONTRATANTE",
+        "ENDERECO_CONTRATANTE",
+        "DOC_CONTRATANTE",
+        "CONTATO_CONTRATANTE",
+        "DATA_RECIBO",
+        "PERIODO_REFERENCIA",
+        "VALOR_TOTAL",
+        "VALOR_POR_EXTENSO",
+        "FORMA_PAGAMENTO",
+        "DESCRICAO_PAGAMENTO",
+        "ITENS",
+        "ASSINATURA_PRESTADOR",
+        "ASSINATURA_CONTRATANTE",
+        "DATA_ASSINATURA",
+    ],
+    "orcamento": [
+        "NOME_EMPRESA",
+        "TIPO_EMPRESA",
+        "CNPJ",
+        "ENDERECO",
+        "SITE_EMAIL",
+        "COR_PRIMARIA",
+        "COR_SECUNDARIA",
+        "NUMERO_ORCAMENTO",
+        "DATA_EMISSAO",
+        "DATA_VALIDADE",
+        "REVISAO",
+        "NOME_CLIENTE",
+        "ENDERECO_CLIENTE",
+        "DOC_CLIENTE",
+        "CONTATO_CLIENTE",
+        "TITULO_PROJETO",
+        "DESCRICAO_REFERENCIA",
+        "VALOR_TOTAL",
+        "ITENS",
+        "ASSINATURA_RESPONSAVEL",
+        "NOME_RESPONSAVEL",
+        "CARGO_RESPONSAVEL",
+    ],
+    "extrato": [
+        "LOGO_SIGLA",
+        "NOME_BANCO",
+        "TAGLINE_BANCO",
+        "COR_BANCO",
+        "PERIODO_INICIO",
+        "PERIODO_FIM",
+        "DATA_GERACAO",
+        "HORA_GERACAO",
+        "NOME_TITULAR",
+        "DOC_TITULAR",
+        "AGENCIA",
+        "NUMERO_CONTA",
+        "TIPO_CONTA",
+        "SALDO_INICIAL",
+        "DATA_SALDO_INICIAL",
+        "MOVIMENTACAO_LIQUIDA",
+        "COR_MOVIMENTACAO",
+        "SALDO_FINAL",
+        "DATA_SALDO_FINAL",
+        "COR_SALDO_FINAL",
+        "TOTAL_CREDITOS",
+        "TOTAL_DEBITOS",
+        "TOTAL_LANCAMENTOS",
+        "NOTA_LEGAL",
+        "CNPJ_BANCO",
+        "ENDERECO_BANCO",
+        "LANCAMENTOS",
+    ],
+}
+
+CHAVES_LISTA: dict[str, str] = {
+    "email_narrador": "CADA_ANEXO",
+    "chat": "MENSAGENS",
+    "log_acesso": "REGISTROS",
+    "log_sistema": "REGISTROS",
+    "escala": "REGISTROS",
+    "recibo": "ITENS",
+    "orcamento": "ITENS",
+    "extrato": "LANCAMENTOS",
+}
+
+
 class Severidade(str, Enum):
     CRITICO = "CRÍTICO"
     MODERADO = "MODERADO"
@@ -105,6 +424,7 @@ class BlueprintValidator:
         self._verificar_linha_do_tempo()
         self._verificar_dicas()
         self._verificar_autossuficiencia()
+        self._verificar_conteudo()
         self._calcular_risco()
         self._gerar_resumo()
         return self.resultado
@@ -118,98 +438,134 @@ class BlueprintValidator:
         }
         for campo, valor_id in ids_obrigatorios.items():
             if valor_id not in self._ids_personagens:
-                self.resultado.adicionar(Erro(
-                    codigo="ELENCO_002",
-                    severidade=Severidade.CRITICO,
-                    mensagem=f"ID '{valor_id}' em '{campo}' não existe no elenco.",
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        codigo="ELENCO_002",
+                        severidade=Severidade.CRITICO,
+                        mensagem=f"ID '{valor_id}' em '{campo}' não existe no elenco.",
+                    )
+                )
 
         ids_unicos = len(set(ids_obrigatorios.values()))
         if ids_unicos == 1:
-            self.resultado.adicionar(Erro(
-                codigo="ELENCO_001",
-                severidade=Severidade.AVISO,
-                mensagem="Executor, planejador e beneficiário apontam para o mesmo personagem.",
-                detalhe="Caso com culpado único; válido quando a concentração dos papéis for intencional.",
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    codigo="ELENCO_001",
+                    severidade=Severidade.AVISO,
+                    mensagem="Executor, planejador e beneficiário apontam para o mesmo personagem.",
+                    detalhe="Caso com culpado único; válido quando a concentração dos papéis for intencional.",
+                )
+            )
         elif ids_unicos == 2:
-            self.resultado.adicionar(Erro(
-                codigo="ELENCO_001",
-                severidade=Severidade.AVISO,
-                mensagem="Executor, planejador e beneficiário usam apenas dois personagens.",
-                detalhe="Verifique se o acúmulo parcial de papéis no gabarito foi intencional.",
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    codigo="ELENCO_001",
+                    severidade=Severidade.AVISO,
+                    mensagem="Executor, planejador e beneficiário usam apenas dois personagens.",
+                    detalhe="Verifique se o acúmulo parcial de papéis no gabarito foi intencional.",
+                )
+            )
 
         if PapelPersonagem.NARRADOR not in papeis:
-            self.resultado.adicionar(Erro(
-                codigo="ELENCO_003",
-                severidade=Severidade.MODERADO,
-                mensagem="Nenhum personagem com papel 'narrador' definido.",
-                detalhe="O primeiro e-mail deve vir de personagem com interesse próprio.",
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    codigo="ELENCO_003",
+                    severidade=Severidade.MODERADO,
+                    mensagem="Nenhum personagem com papel 'narrador' definido.",
+                    detalhe="O primeiro e-mail deve vir de personagem com interesse próprio.",
+                )
+            )
 
-        red_herrings = [p for p in self.bp.personagens if p.papel == PapelPersonagem.RED_HERRING]
+        red_herrings = [
+            p for p in self.bp.personagens if p.papel == PapelPersonagem.RED_HERRING
+        ]
         if len(red_herrings) < 2:
-            self.resultado.adicionar(Erro(
-                codigo="ELENCO_004",
-                severidade=Severidade.MODERADO,
-                mensagem=f"Apenas {len(red_herrings)} red herring(s). Mínimo recomendado: 2.",
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    codigo="ELENCO_004",
+                    severidade=Severidade.MODERADO,
+                    mensagem=f"Apenas {len(red_herrings)} red herring(s). Mínimo recomendado: 2.",
+                )
+            )
 
         for personagem in self.bp.personagens:
             if not personagem.documento_ancoragem:
-                self.resultado.adicionar(Erro(
-                    codigo="ELENCO_005",
-                    severidade=Severidade.MODERADO,
-                    mensagem=f"Personagem '{personagem.nome}' sem documento de ancoragem.",
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        codigo="ELENCO_005",
+                        severidade=Severidade.MODERADO,
+                        mensagem=f"Personagem '{personagem.nome}' sem documento de ancoragem.",
+                    )
+                )
             for codigo in personagem.documento_ancoragem:
                 if codigo not in self._codigos_docs:
-                    self.resultado.adicionar(Erro(
-                        codigo="ELENCO_006",
-                        severidade=Severidade.CRITICO,
-                        mensagem=f"Documento de ancoragem '{codigo}' não existe.",
-                    ))
+                    self.resultado.adicionar(
+                        Erro(
+                            codigo="ELENCO_006",
+                            severidade=Severidade.CRITICO,
+                            mensagem=f"Documento de ancoragem '{codigo}' não existe.",
+                        )
+                    )
 
     def _verificar_documentos(self) -> None:
         docs_e1 = [d for d in self.bp.documentos if d.envelope == Envelope.E1]
         docs_e2 = [d for d in self.bp.documentos if d.envelope == Envelope.E2]
         if len(docs_e1) < 6:
-            self.resultado.adicionar(Erro(
-                "DOC_001", Severidade.MODERADO, f"Envelope 1 tem apenas {len(docs_e1)} documentos."
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    "DOC_001",
+                    Severidade.MODERADO,
+                    f"Envelope 1 tem apenas {len(docs_e1)} documentos.",
+                )
+            )
         if len(docs_e2) < 6:
-            self.resultado.adicionar(Erro(
-                "DOC_002", Severidade.MODERADO, f"Envelope 2 tem apenas {len(docs_e2)} documentos."
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    "DOC_002",
+                    Severidade.MODERADO,
+                    f"Envelope 2 tem apenas {len(docs_e2)} documentos.",
+                )
+            )
 
         tipos_e1 = {d.tipo for d in docs_e1}
         if TipoDocumento.PROTO not in tipos_e1:
-            self.resultado.adicionar(Erro(
-                "DOC_003", Severidade.CRITICO, "Envelope 1 não tem protocolo de investigação."
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    "DOC_003",
+                    Severidade.CRITICO,
+                    "Envelope 1 não tem protocolo de investigação.",
+                )
+            )
         if TipoDocumento.CRUZ not in tipos_e1:
-            self.resultado.adicionar(Erro(
-                "DOC_004", Severidade.MODERADO, "Folha de cruzamento ausente no Envelope 1."
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    "DOC_004",
+                    Severidade.MODERADO,
+                    "Folha de cruzamento ausente no Envelope 1.",
+                )
+            )
 
         for doc in self.bp.documentos:
             for id_citado in doc.ids_citados:
                 if not self._id_tem_correspondencia(id_citado):
-                    self.resultado.adicionar(Erro(
-                        "DOC_005",
-                        Severidade.CRITICO,
-                        f"ID '{id_citado}' citado em '{doc.codigo}' não existe na matriz.",
-                        documento=doc.codigo,
-                    ))
+                    self.resultado.adicionar(
+                        Erro(
+                            "DOC_005",
+                            Severidade.CRITICO,
+                            f"ID '{id_citado}' citado em '{doc.codigo}' não existe na matriz.",
+                            documento=doc.codigo,
+                        )
+                    )
             for ref in doc.confirma + doc.confirmado_por:
                 if ref not in self._codigos_docs:
-                    self.resultado.adicionar(Erro(
-                        "DOC_007",
-                        Severidade.MODERADO,
-                        f"Documento '{doc.codigo}' referencia '{ref}' que não existe.",
-                        documento=doc.codigo,
-                    ))
+                    self.resultado.adicionar(
+                        Erro(
+                            "DOC_007",
+                            Severidade.MODERADO,
+                            f"Documento '{doc.codigo}' referencia '{ref}' que não existe.",
+                            documento=doc.codigo,
+                        )
+                    )
 
     def _id_tem_correspondencia(self, id_citado: str) -> bool:
         if id_citado in self._ids_personagens:
@@ -218,134 +574,370 @@ class BlueprintValidator:
 
     def _verificar_pilares(self) -> None:
         if len(self.bp.pilares_validacao) != 4:
-            self.resultado.adicionar(Erro(
-                "PILAR_001",
-                Severidade.CRITICO,
-                f"O Envelope 1 deve ter exatamente 4 pilares; encontrado: {len(self.bp.pilares_validacao)}.",
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    "PILAR_001",
+                    Severidade.CRITICO,
+                    f"O Envelope 1 deve ter exatamente 4 pilares; encontrado: {len(self.bp.pilares_validacao)}.",
+                )
+            )
             return
 
         personagens = {p.personagem_id for p in self.bp.pilares_validacao}
         if len(personagens) > 1:
-            self.resultado.adicionar(Erro(
-                "PILAR_006",
-                Severidade.MODERADO,
-                f"Pilares apontam para IDs diferentes: {personagens}.",
-            ))
+            self.resultado.adicionar(
+                Erro(
+                    "PILAR_006",
+                    Severidade.MODERADO,
+                    f"Pilares apontam para IDs diferentes: {personagens}.",
+                )
+            )
 
         for pilar in self.bp.pilares_validacao:
             if pilar.documento_principal not in self._codigos_docs:
-                self.resultado.adicionar(Erro(
-                    "PILAR_002", Severidade.CRITICO, f"Documento principal inexistente: {pilar.documento_principal}."
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        "PILAR_002",
+                        Severidade.CRITICO,
+                        f"Documento principal inexistente: {pilar.documento_principal}.",
+                    )
+                )
             if pilar.confirmacao not in self._codigos_docs:
-                self.resultado.adicionar(Erro(
-                    "PILAR_003", Severidade.CRITICO, f"Confirmação inexistente: {pilar.confirmacao}."
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        "PILAR_003",
+                        Severidade.CRITICO,
+                        f"Confirmação inexistente: {pilar.confirmacao}.",
+                    )
+                )
             elif pilar.confirmacao == pilar.documento_principal:
-                self.resultado.adicionar(Erro(
-                    "PILAR_004", Severidade.CRITICO, "Pilar usa o mesmo documento como prova e confirmação."
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        "PILAR_004",
+                        Severidade.CRITICO,
+                        "Pilar usa o mesmo documento como prova e confirmação.",
+                    )
+                )
             if pilar.personagem_id not in self._ids_personagens:
-                self.resultado.adicionar(Erro(
-                    "PILAR_005", Severidade.CRITICO, f"Personagem do pilar não existe: {pilar.personagem_id}."
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        "PILAR_005",
+                        Severidade.CRITICO,
+                        f"Personagem do pilar não existe: {pilar.personagem_id}.",
+                    )
+                )
 
     def _verificar_pistas(self) -> None:
         for pista in self.bp.matriz_pistas:
             if pista.documento not in self._codigos_docs:
-                self.resultado.adicionar(Erro(
-                    "PISTA_002", Severidade.CRITICO, f"Pista referencia documento inexistente: {pista.documento}."
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        "PISTA_002",
+                        Severidade.CRITICO,
+                        f"Pista referencia documento inexistente: {pista.documento}.",
+                    )
+                )
             if pista.confirmacao not in self._codigos_docs:
-                self.resultado.adicionar(Erro(
-                    "PISTA_003", Severidade.CRITICO, f"Pista sem confirmação existente: {pista.confirmacao}."
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        "PISTA_003",
+                        Severidade.CRITICO,
+                        f"Pista sem confirmação existente: {pista.confirmacao}.",
+                    )
+                )
             elif pista.confirmacao == pista.documento:
-                self.resultado.adicionar(Erro(
-                    "PISTA_004", Severidade.CRITICO, "Pista usa o mesmo documento como prova e confirmação."
-                ))
+                self.resultado.adicionar(
+                    Erro(
+                        "PISTA_004",
+                        Severidade.CRITICO,
+                        "Pista usa o mesmo documento como prova e confirmação.",
+                    )
+                )
 
     def _verificar_red_herrings(self) -> None:
         culpados = {self.bp.executor_id, self.bp.planejador_id, self.bp.beneficiario_id}
         for rh in self.bp.red_herrings:
             if rh.personagem_id not in self._ids_personagens:
-                self.resultado.adicionar(Erro("RH_001", Severidade.CRITICO, "Red herring aponta para personagem inexistente."))
+                self.resultado.adicionar(
+                    Erro(
+                        "RH_001",
+                        Severidade.CRITICO,
+                        "Red herring aponta para personagem inexistente.",
+                    )
+                )
             if rh.documento_descarte not in self._codigos_docs:
-                self.resultado.adicionar(Erro("RH_002", Severidade.CRITICO, "Red herring sem documento de descarte existente."))
+                self.resultado.adicionar(
+                    Erro(
+                        "RH_002",
+                        Severidade.CRITICO,
+                        "Red herring sem documento de descarte existente.",
+                    )
+                )
             if rh.personagem_id in culpados:
-                self.resultado.adicionar(Erro("RH_003", Severidade.CRITICO, "Culpado também foi marcado como red herring."))
+                self.resultado.adicionar(
+                    Erro(
+                        "RH_003",
+                        Severidade.CRITICO,
+                        "Culpado também foi marcado como red herring.",
+                    )
+                )
 
     def _verificar_codigos(self) -> None:
         for codigo in self.bp.codigos:
             if codigo.documento not in self._codigos_docs:
-                self.resultado.adicionar(Erro("COD_001", Severidade.CRITICO, f"Código em documento inexistente: {codigo.documento}."))
+                self.resultado.adicionar(
+                    Erro(
+                        "COD_001",
+                        Severidade.CRITICO,
+                        f"Código em documento inexistente: {codigo.documento}.",
+                    )
+                )
             if codigo.chave_em not in self._codigos_docs:
-                self.resultado.adicionar(Erro("COD_002", Severidade.CRITICO, f"Chave de código inexistente: {codigo.chave_em}."))
+                self.resultado.adicionar(
+                    Erro(
+                        "COD_002",
+                        Severidade.CRITICO,
+                        f"Chave de código inexistente: {codigo.chave_em}.",
+                    )
+                )
             if codigo.criterio == "ids_personagens":
                 for elemento in codigo.elementos:
                     if elemento not in self._ids_personagens:
-                        self.resultado.adicionar(Erro("COD_003", Severidade.CRITICO, f"Elemento de código sem personagem: {elemento}."))
+                        self.resultado.adicionar(
+                            Erro(
+                                "COD_003",
+                                Severidade.CRITICO,
+                                f"Elemento de código sem personagem: {elemento}.",
+                            )
+                        )
             if codigo.criterio == "misto":
-                self.resultado.adicionar(Erro("COD_004", Severidade.MODERADO, "Código com critério misto exige pista documental clara."))
+                self.resultado.adicionar(
+                    Erro(
+                        "COD_004",
+                        Severidade.MODERADO,
+                        "Código com critério misto exige pista documental clara.",
+                    )
+                )
 
     def _verificar_cadeia_financeira(self) -> None:
         if not self.bp.cadeia_financeira:
             if "fraude" in self.bp.genero.lower() or "roubo" in self.bp.genero.lower():
-                self.resultado.adicionar(Erro("FIN_001", Severidade.AVISO, "Caso de fraude/roubo sem cadeia financeira/logística."))
+                self.resultado.adicionar(
+                    Erro(
+                        "FIN_001",
+                        Severidade.AVISO,
+                        "Caso de fraude/roubo sem cadeia financeira/logística.",
+                    )
+                )
             return
 
-        finais: list[SaltoFinanceiro] = [s for s in self.bp.cadeia_financeira if s.is_salto_final]
+        finais: list[SaltoFinanceiro] = [
+            s for s in self.bp.cadeia_financeira if s.is_salto_final
+        ]
         if len(finais) != 1:
-            self.resultado.adicionar(Erro("FIN_002", Severidade.CRITICO, "Cadeia deve ter exatamente um salto final marcado."))
+            self.resultado.adicionar(
+                Erro(
+                    "FIN_002",
+                    Severidade.CRITICO,
+                    "Cadeia deve ter exatamente um salto final marcado.",
+                )
+            )
 
         for salto in self.bp.cadeia_financeira:
             if salto.documento_prova not in self._codigos_docs:
-                self.resultado.adicionar(Erro("FIN_004", Severidade.CRITICO, f"Salto sem documento existente: {salto.documento_prova}."))
+                self.resultado.adicionar(
+                    Erro(
+                        "FIN_004",
+                        Severidade.CRITICO,
+                        f"Salto sem documento existente: {salto.documento_prova}.",
+                    )
+                )
             if salto.is_salto_final:
                 if not salto.confirmacao_independente:
-                    self.resultado.adicionar(Erro("FIN_005", Severidade.CRITICO, "Salto final sem confirmação independente."))
+                    self.resultado.adicionar(
+                        Erro(
+                            "FIN_005",
+                            Severidade.CRITICO,
+                            "Salto final sem confirmação independente.",
+                        )
+                    )
                 elif salto.confirmacao_independente not in self._codigos_docs:
-                    self.resultado.adicionar(Erro("FIN_006", Severidade.CRITICO, "Confirmação do salto final não existe."))
+                    self.resultado.adicionar(
+                        Erro(
+                            "FIN_006",
+                            Severidade.CRITICO,
+                            "Confirmação do salto final não existe.",
+                        )
+                    )
                 elif salto.confirmacao_independente == salto.documento_prova:
-                    self.resultado.adicionar(Erro("FIN_007", Severidade.CRITICO, "Salto final usa o mesmo documento como prova e confirmação."))
+                    self.resultado.adicionar(
+                        Erro(
+                            "FIN_007",
+                            Severidade.CRITICO,
+                            "Salto final usa o mesmo documento como prova e confirmação.",
+                        )
+                    )
 
     def _verificar_linha_do_tempo(self) -> None:
         if not self.bp.intervalo_critico_inicio or not self.bp.intervalo_critico_fim:
-            self.resultado.adicionar(Erro("LT_001", Severidade.CRITICO, "Intervalo crítico não definido."))
+            self.resultado.adicionar(
+                Erro("LT_001", Severidade.CRITICO, "Intervalo crítico não definido.")
+            )
         for evento in self.bp.linha_tempo_real:
             if evento.documento_prova not in self._codigos_docs:
-                self.resultado.adicionar(Erro("LT_002", Severidade.MODERADO, f"Evento referencia documento inexistente: {evento.documento_prova}."))
-            if evento.confirmacao_independente and evento.confirmacao_independente not in self._codigos_docs:
-                self.resultado.adicionar(Erro("LT_003", Severidade.MODERADO, f"Evento referencia confirmação inexistente: {evento.confirmacao_independente}."))
+                self.resultado.adicionar(
+                    Erro(
+                        "LT_002",
+                        Severidade.MODERADO,
+                        f"Evento referencia documento inexistente: {evento.documento_prova}.",
+                    )
+                )
+            if (
+                evento.confirmacao_independente
+                and evento.confirmacao_independente not in self._codigos_docs
+            ):
+                self.resultado.adicionar(
+                    Erro(
+                        "LT_003",
+                        Severidade.MODERADO,
+                        f"Evento referencia confirmação inexistente: {evento.confirmacao_independente}.",
+                    )
+                )
 
     def _verificar_dicas(self) -> None:
         if not any(d.intensidade == Intensidade.QUASE_GABARITO for d in self.bp.dicas):
-            self.resultado.adicionar(Erro("DICA_001", Severidade.MODERADO, "Nenhuma dica de quase-gabarito definida."))
+            self.resultado.adicionar(
+                Erro(
+                    "DICA_001",
+                    Severidade.MODERADO,
+                    "Nenhuma dica de quase-gabarito definida.",
+                )
+            )
         dicas_e2 = [d for d in self.bp.dicas if d.envelope == Envelope.E2]
         if len(dicas_e2) < 2:
-            self.resultado.adicionar(Erro("DICA_002", Severidade.MODERADO, "Envelope 2 tem menos de 2 dicas."))
+            self.resultado.adicionar(
+                Erro(
+                    "DICA_002", Severidade.MODERADO, "Envelope 2 tem menos de 2 dicas."
+                )
+            )
         nomes = {p.nome.lower() for p in self.bp.personagens}
         for dica in self.bp.dicas:
             if dica.intensidade in [Intensidade.LEVE, Intensidade.MEDIA]:
                 if any(nome in dica.texto.lower() for nome in nomes):
-                    self.resultado.adicionar(Erro("DICA_003", Severidade.AVISO, f"Dica {dica.numero} pode revelar nome diretamente."))
+                    self.resultado.adicionar(
+                        Erro(
+                            "DICA_003",
+                            Severidade.AVISO,
+                            f"Dica {dica.numero} pode revelar nome diretamente.",
+                        )
+                    )
 
     def _verificar_autossuficiencia(self) -> None:
-        tem_log = any(d.tipo in [TipoDocumento.LOG_ACESSO, TipoDocumento.LOG_SISTEMA] for d in self.bp.documentos)
+        tem_log = any(
+            d.tipo in [TipoDocumento.LOG_ACESSO, TipoDocumento.LOG_SISTEMA]
+            for d in self.bp.documentos
+        )
         tem_glossario = any(d.tipo == TipoDocumento.GLOSS for d in self.bp.documentos)
         if tem_log and not tem_glossario:
-            self.resultado.adicionar(Erro("AUTO_001", Severidade.AVISO, "Caso tem logs técnicos mas nenhum glossário."))
+            self.resultado.adicionar(
+                Erro(
+                    "AUTO_001",
+                    Severidade.AVISO,
+                    "Caso tem logs técnicos mas nenhum glossário.",
+                )
+            )
         if self.bp.modo_validacao == ModoValidacao.OFFLINE_PURO:
             for doc in self.bp.documentos:
                 texto = f"{doc.titulo} {doc.objetivo_narrativo}".lower()
                 if "qr" in texto or "link" in texto or "url" in texto:
-                    self.resultado.adicionar(Erro(
-                        "AUTO_002",
-                        Severidade.MODERADO,
-                        f"Documento '{doc.codigo}' menciona QR/link/url em modo offline puro.",
+                    self.resultado.adicionar(
+                        Erro(
+                            "AUTO_002",
+                            Severidade.MODERADO,
+                            f"Documento '{doc.codigo}' menciona QR/link/url em modo offline puro.",
+                            documento=doc.codigo,
+                        )
+                    )
+
+    def _verificar_conteudo(self) -> None:
+        """Verifica se cada documento tem conteudo com as chaves obrigatórias."""
+        for doc in self.bp.documentos:
+            tipo = doc.tipo.value
+            conteudo = doc.conteudo
+
+            if not conteudo:
+                self.resultado.adicionar(
+                    Erro(
+                        codigo="CONT_001",
+                        severidade=Severidade.CRITICO,
+                        mensagem=f"'{doc.codigo}' — campo 'conteudo' ausente ou vazio.",
+                        detalhe=(
+                            f"Tipo '{tipo}' requer conteudo preenchido. "
+                            "Consulte CONTEUDO_SCHEMA.md para as chaves obrigatórias."
+                        ),
                         documento=doc.codigo,
-                    ))
+                    )
+                )
+                continue
+
+            chaves_obrigatorias = CHAVES_OBRIGATORIAS.get(tipo)
+
+            if chaves_obrigatorias is None:
+                self.resultado.adicionar(
+                    Erro(
+                        codigo="CONT_002",
+                        severidade=Severidade.AVISO,
+                        mensagem=f"'{doc.codigo}' — tipo '{tipo}' sem schema de conteudo definido.",
+                        detalhe="Verifique se o tipo está correto. Usando template 05_carta.html como fallback.",
+                        documento=doc.codigo,
+                    )
+                )
+                continue
+
+            ausentes = [chave for chave in chaves_obrigatorias if chave not in conteudo]
+            if ausentes:
+                self.resultado.adicionar(
+                    Erro(
+                        codigo="CONT_003",
+                        severidade=Severidade.CRITICO,
+                        mensagem=(
+                            f"'{doc.codigo}' ({tipo}) — "
+                            f"{len(ausentes)} chave(s) obrigatória(s) ausente(s): "
+                            f"{', '.join(ausentes[:5])}"
+                            f"{'...' if len(ausentes) > 5 else ''}."
+                        ),
+                        detalhe="Consulte CONTEUDO_SCHEMA.md para a lista completa por tipo.",
+                        documento=doc.codigo,
+                    )
+                )
+
+            chave_lista = CHAVES_LISTA.get(tipo)
+            if chave_lista and chave_lista in conteudo:
+                lista = conteudo[chave_lista]
+                if not isinstance(lista, list) or len(lista) == 0:
+                    self.resultado.adicionar(
+                        Erro(
+                            codigo="CONT_004",
+                            severidade=Severidade.CRITICO,
+                            mensagem=f"'{doc.codigo}' — '{chave_lista}' deve ser lista com ao menos 1 item.",
+                            documento=doc.codigo,
+                        )
+                    )
+
+            for campo_html in ("CORPO_CARTA", "CORPO_EMAIL", "DESCRICAO_OCORRENCIA"):
+                valor = conteudo.get(campo_html, "")
+                if valor and isinstance(valor, str) and "<p>" not in valor.lower():
+                    self.resultado.adicionar(
+                        Erro(
+                            codigo="CONT_005",
+                            severidade=Severidade.AVISO,
+                            mensagem=(
+                                f"'{doc.codigo}' — '{campo_html}' não contém tags <p>. "
+                                "Use HTML com <p> por parágrafo para renderização correta."
+                            ),
+                            documento=doc.codigo,
+                        )
+                    )
 
     def _calcular_risco(self) -> None:
         criticos = len(self.resultado.criticos)
@@ -392,9 +984,13 @@ class BlueprintValidator:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Valida um blueprint de caso antes de gerar documentos.")
+    parser = argparse.ArgumentParser(
+        description="Valida um blueprint de caso antes de gerar documentos."
+    )
     parser.add_argument("arquivo", help="Caminho para o blueprint em JSON")
-    parser.add_argument("--strict", action="store_true", help="Falha também em risco Médio")
+    parser.add_argument(
+        "--strict", action="store_true", help="Falha também em risco Médio"
+    )
     parser.add_argument("--json", action="store_true", help="Saída em JSON")
     args = parser.parse_args()
 
@@ -411,13 +1007,20 @@ def main() -> None:
 
     resultado = BlueprintValidator(blueprint, strict=args.strict).validar()
     if args.json:
-        print(json.dumps({
-            "nivel_risco": resultado.nivel_risco.value,
-            "pode_gerar": resultado.pode_gerar,
-            "criticos": [e.__dict__ for e in resultado.criticos],
-            "moderados": [e.__dict__ for e in resultado.moderados],
-            "avisos": [e.__dict__ for e in resultado.avisos],
-        }, ensure_ascii=False, indent=2, default=str))
+        print(
+            json.dumps(
+                {
+                    "nivel_risco": resultado.nivel_risco.value,
+                    "pode_gerar": resultado.pode_gerar,
+                    "criticos": [e.__dict__ for e in resultado.criticos],
+                    "moderados": [e.__dict__ for e in resultado.moderados],
+                    "avisos": [e.__dict__ for e in resultado.avisos],
+                },
+                ensure_ascii=False,
+                indent=2,
+                default=str,
+            )
+        )
     else:
         print(resultado.resumo)
 
