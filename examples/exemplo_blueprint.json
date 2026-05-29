@@ -8,14 +8,18 @@
   "tempo_estimado_min": 70,
   "numero_jogadores": "3-5",
   "formato_envelopes": 2,
+
   "premissa": "Na tarde de uma quarta-feira, durante uma manutenção programada que desligou as câmeras por 45 minutos, o quadro 'Véspera' — avaliado em R$ 3 milhões — desapareceu da Galeria Principal do Museu Municipal. O museu estava fechado ao público. Apenas quatro funcionários e dois fornecedores tinham acesso.",
+
   "verdade_real": "Marcelo Faria, analista de segurança, combinou com Paulo Leite, motorista da empresa TransArte, a retirada do quadro durante a janela de câmeras offline. Marcelo usou o crachá de emergência da supervisora Helena para liberar a sala restrita sem gerar registro em seu próprio ID. Paulo tinha um van estacionada na entrada de serviço. O quadro foi levado para um galpão em Osasco, onde seria vendido para um colecionador via intermediária Galeria Sombria.",
+
   "executor_id": "14",
   "planejador_id": "14",
   "beneficiario_id": "14",
   "motivacao": "Dívida de jogo de R$ 80.000 com cobrador violento.",
   "metodo_ocultacao": "Usou crachá de Helena para não gerar registro próprio. Justificou presença na área como 'ronda de rotina'.",
   "erro_que_permite_descobrir": "O crachá de Helena foi usado às 15h22, mas ela registrou saída do prédio às 14h50 pelo registro físico biométrico.",
+
   "cadeia_causal": [
     "Marcelo combina com Paulo a operação durante um almoço três dias antes.",
     "Marcelo identifica que a janela de manutenção das câmeras seria na quarta às 15h.",
@@ -26,6 +30,7 @@
     "Paulo leva o quadro para galpão em Osasco.",
     "O sumiço é descoberto às 16h40 quando o técnico entra para ajustar a iluminação."
   ],
+
   "personagens": [
     {
       "id": "14",
@@ -34,10 +39,7 @@
       "papel": "executor",
       "suspeita_aparente": "Estava de plantão e conhece os sistemas de segurança",
       "verdade": "Executou o roubo usando o crachá de Helena durante a janela de câmeras offline",
-      "documento_ancoragem": [
-        "E1-05",
-        "E1-06"
-      ]
+      "documento_ancoragem": ["E1-05", "E1-06"]
     },
     {
       "id": "09",
@@ -46,10 +48,7 @@
       "papel": "red_herring",
       "suspeita_aparente": "Seu crachá foi usado no horário do roubo",
       "verdade": "Havia saído do prédio antes do evento — crachá foi usado por outra pessoa",
-      "documento_ancoragem": [
-        "E1-05",
-        "E1-06"
-      ]
+      "documento_ancoragem": ["E1-05", "E1-06"]
     },
     {
       "id": "22",
@@ -58,10 +57,7 @@
       "papel": "narrador",
       "suspeita_aparente": "Tem acesso privilegiado às obras e beneficiária do seguro institucional",
       "verdade": "Não tem envolvimento. Pediu investigação pois teme ser responsabilizada",
-      "documento_ancoragem": [
-        "E1-01",
-        "E1-02"
-      ]
+      "documento_ancoragem": ["E1-01", "E1-02"]
     },
     {
       "id": "31",
@@ -70,10 +66,7 @@
       "papel": "red_herring",
       "suspeita_aparente": "Descobriu o sumiço e demorou para avisar",
       "verdade": "Descobriu honestamente — demorou porque ficou em choque",
-      "documento_ancoragem": [
-        "E1-03",
-        "E2-04"
-      ]
+      "documento_ancoragem": ["E1-03", "E2-04"]
     },
     {
       "id": "27",
@@ -82,12 +75,10 @@
       "papel": "cumplice",
       "suspeita_aparente": "Fez entrega no museu no dia — van captada em câmera externa",
       "verdade": "Cúmplice de Marcelo. Transportou o quadro para Osasco",
-      "documento_ancoragem": [
-        "E2-03",
-        "E2-05"
-      ]
+      "documento_ancoragem": ["E2-03", "E2-05"]
     }
   ],
+
   "linha_tempo_real": [
     {
       "data_hora": "Qua 14h20",
@@ -132,6 +123,7 @@
       "confirmacao_independente": null
     }
   ],
+
   "linha_tempo_percebida": [
     {
       "data_hora": "Qua 15h22",
@@ -141,6 +133,7 @@
       "confirmacao_independente": null
     }
   ],
+
   "linha_tempo_documental": [
     {
       "data_hora": "Qua 14h50",
@@ -150,6 +143,7 @@
       "confirmacao_independente": null
     }
   ],
+
   "pilares_validacao": [
     {
       "nome": "Presença física na área",
@@ -176,8 +170,10 @@
       "personagem_id": "14"
     }
   ],
+
   "intervalo_critico_inicio": "15:00",
   "intervalo_critico_fim": "16:40",
+
   "documentos": [
     {
       "codigo": "E1-01",
@@ -186,30 +182,11 @@
       "tipo": "protocolo",
       "emocao_esperada": "orientacao e urgencia",
       "objetivo_narrativo": "Orientar o jogador, definir os quatro pilares e o critério de avanço",
-      "pistas_contidas": [
-        "intervalo crítico 15h-16h40",
-        "quatro pilares nomeados"
-      ],
+      "pistas_contidas": ["intervalo crítico 15h-16h40", "quatro pilares nomeados"],
       "confirma": [],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": [],
-      "conteudo": {
-        "NOME_ORGANIZACAO": "Valor fictício de NOME_ORGANIZACAO",
-        "SUBTITULO_ORGANIZACAO": "Valor fictício de SUBTITULO_ORGANIZACAO",
-        "ENDERECO_LINHA1": "Valor fictício de ENDERECO_LINHA1",
-        "CONTATO": "Valor fictício de CONTATO",
-        "CNPJ": "Valor fictício de CNPJ",
-        "COR_TOPO": "Valor fictício de COR_TOPO",
-        "LOCAL_DATA": "Valor fictício de LOCAL_DATA",
-        "SAUDACAO": "Valor fictício de SAUDACAO",
-        "CORPO_CARTA": "<p>Conteúdo fictício do documento.</p>",
-        "FORMULA_ENCERRAMENTO": "Valor fictício de FORMULA_ENCERRAMENTO",
-        "ASSINATURA_CURSIVA": "Valor fictício de ASSINATURA_CURSIVA",
-        "NOME_ASSINANTE": "Valor fictício de NOME_ASSINANTE",
-        "CARGO_ASSINANTE": "Valor fictício de CARGO_ASSINANTE",
-        "ASSUNTO": "Valor fictício de ASSUNTO"
-      }
+      "codigos_citados": []
     },
     {
       "codigo": "E1-02",
@@ -218,34 +195,12 @@
       "tipo": "email_narrador",
       "emocao_esperada": "urgencia e suspeita sobre o narrador",
       "objetivo_narrativo": "Contextualizar o crime, plantar suspeita em Helena e revelar que câmeras estavam offline",
-      "pistas_contidas": [
-        "câmeras offline às 15h",
-        "crachá de Helena usado",
-        "suspeita em Helena"
-      ],
-      "confirma": [
-        "E1-04"
-      ],
+      "pistas_contidas": ["câmeras offline às 15h", "crachá de Helena usado", "suspeita em Helena"],
+      "confirma": ["E1-04"],
       "confirmado_por": [],
       "red_herring_potencial": "Roberta parece saber demais sobre os detalhes",
-      "ids_citados": [
-        "09",
-        "14",
-        "22"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "REMETENTE_NOME": "Valor fictício de REMETENTE_NOME",
-        "REMETENTE_EMAIL": "Valor fictício de REMETENTE_EMAIL",
-        "DESTINATARIO_EMAIL": "Valor fictício de DESTINATARIO_EMAIL",
-        "DESTINATARIO_LABEL": "Valor fictício de DESTINATARIO_LABEL",
-        "DATA_HORA": "Valor fictício de DATA_HORA",
-        "ASSUNTO": "Valor fictício de ASSUNTO",
-        "AVATAR_INICIAL": "Valor fictício de AVATAR_INICIAL",
-        "AVATAR_COR": "Valor fictício de AVATAR_COR",
-        "CORPO_EMAIL": "<p>Conteúdo fictício do documento.</p>",
-        "NOTA_RODAPE": "Valor fictício de NOTA_RODAPE"
-      }
+      "ids_citados": ["09", "14", "22"],
+      "codigos_citados": []
     },
     {
       "codigo": "E1-03",
@@ -254,19 +209,11 @@
       "tipo": "mapa",
       "emocao_esperada": "orientacao espacial",
       "objetivo_narrativo": "Mostrar localização da Galeria Principal, entradas e câmeras",
-      "pistas_contidas": [
-        "entrada de serviço fora do ângulo das câmeras internas",
-        "Galeria Principal tem apenas uma entrada controlada"
-      ],
-      "confirma": [
-        "E1-05"
-      ],
+      "pistas_contidas": ["entrada de serviço fora do ângulo das câmeras internas", "Galeria Principal tem apenas uma entrada controlada"],
+      "confirma": ["E1-05"],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": [],
-      "conteudo": {
-        "OBSERVACAO": "Conteúdo fictício para tipo sem schema dedicado."
-      }
+      "codigos_citados": []
     },
     {
       "codigo": "E1-04",
@@ -275,33 +222,11 @@
       "tipo": "manual",
       "emocao_esperada": "compreensao da vulnerabilidade",
       "objetivo_narrativo": "Confirmar que câmeras ficaram offline entre 15h e 16h30 por manutenção programada",
-      "pistas_contidas": [
-        "janela offline: 15h00 a 16h30",
-        "câmeras de entrada de serviço não afetadas"
-      ],
-      "confirma": [
-        "E1-05"
-      ],
-      "confirmado_por": [
-        "E1-02"
-      ],
+      "pistas_contidas": ["janela offline: 15h00 a 16h30", "câmeras de entrada de serviço não afetadas"],
+      "confirma": ["E1-05"],
+      "confirmado_por": ["E1-02"],
       "ids_citados": [],
-      "codigos_citados": [],
-      "conteudo": {
-        "NOME_ORGANIZACAO": "Valor fictício de NOME_ORGANIZACAO",
-        "SUBTITULO_ORGANIZACAO": "Valor fictício de SUBTITULO_ORGANIZACAO",
-        "ENDERECO_LINHA1": "Valor fictício de ENDERECO_LINHA1",
-        "CONTATO": "Valor fictício de CONTATO",
-        "CNPJ": "Valor fictício de CNPJ",
-        "COR_TOPO": "Valor fictício de COR_TOPO",
-        "LOCAL_DATA": "Valor fictício de LOCAL_DATA",
-        "SAUDACAO": "Valor fictício de SAUDACAO",
-        "CORPO_CARTA": "<p>Conteúdo fictício do documento.</p>",
-        "FORMULA_ENCERRAMENTO": "Valor fictício de FORMULA_ENCERRAMENTO",
-        "ASSINATURA_CURSIVA": "Valor fictício de ASSINATURA_CURSIVA",
-        "NOME_ASSINANTE": "Valor fictício de NOME_ASSINANTE",
-        "CARGO_ASSINANTE": "Valor fictício de CARGO_ASSINANTE"
-      }
+      "codigos_citados": []
     },
     {
       "codigo": "E1-05",
@@ -315,50 +240,12 @@
         "Crachá ID-09: ENTRADA Galeria Principal 15h22",
         "ID-14 Marcelo: presença contínua no corredor"
       ],
-      "confirma": [
-        "E1-06"
-      ],
-      "confirmado_por": [
-        "E1-02",
-        "E1-03"
-      ],
+      "confirma": ["E1-06"],
+      "confirmado_por": ["E1-02", "E1-03"],
       "red_herring_potencial": "Log mostra crachá de Helena — parece que ela voltou",
       "risco_ambiguidade": "medio",
-      "ids_citados": [
-        "09",
-        "14",
-        "22",
-        "31"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "NOME_SISTEMA": "Valor fictício de NOME_SISTEMA",
-        "SUBTITULO_SISTEMA": "Valor fictício de SUBTITULO_SISTEMA",
-        "COR_SISTEMA": "Valor fictício de COR_SISTEMA",
-        "COR_SISTEMA_DARK": "Valor fictício de COR_SISTEMA_DARK",
-        "DATA_EXPORTACAO": "Valor fictício de DATA_EXPORTACAO",
-        "HORA_EXPORTACAO": "Valor fictício de HORA_EXPORTACAO",
-        "OPERADOR_EXPORT": "Valor fictício de OPERADOR_EXPORT",
-        "HASH_REGISTRO": "Valor fictício de HASH_REGISTRO",
-        "PERIODO_INICIO": "Valor fictício de PERIODO_INICIO",
-        "PERIODO_FIM": "Valor fictício de PERIODO_FIM",
-        "LOCALIZACAO_SISTEMA": "Valor fictício de LOCALIZACAO_SISTEMA",
-        "TOTAL_REGISTROS": "Valor fictício de TOTAL_REGISTROS",
-        "COLUNA_NOME": "Valor fictício de COLUNA_NOME",
-        "COLUNA_TERMINAL": "Valor fictício de COLUNA_TERMINAL",
-        "COLUNA_METODO": "Valor fictício de COLUNA_METODO",
-        "COLUNA_OBS": "Valor fictício de COLUNA_OBS",
-        "TOTAL_USUARIOS": "Valor fictício de TOTAL_USUARIOS",
-        "TOTAL_ENTRADAS": "Valor fictício de TOTAL_ENTRADAS",
-        "TOTAL_NEGADOS": "Valor fictício de TOTAL_NEGADOS",
-        "TOTAL_ANOMALIAS": "Valor fictício de TOTAL_ANOMALIAS",
-        "REGISTROS": [
-          {
-            "DESCRICAO": "Item fictício para validação",
-            "VALOR": "1"
-          }
-        ]
-      }
+      "ids_citados": ["09", "14", "22", "31"],
+      "codigos_citados": []
     },
     {
       "codigo": "E1-06",
@@ -372,44 +259,10 @@
         "Helena: turno encerrado às 14h30",
         "Crachá de emergência de Helena estava no armário da segurança"
       ],
-      "confirma": [
-        "E1-05"
-      ],
+      "confirma": ["E1-05"],
       "confirmado_por": [],
-      "ids_citados": [
-        "09",
-        "14",
-        "22"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "NOME_SISTEMA": "Valor fictício de NOME_SISTEMA",
-        "SUBTITULO_SISTEMA": "Valor fictício de SUBTITULO_SISTEMA",
-        "COR_SISTEMA": "Valor fictício de COR_SISTEMA",
-        "COR_SISTEMA_DARK": "Valor fictício de COR_SISTEMA_DARK",
-        "DATA_EXPORTACAO": "Valor fictício de DATA_EXPORTACAO",
-        "HORA_EXPORTACAO": "Valor fictício de HORA_EXPORTACAO",
-        "OPERADOR_EXPORT": "Valor fictício de OPERADOR_EXPORT",
-        "HASH_REGISTRO": "Valor fictício de HASH_REGISTRO",
-        "PERIODO_INICIO": "Valor fictício de PERIODO_INICIO",
-        "PERIODO_FIM": "Valor fictício de PERIODO_FIM",
-        "LOCALIZACAO_SISTEMA": "Valor fictício de LOCALIZACAO_SISTEMA",
-        "TOTAL_REGISTROS": "Valor fictício de TOTAL_REGISTROS",
-        "COLUNA_NOME": "Valor fictício de COLUNA_NOME",
-        "COLUNA_TERMINAL": "Valor fictício de COLUNA_TERMINAL",
-        "COLUNA_METODO": "Valor fictício de COLUNA_METODO",
-        "COLUNA_OBS": "Valor fictício de COLUNA_OBS",
-        "TOTAL_USUARIOS": "Valor fictício de TOTAL_USUARIOS",
-        "TOTAL_ENTRADAS": "Valor fictício de TOTAL_ENTRADAS",
-        "TOTAL_NEGADOS": "Valor fictício de TOTAL_NEGADOS",
-        "TOTAL_ANOMALIAS": "Valor fictício de TOTAL_ANOMALIAS",
-        "REGISTROS": [
-          {
-            "DESCRICAO": "Item fictício para validação",
-            "VALOR": "1"
-          }
-        ]
-      }
+      "ids_citados": ["09", "14", "22"],
+      "codigos_citados": []
     },
     {
       "codigo": "E1-07",
@@ -426,29 +279,8 @@
       "confirmado_por": [],
       "red_herring_potencial": "Túlio parece estar escondendo algo sobre o que viu",
       "risco_ambiguidade": "alto",
-      "ids_citados": [
-        "31"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "ORGAO_NOME": "Valor fictício de ORGAO_NOME",
-        "ORGAO_SUBTITULO": "Valor fictício de ORGAO_SUBTITULO",
-        "NUMERO_CASO": "Valor fictício de NUMERO_CASO",
-        "TIPO_DOCUMENTO": "Valor fictício de TIPO_DOCUMENTO",
-        "TIPO_OCORRENCIA": "Valor fictício de TIPO_OCORRENCIA",
-        "DATA": "Valor fictício de DATA",
-        "LOCALIZACAO": "Valor fictício de LOCALIZACAO",
-        "HORA_OCORRENCIA": "Valor fictício de HORA_OCORRENCIA",
-        "DESCRICAO_OCORRENCIA": "<p>Conteúdo fictício do documento.</p>",
-        "NOME_RESPONSAVEL": "Valor fictício de NOME_RESPONSAVEL",
-        "ASSINATURA_RESPONSAVEL": "Valor fictício de ASSINATURA_RESPONSAVEL",
-        "ASSINATURA_GLIFO": "Valor fictício de ASSINATURA_GLIFO",
-        "DATA_HORA_ASSINATURA": "Valor fictício de DATA_HORA_ASSINATURA",
-        "CAMPO_NOME": "Valor fictício de CAMPO_NOME",
-        "NOME_ENVOLVIDO": "Valor fictício de NOME_ENVOLVIDO",
-        "DATA_NASC": "Valor fictício de DATA_NASC",
-        "CONDICAO": "Valor fictício de CONDICAO"
-      }
+      "ids_citados": ["31"],
+      "codigos_citados": []
     },
     {
       "codigo": "E1-08",
@@ -461,22 +293,7 @@
       "confirma": [],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": [],
-      "conteudo": {
-        "NOME_ORGANIZACAO": "Valor fictício de NOME_ORGANIZACAO",
-        "SUBTITULO_ORGANIZACAO": "Valor fictício de SUBTITULO_ORGANIZACAO",
-        "ENDERECO_LINHA1": "Valor fictício de ENDERECO_LINHA1",
-        "CONTATO": "Valor fictício de CONTATO",
-        "CNPJ": "Valor fictício de CNPJ",
-        "COR_TOPO": "Valor fictício de COR_TOPO",
-        "LOCAL_DATA": "Valor fictício de LOCAL_DATA",
-        "SAUDACAO": "Valor fictício de SAUDACAO",
-        "CORPO_CARTA": "<p>Conteúdo fictício do documento.</p>",
-        "FORMULA_ENCERRAMENTO": "Valor fictício de FORMULA_ENCERRAMENTO",
-        "ASSINATURA_CURSIVA": "Valor fictício de ASSINATURA_CURSIVA",
-        "NOME_ASSINANTE": "Valor fictício de NOME_ASSINANTE",
-        "CARGO_ASSINANTE": "Valor fictício de CARGO_ASSINANTE"
-      }
+      "codigos_citados": []
     },
     {
       "codigo": "E1-09",
@@ -493,22 +310,7 @@
       "confirma": [],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": [],
-      "conteudo": {
-        "NOME_ORGANIZACAO": "Valor fictício de NOME_ORGANIZACAO",
-        "SUBTITULO_ORGANIZACAO": "Valor fictício de SUBTITULO_ORGANIZACAO",
-        "ENDERECO_LINHA1": "Valor fictício de ENDERECO_LINHA1",
-        "CONTATO": "Valor fictício de CONTATO",
-        "CNPJ": "Valor fictício de CNPJ",
-        "COR_TOPO": "Valor fictício de COR_TOPO",
-        "LOCAL_DATA": "Valor fictício de LOCAL_DATA",
-        "SAUDACAO": "Valor fictício de SAUDACAO",
-        "CORPO_CARTA": "<p>Conteúdo fictício do documento.</p>",
-        "FORMULA_ENCERRAMENTO": "Valor fictício de FORMULA_ENCERRAMENTO",
-        "ASSINATURA_CURSIVA": "Valor fictício de ASSINATURA_CURSIVA",
-        "NOME_ASSINANTE": "Valor fictício de NOME_ASSINANTE",
-        "CARGO_ASSINANTE": "Valor fictício de CARGO_ASSINANTE"
-      }
+      "codigos_citados": []
     },
     {
       "codigo": "E2-01",
@@ -517,30 +319,11 @@
       "tipo": "email_institucional",
       "emocao_esperada": "mudanca de perspectiva",
       "objetivo_narrativo": "Reorientar para a cadeia completa — van captada, galpão em Osasco",
-      "pistas_contidas": [
-        "van TransArte captada na câmera externa às 15h28",
-        "quadro não está mais no museu nem em Osasco"
-      ],
-      "confirma": [
-        "E2-03"
-      ],
+      "pistas_contidas": ["van TransArte captada na câmera externa às 15h28", "quadro não está mais no museu nem em Osasco"],
+      "confirma": ["E2-03"],
       "confirmado_por": [],
-      "ids_citados": [
-        "27"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "REMETENTE_NOME": "Valor fictício de REMETENTE_NOME",
-        "REMETENTE_EMAIL": "Valor fictício de REMETENTE_EMAIL",
-        "DESTINATARIO_EMAIL": "Valor fictício de DESTINATARIO_EMAIL",
-        "DESTINATARIO_LABEL": "Valor fictício de DESTINATARIO_LABEL",
-        "DATA_HORA": "Valor fictício de DATA_HORA",
-        "ASSUNTO": "Valor fictício de ASSUNTO",
-        "AVATAR_INICIAL": "Valor fictício de AVATAR_INICIAL",
-        "AVATAR_COR": "Valor fictício de AVATAR_COR",
-        "CORPO_EMAIL": "<p>Conteúdo fictício do documento.</p>",
-        "NOTA_RODAPE": "Valor fictício de NOTA_RODAPE"
-      }
+      "ids_citados": ["27"],
+      "codigos_citados": []
     },
     {
       "codigo": "E2-02",
@@ -549,33 +332,11 @@
       "tipo": "boletim",
       "emocao_esperada": "peso institucional",
       "objetivo_narrativo": "Confirmar furto qualificado, ausência de arrombamento e hipótese de envolvimento interno",
-      "pistas_contidas": [
-        "sem arrombamento",
-        "acesso com crachá válido",
-        "hipótese de envolvimento interno"
-      ],
-      "confirma": [
-        "E1-05",
-        "E1-06"
-      ],
+      "pistas_contidas": ["sem arrombamento", "acesso com crachá válido", "hipótese de envolvimento interno"],
+      "confirma": ["E1-05", "E1-06"],
       "confirmado_por": [],
       "ids_citados": [],
-      "codigos_citados": [],
-      "conteudo": {
-        "ORGAO_NOME": "Valor fictício de ORGAO_NOME",
-        "ORGAO_SUBTITULO": "Valor fictício de ORGAO_SUBTITULO",
-        "NUMERO_CASO": "Valor fictício de NUMERO_CASO",
-        "TIPO_DOCUMENTO": "Valor fictício de TIPO_DOCUMENTO",
-        "TIPO_OCORRENCIA": "Valor fictício de TIPO_OCORRENCIA",
-        "DATA": "Valor fictício de DATA",
-        "LOCALIZACAO": "Valor fictício de LOCALIZACAO",
-        "HORA_OCORRENCIA": "Valor fictício de HORA_OCORRENCIA",
-        "DESCRICAO_OCORRENCIA": "<p>Conteúdo fictício do documento.</p>",
-        "NOME_RESPONSAVEL": "Valor fictício de NOME_RESPONSAVEL",
-        "ASSINATURA_RESPONSAVEL": "Valor fictício de ASSINATURA_RESPONSAVEL",
-        "ASSINATURA_GLIFO": "Valor fictício de ASSINATURA_GLIFO",
-        "DATA_HORA_ASSINATURA": "Valor fictício de DATA_HORA_ASSINATURA"
-      }
+      "codigos_citados": []
     },
     {
       "codigo": "E2-03",
@@ -589,19 +350,10 @@
         "TransArte: contrato de logística com o museu",
         "Autorização de entrada na data do crime"
       ],
-      "confirma": [
-        "E2-05"
-      ],
-      "confirmado_por": [
-        "E2-01"
-      ],
-      "ids_citados": [
-        "27"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "OBSERVACAO": "Conteúdo fictício para tipo sem schema dedicado."
-      }
+      "confirma": ["E2-05"],
+      "confirmado_por": ["E2-01"],
+      "ids_citados": ["27"],
+      "codigos_citados": []
     },
     {
       "codigo": "E2-04",
@@ -615,37 +367,11 @@
         "Não sabia que era suspeito — achava que era retirada normal",
         "Confirma que Marcelo estava no corredor próximo à galeria"
       ],
-      "confirma": [
-        "E2-03",
-        "E2-05"
-      ],
+      "confirma": ["E2-03", "E2-05"],
       "confirmado_por": [],
       "red_herring_potencial": null,
-      "ids_citados": [
-        "31",
-        "14",
-        "27"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "ORGAO_NOME": "Valor fictício de ORGAO_NOME",
-        "ORGAO_SUBTITULO": "Valor fictício de ORGAO_SUBTITULO",
-        "NUMERO_CASO": "Valor fictício de NUMERO_CASO",
-        "TIPO_DOCUMENTO": "Valor fictício de TIPO_DOCUMENTO",
-        "TIPO_OCORRENCIA": "Valor fictício de TIPO_OCORRENCIA",
-        "DATA": "Valor fictício de DATA",
-        "LOCALIZACAO": "Valor fictício de LOCALIZACAO",
-        "HORA_OCORRENCIA": "Valor fictício de HORA_OCORRENCIA",
-        "DESCRICAO_OCORRENCIA": "<p>Conteúdo fictício do documento.</p>",
-        "NOME_RESPONSAVEL": "Valor fictício de NOME_RESPONSAVEL",
-        "ASSINATURA_RESPONSAVEL": "Valor fictício de ASSINATURA_RESPONSAVEL",
-        "ASSINATURA_GLIFO": "Valor fictício de ASSINATURA_GLIFO",
-        "DATA_HORA_ASSINATURA": "Valor fictício de DATA_HORA_ASSINATURA",
-        "CAMPO_NOME": "Valor fictício de CAMPO_NOME",
-        "NOME_ENVOLVIDO": "Valor fictício de NOME_ENVOLVIDO",
-        "DATA_NASC": "Valor fictício de DATA_NASC",
-        "CONDICAO": "Valor fictício de CONDICAO"
-      }
+      "ids_citados": ["31", "14", "27"],
+      "codigos_citados": []
     },
     {
       "codigo": "E2-05",
@@ -659,20 +385,10 @@
         "Horário: 15h28 — dentro da janela crítica",
         "Nenhuma outra van no período"
       ],
-      "confirma": [
-        "E2-03"
-      ],
-      "confirmado_por": [
-        "E2-01",
-        "E2-04"
-      ],
-      "ids_citados": [
-        "27"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "OBSERVACAO": "Conteúdo fictício para tipo sem schema dedicado."
-      }
+      "confirma": ["E2-03"],
+      "confirmado_por": ["E2-01", "E2-04"],
+      "ids_citados": ["27"],
+      "codigos_citados": []
     },
     {
       "codigo": "E2-06",
@@ -688,46 +404,11 @@
       ],
       "confirma": [],
       "confirmado_por": [],
-      "ids_citados": [
-        "14"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "LOGO_SIGLA": "Valor fictício de LOGO_SIGLA",
-        "NOME_BANCO": "Valor fictício de NOME_BANCO",
-        "TAGLINE_BANCO": "Valor fictício de TAGLINE_BANCO",
-        "COR_BANCO": "Valor fictício de COR_BANCO",
-        "PERIODO_INICIO": "Valor fictício de PERIODO_INICIO",
-        "PERIODO_FIM": "Valor fictício de PERIODO_FIM",
-        "DATA_GERACAO": "Valor fictício de DATA_GERACAO",
-        "HORA_GERACAO": "Valor fictício de HORA_GERACAO",
-        "NOME_TITULAR": "Valor fictício de NOME_TITULAR",
-        "DOC_TITULAR": "Valor fictício de DOC_TITULAR",
-        "AGENCIA": "Valor fictício de AGENCIA",
-        "NUMERO_CONTA": "Valor fictício de NUMERO_CONTA",
-        "TIPO_CONTA": "Valor fictício de TIPO_CONTA",
-        "SALDO_INICIAL": "Valor fictício de SALDO_INICIAL",
-        "DATA_SALDO_INICIAL": "Valor fictício de DATA_SALDO_INICIAL",
-        "MOVIMENTACAO_LIQUIDA": "Valor fictício de MOVIMENTACAO_LIQUIDA",
-        "COR_MOVIMENTACAO": "Valor fictício de COR_MOVIMENTACAO",
-        "SALDO_FINAL": "Valor fictício de SALDO_FINAL",
-        "DATA_SALDO_FINAL": "Valor fictício de DATA_SALDO_FINAL",
-        "COR_SALDO_FINAL": "Valor fictício de COR_SALDO_FINAL",
-        "TOTAL_CREDITOS": "Valor fictício de TOTAL_CREDITOS",
-        "TOTAL_DEBITOS": "Valor fictício de TOTAL_DEBITOS",
-        "TOTAL_LANCAMENTOS": "Valor fictício de TOTAL_LANCAMENTOS",
-        "NOTA_LEGAL": "Valor fictício de NOTA_LEGAL",
-        "CNPJ_BANCO": "Valor fictício de CNPJ_BANCO",
-        "ENDERECO_BANCO": "Valor fictício de ENDERECO_BANCO",
-        "LANCAMENTOS": [
-          {
-            "DESCRICAO": "Item fictício para validação",
-            "VALOR": "1"
-          }
-        ]
-      }
+      "ids_citados": ["14"],
+      "codigos_citados": []
     }
   ],
+
   "matriz_pistas": [
     {
       "descricao": "Crachá de Helena usado 32 minutos após a saída biométrica dela",
@@ -757,6 +438,7 @@
       "emocao_esperada": "satisfação ao fechar a cadeia de escoamento"
     }
   ],
+
   "red_herrings": [
     {
       "personagem_id": "09",
@@ -773,6 +455,7 @@
       "categoria": "comportamento_suspeito_sem_evidencia"
     }
   ],
+
   "cadeia_financeira": [
     {
       "de": "Museu Municipal de Arte",
@@ -799,7 +482,9 @@
       "is_salto_final": true
     }
   ],
+
   "codigos": [],
+
   "dicas": [
     {
       "numero": 1,
@@ -858,6 +543,7 @@
       "o_que_desbloqueia": "Fechar a solução completa"
     }
   ],
+
   "versao": "0.1",
   "observacoes_producao": "Colorido discreto. Legível em tela de celular. Mapa simples com 4-5 salas."
 }
