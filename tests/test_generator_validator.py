@@ -287,3 +287,13 @@ def test_validator_cli_accepts_example_blueprint_from_examples_folder():
 
     assert result.returncode == 0, result.stderr
     assert "Risco: Baixo" in result.stdout or "Risco: Médio-baixo" in result.stdout
+
+
+def test_blueprint_validator_blocks_duplicate_document_codes():
+    blueprint = blueprint_valido()
+    blueprint.documentos[1].codigo = blueprint.documentos[0].codigo
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert resultado.pode_gerar is False
+    assert any(e.codigo == "DOC_008" for e in resultado.criticos)

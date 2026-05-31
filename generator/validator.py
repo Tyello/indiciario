@@ -318,6 +318,20 @@ class BlueprintValidator:
                     ))
 
     def _verificar_documentos(self) -> None:
+        codigos_vistos: set[str] = set()
+        codigos_duplicados: set[str] = set()
+        for doc in self.bp.documentos:
+            if doc.codigo in codigos_vistos:
+                codigos_duplicados.add(doc.codigo)
+            codigos_vistos.add(doc.codigo)
+        for codigo in sorted(codigos_duplicados):
+            self.resultado.adicionar(Erro(
+                "DOC_008",
+                Severidade.CRITICO,
+                f"Documento duplicado no blueprint: '{codigo}'.",
+                documento=codigo,
+            ))
+
         docs_e1 = [d for d in self.bp.documentos if d.envelope == Envelope.E1]
         docs_e2 = [d for d in self.bp.documentos if d.envelope == Envelope.E2]
         if len(docs_e1) < 6:

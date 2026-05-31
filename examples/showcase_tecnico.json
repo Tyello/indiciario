@@ -96,13 +96,13 @@
       "evento": "Preparação",
       "personagem_id": null,
       "documento_prova": "E2-07",
-      "confirmacao_independente": "E1-01"
+      "confirmacao_independente": "E1-07"
     },
     {
       "data_hora": "2026-01-02 10:00",
       "evento": "Execução",
       "personagem_id": null,
-      "documento_prova": "E1-03",
+      "documento_prova": "E1-06",
       "confirmacao_independente": "E1-04"
     },
     {
@@ -118,19 +118,19 @@
   "pilares_validacao": [
     {
       "nome": "Presença física",
-      "documento_principal": "E1-03",
-      "confirmacao": "E1-01",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-04",
       "personagem_id": "01"
     },
     {
       "nome": "Credencial",
-      "documento_principal": "E1-04",
-      "confirmacao": "E1-03",
+      "documento_principal": "E1-03",
+      "confirmacao": "E1-06",
       "personagem_id": "01"
     },
     {
       "nome": "Terminal",
-      "documento_principal": "E1-02",
+      "documento_principal": "E1-08",
       "confirmacao": "E2-04",
       "personagem_id": "01"
     },
@@ -392,8 +392,8 @@
       }
     },
     {
-      "codigo": "E1-03",
-      "titulo": "Documento técnico E1-03",
+      "codigo": "E1-07",
+      "titulo": "Documento técnico E1-07",
       "envelope": "E1",
       "tipo": "protocolo",
       "emocao_esperada": "cruzamento",
@@ -525,8 +525,8 @@
       }
     },
     {
-      "codigo": "E1-04",
-      "titulo": "Documento técnico E1-04",
+      "codigo": "E1-08",
+      "titulo": "Documento técnico E1-08",
       "envelope": "E1",
       "tipo": "folha_cruzamento",
       "emocao_esperada": "cruzamento",
@@ -795,10 +795,10 @@
   "matriz_pistas": [
     {
       "descricao": "Acesso",
-      "documento": "E1-03",
+      "documento": "E1-06",
       "o_que_sugere": "presença",
       "o_que_prova": "presença",
-      "confirmacao": "E1-01",
+      "confirmacao": "E1-04",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "descoberta"
     },
@@ -816,7 +816,7 @@
       "documento": "E2-08",
       "o_que_sugere": "benefício",
       "o_que_prova": "benefício",
-      "confirmacao": "E1-02",
+      "confirmacao": "E1-08",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "fechamento"
     }
@@ -826,7 +826,7 @@
       "personagem_id": "05",
       "motivo_aparente": "motivo plausível",
       "como_descartar": "sem oportunidade",
-      "documento_descarte": "E1-03",
+      "documento_descarte": "E1-06",
       "categoria": "motivo_sem_oportunidade"
     },
     {
