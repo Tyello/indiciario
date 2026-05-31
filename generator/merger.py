@@ -23,6 +23,7 @@ class OutputPaths(TypedDict, total=False):
     manifest: Path
     print_manifest: Path
     qa_report: Path
+    graph_report: Path
 
 
 class PDFMergeError(RuntimeError):
@@ -126,4 +127,5 @@ def build_output_paths(case_title: str, output_root: Path) -> OutputPaths:
         "manifest": output_dir / "manifest.json",
         "print_manifest": output_dir / "print_manifest.json",
         "qa_report": output_dir / "qa_report.json",
+        "graph_report": output_dir / "graph_report.json",
     }

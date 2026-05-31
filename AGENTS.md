@@ -231,7 +231,7 @@ O agente deve entender esse fluxo antes de modificar qualquer parte:
         ↓
 8. merger.py agrupa por envelope (E1, E2, dicas, gabarito)
         ↓
-9. package_builder.py gera manifest.json, print_manifest.json, 05_guia_de_impressao.pdf e qa_report.json
+9. package_builder.py gera manifest.json, print_manifest.json, 05_guia_de_impressao.pdf, qa_report.json e graph_report.json
         ↓
 10. Bot envia os arquivos ao usuário no Telegram
 ```
@@ -267,7 +267,7 @@ python -m scripts.build_package examples/showcase_tecnico.json --output output -
 ```
 
 O pacote deve conter envelopes finais, `05_guia_de_impressao.pdf`,
-`manifest.json`, `print_manifest.json` e `qa_report.json`. Dicas e gabarito, quando
+`manifest.json`, `print_manifest.json`, `qa_report.json` e `graph_report.json`. Dicas e gabarito, quando
 existirem, devem permanecer confidenciais e separados dos arquivos de jogador.
 
 ### Modificar o prompt de geração
@@ -319,6 +319,7 @@ em `/framework/` — especialmente:
 - `01_PRINCIPIOS_DO_MODELO.md` — leis invioláveis
 - `04_DESIGN_DE_PISTAS.md` — regras de pistas e códigos
 - `05_CHECKLIST_SOLVABILIDADE.md` — critério de qualidade final
+- `14_GRAFO_DE_PISTAS.md` — grafo lógico e relatório de solvabilidade estrutural
 
 Não tome decisões narrativas por conta própria. Se houver ambiguidade, sinalize
 no PR e aguarde instrução humana.

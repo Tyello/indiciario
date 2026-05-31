@@ -7,7 +7,7 @@ from generator.merger import count_pdf_pages
 from generator.package_builder import PackageBuildError, build_package
 from generator.pdf_backend import PdfWriter
 from generator.print_guide import build_print_manifest
-from generator.qa import run_qa
+from generator.qa import QAReport, run_qa
 
 
 def make_pdf(path: Path, pages: int = 1) -> Path:
@@ -66,6 +66,39 @@ def test_manifest_contem_arquivos_paths_relativos_e_docs_validos(tmp_path, monke
     assert all(not Path(path).is_absolute() for path in paths)
     assert all(entry["category"] != "player" for entry in manifest["files"] if "dicas" in entry["id"] or "gabarito" in entry["id"])
     assert all(doc["final_file"] in paths for doc in manifest["documents"])
+    assert result["graph_report_path"].endswith("graph_report.json")
+    assert Path(result["graph_report_path"]).exists()
+    assert manifest["reports"] == {"qa": "qa_report.json", "graph": "graph_report.json"}
+    assert "graph_report.json" not in paths
+
+
+def test_build_package_blueprint_legado_sem_contratos_nao_falha_por_graph_skipped(tmp_path, monkeypatch):
+    from generator import package_builder
+
+    def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
+        return {
+            "E1": [make_pdf(output_dir / "E1-01.pdf")],
+            "E2": [make_pdf(output_dir / "E2-01.pdf")],
+            "E3": [],
+            "dicas": [],
+            "gabarito": [],
+        }
+
+    def fake_render_print_guide(_print_manifest, output_path, strict=True):
+        return make_pdf(output_path)
+
+    monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
+    monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+    monkeypatch.setattr(package_builder, "run_qa", lambda _package_dir, _manifest, strict=True: QAReport(status="passed"))
+
+    result = build_package(Path("examples/exemplo_blueprint.json"), tmp_path, strict=True)
+    graph_report = json.loads(Path(result["graph_report_path"]).read_text(encoding="utf-8"))
+
+    assert result["status"] == "passed"
+    assert result["graph_status"] == "skipped"
+    assert graph_report["status"] == "skipped"
+    assert graph_report["summary"]["contracts"] == 0
+    assert any(issue["code"] == "GP_006" and issue["severity"] == "warning" for issue in graph_report["issues"])
 
 
 def test_build_package_strict_falha_quando_e3_sem_e2(tmp_path, monkeypatch):
@@ -117,6 +150,8 @@ def test_build_package_empacota_tres_envelopes_e_desloca_auxiliares(tmp_path, mo
     assert "06_guia_de_impressao.pdf" in paths
     assert {entry["file"] for entry in print_manifest["files"]} == set(paths)
     assert result["status"] == "passed"
+    assert result["graph_status"] == "passed"
+    assert Path(result["graph_report_path"]).exists()
 
 
 def test_print_manifest_final_usa_page_count_final_do_guia(tmp_path, monkeypatch):

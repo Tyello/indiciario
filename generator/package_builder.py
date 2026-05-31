@@ -8,6 +8,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from .clue_graph import analyze_clue_graph, build_clue_graph, write_graph_report
 from .merger import OutputPaths, build_output_paths, count_pdf_pages, merge_pdfs, safe_slug
 from .models import Blueprint
 from .print_guide import build_print_manifest, render_print_guide, write_print_manifest
@@ -208,6 +209,10 @@ def build_package(
         "files": files,
         "documents": _build_documents_manifest(blueprint, rendered_by_code, final_by_envelope, package_dir),
         "warnings": warnings,
+        "reports": {
+            "qa": "qa_report.json",
+            "graph": "graph_report.json",
+        },
     }
 
     preliminary_print_manifest = build_print_manifest(manifest, package_dir)
@@ -222,23 +227,28 @@ def build_package(
     write_print_manifest(final_print_manifest, paths["print_manifest"])
     _write_manifest(manifest, paths["manifest"])
 
+    graph = build_clue_graph(blueprint)
+    graph_report = analyze_clue_graph(graph, blueprint)
+    write_graph_report(graph_report, paths["graph_report"])
+
     qa_report = run_qa(package_dir, manifest, strict=strict)
     write_qa_report(qa_report, paths["qa_report"])
-    if strict and qa_report.status != "passed":
-        return {
-            "status": "failed",
-            "case_slug": manifest["case"]["slug"],
-            "output_dir": str(package_dir),
-            "manifest_path": str(paths["manifest"]),
-            "print_manifest_path": str(paths["print_manifest"]),
-            "qa_report_path": str(paths["qa_report"]),
-        }
 
-    return {
-        "status": qa_report.status,
+    qa_ok = qa_report.status == "passed"
+    graph_ok = graph_report["status"] in {"passed", "skipped"}
+
+    result = {
+        "status": "passed" if qa_ok and graph_ok else "failed",
         "case_slug": manifest["case"]["slug"],
         "output_dir": str(package_dir),
         "manifest_path": str(paths["manifest"]),
         "print_manifest_path": str(paths["print_manifest"]),
         "qa_report_path": str(paths["qa_report"]),
+        "graph_report_path": str(paths["graph_report"]),
+        "qa_status": qa_report.status,
+        "graph_status": graph_report["status"],
     }
+    if strict and (not qa_ok or not graph_ok):
+        return result
+
+    return result

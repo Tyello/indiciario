@@ -28,15 +28,19 @@ def main() -> None:
         print("Gerando manifest...")
         print("Gerando guia de impressão...")
         print("Rodando QA...")
+        print("Rodando grafo de pistas...")
         result = build_package(args.blueprint_path, output_root=args.output, strict=args.strict)
     except Exception as exc:  # noqa: BLE001 - CLI precisa exibir erro claro ao usuário.
         print(f"Erro ao gerar pacote: {exc}", file=sys.stderr)
         sys.exit(1)
 
     print(f"Pacote gerado em: {result['output_dir']}")
-    print(f"QA: {result['status']}")
+    print(f"QA: {result.get('qa_status', result['status'])}")
+    print(f"Graph: {result.get('graph_status', 'unknown')}")
     if result["status"] != "passed":
-        print(f"Verifique: {result['qa_report_path']}")
+        print(f"Verifique QA: {result['qa_report_path']}")
+        if "graph_report_path" in result:
+            print(f"Verifique Graph: {result['graph_report_path']}")
         sys.exit(1)
 
 
