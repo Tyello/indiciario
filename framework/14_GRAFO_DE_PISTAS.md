@@ -61,6 +61,12 @@ Ele complementa o validador CE_* e o checklist de solvabilidade. Redundância
 controlada é aceitável porque o `graph_report.json` tem função diagnóstica e deve
 mostrar o problema no vocabulário do grafo.
 
+Blueprints legados sem `contratos_evidencia` recebem `graph_report.status` igual
+a `skipped`. Esse estado preserva compatibilidade com casos antigos e não deve,
+sozinho, impedir o empacotamento quando o QA técnico passa. Para casos novos, o
+recomendado é sempre preencher `contratos_evidencia` para que o grafo consiga
+avaliar a solvabilidade estrutural.
+
 ---
 
 ## Documento órfão
@@ -143,9 +149,10 @@ ver se a solução final tem âncoras documentais declaradas.
 
 - Severidade no grafo: `critical`.
 - Ocorre quando nenhum contrato tem `fase == "final"` ou `tipo == "solucao_final"`.
-- No validador, blueprints antigos sem `contratos_evidencia` podem receber
-  compatibilidade mais branda, mas o relatório do grafo continua expondo a falta
-  de alvo final quando contratos são analisados.
+- Blueprints sem `contratos_evidencia` retornam `status: skipped` com GP_006 em
+  severidade `warning`, preservando compatibilidade com casos legados.
+- Quando contratos existem, ausência de contrato final retorna `status: failed` e
+  GP_006 em severidade `critical`.
 
 ### GP_007 — Contrato final sem caminho documental mínimo
 

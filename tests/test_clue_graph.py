@@ -42,6 +42,22 @@ def _edge_relations(graph):
     return {(edge.source, edge.target, edge.relation) for edge in graph.edges}
 
 
+def test_blueprint_sem_contratos_retorna_skipped_sem_orfaos_ruidosos():
+    blueprint = blueprint_valido()
+    graph = build_clue_graph(blueprint)
+
+    report = analyze_clue_graph(graph, blueprint)
+
+    assert graph.contracts == {}
+    assert report["status"] == "skipped"
+    assert report["summary"]["contracts"] == 0
+    assert report["solution_paths"] == []
+    assert report["cycles"] == []
+    assert report["orphan_documents"] == []
+    assert any(issue["code"] == "GP_006" and issue["severity"] == "warning" for issue in report["issues"])
+    assert not any(issue["code"] == "GP_003" for issue in report["issues"])
+
+
 def test_build_clue_graph_cria_nos_para_documentos_e_contratos():
     blueprint = _blueprint_com_contratos(_contrato())
 
@@ -113,7 +129,7 @@ def test_ausencia_de_contrato_final_gera_gp_006():
     report = analyze_clue_graph(graph, blueprint)
 
     assert report["status"] == "failed"
-    assert any(issue["code"] == "GP_006" for issue in report["issues"])
+    assert any(issue["code"] == "GP_006" and issue["severity"] == "critical" for issue in report["issues"])
 
 
 def test_contrato_final_valido_gera_solution_paths():

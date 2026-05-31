@@ -234,8 +234,11 @@ def build_package(
     qa_report = run_qa(package_dir, manifest, strict=strict)
     write_qa_report(qa_report, paths["qa_report"])
 
+    qa_ok = qa_report.status == "passed"
+    graph_ok = graph_report["status"] in {"passed", "skipped"}
+
     result = {
-        "status": "passed" if qa_report.status == "passed" and graph_report["status"] == "passed" else "failed",
+        "status": "passed" if qa_ok and graph_ok else "failed",
         "case_slug": manifest["case"]["slug"],
         "output_dir": str(package_dir),
         "manifest_path": str(paths["manifest"]),
@@ -245,7 +248,7 @@ def build_package(
         "qa_status": qa_report.status,
         "graph_status": graph_report["status"],
     }
-    if strict and (qa_report.status != "passed" or graph_report["status"] != "passed"):
+    if strict and (not qa_ok or not graph_ok):
         return result
 
     return result

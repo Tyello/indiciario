@@ -166,6 +166,28 @@ def analyze_clue_graph(graph: ClueGraph, blueprint: Blueprint) -> dict[str, Any]
     del blueprint
     issues: list[dict[str, Any]] = []
 
+    if not graph.contracts:
+        return {
+            "status": "skipped",
+            "summary": {
+                "documents": len(graph.documents),
+                "contracts": 0,
+                "nodes": len(graph.nodes),
+                "edges": len(graph.edges),
+                "solution_targets": 0,
+            },
+            "orphan_documents": [],
+            "orphan_contracts": [],
+            "dead_ends": [],
+            "cycles": [],
+            "solution_paths": [],
+            "issues": [_issue(
+                "GP_006",
+                "warning",
+                "Grafo de pistas não avaliado: nenhum contrato de evidência informado.",
+            )],
+        }
+
     for contrato in graph.contracts.values():
         if not contrato.prova_principal:
             issues.append(_issue(
