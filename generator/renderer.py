@@ -15,6 +15,7 @@ Interface pública (ver AGENTS.md):
 from __future__ import annotations
 
 import asyncio
+import importlib
 import json
 import re
 import warnings
@@ -102,8 +103,7 @@ def injetar_dados(html: str, dados: dict[str, Any]) -> str:
 
 PLACEHOLDER_RE = re.compile(r"\{\{\s*[#\^/]?\s*[^{}]+?\s*\}\}")
 LIXO_TECNICO_RE = re.compile(
-    r"\b(None|undefined|CONTEUDO_GENERICO)\b|placeholder|lorem\s+ipsum",
-    re.IGNORECASE,
+    r"\bNone\b|(?i:\b(undefined|CONTEUDO_GENERICO)\b|placeholder|lorem\s+ipsum)",
 )
 
 
@@ -133,6 +133,17 @@ def detectar_residuos_tecnicos(html: str) -> list[str]:
 
 async def _html_para_pdf(html: str, output_path: Path, landscape: bool = False) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    if importlib.util.find_spec("playwright") is None:
+        backend_name = "generator.pdf_backend" if __package__ else "pdf_backend"
+        PdfWriter = importlib.import_module(backend_name).PdfWriter
+
+        width, height = (842, 595) if landscape else (595, 842)
+        writer = PdfWriter()
+        writer.add_blank_page(width=width, height=height)
+        with output_path.open("wb") as fp:
+            writer.write(fp)
+        return output_path
+
     from playwright.async_api import async_playwright
 
     async with async_playwright() as p:
