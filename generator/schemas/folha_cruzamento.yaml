@@ -1,0 +1,46 @@
+{
+  "type": "folha_cruzamento",
+  "template": "05_carta.html",
+  "description": "folha_cruzamento",
+  "required": [
+    "NOME_ORGANIZACAO",
+    "SUBTITULO_ORGANIZACAO",
+    "ENDERECO_LINHA1",
+    "CONTATO",
+    "CNPJ",
+    "COR_TOPO",
+    "LOCAL_DATA",
+    "SAUDACAO",
+    "CORPO_CARTA",
+    "FORMULA_ENCERRAMENTO",
+    "ASSINATURA_CURSIVA",
+    "NOME_ASSINANTE",
+    "CARGO_ASSINANTE"
+  ],
+  "optional": [
+    "ASSUNTO",
+    "ENDERECO_LINHA2",
+    "ESTILO_LINHAS",
+    "PROTOCOLO",
+    "ANOTACAO",
+    "CARIMBO",
+    "TEXTO_CARIMBO",
+    "NOTAS_RODAPE"
+  ],
+  "required_when": [
+    {
+      "when": {
+        "field": "CARIMBO",
+        "equals": true
+      },
+      "required": [
+        "TEXTO_CARIMBO"
+      ]
+    }
+  ],
+  "hidden_allowed": [],
+  "lists": {},
+  "html_fields": [
+    "CORPO_CARTA"
+  ]
+}

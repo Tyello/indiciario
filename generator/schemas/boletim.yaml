@@ -1,0 +1,53 @@
+{
+  "type": "boletim",
+  "template": "04_boletim.html",
+  "description": "boletim",
+  "required": [
+    "ORGAO_NOME",
+    "ORGAO_SUBTITULO",
+    "NUMERO_CASO",
+    "TIPO_DOCUMENTO",
+    "TIPO_OCORRENCIA",
+    "DATA",
+    "LOCALIZACAO",
+    "HORA_OCORRENCIA",
+    "DESCRICAO_OCORRENCIA",
+    "NOME_RESPONSAVEL",
+    "ASSINATURA_RESPONSAVEL",
+    "ASSINATURA_GLIFO",
+    "DATA_HORA_ASSINATURA"
+  ],
+  "optional": [
+    "CAMPO_NOME",
+    "MOSTRAR_CARIMBO",
+    "TEXTO_CARIMBO"
+  ],
+  "required_when": [
+    {
+      "when": {
+        "field": "CAMPO_NOME",
+        "equals": true
+      },
+      "required": [
+        "NOME_ENVOLVIDO",
+        "DATA_NASC",
+        "CONDICAO",
+        "DOCUMENTO_PESSOAL"
+      ]
+    },
+    {
+      "when": {
+        "field": "MOSTRAR_CARIMBO",
+        "equals": true
+      },
+      "required": [
+        "TEXTO_CARIMBO"
+      ]
+    }
+  ],
+  "hidden_allowed": [],
+  "lists": {},
+  "html_fields": [
+    "DESCRICAO_OCORRENCIA"
+  ]
+}

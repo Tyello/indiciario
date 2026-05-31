@@ -1,0 +1,47 @@
+{
+  "type": "log_acesso",
+  "template": "06_log_acesso.html",
+  "description": "log_acesso",
+  "required": [
+    "NOME_SISTEMA",
+    "SUBTITULO_SISTEMA",
+    "COR_SISTEMA",
+    "COR_SISTEMA_DARK",
+    "DATA_EXPORTACAO",
+    "HORA_EXPORTACAO",
+    "OPERADOR_EXPORT",
+    "HASH_REGISTRO",
+    "PERIODO_INICIO",
+    "PERIODO_FIM",
+    "LOCALIZACAO_SISTEMA",
+    "TOTAL_REGISTROS",
+    "TOTAL_USUARIOS",
+    "TOTAL_ENTRADAS",
+    "TOTAL_NEGADOS",
+    "TOTAL_ANOMALIAS",
+    "REGISTROS"
+  ],
+  "optional": [
+    "COLUNA_NOME",
+    "COLUNA_TERMINAL",
+    "COLUNA_METODO",
+    "COLUNA_OBS"
+  ],
+  "required_when": [],
+  "hidden_allowed": [],
+  "lists": {
+    "REGISTROS": {
+      "required": true,
+      "item_required": [
+        "DATA",
+        "HORA",
+        "PORTA",
+        "ID_USUARIO",
+        "NOME_USUARIO",
+        "TIPO_EVENTO",
+        "EVENTO"
+      ]
+    }
+  },
+  "html_fields": []
+}

@@ -1,0 +1,49 @@
+{
+  "type": "chat",
+  "template": "02_whatsapp.html",
+  "description": "chat",
+  "required": [
+    "HORA_TELA",
+    "NOME_GRUPO",
+    "MEMBROS_LISTA",
+    "DATA_CONVERSA",
+    "MENSAGENS"
+  ],
+  "optional": [
+    "CONTADOR_NAOVISTOS"
+  ],
+  "required_when": [],
+  "hidden_allowed": [],
+  "lists": {
+    "MENSAGENS": {
+      "required": true,
+      "item_required": [
+        "DIRECAO",
+        "TEXTO_MENSAGEM",
+        "HORARIO"
+      ],
+      "item_required_when": [
+        {
+          "when": {
+            "field": "MOSTRAR_NOME",
+            "equals": true
+          },
+          "required": [
+            "NOME_REMETENTE",
+            "COR_REMETENTE"
+          ]
+        },
+        {
+          "when": {
+            "field": "DIRECAO_OUT",
+            "equals": true
+          },
+          "required": [
+            "TICKS"
+          ]
+        }
+      ]
+    }
+  },
+  "html_fields": []
+}

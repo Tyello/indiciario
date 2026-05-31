@@ -17,10 +17,10 @@ from __future__ import annotations
 import asyncio
 import json
 import re
+import warnings
 from pathlib import Path
 from typing import Any
 
-from playwright.async_api import async_playwright
 
 TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR    = Path(__file__).parent.parent / "output"
@@ -100,20 +100,37 @@ def injetar_dados(html: str, dados: dict[str, Any]) -> str:
 # Verificação de placeholders residuais
 # ──────────────────────────────────────────────────────────────────────────────
 
-PLACEHOLDER_RE = re.compile(r"\{\{[^{}]+?\}\}")
+PLACEHOLDER_RE = re.compile(r"\{\{\s*[#\^/]?\s*[^{}]+?\s*\}\}")
+LIXO_TECNICO_RE = re.compile(
+    r"\b(None|undefined|CONTEUDO_GENERICO)\b|placeholder|lorem\s+ipsum",
+    re.IGNORECASE,
+)
+
+
+class PlaceholderResidualError(RuntimeError):
+    """Erro lançado quando o HTML final ainda contém placeholders/lixo técnico."""
 
 
 def detectar_placeholders(html: str) -> list[str]:
-    """Retorna lista de placeholders não substituídos no HTML final."""
+    """Retorna lista de placeholders Mustache não substituídos no HTML final."""
     return PLACEHOLDER_RE.findall(html)
+
+
+def detectar_residuos_tecnicos(html: str) -> list[str]:
+    """Detecta placeholders residuais e termos técnicos proibidos no HTML final."""
+    residuos = detectar_placeholders(html)
+    residuos.extend(match.group(0) for match in LIXO_TECNICO_RE.finditer(html))
+    return residuos
 
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Renderização HTML → PDF
 # ──────────────────────────────────────────────────────────────────────────────
 
-async def _html_para_pdf(html: str, output_path: Path) -> Path:
+async def _html_para_pdf(html: str, output_path: Path, landscape: bool = False) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    from playwright.async_api import async_playwright
+
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page    = await browser.new_page()
@@ -122,6 +139,7 @@ async def _html_para_pdf(html: str, output_path: Path) -> Path:
             path=str(output_path),
             format="A4",
             print_background=True,
+            landscape=landscape,
             margin={"top": "15mm", "bottom": "15mm", "left": "15mm", "right": "15mm"},
         )
         await browser.close()
@@ -132,6 +150,8 @@ def renderizar_documento(
     template_nome: str,
     dados: dict[str, Any],
     output_path: Path,
+    strict: bool = False,
+    landscape: bool = False,
 ) -> Path:
     template_path = TEMPLATES_DIR / template_nome
     if not template_path.exists():
@@ -140,14 +160,18 @@ def renderizar_documento(
     html_raw      = template_path.read_text(encoding="utf-8")
     html_final    = renderizar_html(html_raw, dados)
 
-    # Alerta (não bloqueia) se houver placeholders residuais
-    residuais = detectar_placeholders(html_final)
+    residuais = detectar_residuos_tecnicos(html_final)
     if residuais:
         unicos = sorted(set(residuais))
-        print(f"  ⚠️  {output_path.name} — {len(unicos)} placeholder(s) residual(is): "
-              f"{', '.join(unicos[:5])}{'...' if len(unicos) > 5 else ''}")
+        mensagem = (
+            f"{output_path.name} — {len(unicos)} resíduo(s) técnico(s): "
+            f"{', '.join(unicos[:5])}{'...' if len(unicos) > 5 else ''}"
+        )
+        if strict:
+            raise PlaceholderResidualError(mensagem)
+        warnings.warn(mensagem, RuntimeWarning, stacklevel=2)
 
-    return asyncio.run(_html_para_pdf(html_final, output_path))
+    return asyncio.run(_html_para_pdf(html_final, output_path, landscape=landscape))
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -183,6 +207,7 @@ TIPO_PARA_TEMPLATE: dict[str, str] = {
 def renderizar_caso(
     blueprint_path: Path,
     output_dir: Path | None = None,
+    strict: bool = True,
 ) -> dict[str, list[Path]]:
     """
     Lê um blueprint validado e renderiza todos os documentos.
@@ -220,7 +245,7 @@ def renderizar_caso(
 
         pdf_path = output_dir / f"{codigo}.pdf"
         try:
-            caminho = renderizar_documento(template, dados, pdf_path)
+            caminho = renderizar_documento(template, dados, pdf_path, strict=strict)
             grupos[envelope].append(caminho)
             print(f"  ✅ {codigo} → {caminho.name}")
         except Exception as exc:
@@ -240,7 +265,7 @@ def renderizar_caso(
         }
         pdf_path = output_dir / f"DICAS-{envelope_dica}-00_CAPA.pdf"
         try:
-            caminho = renderizar_documento("00_envelope_capa.html", dados_capa, pdf_path)
+            caminho = renderizar_documento("00_envelope_capa.html", dados_capa, pdf_path, strict=strict)
             grupos["dicas"].append(caminho)
             print(f"  ✅ DICAS-{envelope_dica}-CAPA → {caminho.name}")
         except Exception as exc:

@@ -13,6 +13,8 @@ Cobre:
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from generator.renderer import renderizar_html, detectar_placeholders
@@ -198,3 +200,55 @@ def test_log_template_expande_multiplos_registros():
     assert "João" in result
     assert "Maria" in result
     assert result.count("ENTRADA") >= 2
+
+
+def test_detectar_residuos_tecnicos_inclui_secoes_e_lixo():
+    from generator.renderer import detectar_residuos_tecnicos
+
+    html = "{{CAMPO}} {{#SECAO}}x{{/SECAO}} None undefined CONTEUDO_GENERICO lorem ipsum"
+    residuos = detectar_residuos_tecnicos(html)
+    assert "{{CAMPO}}" in residuos
+    assert "{{#SECAO}}" in residuos
+    assert "{{/SECAO}}" in residuos
+    assert "CONTEUDO_GENERICO" in residuos
+
+
+def test_renderizacao_strict_falha_com_placeholder_residual(tmp_path, monkeypatch):
+    from generator import renderer
+
+    template = tmp_path / "template.html"
+    template.write_text("Olá {{NOME}} {{FALTA}}", encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", tmp_path)
+
+    def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    try:
+        renderer.renderizar_documento("template.html", {"NOME": "Mundo"}, tmp_path / "out.pdf", strict=True)
+    except renderer.PlaceholderResidualError:
+        pass
+    else:
+        raise AssertionError("strict deveria bloquear placeholder residual")
+
+
+def test_renderizacao_non_strict_alerta_sem_lancar(tmp_path, monkeypatch):
+    from generator import renderer
+
+    template = tmp_path / "template.html"
+    template.write_text("Olá {{NOME}} {{FALTA}}", encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", tmp_path)
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    with pytest.warns(RuntimeWarning):
+        renderer.renderizar_documento("template.html", {"NOME": "Mundo"}, tmp_path / "out.pdf", strict=False)
+
+
+def test_template_com_secao_condicional_omitida_nao_deixa_placeholder():
+    html = renderizar_html("A{{#MOSTRA}} {{CAMPO}}{{/MOSTRA}}B", {"MOSTRA": False})
+    assert detectar_placeholders(html) == []

@@ -44,7 +44,7 @@ def test_renderizar_caso_gera_capa_por_envelope_de_dicas(tmp_path, monkeypatch):
 
     chamadas = []
 
-    def fake_render(template_nome, dados, output_path):
+    def fake_render(template_nome, dados, output_path, strict=False):
         chamadas.append((template_nome, dados, output_path))
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text("pdf", encoding="utf-8")
@@ -75,7 +75,7 @@ def test_renderizar_caso_gera_tres_capas_com_envelope_3(tmp_path, monkeypatch):
 
     chamadas = []
 
-    def fake_render(template_nome, dados, output_path):
+    def fake_render(template_nome, dados, output_path, strict=False):
         chamadas.append((template_nome, dados, output_path))
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text("pdf", encoding="utf-8")

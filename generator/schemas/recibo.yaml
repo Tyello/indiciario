@@ -1,0 +1,44 @@
+{
+  "type": "recibo",
+  "template": "07_recibo.html",
+  "description": "recibo",
+  "required": [
+    "NOME_EMPRESA",
+    "TAGLINE_EMPRESA",
+    "CNPJ",
+    "ENDERECO_EMPRESA",
+    "CONTATO_EMPRESA",
+    "NUMERO_RECIBO",
+    "WATERMARK_TEXTO",
+    "COR_EMPRESA",
+    "NOME_CONTRATANTE",
+    "ENDERECO_CONTRATANTE",
+    "DOC_CONTRATANTE",
+    "CONTATO_CONTRATANTE",
+    "DATA_RECIBO",
+    "PERIODO_REFERENCIA",
+    "VALOR_TOTAL",
+    "VALOR_POR_EXTENSO",
+    "FORMA_PAGAMENTO",
+    "DESCRICAO_PAGAMENTO",
+    "ITENS",
+    "ASSINATURA_PRESTADOR",
+    "ASSINATURA_CONTRATANTE",
+    "DATA_ASSINATURA"
+  ],
+  "optional": [],
+  "required_when": [],
+  "hidden_allowed": [],
+  "lists": {
+    "ITENS": {
+      "required": true,
+      "item_required": [
+        "DESCRICAO_ITEM",
+        "QUANTIDADE",
+        "VALOR_UNITARIO",
+        "VALOR_ITEM"
+      ]
+    }
+  },
+  "html_fields": []
+}
