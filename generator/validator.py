@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from dataclasses import dataclass, field
 from enum import Enum
@@ -19,7 +20,6 @@ from typing import Any, Optional
 try:  # Execução como pacote: python -m generator.validator
     from .models import (
         Blueprint,
-        Envelope,
         Intensidade,
         ModoValidacao,
         PapelPersonagem,
@@ -29,7 +29,6 @@ try:  # Execução como pacote: python -m generator.validator
 except ImportError:  # Execução direta: python generator/validator.py
     from models import (  # type: ignore[no-redef]
         Blueprint,
-        Envelope,
         Intensidade,
         ModoValidacao,
         PapelPersonagem,
@@ -237,11 +236,13 @@ class BlueprintValidator:
         self.resultado = ResultadoValidacao()
         self._ids_personagens: set[str] = {p.id for p in blueprint.personagens}
         self._codigos_docs: set[str] = {d.codigo for d in blueprint.documentos}
+        self._docs_por_codigo = {d.codigo: d for d in blueprint.documentos}
         self._schemas = load_all_schemas()
 
     def validar(self) -> ResultadoValidacao:
         self._verificar_elenco()
         self._verificar_documentos()
+        self._verificar_contratos_evidencia()
         self._verificar_pilares()
         self._verificar_pistas()
         self._verificar_red_herrings()
@@ -332,17 +333,49 @@ class BlueprintValidator:
                 documento=codigo,
             ))
 
-        docs_e1 = [d for d in self.bp.documentos if d.envelope == Envelope.E1]
-        docs_e2 = [d for d in self.bp.documentos if d.envelope == Envelope.E2]
-        if len(docs_e1) < 6:
+        envelopes_jogador = sorted({d.envelope for d in self.bp.documentos}, key=self._numero_envelope)
+        for envelope in envelopes_jogador:
+            if not self._envelope_valido(envelope):
+                self.resultado.adicionar(Erro(
+                    "ENV_001",
+                    Severidade.CRITICO,
+                    f"Envelope inválido em documento: '{envelope}'. Use E1, E2, E3...",
+                ))
+        if self.bp.documentos and "E1" not in envelopes_jogador:
             self.resultado.adicionar(Erro(
-                "DOC_001", Severidade.MODERADO, f"Envelope 1 tem apenas {len(docs_e1)} documentos."
+                "ENV_002", Severidade.CRITICO, "Documentos de jogador existem, mas o Envelope E1 está ausente."
             ))
-        if len(docs_e2) < 6:
-            self.resultado.adicionar(Erro(
-                "DOC_002", Severidade.MODERADO, f"Envelope 2 tem apenas {len(docs_e2)} documentos."
-            ))
+        numeros = sorted(self._numero_envelope(e) for e in envelopes_jogador if self._envelope_valido(e))
+        if numeros:
+            esperado = list(range(1, max(numeros) + 1))
+            if numeros != esperado:
+                ausentes = [f"E{numero}" for numero in esperado if numero not in numeros]
+                self.resultado.adicionar(Erro(
+                    "ENV_003",
+                    Severidade.CRITICO,
+                    f"Sequência de envelopes com buraco; ausente(s): {', '.join(ausentes)}.",
+                ))
+            maior_envelope_real = max(numeros)
+            if self.bp.formato_envelopes > maior_envelope_real:
+                self.resultado.adicionar(Erro(
+                    "ENV_004",
+                    Severidade.CRITICO,
+                    (
+                        f"formato_envelopes declara E{self.bp.formato_envelopes}, "
+                        f"mas só há documentos até E{maior_envelope_real}."
+                    ),
+                ))
+            if self.bp.formato_envelopes < maior_envelope_real:
+                self.resultado.adicionar(Erro(
+                    "ENV_005",
+                    Severidade.CRITICO,
+                    (
+                        f"formato_envelopes declara apenas E{self.bp.formato_envelopes}, "
+                        f"mas há documentos até E{maior_envelope_real}."
+                    ),
+                ))
 
+        docs_e1 = [d for d in self.bp.documentos if d.envelope == "E1"]
         tipos_e1 = {d.tipo for d in docs_e1}
         if TipoDocumento.PROTO not in tipos_e1:
             self.resultado.adicionar(Erro(
@@ -370,6 +403,82 @@ class BlueprintValidator:
                         f"Documento '{doc.codigo}' referencia '{ref}' que não existe.",
                         documento=doc.codigo,
                     ))
+
+
+    @staticmethod
+    def _envelope_valido(envelope: str) -> bool:
+        return bool(re.fullmatch(r"E[1-9]\d*", str(envelope)))
+
+    @staticmethod
+    def _numero_envelope(envelope: str) -> int:
+        texto = str(envelope)
+        if re.fullmatch(r"E[1-9]\d*", texto):
+            return int(texto[1:])
+        return 10**9
+
+    def _fase_documento_posterior(self, fase: str, documento_codigo: str) -> bool:
+        if fase == "final":
+            return False
+        doc = self._docs_por_codigo.get(documento_codigo)
+        if doc is None:
+            return False
+        return self._numero_envelope(doc.envelope) > self._numero_envelope(fase)
+
+    def _verificar_contratos_evidencia(self) -> None:
+        ids_vistos: set[str] = set()
+        for contrato in self.bp.contratos_evidencia:
+            if not contrato.id:
+                self.resultado.adicionar(Erro("CE_001", Severidade.CRITICO, "Contrato de evidência sem id."))
+            elif contrato.id in ids_vistos:
+                self.resultado.adicionar(Erro("CE_002", Severidade.CRITICO, f"Contrato de evidência duplicado: {contrato.id}."))
+            ids_vistos.add(contrato.id)
+
+            prova = contrato.prova_principal
+            confirmacao = contrato.confirmacao_independente
+            if contrato.obrigatoria_para_avanco and (not prova or not confirmacao):
+                self.resultado.adicionar(Erro(
+                    "CE_008", Severidade.CRITICO, f"Contrato obrigatório '{contrato.id}' está incompleto."
+                ))
+            if not prova or prova not in self._codigos_docs:
+                self.resultado.adicionar(Erro(
+                    "CE_003", Severidade.CRITICO, f"prova_principal inexistente no contrato '{contrato.id}': {prova}."
+                ))
+            if not confirmacao or confirmacao not in self._codigos_docs:
+                self.resultado.adicionar(Erro(
+                    "CE_004",
+                    Severidade.CRITICO,
+                    f"confirmacao_independente inexistente no contrato '{contrato.id}': {confirmacao}.",
+                ))
+            if prova and confirmacao and prova == confirmacao:
+                self.resultado.adicionar(Erro(
+                    "CE_005", Severidade.CRITICO, f"Contrato '{contrato.id}' usa a mesma prova e confirmação."
+                ))
+
+            for doc_codigo in contrato.descarta_alternativas:
+                if doc_codigo not in self._codigos_docs:
+                    self.resultado.adicionar(Erro(
+                        "CE_006",
+                        Severidade.CRITICO,
+                        f"descarta_alternativas referencia documento inexistente no contrato '{contrato.id}': {doc_codigo}.",
+                    ))
+
+            for doc_codigo in [codigo for codigo in [prova, confirmacao] if codigo]:
+                if self._fase_documento_posterior(contrato.fase, doc_codigo):
+                    self.resultado.adicionar(Erro(
+                        "CE_007",
+                        Severidade.CRITICO,
+                        f"Contrato '{contrato.id}' de fase {contrato.fase} depende de documento posterior: {doc_codigo}.",
+                        documento=doc_codigo,
+                    ))
+
+            if contrato.obrigatoria_para_avanco and contrato.risco_ambiguidade == "alto":
+                self.resultado.adicionar(Erro(
+                    "CE_009", Severidade.MODERADO, f"Contrato obrigatório '{contrato.id}' tem risco de ambiguidade alto."
+                ))
+            if contrato.obrigatoria_para_avanco and not contrato.acao_esperada_jogador.strip():
+                self.resultado.adicionar(Erro(
+                    "CE_010", Severidade.MODERADO, f"Contrato obrigatório '{contrato.id}' não define ação esperada do jogador."
+                ))
 
     def _id_tem_correspondencia(self, id_citado: str) -> bool:
         if id_citado in self._ids_personagens:
@@ -482,9 +591,14 @@ class BlueprintValidator:
     def _verificar_dicas(self) -> None:
         if not any(d.intensidade == Intensidade.QUASE_GABARITO for d in self.bp.dicas):
             self.resultado.adicionar(Erro("DICA_001", Severidade.MODERADO, "Nenhuma dica de quase-gabarito definida."))
-        dicas_e2 = [d for d in self.bp.dicas if d.envelope == Envelope.E2]
-        if len(dicas_e2) < 2:
-            self.resultado.adicionar(Erro("DICA_002", Severidade.MODERADO, "Envelope 2 tem menos de 2 dicas."))
+        envelopes_docs = {d.envelope for d in self.bp.documentos}
+        dicas_por_envelope = {envelope: 0 for envelope in envelopes_docs}
+        for dica in self.bp.dicas:
+            if dica.envelope in dicas_por_envelope:
+                dicas_por_envelope[dica.envelope] += 1
+        for envelope, total in dicas_por_envelope.items():
+            if self._numero_envelope(envelope) >= 2 and total < 2:
+                self.resultado.adicionar(Erro("DICA_002", Severidade.MODERADO, f"{envelope} tem menos de 2 dicas."))
         nomes = {p.nome.lower() for p in self.bp.personagens}
         for dica in self.bp.dicas:
             if dica.intensidade in [Intensidade.LEVE, Intensidade.MEDIA]:

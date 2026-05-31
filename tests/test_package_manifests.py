@@ -62,13 +62,13 @@ def test_manifest_contem_arquivos_paths_relativos_e_docs_validos(tmp_path, monke
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
 
     paths = {entry["path"] for entry in manifest["files"]}
-    assert {"01_envelope_1.pdf", "02_envelope_2.pdf", "03_dicas_facilitador.pdf", "05_guia_de_impressao.pdf"}.issubset(paths)
+    assert {"01_envelope_1.pdf", "02_envelope_2.pdf", "03_dicas_facilitador.pdf", "04_guia_de_impressao.pdf"}.issubset(paths)
     assert all(not Path(path).is_absolute() for path in paths)
     assert all(entry["category"] != "player" for entry in manifest["files"] if "dicas" in entry["id"] or "gabarito" in entry["id"])
     assert all(doc["final_file"] in paths for doc in manifest["documents"])
 
 
-def test_build_package_strict_falha_quando_e3_renderizado(tmp_path, monkeypatch):
+def test_build_package_strict_falha_quando_e3_sem_e2(tmp_path, monkeypatch):
     from generator import package_builder
 
     def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
@@ -85,19 +85,19 @@ def test_build_package_strict_falha_quando_e3_renderizado(tmp_path, monkeypatch)
     with pytest.raises(PackageBuildError) as excinfo:
         build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
 
-    assert "Envelope 3 renderizado" in str(excinfo.value)
+    assert "Sequência de envelopes com buraco" in str(excinfo.value)
 
 
-def test_build_package_non_strict_mantem_warning_quando_e3_renderizado(tmp_path, monkeypatch):
+def test_build_package_empacota_tres_envelopes_e_desloca_auxiliares(tmp_path, monkeypatch):
     from generator import package_builder
 
     def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
         return {
             "E1": [make_pdf(output_dir / "E1-01.pdf")],
-            "E2": [],
+            "E2": [make_pdf(output_dir / "E2-01.pdf")],
             "E3": [make_pdf(output_dir / "E3-01.pdf")],
-            "dicas": [],
-            "gabarito": [],
+            "dicas": [make_pdf(output_dir / "DICAS-E1-00_CAPA.pdf")],
+            "gabarito": [make_pdf(output_dir / "GABARITO.pdf")],
         }
 
     def fake_render_print_guide(_print_manifest, output_path, strict=True):
@@ -106,11 +106,18 @@ def test_build_package_non_strict_mantem_warning_quando_e3_renderizado(tmp_path,
     monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
     monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
 
-    result = build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=False)
+    result = build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
+    print_manifest = json.loads(Path(result["print_manifest_path"]).read_text(encoding="utf-8"))
 
+    paths = [entry["path"] for entry in manifest["files"]]
+    assert "03_envelope_3.pdf" in paths
+    assert "04_dicas_facilitador.pdf" in paths
+    assert "05_gabarito_mestre.pdf" in paths
+    assert "06_guia_de_impressao.pdf" in paths
+    assert {entry["file"] for entry in print_manifest["files"]} == set(paths)
     assert result["status"] == "passed"
-    assert "Envelope 3 renderizado, mas não empacotado nesta PR." in manifest["warnings"]
+
 
 def test_print_manifest_final_usa_page_count_final_do_guia(tmp_path, monkeypatch):
     from generator import package_builder
@@ -139,10 +146,10 @@ def test_print_manifest_final_usa_page_count_final_do_guia(tmp_path, monkeypatch
     print_manifest = json.loads(Path(result["print_manifest_path"]).read_text(encoding="utf-8"))
 
     manifest_guide = next(item for item in manifest["files"] if item["id"] == "guia_de_impressao")
-    print_guide = next(item for item in print_manifest["files"] if item["file"] == "05_guia_de_impressao.pdf")
+    print_guide = next(item for item in print_manifest["files"] if item["file"] == "02_guia_de_impressao.pdf")
 
     assert chamadas["count"] == 2
-    assert count_pdf_pages(Path(result["output_dir"]) / "05_guia_de_impressao.pdf") == 2
+    assert count_pdf_pages(Path(result["output_dir"]) / "02_guia_de_impressao.pdf") == 2
     assert manifest_guide["page_count"] == 2
     assert print_guide["page_count"] == 2
 

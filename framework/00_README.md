@@ -47,6 +47,7 @@ Leia e internalize nesta ordem antes de gerar qualquer caso:
 | 10 | `10_TEMPLATE_DICAS.md` | Template de dicas progressivas |
 | 11 | `11_GUIA_DO_FACILITADOR.md` | Como conduzir a sessão |
 | 12 | `12_GUIA_DE_PRODUCAO.md` | Design visual, tipografia, impressão |
+| 13 | `13_CONTRATO_EVIDENCIA.md` | Contratos mínimos de prova, confirmação e fase |
 | 15 | `15_GUIA_DE_IMPRESSAO.md` | Regras operacionais do pacote de impressão |
 
 ---
@@ -57,7 +58,7 @@ Leia e internalize nesta ordem antes de gerar qualquer caso:
 Os 8 princípios que definem um mistério justo: solvabilidade, progressão, cruzamento de pistas, red herrings, cadeia causal, separação de materiais, autossuficiência offline e curva emocional. Violar qualquer princípio invalida o caso.
 
 ### `02_ESTRUTURA_ENVELOPES.md`
-Modelo de dois envelopes (padrão) e três envelopes (casos longos). Define função narrativa de cada fase, documentos recomendados, critério de avanço, posição obrigatória da folha de cruzamento e o que fazer quando o grupo erra a resposta do Envelope 1.
+Modelo de 1+ envelopes como atos investigativos sequenciais. Define função narrativa de cada fase, documentos recomendados, critério de avanço, sequência sem buracos e separação entre envelopes de jogador, dicas e gabarito.
 
 ### `03_TIPOS_DE_DOCUMENTOS.md`
 Catálogo de 15 tipos de documento com: função narrativa, quando usar, campos obrigatórios, especificações visuais, cuidados de design e equivalências temáticas (corporativo / museu / família / escola / pousada).
@@ -88,6 +89,9 @@ Como preparar, abrir, conduzir e fechar uma sessão. Inclui: quando intervir, co
 
 ### `12_GUIA_DE_PRODUCAO.md`
 Guia visual completo: paletas por universo, tipografia por tipo de documento, templates de layout em ASCII para os 12 tipos principais, imperfeições intencionais, acessibilidade em P&B, guia de impressão e checklist visual.
+
+### `13_CONTRATO_EVIDENCIA.md`
+Define o contrato mínimo entre conclusão investigativa, fase, prova principal e confirmação independente. Serve como camada inicial de solvabilidade para impedir chute, spoiler fora de fase e conclusões sem prova.
 
 ### `15_GUIA_DE_IMPRESSAO.md`
 Guia operacional do pacote final: separação entre material de jogador e facilitador, perfis econômico/padrão/premium, escala 100%, confidencialidade, mapas, cartões futuros e interpretação do `print_manifest.json`.

@@ -233,3 +233,43 @@ Distribua as pistas para que a experiência tenha camadas:
 - ❌ Usar ID inexistente em código ou log.
 - ❌ Criar vínculo entre entidades baseado apenas em sobrenome ou iniciais.
 - ❌ Deixar salto de cadeia financeira sem documento próprio.
+
+---
+
+## Atualização PR #10 — Nova escala de dificuldade
+
+A dificuldade agora usa cinco níveis:
+
+### Iniciante
+
+- uma pergunta central;
+- menos documentos;
+- pistas mais diretas;
+- normalmente 1 envelope, mas não obrigatório.
+
+### Intermediário
+
+- 1 a 2 camadas investigativas;
+- red herrings justos;
+- normalmente 2 envelopes.
+
+### Avançado
+
+- mais cruzamentos entre documentos;
+- cadeias operacionais, logísticas ou financeiras;
+- normalmente 2 a 3 envelopes.
+
+### Especialista
+
+- múltiplas hipóteses concorrentes;
+- maior autonomia do grupo;
+- 3+ envelopes quando fizer sentido narrativo.
+
+### Mestre
+
+- caso-evento;
+- muitas camadas;
+- alto volume documental;
+- exige gabarito e guia do facilitador robustos.
+
+A dificuldade é **guia de design, não trava rígida**. Não invalide automaticamente um caso iniciante com 2 envelopes, nem um caso mestre com 3 envelopes, se a estrutura estiver justificada e solúvel. Bloqueie apenas incoerências reais: envelope vazio, sequência com buracos, spoiler fora de fase, conclusão sem prova, contrato de evidência inválido, referência a documento inexistente ou mistura de material do facilitador com material de jogador.

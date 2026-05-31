@@ -256,9 +256,7 @@ def renderizar_caso(
         output_dir = OUTPUT_DIR / titulo_slug
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    grupos: dict[str, list[Path]] = {
-        "E1": [], "E2": [], "E3": [], "dicas": [], "gabarito": [],
-    }
+    grupos: dict[str, list[Path]] = {"dicas": [], "gabarito": []}
 
     for doc in blueprint.get("documentos", []):
         codigo   = doc["codigo"]
@@ -285,7 +283,7 @@ def renderizar_caso(
         pdf_path = output_dir / f"{codigo}.pdf"
         try:
             caminho = renderizar_documento(template, dados, pdf_path, strict=strict)
-            grupos[envelope].append(caminho)
+            grupos.setdefault(envelope, []).append(caminho)
             print(f"  ✅ {codigo} → {caminho.name}")
         except Exception as exc:
             mensagem = f"{codigo} ({template}) — falha ao renderizar: {exc}"
