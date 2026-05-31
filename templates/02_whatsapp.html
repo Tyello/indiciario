@@ -10,308 +10,541 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg-chat: #0b141a;
-    --bg-header: #202c33;
-    --bg-input: #202c33;
-    --bg-msg-out: #005c4b;
-    --bg-msg-in: #202c33;
-    --text-primary: #e9edef;
-    --text-secondary: #8696a0;
-    --text-timestamp: #8696a0;
-    --tick-color: #53bdeb;
-    --separator: #364046;
+    --page-bg: #f2eee8;
+    --device-bg: #1f1f1f;
+    --device-edge: #151515;
+    --screen-bg: #e5ddd5;
+    --status-bg: #054d44;
+    --header-bg: #075e54;
+    --header-text: #ffffff;
+    --header-muted: rgba(255, 255, 255, 0.76);
+    --msg-sent: #dcf8c6;
+    --msg-received: #ffffff;
+    --msg-text: #262626;
+    --meta: #8c8c8c;
+    --tick: #4fc3f7;
+    --composer-bg: #efefef;
+    --composer-icon: #7d8489;
+    --send-bg: #00897b;
+    --date-bg: rgba(225, 245, 254, 0.92);
+    --date-text: #54656f;
   }
 
   body {
-    font-family: 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-    background: var(--bg-chat);
-    color: var(--text-primary);
-    font-size: 14.5px;
-    max-width: 480px;
-    margin: 0 auto;
     min-height: 100vh;
+    background: var(--page-bg);
+    color: var(--msg-text);
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+  }
+
+  .page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .marvel-device.nexus5 {
+    width: 360px;
+    background: var(--device-bg);
+    border-radius: 30px;
+    padding: 52px 12px 58px;
     position: relative;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.58);
   }
 
-  /* Background pattern */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5C16 5 5 16 5 30s11 25 25 25 25-11 25-25S44 5 30 5zm0 45C18.95 50 10 41.05 10 30S18.95 10 30 10s20 8.95 20 20-8.95 20-20 20z' fill='%23182229' fill-opacity='0.4'/%3E%3C/svg%3E");
-    background-size: 60px 60px;
-    opacity: 0.3;
-    pointer-events: none;
-    z-index: 0;
+  .top-bar,
+  .sleep,
+  .volume,
+  .camera {
+    position: absolute;
+    background: var(--device-edge);
   }
 
-  /* Header */
-  .header {
-    background: var(--bg-header);
-    padding: 10px 16px;
+  .top-bar {
+    width: 70px;
+    height: 7px;
+    border-radius: 7px;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sleep {
+    width: 4px;
+    height: 52px;
+    right: -4px;
+    top: 115px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .volume {
+    width: 4px;
+    height: 88px;
+    left: -4px;
+    top: 145px;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .camera {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 23px;
+    left: 92px;
+    background: #0a0a0a;
+    border: 2px solid #2a2a2a;
+  }
+
+  .screen {
+    height: 610px;
+    overflow: hidden;
+    background: var(--screen-bg);
+    border-radius: 3px;
+  }
+
+  .screen-container,
+  .chat,
+  .chat-container {
+    height: 100%;
+  }
+
+  .screen-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--screen-bg);
+  }
+
+  .status-bar {
+    height: 24px;
+    background: var(--status-bg);
+    color: var(--header-text);
     display: flex;
     align-items: center;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 1px solid var(--separator);
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 0 8px;
+    font-size: 11px;
   }
 
-  .back-arrow {
-    font-size: 20px;
-    color: var(--text-secondary);
-    cursor: pointer;
+  .status-time {
+    margin-right: auto;
+    font-weight: 500;
   }
 
-  .group-avatar {
-    width: 40px;
-    height: 40px;
+  .status-icon {
+    color: var(--header-text);
+    line-height: 1;
+    opacity: 0.92;
+  }
+
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-bar {
+    height: 56px;
+    background: var(--header-bg);
+    color: var(--header-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 9px;
+    flex-shrink: 0;
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    line-height: 1;
+  }
+
+  .icon svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    display: block;
+  }
+
+  .back {
+    color: var(--header-text);
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: #6b7c85;
+    background: #d5e8e6;
+    color: #075e54;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
+    font-weight: 600;
+    overflow: hidden;
     flex-shrink: 0;
   }
 
-  .group-info { flex: 1; }
+  .name {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
 
-  .group-name {
+  .name span:first-child {
     font-size: 16px;
     font-weight: 600;
-    color: var(--text-primary);
-    line-height: 1.2;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .group-members {
+  .name .status {
+    color: var(--header-muted);
     font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 2px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .header-icons {
+  .actions {
+    color: var(--header-text);
+    width: 22px;
+    flex-shrink: 0;
+    opacity: 0.95;
+  }
+
+  .conversation {
+    flex: 1;
+    min-height: 0;
     display: flex;
-    gap: 20px;
-    color: var(--text-secondary);
-    font-size: 20px;
-  }
-
-  /* Status bar */
-  .status-bar {
-    background: var(--bg-header);
-    padding: 4px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--separator);
-  }
-
-  /* Messages area */
-  .messages {
-    padding: 12px 8px;
+    flex-direction: column;
     position: relative;
-    z-index: 1;
+    background-color: var(--screen-bg);
+    background-image:
+      radial-gradient(circle at 12px 18px, rgba(0, 0, 0, 0.035) 0 2px, transparent 2px),
+      radial-gradient(circle at 44px 42px, rgba(0, 0, 0, 0.025) 0 2px, transparent 2px);
+    background-size: 64px 64px;
   }
 
-  /* Date separator */
+  .conversation-container {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding: 10px 8px 8px;
+  }
+
   .date-separator {
     text-align: center;
-    margin: 12px 0;
+    margin: 6px 0 10px;
   }
 
   .date-separator span {
-    background: #182229;
-    color: var(--text-secondary);
+    display: inline-block;
+    background: var(--date-bg);
+    color: var(--date-text);
     font-size: 12px;
     padding: 5px 12px;
-    border-radius: 8px;
-    display: inline-block;
+    border-radius: 7px;
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
   }
 
-  /* Message bubble */
   .message {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2px;
+    clear: both;
     max-width: 78%;
+    margin: 2px 0;
+    padding: 6px 7px 4px 9px;
+    border-radius: 7.5px;
+    color: var(--msg-text);
+    font-size: 13.6px;
+    line-height: 1.36;
+    position: relative;
+    word-wrap: break-word;
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
   }
 
-  .message.in { align-self: flex-start; align-items: flex-start; }
-  .message.out { align-self: flex-end; align-items: flex-end; margin-left: auto; }
+  .message.in,
+  .message.received {
+    float: left;
+    background: var(--msg-received);
+    border-top-left-radius: 0;
+  }
 
-  .message + .message { margin-top: 2px; }
-  .message.gap { margin-top: 8px; }
+  .message.out,
+  .message.sent {
+    float: right;
+    background: var(--msg-sent);
+    border-top-right-radius: 0;
+  }
+
+  .message.gap {
+    margin-top: 9px;
+  }
+
+  .message.gap.in::before,
+  .message.gap.received::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 0;
+    height: 0;
+    border-top: 0 solid transparent;
+    border-bottom: 9px solid transparent;
+    border-right: 9px solid var(--msg-received);
+  }
+
+  .message.gap.out::after,
+  .message.gap.sent::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -7px;
+    width: 0;
+    height: 0;
+    border-top: 0 solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 9px solid var(--msg-sent);
+  }
 
   .sender-name-label {
-    font-size: 12.5px;
+    color: #039be5;
+    display: block;
+    font-size: 12.3px;
     font-weight: 600;
-    margin-bottom: 2px;
-    padding-left: 12px;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .message.out .sender-name-label,
+  .message.sent .sender-name-label {
+    display: none;
   }
 
   .bubble {
-    padding: 6px 10px 8px;
-    border-radius: 8px;
-    position: relative;
-    max-width: 100%;
-    min-width: 80px;
-    word-wrap: break-word;
-    line-height: 1.5;
-    font-size: 14.2px;
+    display: inline;
   }
 
-  .message.in .bubble {
-    background: var(--bg-msg-in);
-    border-top-left-radius: 2px;
-  }
-
-  .message.out .bubble {
-    background: var(--bg-msg-out);
-    border-top-right-radius: 2px;
-  }
-
-  /* First bubble gets tail */
-  .message.gap.in .bubble::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -8px;
-    border: 8px solid transparent;
-    border-right: 8px solid var(--bg-msg-in);
-    border-top: 0;
-    border-left: 0;
-  }
-
-  .message.gap.out .bubble::after {
-    content: '';
-    position: absolute;
-    top: 0; right: -8px;
-    border: 8px solid transparent;
-    border-left: 8px solid var(--bg-msg-out);
-    border-top: 0;
-    border-right: 0;
-  }
-
-  .bubble-footer {
-    display: flex;
+  .bubble-footer,
+  .metadata {
+    display: inline-flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 4px;
-    margin-top: 2px;
+    gap: 3px;
+    float: right;
+    margin: 4px 0 0 8px;
+    height: 15px;
   }
 
-  .timestamp {
+  .timestamp,
+  .metadata .time {
+    color: var(--meta);
     font-size: 11px;
-    color: var(--text-timestamp);
+    line-height: 1;
     white-space: nowrap;
   }
 
-  .ticks {
-    font-size: 13px;
-    color: var(--tick-color);
+  .ticks,
+  .tick {
+    color: var(--tick);
+    display: inline-flex;
+    align-items: center;
+    height: 15px;
     line-height: 1;
   }
 
-  /* Colors for different senders */
-  .color-1 { color: #53bdeb; }
-  .color-2 { color: #e9777e; }
-  .color-3 { color: #c8a227; }
-  .color-4 { color: #7bc67e; }
-  .color-5 { color: #cf9adb; }
-  .color-6 { color: #f0a048; }
+  .ticks svg,
+  .tick svg {
+    width: 16px;
+    height: 15px;
+    fill: currentColor;
+  }
 
-  /* Input bar */
-  .input-bar {
-    background: var(--bg-input);
-    padding: 8px 12px;
+  .color-1 { color: #039be5; }
+  .color-2 { color: #e91e63; }
+  .color-3 { color: #f57c00; }
+  .color-4 { color: #43a047; }
+  .color-5 { color: #8e24aa; }
+  .color-6 { color: #00897b; }
+
+  .conversation-compose {
+    min-height: 52px;
+    background: transparent;
     display: flex;
     align-items: center;
-    gap: 10px;
-    position: sticky;
-    bottom: 0;
-    z-index: 10;
-    border-top: 1px solid var(--separator);
+    gap: 6px;
+    padding: 5px 6px;
+    flex-shrink: 0;
   }
 
-  .input-field {
+  .emoji,
+  .photo {
+    color: var(--composer-icon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .emoji {
+    width: 34px;
+    height: 40px;
+    background: #ffffff;
+    border-radius: 21px 0 0 21px;
+    padding-left: 4px;
+  }
+
+  .input-msg {
+    height: 40px;
     flex: 1;
-    background: #2a3942;
-    border-radius: 24px;
-    padding: 9px 16px;
-    font-size: 14px;
-    color: var(--text-secondary);
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: #ffffff;
+    color: var(--msg-text);
+    font: inherit;
+    padding: 0 8px;
   }
 
-  .input-icon {
-    font-size: 22px;
-    color: var(--text-secondary);
+  .photo {
+    width: 34px;
+    height: 40px;
+    background: #ffffff;
+    border-radius: 0 21px 21px 0;
+  }
+
+  .send {
+    width: 42px;
+    height: 42px;
+    border: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--send-bg);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
 </head>
 <body>
+<div class="page">
+  <div class="marvel-device nexus5">
+    <div class="top-bar"></div>
+    <div class="sleep"></div>
+    <div class="volume"></div>
+    <div class="camera"></div>
+    <div class="screen">
+      <div class="screen-container">
+        <div class="status-bar">
+          <div class="status-time">{{HORA_TELA}}</div>
+          <div class="status-icon">★</div>
+          <div class="status-icon">⌁</div>
+          <div class="status-icon">◒</div>
+          <div class="status-icon">▰</div>
+        </div>
+        <div class="chat">
+          <div class="chat-container">
+            <div class="user-bar">
+              <div class="back">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.42-1.41L7.83 13H20v-2z"/></svg>
+                </span>
+              </div>
+              <div class="avatar">👥</div>
+              <div class="name">
+                <span>{{NOME_GRUPO}}</span>
+                <span class="status">{{MEMBROS_LISTA}}</span>
+              </div>
+              <div class="actions more">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                </span>
+              </div>
+              <div class="actions attachment">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 6v11.5a4.5 4.5 0 0 1-9 0V5a3 3 0 0 1 6 0v10.5a1.5 1.5 0 0 1-3 0V6H9v9.5a3 3 0 0 0 6 0V5a4.5 4.5 0 0 0-9 0v12.5a6 6 0 0 0 12 0V6h-1.5z"/></svg>
+                </span>
+              </div>
+              <div class="actions">
+                <span class="icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.56 3.57.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.19 2.45.56 3.57a1 1 0 0 1-.25 1.02l-2.19 2.2z"/></svg>
+                </span>
+              </div>
+            </div>
 
-<!-- Status bar -->
-<div class="status-bar">
-  <span>{{HORA_TELA}}</span>
-  <span>●●● 📶 🔋</span>
-</div>
+            <!-- Messages -->
+            <div class="conversation">
+              <div class="conversation-container">
+                <div class="date-separator"><span>{{DATA_CONVERSA}}</span></div>
 
-<!-- Header -->
-<div class="header">
-  <div class="back-arrow">‹ {{CONTADOR_NAOVISTOS}}</div>
-  <div class="group-avatar">👥</div>
-  <div class="group-info">
-    <div class="group-name">{{NOME_GRUPO}}</div>
-    <div class="group-members">{{MEMBROS_LISTA}}</div>
-  </div>
-  <div class="header-icons">
-    <span>🎬</span>
-    <span>📞</span>
-    <span>⋮</span>
-  </div>
-</div>
+                <!--
+                  INSTRUÇÕES PARA O LLM:
+                  Para cada mensagem, use a estrutura abaixo.
+                  - class "in" = mensagem de outro participante
+                  - class "out" = mensagem do "usuário" (ponto de vista da captura)
+                  - class "gap" = primeira mensagem de um novo remetente (gera cauda no balão)
+                  - sender-name-label: só aparece em mensagens "in" com class "gap"
+                  - color-1 a color-6: cor do nome do remetente (um por participante)
+                  - ticks: ✓ = enviado, ✓✓ = entregue, ticks em azul = lido
+                -->
 
-<!-- Messages -->
-<div class="messages">
-
-  <div class="date-separator"><span>{{DATA_CONVERSA}}</span></div>
-
-  <!-- 
-    INSTRUÇÕES PARA O LLM:
-    Para cada mensagem, use a estrutura abaixo.
-    - class "in" = mensagem de outro participante
-    - class "out" = mensagem do "usuário" (ponto de vista da captura)
-    - class "gap" = primeira mensagem de um novo remetente (gera cauda no balão)
-    - sender-name-label: só aparece em mensagens "in" com class "gap"
-    - color-1 a color-6: cor do nome do remetente (um por participante)
-    - ticks: ✓ = enviado, ✓✓ = entregue, ticks em azul = lido
-  -->
-
-  <div class="message {{DIRECAO}} {{CLASSE_GAP}}">
-    <div class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</div>
-    <div class="bubble">
-      {{TEXTO_MENSAGEM}}
-      <div class="bubble-footer">
-        <span class="timestamp">{{HORARIO}}</span>
-        <span class="ticks">{{TICKS}}</span>
+                <div class="message {{DIRECAO}} {{CLASSE_GAP}}">
+                  <span class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</span>
+                  <span class="bubble">{{TEXTO_MENSAGEM}}</span>
+                  <span class="metadata">
+                    <span class="time">{{HORARIO}}</span>
+                    <span class="tick">{{TICKS}}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="conversation-compose">
+                <div class="emoji">
+                  <span class="icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.15 11.6c.8 0 1.44-.88 1.44-1.96S9.95 7.68 9.15 7.68s-1.44.88-1.44 1.96.65 1.96 1.44 1.96zm5.96 0c.8 0 1.44-.88 1.44-1.96s-.64-1.96-1.44-1.96-1.44.88-1.44 1.96.65 1.96 1.44 1.96zM12 21.36c-5.27 0-9.38-3.89-9.38-9.16 0-5.27 3.94-9.55 9.21-9.55a9.55 9.55 0 0 1 9.55 9.55c0 5.27-4.11 9.16-9.38 9.16zm0-2.84c5.78-.24 6.08-5.55 6.08-5.55-6.08 1.42-12.13 0-12.13 0-.03-.31-.13 5.22 6.05 5.55z"/></svg>
+                  </span>
+                </div>
+                <div class="input-msg">Mensagem</div>
+                <div class="photo">
+                  <span class="icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 5h-3.17l-1.84-2H9.01L7.17 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-8 13a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-1.8a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4z"/></svg>
+                  </span>
+                </div>
+                <div class="send">
+                  <div class="circle">
+                    <span class="icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
-
-<!-- Input bar (decorativo) -->
-<div class="input-bar">
-  <span class="input-icon">☺</span>
-  <div class="input-field">Mensagem</div>
-  <span class="input-icon">📎</span>
-  <span class="input-icon">📷</span>
-  <span class="input-icon" style="color:#00a884; font-size:26px;">🎤</span>
-</div>
-
 </body>
 </html>
-
