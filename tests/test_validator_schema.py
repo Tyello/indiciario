@@ -3,9 +3,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 from generator.models import TipoDocumento
 from generator.validator import BlueprintValidator
-from tests.test_generator_validator import blueprint_valido
+from tests.test_generator_validator import CONTEUDO_CARTA_VALIDO, blueprint_valido
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -78,3 +80,72 @@ def test_showcase_tecnico_valida_sem_criticos():
     assert result.returncode == 0, result.stdout + result.stderr
     output = json.loads(result.stdout)
     assert output["criticos"] == []
+
+
+
+def _validar_email_anexos(valor):
+    def mut(c):
+        c["ANEXOS"] = valor
+        c.pop("CADA_ANEXO", None)
+        c.pop("TOTAL_ANEXOS", None)
+
+    return _validar_doc(mut)
+
+
+@pytest.mark.parametrize("valor", [False, "false", "não", "nao", "no", "0", 0, "", None])
+def test_required_when_bool_falso_normalizado_nao_exige_anexos(valor):
+    resultado = _validar_email_anexos(valor)
+    assert not any(e.codigo == "CONT_REQUIRED_WHEN_001" and e.documento == "E1-02" for e in resultado.criticos)
+
+
+@pytest.mark.parametrize("valor", [True, "true", "sim", "yes", "1", 1])
+def test_required_when_bool_verdadeiro_normalizado_exige_anexos(valor):
+    resultado = _validar_email_anexos(valor)
+    assert any(e.codigo == "CONT_REQUIRED_WHEN_001" and e.documento == "E1-02" for e in resultado.criticos)
+
+
+def test_tipo_outro_valido_usa_schema_e_mantem_aviso_fallback():
+    bp = blueprint_valido()
+    doc = bp.documentos[0]
+    doc.tipo = TipoDocumento.OUTRO
+    doc.conteudo = dict(CONTEUDO_CARTA_VALIDO)
+
+    resultado = BlueprintValidator(bp).validar()
+
+    assert any(e.codigo == "CONT_002" and e.documento == doc.codigo for e in resultado.avisos)
+    assert not any(e.documento == doc.codigo and e.codigo.startswith("CONT_") for e in resultado.criticos)
+
+
+def test_tipo_outro_invalido_nao_pula_schema():
+    bp = blueprint_valido()
+    doc = bp.documentos[0]
+    doc.tipo = TipoDocumento.OUTRO
+    doc.conteudo = {"CORPO_CARTA": "<p>Texto insuficiente.</p>"}
+
+    resultado = BlueprintValidator(bp).validar()
+
+    assert any(e.codigo == "CONT_002" and e.documento == doc.codigo for e in resultado.avisos)
+    assert any(e.codigo == "CONT_003" and e.documento == doc.codigo for e in resultado.criticos)
+
+
+def test_hidden_allowed_ausente_nao_gera_critico():
+    resultado = _validar_doc(lambda c: c.pop("COPIA", None))
+    assert not any(e.documento == "E1-02" and e.codigo.startswith("CONT_") for e in resultado.criticos)
+
+
+def test_hidden_allowed_com_lixo_tecnico_gera_aviso():
+    resultado = _validar_doc(lambda c: c.update({"COPIA": "CONTEUDO_GENERICO"}))
+    assert any(e.codigo == "CONT_SCHEMA_002" and e.documento == "E1-02" for e in resultado.avisos)
+    assert not any(e.documento == "E1-02" and e.codigo.startswith("CONT_") for e in resultado.criticos)
+
+
+def test_required_vence_hidden_allowed():
+    bp = blueprint_valido()
+    doc = next(d for d in bp.documentos if d.tipo == TipoDocumento.EMAIL_N)
+    doc.conteudo.pop("ASSUNTO")
+    validator = BlueprintValidator(bp)
+    validator._schemas["email_narrador"].setdefault("hidden_allowed", []).append("ASSUNTO")
+
+    resultado = validator.validar()
+
+    assert any(e.codigo == "CONT_003" and e.documento == doc.codigo for e in resultado.criticos)

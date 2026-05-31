@@ -32,7 +32,9 @@
       ]
     }
   ],
-  "hidden_allowed": [],
+  "hidden_allowed": [
+    "COPIA"
+  ],
   "lists": {
     "CADA_ANEXO": {
       "required_when": {

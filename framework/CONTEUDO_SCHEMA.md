@@ -70,8 +70,12 @@ for falsa, esses campos não são exigidos.
 
 ### `hidden_allowed`
 
-Campos que podem estar vazios por decisão de apresentação, desde que não deixem
-resíduo técnico no HTML final.
+Campos que podem ser omitidos por decisão narrativa ou de apresentação, desde que
+o template tenha fallback/condicional e nenhum placeholder vaze no HTML final. Se
+estiverem presentes e vazios, não geram crítico; se contiverem lixo técnico
+(`placeholder`, `CONTEUDO_GENERICO`, `lorem ipsum` etc.), geram aviso.
+`hidden_allowed` não substitui `required`: se o mesmo campo aparecer nos dois,
+`required` vence.
 
 ### `lists` e `item_required`
 
@@ -101,9 +105,12 @@ required:
   - ASSUNTO
   - AVATAR_INICIAL
   - AVATAR_COR
-  - COPIA
   - CORPO_EMAIL
   - NOTA_RODAPE
+optional:
+  - COPIA
+hidden_allowed:
+  - COPIA
 required_when:
   - when:
       field: ANEXOS

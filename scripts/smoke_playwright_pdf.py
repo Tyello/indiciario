@@ -11,6 +11,21 @@ from pathlib import Path
 
 from generator.renderer import _html_para_pdf
 
+SETUP_MESSAGE = (
+    "Rode o setup do Playwright/Chromium:\n"
+    "  pip install -r requirements.txt\n"
+    "  python -m playwright install chromium"
+)
+
+
+def _erro_browser_ausente(exc: Exception) -> bool:
+    texto = str(exc).lower()
+    return (
+        "executable doesn't exist" in texto
+        or "browser" in texto and "install" in texto and "chromium" in texto
+        or "playwright install" in texto
+    )
+
 
 async def main() -> None:
     output_dir = Path("output/smoke")
@@ -28,10 +43,11 @@ async def main() -> None:
         await _html_para_pdf(html, landscape, landscape=True)
     except ModuleNotFoundError as exc:
         if exc.name == "playwright":
-            raise SystemExit(
-                "Playwright não está instalado. Rode: pip install -r requirements.txt "
-                "&& python -m playwright install chromium"
-            ) from exc
+            raise SystemExit(f"Playwright não está instalado.\n{SETUP_MESSAGE}") from exc
+        raise
+    except Exception as exc:
+        if _erro_browser_ausente(exc):
+            raise SystemExit(f"Chromium do Playwright não está instalado.\n{SETUP_MESSAGE}") from exc
         raise
     print(f"PDF portrait: {portrait}")
     print(f"PDF landscape: {landscape}")

@@ -683,7 +683,20 @@
       ],
       "codigos_citados": [],
       "conteudo": {
-        "CONTEUDO_GENERICO": "Conteúdo fictício para tipo sem schema específico"
+        "NOME_ORGANIZACAO": "Acervo Central Ficcional",
+        "SUBTITULO_ORGANIZACAO": "Núcleo de Conferência Interna",
+        "ENDERECO_LINHA1": "Rua das Caixas, 42",
+        "CONTATO": "registro@acervocentral.test",
+        "CNPJ": "00.000.000/0001-00",
+        "COR_TOPO": "#1A2E4A",
+        "LOCAL_DATA": "São Paulo, 03 de março de 2026",
+        "SAUDACAO": "À equipe de investigação,",
+        "CORPO_CARTA": "<p>Nota técnica complementar sobre o cruzamento de lacres e registros do acervo.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Helena Moraes",
+        "NOME_ASSINANTE": "Helena Moraes",
+        "CARGO_ASSINANTE": "Coordenação de acervo",
+        "ASSUNTO": "Nota técnica complementar"
       }
     },
     {

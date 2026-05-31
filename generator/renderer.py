@@ -111,6 +111,10 @@ class PlaceholderResidualError(RuntimeError):
     """Erro lançado quando o HTML final ainda contém placeholders/lixo técnico."""
 
 
+class RenderCaseError(RuntimeError):
+    """Erro lançado quando a renderização strict de um caso falha."""
+
+
 def detectar_placeholders(html: str) -> list[str]:
     """Retorna lista de placeholders Mustache não substituídos no HTML final."""
     return PLACEHOLDER_RE.findall(html)
@@ -232,7 +236,10 @@ def renderizar_caso(
         conteudo = doc.get("conteudo", {})
 
         if not conteudo:
-            print(f"  ⚠️  {codigo} — 'conteudo' vazio, PDF ignorado")
+            mensagem = f"{codigo} ({template}) — 'conteudo' vazio, PDF ignorado"
+            if strict:
+                raise RenderCaseError(mensagem)
+            print(f"  ⚠️  {mensagem}")
             continue
 
         dados = {
@@ -249,7 +256,10 @@ def renderizar_caso(
             grupos[envelope].append(caminho)
             print(f"  ✅ {codigo} → {caminho.name}")
         except Exception as exc:
-            print(f"  ❌ {codigo} — {exc}")
+            mensagem = f"{codigo} ({template}) — falha ao renderizar: {exc}"
+            if strict:
+                raise RenderCaseError(mensagem) from exc
+            print(f"  ❌ {mensagem}")
 
     # Capa de dicas por envelope
     for envelope_dica in sorted(
@@ -269,7 +279,10 @@ def renderizar_caso(
             grupos["dicas"].append(caminho)
             print(f"  ✅ DICAS-{envelope_dica}-CAPA → {caminho.name}")
         except Exception as exc:
-            print(f"  ❌ DICAS-{envelope_dica}-CAPA — {exc}")
+            mensagem = f"DICAS-{envelope_dica}-CAPA (00_envelope_capa.html) — falha ao renderizar: {exc}"
+            if strict:
+                raise RenderCaseError(mensagem) from exc
+            print(f"  ❌ {mensagem}")
 
     return grupos
 

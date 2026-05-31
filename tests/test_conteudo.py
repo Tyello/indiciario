@@ -4,8 +4,7 @@ tests/test_conteudo.py — Testes de validação do campo conteudo
 Execute: pytest tests/test_conteudo.py -v
 """
 
-import pytest
-from generator.models import Blueprint, Documento, TipoDocumento, Envelope
+from generator.models import Blueprint
 from generator.validator import BlueprintValidator
 
 

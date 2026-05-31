@@ -1,6 +1,8 @@
 import json
 import sys
 import types
+
+import pytest
 from pathlib import Path
 
 
@@ -129,3 +131,45 @@ def test_template_capa_usa_rotulo_apropriado_para_jogo_dicas_e_gabarito():
     assert "Gabarito" in capa_gabarito
     assert "Envelope 2" not in capa_gabarito
 
+
+
+def test_renderizar_caso_strict_aborta_em_placeholder_residual(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    template_dir = tmp_path / "templates"
+    template_dir.mkdir()
+    (template_dir / "05_carta.html").write_text("Documento {{CORPO}} {{FALTA}}", encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    blueprint_path = _blueprint_base(tmp_path)
+
+    with pytest.raises(renderer.RenderCaseError) as excinfo:
+        renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=True)
+
+    assert "E1-01" in str(excinfo.value)
+    assert "05_carta.html" in str(excinfo.value)
+    assert "FALTA" in str(excinfo.value)
+
+
+def test_renderizar_caso_non_strict_continua_em_placeholder_residual(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    template_dir = tmp_path / "templates"
+    template_dir.mkdir()
+    (template_dir / "05_carta.html").write_text("Documento {{CORPO}} {{FALTA}}", encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    blueprint_path = _blueprint_base(tmp_path)
+
+    with pytest.warns(RuntimeWarning):
+        grupos = renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=False)
+
+    assert len(grupos["E1"]) == 1

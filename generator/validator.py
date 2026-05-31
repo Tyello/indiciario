@@ -511,12 +511,28 @@ class BlueprintValidator:
         return False
 
     @staticmethod
-    def _condicao_verdadeira(conteudo: dict[str, Any], condicao: dict[str, Any]) -> bool:
+    def _normalizar_bool(valor: object) -> bool:
+        if valor is None:
+            return False
+        if isinstance(valor, bool):
+            return valor
+        if isinstance(valor, int) and not isinstance(valor, bool):
+            return valor != 0
+        if isinstance(valor, str):
+            texto = valor.strip().lower()
+            if texto in {"true", "sim", "yes", "1"}:
+                return True
+            if texto in {"false", "não", "nao", "no", "0", ""}:
+                return False
+        return bool(valor)
+
+    @classmethod
+    def _condicao_verdadeira(cls, conteudo: dict[str, Any], condicao: dict[str, Any]) -> bool:
         campo = condicao.get("field")
         esperado = condicao.get("equals", True)
         valor = conteudo.get(campo)
         if isinstance(esperado, bool):
-            return bool(valor) is esperado
+            return cls._normalizar_bool(valor) is esperado
         return valor == esperado
 
     @staticmethod
@@ -653,7 +669,6 @@ class BlueprintValidator:
                     detalhe="Prefira um tipo especializado antes de produção estrita.",
                     documento=doc.codigo,
                 ))
-                continue
 
             schema = get_schema_for_type(tipo, self._schemas)
             if schema is None:
@@ -683,9 +698,10 @@ class BlueprintValidator:
 
             required = set(schema.get("required", []))
             optional = set(schema.get("optional", []))
+            hidden_allowed = set(schema.get("hidden_allowed", [])) - required
             list_names = set(schema.get("lists", {}).keys())
             for campo, valor in conteudo.items():
-                if campo in required or campo in optional or campo in list_names:
+                if campo in required or campo in optional or campo in hidden_allowed or campo in list_names:
                     continue
                 if self._valor_tem_lixo_tecnico(valor):
                     self.resultado.adicionar(Erro(
@@ -695,12 +711,12 @@ class BlueprintValidator:
                         documento=doc.codigo,
                     ))
 
-            for campo in optional:
+            for campo in optional | hidden_allowed:
                 if campo in conteudo and self._valor_tem_lixo_tecnico(conteudo[campo]):
                     self.resultado.adicionar(Erro(
                         codigo="CONT_SCHEMA_002",
                         severidade=Severidade.AVISO,
-                        mensagem=f"'{doc.codigo}' — campo opcional '{campo}' contém lixo técnico.",
+                        mensagem=f"'{doc.codigo}' — campo opcional/ocultável '{campo}' contém lixo técnico.",
                         documento=doc.codigo,
                     ))
 
