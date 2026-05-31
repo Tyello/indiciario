@@ -1,0 +1,55 @@
+{
+  "type": "extrato",
+  "template": "09_extrato.html",
+  "description": "extrato",
+  "required": [
+    "LOGO_SIGLA",
+    "NOME_BANCO",
+    "TAGLINE_BANCO",
+    "COR_BANCO",
+    "PERIODO_INICIO",
+    "PERIODO_FIM",
+    "DATA_GERACAO",
+    "HORA_GERACAO",
+    "NOME_TITULAR",
+    "DOC_TITULAR",
+    "AGENCIA",
+    "NUMERO_CONTA",
+    "TIPO_CONTA",
+    "SALDO_INICIAL",
+    "DATA_SALDO_INICIAL",
+    "MOVIMENTACAO_LIQUIDA",
+    "COR_MOVIMENTACAO",
+    "SALDO_FINAL",
+    "DATA_SALDO_FINAL",
+    "COR_SALDO_FINAL",
+    "TOTAL_CREDITOS",
+    "TOTAL_DEBITOS",
+    "TOTAL_LANCAMENTOS",
+    "NOTA_LEGAL",
+    "CNPJ_BANCO",
+    "ENDERECO_BANCO",
+    "LANCAMENTOS"
+  ],
+  "optional": [],
+  "required_when": [],
+  "hidden_allowed": [],
+  "lists": {
+    "LANCAMENTOS": {
+      "required": true,
+      "item_required": [
+        "CLASSE_LINHA",
+        "DATA",
+        "DESCRICAO",
+        "DETALHE",
+        "TIPO_LOWER",
+        "TIPO",
+        "DIRECAO",
+        "VALOR",
+        "COR_SALDO",
+        "SALDO_ACUMULADO"
+      ]
+    }
+  },
+  "html_fields": []
+}

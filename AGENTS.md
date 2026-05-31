@@ -12,7 +12,7 @@ sobre como atuar neste repositório de forma segura, consistente e alinhada ao p
 Indiciários é um gerador de jogos de investigação offline em formato de dossiê com
 envelopes. O sistema recebe parâmetros de um usuário (tema, dificuldade, tom), gera
 um blueprint estruturado via LLM, valida as regras narrativas do framework e renderiza
-documentos em PDF via templates HTML + Puppeteer (ou equivalente Python).
+documentos em PDF via templates HTML + Playwright/Chromium.
 
 O produto final são PDFs temáticos — e-mails falsos, logs de acesso, boletins policiais,
 extratos bancários — que formam um jogo de investigação físico ou digital.
@@ -74,7 +74,7 @@ considerada concluída.
 Cada arquivo em `/templates/*.html` deve funcionar isoladamente — CSS inline,
 sem dependências externas obrigatórias (fontes do Google são permitidas via CDN
 pois são decorativas, não funcionais). Não adicione `<script src="...">` que
-quebre a renderização offline via Puppeteer/WeasyPrint.
+quebre a renderização offline via Playwright/Chromium.
 
 ---
 
@@ -84,7 +84,7 @@ quebre a renderização offline via Puppeteer/WeasyPrint.
 |--------|-----------|
 | Linguagem | Python 3.11+ |
 | Modelos de dados | Pydantic v2 |
-| Renderização PDF | WeasyPrint (principal) ou Puppeteer via subprocess |
+| Renderização PDF | Playwright oficial com Chromium |
 | LLM | OpenAI API (GPT-4o) ou Anthropic API (Claude) — configurável via env |
 | Bot | python-telegram-bot |
 | Pagamento | Mercado Pago SDK Python |
@@ -144,6 +144,21 @@ def buscar_personagem(id, personagens):
 ```
 
 ---
+
+
+### Renderização oficial
+
+Playwright é o renderizador oficial de PDFs do projeto. O `generator/renderer.py` é
+a fonte operacional da renderização: ele injeta dados nos templates HTML e chama o
+Chromium via Playwright para gerar PDFs. O setup local precisa instalar o browser:
+
+```bash
+pip install -r requirements.txt
+python -m playwright install chromium
+```
+
+A orientação portrait/landscape será definida por template/tipo de documento; nesta
+fase há smoke test manual para ambas as orientações via `python -m scripts.smoke_playwright_pdf`.
 
 ## Como rodar localmente
 
@@ -212,7 +227,7 @@ O agente deve entender esse fluxo antes de modificar qualquer parte:
         ↓
 6. renderer.py injeta dados dos documentos nos templates HTML
         ↓
-7. WeasyPrint/Puppeteer converte cada HTML em PDF
+7. Playwright/Chromium converte cada HTML em PDF
         ↓
 8. pdf_merger.py agrupa por envelope (E1, E2, dicas, gabarito)
         ↓

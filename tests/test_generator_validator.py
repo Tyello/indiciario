@@ -77,7 +77,7 @@ CONTEUDO_LOG_VALIDO = {
     "TOTAL_ENTRADAS": "1",
     "TOTAL_NEGADOS": "0",
     "TOTAL_ANOMALIAS": "0",
-    "REGISTROS": [{"NOME_USUARIO": "Ana Operadora", "EVENTO": "ENTRADA"}],
+    "REGISTROS": [{"CLASSE_LINHA": "normal", "DATA": "01/01/2026", "HORA": "10:00", "PORTA": "A1", "ID_USUARIO": "01", "NOME_USUARIO": "Ana Operadora", "TIPO_EVENTO": "entrada", "EVENTO": "ENTRADA", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Registro aceito"}],
 }
 
 CONTEUDO_EXTRATO_VALIDO = {
@@ -107,7 +107,7 @@ CONTEUDO_EXTRATO_VALIDO = {
     "NOTA_LEGAL": "Documento fictício",
     "CNPJ_BANCO": "00.000.000/0001-00",
     "ENDERECO_BANCO": "Rua Inventada, 123",
-    "LANCAMENTOS": [{"DATA": "02/01/2026", "DESCRICAO": "Crédito fictício", "VALOR": "R$ 100,00"}],
+    "LANCAMENTOS": [{"CLASSE_LINHA": "credito", "DATA": "02/01/2026", "DESCRICAO": "Crédito fictício", "DETALHE": "Contrato interno", "TIPO_LOWER": "credito", "TIPO": "CRÉDITO", "DIRECAO": "entrada", "VALOR": "R$ 100,00", "COR_SALDO": "positivo", "SALDO_ACUMULADO": "R$ 100,00"}],
 }
 
 
@@ -287,3 +287,13 @@ def test_validator_cli_accepts_example_blueprint_from_examples_folder():
 
     assert result.returncode == 0, result.stderr
     assert "Risco: Baixo" in result.stdout or "Risco: Médio-baixo" in result.stdout
+
+
+def test_blueprint_validator_blocks_duplicate_document_codes():
+    blueprint = blueprint_valido()
+    blueprint.documentos[1].codigo = blueprint.documentos[0].codigo
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert resultado.pode_gerar is False
+    assert any(e.codigo == "DOC_008" for e in resultado.criticos)

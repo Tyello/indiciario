@@ -1,0 +1,82 @@
+{
+  "type": "orcamento",
+  "template": "08_orcamento.html",
+  "description": "orcamento",
+  "required": [
+    "NOME_EMPRESA",
+    "TIPO_EMPRESA",
+    "CNPJ",
+    "ENDERECO",
+    "SITE_EMAIL",
+    "COR_PRIMARIA",
+    "COR_SECUNDARIA",
+    "NUMERO_ORCAMENTO",
+    "DATA_EMISSAO",
+    "DATA_VALIDADE",
+    "REVISAO",
+    "NOME_CLIENTE",
+    "ENDERECO_CLIENTE",
+    "DOC_CLIENTE",
+    "CONTATO_CLIENTE",
+    "TITULO_PROJETO",
+    "DESCRICAO_REFERENCIA",
+    "ITENS",
+    "SUBTOTAL",
+    "DESCONTO",
+    "IMPOSTOS",
+    "VALOR_TOTAL",
+    "CONDICOES",
+    "ASSINATURA_RESPONSAVEL",
+    "NOME_RESPONSAVEL",
+    "CARGO_RESPONSAVEL",
+    "ASSINATURA_CLIENTE",
+    "DATA_APROVACAO"
+  ],
+  "optional": [
+    "ESCOPO",
+    "UNIDADES",
+    "LISTA_UNIDADES",
+    "NOTA_MANUSCRITA"
+  ],
+  "required_when": [
+    {
+      "when": {
+        "field": "UNIDADES",
+        "equals": true
+      },
+      "required": [
+        "LISTA_UNIDADES"
+      ]
+    }
+  ],
+  "hidden_allowed": [],
+  "lists": {
+    "ITENS": {
+      "required": true,
+      "item_required": [
+        "NUMERO_ITEM",
+        "NOME_ITEM",
+        "DESC_ITEM",
+        "QUANTIDADE",
+        "VALOR_UNITARIO",
+        "VALOR_TOTAL_ITEM"
+      ]
+    },
+    "CONDICOES": {
+      "required": true,
+      "item_required": [
+        "CONDICAO"
+      ]
+    },
+    "LISTA_UNIDADES": {
+      "required_when": {
+        "field": "UNIDADES",
+        "equals": true
+      },
+      "item_required": [
+        "UNIDADE"
+      ]
+    }
+  },
+  "html_fields": []
+}

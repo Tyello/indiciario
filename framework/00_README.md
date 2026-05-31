@@ -134,3 +134,23 @@ Nunca misture no mesmo arquivo ou impressão:
 - 🔴 Crítico — corrigir antes de qualquer avanço
 - 🟡 Moderado — corrigir antes da produção final
 - 🟢 Melhoria — não bloqueia, mas eleva qualidade
+
+## Renderização técnica oficial
+
+Playwright é o renderizador oficial de PDFs do Indiciário. Os PDFs são gerados
+via Chromium a partir dos templates HTML; `generator/renderer.py` é a fonte
+operacional dessa etapa.
+
+Setup local mínimo:
+
+```bash
+pip install -r requirements.txt
+python -m playwright install chromium
+```
+
+A orientação portrait/landscape será definida por template/tipo de documento. A
+base técnica desta rodada inclui smoke test manual de ambas as orientações:
+
+```bash
+python -m scripts.smoke_playwright_pdf
+```

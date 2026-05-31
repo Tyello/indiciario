@@ -1,0 +1,53 @@
+{
+  "type": "email_institucional",
+  "template": "01_email.html",
+  "description": "email_institucional",
+  "required": [
+    "REMETENTE_NOME",
+    "REMETENTE_EMAIL",
+    "DESTINATARIO_EMAIL",
+    "DESTINATARIO_LABEL",
+    "DATA_HORA",
+    "ASSUNTO",
+    "AVATAR_INICIAL",
+    "AVATAR_COR",
+    "CORPO_EMAIL",
+    "NOTA_RODAPE"
+  ],
+  "optional": [
+    "ANEXOS",
+    "TOTAL_ANEXOS",
+    "CADA_ANEXO",
+    "COPIA"
+  ],
+  "required_when": [
+    {
+      "when": {
+        "field": "ANEXOS",
+        "equals": true
+      },
+      "required": [
+        "TOTAL_ANEXOS",
+        "CADA_ANEXO"
+      ]
+    }
+  ],
+  "hidden_allowed": [
+    "COPIA"
+  ],
+  "lists": {
+    "CADA_ANEXO": {
+      "required_when": {
+        "field": "ANEXOS",
+        "equals": true
+      },
+      "item_required": [
+        "NOME_ARQUIVO",
+        "TAMANHO_KB"
+      ]
+    }
+  },
+  "html_fields": [
+    "CORPO_EMAIL"
+  ]
+}

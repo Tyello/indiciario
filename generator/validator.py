@@ -14,7 +14,7 @@ import sys
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 try:  # Execução como pacote: python -m generator.validator
     from .models import (
@@ -36,6 +36,11 @@ except ImportError:  # Execução direta: python generator/validator.py
         SaltoFinanceiro,
         TipoDocumento,
     )
+
+try:  # Execução como pacote: python -m generator.validator
+    from .schema_loader import get_schema_for_type, load_all_schemas
+except ImportError:  # Execução direta: python generator/validator.py
+    from schema_loader import get_schema_for_type, load_all_schemas  # type: ignore[no-redef]
 
 
 class Severidade(str, Enum):
@@ -232,6 +237,7 @@ class BlueprintValidator:
         self.resultado = ResultadoValidacao()
         self._ids_personagens: set[str] = {p.id for p in blueprint.personagens}
         self._codigos_docs: set[str] = {d.codigo for d in blueprint.documentos}
+        self._schemas = load_all_schemas()
 
     def validar(self) -> ResultadoValidacao:
         self._verificar_elenco()
@@ -244,7 +250,7 @@ class BlueprintValidator:
         self._verificar_linha_do_tempo()
         self._verificar_dicas()
         self._verificar_autossuficiencia()
-        self._verificar_conteudo()
+        self._verificar_conteudo_schema()
         self._calcular_risco()
         self._gerar_resumo()
         return self.resultado
@@ -312,6 +318,20 @@ class BlueprintValidator:
                     ))
 
     def _verificar_documentos(self) -> None:
+        codigos_vistos: set[str] = set()
+        codigos_duplicados: set[str] = set()
+        for doc in self.bp.documentos:
+            if doc.codigo in codigos_vistos:
+                codigos_duplicados.add(doc.codigo)
+            codigos_vistos.add(doc.codigo)
+        for codigo in sorted(codigos_duplicados):
+            self.resultado.adicionar(Erro(
+                "DOC_008",
+                Severidade.CRITICO,
+                f"Documento duplicado no blueprint: '{codigo}'.",
+                documento=codigo,
+            ))
+
         docs_e1 = [d for d in self.bp.documentos if d.envelope == Envelope.E1]
         docs_e2 = [d for d in self.bp.documentos if d.envelope == Envelope.E2]
         if len(docs_e1) < 6:
@@ -504,8 +524,143 @@ class BlueprintValidator:
             return len(valor) == 0
         return False
 
-    def _verificar_conteudo(self) -> None:
-        """Verifica se cada documento tem conteudo renderizável para seu template."""
+    @staticmethod
+    def _normalizar_bool(valor: object) -> bool:
+        if valor is None:
+            return False
+        if isinstance(valor, bool):
+            return valor
+        if isinstance(valor, int) and not isinstance(valor, bool):
+            return valor != 0
+        if isinstance(valor, str):
+            texto = valor.strip().lower()
+            if texto in {"true", "sim", "yes", "1"}:
+                return True
+            if texto in {"false", "não", "nao", "no", "0", ""}:
+                return False
+        return bool(valor)
+
+    @classmethod
+    def _condicao_verdadeira(cls, conteudo: dict[str, Any], condicao: dict[str, Any]) -> bool:
+        campo = condicao.get("field")
+        esperado = condicao.get("equals", True)
+        valor = conteudo.get(campo)
+        if isinstance(esperado, bool):
+            return cls._normalizar_bool(valor) is esperado
+        return valor == esperado
+
+    @staticmethod
+    def _tem_html_minimo(valor: str) -> bool:
+        return any(tag in valor.lower() for tag in ("<p", "<table", "<ul", "<ol", "<div", "<br"))
+
+    @classmethod
+    def _valor_tem_lixo_tecnico(cls, valor: object) -> bool:
+        if isinstance(valor, str):
+            texto = " ".join(valor.strip().lower().split())
+            return (
+                "conteudo_generico" in texto
+                or "conteúdo genérico" in texto
+                or "placeholder" in texto
+                or "lorem ipsum" in texto
+                or texto in {"tbd", "todo", "undefined", "none", "null"}
+            )
+        if isinstance(valor, dict):
+            return any(cls._valor_tem_lixo_tecnico(v) for v in valor.values())
+        if isinstance(valor, list):
+            return any(cls._valor_tem_lixo_tecnico(v) for v in valor)
+        return False
+
+    def _registrar_campos_incompletos(
+        self,
+        doc_codigo: str,
+        tipo: str,
+        conteudo: dict[str, Any],
+        campos: list[str],
+        codigo: str = "CONT_003",
+    ) -> None:
+        incompletos = [
+            campo
+            for campo in campos
+            if campo not in conteudo
+            or self._valor_conteudo_incompleto(conteudo[campo])
+            or self._valor_tem_lixo_tecnico(conteudo[campo])
+        ]
+        if incompletos:
+            self.resultado.adicionar(Erro(
+                codigo=codigo,
+                severidade=Severidade.CRITICO,
+                mensagem=(
+                    f"'{doc_codigo}' ({tipo}) — {len(incompletos)} campo(s) obrigatório(s) "
+                    f"ausente(s), vazio(s) ou técnico(s): {', '.join(incompletos[:5])}"
+                    f"{'...' if len(incompletos) > 5 else ''}."
+                ),
+                detalhe="Consulte framework/CONTEUDO_SCHEMA.md e generator/schemas/*.yaml.",
+                documento=doc_codigo,
+            ))
+
+    def _verificar_lista_schema(
+        self,
+        doc_codigo: str,
+        tipo: str,
+        conteudo: dict[str, Any],
+        nome_lista: str,
+        regra: dict[str, Any],
+    ) -> None:
+        obrigatoria = bool(regra.get("required"))
+        if not obrigatoria and "required_when" in regra:
+            obrigatoria = self._condicao_verdadeira(conteudo, regra["required_when"])
+        if not obrigatoria and nome_lista not in conteudo:
+            return
+
+        lista = conteudo.get(nome_lista)
+        if not isinstance(lista, list) or not lista:
+            self.resultado.adicionar(Erro(
+                codigo="CONT_004",
+                severidade=Severidade.CRITICO,
+                mensagem=f"'{doc_codigo}' — '{nome_lista}' deve ser lista com ao menos 1 item.",
+                documento=doc_codigo,
+            ))
+            return
+
+        item_required = regra.get("item_required", [])
+        for index, item in enumerate(lista, start=1):
+            if not isinstance(item, dict):
+                self.resultado.adicionar(Erro(
+                    codigo="CONT_ITEM_001",
+                    severidade=Severidade.CRITICO,
+                    mensagem=f"'{doc_codigo}' — item {index} de '{nome_lista}' deve ser objeto.",
+                    documento=doc_codigo,
+                ))
+                continue
+            faltantes = [
+                campo
+                for campo in item_required
+                if campo not in item
+                or self._valor_conteudo_incompleto(item[campo])
+                or self._valor_tem_lixo_tecnico(item[campo])
+            ]
+            for condicional in regra.get("item_required_when", []):
+                if self._condicao_verdadeira(item, condicional.get("when", {})):
+                    faltantes.extend(
+                        campo
+                        for campo in condicional.get("required", [])
+                        if campo not in item
+                        or self._valor_conteudo_incompleto(item[campo])
+                        or self._valor_tem_lixo_tecnico(item[campo])
+                    )
+            if faltantes:
+                self.resultado.adicionar(Erro(
+                    codigo="CONT_ITEM_001",
+                    severidade=Severidade.CRITICO,
+                    mensagem=(
+                        f"'{doc_codigo}' — item {index} de '{nome_lista}' sem campo(s) "
+                        f"obrigatório(s): {', '.join(sorted(set(faltantes)))}."
+                    ),
+                    documento=doc_codigo,
+                ))
+
+    def _verificar_conteudo_schema(self) -> None:
+        """Verifica o contrato técnico de renderização a partir de schemas YAML."""
         for doc in self.bp.documentos:
             tipo = doc.tipo.value if hasattr(doc.tipo, "value") else str(doc.tipo)
             conteudo = getattr(doc, "conteudo", None)
@@ -515,71 +670,79 @@ class BlueprintValidator:
                     codigo="CONT_001",
                     severidade=Severidade.CRITICO,
                     mensagem=f"'{doc.codigo}' — campo 'conteudo' ausente ou vazio.",
-                    detalhe=(
-                        f"Tipo '{tipo}' requer conteudo preenchido. "
-                        "Consulte CONTEUDO_SCHEMA.md para as chaves obrigatórias."
-                    ),
+                    detalhe=f"Tipo '{tipo}' requer conteudo preenchido para renderização.",
                     documento=doc.codigo,
                 ))
                 continue
 
-            chaves_obrigatorias = CHAVES_OBRIGATORIAS.get(tipo)
-            if chaves_obrigatorias is None:
+            if tipo == "outro":
                 self.resultado.adicionar(Erro(
                     codigo="CONT_002",
                     severidade=Severidade.AVISO,
-                    mensagem=f"'{doc.codigo}' — tipo '{tipo}' sem schema de conteudo definido.",
-                    detalhe="Verifique se o tipo está correto. Usando template 05_carta.html como fallback.",
+                    mensagem=f"'{doc.codigo}' — tipo 'outro' usa fallback controlado de conteúdo.",
+                    detalhe="Prefira um tipo especializado antes de produção estrita.",
+                    documento=doc.codigo,
+                ))
+
+            schema = get_schema_for_type(tipo, self._schemas)
+            if schema is None:
+                self.resultado.adicionar(Erro(
+                    codigo="CONT_002",
+                    severidade=Severidade.AVISO,
+                    mensagem=f"'{doc.codigo}' — tipo '{tipo}' sem schema técnico de conteúdo definido.",
+                    detalhe="Tipo ainda cai em fallback controlado; crie schema antes de produção estrita.",
                     documento=doc.codigo,
                 ))
                 continue
 
-            incompletas = [
-                chave
-                for chave in chaves_obrigatorias
-                if chave not in conteudo or self._valor_conteudo_incompleto(conteudo[chave])
-            ]
-            if incompletas:
-                self.resultado.adicionar(Erro(
-                    codigo="CONT_003",
-                    severidade=Severidade.CRITICO,
-                    mensagem=(
-                        f"'{doc.codigo}' ({tipo}) — "
-                        f"{len(incompletas)} chave(s) obrigatória(s) ausente(s) "
-                        "ou incompleta(s): "
-                        f"{', '.join(incompletas[:5])}"
-                        f"{'...' if len(incompletas) > 5 else ''}."
-                    ),
-                    detalhe="Consulte CONTEUDO_SCHEMA.md para a lista completa por tipo.",
-                    documento=doc.codigo,
-                ))
+            self._registrar_campos_incompletos(doc.codigo, tipo, conteudo, schema.get("required", []))
 
-            chave_lista = CHAVES_LISTA.get(tipo)
-            deve_verificar_anexos = tipo in {"email_narrador", "email_institucional"} and bool(conteudo.get("ANEXOS"))
-            if chave_lista and (chave_lista in conteudo or deve_verificar_anexos):
-                lista = conteudo.get(chave_lista)
-                lista_invalida = (
-                    not isinstance(lista, list)
-                    or len(lista) == 0
-                    or all(self._valor_conteudo_incompleto(item) for item in lista)
-                )
-                if lista_invalida:
+            for regra in schema.get("required_when", []):
+                if self._condicao_verdadeira(conteudo, regra.get("when", {})):
+                    self._registrar_campos_incompletos(
+                        doc.codigo,
+                        tipo,
+                        conteudo,
+                        regra.get("required", []),
+                        codigo="CONT_REQUIRED_WHEN_001",
+                    )
+
+            for nome_lista, regra_lista in schema.get("lists", {}).items():
+                self._verificar_lista_schema(doc.codigo, tipo, conteudo, nome_lista, regra_lista)
+
+            required = set(schema.get("required", []))
+            optional = set(schema.get("optional", []))
+            hidden_allowed = set(schema.get("hidden_allowed", [])) - required
+            list_names = set(schema.get("lists", {}).keys())
+            for campo, valor in conteudo.items():
+                if campo in required or campo in optional or campo in hidden_allowed or campo in list_names:
+                    continue
+                if self._valor_tem_lixo_tecnico(valor):
                     self.resultado.adicionar(Erro(
-                        codigo="CONT_004",
-                        severidade=Severidade.CRITICO,
-                        mensagem=f"'{doc.codigo}' — '{chave_lista}' deve ser lista com ao menos 1 item.",
+                        codigo="CONT_SCHEMA_002",
+                        severidade=Severidade.AVISO,
+                        mensagem=f"'{doc.codigo}' — campo extra '{campo}' contém lixo técnico.",
                         documento=doc.codigo,
                     ))
 
-            for campo_html in ("CORPO_CARTA", "CORPO_EMAIL", "DESCRICAO_OCORRENCIA"):
+            for campo in optional | hidden_allowed:
+                if campo in conteudo and self._valor_tem_lixo_tecnico(conteudo[campo]):
+                    self.resultado.adicionar(Erro(
+                        codigo="CONT_SCHEMA_002",
+                        severidade=Severidade.AVISO,
+                        mensagem=f"'{doc.codigo}' — campo opcional/ocultável '{campo}' contém lixo técnico.",
+                        documento=doc.codigo,
+                    ))
+
+            for campo_html in schema.get("html_fields", []):
                 valor = conteudo.get(campo_html, "")
-                if valor and isinstance(valor, str) and "<p>" not in valor.lower():
+                if valor and isinstance(valor, str) and not self._tem_html_minimo(valor):
                     self.resultado.adicionar(Erro(
                         codigo="CONT_005",
                         severidade=Severidade.AVISO,
                         mensagem=(
-                            f"'{doc.codigo}' — '{campo_html}' não contém tags <p>. "
-                            "Use HTML com <p> por parágrafo para renderização correta."
+                            f"'{doc.codigo}' — '{campo_html}' não contém HTML mínimo "
+                            "(<p>, <table>, <ul>, <ol>, <div> ou <br>)."
                         ),
                         documento=doc.codigo,
                     ))

@@ -357,7 +357,10 @@
             "NOME_USUARIO": "Personagem Fictício",
             "EVENTO": "ENTRADA",
             "DATA": "01/01/2026",
-            "HORA": "09:30"
+            "HORA": "09:30",
+            "PORTA": "A1",
+            "ID_USUARIO": "09",
+            "TIPO_EVENTO": "registro"
           }
         ]
       }
@@ -410,7 +413,10 @@
             "NOME_USUARIO": "Personagem Fictício",
             "EVENTO": "ENTRADA",
             "DATA": "01/01/2026",
-            "HORA": "09:30"
+            "HORA": "09:30",
+            "PORTA": "A1",
+            "ID_USUARIO": "09",
+            "TIPO_EVENTO": "registro"
           }
         ]
       }
@@ -451,7 +457,8 @@
         "CAMPO_NOME": "Nome",
         "NOME_ENVOLVIDO": "Pessoa Fictícia",
         "DATA_NASC": "01/01/1990",
-        "CONDICAO": "Depoente"
+        "CONDICAO": "Depoente",
+        "DOCUMENTO_PESSOAL": "RG 00.000.000-0"
       }
     },
     {
@@ -648,7 +655,8 @@
         "CAMPO_NOME": "Nome",
         "NOME_ENVOLVIDO": "Pessoa Fictícia",
         "DATA_NASC": "01/01/1990",
-        "CONDICAO": "Depoente"
+        "CONDICAO": "Depoente",
+        "DOCUMENTO_PESSOAL": "RG 00.000.000-0"
       }
     },
     {
@@ -675,7 +683,20 @@
       ],
       "codigos_citados": [],
       "conteudo": {
-        "CONTEUDO_GENERICO": "Conteúdo fictício para tipo sem schema específico"
+        "NOME_ORGANIZACAO": "Acervo Central Ficcional",
+        "SUBTITULO_ORGANIZACAO": "Núcleo de Conferência Interna",
+        "ENDERECO_LINHA1": "Rua das Caixas, 42",
+        "CONTATO": "registro@acervocentral.test",
+        "CNPJ": "00.000.000/0001-00",
+        "COR_TOPO": "#1A2E4A",
+        "LOCAL_DATA": "São Paulo, 03 de março de 2026",
+        "SAUDACAO": "À equipe de investigação,",
+        "CORPO_CARTA": "<p>Nota técnica complementar sobre o cruzamento de lacres e registros do acervo.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Helena Moraes",
+        "NOME_ASSINANTE": "Helena Moraes",
+        "CARGO_ASSINANTE": "Coordenação de acervo",
+        "ASSUNTO": "Nota técnica complementar"
       }
     },
     {
@@ -727,7 +748,14 @@
           {
             "DATA": "02/01/2026",
             "DESCRICAO": "Crédito fictício",
-            "VALOR": "R$ 100,00"
+            "VALOR": "R$ 100,00",
+            "CLASSE_LINHA": "normal",
+            "DETALHE": "Movimentação referenciada no caso",
+            "TIPO_LOWER": "credito",
+            "TIPO": "CRÉDITO",
+            "DIRECAO": "entrada",
+            "COR_SALDO": "positivo",
+            "SALDO_ACUMULADO": "R$ 0,00"
           }
         ]
       }
