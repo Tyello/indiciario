@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import asyncio
 import importlib
+import os
 import json
 import re
 import warnings
@@ -131,18 +132,38 @@ def detectar_residuos_tecnicos(html: str) -> list[str]:
 # Renderização HTML → PDF
 # ──────────────────────────────────────────────────────────────────────────────
 
+def _playwright_disponivel() -> bool:
+    try:
+        return importlib.util.find_spec("playwright") is not None
+    except ValueError:
+        return False
+
+
+def _fake_pdf_permitido() -> bool:
+    return os.getenv("INDICIARIO_ALLOW_FAKE_PDF") == "1"
+
+
+def _gerar_pdf_fake_para_teste(output_path: Path, landscape: bool = False) -> Path:
+    backend_name = "generator.pdf_backend" if __package__ else "pdf_backend"
+    PdfWriter = importlib.import_module(backend_name).PdfWriter
+
+    width, height = (842, 595) if landscape else (595, 842)
+    writer = PdfWriter()
+    writer.add_blank_page(width=width, height=height)
+    with output_path.open("wb") as fp:
+        writer.write(fp)
+    return output_path
+
+
 async def _html_para_pdf(html: str, output_path: Path, landscape: bool = False) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    if importlib.util.find_spec("playwright") is None:
-        backend_name = "generator.pdf_backend" if __package__ else "pdf_backend"
-        PdfWriter = importlib.import_module(backend_name).PdfWriter
-
-        width, height = (842, 595) if landscape else (595, 842)
-        writer = PdfWriter()
-        writer.add_blank_page(width=width, height=height)
-        with output_path.open("wb") as fp:
-            writer.write(fp)
-        return output_path
+    if not _playwright_disponivel():
+        if _fake_pdf_permitido():
+            return _gerar_pdf_fake_para_teste(output_path, landscape=landscape)
+        raise RuntimeError(
+            "Playwright não está instalado. Rode: "
+            "pip install -r requirements.txt && python -m playwright install chromium"
+        )
 
     from playwright.async_api import async_playwright
 

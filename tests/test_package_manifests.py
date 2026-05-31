@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from generator.package_builder import build_package
 from generator.pdf_backend import PdfWriter
 from generator.print_guide import build_print_manifest
@@ -88,3 +90,16 @@ def test_print_manifest_calcula_paginas_confidencialidade_duplex_e_perfis(tmp_pa
     assert by_file["01_envelope_1.pdf"]["confidential"] is False
     assert by_file["03_dicas_facilitador.pdf"]["confidential"] is True
     assert all(entry["duplex"] is False for entry in print_manifest["files"])
+
+def test_build_package_strict_nao_gera_pdf_fake_sem_env(tmp_path, monkeypatch):
+    from generator import renderer
+
+    monkeypatch.setattr(renderer, "_playwright_disponivel", lambda: False)
+    monkeypatch.delenv("INDICIARIO_ALLOW_FAKE_PDF", raising=False)
+
+    with pytest.raises(RuntimeError) as excinfo:
+        build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
+
+    assert "Playwright não está instalado" in str(excinfo.value)
+    assert "python -m playwright install chromium" in str(excinfo.value)
+

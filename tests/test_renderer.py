@@ -173,3 +173,29 @@ def test_renderizar_caso_non_strict_continua_em_placeholder_residual(tmp_path, m
         grupos = renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=False)
 
     assert len(grupos["E1"]) == 1
+
+def test_html_para_pdf_sem_playwright_falha_sem_env(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    monkeypatch.setattr(renderer, "_playwright_disponivel", lambda: False)
+    monkeypatch.delenv("INDICIARIO_ALLOW_FAKE_PDF", raising=False)
+
+    with pytest.raises(RuntimeError) as excinfo:
+        import asyncio
+
+        asyncio.run(renderer._html_para_pdf("<html></html>", tmp_path / "out.pdf"))
+
+    assert "Playwright não está instalado" in str(excinfo.value)
+    assert "python -m playwright install chromium" in str(excinfo.value)
+
+
+def test_html_para_pdf_fake_exige_env_explicito(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    monkeypatch.setattr(renderer, "_playwright_disponivel", lambda: False)
+    monkeypatch.setenv("INDICIARIO_ALLOW_FAKE_PDF", "1")
+
+    import asyncio
+
+    output = asyncio.run(renderer._html_para_pdf("<html></html>", tmp_path / "out.pdf"))
+
+    assert output.exists()
+
