@@ -409,10 +409,12 @@
     </div>
   </div>
 
+  {{#ESCOPO}}
   <div class="scope-section">
     <div class="scope-title">Escopo dos Serviços</div>
     <div class="scope-text">{{ESCOPO}}</div>
   </div>
+  {{/ESCOPO}}
 
   <div class="items-section">
     <table class="items">
@@ -426,6 +428,7 @@
         </tr>
       </thead>
       <tbody>
+        {{#ITENS}}
         <tr>
           <td>{{NUMERO_ITEM}}</td>
           <td class="item-desc">
@@ -436,6 +439,7 @@
           <td class="value">{{VALOR_UNITARIO}}</td>
           <td class="value">{{VALOR_TOTAL_ITEM}}</td>
         </tr>
+        {{/ITENS}}
       </tbody>
     </table>
   </div>
@@ -452,16 +456,18 @@
   <div class="conditions">
     <div class="conditions-title">Condições e Observações</div>
     <ul>
-      <li>{{CONDICAO}}</li>
+      {{#CONDICOES}}<li>{{CONDICAO}}</li>{{/CONDICOES}}
     </ul>
   </div>
 
+  {{#UNIDADES}}
   <div class="locations">
     <strong>Nossas Unidades:</strong>
-    <span class="location-tag">{{UNIDADE}}</span>
+    {{#LISTA_UNIDADES}}<span class="location-tag">{{UNIDADE}}</span>{{/LISTA_UNIDADES}}
   </div>
+  {{/UNIDADES}}
 
-  <span class="manuscript-note">"{{NOTA_MANUSCRITA}}"</span>
+  {{#NOTA_MANUSCRITA}}<span class="manuscript-note">"{{NOTA_MANUSCRITA}}"</span>{{/NOTA_MANUSCRITA}}
 
   <div class="approval">
     <div class="approval-box">

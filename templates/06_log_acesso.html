@@ -313,6 +313,7 @@
         </tr>
       </thead>
       <tbody>
+        {{#REGISTROS}}
         <tr class="{{CLASSE_LINHA}}">
           <td class="cell-date">{{DATA}}</td>
           <td class="cell-time">{{HORA}}</td>
@@ -324,6 +325,7 @@
           <td class="cell-note">{{METODO}}</td>
           <td class="cell-note">{{OBSERVACAO}}</td>
         </tr>
+        {{/REGISTROS}}
       </tbody>
     </table>
   </div>
@@ -364,4 +366,3 @@
 </div>
 </body>
 </html>
-

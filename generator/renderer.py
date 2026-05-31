@@ -1,10 +1,18 @@
 """
-renderer.py — Converte templates HTML em PDF via Playwright
+renderer.py — Converte templates HTML em PDF via Playwright.
 
-Uso:
-    from generator.renderer import renderizar_caso
-    pdfs = renderizar_caso(blueprint, "output/caso_01")
+Motor de injeção suporta:
+- {{VARIAVEL}} → substitui pelo valor escalar
+- {{#LISTA}}...{{/LISTA}} → itera lista de dicts, repete o bloco por item
+- {{#BOOL}}...{{/BOOL}} → renderiza bloco somente se valor for truthy
+- {{^BOOL}}...{{/BOOL}} → renderiza bloco somente se valor for falsy (seção inversa)
+
+Interface pública (ver AGENTS.md):
+    renderizar_documento(template_nome, dados, output_path) -> Path
+    renderizar_caso(blueprint_path, output_dir) -> dict[str, list[Path]]
 """
+
+from __future__ import annotations
 
 import asyncio
 import json
@@ -15,56 +23,108 @@ from typing import Any
 from playwright.async_api import async_playwright
 
 TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
-OUTPUT_DIR = Path(__file__).parent.parent / "output"
+OUTPUT_DIR    = Path(__file__).parent.parent / "output"
 
 
-# ─────────────────────────────────────────
-# Injeção de dados no template
-# ─────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
+# Motor de template (Mustache-lite)
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _injetar_escalares(html: str, dados: dict[str, Any]) -> str:
+    """Substitui {{VARIAVEL}} simples por valor escalar."""
+    def sub(match: re.Match) -> str:
+        chave = match.group(1).strip()
+        valor = dados.get(chave, match.group(0))
+        # Listas e dicts não são injetados como escalares — deixa o placeholder
+        if isinstance(valor, (list, dict)):
+            return match.group(0)
+        return str(valor) if valor is not None else ""
+    return re.sub(r"\{\{([^#/\^].*?)\}\}", sub, html)
+
+
+def _processar_secao(bloco: str, dados: dict[str, Any]) -> str:
+    """Processa um bloco de seção (lista ou bool) recursivamente."""
+    return renderizar_html(bloco, dados)
+
+
+def renderizar_html(template: str, dados: dict[str, Any]) -> str:
+    """
+    Processa o template HTML completo com suporte a seções e escalares.
+
+    Ordem:
+      1. Seções de lista  {{#CHAVE}}...{{/CHAVE}} onde dados[CHAVE] é list
+      2. Seções booleanas {{#CHAVE}}...{{/CHAVE}} onde dados[CHAVE] é truthy
+      3. Seções inversas  {{^CHAVE}}...{{/CHAVE}} onde dados[CHAVE] é falsy
+      4. Escalares simples {{CHAVE}}
+    """
+    # Padrão: captura nome da seção e conteúdo (não-greedy, DOTALL)
+    SECAO_RE = re.compile(r"\{\{([#\^])(\w+)\}\}(.*?)\{\{/\2\}\}", re.DOTALL)
+
+    def processar_match(m: re.Match) -> str:
+        tipo_secao = m.group(1)   # '#' ou '^'
+        chave      = m.group(2)
+        conteudo   = m.group(3)
+        valor      = dados.get(chave)
+
+        if tipo_secao == "#":
+            if isinstance(valor, list):
+                # Itera: renderiza o bloco para cada item da lista
+                partes = []
+                for item in valor:
+                    contexto = {**dados, **item} if isinstance(item, dict) else {**dados, "ITEM": item}
+                    partes.append(renderizar_html(conteudo, contexto))
+                return "".join(partes)
+            elif valor:
+                # Bool truthy: renderiza uma vez com o contexto atual
+                return renderizar_html(conteudo, dados)
+            else:
+                return ""
+        else:  # '^' — seção inversa
+            if not valor:
+                return renderizar_html(conteudo, dados)
+            return ""
+
+    # Processa seções de dentro para fora (re.sub com DOTALL)
+    resultado = SECAO_RE.sub(processar_match, template)
+    # Por fim, substitui escalares simples
+    resultado = _injetar_escalares(resultado, dados)
+    return resultado
+
 
 def injetar_dados(html: str, dados: dict[str, Any]) -> str:
-    """
-    Substitui {{VARIAVEL}} pelo valor correspondente em dados.
-    Ignora chaves não encontradas (mantém o placeholder).
-    """
-    def substituir(match):
-        chave = match.group(1).strip()
-        return str(dados.get(chave, match.group(0)))
-
-    return re.sub(r"\{\{(.+?)\}\}", substituir, html)
+    """API de compatibilidade — delega para renderizar_html."""
+    return renderizar_html(html, dados)
 
 
-# ─────────────────────────────────────────
-# Renderização de um documento
-# ─────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
+# Verificação de placeholders residuais
+# ──────────────────────────────────────────────────────────────────────────────
 
-async def _renderizar_html_para_pdf(
-    html: str,
-    output_path: Path,
-) -> Path:
-    """Renderiza uma string HTML como PDF usando Playwright."""
+PLACEHOLDER_RE = re.compile(r"\{\{[^{}]+?\}\}")
+
+
+def detectar_placeholders(html: str) -> list[str]:
+    """Retorna lista de placeholders não substituídos no HTML final."""
+    return PLACEHOLDER_RE.findall(html)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Renderização HTML → PDF
+# ──────────────────────────────────────────────────────────────────────────────
+
+async def _html_para_pdf(html: str, output_path: Path) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
-
     async with async_playwright() as p:
         browser = await p.chromium.launch()
-        page = await browser.new_page()
-
+        page    = await browser.new_page()
         await page.set_content(html, wait_until="networkidle")
-
         await page.pdf(
             path=str(output_path),
             format="A4",
             print_background=True,
-            margin={
-                "top": "15mm",
-                "bottom": "15mm",
-                "left": "15mm",
-                "right": "15mm",
-            },
+            margin={"top": "15mm", "bottom": "15mm", "left": "15mm", "right": "15mm"},
         )
-
         await browser.close()
-
     return output_path
 
 
@@ -73,36 +133,34 @@ def renderizar_documento(
     dados: dict[str, Any],
     output_path: Path,
 ) -> Path:
-    """
-    Carrega o template, injeta os dados e gera o PDF.
-
-    Args:
-        template_nome: nome do arquivo HTML em /templates (ex: "01_email.html")
-        dados: dicionário com os valores dos placeholders {{VARIAVEL}}
-        output_path: caminho de saída do PDF
-    """
     template_path = TEMPLATES_DIR / template_nome
     if not template_path.exists():
         raise FileNotFoundError(f"Template não encontrado: {template_path}")
 
-    html = template_path.read_text(encoding="utf-8")
-    html_preenchido = injetar_dados(html, dados)
+    html_raw      = template_path.read_text(encoding="utf-8")
+    html_final    = renderizar_html(html_raw, dados)
 
-    return asyncio.run(
-        _renderizar_html_para_pdf(html_preenchido, output_path)
-    )
+    # Alerta (não bloqueia) se houver placeholders residuais
+    residuais = detectar_placeholders(html_final)
+    if residuais:
+        unicos = sorted(set(residuais))
+        print(f"  ⚠️  {output_path.name} — {len(unicos)} placeholder(s) residual(is): "
+              f"{', '.join(unicos[:5])}{'...' if len(unicos) > 5 else ''}")
+
+    return asyncio.run(_html_para_pdf(html_final, output_path))
 
 
-# ─────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
 # Mapeamento tipo → template
-# ─────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
 
-TIPO_PARA_TEMPLATE = {
+TIPO_PARA_TEMPLATE: dict[str, str] = {
     "email_narrador":      "01_email.html",
     "email_institucional": "01_email.html",
     "chat":                "02_whatsapp.html",
     "log_acesso":          "06_log_acesso.html",
     "log_sistema":         "06_log_acesso.html",
+    "escala":              "06_log_acesso.html",
     "boletim":             "04_boletim.html",
     "depoimento":          "04_boletim.html",
     "contrato":            "05_carta.html",
@@ -113,13 +171,14 @@ TIPO_PARA_TEMPLATE = {
     "protocolo":           "05_carta.html",
     "glossario":           "05_carta.html",
     "folha_cruzamento":    "05_carta.html",
+    "manual":              "05_carta.html",
     "outro":               "05_carta.html",
 }
 
 
-# ─────────────────────────────────────────
-# Renderização de um caso completo
-# ─────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
+# Renderização de caso completo
+# ──────────────────────────────────────────────────────────────────────────────
 
 def renderizar_caso(
     blueprint_path: Path,
@@ -128,44 +187,34 @@ def renderizar_caso(
     """
     Lê um blueprint validado e renderiza todos os documentos.
     Agrupa os PDFs por envelope.
-
-    Retorna:
-        {
-          "E1": [path_doc1, path_doc2, ...],
-          "E2": [...],
-          "dicas": [...],
-          "gabarito": [...],
-        }
     """
-    blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
-    titulo_slug = blueprint["titulo"].lower().replace(" ", "_")
+    blueprint  = json.loads(blueprint_path.read_text(encoding="utf-8"))
+    titulo_slug = re.sub(r"[^\w]", "_", blueprint["titulo"].lower())
 
     if output_dir is None:
         output_dir = OUTPUT_DIR / titulo_slug
-
     output_dir.mkdir(parents=True, exist_ok=True)
 
     grupos: dict[str, list[Path]] = {
-        "E1": [], "E2": [], "E3": [], "dicas": [], "gabarito": []
+        "E1": [], "E2": [], "E3": [], "dicas": [], "gabarito": [],
     }
 
     for doc in blueprint.get("documentos", []):
-        codigo = doc["codigo"]
-        tipo = doc.get("tipo", "outro")
+        codigo   = doc["codigo"]
+        tipo     = doc.get("tipo", "outro")
         envelope = doc.get("envelope", "E1")
         template = TIPO_PARA_TEMPLATE.get(tipo, "05_carta.html")
-
         conteudo = doc.get("conteudo", {})
 
         if not conteudo:
-            print(f"  ⚠️  {codigo} — campo 'conteudo' vazio, PDF não gerado")
+            print(f"  ⚠️  {codigo} — 'conteudo' vazio, PDF ignorado")
             continue
 
         dados = {
             "TITULO_DOCUMENTO": doc.get("titulo", codigo),
             "CODIGO_DOCUMENTO": codigo,
-            "NOME_CASO": blueprint["titulo"],
-            "ENVELOPE": envelope,
+            "NOME_CASO":        blueprint["titulo"],
+            "ENVELOPE":         envelope,
             **conteudo,
         }
 
@@ -174,19 +223,19 @@ def renderizar_caso(
             caminho = renderizar_documento(template, dados, pdf_path)
             grupos[envelope].append(caminho)
             print(f"  ✅ {codigo} → {caminho.name}")
-        except Exception as e:
-            print(f"  ❌ {codigo} — erro: {e}")
+        except Exception as exc:
+            print(f"  ❌ {codigo} — {exc}")
 
-    dicas_por_envelope = sorted(
-        {dica.get("envelope") for dica in blueprint.get("dicas", []) if dica.get("envelope")}
-    )
-    for envelope_dica in dicas_por_envelope:
+    # Capa de dicas por envelope
+    for envelope_dica in sorted(
+        {d.get("envelope") for d in blueprint.get("dicas", []) if d.get("envelope")}
+    ):
         dados_capa = {
-            "NOME_CASO": blueprint["titulo"],
-            "ENVELOPE": envelope_dica,
-            "case_name": blueprint["titulo"],
+            "NOME_CASO":     blueprint["titulo"],
+            "ENVELOPE":      envelope_dica,
+            "case_name":     blueprint["titulo"],
             "section_label": "DICAS",
-            "section_ref": "Material de apoio ao facilitador",
+            "section_ref":   "Material de apoio ao facilitador",
             "warning_label": "ABRIR SOMENTE QUANDO NECESSÁRIO",
         }
         pdf_path = output_dir / f"DICAS-{envelope_dica}-00_CAPA.pdf"
@@ -194,33 +243,29 @@ def renderizar_caso(
             caminho = renderizar_documento("00_envelope_capa.html", dados_capa, pdf_path)
             grupos["dicas"].append(caminho)
             print(f"  ✅ DICAS-{envelope_dica}-CAPA → {caminho.name}")
-        except Exception as e:
-            print(f"  ❌ DICAS-{envelope_dica}-CAPA — erro: {e}")
+        except Exception as exc:
+            print(f"  ❌ DICAS-{envelope_dica}-CAPA — {exc}")
 
     return grupos
 
 
-
-# ─────────────────────────────────────────
-# CLI básico
-# ─────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
+# CLI
+# ──────────────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     import sys
-
     if len(sys.argv) < 2:
         print("Uso: python renderer.py <blueprint.json> [pasta_output]")
         sys.exit(1)
 
-    bp_path = Path(sys.argv[1])
-    out_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else None
-
+    bp_path  = Path(sys.argv[1])
+    out_dir  = Path(sys.argv[2]) if len(sys.argv) > 2 else None
     print(f"\n📄 Renderizando: {bp_path.name}\n")
     resultado = renderizar_caso(bp_path, out_dir)
-
     print("\n📦 Arquivos gerados:")
-    for envelope, arquivos in resultado.items():
-        if arquivos:
-            print(f"\n  {envelope}:")
-            for a in arquivos:
+    for env, arqs in resultado.items():
+        if arqs:
+            print(f"\n  {env}:")
+            for a in arqs:
                 print(f"    {a}")

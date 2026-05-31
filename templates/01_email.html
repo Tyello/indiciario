@@ -231,9 +231,11 @@
     {{CORPO_EMAIL}}
   </div>
 
+  {{#ANEXOS}}
   <div class="attachments">
     <div class="attachments-label"><strong>{{TOTAL_ANEXOS}} anexos</strong></div>
     <div class="attachment-grid">
+      {{#CADA_ANEXO}}
       <div class="attachment-item">
         <div class="attachment-icon">📄</div>
         <div class="attachment-info">
@@ -241,8 +243,10 @@
           <div class="attachment-size">{{TAMANHO_KB}}K</div>
         </div>
       </div>
+      {{/CADA_ANEXO}}
     </div>
   </div>
+  {{/ANEXOS}}
 
   <div class="confidential-footer">{{NOTA_RODAPE}}</div>
 </div>

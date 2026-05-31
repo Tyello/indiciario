@@ -510,14 +510,17 @@
                   - ticks: ✓ = enviado, ✓✓ = entregue, ticks em azul = lido
                 -->
 
+<<<<<<< HEAD
+                {{#MENSAGENS}}
                 <div class="message {{DIRECAO}} {{CLASSE_GAP}}">
-                  <span class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</span>
+                  {{#MOSTRAR_NOME}}<span class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</span>{{/MOSTRAR_NOME}}
                   <span class="bubble">{{TEXTO_MENSAGEM}}</span>
                   <span class="metadata">
                     <span class="time">{{HORARIO}}</span>
-                    <span class="tick">{{TICKS}}</span>
+                    {{#DIRECAO_OUT}}<span class="tick">{{TICKS}}</span>{{/DIRECAO_OUT}}
                   </span>
                 </div>
+                {{/MENSAGENS}}
               </div>
               <div class="conversation-compose">
                 <div class="emoji">

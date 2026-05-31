@@ -339,12 +339,14 @@
         </tr>
       </thead>
       <tbody>
+        {{#ITENS}}
         <tr>
           <td>{{DESCRICAO_ITEM}}</td>
           <td>{{QUANTIDADE}}</td>
           <td>{{VALOR_UNITARIO}}</td>
           <td>{{VALOR_ITEM}}</td>
         </tr>
+        {{/ITENS}}
         <tr class="total-row">
           <td colspan="3">Total</td>
           <td>{{VALOR_TOTAL}}</td>
@@ -375,4 +377,3 @@
 </div>
 </body>
 </html>
-
