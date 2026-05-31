@@ -229,9 +229,11 @@ O agente deve entender esse fluxo antes de modificar qualquer parte:
         ↓
 7. Playwright/Chromium converte cada HTML em PDF
         ↓
-8. pdf_merger.py agrupa por envelope (E1, E2, dicas, gabarito)
+8. merger.py agrupa por envelope (E1, E2, dicas, gabarito)
         ↓
-9. Bot envia os arquivos ao usuário no Telegram
+9. package_builder.py gera manifest.json, print_manifest.json, 05_guia_de_impressao.pdf e qa_report.json
+        ↓
+10. Bot envia os arquivos ao usuário no Telegram
 ```
 
 ---
@@ -253,6 +255,20 @@ O agente deve entender esse fluxo antes de modificar qualquer parte:
 3. Definir código único para o erro (ex: `NOVO_001`).
 4. Adicionar teste em `tests/test_validator.py` com blueprint que viola a regra.
 5. Verificar que o blueprint de exemplo ainda passa: `python validator.py exemplo_blueprint.json`.
+
+
+
+### Gerar pacote final completo
+
+Use o entrypoint oficial para transformar um blueprint válido no pacote final:
+
+```bash
+python -m scripts.build_package examples/showcase_tecnico.json --output output --strict
+```
+
+O pacote deve conter envelopes finais, `05_guia_de_impressao.pdf`,
+`manifest.json`, `print_manifest.json` e `qa_report.json`. Dicas e gabarito, quando
+existirem, devem permanecer confidenciais e separados dos arquivos de jogador.
 
 ### Modificar o prompt de geração
 
@@ -288,6 +304,7 @@ Uma tarefa só está concluída quando:
 - [ ] `pytest tests/` passa sem falhas.
 - [ ] `ruff check generator/` sem erros.
 - [ ] `python validator.py generator/exemplo_blueprint.json` retorna risco Baixo ou Médio-baixo.
+- [ ] Se a tarefa altera o pacote final: `python -m scripts.build_package examples/showcase_tecnico.json --output output --strict` gera `qa_report.json` com `status: passed`.
 - [ ] Nenhuma variável de ambiente real foi commitada.
 - [ ] Se modificou framework ou templates: comportamento antigo ainda funciona (sem regressão).
 

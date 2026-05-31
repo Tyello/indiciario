@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Guia de Impressão — {{CASE_TITLE}}</title>
+  <style>
+    @page { size: A4 portrait; margin: 15mm; }
+    * { box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; color: #111; line-height: 1.35; font-size: 12px; }
+    h1, h2, h3 { margin: 0 0 8px; }
+    h1 { font-size: 30px; letter-spacing: .02em; }
+    h2 { font-size: 18px; border-bottom: 2px solid #111; padding-bottom: 4px; margin-top: 24px; }
+    h3 { font-size: 14px; margin-top: 12px; }
+    .cover { min-height: 150mm; display: flex; flex-direction: column; justify-content: center; border: 3px solid #111; padding: 20mm; text-align: center; }
+    .subtitle { font-size: 22px; text-transform: uppercase; margin: 10px 0 20px; }
+    .meta { font-size: 13px; }
+    .summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+    .card { border: 1px solid #333; padding: 10px; min-height: 42px; }
+    .warning { border: 2px solid #111; padding: 10px; margin: 14px 0; font-weight: bold; background: #f2f2f2; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 10px; }
+    th, td { border: 1px solid #333; padding: 5px; vertical-align: top; }
+    th { background: #e8e8e8; text-align: left; }
+    ul { margin: 6px 0 0 18px; padding: 0; }
+    .page-break { page-break-before: always; }
+    .mono { font-family: "Courier New", monospace; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <h1>{{CASE_TITLE}}</h1>
+    <div class="subtitle">Guia de Impressão</div>
+    <div class="meta">Gerado em: {{GENERATED_AT}}</div>
+  </section>
+
+  <section class="page-break">
+    <h2>Resumo do pacote</h2>
+    <div class="summary">
+      <div class="card"><strong>Total de arquivos:</strong><br>{{TOTAL_FILES}}</div>
+      <div class="card"><strong>Total de páginas:</strong><br>{{TOTAL_PAGES}}</div>
+      <div class="card"><strong>Arquivos dos jogadores:</strong><br><span class="mono">{{PLAYER_FILES}}</span></div>
+      <div class="card"><strong>Exclusivos do facilitador:</strong><br><span class="mono">{{FACILITATOR_FILES}}</span></div>
+    </div>
+    <div class="warning">Não misture dicas, gabarito ou qualquer material confidencial com os envelopes dos jogadores.</div>
+
+    <h2>Tabela principal de impressão</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Arquivo</th>
+          <th>Páginas</th>
+          <th>Cópias</th>
+          <th>Papel</th>
+          <th>Cor/P&amp;B</th>
+          <th>Orientação</th>
+          <th>Frente e verso</th>
+          <th>Recorte</th>
+          <th>Destino</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#FILES}}
+        <tr>
+          <td class="mono">{{file}}</td>
+          <td>{{pages}}</td>
+          <td>{{copies}}</td>
+          <td>{{paper}}</td>
+          <td>{{color}}</td>
+          <td>{{orientation}}</td>
+          <td>{{duplex_label}}</td>
+          <td>{{cut_label}}</td>
+          <td>{{deliver_to}}</td>
+          <td>{{instructions}}</td>
+        </tr>
+        {{/FILES}}
+      </tbody>
+    </table>
+
+    <h2>Perfis de impressão</h2>
+    {{#PROFILES}}
+      <h3>{{name}}</h3>
+      <p>{{description}}</p>
+    {{/PROFILES}}
+
+    <h2>Avisos operacionais</h2>
+    <ul>
+      <li>Imprimir todos os PDFs em escala 100%.</li>
+      <li>Não usar “ajustar à página” ou redimensionamento automático.</li>
+      <li>Separar fisicamente os envelopes de jogador antes da entrega.</li>
+      <li>Manter gabarito, dicas e materiais confidenciais fora do pacote dos jogadores.</li>
+      <li>Conferir a ordem dos arquivos e das páginas antes de entregar.</li>
+    </ul>
+  </section>
+</body>
+</html>

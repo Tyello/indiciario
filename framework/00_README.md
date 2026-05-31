@@ -47,6 +47,7 @@ Leia e internalize nesta ordem antes de gerar qualquer caso:
 | 10 | `10_TEMPLATE_DICAS.md` | Template de dicas progressivas |
 | 11 | `11_GUIA_DO_FACILITADOR.md` | Como conduzir a sessão |
 | 12 | `12_GUIA_DE_PRODUCAO.md` | Design visual, tipografia, impressão |
+| 15 | `15_GUIA_DE_IMPRESSAO.md` | Regras operacionais do pacote de impressão |
 
 ---
 
@@ -88,6 +89,9 @@ Como preparar, abrir, conduzir e fechar uma sessão. Inclui: quando intervir, co
 ### `12_GUIA_DE_PRODUCAO.md`
 Guia visual completo: paletas por universo, tipografia por tipo de documento, templates de layout em ASCII para os 12 tipos principais, imperfeições intencionais, acessibilidade em P&B, guia de impressão e checklist visual.
 
+### `15_GUIA_DE_IMPRESSAO.md`
+Guia operacional do pacote final: separação entre material de jogador e facilitador, perfis econômico/padrão/premium, escala 100%, confidencialidade, mapas, cartões futuros e interpretação do `print_manifest.json`.
+
 ---
 
 ## Separação obrigatória de materiais
@@ -119,7 +123,9 @@ Nunca misture no mesmo arquivo ou impressão:
 8. Gerar dicas usando template do 10
 9. Gerar instruções de facilitador com base no 11
 10. Verificar checklist visual do 12
-11. Entregar arquivos separados por destino
+11. Gerar pacote final com `python -m scripts.build_package <blueprint.json> --output output --strict`
+12. Conferir `manifest.json`, `print_manifest.json`, `qa_report.json` e `05_guia_de_impressao.pdf`
+13. Entregar arquivos separados por destino
 ```
 
 ---
@@ -154,3 +160,26 @@ base técnica desta rodada inclui smoke test manual de ambas as orientações:
 ```bash
 python -m scripts.smoke_playwright_pdf
 ```
+
+
+## Pacote final técnico
+
+A camada de pacote final junta os PDFs renderizados por destino e gera arquivos de
+controle para produção:
+
+- `01_envelope_1.pdf` — material do jogador do Envelope 1;
+- `02_envelope_2.pdf` — material do jogador do Envelope 2, quando existir;
+- `03_dicas_facilitador.pdf` — material confidencial de dicas, quando existir;
+- `04_gabarito_mestre.pdf` — gabarito confidencial, quando existir;
+- `05_guia_de_impressao.pdf` — guia operacional para gráfica/papelaria;
+- `manifest.json` — descrição técnica do pacote e dos documentos;
+- `print_manifest.json` — instruções de impressão;
+- `qa_report.json` — QA técnico do pacote.
+
+Uso principal:
+
+```bash
+python -m scripts.build_package examples/showcase_tecnico.json --output output --strict
+```
+
+O QA deve retornar `status: passed` antes de distribuir o pacote.
