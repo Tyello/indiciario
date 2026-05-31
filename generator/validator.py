@@ -41,6 +41,11 @@ try:  # Execução como pacote: python -m generator.validator
 except ImportError:  # Execução direta: python generator/validator.py
     from schema_loader import get_schema_for_type, load_all_schemas  # type: ignore[no-redef]
 
+try:  # Execução como pacote: python -m generator.validator
+    from .clue_graph import analyze_clue_graph, build_clue_graph
+except ImportError:  # Execução direta: python generator/validator.py
+    from clue_graph import analyze_clue_graph, build_clue_graph  # type: ignore[no-redef]
+
 
 class Severidade(str, Enum):
     CRITICO = "CRÍTICO"
@@ -243,6 +248,7 @@ class BlueprintValidator:
         self._verificar_elenco()
         self._verificar_documentos()
         self._verificar_contratos_evidencia()
+        self._verificar_grafo_pistas()
         self._verificar_pilares()
         self._verificar_pistas()
         self._verificar_red_herrings()
@@ -479,6 +485,37 @@ class BlueprintValidator:
                 self.resultado.adicionar(Erro(
                     "CE_010", Severidade.MODERADO, f"Contrato obrigatório '{contrato.id}' não define ação esperada do jogador."
                 ))
+
+    def _verificar_grafo_pistas(self) -> None:
+        graph = build_clue_graph(self.bp)
+        report = analyze_clue_graph(graph, self.bp)
+
+        if not self.bp.contratos_evidencia:
+            self.resultado.adicionar(Erro(
+                "GP_006",
+                Severidade.MODERADO,
+                "Grafo de pistas não avaliado: nenhum contrato de evidência informado.",
+                detalhe="Blueprints antigos continuam aceitos, mas a solvabilidade estrutural exige contratos.",
+            ))
+            return
+
+        for issue in report["issues"]:
+            codigo = str(issue["code"])
+            severidade_texto = str(issue["severity"])
+            if codigo == "GP_003" or severidade_texto == "warning":
+                severidade = Severidade.AVISO
+            elif severidade_texto == "critical":
+                severidade = Severidade.CRITICO
+            else:
+                severidade = Severidade.MODERADO
+
+            self.resultado.adicionar(Erro(
+                codigo=codigo,
+                severidade=severidade,
+                mensagem=str(issue["message"]),
+                documento=issue.get("document"),
+                detalhe=f"Contrato: {issue['contract']}" if issue.get("contract") else None,
+            ))
 
     def _id_tem_correspondencia(self, id_citado: str) -> bool:
         if id_citado in self._ids_personagens:

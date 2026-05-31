@@ -66,6 +66,10 @@ def test_manifest_contem_arquivos_paths_relativos_e_docs_validos(tmp_path, monke
     assert all(not Path(path).is_absolute() for path in paths)
     assert all(entry["category"] != "player" for entry in manifest["files"] if "dicas" in entry["id"] or "gabarito" in entry["id"])
     assert all(doc["final_file"] in paths for doc in manifest["documents"])
+    assert result["graph_report_path"].endswith("graph_report.json")
+    assert Path(result["graph_report_path"]).exists()
+    assert manifest["reports"] == {"qa": "qa_report.json", "graph": "graph_report.json"}
+    assert "graph_report.json" not in paths
 
 
 def test_build_package_strict_falha_quando_e3_sem_e2(tmp_path, monkeypatch):
@@ -117,6 +121,8 @@ def test_build_package_empacota_tres_envelopes_e_desloca_auxiliares(tmp_path, mo
     assert "06_guia_de_impressao.pdf" in paths
     assert {entry["file"] for entry in print_manifest["files"]} == set(paths)
     assert result["status"] == "passed"
+    assert result["graph_status"] == "passed"
+    assert Path(result["graph_report_path"]).exists()
 
 
 def test_print_manifest_final_usa_page_count_final_do_guia(tmp_path, monkeypatch):

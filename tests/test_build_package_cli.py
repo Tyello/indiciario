@@ -26,6 +26,9 @@ def test_build_package_cli_smoke_sem_chromium(tmp_path, monkeypatch, capsys):
             "manifest_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "manifest.json"),
             "print_manifest_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "print_manifest.json"),
             "qa_report_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "qa_report.json"),
+            "graph_report_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "graph_report.json"),
+            "qa_status": "passed",
+            "graph_status": "passed",
         }
 
     monkeypatch.setattr(cli, "build_package", fake_build_package)
@@ -40,3 +43,4 @@ def test_build_package_cli_smoke_sem_chromium(tmp_path, monkeypatch, capsys):
     assert "Validando blueprint..." in out
     assert "Pacote gerado em:" in out
     assert "QA: passed" in out
+    assert "Graph: passed" in out

@@ -48,6 +48,7 @@ Leia e internalize nesta ordem antes de gerar qualquer caso:
 | 11 | `11_GUIA_DO_FACILITADOR.md` | Como conduzir a sessão |
 | 12 | `12_GUIA_DE_PRODUCAO.md` | Design visual, tipografia, impressão |
 | 13 | `13_CONTRATO_EVIDENCIA.md` | Contratos mínimos de prova, confirmação e fase |
+| 14 | `14_GRAFO_DE_PISTAS.md` | Grafo lógico de pistas, contratos e solvabilidade estrutural |
 | 15 | `15_GUIA_DE_IMPRESSAO.md` | Regras operacionais do pacote de impressão |
 
 ---
@@ -93,6 +94,9 @@ Guia visual completo: paletas por universo, tipografia por tipo de documento, te
 ### `13_CONTRATO_EVIDENCIA.md`
 Define o contrato mínimo entre conclusão investigativa, fase, prova principal e confirmação independente. Serve como camada inicial de solvabilidade para impedir chute, spoiler fora de fase e conclusões sem prova.
 
+### `14_GRAFO_DE_PISTAS.md`
+Define o grafo lógico de documentos e contratos de evidência. Estabelece o `graph_report.json`, documentos órfãos, contratos órfãos, caminhos de solução, regras GP_001 a GP_007 e limitações da versão sem visualização.
+
 ### `15_GUIA_DE_IMPRESSAO.md`
 Guia operacional do pacote final: separação entre material de jogador e facilitador, perfis econômico/padrão/premium, escala 100%, confidencialidade, mapas, cartões futuros e interpretação do `print_manifest.json`.
 
@@ -128,7 +132,7 @@ Nunca misture no mesmo arquivo ou impressão:
 9. Gerar instruções de facilitador com base no 11
 10. Verificar checklist visual do 12
 11. Gerar pacote final com `python -m scripts.build_package <blueprint.json> --output output --strict`
-12. Conferir `manifest.json`, `print_manifest.json`, `qa_report.json` e `05_guia_de_impressao.pdf`
+12. Conferir `manifest.json`, `print_manifest.json`, `qa_report.json`, `graph_report.json` e `05_guia_de_impressao.pdf`
 13. Entregar arquivos separados por destino
 ```
 
@@ -178,7 +182,8 @@ controle para produção:
 - `05_guia_de_impressao.pdf` — guia operacional para gráfica/papelaria;
 - `manifest.json` — descrição técnica do pacote e dos documentos;
 - `print_manifest.json` — instruções de impressão;
-- `qa_report.json` — QA técnico do pacote.
+- `qa_report.json` — QA técnico do pacote;
+- `graph_report.json` — relatório técnico de solvabilidade estrutural por grafo de pistas.
 
 Uso principal:
 
@@ -186,4 +191,4 @@ Uso principal:
 python -m scripts.build_package examples/showcase_tecnico.json --output output --strict
 ```
 
-O QA deve retornar `status: passed` antes de distribuir o pacote.
+O QA e o grafo devem retornar `status: passed` antes de distribuir o pacote.

@@ -414,8 +414,8 @@ def test_contrato_evidencia_valido_e_blueprint_antigo_sem_contratos_passam():
     data["contratos_evidencia"] = [{
         "id": "C-E1-01",
         "conclusao": "A presença foi confirmada por dois registros independentes.",
-        "fase": "E1",
-        "tipo": "oportunidade",
+        "fase": "final",
+        "tipo": "solucao_final",
         "prova_principal": "E1-04",
         "confirmacao_independente": "E1-06",
         "descarta_alternativas": ["E1-05"],
@@ -493,3 +493,65 @@ def test_contrato_evidencia_erros_criticos_e_alertas():
 
     assert {"CE_002", "CE_003", "CE_005", "CE_006", "CE_007", "CE_009", "CE_010"}.issubset(codigos)
     assert "CE_004" not in codigos
+
+
+def test_validator_blueprint_sem_contratos_gera_gp_006_moderado_sem_bloquear():
+    blueprint = blueprint_valido()
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert resultado.pode_gerar is True
+    assert any(erro.codigo == "GP_006" for erro in resultado.moderados)
+
+
+def test_validator_contratos_sem_solucao_final_gera_gp_006_critico():
+    blueprint = blueprint_valido()
+    data = blueprint.model_dump(mode="json")
+    data["contratos_evidencia"] = [{
+        "id": "C-E1-01",
+        "conclusao": "A presença foi confirmada.",
+        "fase": "E1",
+        "tipo": "oportunidade",
+        "prova_principal": "E1-04",
+        "confirmacao_independente": "E1-06",
+        "descarta_alternativas": [],
+        "personagens_afetados": ["01"],
+        "acao_esperada_jogador": "comparar registros",
+        "risco_ambiguidade": "baixo",
+        "obrigatoria_para_avanco": True,
+    }]
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert any(erro.codigo == "GP_006" for erro in resultado.criticos)
+
+
+def test_validator_documento_orfao_gera_gp_003_como_aviso():
+    blueprint = blueprint_valido()
+    data = blueprint.model_dump(mode="json")
+    data["contratos_evidencia"] = [{
+        "id": "C-FINAL-01",
+        "conclusao": "A solução final foi confirmada.",
+        "fase": "final",
+        "tipo": "solucao_final",
+        "prova_principal": "E1-04",
+        "confirmacao_independente": "E1-06",
+        "descarta_alternativas": [],
+        "personagens_afetados": ["01"],
+        "acao_esperada_jogador": "comparar registros",
+        "risco_ambiguidade": "baixo",
+        "obrigatoria_para_avanco": True,
+    }]
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert any(erro.codigo == "GP_003" for erro in resultado.avisos)
+    assert not any(erro.codigo == "GP_003" for erro in resultado.criticos)
+
+
+def test_validator_showcase_tecnico_nao_gera_gp_critico():
+    data = json.loads((ROOT / "examples" / "showcase_tecnico.json").read_text(encoding="utf-8"))
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert not any(erro.codigo.startswith("GP_") for erro in resultado.criticos)
