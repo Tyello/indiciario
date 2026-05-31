@@ -279,27 +279,18 @@
 
   <div class="date-separator"><span>{{DATA_CONVERSA}}</span></div>
 
-  <!-- 
-    INSTRUÇÕES PARA O LLM:
-    Para cada mensagem, use a estrutura abaixo.
-    - class "in" = mensagem de outro participante
-    - class "out" = mensagem do "usuário" (ponto de vista da captura)
-    - class "gap" = primeira mensagem de um novo remetente (gera cauda no balão)
-    - sender-name-label: só aparece em mensagens "in" com class "gap"
-    - color-1 a color-6: cor do nome do remetente (um por participante)
-    - ticks: ✓ = enviado, ✓✓ = entregue, ticks em azul = lido
-  -->
-
+  {{#MENSAGENS}}
   <div class="message {{DIRECAO}} {{CLASSE_GAP}}">
-    <div class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</div>
+    {{#MOSTRAR_NOME}}<div class="sender-name-label {{COR_REMETENTE}}">{{NOME_REMETENTE}}</div>{{/MOSTRAR_NOME}}
     <div class="bubble">
       {{TEXTO_MENSAGEM}}
       <div class="bubble-footer">
         <span class="timestamp">{{HORARIO}}</span>
-        <span class="ticks">{{TICKS}}</span>
+        {{#DIRECAO_OUT}}<span class="ticks">{{TICKS}}</span>{{/DIRECAO_OUT}}
       </div>
     </div>
   </div>
+  {{/MENSAGENS}}
 
 </div>
 
