@@ -352,6 +352,27 @@ def test_validator_permite_um_envelope_sem_bloqueio_por_tamanho_esperado():
     assert resultado.pode_gerar is True
 
 
+def test_validator_formato_envelopes_deve_bater_com_maior_envelope_real():
+    blueprint = blueprint_valido()
+    resultado = BlueprintValidator(blueprint).validar()
+    codigos = _codigos(resultado)
+    assert "ENV_004" not in codigos
+    assert "ENV_005" not in codigos
+
+    blueprint_menor_que_real = blueprint_valido()
+    blueprint_menor_que_real.formato_envelopes = 1
+    resultado_menor_que_real = BlueprintValidator(blueprint_menor_que_real).validar()
+    assert "ENV_005" in _codigos(resultado_menor_que_real)
+
+    blueprint_maior_que_real = blueprint_valido()
+    blueprint_maior_que_real.documentos = [
+        doc for doc in blueprint_maior_que_real.documentos if doc.envelope == "E1"
+    ]
+    blueprint_maior_que_real.formato_envelopes = 2
+    resultado_maior_que_real = BlueprintValidator(blueprint_maior_que_real).validar()
+    assert "ENV_004" in _codigos(resultado_maior_que_real)
+
+
 def test_validator_permite_tres_envelopes_sequenciais_e_rejeita_buraco():
     blueprint = blueprint_valido()
     blueprint.formato_envelopes = 3

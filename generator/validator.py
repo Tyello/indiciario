@@ -355,13 +355,23 @@ class BlueprintValidator:
                     Severidade.CRITICO,
                     f"Sequência de envelopes com buraco; ausente(s): {', '.join(ausentes)}.",
                 ))
-            if self.bp.formato_envelopes > max(numeros):
+            maior_envelope_real = max(numeros)
+            if self.bp.formato_envelopes > maior_envelope_real:
                 self.resultado.adicionar(Erro(
                     "ENV_004",
                     Severidade.CRITICO,
                     (
                         f"formato_envelopes declara E{self.bp.formato_envelopes}, "
-                        f"mas só há documentos até E{max(numeros)}."
+                        f"mas só há documentos até E{maior_envelope_real}."
+                    ),
+                ))
+            if self.bp.formato_envelopes < maior_envelope_real:
+                self.resultado.adicionar(Erro(
+                    "ENV_005",
+                    Severidade.CRITICO,
+                    (
+                        f"formato_envelopes declara apenas E{self.bp.formato_envelopes}, "
+                        f"mas há documentos até E{maior_envelope_real}."
                     ),
                 ))
 
