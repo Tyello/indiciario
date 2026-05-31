@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from generator.package_builder import build_package
+from generator.package_builder import PackageBuildError, build_package
 from generator.pdf_backend import PdfWriter
 from generator.print_guide import build_print_manifest
 from generator.qa import run_qa
@@ -66,6 +66,50 @@ def test_manifest_contem_arquivos_paths_relativos_e_docs_validos(tmp_path, monke
     assert all(entry["category"] != "player" for entry in manifest["files"] if "dicas" in entry["id"] or "gabarito" in entry["id"])
     assert all(doc["final_file"] in paths for doc in manifest["documents"])
 
+
+def test_build_package_strict_falha_quando_e3_renderizado(tmp_path, monkeypatch):
+    from generator import package_builder
+
+    def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
+        return {
+            "E1": [make_pdf(output_dir / "E1-01.pdf")],
+            "E2": [],
+            "E3": [make_pdf(output_dir / "E3-01.pdf")],
+            "dicas": [],
+            "gabarito": [],
+        }
+
+    monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
+
+    with pytest.raises(PackageBuildError) as excinfo:
+        build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
+
+    assert "Envelope 3 renderizado" in str(excinfo.value)
+
+
+def test_build_package_non_strict_mantem_warning_quando_e3_renderizado(tmp_path, monkeypatch):
+    from generator import package_builder
+
+    def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
+        return {
+            "E1": [make_pdf(output_dir / "E1-01.pdf")],
+            "E2": [],
+            "E3": [make_pdf(output_dir / "E3-01.pdf")],
+            "dicas": [],
+            "gabarito": [],
+        }
+
+    def fake_render_print_guide(_print_manifest, output_path, strict=True):
+        return make_pdf(output_path)
+
+    monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
+    monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+
+    result = build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=False)
+    manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
+
+    assert result["status"] == "passed"
+    assert "Envelope 3 renderizado, mas não empacotado nesta PR." in manifest["warnings"]
 
 def test_documentos_duplicados_no_manifest_geram_qa_error(tmp_path):
     manifest = minimal_manifest(tmp_path)

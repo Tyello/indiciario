@@ -14,6 +14,10 @@ from .qa import run_qa, write_qa_report
 from .renderer import renderizar_caso
 from .validator import BlueprintValidator
 
+class PackageBuildError(RuntimeError):
+    """Erro claro para pacotes incompletos ou inconsistentes."""
+
+
 GROUP_CONFIG: dict[str, dict[str, str | bool]] = {
     "E1": {
         "id": "envelope_1",
@@ -99,11 +103,21 @@ def _build_documents_manifest(
     return documents
 
 
-def _merge_groups(rendered_groups: dict[str, list[Path]], paths: dict[str, Path]) -> tuple[list[dict[str, Any]], dict[str, Path], list[str]]:
+def _merge_groups(
+    rendered_groups: dict[str, list[Path]],
+    paths: dict[str, Path],
+    strict: bool = True,
+) -> tuple[list[dict[str, Any]], dict[str, Path], list[str]]:
     files: list[dict[str, Any]] = []
     final_by_envelope: dict[str, Path] = {}
     warnings: list[str] = []
     package_dir = paths["output_dir"]
+
+    if rendered_groups.get("E3"):
+        mensagem_e3 = "Envelope 3 renderizado, mas não empacotado nesta PR."
+        if strict:
+            raise PackageBuildError(mensagem_e3)
+        warnings.append(mensagem_e3)
 
     for group in ["E1", "E2", "dicas", "gabarito"]:
         pdfs = rendered_groups.get(group, [])
@@ -126,8 +140,6 @@ def _merge_groups(rendered_groups: dict[str, list[Path]], paths: dict[str, Path]
         if group in {"E1", "E2"}:
             final_by_envelope[group] = merged
 
-    if rendered_groups.get("E3"):
-        warnings.append("Envelope 3 renderizado, mas não empacotado nesta PR.")
     return files, final_by_envelope, warnings
 
 
@@ -161,7 +173,7 @@ def build_package(
     paths["html_debug_dir"].mkdir(parents=True, exist_ok=True)
 
     rendered_groups = renderizar_caso(blueprint_path, paths["rendered_dir"], strict=strict)
-    files, final_by_envelope, warnings = _merge_groups(rendered_groups, paths)
+    files, final_by_envelope, warnings = _merge_groups(rendered_groups, paths, strict=strict)
     rendered_by_code = {path.stem: path for group in rendered_groups.values() for path in group}
 
     manifest: dict[str, Any] = {
