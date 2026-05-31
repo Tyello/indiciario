@@ -4,7 +4,7 @@
   "genero": "fraude corporativa",
   "tom": "corporativo",
   "modo_validacao": "offline_puro",
-  "dificuldade": "medio",
+  "dificuldade": "intermediario",
   "tempo_estimado_min": 60,
   "numero_jogadores": "4",
   "formato_envelopes": 2,
@@ -890,5 +890,61 @@
     }
   ],
   "versao": "0.1",
-  "observacoes_producao": null
+  "observacoes_producao": null,
+  "contratos_evidencia": [
+    {
+      "id": "C-E1-01",
+      "conclusao": "O acesso operacional crítico ocorreu durante a janela investigada e não foi um registro isolado.",
+      "fase": "E1",
+      "tipo": "oportunidade",
+      "prova_principal": "E1-06",
+      "confirmacao_independente": "E1-04",
+      "descarta_alternativas": [
+        "E1-05"
+      ],
+      "personagens_afetados": [
+        "01"
+      ],
+      "acao_esperada_jogador": "cruzar o log de acesso com a escala operacional do primeiro envelope",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-01",
+      "conclusao": "A cadeia financeira confirma que o benefício não ficou no executor operacional.",
+      "fase": "E2",
+      "tipo": "beneficiario",
+      "prova_principal": "E2-08",
+      "confirmacao_independente": "E2-06",
+      "descarta_alternativas": [
+        "E2-03"
+      ],
+      "personagens_afetados": [
+        "03"
+      ],
+      "acao_esperada_jogador": "comparar o extrato final com o documento de confirmação financeira",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-FINAL-01",
+      "conclusao": "A solução final exige combinar oportunidade operacional, planejamento e benefício documentado.",
+      "fase": "final",
+      "tipo": "solucao_final",
+      "prova_principal": "E2-07",
+      "confirmacao_independente": "E1-07",
+      "descarta_alternativas": [
+        "E1-06",
+        "E2-08"
+      ],
+      "personagens_afetados": [
+        "01",
+        "02",
+        "03"
+      ],
+      "acao_esperada_jogador": "integrar os pilares de E1 com os documentos financeiros e logísticos de E2",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": true
+    }
+  ]
 }

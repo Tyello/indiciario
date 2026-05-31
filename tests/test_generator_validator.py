@@ -297,3 +297,178 @@ def test_blueprint_validator_blocks_duplicate_document_codes():
 
     assert resultado.pode_gerar is False
     assert any(e.codigo == "DOC_008" for e in resultado.criticos)
+
+
+def test_blueprint_aceita_dificuldade_nova_e_alias_legado():
+    novo = blueprint_valido().model_dump(mode="json")
+    novo["dificuldade"] = "mestre"
+    assert Blueprint(**novo).dificuldade == Dificuldade.MESTRE
+
+    legado = blueprint_valido().model_dump(mode="json")
+    legado["dificuldade"] = "medio_alto"
+    assert Blueprint(**legado).dificuldade == Dificuldade.AVANCADO
+
+
+def test_blueprint_rejeita_dificuldade_desconhecida():
+    data = blueprint_valido().model_dump(mode="json")
+    data["dificuldade"] = "impossivel"
+    try:
+        Blueprint(**data)
+    except Exception as exc:  # noqa: BLE001 - teste verifica mensagem clara do Pydantic.
+        assert "dificuldade" in str(exc)
+        assert "impossivel" in str(exc)
+    else:  # pragma: no cover
+        raise AssertionError("Dificuldade inválida deveria falhar")
+
+
+def _codigos(resultado):
+    return {erro.codigo for erro in resultado.erros + resultado.avisos}
+
+
+def test_validator_permite_um_envelope_sem_bloqueio_por_tamanho_esperado():
+    blueprint = blueprint_valido()
+    blueprint.documentos = [doc for doc in blueprint.documentos if doc.envelope == "E1"] + [
+        _documento("E1-07", Envelope.E1, TipoDocumento.CRUZ),
+        _documento("E1-08", Envelope.E1, TipoDocumento.CONTR),
+    ]
+    for personagem in blueprint.personagens:
+        personagem.documento_ancoragem = ["E1-02"]
+    blueprint.linha_tempo_real[0].documento_prova = "E1-04"
+    blueprint.linha_tempo_real[0].confirmacao_independente = "E1-05"
+    blueprint.linha_tempo_real[2].documento_prova = "E1-08"
+    blueprint.linha_tempo_real[2].confirmacao_independente = "E1-03"
+    for pilar in blueprint.pilares_validacao:
+        if pilar.confirmacao.startswith("E2"):
+            pilar.confirmacao = "E1-03"
+    blueprint.matriz_pistas[2].documento = "E1-08"
+    blueprint.matriz_pistas[2].confirmacao = "E1-03"
+    blueprint.red_herrings[1].documento_descarte = "E1-04"
+    blueprint.dificuldade = Dificuldade.INICIANTE
+    blueprint.formato_envelopes = 1
+
+    resultado = BlueprintValidator(blueprint, strict=True).validar()
+
+    assert "ENV_003" not in _codigos(resultado)
+    assert resultado.pode_gerar is True
+
+
+def test_validator_permite_tres_envelopes_sequenciais_e_rejeita_buraco():
+    blueprint = blueprint_valido()
+    blueprint.formato_envelopes = 3
+    blueprint.documentos.extend([
+        _documento("E3-01", "E3", TipoDocumento.PROTO),
+        _documento("E3-02", "E3", TipoDocumento.CONTR),
+    ])
+    resultado = BlueprintValidator(blueprint).validar()
+    assert "ENV_003" not in _codigos(resultado)
+
+    blueprint_sem_e2 = blueprint_valido()
+    for doc in blueprint_sem_e2.documentos:
+        if doc.envelope == "E2":
+            doc.envelope = "E3"
+            doc.codigo = doc.codigo.replace("E2", "E3")
+    resultado_sem_e2 = BlueprintValidator(blueprint_sem_e2).validar()
+    assert "ENV_003" in _codigos(resultado_sem_e2)
+
+
+def test_validator_rejeita_envelope_invalido_e_e0():
+    blueprint = blueprint_valido()
+    blueprint.documentos[0].envelope = "E0"
+    resultado = BlueprintValidator(blueprint).validar()
+    assert "ENV_001" in _codigos(resultado)
+
+    blueprint = blueprint_valido()
+    blueprint.documentos[0].envelope = "Envelope A"
+    resultado = BlueprintValidator(blueprint).validar()
+    assert "ENV_001" in _codigos(resultado)
+
+
+def test_contrato_evidencia_valido_e_blueprint_antigo_sem_contratos_passam():
+    antigo = blueprint_valido()
+    assert antigo.contratos_evidencia == []
+    assert BlueprintValidator(antigo).validar().pode_gerar is True
+
+    blueprint = blueprint_valido()
+    data = blueprint.model_dump(mode="json")
+    data["contratos_evidencia"] = [{
+        "id": "C-E1-01",
+        "conclusao": "A presença foi confirmada por dois registros independentes.",
+        "fase": "E1",
+        "tipo": "oportunidade",
+        "prova_principal": "E1-04",
+        "confirmacao_independente": "E1-06",
+        "descarta_alternativas": ["E1-05"],
+        "personagens_afetados": ["01"],
+        "acao_esperada_jogador": "cruzar log de acesso e mapa",
+        "risco_ambiguidade": "baixo",
+        "obrigatoria_para_avanco": True,
+    }]
+    blueprint = Blueprint(**data)
+
+    resultado = BlueprintValidator(blueprint).validar()
+    assert not any(codigo.startswith("CE_") for codigo in _codigos(resultado))
+
+
+def test_contrato_evidencia_erros_criticos_e_alertas():
+    blueprint = blueprint_valido()
+    data = blueprint.model_dump(mode="json")
+    data["contratos_evidencia"] = [
+        {
+            "id": "C-1",
+            "conclusao": "Conclusão inválida.",
+            "fase": "E1",
+            "tipo": "oportunidade",
+            "prova_principal": "E9-99",
+            "confirmacao_independente": "E1-04",
+            "descarta_alternativas": ["E9-98"],
+            "personagens_afetados": [],
+            "acao_esperada_jogador": "comparar registros",
+            "risco_ambiguidade": "baixo",
+            "obrigatoria_para_avanco": True,
+        },
+        {
+            "id": "C-2",
+            "conclusao": "Conclusão inválida.",
+            "fase": "E1",
+            "tipo": "oportunidade",
+            "prova_principal": "E1-04",
+            "confirmacao_independente": "E1-04",
+            "descarta_alternativas": [],
+            "personagens_afetados": [],
+            "acao_esperada_jogador": "",
+            "risco_ambiguidade": "alto",
+            "obrigatoria_para_avanco": True,
+        },
+        {
+            "id": "C-2",
+            "conclusao": "E1 não deve depender de E2.",
+            "fase": "E1",
+            "tipo": "criterio_avanco",
+            "prova_principal": "E1-04",
+            "confirmacao_independente": "E2-02",
+            "descarta_alternativas": [],
+            "personagens_afetados": [],
+            "acao_esperada_jogador": "comparar fases",
+            "risco_ambiguidade": "baixo",
+            "obrigatoria_para_avanco": True,
+        },
+        {
+            "id": "C-final",
+            "conclusao": "Contrato final pode usar qualquer envelope existente.",
+            "fase": "final",
+            "tipo": "solucao_final",
+            "prova_principal": "E1-04",
+            "confirmacao_independente": "E2-02",
+            "descarta_alternativas": [],
+            "personagens_afetados": [],
+            "acao_esperada_jogador": "integrar todas as fases",
+            "risco_ambiguidade": "baixo",
+            "obrigatoria_para_avanco": True,
+        },
+    ]
+    blueprint = Blueprint(**data)
+
+    codigos = _codigos(BlueprintValidator(blueprint).validar())
+
+    assert {"CE_002", "CE_003", "CE_005", "CE_006", "CE_007", "CE_009", "CE_010"}.issubset(codigos)
+    assert "CE_004" not in codigos

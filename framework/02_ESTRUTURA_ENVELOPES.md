@@ -165,3 +165,29 @@ Use apenas se houver conteúdo real para sustentar uma terceira fase e o tempo d
 | Difícil | 10–12 | 7+ | 4–8 | 90–120 min |
 
 O tempo real depende do perfil do grupo. Grupos experientes em investigação tendem a resolver 20–30% mais rápido. Grupos iniciantes tendem a usar mais dicas no Envelope 1.
+
+---
+
+## Atualização PR #10 — Envelopes dinâmicos 1+
+
+O modelo passa a aceitar **um ou mais envelopes de jogador**, sempre nomeados como `E` + número inteiro positivo: `E1`, `E2`, `E3`, `E4` e assim por diante.
+
+Regras obrigatórias:
+
+- `E1` sempre existe quando há material de jogador;
+- `E0`, `E-1`, `env1`, `Envelope A` e `1` não são envelopes válidos;
+- a sequência não pode ter buracos: se `E3` existe, `E2` também deve existir;
+- dicas e gabarito são materiais separados do facilitador, não envelopes de jogador;
+- cada envelope existente precisa ter função clara, pergunta investigativa e documentos suficientes para cumprir essa função.
+
+### Quando usar 1 envelope
+
+Use 1 envelope para caso introdutório, solução direta e uma pergunta central. O caso ainda precisa ser justo: prova principal, confirmação independente e descarte das alternativas relevantes continuam necessários.
+
+### Quando usar 2 envelopes
+
+Use 2 envelopes quando houver uma camada operacional e uma camada final. Esse segue como padrão intermediário: o primeiro envelope estabelece oportunidade/método; o segundo fecha planejamento, benefício, mandante ou cadeia de ocultação.
+
+### Quando usar 3+ envelopes
+
+Use 3 ou mais envelopes como atos progressivos. Cada envelope deve ampliar a pergunta, não apenas aumentar volume. Bons motivos para `E3+` incluem cadeia logística longa, múltiplas hipóteses concorrentes, virada documental ou caso-evento com fases de investigação distintas.

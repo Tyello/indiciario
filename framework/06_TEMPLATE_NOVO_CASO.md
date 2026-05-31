@@ -344,3 +344,31 @@ Use `05_CHECKLIST_SOLVABILIDADE.md` para o checklist completo.
 | 0.1 | | Blueprint inicial | |
 | 1.0 | | Documentos finais gerados | |
 | 1.1 | | | |
+
+---
+
+## Campo opcional/recomendado — contratos_evidencia
+
+Inclua `contratos_evidencia` no blueprint quando quiser declarar explicitamente as conclusões mínimas que tornam o caso solúvel. Blueprints antigos sem esse campo continuam válidos, mas novos casos devem usá-lo para conclusões obrigatórias de avanço e solução final.
+
+Exemplo mínimo:
+
+```json
+"contratos_evidencia": [
+  {
+    "id": "C-E1-01",
+    "conclusao": "A presença do suspeito operacional está comprovada na janela crítica.",
+    "fase": "E1",
+    "tipo": "oportunidade",
+    "prova_principal": "E1-04",
+    "confirmacao_independente": "E1-06",
+    "descarta_alternativas": ["E1-05"],
+    "personagens_afetados": ["01"],
+    "acao_esperada_jogador": "cruzar log de acesso com mapa de sala",
+    "risco_ambiguidade": "baixo",
+    "obrigatoria_para_avanco": true
+  }
+]
+```
+
+Contratos de `E1` não podem depender de documentos de `E2` ou posterior. Contratos `final` podem usar qualquer envelope existente, desde que tenham prova principal e confirmação independente.

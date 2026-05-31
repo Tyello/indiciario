@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -18,36 +19,49 @@ class PackageBuildError(RuntimeError):
     """Erro claro para pacotes incompletos ou inconsistentes."""
 
 
-GROUP_CONFIG: dict[str, dict[str, str | bool]] = {
-    "E1": {
-        "id": "envelope_1",
-        "label": "Envelope 1",
-        "path_key": "envelope_1",
-        "category": "player",
-        "confidential": False,
-    },
-    "E2": {
-        "id": "envelope_2",
-        "label": "Envelope 2",
-        "path_key": "envelope_2",
-        "category": "player",
-        "confidential": False,
-    },
+AUXILIARY_CONFIG: dict[str, dict[str, str | bool]] = {
     "dicas": {
         "id": "dicas_facilitador",
         "label": "Dicas do Facilitador",
-        "path_key": "dicas_facilitador",
+        "filename": "dicas_facilitador.pdf",
         "category": "facilitator",
         "confidential": True,
     },
     "gabarito": {
         "id": "gabarito_mestre",
         "label": "Gabarito Mestre",
-        "path_key": "gabarito_mestre",
+        "filename": "gabarito_mestre.pdf",
         "category": "facilitator",
         "confidential": True,
     },
 }
+
+
+def _is_envelope_group(group: str) -> bool:
+    return bool(re.fullmatch(r"E[1-9]\d*", group))
+
+
+def _envelope_number(group: str) -> int:
+    return int(group[1:])
+
+
+def _sequenced_envelope_groups(rendered_groups: dict[str, list[Path]]) -> list[str]:
+    groups = sorted(
+        [group for group, pdfs in rendered_groups.items() if pdfs and _is_envelope_group(group)],
+        key=_envelope_number,
+    )
+    if not groups:
+        return []
+    numeros = [_envelope_number(group) for group in groups]
+    esperado = list(range(1, max(numeros) + 1))
+    if numeros != esperado:
+        ausentes = [f"E{numero}" for numero in esperado if numero not in numeros]
+        raise PackageBuildError(f"Sequência de envelopes com buraco; ausente(s): {', '.join(ausentes)}.")
+    return groups
+
+
+def _numbered_output(package_dir: Path, index: int, basename: str) -> Path:
+    return package_dir / f"{index:02d}_{basename}"
 
 
 def _relative(path: Path, base: Path) -> str:
@@ -80,7 +94,7 @@ def _build_documents_manifest(
     documents: list[dict[str, Any]] = []
     current_page_by_file: dict[str, int] = {}
     for doc in blueprint.documentos:
-        envelope = doc.envelope.value
+        envelope = doc.envelope
         final_file_path = final_by_envelope.get(envelope)
         source_pdf = rendered_by_code.get(doc.codigo)
         if final_file_path is None or source_pdf is None:
@@ -108,38 +122,49 @@ def _merge_groups(
     paths: OutputPaths,
     strict: bool = True,
 ) -> tuple[list[dict[str, Any]], dict[str, Path], list[str]]:
+    del strict
     files: list[dict[str, Any]] = []
     final_by_envelope: dict[str, Path] = {}
     warnings: list[str] = []
     package_dir = paths["output_dir"]
 
-    if rendered_groups.get("E3"):
-        mensagem_e3 = "Envelope 3 renderizado, mas não empacotado nesta PR."
-        if strict:
-            raise PackageBuildError(mensagem_e3)
-        warnings.append(mensagem_e3)
+    index = 1
+    for group in _sequenced_envelope_groups(rendered_groups):
+        numero = _envelope_number(group)
+        output_path = _numbered_output(package_dir, index, f"envelope_{numero}.pdf")
+        paths[f"envelope_{numero}"] = output_path
+        merged = merge_pdfs(rendered_groups[group], output_path)
+        files.append({
+            "id": f"envelope_{numero}",
+            "label": f"Envelope {numero}",
+            "path": _relative(merged, package_dir),
+            "category": "player",
+            "confidential": False,
+            "page_count": count_pdf_pages(merged),
+        })
+        final_by_envelope[group] = merged
+        index += 1
 
-    for group in ["E1", "E2", "dicas", "gabarito"]:
+    for group in ["dicas", "gabarito"]:
         pdfs = rendered_groups.get(group, [])
-        config = GROUP_CONFIG[group]
+        config = AUXILIARY_CONFIG[group]
         if not pdfs:
-            if group in {"dicas", "gabarito"}:
-                warnings.append(f"Material '{config['label']}' ausente; arquivo final não gerado.")
+            warnings.append(f"Material '{config['label']}' ausente; arquivo final não gerado.")
             continue
-        output_path = paths[str(config["path_key"])]
+        output_path = _numbered_output(package_dir, index, str(config["filename"]))
+        paths[group] = output_path
         merged = merge_pdfs(pdfs, output_path)
-        page_count = count_pdf_pages(merged)
         files.append({
             "id": config["id"],
             "label": config["label"],
             "path": _relative(merged, package_dir),
             "category": config["category"],
             "confidential": config["confidential"],
-            "page_count": page_count,
+            "page_count": count_pdf_pages(merged),
         })
-        if group in {"E1", "E2"}:
-            final_by_envelope[group] = merged
+        index += 1
 
+    paths["guia_de_impressao"] = _numbered_output(package_dir, index, "guia_de_impressao.pdf")
     return files, final_by_envelope, warnings
 
 

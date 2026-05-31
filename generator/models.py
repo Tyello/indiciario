@@ -10,14 +10,29 @@ from __future__ import annotations
 from enum import Enum
 from typing import Any, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class Dificuldade(str, Enum):
-    FACIL = "facil"
-    MEDIO = "medio"
-    MEDIO_ALTO = "medio_alto"
-    DIFICIL = "dificil"
+    INICIANTE = "iniciante"
+    INTERMEDIARIO = "intermediario"
+    AVANCADO = "avancado"
+    ESPECIALISTA = "especialista"
+    MESTRE = "mestre"
+
+    # Aliases legados normalizados para a nova escala.
+    FACIL = "iniciante"
+    MEDIO = "intermediario"
+    MEDIO_ALTO = "avancado"
+    DIFICIL = "especialista"
+
+
+DIFICULDADE_ALIASES: dict[str, str] = {
+    "facil": Dificuldade.INICIANTE.value,
+    "medio": Dificuldade.INTERMEDIARIO.value,
+    "medio_alto": Dificuldade.AVANCADO.value,
+    "dificil": Dificuldade.ESPECIALISTA.value,
+}
 
 
 class ModoValidacao(str, Enum):
@@ -61,6 +76,13 @@ class Envelope(str, Enum):
     E1 = "E1"
     E2 = "E2"
     E3 = "E3"
+
+
+def normalizar_envelope(valor: object) -> str:
+    envelope = valor.value if isinstance(valor, Enum) else str(valor)
+    if not envelope.startswith("E") or not envelope[1:].isdigit() or int(envelope[1:]) < 1:
+        raise ValueError("Envelope deve seguir o padrão E + inteiro positivo, ex.: E1, E2, E3.")
+    return envelope
 
 
 class PapelPersonagem(str, Enum):
@@ -145,7 +167,12 @@ class Pista(BaseModel):
 class Documento(BaseModel):
     codigo: str = Field(..., description="Ex.: E1-01, E2-05.")
     titulo: str
-    envelope: Envelope
+    envelope: str
+
+    @field_validator("envelope", mode="before")
+    @classmethod
+    def _normalizar_envelope(cls, valor: object) -> str:
+        return valor.value if isinstance(valor, Enum) else str(valor)
     tipo: TipoDocumento
     emocao_esperada: str
     objetivo_narrativo: str
@@ -190,10 +217,44 @@ class Codigo(BaseModel):
 class Dica(BaseModel):
     numero: int
     intensidade: Intensidade
-    envelope: Envelope
+    envelope: str
+
+    @field_validator("envelope", mode="before")
+    @classmethod
+    def _normalizar_envelope(cls, valor: object) -> str:
+        return valor.value if isinstance(valor, Enum) else str(valor)
     condicao_uso: str
     texto: str
     o_que_desbloqueia: str
+
+
+class ContratoEvidencia(BaseModel):
+    id: str
+    conclusao: str
+    fase: str
+    tipo: str
+    prova_principal: Optional[str] = None
+    confirmacao_independente: Optional[str] = None
+    descarta_alternativas: list[str] = Field(default_factory=list)
+    personagens_afetados: list[str] = Field(default_factory=list)
+    acao_esperada_jogador: str = ""
+    risco_ambiguidade: str
+    obrigatoria_para_avanco: bool = False
+
+    @field_validator("fase", mode="before")
+    @classmethod
+    def _validar_fase(cls, valor: object) -> str:
+        fase = str(valor).strip()
+        if fase.lower() == "final":
+            return "final"
+        return normalizar_envelope(fase)
+
+    @field_validator("risco_ambiguidade")
+    @classmethod
+    def _validar_risco_ambiguidade(cls, valor: str) -> str:
+        if valor not in {"baixo", "medio_baixo", "medio", "medio_alto", "alto"}:
+            raise ValueError("risco_ambiguidade deve ser baixo, medio_baixo, medio, medio_alto ou alto")
+        return valor
 
 
 class Blueprint(BaseModel):
@@ -205,9 +266,16 @@ class Blueprint(BaseModel):
     tom: str
     modo_validacao: ModoValidacao
     dificuldade: Dificuldade
+
+    @field_validator("dificuldade", mode="before")
+    @classmethod
+    def _normalizar_dificuldade(cls, valor: object) -> object:
+        if isinstance(valor, str):
+            return DIFICULDADE_ALIASES.get(valor.strip().lower(), valor)
+        return valor
     tempo_estimado_min: int
     numero_jogadores: str
-    formato_envelopes: int = Field(..., ge=2, le=3)
+    formato_envelopes: int = Field(..., ge=1)
 
     premissa: str = Field(..., description="Versão do jogador.")
     verdade_real: str = Field(..., description="O que realmente aconteceu; interno.")
@@ -237,6 +305,7 @@ class Blueprint(BaseModel):
     cadeia_financeira: list[SaltoFinanceiro] = Field(default_factory=list)
     codigos: list[Codigo] = Field(default_factory=list)
     dicas: list[Dica] = Field(..., min_length=6)
+    contratos_evidencia: list[ContratoEvidencia] = Field(default_factory=list)
 
     versao: str = "0.1"
     observacoes_producao: Optional[str] = None

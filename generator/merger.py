@@ -10,7 +10,7 @@ from typing import Any, TypedDict
 from .pdf_backend import PdfReader, PdfWriter
 
 
-class OutputPaths(TypedDict):
+class OutputPaths(TypedDict, total=False):
     case_slug: str
     output_dir: Path
     rendered_dir: Path
