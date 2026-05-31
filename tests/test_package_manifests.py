@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from generator.merger import count_pdf_pages
 from generator.package_builder import PackageBuildError, build_package
 from generator.pdf_backend import PdfWriter
 from generator.print_guide import build_print_manifest
@@ -110,6 +111,41 @@ def test_build_package_non_strict_mantem_warning_quando_e3_renderizado(tmp_path,
 
     assert result["status"] == "passed"
     assert "Envelope 3 renderizado, mas não empacotado nesta PR." in manifest["warnings"]
+
+def test_print_manifest_final_usa_page_count_final_do_guia(tmp_path, monkeypatch):
+    from generator import package_builder
+
+    chamadas = {"count": 0}
+
+    def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
+        return {
+            "E1": [make_pdf(output_dir / "E1-01.pdf")],
+            "E2": [],
+            "E3": [],
+            "dicas": [],
+            "gabarito": [],
+        }
+
+    def fake_render_print_guide(_print_manifest, output_path, strict=True):
+        chamadas["count"] += 1
+        pages = 1 if chamadas["count"] == 1 else 2
+        return make_pdf(output_path, pages=pages)
+
+    monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
+    monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+
+    result = build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
+    manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
+    print_manifest = json.loads(Path(result["print_manifest_path"]).read_text(encoding="utf-8"))
+
+    manifest_guide = next(item for item in manifest["files"] if item["id"] == "guia_de_impressao")
+    print_guide = next(item for item in print_manifest["files"] if item["file"] == "05_guia_de_impressao.pdf")
+
+    assert chamadas["count"] == 2
+    assert count_pdf_pages(Path(result["output_dir"]) / "05_guia_de_impressao.pdf") == 2
+    assert manifest_guide["page_count"] == 2
+    assert print_guide["page_count"] == 2
+
 
 def test_documentos_duplicados_no_manifest_geram_qa_error(tmp_path):
     manifest = minimal_manifest(tmp_path)

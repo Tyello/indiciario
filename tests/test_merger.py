@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from generator.merger import count_pdf_pages, get_pdf_orientation_summary, merge_pdfs, safe_slug
+from generator.merger import build_output_paths, count_pdf_pages, get_pdf_orientation_summary, merge_pdfs, safe_slug
 from generator.pdf_backend import PdfWriter
 
 
@@ -51,3 +51,11 @@ def test_merge_preserva_orientacoes_por_pagina(tmp_path):
     assert summary["portrait"] == 1
     assert summary["landscape"] == 1
     assert summary["dominant"] == "mixed"
+
+def test_build_output_paths_retorna_slug_string_e_output_dir_path(tmp_path):
+    paths = build_output_paths("Caso Técnico do Indiciário", tmp_path)
+
+    assert paths["case_slug"] == "caso-tecnico-do-indiciario"
+    assert paths["output_dir"] == tmp_path / "caso-tecnico-do-indiciario"
+    assert paths["guia_de_impressao"] == tmp_path / "caso-tecnico-do-indiciario" / "05_guia_de_impressao.pdf"
+

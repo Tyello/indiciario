@@ -5,9 +5,24 @@ from __future__ import annotations
 import re
 import unicodedata
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
 
 from .pdf_backend import PdfReader, PdfWriter
+
+
+class OutputPaths(TypedDict):
+    case_slug: str
+    output_dir: Path
+    rendered_dir: Path
+    html_debug_dir: Path
+    envelope_1: Path
+    envelope_2: Path
+    dicas_facilitador: Path
+    gabarito_mestre: Path
+    guia_de_impressao: Path
+    manifest: Path
+    print_manifest: Path
+    qa_report: Path
 
 
 class PDFMergeError(RuntimeError):
@@ -94,12 +109,12 @@ def safe_slug(value: str) -> str:
     return slug or "caso-sem-titulo"
 
 
-def build_output_paths(case_title: str, output_root: Path) -> dict[str, Path]:
+def build_output_paths(case_title: str, output_root: Path) -> OutputPaths:
     """Monta caminhos padronizados para o pacote final."""
     case_slug = safe_slug(case_title)
     output_dir = output_root / case_slug
     return {
-        "case_slug": output_dir,
+        "case_slug": case_slug,
         "output_dir": output_dir,
         "rendered_dir": output_dir / "rendered",
         "html_debug_dir": output_dir / "html_debug",

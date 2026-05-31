@@ -7,7 +7,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from .merger import build_output_paths, count_pdf_pages, merge_pdfs, safe_slug
+from .merger import OutputPaths, build_output_paths, count_pdf_pages, merge_pdfs, safe_slug
 from .models import Blueprint
 from .print_guide import build_print_manifest, render_print_guide, write_print_manifest
 from .qa import run_qa, write_qa_report
@@ -105,7 +105,7 @@ def _build_documents_manifest(
 
 def _merge_groups(
     rendered_groups: dict[str, list[Path]],
-    paths: dict[str, Path],
+    paths: OutputPaths,
     strict: bool = True,
 ) -> tuple[list[dict[str, Any]], dict[str, Path], list[str]]:
     files: list[dict[str, Any]] = []
@@ -189,10 +189,12 @@ def build_package(
     render_print_guide(preliminary_print_manifest, paths["guia_de_impressao"], strict=strict)
     _append_print_guide_file(manifest, paths["guia_de_impressao"], package_dir)
 
+    intermediate_print_manifest = build_print_manifest(manifest, package_dir)
+    render_print_guide(intermediate_print_manifest, paths["guia_de_impressao"], strict=strict)
+    _append_print_guide_file(manifest, paths["guia_de_impressao"], package_dir)
+
     final_print_manifest = build_print_manifest(manifest, package_dir)
     write_print_manifest(final_print_manifest, paths["print_manifest"])
-    render_print_guide(final_print_manifest, paths["guia_de_impressao"], strict=strict)
-    _append_print_guide_file(manifest, paths["guia_de_impressao"], package_dir)
     _write_manifest(manifest, paths["manifest"])
 
     qa_report = run_qa(package_dir, manifest, strict=strict)
