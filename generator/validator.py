@@ -274,6 +274,7 @@ class BlueprintValidator:
         self._verificar_linha_do_tempo()
         self._verificar_dicas()
         self._verificar_dicas_contextuais()
+        self._verificar_visual_procedural()
         self._verificar_autossuficiencia()
         self._verificar_conteudo_schema()
         self._calcular_risco()
@@ -710,6 +711,106 @@ class BlueprintValidator:
             if dica.categoria not in CATEGORIAS_DICA_CONTEXTUAL:
                 self.resultado.adicionar(Erro("DC_009", Severidade.CRITICO, f"Categoria inválida em dica contextual '{dica_id}': {dica.categoria}."))
 
+
+
+    def _verificar_visual_procedural(self) -> None:
+        visual = self.bp.visual_procedural
+        if visual is None:
+            return
+
+        tem_funcao_narrativa = False
+        for mapa in visual.mapas:
+            mapa_id = mapa.id.strip()
+            if not mapa_id:
+                self.resultado.adicionar(Erro("VP_001", Severidade.CRITICO, "Mapa procedural sem id."))
+            if mapa.orientacao != "landscape":
+                self.resultado.adicionar(Erro(
+                    "VP_002",
+                    Severidade.CRITICO,
+                    f"Mapa procedural '{mapa_id or mapa.titulo}' deve usar orientacao landscape.",
+                ))
+            if mapa.largura <= 0 or mapa.altura <= 0:
+                self.resultado.adicionar(Erro(
+                    "VP_004",
+                    Severidade.CRITICO,
+                    f"Mapa procedural '{mapa_id or mapa.titulo}' tem largura/altura inválidas.",
+                ))
+
+            area_ids: set[str] = set()
+            for area in mapa.areas:
+                area_id = area.id.strip()
+                if not area_id:
+                    self.resultado.adicionar(Erro(
+                        "VP_003",
+                        Severidade.CRITICO,
+                        f"Área sem id no mapa procedural '{mapa_id or mapa.titulo}'.",
+                    ))
+                else:
+                    area_ids.add(area_id)
+                fora_canvas = mapa.largura > 0 and mapa.altura > 0 and (
+                    area.x + area.w > mapa.largura or area.y + area.h > mapa.altura
+                )
+                if area.x < 0 or area.y < 0 or area.w <= 0 or area.h <= 0 or fora_canvas:
+                    self.resultado.adicionar(Erro(
+                        "VP_004",
+                        Severidade.CRITICO,
+                        f"Área '{area_id or area.nome}' tem dimensões inválidas no mapa '{mapa_id or mapa.titulo}'.",
+                    ))
+
+            for conexao in mapa.conexoes:
+                if conexao.origem not in area_ids or conexao.destino not in area_ids:
+                    self.resultado.adicionar(Erro(
+                        "VP_005",
+                        Severidade.CRITICO,
+                        f"Conexão do mapa '{mapa_id or mapa.titulo}' referencia área inexistente.",
+                    ))
+
+            for marcador in mapa.marcadores:
+                if marcador.documento_relacionado:
+                    tem_funcao_narrativa = True
+                    if marcador.documento_relacionado not in self._codigos_docs:
+                        self.resultado.adicionar(Erro(
+                            "VP_006",
+                            Severidade.CRITICO,
+                            f"Marcador '{marcador.id}' referencia documento inexistente: {marcador.documento_relacionado}.",
+                            documento=marcador.documento_relacionado,
+                        ))
+                if marcador.contrato_relacionado:
+                    tem_funcao_narrativa = True
+                    if marcador.contrato_relacionado not in self._ids_contratos:
+                        self.resultado.adicionar(Erro(
+                            "VP_007",
+                            Severidade.CRITICO,
+                            f"Marcador '{marcador.id}' referencia contrato inexistente: {marcador.contrato_relacionado}.",
+                        ))
+
+        for personagem_visual in visual.personagens:
+            if personagem_visual.personagem_id in self._ids_personagens:
+                tem_funcao_narrativa = True
+            else:
+                self.resultado.adicionar(Erro(
+                    "VP_008",
+                    Severidade.CRITICO,
+                    f"Personagem visual referencia personagem inexistente: {personagem_visual.personagem_id}.",
+                ))
+
+        for local in visual.locais:
+            for codigo in local.documentos_relacionados:
+                tem_funcao_narrativa = True
+                if codigo not in self._codigos_docs:
+                    self.resultado.adicionar(Erro(
+                        "VP_009",
+                        Severidade.CRITICO,
+                        f"Local visual '{local.id}' referencia documento inexistente: {codigo}.",
+                        documento=codigo,
+                    ))
+
+        if (visual.mapas or visual.personagens or visual.locais) and not tem_funcao_narrativa:
+            self.resultado.adicionar(Erro(
+                "VP_010",
+                Severidade.MODERADO,
+                "Visual procedural existe, mas nenhum elemento tem função narrativa relacionada.",
+            ))
 
     def _verificar_autossuficiencia(self) -> None:
         tem_log = any(d.tipo in [TipoDocumento.LOG_ACESSO, TipoDocumento.LOG_SISTEMA] for d in self.bp.documentos)

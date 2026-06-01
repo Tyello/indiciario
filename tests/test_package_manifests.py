@@ -255,6 +255,7 @@ def test_guia_facilitador_no_manifest_print_manifest_e_qa(tmp_path, monkeypatch)
         return make_pdf(output_path)
 
     monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
+    monkeypatch.setattr(package_builder, "build_visual_documents", lambda _blueprint, _output_dir, strict=True: {})
     monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
     monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
 

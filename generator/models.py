@@ -276,6 +276,81 @@ class ContratoEvidencia(BaseModel):
         return valor
 
 
+class AreaMapa(BaseModel):
+    id: str = ""
+    nome: str
+    x: float
+    y: float
+    w: float
+    h: float
+    tipo: str
+    acessivel: bool = True
+    observacao: str = ""
+
+
+class ConexaoMapa(BaseModel):
+    origem: str
+    destino: str
+    tipo: str = "porta"
+    observacao: str = ""
+
+
+class MarcadorMapa(BaseModel):
+    id: str
+    label: str
+    x: float
+    y: float
+    tipo: str
+    documento_relacionado: str = ""
+    contrato_relacionado: str = ""
+
+
+class ItemLegenda(BaseModel):
+    simbolo: str
+    descricao: str
+
+
+class MapaProcedural(BaseModel):
+    id: str = ""
+    titulo: str
+    fase: str = "E1"
+    orientacao: str = "landscape"
+    largura: float
+    altura: float
+    areas: list[AreaMapa] = Field(default_factory=list)
+    conexoes: list[ConexaoMapa] = Field(default_factory=list)
+    marcadores: list[MarcadorMapa] = Field(default_factory=list)
+    legenda: list[ItemLegenda] = Field(default_factory=list)
+
+    @field_validator("fase", mode="before")
+    @classmethod
+    def _normalizar_fase(cls, valor: object) -> str:
+        return valor.value if isinstance(valor, Enum) else str(valor)
+
+
+class PersonagemVisual(BaseModel):
+    personagem_id: str
+    silhueta: str
+    icone: str
+    cor: str
+    detalhes: list[str] = Field(default_factory=list)
+
+
+class LocalVisual(BaseModel):
+    id: str
+    nome: str
+    tipo: str
+    icone: str
+    descricao: str
+    documentos_relacionados: list[str] = Field(default_factory=list)
+
+
+class VisualProcedural(BaseModel):
+    mapas: list[MapaProcedural] = Field(default_factory=list)
+    personagens: list[PersonagemVisual] = Field(default_factory=list)
+    locais: list[LocalVisual] = Field(default_factory=list)
+
+
 class Blueprint(BaseModel):
     """Estrutura completa do planejamento de um caso."""
 
@@ -326,6 +401,7 @@ class Blueprint(BaseModel):
     dicas: list[Dica] = Field(..., min_length=6)
     dicas_contextuais: list[DicaContextual] = Field(default_factory=list)
     contratos_evidencia: list[ContratoEvidencia] = Field(default_factory=list)
+    visual_procedural: VisualProcedural | None = None
 
     versao: str = "0.1"
     observacoes_producao: Optional[str] = None

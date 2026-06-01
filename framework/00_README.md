@@ -108,6 +108,9 @@ Guia operacional do pacote final: separação entre material de jogador e facili
 ### `16_GUIA_FACILITADOR.md`
 Guia confidencial de condução da sessão: papel do facilitador, diferença entre gabarito e guia, critérios de avanço por contratos de evidência, uso de dicas contextuais e prevenção de spoilers.
 
+### `17_VISUAL_PROCEDURAL.md`
+Define a camada de visual procedural controlado: mapas simples em SVG/HTML, cartões de personagens, cartões de locais, limites, proibições e regras de função narrativa.
+
 ---
 
 ## Separação obrigatória de materiais
@@ -138,7 +141,7 @@ Nunca misture no mesmo arquivo ou impressão:
 7. Gerar gabarito usando template do 09
 8. Gerar dicas usando template do 10
 9. Gerar instruções de facilitador com base no 11 e no 16
-10. Verificar checklist visual do 12
+10. Verificar checklist visual do 12 e regras procedurais do 17 quando houver visual_procedural
 11. Gerar pacote final com `python -m scripts.build_package <blueprint.json> --output output --strict`
 12. Conferir `manifest.json`, `print_manifest.json`, `qa_report.json`, `graph_report.json`, `llm_feedback.json`, `guia_facilitador.pdf` e `guia_de_impressao.pdf`
 13. Entregar arquivos separados por destino

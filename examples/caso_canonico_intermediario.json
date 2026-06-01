@@ -1431,5 +1431,202 @@
         "E2-07"
       ]
     }
-  ]
+  ],
+  "visual_procedural": {
+    "mapas": [
+      {
+        "id": "casa_acervo_mirante_andar_1",
+        "titulo": "Casa de Acervo Mirante — circulação do andar térreo",
+        "fase": "E1",
+        "orientacao": "landscape",
+        "largura": 900,
+        "altura": 520,
+        "areas": [
+          {
+            "id": "portaria",
+            "nome": "Portaria principal",
+            "x": 40,
+            "y": 210,
+            "w": 150,
+            "h": 110,
+            "tipo": "controle_acesso",
+            "observacao": "Entrada com credencial"
+          },
+          {
+            "id": "corredor_carga",
+            "nome": "Corredor de carga",
+            "x": 220,
+            "y": 210,
+            "w": 190,
+            "h": 110,
+            "tipo": "circulacao",
+            "observacao": "Rota fora da vitrine"
+          },
+          {
+            "id": "doca_lateral",
+            "nome": "Doca lateral",
+            "x": 40,
+            "y": 360,
+            "w": 210,
+            "h": 110,
+            "tipo": "carga",
+            "observacao": "Acesso de fornecedores"
+          },
+          {
+            "id": "reserva_b",
+            "nome": "Reserva técnica B",
+            "x": 450,
+            "y": 180,
+            "w": 190,
+            "h": 150,
+            "tipo": "reserva",
+            "observacao": "Acervo RM-17"
+          },
+          {
+            "id": "vitrine",
+            "nome": "Vitrine",
+            "x": 675,
+            "y": 70,
+            "w": 170,
+            "h": 130,
+            "tipo": "exposicao",
+            "observacao": "Área pública"
+          },
+          {
+            "id": "administracao",
+            "nome": "Administração",
+            "x": 675,
+            "y": 245,
+            "w": 170,
+            "h": 120,
+            "tipo": "administrativo",
+            "observacao": "Terminal interno"
+          }
+        ],
+        "conexoes": [
+          {
+            "origem": "portaria",
+            "destino": "corredor_carga",
+            "tipo": "porta",
+            "observacao": "Passagem controlada"
+          },
+          {
+            "origem": "doca_lateral",
+            "destino": "corredor_carga",
+            "tipo": "porta_servico",
+            "observacao": "Acesso logístico"
+          },
+          {
+            "origem": "corredor_carga",
+            "destino": "reserva_b",
+            "tipo": "porta",
+            "observacao": "Credencial necessária"
+          },
+          {
+            "origem": "reserva_b",
+            "destino": "administracao",
+            "tipo": "corredor",
+            "observacao": "Visada parcial"
+          },
+          {
+            "origem": "administracao",
+            "destino": "vitrine",
+            "tipo": "porta",
+            "observacao": "Rota pública"
+          }
+        ],
+        "marcadores": [
+          {
+            "id": "janela_operacional",
+            "label": "Janela operacional sem visitante",
+            "x": 335,
+            "y": 265,
+            "tipo": "tempo",
+            "documento_relacionado": "E1-03",
+            "contrato_relacionado": "C-E1-OPORTUNIDADE"
+          },
+          {
+            "id": "porta_credencial",
+            "label": "Porta exige credencial ativa",
+            "x": 450,
+            "y": 250,
+            "tipo": "acesso",
+            "documento_relacionado": "E1-04",
+            "contrato_relacionado": "C-E1-INCONSISTENCIA"
+          },
+          {
+            "id": "etiqueta_rm17",
+            "label": "Etiqueta RM-17 na reserva",
+            "x": 560,
+            "y": 235,
+            "tipo": "item",
+            "documento_relacionado": "E2-02",
+            "contrato_relacionado": "C-E2-COBERTURA"
+          }
+        ],
+        "legenda": [
+          {
+            "simbolo": "TE",
+            "descricao": "marcador de tempo/oportunidade"
+          },
+          {
+            "simbolo": "AC",
+            "descricao": "marcador de acesso/credencial"
+          },
+          {
+            "simbolo": "IT",
+            "descricao": "marcador de item ou etiqueta"
+          }
+        ]
+      }
+    ],
+    "personagens": [
+      {
+        "personagem_id": "02",
+        "silhueta": "postura metódica, crachá de curadoria",
+        "icone": "M",
+        "cor": "#2563eb",
+        "detalhes": [
+          "Conhece a rotina da reserva técnica",
+          "Aparece em documentos de planejamento",
+          "Ajuda a ler a logística do acervo"
+        ]
+      },
+      {
+        "personagem_id": "04",
+        "silhueta": "perfil administrativo, chaveiro de serviço",
+        "icone": "O",
+        "cor": "#7c3aed",
+        "detalhes": [
+          "Associado a acessos e autorizações",
+          "Circula entre administração e portaria",
+          "Seu papel depende de confirmação documental"
+        ]
+      },
+      {
+        "personagem_id": "03",
+        "silhueta": "uniforme operacional, prancheta de carga",
+        "icone": "T",
+        "cor": "#b45309",
+        "detalhes": [
+          "Conectado à doca lateral",
+          "Parece suspeito pela oportunidade logística",
+          "Precisa ser comparado com registros de horário"
+        ]
+      }
+    ],
+    "locais": [
+      {
+        "id": "reserva_tecnica_b",
+        "nome": "Reserva técnica B",
+        "tipo": "reserva de acervo",
+        "icone": "B",
+        "descricao": "Sala de controle restrito onde a etiqueta RM-17 e a rota de credencial ajudam a reconstruir oportunidade e cobertura.",
+        "documentos_relacionados": [
+          "E1-04",
+          "E2-02"
+        ]
+      }
+    ]
+  }
 }
