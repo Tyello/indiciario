@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from .clue_graph import analyze_clue_graph, build_clue_graph, write_graph_report
+from .facilitator_guide import render_facilitator_guide
 from .llm_feedback import build_llm_feedback, write_llm_feedback
 from .merger import OutputPaths, build_output_paths, count_pdf_pages, merge_pdfs, safe_slug
 from .models import Blueprint
@@ -16,6 +17,7 @@ from .print_guide import build_print_manifest, render_print_guide, write_print_m
 from .qa import report_to_dict, run_qa, write_qa_report
 from .renderer import renderizar_caso
 from .validator import BlueprintValidator
+
 
 class PackageBuildError(RuntimeError):
     """Erro claro para pacotes incompletos ou inconsistentes."""
@@ -170,6 +172,23 @@ def _merge_groups(
     return files, final_by_envelope, warnings
 
 
+def _append_facilitator_guide_file(manifest: dict[str, Any], guide_path: Path, package_dir: Path) -> None:
+    entry = {
+        "id": "guia_facilitador",
+        "label": "Guia do Facilitador",
+        "path": _relative(guide_path, package_dir),
+        "category": "facilitator",
+        "confidential": True,
+        "page_count": count_pdf_pages(guide_path),
+    }
+    manifest["files"] = [file for file in manifest.get("files", []) if file.get("id") != "guia_facilitador"]
+    manifest["files"].append(entry)
+
+
+def _next_file_index(files: list[dict[str, Any]]) -> int:
+    return len(files) + 1
+
+
 def _append_print_guide_file(manifest: dict[str, Any], guide_path: Path, package_dir: Path) -> None:
     entry = {
         "id": "guia_de_impressao",
@@ -204,6 +223,8 @@ def build_package(
     rendered_groups = renderizar_caso(blueprint_path, paths["rendered_dir"], strict=strict)
     files, final_by_envelope, warnings = _merge_groups(rendered_groups, paths, strict=strict)
     rendered_by_code = {path.stem: path for group in rendered_groups.values() for path in group}
+    graph = build_clue_graph(blueprint)
+    graph_report = analyze_clue_graph(graph, blueprint)
 
     manifest: dict[str, Any] = {
         "case": _case_metadata(blueprint, safe_slug(blueprint.titulo)),
@@ -219,6 +240,11 @@ def build_package(
         },
     }
 
+    paths["guia_facilitador"] = _numbered_output(package_dir, _next_file_index(files), "guia_facilitador.pdf")
+    render_facilitator_guide(blueprint, paths["guia_facilitador"], graph_report=graph_report, strict=strict)
+    _append_facilitator_guide_file(manifest, paths["guia_facilitador"], package_dir)
+
+    paths["guia_de_impressao"] = _numbered_output(package_dir, _next_file_index(manifest["files"]), "guia_de_impressao.pdf")
     preliminary_print_manifest = build_print_manifest(manifest, package_dir)
     render_print_guide(preliminary_print_manifest, paths["guia_de_impressao"], strict=strict)
     _append_print_guide_file(manifest, paths["guia_de_impressao"], package_dir)
@@ -231,8 +257,6 @@ def build_package(
     write_print_manifest(final_print_manifest, paths["print_manifest"])
     _write_manifest(manifest, paths["manifest"])
 
-    graph = build_clue_graph(blueprint)
-    graph_report = analyze_clue_graph(graph, blueprint)
     write_graph_report(graph_report, paths["graph_report"])
 
     qa_report = run_qa(package_dir, manifest, strict=strict)

@@ -1348,5 +1348,88 @@
     }
   ],
   "versao": "1.0",
-  "observacoes_producao": "Gabarito do facilitador: solução final — Marina Vale executou a troca física; Otávio Salles planejou a contratação emergencial; Celina Duarte recebeu o benefício pela Ateliê Pedra Clara. Sequência: aprovação emergencial às 16h02; bloqueio visual da doca às 19h40; abertura da reserva B pela credencial 02 às 19h48; saída RM-17 às 19h57; pagamento e retorno parcial nos dias seguintes. Evidências: oportunidade por E1-04/E1-05/E1-07; inconsistência por E1-06/E2-07; motivo por E2-01/E2-03/E2-05; benefício por E2-02/E2-04; confirmação final por E2-06/E2-07. Descartes: Inês pressiona, mas não tem porta nem pagamento; Tadeu tem atraso, mas escala e log o colocam na portaria; Lia corrigiu ficha e teve evento negado, explicado pelo glossário. Critério de abertura do E2: hipótese intermediária com janela, credencial 02 e RM-17. Critério final: resposta cobre quem, como, por que, prova principal e alternativas descartadas."
+  "observacoes_producao": "Gabarito do facilitador: solução final — Marina Vale executou a troca física; Otávio Salles planejou a contratação emergencial; Celina Duarte recebeu o benefício pela Ateliê Pedra Clara. Sequência: aprovação emergencial às 16h02; bloqueio visual da doca às 19h40; abertura da reserva B pela credencial 02 às 19h48; saída RM-17 às 19h57; pagamento e retorno parcial nos dias seguintes. Evidências: oportunidade por E1-04/E1-05/E1-07; inconsistência por E1-06/E2-07; motivo por E2-01/E2-03/E2-05; benefício por E2-02/E2-04; confirmação final por E2-06/E2-07. Descartes: Inês pressiona, mas não tem porta nem pagamento; Tadeu tem atraso, mas escala e log o colocam na portaria; Lia corrigiu ficha e teve evento negado, explicado pelo glossário. Critério de abertura do E2: hipótese intermediária com janela, credencial 02 e RM-17. Critério final: resposta cobre quem, como, por que, prova principal e alternativas descartadas.",
+  "dicas_contextuais": [
+    {
+      "id": "DC-E1-MAPA-01",
+      "categoria": "mapa",
+      "fase": "E1",
+      "titulo": "Começar pela área bloqueada",
+      "condicao_uso": "Use se o grupo leu o protocolo e o boletim, mas ainda não delimitou onde a investigação deve concentrar a busca inicial.",
+      "texto": "Peça ao grupo para separar todos os documentos que mencionam a reserva técnica B ou a doca lateral e comparar quais espaços aparecem em mais de uma fonte.",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E1-ABERTURA"
+      ],
+      "documentos_relacionados": [
+        "E1-01",
+        "E1-07"
+      ]
+    },
+    {
+      "id": "DC-E1-LOG-02",
+      "categoria": "logistica",
+      "fase": "E1",
+      "titulo": "Comparar log e escala",
+      "condicao_uso": "Use se o grupo suspeita de várias pessoas, mas não cruzou horário de credencial com a escala de montagem e ronda.",
+      "texto": "Oriente uma comparação em duas colunas: quem deveria estar em ronda e qual credencial aparece no log durante o intervalo crítico. Não nomeie suspeitos; peça que eles procurem incompatibilidades.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E1-OPORTUNIDADE"
+      ],
+      "documentos_relacionados": [
+        "E1-04",
+        "E1-05"
+      ]
+    },
+    {
+      "id": "DC-E2-FIN-01",
+      "categoria": "financeira",
+      "fase": "E2",
+      "titulo": "Seguir a trilha do pagamento",
+      "condicao_uso": "Use se o grupo percebeu o contrato emergencial, mas não conectou orçamento, recibo e extrato como cadeia financeira.",
+      "texto": "Peça que ordenem os documentos financeiros por emissão, aprovação e débito. A pergunta útil é: qual empresa aparece em todas as etapas e qual valor se repete?",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E2-BENEFICIO"
+      ],
+      "documentos_relacionados": [
+        "E2-01",
+        "E2-02",
+        "E2-04"
+      ]
+    },
+    {
+      "id": "DC-E2-COB-02",
+      "categoria": "contrato",
+      "fase": "E2",
+      "titulo": "Cobertura operacional",
+      "condicao_uso": "Use se o grupo encontrou a aprovação financeira, mas não entendeu por que o orçamento comparativo enfraquece a justificativa do contrato emergencial.",
+      "texto": "Indique que eles comparem o documento que justifica urgência com o documento que mostra alternativas disponíveis. A contradição não está no preço isolado, mas na necessidade declarada.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E2-COBERTURA"
+      ],
+      "documentos_relacionados": [
+        "E2-03",
+        "E2-05"
+      ]
+    },
+    {
+      "id": "DC-FINAL-SOL-01",
+      "categoria": "solucao",
+      "fase": "final",
+      "titulo": "Fechamento da cadeia completa",
+      "condicao_uso": "Use apenas se o grupo já relacionou credencial, desvio financeiro e nota técnica, mas não consegue formular a solução final com culpado, método e benefício.",
+      "texto": "A solução exige três afirmações sustentadas: quem abriu a oportunidade operacional, como a contratação cobriu a retirada e quem se beneficiou do pagamento. Peça que citem um documento operacional e um financeiro antes de responder.",
+      "nivel": "quase_gabarito",
+      "contratos_relacionados": [
+        "C-FINAL-SOLUCAO"
+      ],
+      "documentos_relacionados": [
+        "E2-06",
+        "E2-07"
+      ]
+    }
+  ]
 }

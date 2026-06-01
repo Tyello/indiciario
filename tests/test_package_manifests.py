@@ -55,14 +55,18 @@ def test_manifest_contem_arquivos_paths_relativos_e_docs_validos(tmp_path, monke
     def fake_render_print_guide(_print_manifest, output_path, strict=True):
         return make_pdf(output_path)
 
+    def fake_render_facilitator_guide(_blueprint, output_path, graph_report=None, strict=True):
+        return make_pdf(output_path)
+
     monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
     monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+    monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
 
     result = build_package(blueprint_path, tmp_path, strict=True)
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
 
     paths = {entry["path"] for entry in manifest["files"]}
-    assert {"01_envelope_1.pdf", "02_envelope_2.pdf", "03_dicas_facilitador.pdf", "04_guia_de_impressao.pdf"}.issubset(paths)
+    assert {"01_envelope_1.pdf", "02_envelope_2.pdf", "03_dicas_facilitador.pdf", "04_guia_facilitador.pdf", "05_guia_de_impressao.pdf"}.issubset(paths)
     assert all(not Path(path).is_absolute() for path in paths)
     assert all(entry["category"] != "player" for entry in manifest["files"] if "dicas" in entry["id"] or "gabarito" in entry["id"])
     assert all(doc["final_file"] in paths for doc in manifest["documents"])
@@ -91,8 +95,12 @@ def test_build_package_blueprint_legado_sem_contratos_nao_falha_por_graph_skippe
     def fake_render_print_guide(_print_manifest, output_path, strict=True):
         return make_pdf(output_path)
 
+    def fake_render_facilitator_guide(_blueprint, output_path, graph_report=None, strict=True):
+        return make_pdf(output_path)
+
     monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
     monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+    monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
     monkeypatch.setattr(package_builder, "run_qa", lambda _package_dir, _manifest, strict=True: QAReport(status="passed"))
 
     result = build_package(Path("examples/exemplo_blueprint.json"), tmp_path, strict=True)
@@ -140,8 +148,12 @@ def test_build_package_empacota_tres_envelopes_e_desloca_auxiliares(tmp_path, mo
     def fake_render_print_guide(_print_manifest, output_path, strict=True):
         return make_pdf(output_path)
 
+    def fake_render_facilitator_guide(_blueprint, output_path, graph_report=None, strict=True):
+        return make_pdf(output_path)
+
     monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
     monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+    monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
 
     result = build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
@@ -151,7 +163,8 @@ def test_build_package_empacota_tres_envelopes_e_desloca_auxiliares(tmp_path, mo
     assert "03_envelope_3.pdf" in paths
     assert "04_dicas_facilitador.pdf" in paths
     assert "05_gabarito_mestre.pdf" in paths
-    assert "06_guia_de_impressao.pdf" in paths
+    assert "06_guia_facilitador.pdf" in paths
+    assert "07_guia_de_impressao.pdf" in paths
     assert {entry["file"] for entry in print_manifest["files"]} == set(paths)
     assert "llm_feedback.json" not in {entry["file"] for entry in print_manifest["files"]}
     assert result["status"] == "passed"
@@ -178,18 +191,22 @@ def test_print_manifest_final_usa_page_count_final_do_guia(tmp_path, monkeypatch
         pages = 1 if chamadas["count"] == 1 else 2
         return make_pdf(output_path, pages=pages)
 
+    def fake_render_facilitator_guide(_blueprint, output_path, graph_report=None, strict=True):
+        return make_pdf(output_path)
+
     monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
     monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+    monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
 
     result = build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
     print_manifest = json.loads(Path(result["print_manifest_path"]).read_text(encoding="utf-8"))
 
     manifest_guide = next(item for item in manifest["files"] if item["id"] == "guia_de_impressao")
-    print_guide = next(item for item in print_manifest["files"] if item["file"] == "02_guia_de_impressao.pdf")
+    print_guide = next(item for item in print_manifest["files"] if item["file"] == "03_guia_de_impressao.pdf")
 
     assert chamadas["count"] == 2
-    assert count_pdf_pages(Path(result["output_dir"]) / "02_guia_de_impressao.pdf") == 2
+    assert count_pdf_pages(Path(result["output_dir"]) / "03_guia_de_impressao.pdf") == 2
     assert manifest_guide["page_count"] == 2
     assert print_guide["page_count"] == 2
 
@@ -217,6 +234,46 @@ def test_print_manifest_calcula_paginas_confidencialidade_duplex_e_perfis(tmp_pa
     assert by_file["01_envelope_1.pdf"]["confidential"] is False
     assert by_file["03_dicas_facilitador.pdf"]["confidential"] is True
     assert all(entry["duplex"] is False for entry in print_manifest["files"])
+
+
+def test_guia_facilitador_no_manifest_print_manifest_e_qa(tmp_path, monkeypatch):
+    from generator import package_builder
+
+    def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
+        return {
+            "E1": [make_pdf(output_dir / "E1-01.pdf")],
+            "E2": [make_pdf(output_dir / "E2-01.pdf")],
+            "E3": [],
+            "dicas": [make_pdf(output_dir / "DICAS-E1-00_CAPA.pdf")],
+            "gabarito": [],
+        }
+
+    def fake_render_print_guide(_print_manifest, output_path, strict=True):
+        return make_pdf(output_path)
+
+    def fake_render_facilitator_guide(_blueprint, output_path, graph_report=None, strict=True):
+        return make_pdf(output_path)
+
+    monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
+    monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+    monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
+
+    result = build_package(Path("examples/caso_canonico_intermediario.json"), tmp_path, strict=True)
+    package_dir = Path(result["output_dir"])
+    manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
+    print_manifest = json.loads(Path(result["print_manifest_path"]).read_text(encoding="utf-8"))
+
+    guia = next(entry for entry in manifest["files"] if entry["id"] == "guia_facilitador")
+    assert guia["category"] == "facilitator"
+    assert guia["confidential"] is True
+    assert guia["path"] == "04_guia_facilitador.pdf"
+    assert guia["path"] in print_manifest["facilitator_files"]
+    assert guia["path"] not in print_manifest["player_files"]
+    assert all(doc["final_file"] != guia["path"] for doc in manifest["documents"])
+
+    qa_report = run_qa(package_dir, manifest)
+    assert qa_report.status == "passed"
+
 
 def test_build_package_strict_nao_gera_pdf_fake_sem_env(tmp_path, monkeypatch):
     from generator import renderer
