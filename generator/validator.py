@@ -44,8 +44,11 @@ except ImportError:  # Execução direta: python generator/validator.py
 
 try:  # Execução como pacote: python -m generator.validator
     from .clue_graph import analyze_clue_graph, build_clue_graph
+    from .playtest_metrics import analyze_playtest
 except ImportError:  # Execução direta: python generator/validator.py
     from clue_graph import analyze_clue_graph, build_clue_graph  # type: ignore[no-redef]
+    sys.path.append(str(Path(__file__).resolve().parents[1]))
+    from generator.playtest_metrics import analyze_playtest  # type: ignore[no-redef]
 
 
 class Severidade(str, Enum):
@@ -276,6 +279,7 @@ class BlueprintValidator:
         self._verificar_dicas_contextuais()
         self._verificar_visual_procedural()
         self._verificar_autossuficiencia()
+        self._verificar_playtest_metrics()
         self._verificar_conteudo_schema()
         self._calcular_risco()
         self._gerar_resumo()
@@ -810,6 +814,20 @@ class BlueprintValidator:
                 "VP_010",
                 Severidade.MODERADO,
                 "Visual procedural existe, mas nenhum elemento tem função narrativa relacionada.",
+            ))
+
+    def _verificar_playtest_metrics(self) -> None:
+        """Registra warnings heurísticos de playtest sem bloquear geração."""
+        report = analyze_playtest(self.bp)
+        for warning in report.get("warnings", []):
+            code = str(warning.get("code", "PT_000"))
+            message = str(warning.get("message", "Métrica de playtest requer revisão."))
+            detail = warning.get("detail")
+            self.resultado.adicionar(Erro(
+                codigo=code,
+                severidade=Severidade.AVISO,
+                mensagem=message,
+                detalhe=str(detail) if detail else None,
             ))
 
     def _verificar_autossuficiencia(self) -> None:

@@ -12,6 +12,7 @@ from .clue_graph import analyze_clue_graph, build_clue_graph, write_graph_report
 from .facilitator_guide import render_facilitator_guide
 from .llm_feedback import build_llm_feedback, write_llm_feedback
 from .merger import OutputPaths, build_output_paths, count_pdf_pages, merge_pdfs, safe_slug
+from .playtest_metrics import analyze_playtest, write_playtest_report
 from .models import Blueprint
 from .print_guide import build_print_manifest, render_print_guide, write_print_manifest
 from .qa import report_to_dict, run_qa, write_qa_report
@@ -325,6 +326,7 @@ def build_package(
             "qa": "qa_report.json",
             "graph": "graph_report.json",
             "llm_feedback": "llm_feedback.json",
+            "playtest": "playtest_report.json",
         },
     }
 
@@ -347,6 +349,9 @@ def build_package(
 
     write_graph_report(graph_report, paths["graph_report"])
 
+    playtest_report = analyze_playtest(blueprint, graph_report=graph_report)
+    write_playtest_report(playtest_report, paths["playtest_report"])
+
     qa_report = run_qa(package_dir, manifest, strict=strict)
     write_qa_report(qa_report, paths["qa_report"])
 
@@ -365,8 +370,10 @@ def build_package(
         "qa_report_path": str(paths["qa_report"]),
         "graph_report_path": str(paths["graph_report"]),
         "llm_feedback_path": str(paths["llm_feedback"]),
+        "playtest_report_path": str(paths["playtest_report"]),
         "qa_status": qa_report.status,
         "graph_status": graph_report["status"],
+        "playtest_status": playtest_report["status"],
     }
     if strict and (not qa_ok or not graph_ok):
         return result

@@ -118,3 +118,12 @@ def test_write_llm_feedback_escreve_json_valido(tmp_path):
 
     assert returned == output
     assert json.loads(output.read_text(encoding="utf-8"))["status"] == "passed"
+
+
+def test_pt_warnings_geram_instrucoes_medium_playtest():
+    for code in ["PT_001", "PT_002", "PT_003", "PT_004", "PT_005", "PT_006", "PT_007", "PT_008", "PT_009"]:
+        feedback = build_llm_feedback(resultado_com(Erro(code, Severidade.AVISO, "Warning de playtest.")))
+
+        instruction = primeira_instrucao(feedback)
+        assert instruction["priority"] == "medium"
+        assert instruction["category"] == "playtest_metrics"

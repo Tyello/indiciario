@@ -28,8 +28,10 @@ def test_build_package_cli_smoke_sem_chromium(tmp_path, monkeypatch, capsys):
             "qa_report_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "qa_report.json"),
             "graph_report_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "graph_report.json"),
             "llm_feedback_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "llm_feedback.json"),
+            "playtest_report_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "playtest_report.json"),
             "qa_status": "passed",
             "graph_status": "passed",
+            "playtest_status": "warnings",
         }
 
     monkeypatch.setattr(cli, "build_package", fake_build_package)
@@ -45,4 +47,5 @@ def test_build_package_cli_smoke_sem_chromium(tmp_path, monkeypatch, capsys):
     assert "Pacote gerado em:" in out
     assert "QA: passed" in out
     assert "Graph: passed" in out
+    assert "Playtest: warnings" in out
     assert "LLM Feedback: generated" in out
