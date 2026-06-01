@@ -17,6 +17,7 @@ from .print_guide import build_print_manifest, render_print_guide, write_print_m
 from .qa import report_to_dict, run_qa, write_qa_report
 from .renderer import renderizar_caso
 from .validator import BlueprintValidator
+from .visual_procedural import build_visual_documents, visual_document_code, visual_document_path
 
 
 class PackageBuildError(RuntimeError):
@@ -89,6 +90,34 @@ def _case_metadata(blueprint: Blueprint, case_slug: str) -> dict[str, Any]:
     }
 
 
+def _append_document_manifest_entry(
+    documents: list[dict[str, Any]],
+    current_page_by_file: dict[str, int],
+    package_dir: Path,
+    final_file_path: Path,
+    source_pdf: Path,
+    codigo: str,
+    titulo: str,
+    tipo: str,
+    envelope: str,
+) -> None:
+    final_file = _relative(final_file_path, package_dir)
+    source_pages = count_pdf_pages(source_pdf)
+    page_start = current_page_by_file.get(final_file, 1)
+    page_end = page_start + source_pages - 1
+    current_page_by_file[final_file] = page_end + 1
+    documents.append({
+        "codigo": codigo,
+        "titulo": titulo,
+        "tipo": tipo,
+        "envelope": envelope,
+        "source_pdf": _relative(source_pdf, package_dir),
+        "final_file": final_file,
+        "page_start": page_start,
+        "page_end": page_end,
+    })
+
+
 def _build_documents_manifest(
     blueprint: Blueprint,
     rendered_by_code: dict[str, Path],
@@ -103,21 +132,77 @@ def _build_documents_manifest(
         source_pdf = rendered_by_code.get(doc.codigo)
         if final_file_path is None or source_pdf is None:
             continue
-        final_file = _relative(final_file_path, package_dir)
-        source_pages = count_pdf_pages(source_pdf)
-        page_start = current_page_by_file.get(final_file, 1)
-        page_end = page_start + source_pages - 1
-        current_page_by_file[final_file] = page_end + 1
-        documents.append({
-            "codigo": doc.codigo,
-            "titulo": doc.titulo,
-            "tipo": doc.tipo.value,
-            "envelope": envelope,
-            "source_pdf": _relative(source_pdf, package_dir),
-            "final_file": final_file,
-            "page_start": page_start,
-            "page_end": page_end,
-        })
+        _append_document_manifest_entry(
+            documents,
+            current_page_by_file,
+            package_dir,
+            final_file_path,
+            source_pdf,
+            doc.codigo,
+            doc.titulo,
+            doc.tipo.value,
+            envelope,
+        )
+
+    visual = blueprint.visual_procedural
+    if visual is None:
+        return documents
+
+    rendered_by_name = {path.name: path for path in rendered_by_code.values()}
+    for mapa in visual.mapas:
+        envelope = mapa.fase or "E1"
+        final_file_path = final_by_envelope.get(envelope)
+        source_pdf = rendered_by_name.get(visual_document_path("map", mapa.id, package_dir).name)
+        if final_file_path is None or source_pdf is None:
+            continue
+        _append_document_manifest_entry(
+            documents,
+            current_page_by_file,
+            package_dir,
+            final_file_path,
+            source_pdf,
+            visual_document_code("map", mapa.id),
+            mapa.titulo,
+            "visual_procedural",
+            envelope,
+        )
+
+    for personagem in visual.personagens:
+        envelope = "E1"
+        final_file_path = final_by_envelope.get(envelope)
+        source_pdf = rendered_by_name.get(visual_document_path("character", personagem.personagem_id, package_dir).name)
+        if final_file_path is None or source_pdf is None:
+            continue
+        titulo = f"Cartão de personagem {personagem.personagem_id}"
+        _append_document_manifest_entry(
+            documents,
+            current_page_by_file,
+            package_dir,
+            final_file_path,
+            source_pdf,
+            visual_document_code("character", personagem.personagem_id),
+            titulo,
+            "visual_procedural",
+            envelope,
+        )
+
+    for local in visual.locais:
+        envelope = "E1"
+        final_file_path = final_by_envelope.get(envelope)
+        source_pdf = rendered_by_name.get(visual_document_path("location", local.id, package_dir).name)
+        if final_file_path is None or source_pdf is None:
+            continue
+        _append_document_manifest_entry(
+            documents,
+            current_page_by_file,
+            package_dir,
+            final_file_path,
+            source_pdf,
+            visual_document_code("location", local.id),
+            local.nome,
+            "visual_procedural",
+            envelope,
+        )
     return documents
 
 
@@ -221,6 +306,9 @@ def build_package(
     paths["html_debug_dir"].mkdir(parents=True, exist_ok=True)
 
     rendered_groups = renderizar_caso(blueprint_path, paths["rendered_dir"], strict=strict)
+    visual_groups = build_visual_documents(blueprint, paths["rendered_dir"], strict=strict)
+    for group, pdfs in visual_groups.items():
+        rendered_groups.setdefault(group, []).extend(pdfs)
     files, final_by_envelope, warnings = _merge_groups(rendered_groups, paths, strict=strict)
     rendered_by_code = {path.stem: path for group in rendered_groups.values() for path in group}
     graph = build_clue_graph(blueprint)
