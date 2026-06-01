@@ -51,6 +51,7 @@ Leia e internalize nesta ordem antes de gerar qualquer caso:
 | 14 | `14_GRAFO_DE_PISTAS.md` | Grafo lógico de pistas, contratos e solvabilidade estrutural |
 | 15 | `15_CONTROLES_DA_LLM.md` | Guard rails da LLM e feedback estruturado para correção futura |
 | 16 | `15_GUIA_DE_IMPRESSAO.md` | Regras operacionais do pacote de impressão |
+| 17 | `16_GUIA_FACILITADOR.md` | Guia confidencial de condução e dicas contextuais |
 
 ---
 
@@ -104,6 +105,9 @@ Define que a LLM não é fonte final de verdade, lista permissões e proibiçõe
 ### `15_GUIA_DE_IMPRESSAO.md`
 Guia operacional do pacote final: separação entre material de jogador e facilitador, perfis econômico/padrão/premium, escala 100%, confidencialidade, mapas, cartões futuros e interpretação do `print_manifest.json`.
 
+### `16_GUIA_FACILITADOR.md`
+Guia confidencial de condução da sessão: papel do facilitador, diferença entre gabarito e guia, critérios de avanço por contratos de evidência, uso de dicas contextuais e prevenção de spoilers.
+
 ---
 
 ## Separação obrigatória de materiais
@@ -133,10 +137,10 @@ Nunca misture no mesmo arquivo ou impressão:
 6. Gerar documentos finais seguindo specs do 03 e 12
 7. Gerar gabarito usando template do 09
 8. Gerar dicas usando template do 10
-9. Gerar instruções de facilitador com base no 11
+9. Gerar instruções de facilitador com base no 11 e no 16
 10. Verificar checklist visual do 12
 11. Gerar pacote final com `python -m scripts.build_package <blueprint.json> --output output --strict`
-12. Conferir `manifest.json`, `print_manifest.json`, `qa_report.json`, `graph_report.json`, `llm_feedback.json` e `05_guia_de_impressao.pdf`
+12. Conferir `manifest.json`, `print_manifest.json`, `qa_report.json`, `graph_report.json`, `llm_feedback.json`, `guia_facilitador.pdf` e `guia_de_impressao.pdf`
 13. Entregar arquivos separados por destino
 ```
 
@@ -189,7 +193,8 @@ controle para produção:
 - `02_envelope_2.pdf` — material do jogador do Envelope 2, quando existir;
 - `03_dicas_facilitador.pdf` — material confidencial de dicas, quando existir;
 - `04_gabarito_mestre.pdf` — gabarito confidencial, quando existir;
-- `05_guia_de_impressao.pdf` — guia operacional para gráfica/papelaria;
+- `NN_guia_facilitador.pdf` — guia confidencial de condução para o facilitador;
+- `NN_guia_de_impressao.pdf` — guia operacional para gráfica/papelaria;
 - `manifest.json` — descrição técnica do pacote e dos documentos;
 - `print_manifest.json` — instruções de impressão;
 - `qa_report.json` — QA técnico do pacote;

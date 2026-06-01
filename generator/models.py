@@ -228,6 +228,25 @@ class Dica(BaseModel):
     o_que_desbloqueia: str
 
 
+class DicaContextual(BaseModel):
+    """Dica contextual para uso interno do facilitador durante a sessão."""
+
+    id: str = ""
+    categoria: str
+    fase: str
+    titulo: str = ""
+    condicao_uso: str = ""
+    texto: str = ""
+    nivel: str
+    contratos_relacionados: list[str] = Field(default_factory=list)
+    documentos_relacionados: list[str] = Field(default_factory=list)
+
+    @field_validator("fase", mode="before")
+    @classmethod
+    def _normalizar_fase(cls, valor: object) -> str:
+        return valor.value if isinstance(valor, Enum) else str(valor)
+
+
 class ContratoEvidencia(BaseModel):
     id: str
     conclusao: str
@@ -305,6 +324,7 @@ class Blueprint(BaseModel):
     cadeia_financeira: list[SaltoFinanceiro] = Field(default_factory=list)
     codigos: list[Codigo] = Field(default_factory=list)
     dicas: list[Dica] = Field(..., min_length=6)
+    dicas_contextuais: list[DicaContextual] = Field(default_factory=list)
     contratos_evidencia: list[ContratoEvidencia] = Field(default_factory=list)
 
     versao: str = "0.1"

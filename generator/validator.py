@@ -224,6 +224,21 @@ CHAVES_LISTA: dict[str, str] = {
 }
 
 
+CATEGORIAS_DICA_CONTEXTUAL = {
+    "mapa",
+    "personagem",
+    "cronologia",
+    "financeira",
+    "logistica",
+    "documento",
+    "contrato",
+    "descarte",
+    "solucao",
+}
+
+NIVEIS_DICA_CONTEXTUAL = {"leve", "media", "forte", "quase_gabarito"}
+
+
 PLACEHOLDERS_INVALIDOS = {
     "...",
     "a preencher",
@@ -242,6 +257,7 @@ class BlueprintValidator:
         self.resultado = ResultadoValidacao()
         self._ids_personagens: set[str] = {p.id for p in blueprint.personagens}
         self._codigos_docs: set[str] = {d.codigo for d in blueprint.documentos}
+        self._ids_contratos: set[str] = {c.id for c in blueprint.contratos_evidencia if c.id}
         self._docs_por_codigo = {d.codigo: d for d in blueprint.documentos}
         self._schemas = load_all_schemas()
 
@@ -257,6 +273,7 @@ class BlueprintValidator:
         self._verificar_cadeia_financeira()
         self._verificar_linha_do_tempo()
         self._verificar_dicas()
+        self._verificar_dicas_contextuais()
         self._verificar_autossuficiencia()
         self._verificar_conteudo_schema()
         self._calcular_risco()
@@ -642,6 +659,57 @@ class BlueprintValidator:
             if dica.intensidade in [Intensidade.LEVE, Intensidade.MEDIA]:
                 if any(nome in dica.texto.lower() for nome in nomes):
                     self.resultado.adicionar(Erro("DICA_003", Severidade.AVISO, f"Dica {dica.numero} pode revelar nome diretamente."))
+
+    def _verificar_dicas_contextuais(self) -> None:
+        dicas = self.bp.dicas_contextuais
+        if self.bp.contratos_evidencia and not dicas:
+            self.resultado.adicionar(Erro(
+                "DC_000",
+                Severidade.MODERADO,
+                "Contratos de evidência existem, mas nenhuma dica contextual foi definida.",
+                detalhe="O pacote continua gerável; adicione dicas para apoiar o facilitador em travamentos reais.",
+            ))
+            return
+
+        ids_vistos: set[str] = set()
+        for dica in dicas:
+            dica_id = dica.id.strip()
+            if not dica_id:
+                self.resultado.adicionar(Erro("DC_001", Severidade.CRITICO, "Dica contextual sem id."))
+            elif dica_id in ids_vistos:
+                self.resultado.adicionar(Erro("DC_002", Severidade.CRITICO, f"Dica contextual duplicada: {dica_id}."))
+            ids_vistos.add(dica_id)
+
+            fase = dica.fase.strip()
+            if fase != "final" and not self._envelope_valido(fase):
+                self.resultado.adicionar(Erro("DC_003", Severidade.CRITICO, f"Fase inválida em dica contextual '{dica_id}': {dica.fase}."))
+
+            if not dica.texto.strip():
+                self.resultado.adicionar(Erro("DC_004", Severidade.CRITICO, f"Dica contextual '{dica_id}' sem texto."))
+            if not dica.condicao_uso.strip():
+                self.resultado.adicionar(Erro("DC_005", Severidade.CRITICO, f"Dica contextual '{dica_id}' sem condicao_uso."))
+
+            for contrato_id in dica.contratos_relacionados:
+                if contrato_id not in self._ids_contratos:
+                    self.resultado.adicionar(Erro(
+                        "DC_006",
+                        Severidade.CRITICO,
+                        f"Dica contextual '{dica_id}' referencia contrato inexistente: {contrato_id}.",
+                    ))
+            for documento_codigo in dica.documentos_relacionados:
+                if documento_codigo not in self._codigos_docs:
+                    self.resultado.adicionar(Erro(
+                        "DC_007",
+                        Severidade.CRITICO,
+                        f"Dica contextual '{dica_id}' referencia documento inexistente: {documento_codigo}.",
+                        documento=documento_codigo,
+                    ))
+
+            if dica.nivel not in NIVEIS_DICA_CONTEXTUAL:
+                self.resultado.adicionar(Erro("DC_008", Severidade.CRITICO, f"Nível inválido em dica contextual '{dica_id}': {dica.nivel}."))
+            if dica.categoria not in CATEGORIAS_DICA_CONTEXTUAL:
+                self.resultado.adicionar(Erro("DC_009", Severidade.CRITICO, f"Categoria inválida em dica contextual '{dica_id}': {dica.categoria}."))
+
 
     def _verificar_autossuficiencia(self) -> None:
         tem_log = any(d.tipo in [TipoDocumento.LOG_ACESSO, TipoDocumento.LOG_SISTEMA] for d in self.bp.documentos)

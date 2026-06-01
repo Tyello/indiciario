@@ -88,11 +88,16 @@ def run_qa(package_dir: Path, manifest: dict[str, Any], strict: bool = True) -> 
         file_id = str(entry.get("id", ""))
         label = str(entry.get("label", ""))
         confidential = entry.get("confidential")
-        is_facilitator_secret = any(token in file_id or token in label.lower() for token in ["dicas", "gabarito"])
+        is_facilitator_secret = any(
+            token in file_id or token in label.lower()
+            for token in ["dicas", "gabarito", "guia_facilitador", "guia do facilitador"]
+        )
         if is_facilitator_secret and confidential is not True:
-            report.errors.append(_issue("QA_CONF_001", "Dicas/gabarito devem ser confidential: true.", path))
+            report.errors.append(_issue("QA_CONF_001", "Materiais confidenciais do facilitador devem ser confidential: true.", path))
         if is_facilitator_secret and category == "player":
-            report.errors.append(_issue("QA_CONF_002", "Dicas/gabarito não podem estar em category: player.", path))
+            report.errors.append(_issue("QA_CONF_002", "Materiais confidenciais do facilitador não podem estar em category: player.", path))
+        if is_facilitator_secret and category != "facilitator":
+            report.errors.append(_issue("QA_CONF_004", "Materiais confidenciais do facilitador devem usar category: facilitator.", path))
         if str(file_id).startswith("envelope_") and confidential is not False:
             report.errors.append(_issue("QA_CONF_003", "Envelopes de jogador devem ser confidential: false.", path))
 
