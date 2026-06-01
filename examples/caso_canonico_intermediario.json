@@ -1628,5 +1628,10 @@
         ]
       }
     ]
+  },
+  "playtest": {
+    "status": "simulado",
+    "rodadas": 0,
+    "observacoes": []
   }
 }

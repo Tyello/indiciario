@@ -111,6 +111,9 @@ Guia confidencial de condução da sessão: papel do facilitador, diferença ent
 ### `17_VISUAL_PROCEDURAL.md`
 Define a camada de visual procedural controlado: mapas simples em SVG/HTML, cartões de personagens, cartões de locais, limites, proibições e regras de função narrativa.
 
+### `18_PLAYTEST_E_METRICAS.md`
+Define a camada analítica de playtest heurístico: métricas de documentos, envelopes, contratos, suspeitos, red herrings, carga cognitiva, tempo estimado e warnings de experiência que não bloqueiam geração.
+
 ---
 
 ## Separação obrigatória de materiais

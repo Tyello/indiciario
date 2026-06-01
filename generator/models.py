@@ -351,6 +351,12 @@ class VisualProcedural(BaseModel):
     locais: list[LocalVisual] = Field(default_factory=list)
 
 
+class PlaytestMetadata(BaseModel):
+    status: str = "simulado"
+    rodadas: int = 0
+    observacoes: list[str] = Field(default_factory=list)
+
+
 class Blueprint(BaseModel):
     """Estrutura completa do planejamento de um caso."""
 
@@ -402,6 +408,7 @@ class Blueprint(BaseModel):
     dicas_contextuais: list[DicaContextual] = Field(default_factory=list)
     contratos_evidencia: list[ContratoEvidencia] = Field(default_factory=list)
     visual_procedural: VisualProcedural | None = None
+    playtest: PlaytestMetadata | None = None
 
     versao: str = "0.1"
     observacoes_producao: Optional[str] = None

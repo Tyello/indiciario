@@ -25,6 +25,7 @@ class OutputPaths(TypedDict, total=False):
     qa_report: Path
     graph_report: Path
     llm_feedback: Path
+    playtest_report: Path
 
 
 class PDFMergeError(RuntimeError):
@@ -130,4 +131,5 @@ def build_output_paths(case_title: str, output_root: Path) -> OutputPaths:
         "qa_report": output_dir / "qa_report.json",
         "graph_report": output_dir / "graph_report.json",
         "llm_feedback": output_dir / "llm_feedback.json",
+        "playtest_report": output_dir / "playtest_report.json",
     }
