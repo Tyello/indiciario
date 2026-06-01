@@ -273,6 +273,24 @@ def test_validator_cli_json_output(tmp_path):
     assert output["pode_gerar"] is True
 
 
+def test_validator_cli_writes_llm_feedback(tmp_path):
+    path = tmp_path / "blueprint.json"
+    feedback_path = tmp_path / "llm_feedback.json"
+    path.write_text(blueprint_valido().model_dump_json(), encoding="utf-8")
+
+    result = subprocess.run(
+        [sys.executable, "-m", "generator.validator", str(path), "--llm-feedback", str(feedback_path)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+
+    assert result.returncode == 0, result.stderr
+    feedback = json.loads(feedback_path.read_text(encoding="utf-8"))
+    assert feedback["status"] == "passed"
+
+
 def test_validator_cli_accepts_example_blueprint_from_examples_folder():
     exemplo_path = ROOT / "examples" / "exemplo_blueprint.json"
     assert exemplo_path.exists(), "Arquivo de exemplo esperado em examples/exemplo_blueprint.json"

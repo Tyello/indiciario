@@ -231,7 +231,7 @@ O agente deve entender esse fluxo antes de modificar qualquer parte:
         ↓
 8. merger.py agrupa por envelope (E1, E2, dicas, gabarito)
         ↓
-9. package_builder.py gera manifest.json, print_manifest.json, 05_guia_de_impressao.pdf, qa_report.json e graph_report.json
+9. package_builder.py gera manifest.json, print_manifest.json, 05_guia_de_impressao.pdf, qa_report.json, graph_report.json e llm_feedback.json
         ↓
 10. Bot envia os arquivos ao usuário no Telegram
 ```
@@ -267,8 +267,8 @@ python -m scripts.build_package examples/showcase_tecnico.json --output output -
 ```
 
 O pacote deve conter envelopes finais, `05_guia_de_impressao.pdf`,
-`manifest.json`, `print_manifest.json`, `qa_report.json` e `graph_report.json`. Dicas e gabarito, quando
-existirem, devem permanecer confidenciais e separados dos arquivos de jogador.
+`manifest.json`, `print_manifest.json`, `qa_report.json`, `graph_report.json` e `llm_feedback.json`. Dicas e gabarito, quando
+existirem, devem permanecer confidenciais e separados dos arquivos de jogador. O `llm_feedback.json` é artefato técnico interno, não é para jogadores e não entra no `print_manifest.json`.
 
 ### Modificar o prompt de geração
 
@@ -320,6 +320,7 @@ em `/framework/` — especialmente:
 - `04_DESIGN_DE_PISTAS.md` — regras de pistas e códigos
 - `05_CHECKLIST_SOLVABILIDADE.md` — critério de qualidade final
 - `14_GRAFO_DE_PISTAS.md` — grafo lógico e relatório de solvabilidade estrutural
+- `15_CONTROLES_DA_LLM.md` — guard rails da LLM e feedback estruturado para correção futura
 
 Não tome decisões narrativas por conta própria. Se houver ambiguidade, sinalize
 no PR e aguarde instrução humana.
