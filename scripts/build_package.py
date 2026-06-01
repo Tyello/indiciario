@@ -37,10 +37,16 @@ def main() -> None:
     print(f"Pacote gerado em: {result['output_dir']}")
     print(f"QA: {result.get('qa_status', result['status'])}")
     print(f"Graph: {result.get('graph_status', 'unknown')}")
+    if result["status"] == "passed":
+        print("LLM Feedback: generated")
+    elif "llm_feedback_path" in result:
+        print(f"LLM Feedback: {result['llm_feedback_path']}")
     if result["status"] != "passed":
         print(f"Verifique QA: {result['qa_report_path']}")
         if "graph_report_path" in result:
             print(f"Verifique Graph: {result['graph_report_path']}")
+        if "llm_feedback_path" in result:
+            print(f"Verifique LLM Feedback: {result['llm_feedback_path']}")
         sys.exit(1)
 
 

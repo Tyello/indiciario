@@ -9,10 +9,11 @@ from pathlib import Path
 from typing import Any
 
 from .clue_graph import analyze_clue_graph, build_clue_graph, write_graph_report
+from .llm_feedback import build_llm_feedback, write_llm_feedback
 from .merger import OutputPaths, build_output_paths, count_pdf_pages, merge_pdfs, safe_slug
 from .models import Blueprint
 from .print_guide import build_print_manifest, render_print_guide, write_print_manifest
-from .qa import run_qa, write_qa_report
+from .qa import report_to_dict, run_qa, write_qa_report
 from .renderer import renderizar_caso
 from .validator import BlueprintValidator
 
@@ -190,10 +191,12 @@ def build_package(
     """Gera pacote final completo a partir de um blueprint válido."""
     blueprint = Blueprint(**json.loads(blueprint_path.read_text(encoding="utf-8")))
     validation = BlueprintValidator(blueprint, strict=strict).validar()
+    paths = build_output_paths(blueprint.titulo, output_root)
     if not validation.pode_gerar:
+        feedback = build_llm_feedback(validation)
+        write_llm_feedback(feedback, paths["llm_feedback"])
         raise RuntimeError(f"Blueprint inválido para geração: {validation.nivel_risco.value}")
 
-    paths = build_output_paths(blueprint.titulo, output_root)
     package_dir = paths["output_dir"]
     paths["rendered_dir"].mkdir(parents=True, exist_ok=True)
     paths["html_debug_dir"].mkdir(parents=True, exist_ok=True)
@@ -212,6 +215,7 @@ def build_package(
         "reports": {
             "qa": "qa_report.json",
             "graph": "graph_report.json",
+            "llm_feedback": "llm_feedback.json",
         },
     }
 
@@ -234,6 +238,9 @@ def build_package(
     qa_report = run_qa(package_dir, manifest, strict=strict)
     write_qa_report(qa_report, paths["qa_report"])
 
+    llm_feedback = build_llm_feedback(validation, report_to_dict(qa_report), graph_report)
+    write_llm_feedback(llm_feedback, paths["llm_feedback"])
+
     qa_ok = qa_report.status == "passed"
     graph_ok = graph_report["status"] in {"passed", "skipped"}
 
@@ -245,6 +252,7 @@ def build_package(
         "print_manifest_path": str(paths["print_manifest"]),
         "qa_report_path": str(paths["qa_report"]),
         "graph_report_path": str(paths["graph_report"]),
+        "llm_feedback_path": str(paths["llm_feedback"]),
         "qa_status": qa_report.status,
         "graph_status": graph_report["status"],
     }

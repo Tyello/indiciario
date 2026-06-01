@@ -27,6 +27,7 @@ def test_build_package_cli_smoke_sem_chromium(tmp_path, monkeypatch, capsys):
             "print_manifest_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "print_manifest.json"),
             "qa_report_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "qa_report.json"),
             "graph_report_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "graph_report.json"),
+            "llm_feedback_path": str(tmp_path / "showcase-tecnico-do-indiciario" / "llm_feedback.json"),
             "qa_status": "passed",
             "graph_status": "passed",
         }
@@ -44,3 +45,4 @@ def test_build_package_cli_smoke_sem_chromium(tmp_path, monkeypatch, capsys):
     assert "Pacote gerado em:" in out
     assert "QA: passed" in out
     assert "Graph: passed" in out
+    assert "LLM Feedback: generated" in out

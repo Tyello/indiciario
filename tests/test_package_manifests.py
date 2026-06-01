@@ -68,8 +68,12 @@ def test_manifest_contem_arquivos_paths_relativos_e_docs_validos(tmp_path, monke
     assert all(doc["final_file"] in paths for doc in manifest["documents"])
     assert result["graph_report_path"].endswith("graph_report.json")
     assert Path(result["graph_report_path"]).exists()
-    assert manifest["reports"] == {"qa": "qa_report.json", "graph": "graph_report.json"}
+    assert Path(result["llm_feedback_path"]).exists()
+    assert result["llm_feedback_path"].endswith("llm_feedback.json")
+    assert Path(result["llm_feedback_path"]).exists()
+    assert manifest["reports"] == {"qa": "qa_report.json", "graph": "graph_report.json", "llm_feedback": "llm_feedback.json"}
     assert "graph_report.json" not in paths
+    assert "llm_feedback.json" not in paths
 
 
 def test_build_package_blueprint_legado_sem_contratos_nao_falha_por_graph_skipped(tmp_path, monkeypatch):
@@ -149,6 +153,7 @@ def test_build_package_empacota_tres_envelopes_e_desloca_auxiliares(tmp_path, mo
     assert "05_gabarito_mestre.pdf" in paths
     assert "06_guia_de_impressao.pdf" in paths
     assert {entry["file"] for entry in print_manifest["files"]} == set(paths)
+    assert "llm_feedback.json" not in {entry["file"] for entry in print_manifest["files"]}
     assert result["status"] == "passed"
     assert result["graph_status"] == "passed"
     assert Path(result["graph_report_path"]).exists()

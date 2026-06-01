@@ -9,6 +9,7 @@ Mantém a interface pública descrita em AGENTS.md:
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
 import re
 import sys
@@ -947,6 +948,7 @@ def main() -> None:
     parser.add_argument("arquivo", help="Caminho para o blueprint em JSON")
     parser.add_argument("--strict", action="store_true", help="Falha também em risco Médio")
     parser.add_argument("--json", action="store_true", help="Saída em JSON")
+    parser.add_argument("--llm-feedback", type=Path, help="Caminho para escrever llm_feedback.json")
     args = parser.parse_args()
 
     path = Path(args.arquivo)
@@ -961,6 +963,12 @@ def main() -> None:
         sys.exit(2)
 
     resultado = BlueprintValidator(blueprint, strict=args.strict).validar()
+    if args.llm_feedback:
+        feedback_module = importlib.import_module(".llm_feedback", __package__) if __package__ else importlib.import_module("llm_feedback")
+        write_llm_feedback = feedback_module.write_llm_feedback
+        build_llm_feedback = feedback_module.build_llm_feedback
+        write_llm_feedback(build_llm_feedback(resultado), args.llm_feedback)
+
     if args.json:
         print(json.dumps({
             "nivel_risco": resultado.nivel_risco.value,
