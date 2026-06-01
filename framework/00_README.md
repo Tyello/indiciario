@@ -153,6 +153,12 @@ Nunca misture no mesmo arquivo ou impressão:
 - 🟡 Moderado — corrigir antes da produção final
 - 🟢 Melhoria — não bloqueia, mas eleva qualidade
 
+
+## Exemplos oficiais
+
+- `examples/showcase_tecnico.json` — fixture técnica para exercitar schemas, renderização, pacote final, QA, grafo e feedback estruturado. Use para validar cobertura técnica do pipeline.
+- `examples/caso_canonico_intermediario.json` — caso canônico jogável em dificuldade intermediária, com dois envelopes, validação offline pura e foco em experiência real de investigação. Use como referência de produto para casos narrativos completos.
+
 ## Renderização técnica oficial
 
 Playwright é o renderizador oficial de PDFs do Indiciário. Os PDFs são gerados
