@@ -64,6 +64,36 @@ def test_caso_canonico_tem_contratos_e_contrato_final():
     assert any(contrato.fase == "final" for contrato in blueprint.contratos_evidencia)
 
 
+def test_caso_canonico_pilares_e1_usam_apenas_documentos_e1():
+    blueprint = _blueprint()
+
+    for pilar in blueprint.pilares_validacao:
+        assert pilar.documento_principal.startswith("E1-")
+        assert pilar.confirmacao.startswith("E1-")
+
+
+def test_caso_canonico_contratos_obrigatorios_preservam_dificuldade_intermediaria():
+    blueprint = _blueprint()
+    contrato_abertura = next(
+        contrato for contrato in blueprint.contratos_evidencia if contrato.id == "C-E1-ABERTURA"
+    )
+    contratos_obrigatorios = [
+        contrato for contrato in blueprint.contratos_evidencia if contrato.obrigatoria_para_avanco
+    ]
+
+    assert contrato_abertura.obrigatoria_para_avanco is False
+    assert len(contratos_obrigatorios) <= 5
+
+
+def test_caso_canonico_playtest_ainda_e_rascunho_pre_playtest():
+    blueprint = _blueprint()
+
+    assert blueprint.playtest is not None
+    assert blueprint.playtest.status == "rascunho_pre_playtest"
+    assert blueprint.playtest.rodadas == 0
+    assert blueprint.playtest.observacoes == []
+
+
 def test_caso_canonico_graph_report_nao_falha():
     blueprint = _blueprint()
     report = analyze_clue_graph(build_clue_graph(blueprint), blueprint)
