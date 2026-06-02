@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import asyncio
 import importlib
+import logging
 import os
 import json
 import re
@@ -26,6 +27,8 @@ from typing import Any
 
 TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR    = Path(__file__).parent.parent / "output"
+
+logger = logging.getLogger(__name__)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -188,6 +191,7 @@ def renderizar_documento(
     output_path: Path,
     strict: bool = False,
     landscape: bool = False,
+    html_debug_path: Path | None = None,
 ) -> Path:
     template_path = TEMPLATES_DIR / template_nome
     if not template_path.exists():
@@ -195,6 +199,10 @@ def renderizar_documento(
 
     html_raw      = template_path.read_text(encoding="utf-8")
     html_final    = renderizar_html(html_raw, dados)
+
+    if html_debug_path is not None:
+        html_debug_path.parent.mkdir(parents=True, exist_ok=True)
+        html_debug_path.write_text(html_final, encoding="utf-8")
 
     residuais = detectar_residuos_tecnicos(html_final)
     if residuais:
@@ -244,6 +252,7 @@ def renderizar_caso(
     blueprint_path: Path,
     output_dir: Path | None = None,
     strict: bool = True,
+    html_debug_dir: Path | None = None,
 ) -> dict[str, list[Path]]:
     """
     Lê um blueprint validado e renderiza todos os documentos.
@@ -269,7 +278,7 @@ def renderizar_caso(
             mensagem = f"{codigo} ({template}) — 'conteudo' vazio, PDF ignorado"
             if strict:
                 raise RenderCaseError(mensagem)
-            print(f"  ⚠️  {mensagem}")
+            logger.warning("%s", mensagem)
             continue
 
         dados = {
@@ -282,14 +291,17 @@ def renderizar_caso(
 
         pdf_path = output_dir / f"{codigo}.pdf"
         try:
-            caminho = renderizar_documento(template, dados, pdf_path, strict=strict)
+            render_kwargs: dict[str, Any] = {"strict": strict}
+            if html_debug_dir is not None:
+                render_kwargs["html_debug_path"] = html_debug_dir / f"{codigo}.html"
+            caminho = renderizar_documento(template, dados, pdf_path, **render_kwargs)
             grupos.setdefault(envelope, []).append(caminho)
-            print(f"  ✅ {codigo} → {caminho.name}")
+            logger.info("Documento renderizado: %s → %s", codigo, caminho.name)
         except Exception as exc:
             mensagem = f"{codigo} ({template}) — falha ao renderizar: {exc}"
             if strict:
                 raise RenderCaseError(mensagem) from exc
-            print(f"  ❌ {mensagem}")
+            logger.error("%s", mensagem)
 
     # Capa de dicas por envelope
     for envelope_dica in sorted(
@@ -305,14 +317,17 @@ def renderizar_caso(
         }
         pdf_path = output_dir / f"DICAS-{envelope_dica}-00_CAPA.pdf"
         try:
-            caminho = renderizar_documento("00_envelope_capa.html", dados_capa, pdf_path, strict=strict)
+            render_kwargs: dict[str, Any] = {"strict": strict}
+            if html_debug_dir is not None:
+                render_kwargs["html_debug_path"] = html_debug_dir / f"DICAS-{envelope_dica}-00_CAPA.html"
+            caminho = renderizar_documento("00_envelope_capa.html", dados_capa, pdf_path, **render_kwargs)
             grupos["dicas"].append(caminho)
-            print(f"  ✅ DICAS-{envelope_dica}-CAPA → {caminho.name}")
+            logger.info("Capa de dicas renderizada: DICAS-%s-CAPA → %s", envelope_dica, caminho.name)
         except Exception as exc:
             mensagem = f"DICAS-{envelope_dica}-CAPA (00_envelope_capa.html) — falha ao renderizar: {exc}"
             if strict:
                 raise RenderCaseError(mensagem) from exc
-            print(f"  ❌ {mensagem}")
+            logger.error("%s", mensagem)
 
     return grupos
 

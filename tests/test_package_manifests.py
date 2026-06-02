@@ -292,3 +292,31 @@ def test_build_package_strict_nao_gera_pdf_fake_sem_env(tmp_path, monkeypatch):
     assert "Playwright não está instalado" in str(excinfo.value)
     assert "python -m playwright install chromium" in str(excinfo.value)
 
+
+
+def test_build_package_passa_html_debug_dir_sem_incluir_no_print_manifest(tmp_path, monkeypatch):
+    from generator import package_builder
+
+    def fake_renderizar_caso(_blueprint_path, output_dir, strict=True, html_debug_dir=None):
+        assert html_debug_dir is not None
+        html_debug_dir.mkdir(parents=True, exist_ok=True)
+        (html_debug_dir / "E1-01.html").write_text("<html>debug narrativo</html>", encoding="utf-8")
+        return {"E1": [make_pdf(output_dir / "E1-01.pdf")], "dicas": [], "gabarito": []}
+
+    def fake_render_print_guide(_print_manifest, output_path, strict=True):
+        return make_pdf(output_path)
+
+    def fake_render_facilitator_guide(_blueprint, output_path, graph_report=None, strict=True):
+        return make_pdf(output_path)
+
+    monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
+    monkeypatch.setattr(package_builder, "build_visual_documents", lambda _blueprint, output_dir, strict=True: {})
+    monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
+    monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
+
+    result = build_package(Path("examples/showcase_tecnico.json"), tmp_path, strict=True)
+    package_dir = Path(result["output_dir"])
+    print_manifest = json.loads(Path(result["print_manifest_path"]).read_text(encoding="utf-8"))
+
+    assert (package_dir / "html_debug" / "E1-01.html").exists()
+    assert all("html_debug" not in json.dumps(entry, ensure_ascii=False) for entry in print_manifest["files"])
