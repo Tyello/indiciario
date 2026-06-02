@@ -12,14 +12,24 @@ from typing import Any
 from .clue_graph import analyze_clue_graph, build_clue_graph, write_graph_report
 from .facilitator_guide import render_facilitator_guide
 from .llm_feedback import build_llm_feedback, write_llm_feedback
-from .merger import OutputPaths, build_output_paths, count_pdf_pages, merge_pdfs, safe_slug
+from .merger import (
+    OutputPaths,
+    build_output_paths,
+    count_pdf_pages,
+    merge_pdfs,
+    safe_slug,
+)
 from .playtest_metrics import analyze_playtest, write_playtest_report
 from .models import Blueprint
 from .print_guide import build_print_manifest, render_print_guide, write_print_manifest
 from .qa import report_to_dict, run_qa, write_qa_report
-from .renderer import renderizar_caso
+from .renderer import renderizar_caso, renderizar_documento
 from .validator import BlueprintValidator
-from .visual_procedural import build_visual_documents, visual_document_code, visual_document_path
+from .visual_procedural import (
+    build_visual_documents,
+    visual_document_code,
+    visual_document_path,
+)
 
 
 class PackageBuildError(RuntimeError):
@@ -54,7 +64,11 @@ def _envelope_number(group: str) -> int:
 
 def _sequenced_envelope_groups(rendered_groups: dict[str, list[Path]]) -> list[str]:
     groups = sorted(
-        [group for group, pdfs in rendered_groups.items() if pdfs and _is_envelope_group(group)],
+        [
+            group
+            for group, pdfs in rendered_groups.items()
+            if pdfs and _is_envelope_group(group)
+        ],
         key=_envelope_number,
     )
     if not groups:
@@ -63,7 +77,9 @@ def _sequenced_envelope_groups(rendered_groups: dict[str, list[Path]]) -> list[s
     esperado = list(range(1, max(numeros) + 1))
     if numeros != esperado:
         ausentes = [f"E{numero}" for numero in esperado if numero not in numeros]
-        raise PackageBuildError(f"Sequência de envelopes com buraco; ausente(s): {', '.join(ausentes)}.")
+        raise PackageBuildError(
+            f"Sequência de envelopes com buraco; ausente(s): {', '.join(ausentes)}."
+        )
     return groups
 
 
@@ -77,7 +93,9 @@ def _relative(path: Path, base: Path) -> str:
 
 def _write_manifest(manifest: dict[str, Any], output_path: Path) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    output_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     return output_path
 
 
@@ -108,16 +126,18 @@ def _append_document_manifest_entry(
     page_start = current_page_by_file.get(final_file, 1)
     page_end = page_start + source_pages - 1
     current_page_by_file[final_file] = page_end + 1
-    documents.append({
-        "codigo": codigo,
-        "titulo": titulo,
-        "tipo": tipo,
-        "envelope": envelope,
-        "source_pdf": _relative(source_pdf, package_dir),
-        "final_file": final_file,
-        "page_start": page_start,
-        "page_end": page_end,
-    })
+    documents.append(
+        {
+            "codigo": codigo,
+            "titulo": titulo,
+            "tipo": tipo,
+            "envelope": envelope,
+            "source_pdf": _relative(source_pdf, package_dir),
+            "final_file": final_file,
+            "page_start": page_start,
+            "page_end": page_end,
+        }
+    )
 
 
 def _build_documents_manifest(
@@ -125,9 +145,17 @@ def _build_documents_manifest(
     rendered_by_code: dict[str, Path],
     final_by_envelope: dict[str, Path],
     package_dir: Path,
+    cover_pages_by_envelope: dict[str, int] | None = None,
 ) -> list[dict[str, Any]]:
     documents: list[dict[str, Any]] = []
+    cover_pages_by_envelope = cover_pages_by_envelope or {}
     current_page_by_file: dict[str, int] = {}
+    for envelope, final_file_path in final_by_envelope.items():
+        cover_pages = cover_pages_by_envelope.get(envelope, 0)
+        if cover_pages > 0:
+            current_page_by_file[_relative(final_file_path, package_dir)] = (
+                cover_pages + 1
+            )
     for doc in blueprint.documentos:
         envelope = doc.envelope
         final_file_path = final_by_envelope.get(envelope)
@@ -154,7 +182,9 @@ def _build_documents_manifest(
     for mapa in visual.mapas:
         envelope = mapa.fase or "E1"
         final_file_path = final_by_envelope.get(envelope)
-        source_pdf = rendered_by_name.get(visual_document_path("map", mapa.id, package_dir).name)
+        source_pdf = rendered_by_name.get(
+            visual_document_path("map", mapa.id, package_dir).name
+        )
         if final_file_path is None or source_pdf is None:
             continue
         _append_document_manifest_entry(
@@ -172,7 +202,11 @@ def _build_documents_manifest(
     for personagem in visual.personagens:
         envelope = "E1"
         final_file_path = final_by_envelope.get(envelope)
-        source_pdf = rendered_by_name.get(visual_document_path("character", personagem.personagem_id, package_dir).name)
+        source_pdf = rendered_by_name.get(
+            visual_document_path(
+                "character", personagem.personagem_id, package_dir
+            ).name
+        )
         if final_file_path is None or source_pdf is None:
             continue
         titulo = f"Cartão de personagem {personagem.personagem_id}"
@@ -191,7 +225,9 @@ def _build_documents_manifest(
     for local in visual.locais:
         envelope = "E1"
         final_file_path = final_by_envelope.get(envelope)
-        source_pdf = rendered_by_name.get(visual_document_path("location", local.id, package_dir).name)
+        source_pdf = rendered_by_name.get(
+            visual_document_path("location", local.id, package_dir).name
+        )
         if final_file_path is None or source_pdf is None:
             continue
         _append_document_manifest_entry(
@@ -208,14 +244,44 @@ def _build_documents_manifest(
     return documents
 
 
+def _envelope_title(group: str) -> str:
+    titles = {
+        "E1": "Apuração inicial",
+        "E2": "Contradições e fechamento",
+        "E3": "Material complementar",
+    }
+    return titles.get(group, "Evidências do envelope")
+
+
+def _render_envelope_cover(
+    blueprint: Blueprint, group: str, paths: OutputPaths, strict: bool = True
+) -> Path:
+    numero = _envelope_number(group)
+    output_path = paths["rendered_dir"] / f"{group}-00_CAPA.pdf"
+    dados = {
+        "case_name": blueprint.titulo,
+        "section_label": f"Envelope {numero}",
+        "section_ref": _envelope_title(group),
+        "warning_label": "CUSTÓDIA INTERNA",
+    }
+    html_debug_dir = paths.get("html_debug_dir")
+    render_kwargs: dict[str, Any] = {"strict": strict}
+    if isinstance(html_debug_dir, Path):
+        render_kwargs["html_debug_path"] = html_debug_dir / f"{group}-00_CAPA.html"
+    return renderizar_documento(
+        "00_envelope_capa.html", dados, output_path, **render_kwargs
+    )
+
+
 def _merge_groups(
     rendered_groups: dict[str, list[Path]],
     paths: OutputPaths,
+    blueprint: Blueprint,
     strict: bool = True,
-) -> tuple[list[dict[str, Any]], dict[str, Path], list[str]]:
-    del strict
+) -> tuple[list[dict[str, Any]], dict[str, Path], dict[str, int], list[str]]:
     files: list[dict[str, Any]] = []
     final_by_envelope: dict[str, Path] = {}
+    cover_pages_by_envelope: dict[str, int] = {}
     warnings: list[str] = []
     package_dir = paths["output_dir"]
 
@@ -224,15 +290,19 @@ def _merge_groups(
         numero = _envelope_number(group)
         output_path = _numbered_output(package_dir, index, f"envelope_{numero}.pdf")
         paths[f"envelope_{numero}"] = output_path
-        merged = merge_pdfs(rendered_groups[group], output_path)
-        files.append({
-            "id": f"envelope_{numero}",
-            "label": f"Envelope {numero}",
-            "path": _relative(merged, package_dir),
-            "category": "player",
-            "confidential": False,
-            "page_count": count_pdf_pages(merged),
-        })
+        cover_path = _render_envelope_cover(blueprint, group, paths, strict=strict)
+        cover_pages_by_envelope[group] = count_pdf_pages(cover_path)
+        merged = merge_pdfs([cover_path, *rendered_groups[group]], output_path)
+        files.append(
+            {
+                "id": f"envelope_{numero}",
+                "label": f"Envelope {numero}",
+                "path": _relative(merged, package_dir),
+                "category": "player",
+                "confidential": False,
+                "page_count": count_pdf_pages(merged),
+            }
+        )
         final_by_envelope[group] = merged
         index += 1
 
@@ -240,26 +310,34 @@ def _merge_groups(
         pdfs = rendered_groups.get(group, [])
         config = AUXILIARY_CONFIG[group]
         if not pdfs:
-            warnings.append(f"Material '{config['label']}' ausente; arquivo final não gerado.")
+            warnings.append(
+                f"Material '{config['label']}' ausente; arquivo final não gerado."
+            )
             continue
         output_path = _numbered_output(package_dir, index, str(config["filename"]))
         paths[group] = output_path
         merged = merge_pdfs(pdfs, output_path)
-        files.append({
-            "id": config["id"],
-            "label": config["label"],
-            "path": _relative(merged, package_dir),
-            "category": config["category"],
-            "confidential": config["confidential"],
-            "page_count": count_pdf_pages(merged),
-        })
+        files.append(
+            {
+                "id": config["id"],
+                "label": config["label"],
+                "path": _relative(merged, package_dir),
+                "category": config["category"],
+                "confidential": config["confidential"],
+                "page_count": count_pdf_pages(merged),
+            }
+        )
         index += 1
 
-    paths["guia_de_impressao"] = _numbered_output(package_dir, index, "guia_de_impressao.pdf")
-    return files, final_by_envelope, warnings
+    paths["guia_de_impressao"] = _numbered_output(
+        package_dir, index, "guia_de_impressao.pdf"
+    )
+    return files, final_by_envelope, cover_pages_by_envelope, warnings
 
 
-def _append_facilitator_guide_file(manifest: dict[str, Any], guide_path: Path, package_dir: Path) -> None:
+def _append_facilitator_guide_file(
+    manifest: dict[str, Any], guide_path: Path, package_dir: Path
+) -> None:
     entry = {
         "id": "guia_facilitador",
         "label": "Guia do Facilitador",
@@ -268,7 +346,11 @@ def _append_facilitator_guide_file(manifest: dict[str, Any], guide_path: Path, p
         "confidential": True,
         "page_count": count_pdf_pages(guide_path),
     }
-    manifest["files"] = [file for file in manifest.get("files", []) if file.get("id") != "guia_facilitador"]
+    manifest["files"] = [
+        file
+        for file in manifest.get("files", [])
+        if file.get("id") != "guia_facilitador"
+    ]
     manifest["files"].append(entry)
 
 
@@ -276,7 +358,9 @@ def _next_file_index(files: list[dict[str, Any]]) -> int:
     return len(files) + 1
 
 
-def _append_print_guide_file(manifest: dict[str, Any], guide_path: Path, package_dir: Path) -> None:
+def _append_print_guide_file(
+    manifest: dict[str, Any], guide_path: Path, package_dir: Path
+) -> None:
     entry = {
         "id": "guia_de_impressao",
         "label": "Guia de Impressão",
@@ -285,7 +369,11 @@ def _append_print_guide_file(manifest: dict[str, Any], guide_path: Path, package
         "confidential": False,
         "page_count": count_pdf_pages(guide_path),
     }
-    manifest["files"] = [file for file in manifest.get("files", []) if file.get("id") != "guia_de_impressao"]
+    manifest["files"] = [
+        file
+        for file in manifest.get("files", [])
+        if file.get("id") != "guia_de_impressao"
+    ]
     manifest["files"].append(entry)
 
 
@@ -301,7 +389,9 @@ def build_package(
     if not validation.pode_gerar:
         feedback = build_llm_feedback(validation)
         write_llm_feedback(feedback, paths["llm_feedback"])
-        raise RuntimeError(f"Blueprint inválido para geração: {validation.nivel_risco.value}")
+        raise RuntimeError(
+            f"Blueprint inválido para geração: {validation.nivel_risco.value}"
+        )
 
     package_dir = paths["output_dir"]
     paths["rendered_dir"].mkdir(parents=True, exist_ok=True)
@@ -310,15 +400,23 @@ def build_package(
     renderizar_caso_kwargs: dict[str, Any] = {"strict": strict}
     if "html_debug_dir" in inspect.signature(renderizar_caso).parameters:
         renderizar_caso_kwargs["html_debug_dir"] = paths["html_debug_dir"]
-    rendered_groups = renderizar_caso(blueprint_path, paths["rendered_dir"], **renderizar_caso_kwargs)
+    rendered_groups = renderizar_caso(
+        blueprint_path, paths["rendered_dir"], **renderizar_caso_kwargs
+    )
     build_visual_kwargs: dict[str, Any] = {"strict": strict}
     if "html_debug_dir" in inspect.signature(build_visual_documents).parameters:
         build_visual_kwargs["html_debug_dir"] = paths["html_debug_dir"]
-    visual_groups = build_visual_documents(blueprint, paths["rendered_dir"], **build_visual_kwargs)
+    visual_groups = build_visual_documents(
+        blueprint, paths["rendered_dir"], **build_visual_kwargs
+    )
     for group, pdfs in visual_groups.items():
         rendered_groups.setdefault(group, []).extend(pdfs)
-    files, final_by_envelope, warnings = _merge_groups(rendered_groups, paths, strict=strict)
-    rendered_by_code = {path.stem: path for group in rendered_groups.values() for path in group}
+    files, final_by_envelope, cover_pages_by_envelope, warnings = _merge_groups(
+        rendered_groups, paths, blueprint, strict=strict
+    )
+    rendered_by_code = {
+        path.stem: path for group in rendered_groups.values() for path in group
+    }
     graph = build_clue_graph(blueprint)
     graph_report = analyze_clue_graph(graph, blueprint)
 
@@ -327,7 +425,13 @@ def build_package(
         "generated_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "status": "generated",
         "files": files,
-        "documents": _build_documents_manifest(blueprint, rendered_by_code, final_by_envelope, package_dir),
+        "documents": _build_documents_manifest(
+            blueprint,
+            rendered_by_code,
+            final_by_envelope,
+            package_dir,
+            cover_pages_by_envelope,
+        ),
         "warnings": warnings,
         "reports": {
             "qa": "qa_report.json",
@@ -337,17 +441,27 @@ def build_package(
         },
     }
 
-    paths["guia_facilitador"] = _numbered_output(package_dir, _next_file_index(files), "guia_facilitador.pdf")
-    render_facilitator_guide(blueprint, paths["guia_facilitador"], graph_report=graph_report, strict=strict)
+    paths["guia_facilitador"] = _numbered_output(
+        package_dir, _next_file_index(files), "guia_facilitador.pdf"
+    )
+    render_facilitator_guide(
+        blueprint, paths["guia_facilitador"], graph_report=graph_report, strict=strict
+    )
     _append_facilitator_guide_file(manifest, paths["guia_facilitador"], package_dir)
 
-    paths["guia_de_impressao"] = _numbered_output(package_dir, _next_file_index(manifest["files"]), "guia_de_impressao.pdf")
+    paths["guia_de_impressao"] = _numbered_output(
+        package_dir, _next_file_index(manifest["files"]), "guia_de_impressao.pdf"
+    )
     preliminary_print_manifest = build_print_manifest(manifest, package_dir)
-    render_print_guide(preliminary_print_manifest, paths["guia_de_impressao"], strict=strict)
+    render_print_guide(
+        preliminary_print_manifest, paths["guia_de_impressao"], strict=strict
+    )
     _append_print_guide_file(manifest, paths["guia_de_impressao"], package_dir)
 
     intermediate_print_manifest = build_print_manifest(manifest, package_dir)
-    render_print_guide(intermediate_print_manifest, paths["guia_de_impressao"], strict=strict)
+    render_print_guide(
+        intermediate_print_manifest, paths["guia_de_impressao"], strict=strict
+    )
     _append_print_guide_file(manifest, paths["guia_de_impressao"], package_dir)
 
     final_print_manifest = build_print_manifest(manifest, package_dir)
@@ -362,7 +476,9 @@ def build_package(
     qa_report = run_qa(package_dir, manifest, strict=strict)
     write_qa_report(qa_report, paths["qa_report"])
 
-    llm_feedback = build_llm_feedback(validation, report_to_dict(qa_report), graph_report)
+    llm_feedback = build_llm_feedback(
+        validation, report_to_dict(qa_report), graph_report
+    )
     write_llm_feedback(llm_feedback, paths["llm_feedback"])
 
     qa_ok = qa_report.status == "passed"

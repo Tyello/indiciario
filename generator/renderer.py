@@ -167,6 +167,8 @@ def _gerar_pdf_fake_para_teste(output_path: Path, landscape: bool = False) -> Pa
 
 async def _html_para_pdf(html: str, output_path: Path, landscape: bool = False) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    if _fake_pdf_permitido():
+        return _gerar_pdf_fake_para_teste(output_path, landscape=landscape)
     if not _playwright_disponivel():
         if _fake_pdf_permitido():
             return _gerar_pdf_fake_para_teste(output_path, landscape=landscape)
@@ -186,7 +188,12 @@ async def _html_para_pdf(html: str, output_path: Path, landscape: bool = False) 
             format="A4",
             print_background=True,
             landscape=landscape,
-            margin={"top": "15mm", "bottom": "15mm", "left": "15mm", "right": "15mm"},
+            margin={
+                "top": "15mm",
+                "bottom": "15mm",
+                "left": "15mm",
+                "right": "15mm",
+            },
         )
         await browser.close()
     return output_path

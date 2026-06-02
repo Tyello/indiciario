@@ -66,18 +66,34 @@ def test_conexao_area_inexistente_gera_vp_005() -> None:
 
 def test_marcador_documento_inexistente_gera_vp_006() -> None:
     data = load_canonical_data()
-    data["visual_procedural"]["mapas"][0]["marcadores"][0][
-        "documento_relacionado"
-    ] = "E9-99"
+    data["visual_procedural"]["mapas"][0]["marcadores"].append(
+        {
+            "id": "marcador_teste",
+            "label": "Teste",
+            "x": 10,
+            "y": 10,
+            "tipo": "teste",
+            "documento_relacionado": "E9-99",
+            "contrato_relacionado": "",
+        }
+    )
 
     assert "VP_006" in validation_codes(Blueprint(**data))
 
 
 def test_marcador_contrato_inexistente_gera_vp_007() -> None:
     data = load_canonical_data()
-    data["visual_procedural"]["mapas"][0]["marcadores"][0][
-        "contrato_relacionado"
-    ] = "C-INEXISTENTE"
+    data["visual_procedural"]["mapas"][0]["marcadores"].append(
+        {
+            "id": "marcador_teste",
+            "label": "Teste",
+            "x": 10,
+            "y": 10,
+            "tipo": "teste",
+            "documento_relacionado": "E1-03",
+            "contrato_relacionado": "C-INEXISTENTE",
+        }
+    )
 
     assert "VP_007" in validation_codes(Blueprint(**data))
 
@@ -103,8 +119,8 @@ def test_build_map_svg_retorna_svg_com_areas() -> None:
     svg = build_map_svg(mapa)
 
     assert svg.startswith("<svg")
-    assert "Portaria" in svg
-    assert "Reserva técnica B" in svg
+    assert "Guarita" in svg
+    assert "Reserva Técnica B" in svg
 
 
 def test_build_visual_documents_gera_pdfs_com_mock_renderer(
@@ -130,7 +146,7 @@ def test_build_visual_documents_gera_pdfs_com_mock_renderer(
     assert "E1" in grupos
     assert any(path.name.startswith("visual_map_") for path in grupos["E1"])
     assert any(call[0] == "visual_map.html" and call[2] is True for call in calls)
-    assert len(grupos["E1"]) == 5
+    assert len(grupos["E1"]) == 15
 
 
 def test_caso_canonico_tem_visual_procedural_com_mapa_landscape() -> None:
@@ -139,8 +155,8 @@ def test_caso_canonico_tem_visual_procedural_com_mapa_landscape() -> None:
     assert blueprint.visual_procedural is not None
     assert len(blueprint.visual_procedural.mapas) >= 1
     assert blueprint.visual_procedural.mapas[0].orientacao == "landscape"
-    assert len(blueprint.visual_procedural.personagens) >= 3
-    assert len(blueprint.visual_procedural.locais) >= 1
+    assert len(blueprint.visual_procedural.personagens) >= 6
+    assert len(blueprint.visual_procedural.locais) >= 8
 
 
 def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
@@ -181,6 +197,11 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
     monkeypatch.setattr(
         package_builder, "render_facilitator_guide", fake_render_facilitator_guide
     )
+    monkeypatch.setattr(
+        package_builder,
+        "renderizar_documento",
+        lambda _template, _dados, output_path, **_kwargs: make_pdf(output_path),
+    )
 
     result = package_builder.build_package(
         Path("examples/caso_canonico_intermediario.json"), tmp_path, strict=True
@@ -196,8 +217,8 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
     assert visual_map["tipo"] == "visual_procedural"
     assert visual_map["envelope"] == "E1"
     assert visual_map["final_file"] == "01_envelope_1.pdf"
-    assert visual_map["page_start"] == 2
-    assert visual_map["page_end"] == 3
+    assert visual_map["page_start"] == 3
+    assert visual_map["page_end"] == 4
     assert "01_envelope_1.pdf" in {entry["file"] for entry in print_manifest["files"]}
     assert result["status"] == "passed"
 
@@ -210,23 +231,30 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     svg = build_map_svg(mapa)
 
     assert nomes == {
-        "Portaria principal",
-        "Corredor de carga",
-        "Doca lateral",
-        "Reserva técnica B",
+        "Guarita",
+        "Área externa / pátio",
+        "Corredor técnico",
         "Administração",
+        "Sala de Segurança",
+        "Doca de Serviço",
+        "Depósito",
+        "Reserva Técnica A",
+        "Reserva Técnica B",
         "Vitrine / área pública",
     }
-    assert labels == ["Janela operacional", "Credencial / acesso", "Etiqueta RM-17"]
-    assert all(len(label) <= 22 for label in labels)
-    assert ">1<" in svg
-    assert ">2<" in svg
-    assert ">3<" in svg
+    assert labels == []
+    assert ">1<" not in svg
+    assert ">2<" not in svg
+    assert ">3<" not in svg
+    assert "rota provável" not in svg
     assert "Legenda" in svg
-    assert "Janela operacional" in svg
-    assert "Credencial / acesso" in svg
+    assert "P-06 Reserva Técnica B" in svg
+    assert "Reserva Técnica A" in svg
+    assert "Sala de Segurança" in svg
+    assert "Doca de" in svg
+    assert "Serviço" in svg
     assert "Planta operacional — térreo" in svg
-    assert "planta operacional simplificada" in svg
+    assert "identificação de setores e portas" in svg
     assert "Carimbo técnico" in svg
-    assert "Escala visual aproximada" in svg
+    assert "Rotas não registradas" in svg
     assert "Planta esquemática" not in svg
