@@ -1281,13 +1281,13 @@
     {
       "nome": "ação de troca",
       "documento_principal": "E1-06",
-      "confirmacao": "E2-06",
+      "confirmacao": "E1-07",
       "personagem_id": "02"
     },
     {
-      "nome": "cadeia financeira",
-      "documento_principal": "E2-04",
-      "confirmacao": "E2-02",
+      "nome": "credencial fora de função",
+      "documento_principal": "E1-04",
+      "confirmacao": "E1-05",
       "personagem_id": "02"
     }
   ],
@@ -1458,7 +1458,7 @@
       ],
       "acao_esperada_jogador": "Escrever uma hipótese intermediária citando E1-01 e E1-06 antes de abrir o próximo envelope.",
       "risco_ambiguidade": "baixo",
-      "obrigatoria_para_avanco": true
+      "obrigatoria_para_avanco": false
     },
     {
       "id": "C-E1-OPORTUNIDADE",
@@ -2012,7 +2012,7 @@
     ]
   },
   "playtest": {
-    "status": "simulado",
+    "status": "rascunho_pre_playtest",
     "rodadas": 0,
     "observacoes": []
   }

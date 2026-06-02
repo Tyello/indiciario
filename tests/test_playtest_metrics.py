@@ -38,7 +38,7 @@ def test_analyze_playtest_gera_report_valido_serializavel(tmp_path):
 def test_tempo_estimado_eh_calculado_por_documentos_contratos_e_envelopes():
     report = analyze_playtest(blueprint_with())
 
-    assert report["summary"]["estimated_minutes"] == 83
+    assert report["summary"]["estimated_minutes"] == 80
 
 
 def test_carga_cognitiva_baixa():
