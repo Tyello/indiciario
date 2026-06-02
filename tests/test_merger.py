@@ -20,7 +20,7 @@ def make_pdf_with_content(path: Path, text: str) -> Path:
     stream = DecodedStreamObject()
     safe_text = text.replace("(", "").replace(")", "")
     stream.set_data(f"BT /F1 12 Tf 72 720 Td ({safe_text}) Tj ET".encode("latin-1"))
-    page[NameObject("/Contents")] = stream
+    page[NameObject("/Contents")] = writer._add_object(stream)
     with path.open("wb") as fp:
         writer.write(fp)
     return path

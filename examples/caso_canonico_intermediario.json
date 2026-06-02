@@ -41,8 +41,8 @@
       "nome": "Marina Vale",
       "funcao": "Coordenadora de operações",
       "papel": "executor",
-      "suspeita_aparente": "A credencial aparece na reserva técnica fora da função prevista.",
-      "verdade": "Executou a troca física da peça e tentou enquadrar o evento como recebimento emergencial.",
+      "suspeita_aparente": "Sua credencial aparece em uma abertura da reserva B, mas a saída pela doca foi registrada como evento de OS/sensor sem usuário nominal direto.",
+      "verdade": "Executou a troca física da peça; isso só se torna seguro quando o chat de E2 liga Marina à saída RM-17 e à etiqueta PC-14.",
       "documento_ancoragem": [
         "E1-04",
         "E1-05",
@@ -54,8 +54,8 @@
       "nome": "Tadeu Nobre",
       "funcao": "Supervisor noturno",
       "papel": "red_herring",
-      "suspeita_aparente": "Relatou atraso e estava no corredor de carga durante a janela crítica.",
-      "verdade": "Cobriu a portaria principal e não entrou na reserva B; seu atraso foi registrado e descartado por log e escala.",
+      "suspeita_aparente": "Relatou atraso, circulou perto da área de carga e aparece como cobertura de ronda durante a janela crítica.",
+      "verdade": "Cobriu a portaria principal; seu atraso explica a lacuna de observação, mas log, escala e procedimento limitam sua capacidade de abrir a reserva B.",
       "documento_ancoragem": [
         "E1-03",
         "E1-05"
@@ -66,7 +66,7 @@
       "nome": "Otávio Salles",
       "funcao": "Gerente financeiro",
       "papel": "planejador",
-      "suspeita_aparente": "Aprovou despesa emergencial e controlava fornecedores.",
+      "suspeita_aparente": "Aprovou OS, aparece em terminal administrativo e controlava fornecedores/cotações.",
       "verdade": "Planejou a cobertura financeira e direcionou contrato à Ateliê Pedra Clara.",
       "documento_ancoragem": [
         "E2-01",
@@ -91,8 +91,8 @@
       "nome": "Lia Figueira",
       "funcao": "Registradora de acervo",
       "papel": "red_herring",
-      "suspeita_aparente": "Foi responsável por fichas de catalogação e corrigiu uma etiqueta pela manhã.",
-      "verdade": "Corrigiu apenas inventário de vitrine; seu registro não coincide com porta, escala nem pagamento.",
+      "suspeita_aparente": "Foi responsável por fichas/etiquetas, aparece com acesso negado na doca e assinou conferências de peso.",
+      "verdade": "Corrigiu inventário e identificou divergências; o acesso negado não abriu porta e não há pagamento/saída física vinculada a ela.",
       "documento_ancoragem": [
         "E1-06",
         "E2-07"
@@ -238,9 +238,10 @@
       "envelope": "E1",
       "tipo": "log_acesso",
       "emocao_esperada": "curiosidade operacional",
-      "objetivo_narrativo": "Provar a oportunidade operacional e apontar credencial de Marina na porta certa.",
+      "objetivo_narrativo": "Provar a janela operacional e distribuir hipóteses entre acesso, OS administrativa, sensor de carga e evento negado, sem cravar autoria no Envelope 1.",
       "pistas_contidas": [
-        "Às 19h48, ID 02 abriu a reserva B pela doca lateral; ID 03 teve evento negado na portaria principal."
+        "Entre 19h42 e 20h08 há eventos incompatíveis entre doca, reserva B, OS 0147/2026 e terminal administrativo.",
+        "Lia tem evento NEGADO na doca; Marina tem abertura de reserva B; Otávio aparece em terminal administrativo; a SAIDA da doca é evento de sensor/OS sem usuário nominal direto."
       ],
       "confirma": [
         "E1-05",
@@ -249,11 +250,12 @@
       "confirmado_por": [
         "E2-07"
       ],
-      "red_herring_potencial": null,
+      "red_herring_potencial": "Eventos de acesso permitem hipóteses sobre Lia, Tadeu e Otávio, mas cada uma exige confirmação independente antes de imputação.",
       "risco_ambiguidade": "baixo",
       "ids_citados": [
         "02",
         "03",
+        "04",
         "06"
       ],
       "codigos_citados": [],
@@ -338,7 +340,7 @@
             "CLASSE_LINHA": "anomaly",
             "TERMINAL": "Leitor Doca",
             "METODO": "credencial",
-            "OBSERVACAO": "Perfil sem permissão naquele setor."
+            "OBSERVACAO": "Perfil de acervo sem permissão operacional na doca."
           },
           {
             "DATA": "18/08/2026",
@@ -347,24 +349,24 @@
             "ID_USUARIO": "USR-MA-022",
             "NOME_USUARIO": "USR-MA-022",
             "TIPO_EVENTO": "ENTRADA",
-            "EVENTO": "Abertura por credencial de curadoria",
+            "EVENTO": "Abertura de reserva para conferência de suporte",
             "CLASSE_LINHA": "normal",
             "TERMINAL": "Leitor RT-B",
             "METODO": "credencial",
-            "OBSERVACAO": "Evento dentro da janela de montagem."
+            "OBSERVACAO": "Evento compatível com curadoria operacional; conferir com escala do setor."
           },
           {
             "DATA": "18/08/2026",
             "HORA": "19h57",
             "PORTA": "P-04 / Doca de serviço",
-            "ID_USUARIO": "USR-MA-022",
-            "NOME_USUARIO": "USR-MA-022",
+            "ID_USUARIO": "OS-0147/2026",
+            "NOME_USUARIO": "OS-0147/2026",
             "TIPO_EVENTO": "SAIDA",
-            "EVENTO": "Passagem de carrinho registrada no sensor de carga",
+            "EVENTO": "Sensor de carga acionado por carrinho de transporte",
             "CLASSE_LINHA": "normal",
-            "TERMINAL": "Terminal Doca",
+            "TERMINAL": "Terminal Doca / Sensor de carga",
             "METODO": "código OS 0147/2026",
-            "OBSERVACAO": "Vinculado a recebimento emergencial."
+            "OBSERVACAO": "Evento logístico vinculado a recebimento emergencial; exportação não registra usuário nominal."
           },
           {
             "DATA": "18/08/2026",
@@ -373,11 +375,11 @@
             "ID_USUARIO": "USR-OT-041",
             "NOME_USUARIO": "USR-OT-041",
             "TIPO_EVENTO": "ENTRADA",
-            "EVENTO": "Consulta curta em terminal administrativo",
+            "EVENTO": "Consulta curta da OS 0147/2026 em terminal administrativo",
             "CLASSE_LINHA": "normal",
             "TERMINAL": "Console Administração",
             "METODO": "terminal administrativo",
-            "OBSERVACAO": "Lançamento financeiro posterior."
+            "OBSERVACAO": "Terminal com permissão para autorizar fornecedor, sem abertura física de reserva."
           },
           {
             "DATA": "18/08/2026",
@@ -405,9 +407,10 @@
       "envelope": "E1",
       "tipo": "escala",
       "emocao_esperada": "curiosidade operacional",
-      "objetivo_narrativo": "Mostrar funções previstas, reduzindo suspeitos e tornando o acesso de Marina inconsistente.",
+      "objetivo_narrativo": "Mostrar funções previstas e limitações de cada hipótese inicial: Marina tinha rotina de vitrine, Otávio tinha OS/terminal, Lia tinha etiquetas sem porta aberta e Tadeu tinha atraso sem credencial de reserva.",
       "pistas_contidas": [
-        "Marina deveria estar no salão oeste até 20h10; Tadeu estava alocado na portaria principal."
+        "Marina deveria estar no salão oeste até 20h10, mas a escala também coloca Otávio no terminal administrativo e Lia no controle de fichas/etiquetas durante a janela.",
+        "Tadeu atrasou a ronda, porém sua cobertura era a portaria principal e não a reserva B."
       ],
       "confirma": [
         "E1-03",
@@ -416,11 +419,12 @@
       "confirmado_por": [
         "E1-06"
       ],
-      "red_herring_potencial": null,
+      "red_herring_potencial": "A escala abre três hipóteses plausíveis no E1, mas limita Lia por acesso negado e Tadeu por posto/credencial.",
       "risco_ambiguidade": "baixo",
       "ids_citados": [
         "02",
         "03",
+        "04",
         "06"
       ],
       "codigos_citados": [],
@@ -436,11 +440,11 @@
         "PERIODO_INICIO": "18/08/2026 18h00",
         "PERIODO_FIM": "18/08/2026 21h00",
         "LOCALIZACAO_SISTEMA": "SETOR-01 a SETOR-08",
-        "TOTAL_REGISTROS": "5",
-        "TOTAL_USUARIOS": "4",
-        "TOTAL_ENTRADAS": "5",
-        "TOTAL_NEGADOS": "1",
-        "TOTAL_ANOMALIAS": "1",
+        "TOTAL_REGISTROS": "6",
+        "TOTAL_USUARIOS": "5",
+        "TOTAL_ENTRADAS": "6",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
         "REGISTROS": [
           {
             "DATA": "18/08/2026",
@@ -466,7 +470,7 @@
             "CLASSE_LINHA": "normal",
             "TERMINAL": "Planilha Escala-Oeste",
             "METODO": "escala operacional",
-            "OBSERVACAO": "Cobertura declarada no período crítico."
+            "OBSERVACAO": "Cobertura declarada no período crítico; não explica sozinha a saída pela doca."
           },
           {
             "DATA": "18/08/2026",
@@ -479,33 +483,46 @@
             "CLASSE_LINHA": "normal",
             "TERMINAL": "Console Portaria",
             "METODO": "escala de ronda",
-            "OBSERVACAO": "Ronda cobre portaria durante janela crítica."
+            "OBSERVACAO": "Atraso de ronda reduz vigilância, mas posto não autoriza Reserva Técnica B."
           },
           {
             "DATA": "18/08/2026",
-            "HORA": "18h50-19h25",
-            "PORTA": "SETOR-08 / Vitrine",
+            "HORA": "19h35-20h05",
+            "PORTA": "SETOR-06 / Controle de fichas",
             "ID_USUARIO": "USR-LI-066",
             "NOME_USUARIO": "Lia Figueira",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Correção de ficha de vitrine encerrada antes da janela crítica",
-            "CLASSE_LINHA": "anomaly",
-            "TERMINAL": "Leitor Reserva B",
+            "EVENTO": "Revisão de etiquetas RM-17 e PC-14 para conferência de bancada",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Planilha Etiquetas-RT",
             "METODO": "ajuste de ficha",
-            "OBSERVACAO": "Atividade encerrada antes da janela crítica."
+            "OBSERVACAO": "Cria hipótese por etiqueta, mas não é registro de abertura física."
           },
           {
             "DATA": "18/08/2026",
-            "HORA": "20h00-20h20",
+            "HORA": "19h38-20h20",
             "PORTA": "SETOR-03 / Administração",
             "ID_USUARIO": "USR-OT-041",
             "NOME_USUARIO": "Otávio Salles",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Assinatura de autorização de fornecedor",
+            "EVENTO": "Autorização e consulta da OS 0147/2026",
             "CLASSE_LINHA": "normal",
             "TERMINAL": "Console Administração",
             "METODO": "terminal administrativo",
-            "OBSERVACAO": "Autorização financeira posterior ao acesso principal."
+            "OBSERVACAO": "Permite aprovar fornecedor e OS, não movimentar acervo sozinho."
+          },
+          {
+            "DATA": "18/08/2026",
+            "HORA": "20h20-20h40",
+            "PORTA": "SETOR-08 / Vitrine",
+            "ID_USUARIO": "USR-IN-011",
+            "NOME_USUARIO": "Inês Laranjeira",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Conferência final adiada por divergência de peso",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Planilha Escala-Vitrine",
+            "METODO": "escala operacional",
+            "OBSERVACAO": "Registro posterior ao intervalo crítico."
           }
         ],
         "COLUNA_NOME": true,
@@ -520,9 +537,10 @@
       "envelope": "E1",
       "tipo": "folha_cruzamento",
       "emocao_esperada": "curiosidade operacional",
-      "objetivo_narrativo": "Fornecer a inconsistência central: etiqueta RM-17 aparece como retorno, mas pesa como peça original.",
+      "objetivo_narrativo": "Fornecer a inconsistência central entre etiquetas e pesos, mantendo Lia como hipótese técnica plausível mas resolvível por cruzamento com acesso negado e ausência de abertura física.",
       "pistas_contidas": [
-        "Etiqueta RM-17 deveria acompanhar a réplica leve; o peso anotado corresponde ao objeto original."
+        "RM-17 deveria acompanhar a réplica leve; o peso anotado corresponde ao objeto original.",
+        "A conferência de Lia cria suspeita técnica, mas não prova acesso físico nem transporte."
       ],
       "confirma": [
         "E1-01",
@@ -533,7 +551,7 @@
         "E2-06",
         "E2-07"
       ],
-      "red_herring_potencial": null,
+      "red_herring_potencial": "Assinatura de Lia na conferência pode parecer manipulação de etiqueta, mas E1-04/E1-08 limitam essa hipótese.",
       "risco_ambiguidade": "baixo",
       "ids_citados": [
         "02",
@@ -550,7 +568,7 @@
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
         "ASSUNTO": "Conferência operacional de etiquetas RM-17 e PC-14",
-        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em balança de bancada e consulta às fichas de acondicionamento.</p><table><tr><th>Etiqueta</th><th>Ficha esperada</th><th>Peso registrado</th><th>Observação de bancada</th></tr><tr><td>RM-17</td><td>Réplica de restauro para ajuste de moldura</td><td>3,8 kg</td><td>Divergência de peso em relação à ficha da réplica.</td></tr><tr><td>PC-14</td><td>Peça original em cobre</td><td>1,1 kg</td><td>Divergência de peso em relação à ficha do original.</td></tr></table><p>As duas etiquetas foram lacradas em envelopes de controle separados para nova conferência visual no dia seguinte.</p>",
+        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em balança de bancada e consulta às fichas de acondicionamento. Lia registrou a divergência após a escala já estar congelada, sem autorização de correção retroativa.</p><table><tr><th>Etiqueta</th><th>Ficha esperada</th><th>Peso registrado</th><th>Observação de bancada</th></tr><tr><td>RM-17</td><td>Réplica de restauro para ajuste de moldura</td><td>3,8 kg</td><td>Divergência de peso em relação à ficha da réplica.</td></tr><tr><td>PC-14</td><td>Peça original em cobre</td><td>1,1 kg</td><td>Divergência de peso em relação à ficha do original.</td></tr></table><p>As duas etiquetas foram lacradas em envelopes de controle separados para nova conferência visual no dia seguinte. O registro de etiqueta deve permanecer vinculado à cadeia documental de acesso, escala e movimentação logística antes de qualquer conclusão operacional.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "Lia Figueira",
         "NOME_ASSINANTE": "Lia Figueira",
@@ -750,13 +768,14 @@
     },
     {
       "codigo": "E2-03",
-      "titulo": "Proposta comercial de restauração emergencial",
+      "titulo": "Quadro comparativo de cotações emergenciais",
       "envelope": "E2",
       "tipo": "orcamento",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Mostrar inflação do escopo e motivo financeiro sem exigir preço de mercado externo.",
+      "objetivo_narrativo": "Inserir múltiplas empresas e escopos para que a Ateliê Pedra Clara se destaque apenas pelo cruzamento entre OS, transporte, recibo e extrato.",
       "pistas_contidas": [
-        "Orçamento anterior para o mesmo tipo de moldura era R$ 5.900,00; revisão aprovada multiplicou escopo sem laudo correspondente."
+        "Quatro fornecedores aparecem no quadro; só a proposta da Ateliê Pedra Clara combina intervenção de acervo, transporte assistido, OS 0147/2026 e valor pago no extrato.",
+        "Conserva Sul e LogisArte oferecem partes legítimas do serviço; Mirante Norte surge como ruído financeiro ligado a consultoria."
       ],
       "confirma": [
         "E2-01",
@@ -765,7 +784,7 @@
       "confirmado_por": [
         "E2-07"
       ],
-      "red_herring_potencial": null,
+      "red_herring_potencial": "Mirante Norte e LogisArte parecem suspeitas pelo nome/transportes, mas não têm recibo de intervenção de acervo nem rubrica final correspondente.",
       "risco_ambiguidade": "baixo",
       "ids_citados": [
         "04",
@@ -773,64 +792,75 @@
       ],
       "codigos_citados": [],
       "conteudo": {
-        "NOME_EMPRESA": "Ateliê Pedra Clara",
-        "TIPO_EMPRESA": "Conservação de acervos",
-        "CNPJ": "29.604.118/0001-73",
-        "ENDERECO": "Travessa dos Arcos, 44 — Porto Claro",
-        "SITE_EMAIL": "orcamentos@pedraclara.local",
-        "COR_PRIMARIA": "#6A4C3B",
+        "NOME_EMPRESA": "Casa de Acervo Mirante",
+        "TIPO_EMPRESA": "Quadro comparativo de cotações",
+        "CNPJ": "41.738.902/0001-64",
+        "ENDERECO": "Rua das Figueiras, 118 — Porto Claro",
+        "SITE_EMAIL": "compras@acervomirante.local",
+        "COR_PRIMARIA": "#3F5E5A",
         "COR_SECUNDARIA": "#D8C7B0",
-        "NUMERO_ORCAMENTO": "2026-0318-RM",
+        "NUMERO_ORCAMENTO": "MAPA-OS-0147/2026",
         "DATA_EMISSAO": "18/08/2026",
         "DATA_VALIDADE": "25/08/2026",
-        "REVISAO": "revisão 02",
+        "REVISAO": "comparativo interno",
         "NOME_CLIENTE": "Casa de Acervo Mirante",
         "ENDERECO_CLIENTE": "Rua das Figueiras, 118 — Porto Claro",
         "DOC_CLIENTE": "41.738.902/0001-64",
         "CONTATO_CLIENTE": "Otávio Salles",
-        "TITULO_PROJETO": "Proposta comercial — revisão emergencial de acondicionamento",
-        "DESCRICAO_REFERENCIA": "Anexo financeiro referente à OS 0147/2026. Proposta anterior 2026-0211-RM cobria apenas moldura equivalente, sem retirada assistida nem documentação de transporte.",
+        "TITULO_PROJETO": "Mapa de propostas — OS 0147/2026",
+        "DESCRICAO_REFERENCIA": "Cotações reunidas para serviço emergencial de moldura, acondicionamento e/ou transporte. A seleção exige comparar escopo, prazo, OS, recibo e extrato; o menor preço não cobre necessariamente a retirada assistida.",
         "ITENS": [
           {
             "NUMERO_ITEM": "1",
-            "NOME_ITEM": "Moldura e berço",
-            "DESC_ITEM": "Revisão de berço e moldura declarada como urgente",
-            "QUANTIDADE": "1",
-            "VALOR_UNITARIO": "R$ 7.200,00",
-            "VALOR_TOTAL_ITEM": "R$ 7.200,00"
+            "NOME_ITEM": "Ateliê Pedra Clara",
+            "DESC_ITEM": "Intervenção de moldura, transporte assistido e documentação de retorno; prazo imediato; referência CAM-APC-44/26 / OS 0147/2026.",
+            "QUANTIDADE": "1 pacote",
+            "VALOR_UNITARIO": "R$ 18.400,00",
+            "VALOR_TOTAL_ITEM": "R$ 18.400,00"
           },
           {
             "NUMERO_ITEM": "2",
-            "NOME_ITEM": "Transporte reservado",
-            "DESC_ITEM": "Retirada assistida fora do horário regular, com lacre de transporte informado pelo contratante",
-            "QUANTIDADE": "1",
+            "NOME_ITEM": "Conserva Sul Restauro",
+            "DESC_ITEM": "Cotação legítima para moldura equivalente e laudo simples; sem transporte e sem prazo para retirada noturna.",
+            "QUANTIDADE": "1 serviço",
+            "VALOR_UNITARIO": "R$ 5.900,00",
+            "VALOR_TOTAL_ITEM": "R$ 5.900,00"
+          },
+          {
+            "NUMERO_ITEM": "3",
+            "NOME_ITEM": "LogisArte Transportes",
+            "DESC_ITEM": "Transporte segurado com lacre e escolta, sem intervenção em acervo ou fotografia técnica de retorno.",
+            "QUANTIDADE": "1 trajeto",
             "VALOR_UNITARIO": "R$ 6.800,00",
             "VALOR_TOTAL_ITEM": "R$ 6.800,00"
           },
           {
-            "NUMERO_ITEM": "3",
-            "NOME_ITEM": "Documentação técnica",
-            "DESC_ITEM": "Relatório e fotografia de retorno",
-            "QUANTIDADE": "1",
-            "VALOR_UNITARIO": "R$ 4.400,00",
-            "VALOR_TOTAL_ITEM": "R$ 4.400,00"
+            "NUMERO_ITEM": "4",
+            "NOME_ITEM": "Mirante Norte Consultoria",
+            "DESC_ITEM": "Assessoria administrativa para fluxo de fornecedores; sem manuseio de acervo, mas citada em crédito posterior com a mesma OS.",
+            "QUANTIDADE": "1 consultoria",
+            "VALOR_UNITARIO": "R$ 6.200,00",
+            "VALOR_TOTAL_ITEM": "R$ 6.200,00"
           }
         ],
-        "SUBTOTAL": "R$ 18.400,00",
+        "SUBTOTAL": "R$ 31.100,00",
         "DESCONTO": "R$ 0,00",
         "IMPOSTOS": "Inclusos",
-        "VALOR_TOTAL": "R$ 18.400,00",
+        "VALOR_TOTAL": "Selecionado: R$ 18.400,00",
         "CONDICOES": [
           {
-            "CONDICAO": "Aprovação por responsável financeiro conforme protocolo ADM-2026-03-014."
+            "CONDICAO": "Critério de aprovação: selecionar proposta que reúna escopo técnico, transporte assistido, documentação de retorno e prazo compatível com a OS 0147/2026."
           },
           {
-            "CONDICAO": "Coleta em área de carga previamente agendada; liberação condicionada a credencial ativa, OS 0147/2026 e conferência de lacre no ato da retirada."
+            "CONDICAO": "Conserva Sul Restauro permanece como referência legítima de preço para moldura, mas não cobre doca nem prazo imediato."
+          },
+          {
+            "CONDICAO": "Liberação operacional condicionada a credencial interna, OS 0147/2026 e conferência de lacre no ato da retirada."
           }
         ],
-        "ASSINATURA_RESPONSAVEL": "Celina Duarte",
-        "NOME_RESPONSAVEL": "Celina Duarte",
-        "CARGO_RESPONSAVEL": "Sócia-administradora",
+        "ASSINATURA_RESPONSAVEL": "Otávio Salles",
+        "NOME_RESPONSAVEL": "Otávio Salles",
+        "CARGO_RESPONSAVEL": "Gerente financeiro",
         "ASSINATURA_CLIENTE": "Otávio Salles",
         "DATA_APROVACAO": "18/08/2026 16h05"
       }
@@ -841,9 +871,10 @@
       "envelope": "E2",
       "tipo": "extrato",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Provar o salto financeiro da Casa para a fornecedora e o retorno parcial por consultoria.",
+      "objetivo_narrativo": "Provar o salto financeiro relevante dentro de ruído controlado de pagamentos normais, taxa/estorno e retorno ambíguo por consultoria.",
       "pistas_contidas": [
-        "Pagamento de R$ 18.400,00 à Ateliê Pedra Clara; crédito posterior de R$ 6.200,00 vindo de consultoria Mirante Norte."
+        "O extrato contém seis lançamentos; o pagamento de R$ 18.400,00 à Ateliê Pedra Clara só ganha força quando comparado ao quadro de cotações, recibo e OS.",
+        "O crédito de R$ 6.200,00 da Mirante Norte é ambíguo até ser cruzado com a OS 0147/2026 e a cadeia financeira."
       ],
       "confirma": [
         "E2-02"
@@ -851,7 +882,7 @@
       "confirmado_por": [
         "E2-06"
       ],
-      "red_herring_potencial": null,
+      "red_herring_potencial": "Pagamentos a Conserva Sul e LogisArte são plausíveis, mas seus escopos não batem com a intervenção completa nem com o recibo final.",
       "risco_ambiguidade": "baixo",
       "ids_citados": [
         "04",
@@ -874,58 +905,115 @@
         "TIPO_CONTA": "Conta corrente empresarial",
         "SALDO_INICIAL": "R$ 72.880,00",
         "DATA_SALDO_INICIAL": "18/08/2026",
-        "MOVIMENTACAO_LIQUIDA": "-R$ 12.200,00",
+        "MOVIMENTACAO_LIQUIDA": "-R$ 18.880,00",
         "COR_MOVIMENTACAO": "#8A3A34",
-        "SALDO_FINAL": "R$ 60.680,00",
+        "SALDO_FINAL": "R$ 53.000,00",
         "DATA_SALDO_FINAL": "21/08/2026",
         "COR_SALDO_FINAL": "#254C70",
-        "TOTAL_CREDITOS": "R$ 6.200,00",
-        "TOTAL_DEBITOS": "R$ 18.400,00",
-        "TOTAL_LANCAMENTOS": "2",
+        "TOTAL_CREDITOS": "R$ 6.285,00",
+        "TOTAL_DEBITOS": "R$ 25.165,00",
+        "TOTAL_LANCAMENTOS": "6",
         "NOTA_LEGAL": "Extrato interno anexado por autorização da diretoria administrativa.",
         "CNPJ_BANCO": "34.905.781/0001-28",
         "ENDERECO_BANCO": "Praça Central, 80 — Porto Claro",
         "LANCAMENTOS": [
           {
-            "DATA": "19/08/2026",
-            "DESCRICAO": "Transferência para Ateliê Pedra Clara — proposta 2026-0318-RM",
-            "DOCUMENTO": "TEF-6114/26",
-            "VALOR": "-R$ 18.400,00",
-            "SALDO": "R$ 54.480,00",
+            "DATA": "18/08/2026",
+            "DESCRICAO": "Pagamento Conserva Sul Restauro — laudo lote 12",
+            "DOCUMENTO": "TEF-6098/26",
+            "VALOR": "-R$ 5.900,00",
+            "SALDO": "R$ 66.980,00",
             "CLASSE_LINHA": "saida",
             "TIPO": "Débito",
             "TIPO_LOWER": "debit",
             "DIRECAO": "saída",
-            "SALDO_ACUMULADO": "R$ 54.480,00",
+            "SALDO_ACUMULADO": "R$ 66.980,00",
             "COR_SALDO": "#8A3A34",
-            "DETALHE": "Pagamento de fornecedor conforme recibo RPC-2026-0819-144"
+            "DETALHE": "Despesa regular de conservação sem transporte vinculado."
           },
           {
-            "DATA": "21/08/2026",
-            "DESCRICAO": "Crédito Consultoria Mirante Norte — OS 0147/2026",
-            "DOCUMENTO": "TED-9042/26",
-            "VALOR": "R$ 6.200,00",
-            "SALDO": "R$ 60.680,00",
+            "DATA": "19/08/2026",
+            "DESCRICAO": "Transferência para Ateliê Pedra Clara — CAM-APC-44/26",
+            "DOCUMENTO": "TEF-6114/26",
+            "VALOR": "-R$ 18.400,00",
+            "SALDO": "R$ 48.580,00",
+            "CLASSE_LINHA": "saida",
+            "TIPO": "Débito",
+            "TIPO_LOWER": "debit",
+            "DIRECAO": "saída",
+            "SALDO_ACUMULADO": "R$ 48.580,00",
+            "COR_SALDO": "#8A3A34",
+            "DETALHE": "Pagamento de fornecedor conforme recibo RPC-2026-0819-144 e OS 0147/2026."
+          },
+          {
+            "DATA": "19/08/2026",
+            "DESCRICAO": "LogisArte Transportes — reserva de veículo cancelada",
+            "DOCUMENTO": "DOC-7712/26",
+            "VALOR": "-R$ 85,00",
+            "SALDO": "R$ 48.495,00",
+            "CLASSE_LINHA": "saida",
+            "TIPO": "Débito",
+            "TIPO_LOWER": "debit",
+            "DIRECAO": "saída",
+            "SALDO_ACUMULADO": "R$ 48.495,00",
+            "COR_SALDO": "#8A3A34",
+            "DETALHE": "Taxa de emissão de ordem de coleta; sem comprovante de intervenção em acervo."
+          },
+          {
+            "DATA": "20/08/2026",
+            "DESCRICAO": "Despesa administrativa — autenticação de cópias",
+            "DOCUMENTO": "CC-3381/26",
+            "VALOR": "-R$ 780,00",
+            "SALDO": "R$ 47.715,00",
+            "CLASSE_LINHA": "saida",
+            "TIPO": "Débito",
+            "TIPO_LOWER": "debit",
+            "DIRECAO": "saída",
+            "SALDO_ACUMULADO": "R$ 47.715,00",
+            "COR_SALDO": "#8A3A34",
+            "DETALHE": "Custo administrativo de documentação da mostra."
+          },
+          {
+            "DATA": "20/08/2026",
+            "DESCRICAO": "Estorno LogisArte Transportes — reserva cancelada",
+            "DOCUMENTO": "EST-7712/26",
+            "VALOR": "R$ 85,00",
+            "SALDO": "R$ 47.800,00",
             "CLASSE_LINHA": "entrada",
             "TIPO": "Crédito",
             "TIPO_LOWER": "credit",
             "DIRECAO": "entrada",
-            "SALDO_ACUMULADO": "R$ 60.680,00",
+            "SALDO_ACUMULADO": "R$ 47.800,00",
             "COR_SALDO": "#2F6B4F",
-            "DETALHE": "Retorno parcial classificado como consultoria vinculada à OS 0147/2026"
+            "DETALHE": "Estorno pequeno da taxa de ordem de coleta; resolve o ruído de transporte alternativo."
+          },
+          {
+            "DATA": "21/08/2026",
+            "DESCRICAO": "Crédito Mirante Norte Consultoria — OS 0147/2026",
+            "DOCUMENTO": "TED-9042/26",
+            "VALOR": "R$ 6.200,00",
+            "SALDO": "R$ 53.000,00",
+            "CLASSE_LINHA": "entrada",
+            "TIPO": "Crédito",
+            "TIPO_LOWER": "credit",
+            "DIRECAO": "entrada",
+            "SALDO_ACUMULADO": "R$ 53.000,00",
+            "COR_SALDO": "#2F6B4F",
+            "DETALHE": "Retorno parcial classificado como consultoria vinculada à mesma OS."
           }
         ]
       }
     },
     {
       "codigo": "E2-05",
-      "titulo": "E-mail institucional de aprovação financeira",
+      "titulo": "E-mail institucional de aprovação da OS 0147/2026",
       "envelope": "E2",
       "tipo": "email_institucional",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Revelar que Otávio forçou aprovação antes de laudo técnico, mas também delimitar que o e-mail sozinho não prova execução.",
+      "objetivo_narrativo": "Manter Otávio como hipótese administrativa até E2, mostrando que a decisão por fornecedor emerge de prazo/escopo e não de um título óbvio.",
       "pistas_contidas": [
-        "Otávio pediu aprovação antes da conferência final e citou doca lateral."
+        "Otávio aprova a opção completa da OS 0147/2026 antes da conferência final e pede fluxo pela doca lateral.",
+        "O e-mail cita alternativas legítimas, mas escolhe a única que combina transporte e intervenção."
       ],
       "confirma": [
         "E2-01"
@@ -948,10 +1036,10 @@
         "COPIA": "controle.financeiro@acervomirante.local",
         "DESTINATARIO_LABEL": "Equipe interna",
         "DATA_HORA": "18/08/2026 16h02",
-        "ASSUNTO": "Aprovação emergencial — Pedra Clara",
+        "ASSUNTO": "Aprovação emergencial — OS 0147/2026",
         "AVATAR_INICIAL": "O",
         "AVATAR_COR": "#7A4E2D",
-        "CORPO_EMAIL": "<p>Solicito aprovação imediata do orçamento R2 da Ateliê Pedra Clara. A prestadora consegue retirar e devolver o conjunto ainda hoje pela doca lateral, desde que operações acompanhe o fluxo.</p><p>Marina pode registrar a movimentação como recebimento emergencial para não atrasar a montagem. A documentação técnica será anexada no fechamento.</p>",
+        "CORPO_EMAIL": "<p>Solicito aprovação imediata da opção completa no mapa da OS 0147/2026. Conserva Sul resolve moldura, LogisArte resolve transporte, mas só a proposta selecionada cobre retirada assistida, documentação de retorno e prazo de hoje.</p><p>Operações deve acompanhar a doca lateral e registrar o fluxo como recebimento emergencial para não atrasar a montagem. A documentação técnica será anexada no fechamento.</p>",
         "NOTA_RODAPE": "E-mail arquivado pela diretoria administrativa.",
         "ANEXOS": false
       }
@@ -1207,19 +1295,19 @@
   "intervalo_critico_fim": "18/08/2026 20h05",
   "matriz_pistas": [
     {
-      "descricao": "Credencial 02 abriu a reserva B durante bloqueio visual da doca.",
+      "descricao": "A reserva B abre na janela crítica e a doca registra SAIDA por sensor de carga vinculado à OS 0147/2026, sem usuário nominal direto na saída.",
       "documento": "E1-04",
-      "o_que_sugere": "Marina teve oportunidade física.",
-      "o_que_prova": "Abertura real de porta na janela crítica.",
+      "o_que_sugere": "Houve oportunidade operacional com hipóteses sobre Marina, Otávio e Lia.",
+      "o_que_prova": "Abertura real de porta e evento logístico ocorreram no intervalo crítico; autoria ainda depende de cruzamento.",
       "confirmacao": "E1-07",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "suspeita objetiva"
     },
     {
-      "descricao": "Escala colocava Marina longe da reserva B e Tadeu na portaria principal.",
+      "descricao": "Escala cria limites para Marina, Lia, Tadeu e Otávio em vez de eliminar todos de imediato.",
       "documento": "E1-05",
-      "o_que_sugere": "O acesso de Marina foi desviante e o atraso de Tadeu não basta.",
-      "o_que_prova": "A função prevista não justificava a entrada de Marina.",
+      "o_que_sugere": "Marina não é a única suspeita inicial; Otávio controla OS, Lia controla etiquetas e Tadeu explica a lacuna de vigilância.",
+      "o_que_prova": "Cada hipótese precisa de confirmação e tem limitação operacional documentada.",
       "confirmacao": "E1-04",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "redução de suspeitos"
@@ -1234,18 +1322,18 @@
       "emocao_esperada": "virada lógica"
     },
     {
-      "descricao": "Orçamento emergencial foi aprovado antes da conferência final.",
+      "descricao": "Mapa compara Ateliê Pedra Clara, Conserva Sul, LogisArte e Mirante Norte.",
       "documento": "E2-03",
-      "o_que_sugere": "A cobertura financeira foi preparada antes da confirmação técnica.",
-      "o_que_prova": "Otávio planejou a justificativa contratual.",
+      "o_que_sugere": "A escolha da Pedra Clara é suspeita pelo conjunto escopo/prazo/OS, não pelo nome isolado.",
+      "o_que_prova": "A proposta selecionada é a única que cruza intervenção, transporte assistido e valor que aparece em recibo/extrato.",
       "confirmacao": "E2-05",
       "risco_ambiguidade": "medio_baixo",
       "emocao_esperada": "motivo revelado"
     },
     {
-      "descricao": "Recibo e extrato batem em valor e favorecem a Ateliê Pedra Clara.",
+      "descricao": "Recibo e extrato batem no valor da opção completa da Ateliê Pedra Clara, enquanto outros fornecedores aparecem como ruído controlado.",
       "documento": "E2-02",
-      "o_que_sugere": "Celina recebeu benefício direto.",
+      "o_que_sugere": "Celina recebeu benefício direto, mas a prova exige comparar cotação, OS, recibo e extrato.",
       "o_que_prova": "Pagamento a fornecedora ligada ao desvio.",
       "confirmacao": "E2-04",
       "risco_ambiguidade": "baixo",
@@ -1264,15 +1352,15 @@
   "red_herrings": [
     {
       "personagem_id": "03",
-      "motivo_aparente": "Tadeu atrasou a ronda e estava no corredor de carga.",
-      "como_descartar": "E1-05 o coloca na portaria principal e E1-04 não registra abertura da reserva B com a credencial dele.",
+      "motivo_aparente": "Tadeu atrasou a ronda, ouviu carrinho na doca e sua lacuna de vigilância coincide com a janela crítica.",
+      "como_descartar": "E1-05 o mantém na portaria principal e E1-04/E1-08 não registram abertura da reserva B com sua credencial; o atraso explica ausência de testemunha, não execução.",
       "documento_descarte": "E1-05",
       "categoria": "motivo_sem_oportunidade"
     },
     {
       "personagem_id": "06",
-      "motivo_aparente": "Lia corrigiu etiquetas e teve tentativa negada na doca.",
-      "como_descartar": "E1-08 explica que evento NEGADO não abre porta; E1-04 mostra que a entrada real foi da credencial 02.",
+      "motivo_aparente": "Lia corrigiu etiquetas, assinou conferência de peso e teve tentativa negada na doca.",
+      "como_descartar": "E1-08 explica que NEGADO não abre porta; E1-04 mostra que ela não tem saída física ou OS, e E1-06 preserva a divergência como achado técnico.",
       "documento_descarte": "E1-08",
       "categoria": "acesso_negado_sem_execucao"
     }
