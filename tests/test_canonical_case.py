@@ -81,3 +81,29 @@ def test_caso_canonico_llm_feedback_nao_exige_revisao_por_critico():
 
     assert feedback["status"] != "needs_revision"
     assert feedback["critical_count"] == 0
+
+
+def test_caso_canonico_hardening_editorial_pre_playtest():
+    blueprint = _blueprint()
+    e101 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-01")
+    e106 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-06")
+    e108 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-08")
+    e207 = next(doc for doc in blueprint.documentos if doc.codigo == "E2-07")
+
+    assert "para abrir o segundo envelope" not in str(e101.conteudo).lower()
+    assert "a inversão torna" not in str(e106.conteudo).lower()
+    assert e108.tipo.value == "manual"
+    assert "USR-MA-022" in str(e108.conteudo)
+    assert "conclusão técnica" not in str(e207.conteudo).lower()
+
+    assert any(personagem.nome == "Vera Matos" for personagem in blueprint.personagens)
+    visual_ids = {card.personagem_id for card in blueprint.visual_procedural.personagens}  # type: ignore[union-attr]
+    assert {"03", "04", "05", "06", "07"}.issubset(visual_ids)
+    local_ids = {local.id for local in blueprint.visual_procedural.locais}  # type: ignore[union-attr]
+    assert {
+        "guarita",
+        "doca_servico",
+        "reserva_tecnica_a",
+        "reserva_tecnica_b",
+        "sala_seguranca",
+    }.issubset(local_ids)

@@ -4,28 +4,29 @@
   <meta charset="utf-8">
   <title>Guia do Facilitador — {{CASE_TITLE}}</title>
   <style>
-    @page { size: A4 portrait; margin: 15mm; }
+    @page { size: A4 portrait; margin: 14mm; }
     * { box-sizing: border-box; }
-    body { font-family: Arial, Helvetica, sans-serif; color: #111; line-height: 1.38; font-size: 12px; }
-    h1, h2, h3, h4 { margin: 0 0 8px; }
-    h1 { font-size: 30px; letter-spacing: .02em; }
-    h2 { font-size: 18px; border-bottom: 2px solid #111; padding-bottom: 4px; margin-top: 22px; }
-    h3 { font-size: 14px; margin-top: 14px; }
-    h4 { font-size: 12px; text-transform: uppercase; margin-top: 10px; }
-    p { margin: 6px 0; }
-    ul, ol { margin: 6px 0 0 18px; padding: 0; }
-    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 10px; }
-    th, td { border: 1px solid #333; padding: 5px; vertical-align: top; }
+    body { font-family: Arial, Helvetica, sans-serif; color: #111; line-height: 1.34; font-size: 11.2px; }
+    h1, h2, h3, h4 { margin: 0 0 7px; break-after: avoid; page-break-after: avoid; }
+    h1 { font-size: 29px; letter-spacing: .02em; }
+    h2 { font-size: 17px; border-bottom: 2px solid #111; padding-bottom: 4px; margin-top: 16px; }
+    h3 { font-size: 13px; margin-top: 11px; }
+    h4 { font-size: 11px; text-transform: uppercase; margin-top: 8px; }
+    p { margin: 5px 0; }
+    ul, ol { margin: 5px 0 0 18px; padding: 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 7px; font-size: 9.3px; break-inside: avoid; page-break-inside: avoid; }
+    th, td { border: 1px solid #333; padding: 4px; vertical-align: top; }
     th { background: #e8e8e8; text-align: left; }
-    .cover { min-height: 150mm; display: flex; flex-direction: column; justify-content: center; border: 3px solid #111; padding: 20mm; text-align: center; }
+    .cover { min-height: 150mm; display: flex; flex-direction: column; justify-content: center; border: 3px solid #111; padding: 20mm; text-align: center; break-after: page; page-break-after: always; }
     .subtitle { font-size: 20px; text-transform: uppercase; margin: 10px 0 20px; }
-    .meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px; }
-    .card { border: 1px solid #333; padding: 9px; min-height: 42px; }
-    .warning { border: 2px solid #111; padding: 10px; margin: 12px 0; font-weight: bold; background: #f2f2f2; }
-    .page-break { page-break-before: always; }
+    .meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; margin-top: 10px; }
+    .card { border: 1px solid #333; padding: 8px; min-height: 38px; break-inside: avoid; page-break-inside: avoid; }
+    .warning { border: 2px solid #111; padding: 9px; margin: 10px 0; font-weight: bold; background: #f2f2f2; break-inside: avoid; page-break-inside: avoid; }
+    .page-section { break-before: page; page-break-before: always; }
+    .block { break-inside: avoid; page-break-inside: avoid; }
     .mono { font-family: "Courier New", monospace; }
-    .hint { border: 1px solid #333; padding: 8px; margin: 8px 0; }
-    .small { font-size: 10px; }
+    .hint { border: 1px solid #333; padding: 7px; margin: 6px 0; break-inside: avoid; page-break-inside: avoid; }
+    .small { font-size: 9.5px; }
   </style>
 </head>
 <body>
@@ -36,8 +37,8 @@
     <div class="warning">CONFIDENCIAL — não entregar, fotografar ou ler em voz alta para os jogadores.</div>
   </section>
 
-  <section class="page-break">
-    <h2>Resumo do caso</h2>
+  <section>
+    <h2>1. Visão geral do caso</h2>
     <p>{{PREMISSA}}</p>
     <div class="meta-grid">
       <div class="card"><strong>Dificuldade:</strong><br>{{DIFICULDADE}}</div>
@@ -45,97 +46,102 @@
       <div class="card"><strong>Jogadores:</strong><br>{{NUMERO_JOGADORES}}</div>
       <div class="card"><strong>Envelopes:</strong><br>{{TOTAL_ENVELOPES}}</div>
     </div>
+    <div class="block">
+      <h3>Objetivo dos jogadores</h3>
+      <p>{{OBJETIVO_JOGADORES}}</p>
+    </div>
+    <div class="block">
+      <h3>Verdade real resumida</h3>
+      <p>{{VERDADE_REAL}}</p>
+      <p><strong>Método de ocultação:</strong> {{METODO_OCULTACAO}}</p>
+    </div>
 
-    <h2>Objetivo dos jogadores</h2>
-    <p>{{OBJETIVO_JOGADORES}}</p>
-
-    <h2>Verdade real resumida</h2>
-    <p>{{VERDADE_REAL}}</p>
-    <p><strong>Método de ocultação:</strong> {{METODO_OCULTACAO}}</p>
-
-    <h2>Fluxo recomendado da sessão</h2>
+    <h2>2. Preparação</h2>
     <ol>
-      <li>Apresente apenas a premissa pública e entregue o Envelope 1.</li>
-      <li>Observe hipóteses e peça que o grupo aponte documentos antes de liberar novo material.</li>
-      <li>Use os contratos obrigatórios como critério de avanço, não como texto para ser lido.</li>
-      <li>Ofereça dicas somente quando houver travamento real, começando por níveis leves.</li>
-      <li>No final, conduza a reconstrução da verdade com base nas evidências citadas pelos jogadores.</li>
+      <li>Separe envelopes dos jogadores, dicas entregáveis e este guia confidencial.</li>
+      <li>Não leia critérios de avanço ou solução em voz alta; use-os apenas para checar hipóteses.</li>
+      <li>Oriente que nenhum dado externo é necessário.</li>
     </ol>
 
-    <h2>Critérios de avanço por envelope</h2>
-    {{#CRITERIOS_AVANCO}}
-      <h3>{{fase}}</h3>
-      <p>{{criterio}}</p>
-      {{#sem_contratos}}<p class="small">Nenhum contrato obrigatório marcado para esta fase.</p>{{/sem_contratos}}
-      {{#contratos}}
-        <div class="hint">
-          <strong class="mono">{{id}}</strong> — {{conclusao}}<br>
-          <span class="small">Prova: {{prova_principal}} | Confirmação: {{confirmacao_independente}} | Ação esperada: {{acao_esperada_jogador}}</span>
-        </div>
-      {{/contratos}}
-    {{/CRITERIOS_AVANCO}}
+    <h2>3. Ordem dos envelopes</h2>
+    <ol>
+      <li>Entregue o Envelope 1 com a capa e todo seu conteúdo.</li>
+      <li>Libere o Envelope 2 somente após hipótese intermediária sustentada por evidências.</li>
+      <li>Mantenha dicas e gabarito separados dos materiais de jogador.</li>
+    </ol>
   </section>
 
-  <section class="page-break">
-    <h2>Contratos obrigatórios por fase</h2>
-    {{#CONTRATOS_POR_FASE}}
-      <h3>{{fase}}</h3>
-      <table>
-        <thead><tr><th>ID</th><th>Conclusão</th><th>Prova</th><th>Confirmação</th><th>Obrigatório</th></tr></thead>
-        <tbody>
-          {{#contratos}}
-          <tr>
-            <td class="mono">{{id}}</td>
-            <td>{{conclusao}}</td>
-            <td class="mono">{{prova_principal}}</td>
-            <td class="mono">{{confirmacao_independente}}</td>
-            <td>{{obrigatoria_para_avanco}}</td>
-          </tr>
-          {{/contratos}}
-        </tbody>
-      </table>
-    {{/CONTRATOS_POR_FASE}}
+  <section class="page-section">
+    <h2>4. Objetivo de cada envelope</h2>
+    {{#DOCUMENTOS_POR_ENVELOPE}}
+      <div class="block">
+        <h3>{{envelope}}</h3>
+        <ul>
+          {{#documentos}}<li><span class="mono">{{codigo}}</span> — {{titulo}} ({{tipo}})</li>{{/documentos}}
+        </ul>
+      </div>
+    {{/DOCUMENTOS_POR_ENVELOPE}}
 
-    <h2>Dicas contextuais</h2>
-    {{#SEM_DICAS_CONTEXTUAIS}}
-      <p>Nenhuma dica contextual foi definida neste blueprint.</p>
-    {{/SEM_DICAS_CONTEXTUAIS}}
+    <h2>5. Critério de avanço entre envelopes</h2>
+    {{#CRITERIOS_AVANCO}}
+      <div class="block">
+        <h3>{{fase}}</h3>
+        <p>{{criterio}}</p>
+        {{#sem_contratos}}<p class="small">Nenhum contrato obrigatório marcado para esta fase.</p>{{/sem_contratos}}
+        {{#contratos}}
+          <div class="hint"><strong class="mono">{{id}}</strong> — {{conclusao}}<br><span class="small">Prova: {{prova_principal}} | Confirmação: {{confirmacao_independente}} | Ação esperada: {{acao_esperada_jogador}}</span></div>
+        {{/contratos}}
+      </div>
+    {{/CRITERIOS_AVANCO}}
+
+    <h2>6. O que observar nos jogadores</h2>
+    <ul>
+      <li>Se cruzam logs, mapa e escala antes de acusar uma pessoa.</li>
+      <li>Se diferenciam marcação de escala de abertura física de porta.</li>
+      <li>Se usam documentos financeiros como cobertura documental, não como solução isolada.</li>
+      <li>Se confundem material de dicas com gabarito; nesse caso, reforce que dicas são graduais.</li>
+    </ul>
+  </section>
+
+  <section class="page-section">
+    <h2>7. Dicas graduais</h2>
+    <p>As dicas abaixo são instruções internas de oferta. As dicas entregáveis aos jogadores são renderizadas no arquivo de dicas do facilitador por contexto; não duplique todas em voz alta.</p>
+    {{#SEM_DICAS_CONTEXTUAIS}}<p>Nenhuma dica contextual foi definida neste blueprint.</p>{{/SEM_DICAS_CONTEXTUAIS}}
     {{#DICAS_POR_FASE}}
-      <h3>{{fase}}</h3>
-      {{#categorias}}
-        <h4>{{categoria}}</h4>
-        {{#dicas}}
-          <div class="hint">
-            <strong>{{titulo}}</strong> <span class="mono">({{id}} · {{nivel}})</span><br>
-            <strong>Quando usar:</strong> {{condicao_uso}}<br>
-            <strong>Texto:</strong> {{texto}}<br>
-            <span class="small">Contratos: {{contratos_relacionados}} | Documentos: {{documentos_relacionados}}</span>
-          </div>
-        {{/dicas}}
-      {{/categorias}}
+      <div class="block">
+        <h3>{{fase}}</h3>
+        {{#categorias}}
+          <h4>{{categoria}}</h4>
+          {{#dicas}}
+            <div class="hint"><strong>{{titulo}}</strong> <span class="mono">({{id}} · {{nivel}})</span><br><strong>Quando oferecer:</strong> {{condicao_uso}}<br><span class="small">Documentos: {{documentos_relacionados}} | Contratos: {{contratos_relacionados}}</span></div>
+          {{/dicas}}
+        {{/categorias}}
+      </div>
     {{/DICAS_POR_FASE}}
   </section>
 
-  <section class="page-break">
-    <h2>Documentos por envelope</h2>
-    {{#DOCUMENTOS_POR_ENVELOPE}}
-      <h3>{{envelope}}</h3>
-      <ul>
-        {{#documentos}}
-          <li><span class="mono">{{codigo}}</span> — {{titulo}} ({{tipo}})</li>
-        {{/documentos}}
-      </ul>
-    {{/DOCUMENTOS_POR_ENVELOPE}}
-
-    <h2>Gabarito resumido</h2>
+  <section class="page-section">
+    <h2>8. Solução final</h2>
     <p>{{GABARITO_RESUMIDO}}</p>
-
-    <h2>Relatório estrutural</h2>
+    <h3>Contratos obrigatórios</h3>
+    {{#CONTRATOS_POR_FASE}}
+      <div class="block">
+        <h4>{{fase}}</h4>
+        <table><thead><tr><th>ID</th><th>Conclusão</th><th>Prova</th><th>Confirmação</th><th>Obrigatório</th></tr></thead><tbody>{{#contratos}}<tr><td class="mono">{{id}}</td><td>{{conclusao}}</td><td class="mono">{{prova_principal}}</td><td class="mono">{{confirmacao_independente}}</td><td>{{obrigatoria_para_avanco}}</td></tr>{{/contratos}}</tbody></table>
+      </div>
+    {{/CONTRATOS_POR_FASE}}
+    <h3>Relatório estrutural</h3>
     <p><strong>Status do grafo:</strong> {{GRAPH_STATUS}}</p>
     <p>{{GRAPH_SUMMARY}}</p>
 
-    <h2>Aviso de confidencialidade</h2>
-    <div class="warning">Este guia contém verdade real, critérios de avanço, dicas e gabarito. Ele deve ficar separado dos envelopes dos jogadores e do material público do caso.</div>
+    <h2>9. Checklist pós-playtest</h2>
+    <ul>
+      <li>Registrar onde os jogadores travaram e qual dica foi suficiente.</li>
+      <li>Verificar se houve acusação precoce motivada por viés visual ou título de documento.</li>
+      <li>Anotar qualquer página quebrada, elemento ilegível ou mapa interpretado como rota.</li>
+      <li>Confirmar se a solução final foi formulada com documento principal e confirmação.</li>
+    </ul>
+    <div class="warning">Este guia é confidencial. Critérios, dicas internas e solução final devem ficar fora dos envelopes dos jogadores.</div>
   </section>
 </body>
 </html>

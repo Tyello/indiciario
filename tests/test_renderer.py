@@ -444,7 +444,8 @@ def test_caso_canonico_e1_08_nao_tem_texto_meta() -> None:
     assert "Essas definições devem ser usadas" not in corpo
     assert "cruzar E1-04" not in corpo
     assert "interpretação técnica externa" not in corpo
-    assert "Glossário interno" in corpo
+    assert "Trecho extraído do treinamento" in corpo
+    assert "ID operacional" in corpo
 
 
 def test_template_orcamento_esta_compacto_para_e2_03() -> None:
