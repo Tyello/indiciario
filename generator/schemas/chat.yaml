@@ -19,6 +19,7 @@
       "required": true,
       "item_required": [
         "DIRECAO",
+        "CLASSE_GAP",
         "TEXTO_MENSAGEM",
         "HORARIO"
       ],

@@ -18,7 +18,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from generator.renderer import renderizar_html, detectar_placeholders
+from generator.renderer import TIPO_PARA_TEMPLATE, renderizar_html, detectar_placeholders
 
 
 # ── Escalares ─────────────────────────────────────────────────────────────────
@@ -180,6 +180,26 @@ def test_email_canonico_e1_02_renderiza_sem_copia_residual():
     assert "{{COPIA}}" not in residuais
     assert residuais == [], f"Placeholders residuais em E1-02: {residuais}"
     assert "coord.reservas@acervomirante.local" in html
+
+
+def test_caso_canonico_templates_usados_renderizam_sem_placeholders_residuais():
+    root = Path(__file__).parent.parent
+    blueprint_path = root / "examples" / "caso_canonico_intermediario.json"
+    blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
+    residuos_por_doc = {}
+
+    for documento in blueprint["documentos"]:
+        template_nome = TIPO_PARA_TEMPLATE.get(documento["tipo"], "05_carta.html")
+        template = (root / "templates" / template_nome).read_text(encoding="utf-8")
+        html = renderizar_html(template, documento["conteudo"])
+        residuais = detectar_placeholders(html)
+        if residuais:
+            residuos_por_doc[documento["codigo"]] = sorted(set(residuais))
+
+    assert "{{COPIA}}" not in residuos_por_doc.get("E1-02", [])
+    for placeholder in ("{{CLASSE_LINHA}}", "{{METODO}}", "{{OBSERVACAO}}", "{{TERMINAL}}"):
+        assert placeholder not in residuos_por_doc.get("E1-04", [])
+    assert residuos_por_doc == {}
 
 
 def test_log_template_expande_multiplos_registros():
