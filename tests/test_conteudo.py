@@ -116,6 +116,7 @@ CONTEUDO_EMAIL_VALIDO = {
     "REMETENTE_NOME": "João Silva",
     "REMETENTE_EMAIL": "joao@ficticio.com",
     "DESTINATARIO_EMAIL": "detetive@indiciarios.com",
+    "COPIA": "juridico@indiciarios.com",
     "DESTINATARIO_LABEL": "Investigação",
     "DATA_HORA": "01 de março de 2026 às 17:05",
     "ASSUNTO": "Urgente",

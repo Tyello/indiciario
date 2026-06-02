@@ -6,6 +6,7 @@
     "REMETENTE_NOME",
     "REMETENTE_EMAIL",
     "DESTINATARIO_EMAIL",
+    "COPIA",
     "DESTINATARIO_LABEL",
     "DATA_HORA",
     "ASSUNTO",
@@ -17,8 +18,7 @@
   "optional": [
     "ANEXOS",
     "TOTAL_ANEXOS",
-    "CADA_ANEXO",
-    "COPIA"
+    "CADA_ANEXO"
   ],
   "required_when": [
     {
@@ -31,9 +31,6 @@
         "CADA_ANEXO"
       ]
     }
-  ],
-  "hidden_allowed": [
-    "COPIA"
   ],
   "lists": {
     "CADA_ANEXO": {
