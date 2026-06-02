@@ -353,7 +353,7 @@
             "CLASSE_LINHA": "normal",
             "TERMINAL": "Leitor RT-B",
             "METODO": "credencial",
-            "OBSERVACAO": "Evento compatível com curadoria operacional, mas divergente da escala declarada."
+            "OBSERVACAO": "Evento compatível com curadoria operacional; conferir com escala do setor."
           },
           {
             "DATA": "18/08/2026",
@@ -568,7 +568,7 @@
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
         "ASSUNTO": "Conferência operacional de etiquetas RM-17 e PC-14",
-        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em balança de bancada e consulta às fichas de acondicionamento. Lia registrou a divergência após a escala já estar congelada, sem autorização de correção retroativa.</p><table><tr><th>Etiqueta</th><th>Ficha esperada</th><th>Peso registrado</th><th>Observação de bancada</th></tr><tr><td>RM-17</td><td>Réplica de restauro para ajuste de moldura</td><td>3,8 kg</td><td>Divergência de peso em relação à ficha da réplica.</td></tr><tr><td>PC-14</td><td>Peça original em cobre</td><td>1,1 kg</td><td>Divergência de peso em relação à ficha do original.</td></tr></table><p>As duas etiquetas foram lacradas em envelopes de controle separados para nova conferência visual no dia seguinte. O registro de etiqueta, isoladamente, não comprova abertura de porta ou saída por doca.</p>",
+        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em balança de bancada e consulta às fichas de acondicionamento. Lia registrou a divergência após a escala já estar congelada, sem autorização de correção retroativa.</p><table><tr><th>Etiqueta</th><th>Ficha esperada</th><th>Peso registrado</th><th>Observação de bancada</th></tr><tr><td>RM-17</td><td>Réplica de restauro para ajuste de moldura</td><td>3,8 kg</td><td>Divergência de peso em relação à ficha da réplica.</td></tr><tr><td>PC-14</td><td>Peça original em cobre</td><td>1,1 kg</td><td>Divergência de peso em relação à ficha do original.</td></tr></table><p>As duas etiquetas foram lacradas em envelopes de controle separados para nova conferência visual no dia seguinte. O registro de etiqueta deve permanecer vinculado à cadeia documental de acesso, escala e movimentação logística antes de qualquer conclusão operacional.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "Lia Figueira",
         "NOME_ASSINANTE": "Lia Figueira",
@@ -849,7 +849,7 @@
         "VALOR_TOTAL": "Selecionado: R$ 18.400,00",
         "CONDICOES": [
           {
-            "CONDICAO": "Ateliê Pedra Clara é a única proposta que combina intervenção, transporte assistido e documentação de retorno no mesmo pacote."
+            "CONDICAO": "Critério de aprovação: selecionar proposta que reúna escopo técnico, transporte assistido, documentação de retorno e prazo compatível com a OS 0147/2026."
           },
           {
             "CONDICAO": "Conserva Sul Restauro permanece como referência legítima de preço para moldura, mas não cobre doca nem prazo imediato."

@@ -87,6 +87,7 @@ def test_caso_canonico_hardening_editorial_pre_playtest():
     blueprint = _blueprint()
     e101 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-01")
     e106 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-06")
+    e106 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-06")
     e108 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-08")
     e207 = next(doc for doc in blueprint.documentos if doc.codigo == "E2-07")
 
@@ -142,6 +143,7 @@ def test_caso_canonico_e1_falsos_caminhos_tem_limites_justos():
     blueprint = _blueprint()
     e104 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-04")
     e105 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-05")
+    e106 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-06")
     e108 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-08")
 
     assert any(
@@ -151,6 +153,8 @@ def test_caso_canonico_e1_falsos_caminhos_tem_limites_justos():
     assert "NEGADO</strong> registra tentativa sem abertura" in e108.conteudo["CORPO_CARTA"]
     assert "não autoriza Reserva Técnica B" in str(e105.conteudo)
     assert "não movimentar acervo sozinho" in str(e105.conteudo)
+    assert "cadeia documental" in str(e106.conteudo)
+    assert "não comprova abertura de porta" not in str(e106.conteudo)
 
 
 def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_unica():
@@ -174,7 +178,8 @@ def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_
     assert "sem transporte" in texto_cotacao
     assert "sem intervenção em acervo" in texto_cotacao
     assert "crédito posterior" in texto_cotacao
-    assert "intervenção, transporte assistido" in str(e203.conteudo["CONDICOES"])
+    assert "Critério de aprovação" in str(e203.conteudo["CONDICOES"])
+    assert "única proposta" not in str(e203.conteudo["CONDICOES"])
 
     assert e204.conteudo["TOTAL_LANCAMENTOS"] == "6"
     assert len(e204.conteudo["LANCAMENTOS"]) == 6
