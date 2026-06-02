@@ -114,3 +114,72 @@ def test_caso_canonico_hardening_editorial_pre_playtest():
         "reserva_tecnica_b",
         "sala_seguranca",
     }.issubset(local_ids)
+
+
+def test_caso_canonico_e1_distribui_suspeitas_sem_cravar_marina():
+    blueprint = _blueprint()
+    e104 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-04")
+    e105 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-05")
+
+    registros_log = {registro["HORA"]: registro for registro in e104.conteudo["REGISTROS"]}
+    saida_doca = registros_log["19h57"]
+
+    assert saida_doca["PORTA"] == "P-04 / Doca de serviço"
+    assert saida_doca["TIPO_EVENTO"] == "SAIDA"
+    assert saida_doca["ID_USUARIO"] == "OS-0147/2026"
+    assert "Sensor de carga" in saida_doca["TERMINAL"]
+    assert "usuário nominal" in saida_doca["OBSERVACAO"]
+
+    texto_e1 = f"{e104.objetivo_narrativo} {e105.objetivo_narrativo} {e104.pistas_contidas} {e105.pistas_contidas}"
+    for suspeito in ["Marina", "Otávio", "Lia", "Tadeu"]:
+        assert suspeito in texto_e1
+
+    assert "sem cravar autoria" in e104.objetivo_narrativo
+    assert "não explica sozinha" in str(e105.conteudo)
+
+
+def test_caso_canonico_e1_falsos_caminhos_tem_limites_justos():
+    blueprint = _blueprint()
+    e104 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-04")
+    e105 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-05")
+    e108 = next(doc for doc in blueprint.documentos if doc.codigo == "E1-08")
+
+    assert any(
+        registro["ID_USUARIO"] == "USR-LI-066" and registro["TIPO_EVENTO"] == "NEGADO"
+        for registro in e104.conteudo["REGISTROS"]
+    )
+    assert "NEGADO</strong> registra tentativa sem abertura" in e108.conteudo["CORPO_CARTA"]
+    assert "não autoriza Reserva Técnica B" in str(e105.conteudo)
+    assert "não movimentar acervo sozinho" in str(e105.conteudo)
+
+
+def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_unica():
+    blueprint = _blueprint()
+    e203 = next(doc for doc in blueprint.documentos if doc.codigo == "E2-03")
+    e204 = next(doc for doc in blueprint.documentos if doc.codigo == "E2-04")
+
+    empresas = {item["NOME_ITEM"] for item in e203.conteudo["ITENS"]}
+    assert {
+        "Ateliê Pedra Clara",
+        "Conserva Sul Restauro",
+        "LogisArte Transportes",
+        "Mirante Norte Consultoria",
+    } == empresas
+    assert e203.titulo == "Quadro comparativo de cotações emergenciais"
+    assert "Ateliê Pedra Clara" not in e203.titulo
+    assert "só a proposta" not in e203.titulo.lower()
+    assert len(e203.conteudo["ITENS"]) == 4
+
+    texto_cotacao = str(e203.conteudo)
+    assert "sem transporte" in texto_cotacao
+    assert "sem intervenção em acervo" in texto_cotacao
+    assert "crédito posterior" in texto_cotacao
+    assert "intervenção, transporte assistido" in str(e203.conteudo["CONDICOES"])
+
+    assert e204.conteudo["TOTAL_LANCAMENTOS"] == "6"
+    assert len(e204.conteudo["LANCAMENTOS"]) == 6
+    descricoes = " ".join(lancamento["DESCRICAO"] for lancamento in e204.conteudo["LANCAMENTOS"])
+    assert "Conserva Sul Restauro" in descricoes
+    assert "Ateliê Pedra Clara" in descricoes
+    assert "LogisArte Transportes" in descricoes
+    assert "Mirante Norte Consultoria" in descricoes
