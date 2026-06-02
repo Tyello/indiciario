@@ -256,5 +256,5 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     assert "Planta operacional — térreo" in svg
     assert "identificação de setores e portas" in svg
     assert "Carimbo técnico" in svg
-    assert "Sem rota indicada" in svg
+    assert "Rotas não registradas" in svg
     assert "Planta esquemática" not in svg

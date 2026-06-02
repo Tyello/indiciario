@@ -348,7 +348,7 @@
             "NOME_USUARIO": "USR-MA-022",
             "TIPO_EVENTO": "ENTRADA",
             "EVENTO": "Abertura por credencial de curadoria",
-            "CLASSE_LINHA": "highlight",
+            "CLASSE_LINHA": "normal",
             "TERMINAL": "Leitor RT-B",
             "METODO": "credencial",
             "OBSERVACAO": "Evento dentro da janela de montagem."
@@ -361,7 +361,7 @@
             "NOME_USUARIO": "USR-MA-022",
             "TIPO_EVENTO": "SAIDA",
             "EVENTO": "Passagem de carrinho registrada no sensor de carga",
-            "CLASSE_LINHA": "highlight",
+            "CLASSE_LINHA": "normal",
             "TERMINAL": "Terminal Doca",
             "METODO": "código OS 0147/2026",
             "OBSERVACAO": "Vinculado a recebimento emergencial."
@@ -463,7 +463,7 @@
             "NOME_USUARIO": "Marina Vale",
             "TIPO_EVENTO": "OPERACAO",
             "EVENTO": "Conferência de suportes da mostra",
-            "CLASSE_LINHA": "highlight",
+            "CLASSE_LINHA": "normal",
             "TERMINAL": "Planilha Escala-Oeste",
             "METODO": "escala operacional",
             "OBSERVACAO": "Cobertura declarada no período crítico."
@@ -1031,9 +1031,9 @@
       "envelope": "E2",
       "tipo": "manual",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Fechar a solução com confirmação independente da etiqueta, do peso e do caminho documental.",
+      "objetivo_narrativo": "Registrar inconsistências técnicas de acervo que pedem cruzamento com logs, etiquetas e documentos financeiros, sem apontar autoria.",
       "pistas_contidas": [
-        "Auditoria confirma que RM-17 tinha peso de peça original, que a réplica ficou na vitrine e que a movimentação foi incompatível com o serviço contratado."
+        "Fotografias, pesos e registros de etiqueta não fecham entre a peça em vitrine, a ficha do original e a documentação de transporte."
       ],
       "confirma": [
         "E1-04",
@@ -1063,7 +1063,7 @@
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
         "ASSUNTO": "Nota técnica CAM-AUD-31 — inconsistências de acervo",
-        "CORPO_CARTA": "<p>A auditoria comparou fotografias de borda, peso de acondicionamento e registro de etiqueta. A peça em vitrine no dia 19/08 apresenta diferenças materiais em relação à ficha do Estudo em cobre nº 14.</p><p>A etiqueta RM-17 aparece em documentação operacional do período e em registros de carga do mesmo intervalo. A conferência de E1-06 aponta pesos incompatíveis entre etiquetas e fichas, exigindo nova vistoria presencial antes de qualquer responsabilização.</p><p>A documentação da Ateliê Pedra Clara descreve moldura, transporte e documentação técnica. Até o fechamento desta nota, não havia laudo de intervenção correspondente à saída física do original nem fotografia de retorno assinada pela equipe de acervo.</p>",
+        "CORPO_CARTA": "<p>A auditoria comparou fotografias de borda, peso de acondicionamento e registro de etiqueta. A peça em vitrine no dia 19/08 apresenta diferenças materiais em relação à ficha do Estudo em cobre nº 14.</p><p>A etiqueta RM-17 aparece em documentação operacional do período e em registros de carga do mesmo intervalo. A conferência de E1-06 aponta pesos incompatíveis entre etiquetas e fichas, exigindo nova vistoria presencial antes de qualquer responsabilização.</p><p>A documentação da Ateliê Pedra Clara descreve moldura, transporte e documentação técnica. Até o fechamento desta nota, não havia laudo de intervenção correspondente à saída física do original nem fotografia de retorno assinada pela equipe de acervo. A leitura desta nota deve ser feita em conjunto com os registros de porta, escala e anexos financeiros.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "Lia Figueira",
         "NOME_ASSINANTE": "Lia Figueira",

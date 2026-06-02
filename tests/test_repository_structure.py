@@ -67,3 +67,10 @@ def test_html_templates_are_self_contained_when_present():
         content = html_file.read_text(encoding="utf-8").lower()
         assert "<script src=" not in content, f"Template com script remoto obrigatório: {html_file}"
         assert "&nbsp;" not in content, f"Template contém entidade proibida &nbsp;: {html_file}"
+
+
+def test_templates_nao_usam_fontes_externas():
+    for template in Path("templates").glob("*.html"):
+        conteudo = template.read_text(encoding="utf-8")
+        assert "@import url(" not in conteudo
+        assert "fonts.googleapis" not in conteudo

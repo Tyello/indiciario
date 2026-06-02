@@ -262,7 +262,7 @@ def _render_envelope_cover(
         "case_name": blueprint.titulo,
         "section_label": f"Envelope {numero}",
         "section_ref": _envelope_title(group),
-        "warning_label": "SEM SPOILERS",
+        "warning_label": "CUSTÓDIA INTERNA",
     }
     html_debug_dir = paths.get("html_debug_dir")
     render_kwargs: dict[str, Any] = {"strict": strict}

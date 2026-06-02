@@ -95,6 +95,13 @@ def test_caso_canonico_hardening_editorial_pre_playtest():
     assert e108.tipo.value == "manual"
     assert "USR-MA-022" in str(e108.conteudo)
     assert "conclusão técnica" not in str(e207.conteudo).lower()
+    assert "fechar a solução" not in e207.objetivo_narrativo.lower()
+    assert "sem apontar autoria" in e207.objetivo_narrativo.lower()
+
+    for documento in blueprint.documentos:
+        if documento.codigo in {"E1-04", "E1-05"}:
+            for registro in documento.conteudo["REGISTROS"]:
+                assert registro["CLASSE_LINHA"] != "highlight"
 
     assert any(personagem.nome == "Vera Matos" for personagem in blueprint.personagens)
     visual_ids = {card.personagem_id for card in blueprint.visual_procedural.personagens}  # type: ignore[union-attr]

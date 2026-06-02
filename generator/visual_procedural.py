@@ -78,7 +78,7 @@ def _build_mirante_floor_plan_svg(mapa: MapaProcedural) -> str:
   <line x1="486" y1="224" x2="526" y2="224" class="door-gap"/><path d="M486 224 q0 -30 36 -30" class="door"/><text x="506" y="220" class="door-label">P-08</text>
 
   <g transform="translate(800 92)"><rect x="0" y="0" width="148" height="250" rx="9" fill="#ffffff" stroke="#94a3b8"/><text x="14" y="27" class="legend-title">Legenda</text><text x="14" y="52" class="legend">P-01 Guarita</text><text x="14" y="75" class="legend">P-02 Corredor técnico</text><text x="14" y="98" class="legend">P-03 Administração</text><text x="14" y="121" class="legend">P-04 Doca de serviço</text><text x="14" y="144" class="legend">P-05 Depósito</text><text x="14" y="167" class="legend">P-06 Reserva Técnica B</text><text x="14" y="190" class="legend">P-07 Reserva Técnica A</text><text x="14" y="213" class="legend">P-08 Sala de Segurança</text><text x="14" y="236" class="micro">Linhas e escala são aproximadas.</text></g>
-  <g transform="translate(800 372)"><rect x="0" y="0" width="148" height="72" fill="#ffffff" stroke="#64748b"/><text x="10" y="19" class="stamp">Carimbo técnico</text><line x1="10" y1="30" x2="138" y2="30" stroke="#94a3b8"/><text x="10" y="48" class="micro">Uso: apuração interna / E1</text><text x="10" y="62" class="micro">Sem rota indicada</text></g>
+  <g transform="translate(800 372)"><rect x="0" y="0" width="148" height="72" fill="#ffffff" stroke="#64748b"/><text x="10" y="19" class="stamp">Carimbo técnico</text><line x1="10" y1="30" x2="138" y2="30" stroke="#94a3b8"/><text x="10" y="48" class="micro">Uso: apuração interna / E1</text><text x="10" y="62" class="micro">Rotas não registradas</text></g>
 </svg>"""
 
 
