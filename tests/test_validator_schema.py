@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from generator.models import TipoDocumento
+from generator.models import Blueprint, TipoDocumento
 from generator.validator import BlueprintValidator
 from tests.test_generator_validator import CONTEUDO_CARTA_VALIDO, blueprint_valido
 
@@ -82,6 +82,20 @@ def test_showcase_tecnico_valida_sem_criticos():
     assert output["criticos"] == []
 
 
+def test_caso_canonico_intermediario_valida_email_e1_02_com_copia():
+    path = ROOT / "examples" / "caso_canonico_intermediario.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert not any(
+        e.documento == "E1-02" and "COPIA" in e.mensagem
+        for e in resultado.criticos
+    )
+    assert not any(
+        e.documento == "E1-02" and e.codigo.startswith("CONT_")
+        for e in resultado.criticos
+    )
+
 
 def _validar_email_anexos(valor):
     def mut(c):
@@ -128,15 +142,14 @@ def test_tipo_outro_invalido_nao_pula_schema():
     assert any(e.codigo == "CONT_003" and e.documento == doc.codigo for e in resultado.criticos)
 
 
-def test_hidden_allowed_ausente_nao_gera_critico():
+def test_email_schema_exige_copia():
     resultado = _validar_doc(lambda c: c.pop("COPIA", None))
-    assert not any(e.documento == "E1-02" and e.codigo.startswith("CONT_") for e in resultado.criticos)
+    assert any(e.codigo == "CONT_003" and e.documento == "E1-02" for e in resultado.criticos)
 
 
-def test_hidden_allowed_com_lixo_tecnico_gera_aviso():
+def test_email_schema_rejeita_copia_com_lixo_tecnico_como_required():
     resultado = _validar_doc(lambda c: c.update({"COPIA": "CONTEUDO_GENERICO"}))
-    assert any(e.codigo == "CONT_SCHEMA_002" and e.documento == "E1-02" for e in resultado.avisos)
-    assert not any(e.documento == "E1-02" and e.codigo.startswith("CONT_") for e in resultado.criticos)
+    assert any(e.codigo == "CONT_003" and e.documento == "E1-02" for e in resultado.criticos)
 
 
 def test_required_vence_hidden_allowed():

@@ -29,6 +29,7 @@ CONTEUDO_EMAIL_VALIDO = {
     "REMETENTE_NOME": "Bruno Narrador",
     "REMETENTE_EMAIL": "bruno@ficcional.test",
     "DESTINATARIO_EMAIL": "investigacao@ficcional.test",
+    "COPIA": "arquivo@ficcional.test",
     "DESTINATARIO_LABEL": "Equipe de investigação",
     "DATA_HORA": "01/01/2026 10:00",
     "ASSUNTO": "Registro do incidente",

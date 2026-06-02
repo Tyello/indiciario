@@ -10,6 +10,7 @@ Cobre:
 - renderização aninhada (lista dentro de condicional)
 """
 
+import json
 import sys
 from pathlib import Path
 
@@ -150,7 +151,7 @@ def test_email_template_sem_residuais_com_dados_completos():
         "AVATAR_COR": "#1A2E4A",
         "CORPO_EMAIL": "<p>Texto.</p>",
         "NOTA_RODAPE": "CONFIDENCIAL",
-        "COPIA": "",
+        "COPIA": "arquivo@indiciarios.com",
         "TOTAL_ANEXOS": "2",
         "ANEXOS": True,
         "CADA_ANEXO": [
@@ -160,9 +161,25 @@ def test_email_template_sem_residuais_com_dados_completos():
     }
     result = renderizar_html(html, dados)
     residuais = detectar_placeholders(result)
-    # Nenhum placeholder crítico deve sobrar
-    criticos = [p for p in residuais if p not in ("{{COPIA}}", "{{/COPIA}}")]
-    assert criticos == [], f"Placeholders residuais: {criticos}"
+    assert residuais == [], f"Placeholders residuais: {residuais}"
+
+
+def test_email_canonico_e1_02_renderiza_sem_copia_residual():
+    root = Path(__file__).parent.parent
+    template = (root / "templates" / "01_email.html").read_text(encoding="utf-8")
+    blueprint_path = root / "examples" / "caso_canonico_intermediario.json"
+    blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
+    doc = next(
+        documento for documento in blueprint["documentos"]
+        if documento["codigo"] == "E1-02"
+    )
+
+    html = renderizar_html(template, doc["conteudo"])
+    residuais = detectar_placeholders(html)
+
+    assert "{{COPIA}}" not in residuais
+    assert residuais == [], f"Placeholders residuais em E1-02: {residuais}"
+    assert "coord.reservas@acervomirante.local" in html
 
 
 def test_log_template_expande_multiplos_registros():
