@@ -2,12 +2,20 @@
 
 from __future__ import annotations
 
+import logging
 import re
 import unicodedata
 from pathlib import Path
 from typing import Any, TypedDict
 
 from .pdf_backend import PdfReader, PdfWriter
+
+logger = logging.getLogger(__name__)
+
+try:  # pragma: no cover - depende do ambiente de instalação.
+    import pikepdf
+except ImportError:  # pragma: no cover - fallback sem dependência oficial.
+    pikepdf = None
 
 
 class OutputPaths(TypedDict, total=False):
@@ -42,18 +50,69 @@ def _validar_pdf_entrada(pdf_path: Path) -> PdfReader:
         return reader
     except PDFMergeError:
         raise
-    except Exception as exc:  # noqa: BLE001 - pypdf levanta exceções variadas para PDFs inválidos.
+    except Exception as exc:  # noqa: BLE001 - PDFs inválidos variam.
         raise PDFMergeError(f"PDF ilegível: {pdf_path}") from exc
 
 
-def merge_pdfs(pdf_paths: list[Path], output_path: Path) -> Path:
-    """Junta PDFs na ordem recebida e valida que cada entrada tem ao menos 1 página."""
-    if not pdf_paths:
-        raise PDFMergeError("Nenhum PDF informado para merge.")
+def _count_pdf_pages_pikepdf(pdf_path: Path) -> int:
+    if pikepdf is None:  # pragma: no cover - guard defensivo.
+        return count_pdf_pages(pdf_path)
+    try:
+        with pikepdf.Pdf.open(pdf_path) as pdf:
+            page_count = len(pdf.pages)
+    except Exception as exc:  # noqa: BLE001 - PDFs inválidos variam.
+        raise PDFMergeError(f"PDF ilegível: {pdf_path}") from exc
+    if page_count < 1:
+        raise PDFMergeError(f"PDF sem páginas: {pdf_path}")
+    return page_count
 
+
+def _merge_pdfs_pikepdf(pdf_paths: list[Path], output_path: Path) -> Path:
+    expected_page_count = 0
+    merged = pikepdf.Pdf.new()
+    for pdf_path in pdf_paths:
+        if not pdf_path.exists():
+            raise FileNotFoundError(f"PDF de entrada não encontrado: {pdf_path}")
+        try:
+            with pikepdf.Pdf.open(pdf_path) as source:
+                page_count = len(source.pages)
+                if page_count < 1:
+                    raise PDFMergeError(f"PDF sem páginas: {pdf_path}")
+                expected_page_count += page_count
+                merged.pages.extend(source.pages)
+        except PDFMergeError:
+            raise
+        except (
+            Exception
+        ) as exc:  # noqa: BLE001 - PDFs reais falham por motivos distintos.
+            raise PDFMergeError(f"PDF ilegível: {pdf_path}") from exc
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        merged.save(output_path)
+    finally:
+        merged.close()
+
+    actual_page_count = _count_pdf_pages_pikepdf(output_path)
+    if actual_page_count != expected_page_count:
+        raise PDFMergeError(
+            "Merge gerou contagem de páginas inesperada: "
+            f"esperado {expected_page_count}, obtido {actual_page_count} em {output_path}"
+        )
+    return output_path
+
+
+def _merge_pdfs_pypdf_fallback(pdf_paths: list[Path], output_path: Path) -> Path:
+    logger.warning(
+        "pikepdf não está instalado; usando fallback pypdf para merge. "
+        "Este fallback não é o backend oficial e pode gerar PDFs consolidados em branco "
+        "com origens reais do Chromium/Playwright em alguns ambientes."
+    )
+    expected_page_count = 0
     writer = PdfWriter()
     for pdf_path in pdf_paths:
         reader = _validar_pdf_entrada(pdf_path)
+        expected_page_count += len(reader.pages)
         if hasattr(writer, "append"):
             writer.append(reader)
         else:  # pragma: no cover - fallback mínimo sem pypdf instalado.
@@ -64,8 +123,23 @@ def merge_pdfs(pdf_paths: list[Path], output_path: Path) -> Path:
     with output_path.open("wb") as fp:
         writer.write(fp)
 
-    count_pdf_pages(output_path)
+    actual_page_count = count_pdf_pages(output_path)
+    if actual_page_count != expected_page_count:
+        raise PDFMergeError(
+            "Merge fallback gerou contagem de páginas inesperada: "
+            f"esperado {expected_page_count}, obtido {actual_page_count} em {output_path}"
+        )
     return output_path
+
+
+def merge_pdfs(pdf_paths: list[Path], output_path: Path) -> Path:
+    """Junta PDFs na ordem recebida usando pikepdf como backend oficial."""
+    if not pdf_paths:
+        raise PDFMergeError("Nenhum PDF informado para merge.")
+
+    if pikepdf is not None:
+        return _merge_pdfs_pikepdf(pdf_paths, output_path)
+    return _merge_pdfs_pypdf_fallback(pdf_paths, output_path)
 
 
 def count_pdf_pages(pdf_path: Path) -> int:
@@ -110,7 +184,9 @@ def get_pdf_orientation_summary(pdf_path: Path) -> dict[str, Any]:
 
 def safe_slug(value: str) -> str:
     """Normaliza texto para slug ASCII estável."""
-    normalized = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
+    normalized = (
+        unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
+    )
     slug = re.sub(r"[^a-zA-Z0-9]+", "-", normalized.lower()).strip("-")
     return slug or "caso-sem-titulo"
 
