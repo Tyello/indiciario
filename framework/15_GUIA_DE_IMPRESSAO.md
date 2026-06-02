@@ -108,6 +108,26 @@ imersão.
 
 ---
 
+## Margem segura e borda branca no A4
+
+Os documentos internos do pacote usam margem segura de impressão para preservar
+legibilidade, evitar cortes em impressoras domésticas e manter espaço de manuseio
+quando as páginas forem colocadas em envelopes físicos. Essa borda branca é
+intencional em documentos narrativos comuns, dicas, gabaritos e relatórios de
+produção.
+
+Capas podem ocupar a página inteira quando o efeito visual justificar essa escolha.
+Mapas, plantas, tabelas extensas e documentos em paisagem podem usar uma área útil
+maior, desde que continuem legíveis em escala 100% e não dependam de sangria para
+funcionar.
+
+Impressoras domésticas e algumas gráficas rápidas ainda podem criar uma borda física
+mesmo em arquivos com fundo até a extremidade da página. Por isso, full bleed
+(sangria total) deve ser usado apenas quando for uma decisão intencional do
+template, nunca como padrão automático para todos os documentos.
+
+---
+
 ## Mapas e orientação paisagem
 
 Quando existirem mapas ou documentos com orientação paisagem, o

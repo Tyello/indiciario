@@ -1,12 +1,17 @@
 from pathlib import Path
 
 import pytest
+import pypdf
 from pypdf.generic import DecodedStreamObject, NameObject
 
-from generator.merger import build_output_paths, count_pdf_pages, get_pdf_orientation_summary, merge_pdfs, safe_slug
+from generator.merger import (
+    build_output_paths,
+    count_pdf_pages,
+    get_pdf_orientation_summary,
+    merge_pdfs,
+    safe_slug,
+)
 from generator.pdf_backend import PdfReader, PdfWriter
-
-
 
 
 def make_pdf_with_content(path: Path, text: str) -> Path:
@@ -24,6 +29,7 @@ def make_pdf_with_content(path: Path, text: str) -> Path:
 def page_has_content_stream(pdf_path: Path, page_index: int) -> bool:
     contents = PdfReader(str(pdf_path)).pages[page_index].get_contents()
     return contents is not None and bool(contents.get_data())
+
 
 def make_pdf(path: Path, pages: list[tuple[int, int]]) -> Path:
     writer = PdfWriter()
@@ -51,7 +57,9 @@ def test_count_pdf_pages_retorna_numero_correto(tmp_path):
 
 
 def test_safe_slug_normaliza_titulo_com_acentos_espacos():
-    assert safe_slug("Showcase Técnico do Indiciário!") == "showcase-tecnico-do-indiciario"
+    assert (
+        safe_slug("Showcase Técnico do Indiciário!") == "showcase-tecnico-do-indiciario"
+    )
 
 
 def test_merge_pdfs_erro_quando_entrada_nao_existe(tmp_path):
@@ -71,13 +79,16 @@ def test_merge_preserva_orientacoes_por_pagina(tmp_path):
     assert summary["landscape"] == 1
     assert summary["dominant"] == "mixed"
 
+
 def test_build_output_paths_retorna_slug_string_e_output_dir_path(tmp_path):
     paths = build_output_paths("Caso Técnico do Indiciário", tmp_path)
 
     assert paths["case_slug"] == "caso-tecnico-do-indiciario"
     assert paths["output_dir"] == tmp_path / "caso-tecnico-do-indiciario"
-    assert paths["guia_de_impressao"] == tmp_path / "caso-tecnico-do-indiciario" / "05_guia_de_impressao.pdf"
-
+    assert (
+        paths["guia_de_impressao"]
+        == tmp_path / "caso-tecnico-do-indiciario" / "05_guia_de_impressao.pdf"
+    )
 
 
 def test_merge_pdfs_copia_streams_de_conteudo_reais(tmp_path):
@@ -91,6 +102,22 @@ def test_merge_pdfs_copia_streams_de_conteudo_reais(tmp_path):
     assert page_has_content_stream(merged, 1)
 
 
+def test_merge_pdfs_pikepdf_preserva_paginas_com_conteudo(tmp_path):
+    pikepdf = pytest.importorskip("pikepdf")
+    pdf1 = make_pdf_with_content(tmp_path / "a_pikepdf.pdf", "Documento A visivel")
+    pdf2 = make_pdf_with_content(tmp_path / "b_pikepdf.pdf", "Documento B visivel")
+
+    merged = merge_pdfs([pdf1, pdf2], tmp_path / "merged_pikepdf.pdf")
+
+    with pikepdf.Pdf.open(merged) as pdf:
+        assert len(pdf.pages) == 2
+        assert all("/Contents" in page.obj for page in pdf.pages)
+    reader = pypdf.PdfReader(str(merged))
+    assert all(
+        (page.get_contents() is not None and page.get_contents().get_data())
+        for page in reader.pages
+    )
+
 
 def test_merge_pdfs_chromium_preserva_texto_quando_browser_disponivel(tmp_path):
     playwright = pytest.importorskip("playwright.async_api")
@@ -100,7 +127,9 @@ def test_merge_pdfs_chromium_preserva_texto_quando_browser_disponivel(tmp_path):
         async with playwright.async_playwright() as p:
             try:
                 browser = await p.chromium.launch()
-            except Exception as exc:  # noqa: BLE001 - browser pode não estar instalado no CI.
+            except (
+                Exception
+            ) as exc:  # noqa: BLE001 - browser pode não estar instalado no CI.
                 pytest.skip(f"Chromium não disponível: {exc}")
             page = await browser.new_page()
             await page.set_content(html, wait_until="networkidle")
@@ -109,8 +138,12 @@ def test_merge_pdfs_chromium_preserva_texto_quando_browser_disponivel(tmp_path):
 
     pdf1 = tmp_path / "chromium_a.pdf"
     pdf2 = tmp_path / "chromium_b.pdf"
-    asyncio.run(gerar_pdf("<html><body><h1>Documento Chromium A</h1></body></html>", pdf1))
-    asyncio.run(gerar_pdf("<html><body><h1>Documento Chromium B</h1></body></html>", pdf2))
+    asyncio.run(
+        gerar_pdf("<html><body><h1>Documento Chromium A</h1></body></html>", pdf1)
+    )
+    asyncio.run(
+        gerar_pdf("<html><body><h1>Documento Chromium B</h1></body></html>", pdf2)
+    )
 
     merged = merge_pdfs([pdf1, pdf2], tmp_path / "chromium_merged.pdf")
     reader = PdfReader(str(merged))

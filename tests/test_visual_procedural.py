@@ -18,7 +18,9 @@ def make_pdf(path: Path, pages: int = 1) -> Path:
 
 
 def load_canonical_data() -> dict:
-    return json.loads(Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8"))
+    return json.loads(
+        Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8")
+    )
 
 
 def validation_codes(blueprint: Blueprint) -> set[str]:
@@ -64,14 +66,18 @@ def test_conexao_area_inexistente_gera_vp_005() -> None:
 
 def test_marcador_documento_inexistente_gera_vp_006() -> None:
     data = load_canonical_data()
-    data["visual_procedural"]["mapas"][0]["marcadores"][0]["documento_relacionado"] = "E9-99"
+    data["visual_procedural"]["mapas"][0]["marcadores"][0][
+        "documento_relacionado"
+    ] = "E9-99"
 
     assert "VP_006" in validation_codes(Blueprint(**data))
 
 
 def test_marcador_contrato_inexistente_gera_vp_007() -> None:
     data = load_canonical_data()
-    data["visual_procedural"]["mapas"][0]["marcadores"][0]["contrato_relacionado"] = "C-INEXISTENTE"
+    data["visual_procedural"]["mapas"][0]["marcadores"][0][
+        "contrato_relacionado"
+    ] = "C-INEXISTENTE"
 
     assert "VP_007" in validation_codes(Blueprint(**data))
 
@@ -101,16 +107,22 @@ def test_build_map_svg_retorna_svg_com_areas() -> None:
     assert "Reserva técnica B" in svg
 
 
-def test_build_visual_documents_gera_pdfs_com_mock_renderer(tmp_path, monkeypatch) -> None:
+def test_build_visual_documents_gera_pdfs_com_mock_renderer(
+    tmp_path, monkeypatch
+) -> None:
     from generator import visual_procedural
 
     calls: list[tuple[str, Path, bool]] = []
 
-    def fake_renderizar_documento(template_nome, dados, output_path, strict=False, landscape=False):
+    def fake_renderizar_documento(
+        template_nome, dados, output_path, strict=False, landscape=False
+    ):
         calls.append((template_nome, output_path, landscape))
         return make_pdf(output_path)
 
-    monkeypatch.setattr(visual_procedural, "renderizar_documento", fake_renderizar_documento)
+    monkeypatch.setattr(
+        visual_procedural, "renderizar_documento", fake_renderizar_documento
+    )
     blueprint = Blueprint(**load_canonical_data())
 
     grupos = build_visual_documents(blueprint, tmp_path, strict=True)
@@ -131,7 +143,9 @@ def test_caso_canonico_tem_visual_procedural_com_mapa_landscape() -> None:
     assert len(blueprint.visual_procedural.locais) >= 1
 
 
-def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(tmp_path, monkeypatch) -> None:
+def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
+    tmp_path, monkeypatch
+) -> None:
     from generator import package_builder
 
     def fake_renderizar_caso(_blueprint_path, output_dir, strict=True):
@@ -143,24 +157,42 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(tmp_path, m
         }
 
     def fake_build_visual_documents(_blueprint, output_dir, strict=True):
-        return {"E1": [make_pdf(output_dir / "visual_map_casa_acervo_mirante_andar_1.pdf", pages=2)]}
+        return {
+            "E1": [
+                make_pdf(
+                    output_dir / "visual_map_casa_acervo_mirante_andar_1.pdf", pages=2
+                )
+            ]
+        }
 
     def fake_render_print_guide(_print_manifest, output_path, strict=True):
         return make_pdf(output_path)
 
-    def fake_render_facilitator_guide(_blueprint, output_path, graph_report=None, strict=True):
+    def fake_render_facilitator_guide(
+        _blueprint, output_path, graph_report=None, strict=True
+    ):
         return make_pdf(output_path)
 
     monkeypatch.setattr(package_builder, "renderizar_caso", fake_renderizar_caso)
-    monkeypatch.setattr(package_builder, "build_visual_documents", fake_build_visual_documents)
+    monkeypatch.setattr(
+        package_builder, "build_visual_documents", fake_build_visual_documents
+    )
     monkeypatch.setattr(package_builder, "render_print_guide", fake_render_print_guide)
-    monkeypatch.setattr(package_builder, "render_facilitator_guide", fake_render_facilitator_guide)
+    monkeypatch.setattr(
+        package_builder, "render_facilitator_guide", fake_render_facilitator_guide
+    )
 
-    result = package_builder.build_package(Path("examples/caso_canonico_intermediario.json"), tmp_path, strict=True)
+    result = package_builder.build_package(
+        Path("examples/caso_canonico_intermediario.json"), tmp_path, strict=True
+    )
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
-    print_manifest = json.loads(Path(result["print_manifest_path"]).read_text(encoding="utf-8"))
+    print_manifest = json.loads(
+        Path(result["print_manifest_path"]).read_text(encoding="utf-8")
+    )
 
-    visual_map = next(doc for doc in manifest["documents"] if doc["codigo"].startswith("VP-MAPA-"))
+    visual_map = next(
+        doc for doc in manifest["documents"] if doc["codigo"].startswith("VP-MAPA-")
+    )
     assert visual_map["tipo"] == "visual_procedural"
     assert visual_map["envelope"] == "E1"
     assert visual_map["final_file"] == "01_envelope_1.pdf"
@@ -170,7 +202,6 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(tmp_path, m
     assert result["status"] == "passed"
 
 
-
 def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     blueprint = Blueprint(**load_canonical_data())
     mapa = blueprint.visual_procedural.mapas[0]  # type: ignore[union-attr]
@@ -178,11 +209,20 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     labels = [marcador.label for marcador in mapa.marcadores]
     svg = build_map_svg(mapa)
 
-    assert nomes == {"Portaria", "Corredor de carga", "Doca lateral", "Reserva técnica B", "Administração", "Vitrine"}
-    assert labels == ["Janela operacional", "Credencial / porta", "Etiqueta RM-17"]
+    assert nomes == {
+        "Portaria principal",
+        "Corredor de carga",
+        "Doca lateral",
+        "Reserva técnica B",
+        "Administração",
+        "Vitrine / área pública",
+    }
+    assert labels == ["Janela operacional", "Credencial / acesso", "Etiqueta RM-17"]
     assert all(len(label) <= 22 for label in labels)
     assert ">1<" in svg
     assert ">2<" in svg
     assert ">3<" in svg
-    assert "Marcadores" in svg
+    assert "Legenda" in svg
     assert "Janela operacional" in svg
+    assert "Credencial / acesso" in svg
+    assert "Planta baixa operacional" in svg
