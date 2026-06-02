@@ -39,7 +39,11 @@
         "ID_USUARIO",
         "NOME_USUARIO",
         "TIPO_EVENTO",
-        "EVENTO"
+        "EVENTO",
+        "CLASSE_LINHA",
+        "TERMINAL",
+        "METODO",
+        "OBSERVACAO"
       ]
     }
   },

@@ -269,7 +269,11 @@
             "ID_USUARIO": "03",
             "NOME_USUARIO": "Tadeu Nobre",
             "TIPO_EVENTO": "ENTRADA",
-            "EVENTO": "Entrada autorizada para cobertura de ronda"
+            "EVENTO": "Entrada autorizada para cobertura de ronda",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Console Portaria",
+            "METODO": "credencial",
+            "OBSERVACAO": "Ronda regular registrada."
           },
           {
             "DATA": "18/08/2026",
@@ -278,7 +282,11 @@
             "ID_USUARIO": "06",
             "NOME_USUARIO": "Lia Figueira",
             "TIPO_EVENTO": "NEGADO",
-            "EVENTO": "Tentativa negada: perfil sem permissão para reserva B"
+            "EVENTO": "Tentativa negada: perfil sem permissão para reserva B",
+            "CLASSE_LINHA": "anomaly",
+            "TERMINAL": "Leitor Doca Lateral",
+            "METODO": "credencial",
+            "OBSERVACAO": "Perfil sem permissão para reserva B."
           },
           {
             "DATA": "18/08/2026",
@@ -287,7 +295,11 @@
             "ID_USUARIO": "02",
             "NOME_USUARIO": "Marina Vale",
             "TIPO_EVENTO": "ENTRADA",
-            "EVENTO": "Abertura autorizada por credencial operacional"
+            "EVENTO": "Abertura autorizada por credencial operacional",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Leitor Reserva B",
+            "METODO": "credencial",
+            "OBSERVACAO": "Acesso operacional na janela crítica."
           },
           {
             "DATA": "18/08/2026",
@@ -296,7 +308,11 @@
             "ID_USUARIO": "02",
             "NOME_USUARIO": "Marina Vale",
             "TIPO_EVENTO": "SAIDA",
-            "EVENTO": "Saída com carrinho registrado como recebimento emergencial"
+            "EVENTO": "Saída com carrinho registrado como recebimento emergencial",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Terminal RT-B",
+            "METODO": "código interno",
+            "OBSERVACAO": "Saída vinculada a recebimento emergencial."
           },
           {
             "DATA": "18/08/2026",
@@ -305,7 +321,11 @@
             "ID_USUARIO": "04",
             "NOME_USUARIO": "Otávio Salles",
             "TIPO_EVENTO": "ENTRADA",
-            "EVENTO": "Entrada breve para conferência financeira de fornecedor"
+            "EVENTO": "Entrada breve para conferência financeira de fornecedor",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Console Administrativo",
+            "METODO": "terminal administrativo",
+            "OBSERVACAO": "Conferência curta fora do fluxo de reserva."
           }
         ],
         "COLUNA_NOME": true,
@@ -364,7 +384,11 @@
             "ID_USUARIO": "02",
             "NOME_USUARIO": "Marina Vale",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Conferência de suportes da mostra"
+            "EVENTO": "Conferência de suportes da mostra",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Planilha Escala-Oeste",
+            "METODO": "escala operacional",
+            "OBSERVACAO": "Cobertura compatível com conferência da mostra."
           },
           {
             "DATA": "18/08/2026",
@@ -373,7 +397,11 @@
             "ID_USUARIO": "03",
             "NOME_USUARIO": "Tadeu Nobre",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Cobertura de ronda e livro de visitantes"
+            "EVENTO": "Cobertura de ronda e livro de visitantes",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Console Portaria",
+            "METODO": "escala de ronda",
+            "OBSERVACAO": "Ronda cobre portaria durante janela crítica."
           },
           {
             "DATA": "18/08/2026",
@@ -382,7 +410,11 @@
             "ID_USUARIO": "06",
             "NOME_USUARIO": "Lia Figueira",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Correção de ficha de vitrine encerrada antes da janela crítica"
+            "EVENTO": "Correção de ficha de vitrine encerrada antes da janela crítica",
+            "CLASSE_LINHA": "anomaly",
+            "TERMINAL": "Leitor Reserva B",
+            "METODO": "ajuste de ficha",
+            "OBSERVACAO": "Atividade encerrada antes da janela crítica."
           },
           {
             "DATA": "18/08/2026",
@@ -391,7 +423,11 @@
             "ID_USUARIO": "04",
             "NOME_USUARIO": "Otávio Salles",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Assinatura de autorização de fornecedor"
+            "EVENTO": "Assinatura de autorização de fornecedor",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Console Administração",
+            "METODO": "terminal administrativo",
+            "OBSERVACAO": "Autorização financeira posterior ao acesso principal."
           }
         ],
         "COLUNA_NOME": true,
@@ -879,14 +915,16 @@
             "NOME_REMETENTE": "Otávio",
             "COR_REMETENTE": "#7A4E2D",
             "TEXTO_MENSAGEM": "Confirma que a autorização da Pedra Clara saiu. Preciso que o fluxo não passe pela vitrine.",
-            "HORARIO": "19h36"
+            "HORARIO": "19h36",
+            "CLASSE_GAP": "gap"
           },
           {
             "DIRECAO": "out",
             "DIRECAO_OUT": true,
             "TICKS": "✓✓",
             "TEXTO_MENSAGEM": "RM-17 sai pela doca antes da conferência. Vou lançar como recebimento emergencial para fechar a escala.",
-            "HORARIO": "19h44"
+            "HORARIO": "19h44",
+            "CLASSE_GAP": "normal"
           },
           {
             "DIRECAO": "in",
@@ -894,14 +932,16 @@
             "NOME_REMETENTE": "Celina",
             "COR_REMETENTE": "#6A4C3B",
             "TEXTO_MENSAGEM": "Recibo fica com moldura completa e transporte reservado. A nota de retorno segue depois.",
-            "HORARIO": "19h51"
+            "HORARIO": "19h51",
+            "CLASSE_GAP": "gap"
           },
           {
             "DIRECAO": "out",
             "DIRECAO_OUT": true,
             "TICKS": "✓✓",
             "TEXTO_MENSAGEM": "A etiqueta PC-14 fica na réplica. Sem mexer no livro da portaria.",
-            "HORARIO": "19h56"
+            "HORARIO": "19h56",
+            "CLASSE_GAP": "normal"
           }
         ]
       }

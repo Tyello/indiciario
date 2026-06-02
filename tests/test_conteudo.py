@@ -164,9 +164,11 @@ CONTEUDO_LOG_VALIDO = {
     "TOTAL_NEGADOS": "0",
     "TOTAL_ANOMALIAS": "0",
     "REGISTROS": [
-        {"CLASSE_LINHA": "", "DATA": "01/03/2026", "HORA": "09:58:02",
+        {"CLASSE_LINHA": "normal", "DATA": "01/03/2026", "HORA": "09:58:02",
          "PORTA": "1A", "ID_USUARIO": "09", "NOME_USUARIO": "João",
-         "TIPO_EVENTO": "in", "EVENTO": "ENTRADA"},
+         "TIPO_EVENTO": "in", "EVENTO": "ENTRADA",
+         "TERMINAL": "Terminal 1A", "METODO": "credencial",
+         "OBSERVACAO": "Registro aceito"},
     ],
 }
 

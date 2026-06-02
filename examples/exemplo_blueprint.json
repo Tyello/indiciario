@@ -361,7 +361,11 @@
             "HORA": "09:30",
             "PORTA": "A1",
             "ID_USUARIO": "09",
-            "TIPO_EVENTO": "registro"
+            "TIPO_EVENTO": "registro",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Terminal A1",
+            "METODO": "credencial",
+            "OBSERVACAO": "Registro fictício de exemplo"
           }
         ]
       }
@@ -417,7 +421,11 @@
             "HORA": "09:30",
             "PORTA": "A1",
             "ID_USUARIO": "09",
-            "TIPO_EVENTO": "registro"
+            "TIPO_EVENTO": "registro",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Terminal A1",
+            "METODO": "credencial",
+            "OBSERVACAO": "Registro fictício de exemplo"
           }
         ]
       }
