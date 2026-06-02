@@ -12,6 +12,7 @@ def _import_renderer_module():
     sys.modules.setdefault("playwright", fake_playwright)
     sys.modules.setdefault("playwright.async_api", fake_async_api)
     from generator import renderer
+
     return renderer
 
 
@@ -61,7 +62,7 @@ def test_renderizar_caso_gera_capa_por_envelope_de_dicas(tmp_path, monkeypatch):
     assert [c[1]["section_label"] for c in capas] == ["DICAS", "DICAS"]
     assert all(c[1]["section_ref"] == "Material de apoio ao facilitador" for c in capas)
     assert all("envelope_number" not in c[1] for c in capas)
-    assert len(grupos["dicas"]) == 2
+    assert len(grupos["dicas"]) == 4
 
 
 def test_renderizar_caso_gera_tres_capas_com_envelope_3(tmp_path, monkeypatch):
@@ -92,6 +93,108 @@ def test_renderizar_caso_gera_tres_capas_com_envelope_3(tmp_path, monkeypatch):
     assert [c[1]["section_label"] for c in capas] == ["DICAS", "DICAS", "DICAS"]
     assert all(c[1]["section_ref"] == "Material de apoio ao facilitador" for c in capas)
     assert all("envelope_number" not in c[1] for c in capas)
+
+
+def test_renderizar_caso_gera_conteudo_real_de_dicas_contextuais(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    template_dir = tmp_path / "templates"
+    template_dir.mkdir()
+    (template_dir / "05_carta.html").write_text(
+        "Documento {{CODIGO_DOCUMENTO}} {{CORPO}}", encoding="utf-8"
+    )
+    (template_dir / "00_envelope_capa.html").write_text(
+        "Capa {{section_label}} {{ENVELOPE}}", encoding="utf-8"
+    )
+    (template_dir / "dicas_contextuais.html").write_text(
+        "{{NOME_CASO}} {{ENVELOPE}} {{#CONTEXTOS}}Contexto {{categoria}} {{#dicas}}{{titulo}} {{nivel}} {{condicao_uso}} {{texto}} {{documentos_relacionados}} {{contratos_relacionados}}{{/dicas}}{{/CONTEXTOS}}",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    blueprint_path = _blueprint_base(tmp_path)
+    blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
+    blueprint["dicas"] = [{"envelope": "E1", "numero": 1, "texto": "Dica antiga"}]
+    blueprint["dicas_contextuais"] = [
+        {
+            "id": "DC-E1-MAPA-01",
+            "categoria": "mapa",
+            "fase": "E1",
+            "titulo": "Começar pela área bloqueada",
+            "condicao_uso": "Use após leitura do protocolo.",
+            "texto": "Separar documentos que mencionam reserva técnica B ou doca lateral.",
+            "nivel": "leve",
+            "contratos_relacionados": ["C-E1-ABERTURA"],
+            "documentos_relacionados": ["E1-01", "E1-07"],
+        },
+        {
+            "id": "DC-FINAL-SOL-01",
+            "categoria": "solucao",
+            "fase": "final",
+            "titulo": "Fechamento da cadeia completa",
+            "condicao_uso": "Use ao final.",
+            "texto": "Peça que citem um documento operacional e um financeiro.",
+            "nivel": "quase_gabarito",
+            "contratos_relacionados": ["C-FINAL-SOLUCAO"],
+            "documentos_relacionados": ["E2-06"],
+        },
+    ]
+    blueprint_path.write_text(json.dumps(blueprint), encoding="utf-8")
+
+    grupos = renderer.renderizar_caso(
+        blueprint_path,
+        tmp_path / "out",
+        strict=True,
+        html_debug_dir=tmp_path / "html_debug",
+    )
+
+    assert len(grupos["dicas"]) == 2
+    conteudo = (tmp_path / "html_debug" / "DICAS-E1-01_CONTEUDO.html").read_text(
+        encoding="utf-8"
+    )
+    assert "Começar pela área bloqueada" in conteudo
+    assert (
+        "Separar documentos que mencionam reserva técnica B ou doca lateral" in conteudo
+    )
+    assert "C-E1-ABERTURA" in conteudo
+    assert "Dica antiga" not in conteudo
+    assert "Fechamento da cadeia completa" in conteudo
+
+
+def test_caso_canonico_dicas_contextuais_aparecem_no_html_debug(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+
+    grupos = renderer.renderizar_caso(
+        Path("examples/caso_canonico_intermediario.json"),
+        tmp_path / "out",
+        strict=True,
+        html_debug_dir=tmp_path / "html_debug",
+    )
+
+    assert len(grupos["dicas"]) > 2
+    e1 = (tmp_path / "html_debug" / "DICAS-E1-01_CONTEUDO.html").read_text(
+        encoding="utf-8"
+    )
+    e2 = (tmp_path / "html_debug" / "DICAS-E2-01_CONTEUDO.html").read_text(
+        encoding="utf-8"
+    )
+    assert "Começar pela área bloqueada" in e1
+    assert "Comparar log e escala" in e1
+    assert "Seguir a trilha do pagamento" in e2
+    assert "Cobertura operacional" in e2
+    assert "Fechamento da cadeia completa" in e2
+    assert "Confidencial" in e1
+
 
 def test_template_capa_usa_rotulo_apropriado_para_jogo_dicas_e_gabarito():
     renderer = _import_renderer_module()
@@ -132,12 +235,13 @@ def test_template_capa_usa_rotulo_apropriado_para_jogo_dicas_e_gabarito():
     assert "Envelope 2" not in capa_gabarito
 
 
-
 def test_renderizar_caso_strict_aborta_em_placeholder_residual(tmp_path, monkeypatch):
     renderer = _import_renderer_module()
     template_dir = tmp_path / "templates"
     template_dir.mkdir()
-    (template_dir / "05_carta.html").write_text("Documento {{CORPO}} {{FALTA}}", encoding="utf-8")
+    (template_dir / "05_carta.html").write_text(
+        "Documento {{CORPO}} {{FALTA}}", encoding="utf-8"
+    )
     monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
 
     async def fake_pdf(html, output_path, landscape=False):
@@ -155,11 +259,15 @@ def test_renderizar_caso_strict_aborta_em_placeholder_residual(tmp_path, monkeyp
     assert "FALTA" in str(excinfo.value)
 
 
-def test_renderizar_caso_non_strict_continua_em_placeholder_residual(tmp_path, monkeypatch):
+def test_renderizar_caso_non_strict_continua_em_placeholder_residual(
+    tmp_path, monkeypatch
+):
     renderer = _import_renderer_module()
     template_dir = tmp_path / "templates"
     template_dir.mkdir()
-    (template_dir / "05_carta.html").write_text("Documento {{CORPO}} {{FALTA}}", encoding="utf-8")
+    (template_dir / "05_carta.html").write_text(
+        "Documento {{CORPO}} {{FALTA}}", encoding="utf-8"
+    )
     monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
 
     async def fake_pdf(html, output_path, landscape=False):
@@ -170,9 +278,12 @@ def test_renderizar_caso_non_strict_continua_em_placeholder_residual(tmp_path, m
     blueprint_path = _blueprint_base(tmp_path)
 
     with pytest.warns(RuntimeWarning):
-        grupos = renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=False)
+        grupos = renderer.renderizar_caso(
+            blueprint_path, tmp_path / "out", strict=False
+        )
 
     assert len(grupos["E1"]) == 1
+
 
 def test_html_para_pdf_sem_playwright_falha_sem_env(tmp_path, monkeypatch):
     renderer = _import_renderer_module()
@@ -200,12 +311,13 @@ def test_html_para_pdf_fake_exige_env_explicito(tmp_path, monkeypatch):
     assert output.exists()
 
 
-
 def test_renderizar_documento_salva_html_debug_pos_template(tmp_path, monkeypatch):
     renderer = _import_renderer_module()
     template_dir = tmp_path / "templates"
     template_dir.mkdir()
-    (template_dir / "05_carta.html").write_text("<html>Documento {{CORPO}}</html>", encoding="utf-8")
+    (template_dir / "05_carta.html").write_text(
+        "<html>Documento {{CORPO}}</html>", encoding="utf-8"
+    )
     monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
 
     async def fake_pdf(html, output_path, landscape=False):
@@ -230,7 +342,9 @@ def test_renderizar_caso_preenche_html_debug_para_documentos(tmp_path, monkeypat
     renderer = _import_renderer_module()
     template_dir = tmp_path / "templates"
     template_dir.mkdir()
-    (template_dir / "05_carta.html").write_text("Documento {{CODIGO_DOCUMENTO}} {{CORPO}}", encoding="utf-8")
+    (template_dir / "05_carta.html").write_text(
+        "Documento {{CODIGO_DOCUMENTO}} {{CORPO}}", encoding="utf-8"
+    )
     monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
 
     async def fake_pdf(html, output_path, landscape=False):
@@ -240,7 +354,12 @@ def test_renderizar_caso_preenche_html_debug_para_documentos(tmp_path, monkeypat
     monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
     blueprint_path = _blueprint_base(tmp_path)
 
-    renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=True, html_debug_dir=tmp_path / "html_debug")
+    renderer.renderizar_caso(
+        blueprint_path,
+        tmp_path / "out",
+        strict=True,
+        html_debug_dir=tmp_path / "html_debug",
+    )
 
     debug_file = tmp_path / "html_debug" / "E1-01.html"
     assert debug_file.exists()
@@ -268,12 +387,13 @@ def test_templates_problematicos_usam_pagina_a4_compacta():
     assert "@page { size: A4; margin: 12mm; }" in email
 
 
-
 def test_templates_de_logs_usam_landscape_no_renderer(tmp_path, monkeypatch):
     renderer = _import_renderer_module()
     template_dir = tmp_path / "templates"
     template_dir.mkdir()
-    (template_dir / "06_log_acesso.html").write_text("<html>{{NOME_SISTEMA}}</html>", encoding="utf-8")
+    (template_dir / "06_log_acesso.html").write_text(
+        "<html>{{NOME_SISTEMA}}</html>", encoding="utf-8"
+    )
     monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
     blueprint_path = tmp_path / "blueprint.json"
     blueprint_path.write_text(
@@ -315,7 +435,9 @@ def test_templates_de_logs_usam_landscape_no_renderer(tmp_path, monkeypatch):
 
 
 def test_caso_canonico_e1_08_nao_tem_texto_meta() -> None:
-    blueprint = json.loads(Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8"))
+    blueprint = json.loads(
+        Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8")
+    )
     doc = next(item for item in blueprint["documentos"] if item["codigo"] == "E1-08")
     corpo = doc["conteudo"]["CORPO_CARTA"]
 
