@@ -222,6 +222,14 @@ def renderizar_documento(
 # Mapeamento tipo → template
 # ──────────────────────────────────────────────────────────────────────────────
 
+LANDSCAPE_TEMPLATES: set[str] = {"06_log_acesso.html"}
+
+
+def template_usa_landscape(template_nome: str) -> bool:
+    """Indica se um template deve ser renderizado em A4 landscape."""
+    return template_nome in LANDSCAPE_TEMPLATES
+
+
 TIPO_PARA_TEMPLATE: dict[str, str] = {
     "email_narrador":      "01_email.html",
     "email_institucional": "01_email.html",
@@ -292,6 +300,8 @@ def renderizar_caso(
         pdf_path = output_dir / f"{codigo}.pdf"
         try:
             render_kwargs: dict[str, Any] = {"strict": strict}
+            if template_usa_landscape(template):
+                render_kwargs["landscape"] = True
             if html_debug_dir is not None:
                 render_kwargs["html_debug_path"] = html_debug_dir / f"{codigo}.html"
             caminho = renderizar_documento(template, dados, pdf_path, **render_kwargs)

@@ -89,3 +89,33 @@ def test_merge_pdfs_copia_streams_de_conteudo_reais(tmp_path):
     assert count_pdf_pages(merged) == 2
     assert page_has_content_stream(merged, 0)
     assert page_has_content_stream(merged, 1)
+
+
+
+def test_merge_pdfs_chromium_preserva_texto_quando_browser_disponivel(tmp_path):
+    playwright = pytest.importorskip("playwright.async_api")
+    import asyncio
+
+    async def gerar_pdf(html: str, output_path: Path) -> None:
+        async with playwright.async_playwright() as p:
+            try:
+                browser = await p.chromium.launch()
+            except Exception as exc:  # noqa: BLE001 - browser pode não estar instalado no CI.
+                pytest.skip(f"Chromium não disponível: {exc}")
+            page = await browser.new_page()
+            await page.set_content(html, wait_until="networkidle")
+            await page.pdf(path=str(output_path), format="A4", print_background=True)
+            await browser.close()
+
+    pdf1 = tmp_path / "chromium_a.pdf"
+    pdf2 = tmp_path / "chromium_b.pdf"
+    asyncio.run(gerar_pdf("<html><body><h1>Documento Chromium A</h1></body></html>", pdf1))
+    asyncio.run(gerar_pdf("<html><body><h1>Documento Chromium B</h1></body></html>", pdf2))
+
+    merged = merge_pdfs([pdf1, pdf2], tmp_path / "chromium_merged.pdf")
+    reader = PdfReader(str(merged))
+
+    assert len(reader.pages) == 2
+    texto = "\n".join(page.extract_text() or "" for page in reader.pages)
+    assert "Documento Chromium A" in texto
+    assert "Documento Chromium B" in texto

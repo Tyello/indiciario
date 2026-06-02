@@ -37,23 +37,16 @@ def _personagem_nome(personagem: PersonagemVisual, blueprint: Blueprint) -> str:
 
 
 def build_map_svg(mapa: MapaProcedural) -> str:
-    """Monta SVG local para um mapa procedural simples de um andar."""
+    """Monta SVG local para uma planta esquemática simples de um andar."""
     largura = max(mapa.largura, 1)
     altura = max(mapa.altura, 1)
+    centers = {area.id: (area.x + area.w / 2, area.y + area.h / 2) for area in mapa.areas if area.id}
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura:g} {altura:g}" role="img" aria-label="{escape(mapa.titulo)}">',
         '<rect x="0" y="0" width="100%" height="100%" fill="#f8fafc" stroke="#111827" stroke-width="2"/>',
+        '<text x="28" y="36" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Planta esquemática</text>',
     ]
 
-    for area in mapa.areas:
-        fill = "#ffffff" if area.acessivel else "#e5e7eb"
-        stroke_dash = "" if area.acessivel else ' stroke-dasharray="8 5"'
-        parts.append(
-            f'<rect x="{area.x:g}" y="{area.y:g}" width="{area.w:g}" height="{area.h:g}" '
-            f'fill="{fill}" stroke="#374151" stroke-width="2"{stroke_dash}/>'
-        )
-
-    centers = {area.id: (area.x + area.w / 2, area.y + area.h / 2) for area in mapa.areas if area.id}
     for conexao in mapa.conexoes:
         origem = centers.get(conexao.origem)
         destino = centers.get(conexao.destino)
@@ -61,60 +54,70 @@ def build_map_svg(mapa: MapaProcedural) -> str:
             continue
         parts.append(
             f'<line x1="{origem[0]:g}" y1="{origem[1]:g}" x2="{destino[0]:g}" y2="{destino[1]:g}" '
-            'stroke="#111827" stroke-width="3" stroke-opacity="0.55" stroke-dasharray="6 5"/>'
+            'stroke="#bfdbfe" stroke-width="18" stroke-linecap="round"/>'
+        )
+        parts.append(
+            f'<line x1="{origem[0]:g}" y1="{origem[1]:g}" x2="{destino[0]:g}" y2="{destino[1]:g}" '
+            'stroke="#1d4ed8" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 7"/>'
         )
 
+    palette = {
+        "controle_acesso": "#dbeafe",
+        "circulacao": "#e0f2fe",
+        "carga": "#fef3c7",
+        "reserva": "#ede9fe",
+        "exposicao": "#dcfce7",
+        "administrativo": "#fce7f3",
+    }
     for area in mapa.areas:
-        label = escape(_short_label(area.nome, 24))
+        fill = palette.get(area.tipo, "#ffffff") if area.acessivel else "#e5e7eb"
+        stroke_dash = "" if area.acessivel else ' stroke-dasharray="8 5"'
         parts.append(
-            f'<rect x="{area.x + 6:g}" y="{area.y + 8:g}" width="{min(area.w - 12, 150):g}" height="24" '
-            'rx="3" fill="#ffffff" fill-opacity="0.88"/>'
+            f'<rect x="{area.x:g}" y="{area.y:g}" width="{area.w:g}" height="{area.h:g}" rx="12" '
+            f'fill="{fill}" stroke="#334155" stroke-width="2.5"{stroke_dash}/>'
         )
+        label = escape(_short_label(area.nome, 20))
+        text_x = area.x + area.w / 2
+        text_y = area.y + area.h / 2 - (8 if area.observacao else 0)
         parts.append(
-            f'<text x="{area.x + 12:g}" y="{area.y + 25:g}" font-family="Arial, sans-serif" '
-            f'font-size="13" font-weight="700" fill="#111827">{label}</text>'
+            f'<text x="{text_x:g}" y="{text_y:g}" text-anchor="middle" font-family="Arial, sans-serif" '
+            f'font-size="16" font-weight="700" fill="#111827">{label}</text>'
         )
         if area.observacao:
             parts.append(
-                f'<text x="{area.x + 12:g}" y="{area.y + 45:g}" font-family="Arial, sans-serif" '
-                f'font-size="10" fill="#4b5563">{escape(_short_label(area.observacao, 30))}</text>'
+                f'<text x="{text_x:g}" y="{text_y + 22:g}" text-anchor="middle" font-family="Arial, sans-serif" '
+                f'font-size="11" fill="#475569">{escape(_short_label(area.observacao, 24))}</text>'
             )
 
-    marker_offsets = [(14, -14), (14, 18), (-128, -14), (-128, 18)]
-    for index, marcador in enumerate(mapa.marcadores):
-        dx, dy = marker_offsets[index % len(marker_offsets)]
-        label = escape(_short_label(marcador.label, 30))
-        label_x = max(8, min(marcador.x + dx, largura - 178))
-        label_y = max(18, min(marcador.y + dy, altura - 28))
-        parts.append(f'<circle cx="{marcador.x:g}" cy="{marcador.y:g}" r="11" fill="#111827"/>')
+    marker_items: list[str] = []
+    for index, marcador in enumerate(mapa.marcadores, start=1):
+        label = escape(_short_label(marcador.label, 24))
+        marker_items.append(f"{index}. {label}")
+        parts.append(f'<circle cx="{marcador.x:g}" cy="{marcador.y:g}" r="15" fill="#111827"/>')
         parts.append(
-            f'<text x="{marcador.x:g}" y="{marcador.y + 4:g}" text-anchor="middle" '
-            f'font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#ffffff">{escape(marcador.tipo[:2].upper())}</text>'
-        )
-        parts.append(
-            f'<rect x="{label_x:g}" y="{label_y - 14:g}" width="170" height="22" rx="4" '
-            'fill="#ffffff" fill-opacity="0.92" stroke="#9ca3af"/>'
-        )
-        parts.append(
-            f'<text x="{label_x + 6:g}" y="{label_y + 1:g}" font-family="Arial, sans-serif" '
-            f'font-size="11" fill="#111827">{label}</text>'
+            f'<text x="{marcador.x:g}" y="{marcador.y + 5:g}" text-anchor="middle" '
+            f'font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">{index}</text>'
         )
 
-    if mapa.legenda:
-        legend_height = 18 * len(mapa.legenda) + 16
+    legend_items = marker_items or [f"{item.simbolo}: {_short_label(item.descricao, 28)}" for item in mapa.legenda]
+    if legend_items:
         legend_width = 300
-        y = max(12, altura - legend_height - 12)
-        x = max(12, largura - legend_width - 12)
+        legend_height = 34 + 22 * len(legend_items)
+        x = max(12, largura - legend_width - 24)
+        y = 24
         parts.append(f'<g transform="translate({x:g} {y:g})">')
         parts.append(
-            f'<rect x="0" y="0" width="{legend_width}" height="{legend_height}" rx="5" '
-            'fill="#ffffff" fill-opacity="0.95" stroke="#9ca3af"/>'
+            f'<rect x="0" y="0" width="{legend_width}" height="{legend_height}" rx="10" '
+            'fill="#ffffff" fill-opacity="0.96" stroke="#94a3b8"/>'
         )
-        for index, item in enumerate(mapa.legenda):
-            line_y = 20 + index * 18
+        parts.append(
+            '<text x="16" y="22" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">Marcadores</text>'
+        )
+        for index, item in enumerate(legend_items):
+            line_y = 46 + index * 22
             parts.append(
-                f'<text x="10" y="{line_y}" font-family="Arial, sans-serif" font-size="11" fill="#111827">'
-                f'{escape(item.simbolo)} — {escape(_short_label(item.descricao, 36))}</text>'
+                f'<text x="16" y="{line_y}" font-family="Arial, sans-serif" font-size="12" fill="#111827">'
+                f'{escape(_short_label(item, 36))}</text>'
             )
         parts.append('</g>')
 

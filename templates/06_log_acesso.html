@@ -9,14 +9,14 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @page { size: A4; margin: 10mm; }
+  @page { size: A4 landscape; margin: 8mm; }
 
   body {
     font-family: 'DM Sans', sans-serif;
     background: #0d1117;
     color: #c9d1d9;
-    font-size: 12px;
-    line-height: 1.35;
+    font-size: 11.2px;
+    line-height: 1.28;
     padding: 0;
   }
 
@@ -33,7 +33,7 @@
   .log-header {
     background: #1c2128;
     border-bottom: 1px solid #30363d;
-    padding: 12px 16px;
+    padding: 16px 18px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -59,7 +59,7 @@
   }
 
   .system-name {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     color: #e6edf3;
     letter-spacing: -.3px;
@@ -88,7 +88,7 @@
   .period-bar {
     background: {{COR_SISTEMA}};
     background: linear-gradient(90deg, {{COR_SISTEMA}} 0%, {{COR_SISTEMA_DARK}} 100%);
-    padding: 7px 16px;
+    padding: 9px 18px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 10.5px;
     color: rgba(255,255,255,.9);
@@ -110,7 +110,7 @@
     table-layout: fixed;
     border-collapse: collapse;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10.2px;
+    font-size: 9.6px;
   }
 
   thead tr {
@@ -119,7 +119,7 @@
   }
 
   thead th {
-    padding: 7px 6px;
+    padding: 7px 7px;
     text-align: left;
     font-size: 10px;
     font-weight: 600;
@@ -154,7 +154,7 @@
   }
 
   td {
-    padding: 7px 6px;
+    padding: 7px 7px;
     color: #c9d1d9;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -162,15 +162,15 @@
     vertical-align: top;
   }
 
-  th:nth-child(1) { width: 9%; }
-  th:nth-child(2) { width: 7%; }
-  th:nth-child(3) { width: 13%; }
-  th:nth-child(4) { width: 10%; }
-  th:nth-child(5) { width: 13%; }
-  th:nth-child(6) { width: 24%; }
-  th:nth-child(7) { width: 8%; }
+  th:nth-child(1) { width: 8%; }
+  th:nth-child(2) { width: 8%; }
+  th:nth-child(3) { width: 12%; }
+  th:nth-child(4) { width: 7%; }
+  th:nth-child(5) { width: 11%; }
+  th:nth-child(6) { width: 22%; }
+  th:nth-child(7) { width: 10%; }
   th:nth-child(8) { width: 8%; }
-  th:nth-child(9) { width: 8%; }
+  th:nth-child(9) { width: 14%; }
 
   /* Cell types */
   .cell-date { color: #7d8590; font-size: 10.5px; }
@@ -202,8 +202,11 @@
   }
   .cell-note {
     color: #7d8590;
-    font-size: 10px;
+    font-size: 9.3px;
     font-style: italic;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   /* Stats footer */
