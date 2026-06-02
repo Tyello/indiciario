@@ -54,8 +54,11 @@ def merge_pdfs(pdf_paths: list[Path], output_path: Path) -> Path:
     writer = PdfWriter()
     for pdf_path in pdf_paths:
         reader = _validar_pdf_entrada(pdf_path)
-        for page in reader.pages:
-            writer.add_page(page)
+        if hasattr(writer, "append"):
+            writer.append(reader)
+        else:  # pragma: no cover - fallback mínimo sem pypdf instalado.
+            for page in reader.pages:
+                writer.add_page(page)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("wb") as fp:

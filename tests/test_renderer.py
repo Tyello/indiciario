@@ -253,7 +253,8 @@ def test_log_template_permite_quebra_na_coluna_evento():
     assert "table-layout: fixed" in template
     assert "overflow-wrap: anywhere" in template
     assert "th:nth-child(6)" in template
-    assert "width: 24%" in template
+    assert "width: 22%" in template
+    assert "width: 14%" in template
 
 
 def test_templates_problematicos_usam_pagina_a4_compacta():
@@ -265,3 +266,68 @@ def test_templates_problematicos_usam_pagina_a4_compacta():
     assert "min-height: auto" in carta
     assert "@page { size: A4; margin: 10mm; }" in extrato
     assert "@page { size: A4; margin: 12mm; }" in email
+
+
+
+def test_templates_de_logs_usam_landscape_no_renderer(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    template_dir = tmp_path / "templates"
+    template_dir.mkdir()
+    (template_dir / "06_log_acesso.html").write_text("<html>{{NOME_SISTEMA}}</html>", encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
+    blueprint_path = tmp_path / "blueprint.json"
+    blueprint_path.write_text(
+        json.dumps(
+            {
+                "titulo": "Caso de Logs",
+                "documentos": [
+                    {
+                        "codigo": "E1-04",
+                        "tipo": "log_acesso",
+                        "envelope": "E1",
+                        "conteudo": {"NOME_SISTEMA": "Acesso"},
+                    },
+                    {
+                        "codigo": "E1-05",
+                        "tipo": "escala",
+                        "envelope": "E1",
+                        "conteudo": {"NOME_SISTEMA": "Escala"},
+                    },
+                ],
+                "dicas": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    chamadas = []
+
+    async def fake_pdf(html, output_path, landscape=False):
+        chamadas.append((output_path.name, landscape))
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+
+    renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=True)
+
+    assert chamadas == [("E1-04.pdf", True), ("E1-05.pdf", True)]
+    assert renderer.template_usa_landscape("06_log_acesso.html") is True
+
+
+def test_caso_canonico_e1_08_nao_tem_texto_meta() -> None:
+    blueprint = json.loads(Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8"))
+    doc = next(item for item in blueprint["documentos"] if item["codigo"] == "E1-08")
+    corpo = doc["conteudo"]["CORPO_CARTA"]
+
+    assert "Essas definições devem ser usadas" not in corpo
+    assert "cruzar E1-04" not in corpo
+    assert "interpretação técnica externa" not in corpo
+    assert "Glossário interno" in corpo
+
+
+def test_template_orcamento_esta_compacto_para_e2_03() -> None:
+    template = Path("templates/08_orcamento.html").read_text(encoding="utf-8")
+
+    assert "@page { size: A4; margin: 8mm; }" in template
+    assert "padding: 0;" in template
+    assert "min-height: 28px" in template

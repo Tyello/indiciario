@@ -97,7 +97,7 @@ def test_build_map_svg_retorna_svg_com_areas() -> None:
     svg = build_map_svg(mapa)
 
     assert svg.startswith("<svg")
-    assert "Portaria principal" in svg
+    assert "Portaria" in svg
     assert "Reserva técnica B" in svg
 
 
@@ -168,3 +168,21 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(tmp_path, m
     assert visual_map["page_end"] == 3
     assert "01_envelope_1.pdf" in {entry["file"] for entry in print_manifest["files"]}
     assert result["status"] == "passed"
+
+
+
+def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
+    blueprint = Blueprint(**load_canonical_data())
+    mapa = blueprint.visual_procedural.mapas[0]  # type: ignore[union-attr]
+    nomes = {area.nome for area in mapa.areas}
+    labels = [marcador.label for marcador in mapa.marcadores]
+    svg = build_map_svg(mapa)
+
+    assert nomes == {"Portaria", "Corredor de carga", "Doca lateral", "Reserva técnica B", "Administração", "Vitrine"}
+    assert labels == ["Janela operacional", "Credencial / porta", "Etiqueta RM-17"]
+    assert all(len(label) <= 22 for label in labels)
+    assert ">1<" in svg
+    assert ">2<" in svg
+    assert ">3<" in svg
+    assert "Marcadores" in svg
+    assert "Janela operacional" in svg
