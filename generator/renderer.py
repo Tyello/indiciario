@@ -24,9 +24,8 @@ import warnings
 from pathlib import Path
 from typing import Any
 
-
 TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
-OUTPUT_DIR    = Path(__file__).parent.parent / "output"
+OUTPUT_DIR = Path(__file__).parent.parent / "output"
 
 logger = logging.getLogger(__name__)
 
@@ -35,8 +34,10 @@ logger = logging.getLogger(__name__)
 # Motor de template (Mustache-lite)
 # ──────────────────────────────────────────────────────────────────────────────
 
+
 def _injetar_escalares(html: str, dados: dict[str, Any]) -> str:
     """Substitui {{VARIAVEL}} simples por valor escalar."""
+
     def sub(match: re.Match) -> str:
         chave = match.group(1).strip()
         valor = dados.get(chave, match.group(0))
@@ -44,6 +45,7 @@ def _injetar_escalares(html: str, dados: dict[str, Any]) -> str:
         if isinstance(valor, (list, dict)):
             return match.group(0)
         return str(valor) if valor is not None else ""
+
     return re.sub(r"\{\{([^#/\^].*?)\}\}", sub, html)
 
 
@@ -66,17 +68,21 @@ def renderizar_html(template: str, dados: dict[str, Any]) -> str:
     SECAO_RE = re.compile(r"\{\{([#\^])(\w+)\}\}(.*?)\{\{/\2\}\}", re.DOTALL)
 
     def processar_match(m: re.Match) -> str:
-        tipo_secao = m.group(1)   # '#' ou '^'
-        chave      = m.group(2)
-        conteudo   = m.group(3)
-        valor      = dados.get(chave)
+        tipo_secao = m.group(1)  # '#' ou '^'
+        chave = m.group(2)
+        conteudo = m.group(3)
+        valor = dados.get(chave)
 
         if tipo_secao == "#":
             if isinstance(valor, list):
                 # Itera: renderiza o bloco para cada item da lista
                 partes = []
                 for item in valor:
-                    contexto = {**dados, **item} if isinstance(item, dict) else {**dados, "ITEM": item}
+                    contexto = (
+                        {**dados, **item}
+                        if isinstance(item, dict)
+                        else {**dados, "ITEM": item}
+                    )
                     partes.append(renderizar_html(conteudo, contexto))
                 return "".join(partes)
             elif valor:
@@ -135,6 +141,7 @@ def detectar_residuos_tecnicos(html: str) -> list[str]:
 # Renderização HTML → PDF
 # ──────────────────────────────────────────────────────────────────────────────
 
+
 def _playwright_disponivel() -> bool:
     try:
         return importlib.util.find_spec("playwright") is not None
@@ -172,7 +179,7 @@ async def _html_para_pdf(html: str, output_path: Path, landscape: bool = False) 
 
     async with async_playwright() as p:
         browser = await p.chromium.launch()
-        page    = await browser.new_page()
+        page = await browser.new_page()
         await page.set_content(html, wait_until="networkidle")
         await page.pdf(
             path=str(output_path),
@@ -197,8 +204,8 @@ def renderizar_documento(
     if not template_path.exists():
         raise FileNotFoundError(f"Template não encontrado: {template_path}")
 
-    html_raw      = template_path.read_text(encoding="utf-8")
-    html_final    = renderizar_html(html_raw, dados)
+    html_raw = template_path.read_text(encoding="utf-8")
+    html_final = renderizar_html(html_raw, dados)
 
     if html_debug_path is not None:
         html_debug_path.parent.mkdir(parents=True, exist_ok=True)
@@ -231,30 +238,156 @@ def template_usa_landscape(template_nome: str) -> bool:
 
 
 TIPO_PARA_TEMPLATE: dict[str, str] = {
-    "email_narrador":      "01_email.html",
+    "email_narrador": "01_email.html",
     "email_institucional": "01_email.html",
-    "chat":                "02_whatsapp.html",
-    "log_acesso":          "06_log_acesso.html",
-    "log_sistema":         "06_log_acesso.html",
-    "escala":              "06_log_acesso.html",
-    "boletim":             "04_boletim.html",
-    "depoimento":          "04_boletim.html",
-    "contrato":            "05_carta.html",
-    "carta":               "05_carta.html",
-    "recibo":              "07_recibo.html",
-    "orcamento":           "08_orcamento.html",
-    "extrato":             "09_extrato.html",
-    "protocolo":           "05_carta.html",
-    "glossario":           "05_carta.html",
-    "folha_cruzamento":    "05_carta.html",
-    "manual":              "05_carta.html",
-    "outro":               "05_carta.html",
+    "chat": "02_whatsapp.html",
+    "log_acesso": "06_log_acesso.html",
+    "log_sistema": "06_log_acesso.html",
+    "escala": "06_log_acesso.html",
+    "boletim": "04_boletim.html",
+    "depoimento": "04_boletim.html",
+    "contrato": "05_carta.html",
+    "carta": "05_carta.html",
+    "recibo": "07_recibo.html",
+    "orcamento": "08_orcamento.html",
+    "extrato": "09_extrato.html",
+    "protocolo": "05_carta.html",
+    "glossario": "05_carta.html",
+    "folha_cruzamento": "05_carta.html",
+    "manual": "05_carta.html",
+    "outro": "05_carta.html",
 }
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Dicas do facilitador
+# ──────────────────────────────────────────────────────────────────────────────
+
+
+def _fase_sort_key(fase: str) -> tuple[int, str]:
+    match = re.fullmatch(r"E(\d+)", fase)
+    if match:
+        return (int(match.group(1)), "")
+    if fase == "final":
+        return (10_000, fase)
+    return (9_000, fase)
+
+
+def _normalizar_lista_texto(valor: object) -> str:
+    if isinstance(valor, list):
+        return ", ".join(str(item) for item in valor) or "—"
+    if valor:
+        return str(valor)
+    return "—"
+
+
+def _fase_para_envelope(fase: str, envelopes_disponiveis: list[str]) -> str:
+    if re.fullmatch(r"E\d+", fase):
+        return fase
+    if envelopes_disponiveis:
+        return envelopes_disponiveis[-1]
+    return "E1"
+
+
+def _dicas_contextuais_por_envelope(
+    blueprint: dict[str, Any],
+) -> dict[str, list[dict[str, Any]]]:
+    dicas_contextuais = blueprint.get("dicas_contextuais") or []
+    fases_envelope = sorted(
+        {
+            str(dica.get("fase"))
+            for dica in dicas_contextuais
+            if re.fullmatch(r"E\d+", str(dica.get("fase")))
+        },
+        key=_fase_sort_key,
+    )
+    resultado: dict[str, list[dict[str, Any]]] = {}
+    for dica in dicas_contextuais:
+        fase = str(dica.get("fase", "E1"))
+        envelope = _fase_para_envelope(fase, fases_envelope)
+        resultado.setdefault(envelope, []).append(
+            {
+                "id": str(dica.get("id") or ""),
+                "categoria": str(dica.get("categoria") or "geral"),
+                "titulo": str(
+                    dica.get("titulo") or dica.get("id") or "Dica contextual"
+                ),
+                "nivel": str(dica.get("nivel") or "—"),
+                "condicao_uso": str(
+                    dica.get("condicao_uso")
+                    or "Usar quando o grupo estiver travado neste ponto."
+                ),
+                "texto": str(dica.get("texto") or ""),
+                "documentos_relacionados": _normalizar_lista_texto(
+                    dica.get("documentos_relacionados")
+                ),
+                "contratos_relacionados": _normalizar_lista_texto(
+                    dica.get("contratos_relacionados")
+                ),
+                "o_que_desbloqueia": "",
+                "HAS_DESBLOQUEIO": False,
+            }
+        )
+    return resultado
+
+
+def _dicas_legadas_por_envelope(
+    blueprint: dict[str, Any],
+) -> dict[str, list[dict[str, Any]]]:
+    resultado: dict[str, list[dict[str, Any]]] = {}
+    for dica in blueprint.get("dicas", []) or []:
+        envelope = str(dica.get("envelope") or "E1")
+        numero = dica.get("numero")
+        o_que_desbloqueia = str(dica.get("o_que_desbloqueia") or "")
+        resultado.setdefault(envelope, []).append(
+            {
+                "id": (
+                    f"DICA-{envelope}-{numero}"
+                    if numero is not None
+                    else f"DICA-{envelope}"
+                ),
+                "categoria": "geral",
+                "titulo": (
+                    f"Dica {numero}" if numero is not None else "Dica operacional"
+                ),
+                "nivel": str(dica.get("intensidade") or dica.get("nivel") or "—"),
+                "condicao_uso": str(
+                    dica.get("condicao_uso")
+                    or "Usar quando o grupo estiver travado neste envelope."
+                ),
+                "texto": str(dica.get("texto") or ""),
+                "documentos_relacionados": "—",
+                "contratos_relacionados": "—",
+                "o_que_desbloqueia": o_que_desbloqueia,
+                "HAS_DESBLOQUEIO": bool(o_que_desbloqueia),
+            }
+        )
+    return resultado
+
+
+def _dicas_por_envelope(blueprint: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    """Retorna dicas operacionais por envelope, priorizando dicas_contextuais."""
+    contextuais = _dicas_contextuais_por_envelope(blueprint)
+    return contextuais or _dicas_legadas_por_envelope(blueprint)
+
+
+def _contextos_dicas(dicas: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    agrupadas: dict[str, list[dict[str, Any]]] = {}
+    for dica in dicas:
+        agrupadas.setdefault(dica["categoria"], []).append(dica)
+    return [
+        {
+            "categoria": categoria,
+            "dicas": sorted(itens, key=lambda item: item.get("id", "")),
+        }
+        for categoria, itens in sorted(agrupadas.items())
+    ]
 
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Renderização de caso completo
 # ──────────────────────────────────────────────────────────────────────────────
+
 
 def renderizar_caso(
     blueprint_path: Path,
@@ -266,7 +399,7 @@ def renderizar_caso(
     Lê um blueprint validado e renderiza todos os documentos.
     Agrupa os PDFs por envelope.
     """
-    blueprint  = json.loads(blueprint_path.read_text(encoding="utf-8"))
+    blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
     titulo_slug = re.sub(r"[^\w]", "_", blueprint["titulo"].lower())
 
     if output_dir is None:
@@ -276,8 +409,8 @@ def renderizar_caso(
     grupos: dict[str, list[Path]] = {"dicas": [], "gabarito": []}
 
     for doc in blueprint.get("documentos", []):
-        codigo   = doc["codigo"]
-        tipo     = doc.get("tipo", "outro")
+        codigo = doc["codigo"]
+        tipo = doc.get("tipo", "outro")
         envelope = doc.get("envelope", "E1")
         template = TIPO_PARA_TEMPLATE.get(tipo, "05_carta.html")
         conteudo = doc.get("conteudo", {})
@@ -292,8 +425,8 @@ def renderizar_caso(
         dados = {
             "TITULO_DOCUMENTO": doc.get("titulo", codigo),
             "CODIGO_DOCUMENTO": codigo,
-            "NOME_CASO":        blueprint["titulo"],
-            "ENVELOPE":         envelope,
+            "NOME_CASO": blueprint["titulo"],
+            "ENVELOPE": envelope,
             **conteudo,
         }
 
@@ -313,28 +446,63 @@ def renderizar_caso(
                 raise RenderCaseError(mensagem) from exc
             logger.error("%s", mensagem)
 
-    # Capa de dicas por envelope
-    for envelope_dica in sorted(
-        {d.get("envelope") for d in blueprint.get("dicas", []) if d.get("envelope")}
+    # Capa e conteúdo operacional de dicas por envelope
+    for envelope_dica, dicas in sorted(
+        _dicas_por_envelope(blueprint).items(), key=lambda item: _fase_sort_key(item[0])
     ):
         dados_capa = {
-            "NOME_CASO":     blueprint["titulo"],
-            "ENVELOPE":      envelope_dica,
-            "case_name":     blueprint["titulo"],
+            "NOME_CASO": blueprint["titulo"],
+            "ENVELOPE": envelope_dica,
+            "case_name": blueprint["titulo"],
             "section_label": "DICAS",
-            "section_ref":   "Material de apoio ao facilitador",
+            "section_ref": "Material de apoio ao facilitador",
             "warning_label": "ABRIR SOMENTE QUANDO NECESSÁRIO",
         }
         pdf_path = output_dir / f"DICAS-{envelope_dica}-00_CAPA.pdf"
         try:
             render_kwargs: dict[str, Any] = {"strict": strict}
             if html_debug_dir is not None:
-                render_kwargs["html_debug_path"] = html_debug_dir / f"DICAS-{envelope_dica}-00_CAPA.html"
-            caminho = renderizar_documento("00_envelope_capa.html", dados_capa, pdf_path, **render_kwargs)
+                render_kwargs["html_debug_path"] = (
+                    html_debug_dir / f"DICAS-{envelope_dica}-00_CAPA.html"
+                )
+            caminho = renderizar_documento(
+                "00_envelope_capa.html", dados_capa, pdf_path, **render_kwargs
+            )
             grupos["dicas"].append(caminho)
-            logger.info("Capa de dicas renderizada: DICAS-%s-CAPA → %s", envelope_dica, caminho.name)
+            logger.info(
+                "Capa de dicas renderizada: DICAS-%s-CAPA → %s",
+                envelope_dica,
+                caminho.name,
+            )
         except Exception as exc:
             mensagem = f"DICAS-{envelope_dica}-CAPA (00_envelope_capa.html) — falha ao renderizar: {exc}"
+            if strict:
+                raise RenderCaseError(mensagem) from exc
+            logger.error("%s", mensagem)
+
+        dados_dicas = {
+            "NOME_CASO": blueprint["titulo"],
+            "ENVELOPE": envelope_dica,
+            "CONTEXTOS": _contextos_dicas(dicas),
+        }
+        pdf_path = output_dir / f"DICAS-{envelope_dica}-01_CONTEUDO.pdf"
+        try:
+            render_kwargs = {"strict": strict}
+            if html_debug_dir is not None:
+                render_kwargs["html_debug_path"] = (
+                    html_debug_dir / f"DICAS-{envelope_dica}-01_CONTEUDO.html"
+                )
+            caminho = renderizar_documento(
+                "dicas_contextuais.html", dados_dicas, pdf_path, **render_kwargs
+            )
+            grupos["dicas"].append(caminho)
+            logger.info(
+                "Conteúdo de dicas renderizado: DICAS-%s-CONTEUDO → %s",
+                envelope_dica,
+                caminho.name,
+            )
+        except Exception as exc:
+            mensagem = f"DICAS-{envelope_dica}-CONTEUDO (dicas_contextuais.html) — falha ao renderizar: {exc}"
             if strict:
                 raise RenderCaseError(mensagem) from exc
             logger.error("%s", mensagem)
@@ -348,12 +516,13 @@ def renderizar_caso(
 
 if __name__ == "__main__":
     import sys
+
     if len(sys.argv) < 2:
         print("Uso: python renderer.py <blueprint.json> [pasta_output]")
         sys.exit(1)
 
-    bp_path  = Path(sys.argv[1])
-    out_dir  = Path(sys.argv[2]) if len(sys.argv) > 2 else None
+    bp_path = Path(sys.argv[1])
+    out_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else None
     print(f"\n📄 Renderizando: {bp_path.name}\n")
     resultado = renderizar_caso(bp_path, out_dir)
     print("\n📦 Arquivos gerados:")

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Dicas do facilitador — {{NOME_CASO}} — {{ENVELOPE}}</title>
+  <style>
+    @page { size: A4; margin: 14mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #111827;
+      background: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11.5pt;
+      line-height: 1.35;
+    }
+    header {
+      border: 2px solid #111827;
+      padding: 8mm 9mm;
+      margin-bottom: 8mm;
+    }
+    .eyebrow {
+      color: #374151;
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 2mm 0 1mm;
+      font-size: 19pt;
+      line-height: 1.08;
+    }
+    .notice {
+      margin-top: 4mm;
+      padding: 3mm 4mm;
+      border: 1px solid #6b7280;
+      background: #f3f4f6;
+      font-size: 9.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .contexto {
+      break-inside: avoid;
+      margin: 0 0 7mm;
+    }
+    h2 {
+      margin: 0 0 3mm;
+      padding-bottom: 1.5mm;
+      border-bottom: 1.5px solid #111827;
+      font-size: 14pt;
+      text-transform: uppercase;
+    }
+    article {
+      break-inside: avoid;
+      border: 1px solid #9ca3af;
+      margin: 0 0 4mm;
+      padding: 4mm;
+      background: #fff;
+    }
+    .hint-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 5mm;
+      margin-bottom: 2mm;
+      font-weight: 700;
+      font-size: 12.5pt;
+    }
+    .level {
+      white-space: nowrap;
+      border: 1px solid #111827;
+      padding: .7mm 2mm;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+    }
+    .field { margin: 2mm 0; }
+    .field strong {
+      display: inline-block;
+      min-width: 35mm;
+      font-size: 9pt;
+      text-transform: uppercase;
+    }
+    .hint-text {
+      margin: 3mm 0;
+      padding-left: 3mm;
+      border-left: 3px solid #111827;
+    }
+    footer {
+      margin-top: 8mm;
+      border-top: 1px solid #9ca3af;
+      padding-top: 3mm;
+      color: #4b5563;
+      font-size: 8.5pt;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Confidencial — apoio operacional ao facilitador</div>
+    <h1>Dicas do {{ENVELOPE}}</h1>
+    <div>{{NOME_CASO}}</div>
+    <div class="notice">Não entregar esta página aos jogadores. Use apenas uma dica por travamento real.</div>
+  </header>
+
+  {{#CONTEXTOS}}
+  <section class="contexto">
+    <h2>Contexto: {{categoria}}</h2>
+    {{#dicas}}
+    <article>
+      <div class="hint-title">
+        <span>{{titulo}}</span>
+        <span class="level">Nível: {{nivel}}</span>
+      </div>
+      <div class="field"><strong>Quando usar</strong> {{condicao_uso}}</div>
+      <div class="hint-text">{{texto}}</div>
+      <div class="field"><strong>Documentos</strong> {{documentos_relacionados}}</div>
+      <div class="field"><strong>Contratos</strong> {{contratos_relacionados}}</div>
+      {{#HAS_DESBLOQUEIO}}
+      <div class="field"><strong>Desbloqueia</strong> {{o_que_desbloqueia}}</div>
+      {{/HAS_DESBLOQUEIO}}
+    </article>
+    {{/dicas}}
+  </section>
+  {{/CONTEXTOS}}
+
+  <footer>
+    Este material organiza pistas graduais e condições de uso. Ele não substitui o guia do facilitador nem contém o gabarito completo do caso.
+  </footer>
+</body>
+</html>

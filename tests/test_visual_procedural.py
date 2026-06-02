@@ -225,4 +225,8 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     assert "Legenda" in svg
     assert "Janela operacional" in svg
     assert "Credencial / acesso" in svg
-    assert "Planta baixa operacional" in svg
+    assert "Planta operacional — térreo" in svg
+    assert "planta operacional simplificada" in svg
+    assert "Carimbo técnico" in svg
+    assert "Escala visual aproximada" in svg
+    assert "Planta esquemática" not in svg
