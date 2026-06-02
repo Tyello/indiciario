@@ -172,7 +172,7 @@
         "AVATAR_INICIAL": "I",
         "AVATAR_COR": "#3F5E5A",
         "CORPO_EMAIL": "<p>Durante a conferência final da mostra, identifiquei diferença de peso e acabamento entre a ficha da peça Estudo em cobre nº 14 e o objeto posicionado para vitrine.</p><p>Peço congelamento da escala, dos registros de porta e dos documentos de recebimento. A inauguração pode ser adiada, mas uma acusação sem cruzamento documental destruiria a equipe.</p><p>Comecem pela janela entre 19h30 e 20h15; foi quando a reserva B ficou fora do fluxo comum de montagem.</p>",
-        "NOTA_RODAPE": "Mensagem preservada no espelho interno de correio da Casa de Acervo Mirante.",
+        "NOTA_RODAPE": "Registro interno de preservação: cópia arquivada no espelho de correio da Casa de Acervo Mirante.",
         "ANEXOS": false
       }
     },
@@ -1580,17 +1580,17 @@
         "marcadores": [
           {
             "id": "janela_operacional",
-            "label": "Janela operacional sem visitante",
-            "x": 335,
-            "y": 265,
+            "label": "Janela sem visitante",
+            "x": 330,
+            "y": 300,
             "tipo": "tempo",
             "documento_relacionado": "E1-03",
             "contrato_relacionado": "C-E1-OPORTUNIDADE"
           },
           {
             "id": "porta_credencial",
-            "label": "Porta exige credencial ativa",
-            "x": 450,
+            "label": "Credencial ativa",
+            "x": 435,
             "y": 250,
             "tipo": "acesso",
             "documento_relacionado": "E1-04",
@@ -1598,9 +1598,9 @@
           },
           {
             "id": "etiqueta_rm17",
-            "label": "Etiqueta RM-17 na reserva",
-            "x": 560,
-            "y": 235,
+            "label": "Etiqueta RM-17",
+            "x": 575,
+            "y": 305,
             "tipo": "item",
             "documento_relacionado": "E2-02",
             "contrato_relacionado": "C-E2-COBERTURA"

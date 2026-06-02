@@ -22,6 +22,13 @@ def _safe_color(value: str) -> str:
     return "#4b5563"
 
 
+def _short_label(value: str, limit: int = 28) -> str:
+    text = " ".join(value.split())
+    if len(text) <= limit:
+        return text
+    return text[: limit - 1].rstrip() + "…"
+
+
 def _personagem_nome(personagem: PersonagemVisual, blueprint: Blueprint) -> str:
     for item in blueprint.personagens:
         if item.id == personagem.personagem_id:
@@ -37,6 +44,7 @@ def build_map_svg(mapa: MapaProcedural) -> str:
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura:g} {altura:g}" role="img" aria-label="{escape(mapa.titulo)}">',
         '<rect x="0" y="0" width="100%" height="100%" fill="#f8fafc" stroke="#111827" stroke-width="2"/>',
     ]
+
     for area in mapa.areas:
         fill = "#ffffff" if area.acessivel else "#e5e7eb"
         stroke_dash = "" if area.acessivel else ' stroke-dasharray="8 5"'
@@ -44,15 +52,6 @@ def build_map_svg(mapa: MapaProcedural) -> str:
             f'<rect x="{area.x:g}" y="{area.y:g}" width="{area.w:g}" height="{area.h:g}" '
             f'fill="{fill}" stroke="#374151" stroke-width="2"{stroke_dash}/>'
         )
-        parts.append(
-            f'<text x="{area.x + 8:g}" y="{area.y + 22:g}" font-family="Arial, sans-serif" '
-            f'font-size="14" fill="#111827">{escape(area.nome)}</text>'
-        )
-        if area.observacao:
-            parts.append(
-                f'<text x="{area.x + 8:g}" y="{area.y + 42:g}" font-family="Arial, sans-serif" '
-                f'font-size="10" fill="#4b5563">{escape(area.observacao)}</text>'
-            )
 
     centers = {area.id: (area.x + area.w / 2, area.y + area.h / 2) for area in mapa.areas if area.id}
     for conexao in mapa.conexoes:
@@ -62,29 +61,60 @@ def build_map_svg(mapa: MapaProcedural) -> str:
             continue
         parts.append(
             f'<line x1="{origem[0]:g}" y1="{origem[1]:g}" x2="{destino[0]:g}" y2="{destino[1]:g}" '
-            'stroke="#111827" stroke-width="3" stroke-dasharray="6 4"/>'
+            'stroke="#111827" stroke-width="3" stroke-opacity="0.55" stroke-dasharray="6 5"/>'
         )
 
-    for marcador in mapa.marcadores:
-        parts.append(f'<circle cx="{marcador.x:g}" cy="{marcador.y:g}" r="10" fill="#111827"/>')
+    for area in mapa.areas:
+        label = escape(_short_label(area.nome, 24))
         parts.append(
-            f'<text x="{marcador.x:g}" y="{marcador.y + 4:g}" text-anchor="middle" '
-            f'font-family="Arial, sans-serif" font-size="9" fill="#ffffff">{escape(marcador.tipo[:2].upper())}</text>'
+            f'<rect x="{area.x + 6:g}" y="{area.y + 8:g}" width="{min(area.w - 12, 150):g}" height="24" '
+            'rx="3" fill="#ffffff" fill-opacity="0.88"/>'
         )
         parts.append(
-            f'<text x="{marcador.x + 14:g}" y="{marcador.y + 4:g}" font-family="Arial, sans-serif" '
-            f'font-size="12" fill="#111827">{escape(marcador.label)}</text>'
+            f'<text x="{area.x + 12:g}" y="{area.y + 25:g}" font-family="Arial, sans-serif" '
+            f'font-size="13" font-weight="700" fill="#111827">{label}</text>'
+        )
+        if area.observacao:
+            parts.append(
+                f'<text x="{area.x + 12:g}" y="{area.y + 45:g}" font-family="Arial, sans-serif" '
+                f'font-size="10" fill="#4b5563">{escape(_short_label(area.observacao, 30))}</text>'
+            )
+
+    marker_offsets = [(14, -14), (14, 18), (-128, -14), (-128, 18)]
+    for index, marcador in enumerate(mapa.marcadores):
+        dx, dy = marker_offsets[index % len(marker_offsets)]
+        label = escape(_short_label(marcador.label, 30))
+        label_x = max(8, min(marcador.x + dx, largura - 178))
+        label_y = max(18, min(marcador.y + dy, altura - 28))
+        parts.append(f'<circle cx="{marcador.x:g}" cy="{marcador.y:g}" r="11" fill="#111827"/>')
+        parts.append(
+            f'<text x="{marcador.x:g}" y="{marcador.y + 4:g}" text-anchor="middle" '
+            f'font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#ffffff">{escape(marcador.tipo[:2].upper())}</text>'
+        )
+        parts.append(
+            f'<rect x="{label_x:g}" y="{label_y - 14:g}" width="170" height="22" rx="4" '
+            'fill="#ffffff" fill-opacity="0.92" stroke="#9ca3af"/>'
+        )
+        parts.append(
+            f'<text x="{label_x + 6:g}" y="{label_y + 1:g}" font-family="Arial, sans-serif" '
+            f'font-size="11" fill="#111827">{label}</text>'
         )
 
     if mapa.legenda:
-        y = altura - 18 * len(mapa.legenda) - 10
-        parts.append(f'<g transform="translate(12 {max(y, 12):g})">')
-        parts.append('<rect x="0" y="0" width="260" height="100%" fill="#ffffff" stroke="#9ca3af"/>')
+        legend_height = 18 * len(mapa.legenda) + 16
+        legend_width = 300
+        y = max(12, altura - legend_height - 12)
+        x = max(12, largura - legend_width - 12)
+        parts.append(f'<g transform="translate({x:g} {y:g})">')
+        parts.append(
+            f'<rect x="0" y="0" width="{legend_width}" height="{legend_height}" rx="5" '
+            'fill="#ffffff" fill-opacity="0.95" stroke="#9ca3af"/>'
+        )
         for index, item in enumerate(mapa.legenda):
             line_y = 20 + index * 18
             parts.append(
                 f'<text x="10" y="{line_y}" font-family="Arial, sans-serif" font-size="11" fill="#111827">'
-                f'{escape(item.simbolo)} — {escape(item.descricao)}</text>'
+                f'{escape(item.simbolo)} — {escape(_short_label(item.descricao, 36))}</text>'
             )
         parts.append('</g>')
 
@@ -145,7 +175,12 @@ def visual_document_path(kind: str, identifier: str, output_dir: Path) -> Path:
     return output_dir / f"{names[kind]}_{_safe_id(identifier)}.pdf"
 
 
-def build_visual_documents(blueprint: Blueprint, output_dir: Path, strict: bool = True) -> dict[str, list[Path]]:
+def build_visual_documents(
+    blueprint: Blueprint,
+    output_dir: Path,
+    strict: bool = True,
+    html_debug_dir: Path | None = None,
+) -> dict[str, list[Path]]:
     """Renderiza PDFs visuais e agrupa por envelope/fase para o pacote final."""
     visual = blueprint.visual_procedural
     grupos: dict[str, list[Path]] = {}
@@ -157,7 +192,10 @@ def build_visual_documents(blueprint: Blueprint, output_dir: Path, strict: bool 
         svg = build_map_svg(mapa)
         output_path = visual_document_path("map", mapa.id, output_dir)
         dados = {"TITULO": mapa.titulo, "SUBTITULO": f"Mapa procedural — {mapa.fase}", "SVG": svg}
-        caminho = renderizar_documento("visual_map.html", dados, output_path, strict=strict, landscape=True)
+        render_kwargs = {"strict": strict, "landscape": True}
+        if html_debug_dir is not None:
+            render_kwargs["html_debug_path"] = html_debug_dir / f"{output_path.stem}.html"
+        caminho = renderizar_documento("visual_map.html", dados, output_path, **render_kwargs)
         grupos.setdefault(mapa.fase or "E1", []).append(caminho)
 
     for personagem in visual.personagens:
@@ -165,14 +203,20 @@ def build_visual_documents(blueprint: Blueprint, output_dir: Path, strict: bool 
         output_path = visual_document_path("character", personagem.personagem_id, output_dir)
         nome = _personagem_nome(personagem, blueprint)
         dados = {"TITULO": f"Cartão de personagem — {nome}", "SVG": svg}
-        caminho = renderizar_documento("visual_character_card.html", dados, output_path, strict=strict)
+        render_kwargs = {"strict": strict}
+        if html_debug_dir is not None:
+            render_kwargs["html_debug_path"] = html_debug_dir / f"{output_path.stem}.html"
+        caminho = renderizar_documento("visual_character_card.html", dados, output_path, **render_kwargs)
         grupos.setdefault("E1", []).append(caminho)
 
     for local in visual.locais:
         svg = build_location_card_svg(local)
         output_path = visual_document_path("location", local.id, output_dir)
         dados = {"TITULO": f"Cartão de local — {local.nome}", "SVG": svg}
-        caminho = renderizar_documento("visual_location_card.html", dados, output_path, strict=strict)
+        render_kwargs = {"strict": strict}
+        if html_debug_dir is not None:
+            render_kwargs["html_debug_path"] = html_debug_dir / f"{output_path.stem}.html"
+        caminho = renderizar_documento("visual_location_card.html", dados, output_path, **render_kwargs)
         grupos.setdefault("E1", []).append(caminho)
 
     return grupos

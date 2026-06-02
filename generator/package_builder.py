@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 import json
 import re
 from datetime import UTC, datetime
@@ -306,8 +307,14 @@ def build_package(
     paths["rendered_dir"].mkdir(parents=True, exist_ok=True)
     paths["html_debug_dir"].mkdir(parents=True, exist_ok=True)
 
-    rendered_groups = renderizar_caso(blueprint_path, paths["rendered_dir"], strict=strict)
-    visual_groups = build_visual_documents(blueprint, paths["rendered_dir"], strict=strict)
+    renderizar_caso_kwargs: dict[str, Any] = {"strict": strict}
+    if "html_debug_dir" in inspect.signature(renderizar_caso).parameters:
+        renderizar_caso_kwargs["html_debug_dir"] = paths["html_debug_dir"]
+    rendered_groups = renderizar_caso(blueprint_path, paths["rendered_dir"], **renderizar_caso_kwargs)
+    build_visual_kwargs: dict[str, Any] = {"strict": strict}
+    if "html_debug_dir" in inspect.signature(build_visual_documents).parameters:
+        build_visual_kwargs["html_debug_dir"] = paths["html_debug_dir"]
+    visual_groups = build_visual_documents(blueprint, paths["rendered_dir"], **build_visual_kwargs)
     for group, pdfs in visual_groups.items():
         rendered_groups.setdefault(group, []).extend(pdfs)
     files, final_by_envelope, warnings = _merge_groups(rendered_groups, paths, strict=strict)

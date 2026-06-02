@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -9,24 +9,26 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  @page { size: A4; margin: 12mm; }
+
   body {
     font-family: 'Libre Baskerville', Georgia, serif;
     background: #e8e4dc;
     color: #1a1a1a;
-    padding: 30px 20px;
-    font-size: 13.5px;
-    line-height: 1.7;
+    padding: 0;
+    font-size: 12.5px;
+    line-height: 1.55;
   }
 
   .page {
     background: #fdfaf4;
     max-width: 700px;
     margin: 0 auto;
-    padding: 60px 72px;
-    min-height: 960px;
-    box-shadow: 0 3px 20px rgba(0,0,0,.15), 0 1px 4px rgba(0,0,0,.1);
+    padding: 34px 46px;
+    min-height: auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,.13), 0 1px 3px rgba(0,0,0,.08);
     position: relative;
-    border-top: 5px solid {{COR_TOPO}};
+    border-top: 4px solid {{COR_TOPO}};
   }
 
   /* Paper texture lines (optional) */
@@ -41,8 +43,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 48px;
-    padding-bottom: 24px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
     border-bottom: 1px solid #c8bea0;
   }
 
@@ -74,7 +76,7 @@
     text-align: right;
     font-size: 13px;
     color: #555;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
     font-style: italic;
   }
 
@@ -84,12 +86,12 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #888;
-    margin-bottom: 32px;
+    margin-bottom: 18px;
   }
 
   /* Subject line */
   .subject-line {
-    margin-bottom: 28px;
+    margin-bottom: 18px;
   }
 
   .subject-label {
@@ -113,14 +115,14 @@
   /* Salutation */
   .salutation {
     font-size: 14px;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
     color: #222;
   }
 
   /* Body */
   .body-text p {
-    margin-bottom: 18px;
-    font-size: 13.5px;
+    margin-bottom: 12px;
+    font-size: 12.5px;
     color: #222;
     text-align: justify;
     hyphens: auto;
@@ -132,13 +134,13 @@
 
   /* Closing */
   .closing {
-    margin-top: 40px;
+    margin-top: 22px;
     font-size: 13.5px;
     color: #333;
   }
 
   .closing-formula {
-    margin-bottom: 56px;
+    margin-bottom: 28px;
     font-style: italic;
   }
 
@@ -153,7 +155,7 @@
 
   .signature-script {
     font-family: 'Caveat', cursive;
-    font-size: 28px;
+    font-size: 24px;
     color: #1a1a1a;
     line-height: 1.1;
     margin-bottom: 6px;
@@ -198,7 +200,7 @@
 
   /* Footnotes */
   .footnotes {
-    margin-top: 60px;
+    margin-top: 28px;
     padding-top: 16px;
     border-top: 1px solid #c8bea0;
     font-size: 10.5px;

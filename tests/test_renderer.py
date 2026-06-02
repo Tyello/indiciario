@@ -199,3 +199,69 @@ def test_html_para_pdf_fake_exige_env_explicito(tmp_path, monkeypatch):
 
     assert output.exists()
 
+
+
+def test_renderizar_documento_salva_html_debug_pos_template(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    template_dir = tmp_path / "templates"
+    template_dir.mkdir()
+    (template_dir / "05_carta.html").write_text("<html>Documento {{CORPO}}</html>", encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    debug_path = tmp_path / "html_debug" / "E1-01.html"
+
+    renderer.renderizar_documento(
+        "05_carta.html",
+        {"CORPO": "final"},
+        tmp_path / "E1-01.pdf",
+        strict=True,
+        html_debug_path=debug_path,
+    )
+
+    assert debug_path.read_text(encoding="utf-8") == "<html>Documento final</html>"
+
+
+def test_renderizar_caso_preenche_html_debug_para_documentos(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    template_dir = tmp_path / "templates"
+    template_dir.mkdir()
+    (template_dir / "05_carta.html").write_text("Documento {{CODIGO_DOCUMENTO}} {{CORPO}}", encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    blueprint_path = _blueprint_base(tmp_path)
+
+    renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=True, html_debug_dir=tmp_path / "html_debug")
+
+    debug_file = tmp_path / "html_debug" / "E1-01.html"
+    assert debug_file.exists()
+    assert "Documento E1-01" in debug_file.read_text(encoding="utf-8")
+
+
+def test_log_template_permite_quebra_na_coluna_evento():
+    template = Path("templates/06_log_acesso.html").read_text(encoding="utf-8")
+
+    assert "table-layout: fixed" in template
+    assert "overflow-wrap: anywhere" in template
+    assert "th:nth-child(6)" in template
+    assert "width: 24%" in template
+
+
+def test_templates_problematicos_usam_pagina_a4_compacta():
+    carta = Path("templates/05_carta.html").read_text(encoding="utf-8")
+    extrato = Path("templates/09_extrato.html").read_text(encoding="utf-8")
+    email = Path("templates/01_email.html").read_text(encoding="utf-8")
+
+    assert "@page { size: A4; margin: 12mm; }" in carta
+    assert "min-height: auto" in carta
+    assert "@page { size: A4; margin: 10mm; }" in extrato
+    assert "@page { size: A4; margin: 12mm; }" in email
