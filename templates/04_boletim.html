@@ -219,10 +219,20 @@
   }
 
   .signature-text {
-    font-family: 'Caveat', cursive;
-    font-size: 18px;
-    color: #1a1a1a;
-    font-weight: 600;
+    font-family: 'Caveat', 'Bradley Hand', cursive;
+    font-size: 16px;
+    color: rgba(20, 20, 20, .76);
+    font-weight: 400;
+    letter-spacing: .15px;
+    transform: rotate(-1.4deg) skewX(-3deg);
+    opacity: .86;
+  }
+
+  .signature-text.secondary {
+    font-size: 15px;
+    transform: rotate(.9deg) skewX(4deg);
+    letter-spacing: .35px;
+    opacity: .72;
   }
 
   .footer-name {
@@ -324,9 +334,9 @@
         <div class="footer-name">{{NOME_RESPONSAVEL}}</div>
       </div>
       <div class="footer-cell">
-        <div class="label">Assinatura</div>
+        <div class="label">Conferência</div>
         <div class="signature-line">
-          <div class="signature-text">{{ASSINATURA_GLIFO}}</div>
+          <div class="signature-text secondary">{{ASSINATURA_GLIFO}}</div>
         </div>
         <div class="footer-name"> </div>
       </div>
