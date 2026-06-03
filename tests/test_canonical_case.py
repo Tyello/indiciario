@@ -130,6 +130,9 @@ def test_caso_canonico_hardening_editorial_pre_playtest():
     assert e108.tipo.value == "manual"
     assert "USR-022" in str(e108.conteudo)
     assert "USR-MA-022" not in str(e108.conteudo)
+    assert "TERM-ADM-03" in str(e108.conteudo)
+    assert "SETOR-06 Sala de Segurança" in str(e108.conteudo)
+    assert "SETOR-06 Administração/terminal" not in str(e108.conteudo)
     assert "conclusão técnica" not in str(e207.conteudo).lower()
     assert "fechar a solução" not in e207.objetivo_narrativo.lower()
     assert "sem apontar autoria" in e207.objetivo_narrativo.lower()
@@ -165,6 +168,8 @@ def test_caso_canonico_e1_distribui_suspeitas_sem_cravar_marina():
     assert saida_doca["PORTA"] == "P-04 / Doca de serviço"
     assert saida_doca["TIPO_EVENTO"] == "SAIDA"
     assert saida_doca["ID_USUARIO"] == "OS-0147/2026"
+    consulta_os = registros_log["20h08"]
+    assert consulta_os["ID_USUARIO"] == "TERM-ADM-03"
     assert "Sensor" in saida_doca["TERMINAL"]
     assert "usuário nominal" in saida_doca["OBSERVACAO"]
 
@@ -212,23 +217,25 @@ def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_
         "LogisArte Transportes",
         "Mirante Norte Consultoria",
     } == empresas
-    papeis = {item["NOME_ITEM"].split(" — ", 1)[0] for item in e203.conteudo["ITENS"]}
-    assert {
+    rotulos = {item["NOME_ITEM"].split(" — ", 1)[0] for item in e203.conteudo["ITENS"]}
+    assert {"Opção 1", "Opção 2", "Lote A", "Lote B"} == rotulos
+    texto_cotacao = str(e203.conteudo)
+    for label_meta in [
         "PROPOSTA COMPLETA",
         "RESTAURO LEGÍTIMO",
-        "LOGÍSTICA",
+        "LOGÍSTICA —",
         "RUÍDO ADMINISTRATIVO",
-    } == papeis
+    ]:
+        assert label_meta not in texto_cotacao
     assert e203.titulo == "Quadro comparativo de cotações emergenciais"
     assert "Ateliê Pedra Clara" not in e203.titulo
     assert "só a proposta" not in e203.titulo.lower()
     assert len(e203.conteudo["ITENS"]) == 4
 
-    texto_cotacao = str(e203.conteudo)
     assert "sem transporte" in texto_cotacao
     assert "sem intervenção em acervo" in texto_cotacao
-    assert "apoio administrativo" in texto_cotacao
-    assert "Ateliê Pedra Clara: pacote completo" in str(e203.conteudo["CONDICOES"])
+    assert "assessoria administrativa" in texto_cotacao
+    assert "Ateliê Pedra Clara: revisão de moldura" in str(e203.conteudo["CONDICOES"])
     assert "única proposta" not in str(e203.conteudo["CONDICOES"])
 
     assert e204.conteudo["TOTAL_LANCAMENTOS"] == "6"

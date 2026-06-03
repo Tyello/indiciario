@@ -240,7 +240,7 @@
       "emocao_esperada": "curiosidade operacional",
       "objetivo_narrativo": "Registrar eventos operacionais frios entre doca, reserva B e terminal administrativo, sem tradução nominal nem inferência pronta sobre autoria.",
       "pistas_contidas": [
-        "Entre 19h42 e 20h08 há eventos próximos envolvendo P-04, P-06, P-03, OS 0147/2026 e SETOR-06.",
+        "Entre 19h42 e 20h08 há eventos próximos envolvendo P-04, P-06, P-03, OS 0147/2026 e TERM-ADM-03.",
         "Um evento negado, uma abertura de reserva, um sensor de carga e uma consulta administrativa aparecem na mesma janela sem coluna nominal."
       ],
       "confirma": [
@@ -270,7 +270,7 @@
         "HASH_REGISTRO": "LOG-2026-0818-B7F4",
         "PERIODO_INICIO": "18/08/2026 18h15",
         "PERIODO_FIM": "18/08/2026 21h00",
-        "LOCALIZACAO_SISTEMA": "SETOR-04 / SETOR-06 / P-03",
+        "LOCALIZACAO_SISTEMA": "SETOR-04 / SETOR-03 / P-06",
         "TOTAL_REGISTROS": "9",
         "TOTAL_USUARIOS": "6",
         "TOTAL_ENTRADAS": "6",
@@ -372,14 +372,14 @@
             "DATA": "18/08/2026",
             "HORA": "20h08",
             "PORTA": "P-03 / Administração",
-            "ID_USUARIO": "SETOR-06",
+            "ID_USUARIO": "TERM-ADM-03",
             "NOME_USUARIO": "—",
             "TIPO_EVENTO": "ENTRADA",
             "EVENTO": "Consulta de OS",
             "CLASSE_LINHA": "normal",
             "TERMINAL": "Console Administração",
             "METODO": "terminal administrativo",
-            "OBSERVACAO": "Consulta curta em terminal autorizado."
+            "OBSERVACAO": "Consulta curta em terminal administrativo autorizado."
           },
           {
             "DATA": "18/08/2026",
@@ -489,7 +489,7 @@
           {
             "DATA": "18/08/2026",
             "HORA": "19h35-20h05",
-            "PORTA": "SETOR-06 / Controle de fichas",
+            "PORTA": "SETOR-03 / Controle de fichas",
             "ID_USUARIO": "USR-LI-066",
             "NOME_USUARIO": "Lia Figueira",
             "TIPO_EVENTO": "OPERACAO",
@@ -649,7 +649,7 @@
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
         "ASSUNTO": "Trecho do procedimento CAM-SEG-04 — leitura de acessos",
-        "CORPO_CARTA": "<p>Trecho extraído do treinamento de funcionários sobre leitura de registros físicos e marcações de escala. O quadro abaixo é arquivado separado da exportação de portas; ele traduz códigos por função, não por nome civil.</p><table><tr><th>ID operacional</th><th>Referência funcional</th><th>Observação</th></tr><tr><td>USR-014</td><td>Curadoria-chefe</td><td>Conferência final e vitrine.</td></tr><tr><td>USR-022</td><td>Curadoria operacional</td><td>Suportes, reserva e vitrine.</td></tr><tr><td>USR-031</td><td>Supervisor noturno</td><td>Guarita, ronda e livro de visitantes.</td></tr><tr><td>TERM-03</td><td>Terminal de depósito</td><td>Movimentação de material de montagem.</td></tr><tr><td>USR-066</td><td>Registro de acervo</td><td>Fichas, etiquetas e validação de vitrine.</td></tr><tr><td>USR-072</td><td>Integridade patrimonial</td><td>Exportação e custódia de relatórios.</td></tr><tr><td>SETOR-06</td><td>Terminal administrativo autorizado</td><td>Consulta de OS; não indica abertura física de reserva.</td></tr></table><p>Portas: P-01 Guarita; P-02 Corredor técnico; P-03 Administração; P-04 Doca de serviço; P-05 Depósito; P-06 Reserva Técnica B; P-07 Reserva Técnica A; P-08 Sala de Segurança; P-09 Vitrine/área pública.</p><p>Setores: SETOR-01 Guarita; SETOR-02 Corredor técnico; SETOR-03 Administração; SETOR-04 Doca de serviço; SETOR-05 Depósito; SETOR-06 Administração/terminal; SETOR-07 Reserva Técnica A; SETOR-08 Vitrine/área pública.</p><p><strong>ENTRADA</strong> indica abertura autorizada por credencial válida. <strong>NEGADO</strong> registra tentativa sem abertura. <strong>SAIDA</strong> depende de sensor interno de carga após abertura anterior. <strong>OPERACAO</strong> é marcação de escala, não prova abertura física.</p>",
+        "CORPO_CARTA": "<p>Trecho extraído do treinamento de funcionários sobre leitura de registros físicos e marcações de escala. O quadro abaixo é arquivado separado da exportação de portas; ele traduz códigos por função, não por nome civil.</p><table><tr><th>ID operacional</th><th>Referência funcional</th><th>Observação</th></tr><tr><td>USR-014</td><td>Curadoria-chefe</td><td>Conferência final e vitrine.</td></tr><tr><td>USR-022</td><td>Curadoria operacional</td><td>Suportes, reserva e vitrine.</td></tr><tr><td>USR-031</td><td>Supervisor noturno</td><td>Guarita, ronda e livro de visitantes.</td></tr><tr><td>TERM-03</td><td>Terminal de depósito</td><td>Movimentação de material de montagem.</td></tr><tr><td>USR-066</td><td>Registro de acervo</td><td>Fichas, etiquetas e validação de vitrine.</td></tr><tr><td>USR-072</td><td>Integridade patrimonial</td><td>Exportação e custódia de relatórios.</td></tr><tr><td>TERM-ADM-03</td><td>Terminal administrativo autorizado</td><td>Consulta de OS em administração; não indica abertura física de reserva.</td></tr></table><p>Portas: P-01 Guarita; P-02 Corredor técnico; P-03 Administração; P-04 Doca de serviço; P-05 Depósito; P-06 Reserva Técnica B; P-07 Reserva Técnica A; P-08 Sala de Segurança; P-09 Vitrine/área pública.</p><p>Setores: SETOR-01 Guarita; SETOR-02 Corredor técnico; SETOR-03 Administração/terminal; SETOR-04 Doca de serviço; SETOR-05 Depósito; SETOR-06 Sala de Segurança; SETOR-07 Reserva Técnica A; SETOR-08 Vitrine/área pública.</p><p><strong>ENTRADA</strong> indica abertura autorizada por credencial válida. <strong>NEGADO</strong> registra tentativa sem abertura. <strong>SAIDA</strong> depende de sensor interno de carga após abertura anterior. <strong>OPERACAO</strong> é marcação de escala, não prova abertura física.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "V. Matos",
         "NOME_ASSINANTE": "Vera Matos",
@@ -773,9 +773,9 @@
       "envelope": "E2",
       "tipo": "orcamento",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Apresentar quatro empresas visíveis com papéis distintos — proposta completa, restauro legítimo, logística e consultoria administrativa — sem indicar isoladamente qual fecha a solução.",
+      "objetivo_narrativo": "Apresentar quatro empresas visíveis com escopos distintos — moldura/transporte, restauro, transporte e assessoria — sem indicar isoladamente qual fecha a solução.",
       "pistas_contidas": [
-        "Quatro fornecedores aparecem em linhas legíveis com escopos diferentes: Ateliê Pedra Clara, Conserva Sul Restauro, LogisArte Transportes e Mirante Norte Consultoria.",
+        "Quatro fornecedores aparecem em linhas legíveis: Ateliê Pedra Clara, Conserva Sul Restauro, LogisArte Transportes e Mirante Norte Consultoria.",
         "A comparação exige combinar escopo, prazo, OS, recibo e extrato; nenhuma linha isolada resolve o caso."
       ],
       "confirma": [
@@ -809,11 +809,11 @@
         "DOC_CLIENTE": "41.738.902/0001-64",
         "CONTATO_CLIENTE": "Otávio Salles",
         "TITULO_PROJETO": "Mapa de propostas — OS 0147/2026",
-        "DESCRICAO_REFERENCIA": "Cotações reunidas para serviço emergencial de moldura, acondicionamento, logística e apoio administrativo. As quatro empresas abaixo devem ser lidas como alternativas de escopo: proposta completa, restauro legítimo, logística e ruído administrativo.",
+        "DESCRICAO_REFERENCIA": "Cotações reunidas para serviço emergencial de moldura, acondicionamento, transporte e assessoria administrativa. As linhas abaixo preservam a redação de escopo recebida em compras; a análise depende de comparar prazo, OS, recibo e extrato.",
         "ITENS": [
           {
             "NUMERO_ITEM": "1",
-            "NOME_ITEM": "PROPOSTA COMPLETA — Ateliê Pedra Clara",
+            "NOME_ITEM": "Opção 1 — Ateliê Pedra Clara",
             "DESC_ITEM": "Intervenção de moldura, transporte assistido e documentação de retorno; prazo imediato; referência CAM-APC-44/26 / OS 0147/2026.",
             "QUANTIDADE": "1 pacote",
             "VALOR_UNITARIO": "R$ 18.400,00",
@@ -821,15 +821,15 @@
           },
           {
             "NUMERO_ITEM": "2",
-            "NOME_ITEM": "RESTAURO LEGÍTIMO — Conserva Sul Restauro",
-            "DESC_ITEM": "Cotação legítima para moldura equivalente e laudo simples; sem transporte e sem prazo para retirada noturna.",
+            "NOME_ITEM": "Opção 2 — Conserva Sul Restauro",
+            "DESC_ITEM": "Revisão de moldura equivalente e laudo simples; sem transporte e sem prazo para retirada noturna.",
             "QUANTIDADE": "1 serviço",
             "VALOR_UNITARIO": "R$ 5.900,00",
             "VALOR_TOTAL_ITEM": "R$ 5.900,00"
           },
           {
             "NUMERO_ITEM": "3",
-            "NOME_ITEM": "LOGÍSTICA — LogisArte Transportes",
+            "NOME_ITEM": "Lote A — LogisArte Transportes",
             "DESC_ITEM": "Transporte segurado com lacre e escolta, sem intervenção em acervo ou fotografia técnica de retorno.",
             "QUANTIDADE": "1 trajeto",
             "VALOR_UNITARIO": "R$ 6.800,00",
@@ -837,8 +837,8 @@
           },
           {
             "NUMERO_ITEM": "4",
-            "NOME_ITEM": "RUÍDO ADMINISTRATIVO — Mirante Norte Consultoria",
-            "DESC_ITEM": "Assessoria administrativa para fluxo de fornecedores; sem manuseio de acervo, mas citada em crédito posterior com a mesma OS.",
+            "NOME_ITEM": "Lote B — Mirante Norte Consultoria",
+            "DESC_ITEM": "Assessoria administrativa para fluxo de fornecedores; sem manuseio de acervo, com referência à mesma OS.",
             "QUANTIDADE": "1 consultoria",
             "VALOR_UNITARIO": "R$ 6.200,00",
             "VALOR_TOTAL_ITEM": "R$ 6.200,00"
@@ -847,19 +847,19 @@
         "SUBTOTAL": "R$ 31.100,00",
         "DESCONTO": "R$ 0,00",
         "IMPOSTOS": "Inclusos",
-        "VALOR_TOTAL": "Selecionado: R$ 18.400,00",
+        "VALOR_TOTAL": "Referência: R$ 18.400,00",
         "CONDICOES": [
           {
-            "CONDICAO": "Ateliê Pedra Clara: pacote completo, preço maior e prazo imediato; conferir com recibo e autorização."
+            "CONDICAO": "Ateliê Pedra Clara: revisão de moldura, acondicionamento, transporte assistido e documentação de retorno."
           },
           {
-            "CONDICAO": "Conserva Sul Restauro: proposta legítima de moldura/laudo, mas sem logística noturna."
+            "CONDICAO": "Conserva Sul Restauro: revisão de moldura equivalente e emissão de laudo simples, sem transporte no mesmo pedido."
           },
           {
-            "CONDICAO": "LogisArte Transportes: logística segurada, sem intervenção técnica no acervo."
+            "CONDICAO": "LogisArte Transportes: transporte segurado com lacre e escolta, sem intervenção técnica no acervo."
           },
           {
-            "CONDICAO": "Mirante Norte Consultoria: apoio administrativo citado na OS, sem manuseio declarado de peça."
+            "CONDICAO": "Mirante Norte Consultoria: assessoria para fluxo de fornecedores e documentação administrativa da OS."
           }
         ],
         "ASSINATURA_RESPONSAVEL": "Otávio Salles",
