@@ -344,8 +344,10 @@
     margin-bottom: 6px;
   }
 
+  .sig-line { min-height: 46px; }
+
   .sig-name {
-    font-family: 'Caveat', cursive;
+    font-family: 'Segoe Print', 'Lucida Handwriting', cursive;
     font-size: 17px;
     color: #1a1a1a;
     font-weight: 600;
@@ -358,7 +360,7 @@
 
   /* Manuscript note */
   .manuscript-note {
-    font-family: 'Caveat', cursive;
+    font-family: 'Segoe Print', 'Lucida Handwriting', cursive;
     font-size: 15px;
     color: #1a4a9a;
     padding: 0 32px 16px;
@@ -473,12 +475,12 @@
   <div class="approval">
     <div class="approval-box">
       <div class="label">Responsável Comercial</div>
-      <div class="sig-line"><span class="sig-name">{{ASSINATURA_RESPONSAVEL}}</span></div>
+      <div class="sig-line"><span class="sig-name">{{ASSINATURA_RESPONSAVEL_VISUAL}}</span></div>
       <div class="sig-role">{{NOME_RESPONSAVEL}} — {{CARGO_RESPONSAVEL}}</div>
     </div>
     <div class="approval-box">
       <div class="label">Aprovação do Cliente</div>
-      <div class="sig-line"><span class="sig-name">{{ASSINATURA_CLIENTE}}</span></div>
+      <div class="sig-line"><span class="sig-name">{{ASSINATURA_CLIENTE_VISUAL}}</span></div>
       <div class="sig-role">Data: {{DATA_APROVACAO}}</div>
     </div>
   </div>

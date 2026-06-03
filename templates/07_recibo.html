@@ -151,9 +151,9 @@
   }
 
   .value-written {
-    font-family: 'Caveat', cursive;
-    font-size: 16px;
-    color: #444;
+    font-family: 'Segoe Print', 'Lucida Handwriting', cursive;
+    font-size: 14px;
+    color: rgba(68,68,68,.78);
     font-style: italic;
   }
 
@@ -252,6 +252,8 @@
     color: #888;
     margin-bottom: 10px;
   }
+
+  .signature-cell { min-height: 42px; transform: rotate(-.8deg); }
 
   .footer-value {
     font-family: 'Caveat', cursive;
@@ -362,11 +364,11 @@
   <div class="footer-row">
     <div class="footer-cell">
       <div class="footer-label">Assinatura do Prestador</div>
-      <div class="footer-value">{{ASSINATURA_PRESTADOR}}</div>
+      <div class="footer-value signature-cell">{{ASSINATURA_PRESTADOR_VISUAL}}</div>
     </div>
     <div class="footer-cell">
       <div class="footer-label">Assinatura do Contratante</div>
-      <div class="footer-value">{{ASSINATURA_CONTRATANTE}}</div>
+      <div class="footer-value signature-cell">{{ASSINATURA_CONTRATANTE_VISUAL}}</div>
     </div>
     <div class="footer-cell">
       <div class="footer-label">Data e Hora</div>

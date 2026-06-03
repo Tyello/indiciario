@@ -373,7 +373,7 @@ def test_log_template_permite_quebra_na_coluna_evento():
     assert "overflow-wrap: anywhere" in template
     assert "th:nth-child(6)" in template
     assert "width: 22%" in template
-    assert "width: 14%" in template
+    assert "width: 16%" in template
 
 
 def test_templates_problematicos_usam_pagina_a4_compacta():

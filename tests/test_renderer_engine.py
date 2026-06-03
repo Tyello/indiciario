@@ -233,9 +233,11 @@ def test_log_template_expande_multiplos_registros():
         "REGISTROS": registros,
     }
     result = renderizar_html(html, dados)
-    # Ambos os registros devem aparecer
-    assert "João" in result
-    assert "Maria" in result
+    # Ambos os registros devem aparecer no padrão enxuto por identificador.
+    assert "27" in result
+    assert "09" in result
+    assert "João" not in result
+    assert "Maria" not in result
     assert result.count("ENTRADA") >= 2
 
 

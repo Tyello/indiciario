@@ -153,15 +153,10 @@
   .signature-area { min-width: 220px; }
 
   .signature-script {
-    font-family: 'Caveat', 'Bradley Hand', cursive;
-    font-size: 20px;
-    color: rgba(22,22,22,.72);
-    line-height: 1.05;
-    margin-bottom: 6px;
-    font-weight: 400;
-    letter-spacing: .16px;
-    transform: rotate(-1.6deg) skewX(-2deg);
-    opacity: .82;
+    min-height: 44px;
+    margin-bottom: 2px;
+    transform: rotate(-1.2deg);
+    transform-origin: left bottom;
   }
 
   .signature-underline {
@@ -212,10 +207,10 @@
 
   /* Annotations (handwritten notes on the letter) */
   .annotation {
-    font-family: 'Caveat', cursive;
-    font-size: 13px;
-    color: rgba(26,74,154,.72);
-    transform: rotate(-1.4deg) skewX(-2deg);
+    font-family: 'Segoe Print', 'Lucida Handwriting', cursive;
+    font-size: 12px;
+    color: rgba(26,74,154,.58);
+    transform: rotate(-1.1deg) skewX(-1deg);
     font-weight: 400;
     display: inline-block;
     margin: 8px 0;
@@ -273,7 +268,7 @@
     <div class="signature-block">
       <div class="signature-area">
         <div class="signature-underline">
-          <div class="signature-script">{{ASSINATURA_CURSIVA}}</div>
+          <div class="signature-script">{{ASSINATURA_CURSIVA_VISUAL}}</div>
         </div>
         <div class="signer-name">{{NOME_ASSINANTE}}</div>
         <div class="signer-title">{{CARGO_ASSINANTE}}</div>

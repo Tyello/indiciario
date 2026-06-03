@@ -143,10 +143,10 @@
   }
 
   .field-value {
-    font-family: 'Caveat', cursive;
-    font-size: 16px;
-    color: #1a1a1a;
-    line-height: 1.3;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 13px;
+    color: #1f2933;
+    line-height: 1.35;
     min-height: 22px;
     border-bottom: 1px dashed #b8a060;
     padding-bottom: 4px;
@@ -172,10 +172,10 @@
   }
 
   .body-text {
-    font-family: 'Caveat', cursive;
-    font-size: 17px;
-    line-height: 2.0;
-    color: #1a1a1a;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #202020;
     background-image: repeating-linear-gradient(
       transparent,
       transparent 31px,
@@ -211,7 +211,7 @@
 
   .signature-line {
     border-bottom: 1px solid #888;
-    height: 38px;
+    height: 42px;
     margin-bottom: 4px;
     display: flex;
     align-items: flex-end;
@@ -219,25 +219,21 @@
   }
 
   .signature-text {
-    font-family: 'Caveat', 'Bradley Hand', cursive;
-    font-size: 16px;
-    color: rgba(20, 20, 20, .76);
-    font-weight: 400;
-    letter-spacing: .15px;
-    transform: rotate(-1.4deg) skewX(-3deg);
-    opacity: .86;
+    min-width: 140px;
+    transform: rotate(-1.1deg);
+    transform-origin: left bottom;
   }
 
+  .signature-text.date-signed { font-family: 'Source Serif 4', Georgia, serif; font-size: 12px; color: #333; transform: none; }
+
   .signature-text.secondary {
-    font-size: 15px;
-    transform: rotate(.9deg) skewX(4deg);
-    letter-spacing: .35px;
-    opacity: .72;
+    transform: rotate(.8deg);
+    opacity: .9;
   }
 
   .footer-name {
-    font-family: 'Caveat', cursive;
-    font-size: 14px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12px;
     color: #333;
     margin-top: 4px;
   }
@@ -329,21 +325,21 @@
       <div class="footer-cell">
         <div class="label">Relatado por</div>
         <div class="signature-line">
-          <div class="signature-text">{{ASSINATURA_RESPONSAVEL}}</div>
+          <div class="signature-text">{{ASSINATURA_RESPONSAVEL_VISUAL}}</div>
         </div>
         <div class="footer-name">{{NOME_RESPONSAVEL}}</div>
       </div>
       <div class="footer-cell">
         <div class="label">Conferência</div>
         <div class="signature-line">
-          <div class="signature-text secondary">{{ASSINATURA_GLIFO}}</div>
+          <div class="signature-text secondary">{{ASSINATURA_GLIFO_VISUAL}}</div>
         </div>
         <div class="footer-name"> </div>
       </div>
       <div class="footer-cell">
         <div class="label">Data e Hora</div>
         <div class="signature-line">
-          <div class="signature-text">{{DATA_HORA_ASSINATURA}}</div>
+          <div class="signature-text date-signed">{{DATA_HORA_ASSINATURA}}</div>
         </div>
         <div class="footer-name"> </div>
       </div>

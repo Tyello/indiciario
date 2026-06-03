@@ -440,7 +440,7 @@
         "HASH_REGISTRO": "CAM-0826-B7F4",
         "PERIODO_INICIO": "18/08/2026 18h00",
         "PERIODO_FIM": "18/08/2026 21h00",
-        "LOCALIZACAO_SISTEMA": "SETOR-01 a SETOR-08",
+        "LOCALIZACAO_SISTEMA": "Guarita, doca, reservas, vitrine e administração",
         "TOTAL_REGISTROS": "6",
         "TOTAL_USUARIOS": "5",
         "TOTAL_ENTRADAS": "6",
@@ -450,98 +450,99 @@
           {
             "DATA": "18/08/2026",
             "HORA": "18h30-19h10",
-            "PORTA": "SETOR-08 / Vitrine",
-            "ID_USUARIO": "USR-IN-011",
-            "NOME_USUARIO": "Inês Laranjeira",
+            "PORTA": "Vitrine / área pública",
+            "ID_USUARIO": "USR-014",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Conferência de iluminação e suportes",
+            "EVENTO": "Conferência de iluminação",
             "CLASSE_LINHA": "normal",
-            "TERMINAL": "Planilha Escala-Vitrine",
-            "METODO": "escala operacional",
-            "OBSERVACAO": "Rotina pré-abertura."
+            "OBSERVACAO": "Rotina pré-abertura; sem movimentação logística.",
+            "NOME_USUARIO": "—",
+            "TERMINAL": "—",
+            "METODO": "registro operacional"
           },
           {
             "DATA": "18/08/2026",
             "HORA": "19h00-20h10",
-            "PORTA": "SETOR-08 / Vitrine",
-            "ID_USUARIO": "USR-MA-022",
-            "NOME_USUARIO": "Marina Vale",
+            "PORTA": "Vitrine / área pública",
+            "ID_USUARIO": "USR-022",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Conferência de suportes da mostra",
+            "EVENTO": "Cobertura de suportes da mostra",
             "CLASSE_LINHA": "normal",
-            "TERMINAL": "Planilha Escala-Oeste",
-            "METODO": "escala operacional",
-            "OBSERVACAO": "Cobertura declarada no período crítico; não explica sozinha a saída pela doca."
+            "OBSERVACAO": "Período crítico; escala não explica sozinha a saída pela doca.",
+            "NOME_USUARIO": "—",
+            "TERMINAL": "—",
+            "METODO": "registro operacional"
           },
           {
             "DATA": "18/08/2026",
             "HORA": "19h30-20h30",
-            "PORTA": "SETOR-01 / Guarita",
-            "ID_USUARIO": "USR-TA-031",
-            "NOME_USUARIO": "Tadeu Nobre",
+            "PORTA": "Guarita / portaria principal",
+            "ID_USUARIO": "USR-031",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Cobertura de ronda e livro de visitantes",
+            "EVENTO": "Cobertura de ronda e livro",
             "CLASSE_LINHA": "normal",
-            "TERMINAL": "Console Portaria",
-            "METODO": "escala de ronda",
-            "OBSERVACAO": "Atraso de ronda reduz vigilância, mas posto não autoriza Reserva Técnica B."
+            "OBSERVACAO": "Atraso reduz vigilância, mas posto não autoriza Reserva Técnica B.",
+            "NOME_USUARIO": "—",
+            "TERMINAL": "—",
+            "METODO": "registro operacional"
           },
           {
             "DATA": "18/08/2026",
             "HORA": "19h35-20h05",
-            "PORTA": "SETOR-03 / Controle de fichas",
-            "ID_USUARIO": "USR-LI-066",
-            "NOME_USUARIO": "Lia Figueira",
+            "PORTA": "Controle de fichas / bancada",
+            "ID_USUARIO": "USR-066",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Revisão de etiquetas RM-17 e PC-14 para conferência de bancada",
+            "EVENTO": "Revisão de etiquetas RM-17 e PC-14",
             "CLASSE_LINHA": "normal",
-            "TERMINAL": "Planilha Etiquetas-RT",
-            "METODO": "ajuste de ficha",
-            "OBSERVACAO": "Cria hipótese por etiqueta, mas não é registro de abertura física."
+            "OBSERVACAO": "Hipótese técnica por etiqueta; não é abertura física de porta.",
+            "NOME_USUARIO": "—",
+            "TERMINAL": "—",
+            "METODO": "registro operacional"
           },
           {
             "DATA": "18/08/2026",
             "HORA": "19h38-20h20",
-            "PORTA": "SETOR-03 / Administração",
-            "ID_USUARIO": "USR-OT-041",
-            "NOME_USUARIO": "Otávio Salles",
+            "PORTA": "Administração / terminal interno",
+            "ID_USUARIO": "TERM-ADM-03",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Autorização e consulta da OS 0147/2026",
+            "EVENTO": "Consulta e autorização da OS 0147/2026",
             "CLASSE_LINHA": "normal",
-            "TERMINAL": "Console Administração",
-            "METODO": "terminal administrativo",
-            "OBSERVACAO": "Permite aprovar fornecedor e OS, não movimentar acervo sozinho."
+            "OBSERVACAO": "Autoriza fornecedor e OS; não movimentar acervo sozinho.",
+            "NOME_USUARIO": "—",
+            "TERMINAL": "—",
+            "METODO": "registro operacional"
           },
           {
             "DATA": "18/08/2026",
             "HORA": "20h20-20h40",
-            "PORTA": "SETOR-08 / Vitrine",
-            "ID_USUARIO": "USR-IN-011",
-            "NOME_USUARIO": "Inês Laranjeira",
+            "PORTA": "Vitrine / área pública",
+            "ID_USUARIO": "USR-014",
             "TIPO_EVENTO": "OPERACAO",
-            "EVENTO": "Conferência final adiada por divergência de peso",
+            "EVENTO": "Conferência final adiada",
             "CLASSE_LINHA": "normal",
-            "TERMINAL": "Planilha Escala-Vitrine",
-            "METODO": "escala operacional",
-            "OBSERVACAO": "Registro posterior ao intervalo crítico."
+            "OBSERVACAO": "Registro posterior ao intervalo crítico.",
+            "NOME_USUARIO": "—",
+            "TERMINAL": "—",
+            "METODO": "registro operacional"
           }
         ],
-        "COLUNA_NOME": true,
-        "COLUNA_TERMINAL": true,
-        "COLUNA_METODO": true,
+        "COLUNA_NOME": false,
+        "COLUNA_TERMINAL": false,
+        "COLUNA_METODO": false,
         "COLUNA_OBS": true
       }
     },
     {
       "codigo": "E1-06",
-      "titulo": "Folha de cruzamento de etiquetas",
+      "titulo": "Registro de conferência de etiquetas e pesos",
       "envelope": "E1",
       "tipo": "folha_cruzamento",
       "emocao_esperada": "curiosidade operacional",
-      "objetivo_narrativo": "Fornecer a inconsistência central entre etiquetas e pesos, mantendo Lia como hipótese técnica plausível mas resolvível por cruzamento com acesso negado e ausência de abertura física.",
+      "objetivo_narrativo": "Fornecer a inconsistência central entre etiquetas e pesos no mesmo padrão de registro operacional de E1-05, mantendo a hipótese técnica dependente da cadeia documental de acesso.",
       "pistas_contidas": [
-        "RM-17 deveria acompanhar a réplica leve; o peso anotado corresponde ao objeto original.",
-        "A conferência de Lia cria suspeita técnica, mas não prova acesso físico nem transporte."
+        "RM-17 e PC-14 aparecem em conferência posterior ao intervalo crítico.",
+        "USR-066 registra revisão técnica, mas a divergência depende da cadeia documental de acesso e da OS.",
+        "A conferência de peso sinaliza troca material sem comprovar autoria sozinha."
       ],
       "confirma": [
         "E1-01",
@@ -568,8 +569,8 @@
         "COR_TOPO": "#3F5E5A",
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
-        "ASSUNTO": "Conferência operacional de etiquetas RM-17 e PC-14",
-        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em balança de bancada e consulta às fichas de acondicionamento. Lia registrou a divergência após a escala já estar congelada, sem autorização de correção retroativa.</p><table><tr><th>Etiqueta</th><th>Ficha esperada</th><th>Peso registrado</th><th>Observação de bancada</th></tr><tr><td>RM-17</td><td>Réplica de restauro para ajuste de moldura</td><td>3,8 kg</td><td>Divergência de peso em relação à ficha da réplica.</td></tr><tr><td>PC-14</td><td>Peça original em cobre</td><td>1,1 kg</td><td>Divergência de peso em relação à ficha do original.</td></tr></table><p>As duas etiquetas foram lacradas em envelopes de controle separados para nova conferência visual no dia seguinte. O registro de etiqueta deve permanecer vinculado à cadeia documental de acesso, escala e movimentação logística antes de qualquer conclusão operacional.</p>",
+        "ASSUNTO": "Registro de conferência de etiquetas e pesos",
+        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em bancada e consulta às fichas de acondicionamento. O quadro abaixo usa a mesma estrutura de leitura de E1-05, sem coluna de nome, para manter os identificadores operacionais comparáveis.</p><table><tr><th>Data</th><th>Hora</th><th>Ponto / Porta / Área</th><th>Identificador</th><th>Evento</th><th>Observação curta</th></tr><tr><td>18/08/2026</td><td>21h12</td><td>Controle de fichas / bancada</td><td>USR-066</td><td>Abertura de conferência</td><td>Revisão iniciada após escala congelada; não retroage registro de porta.</td></tr><tr><td>18/08/2026</td><td>21h18</td><td>Bancada de pesagem</td><td>ETQ-RM-17</td><td>Peso incompatível</td><td>3,8 kg; etiqueta de réplica não bate com ficha esperada.</td></tr><tr><td>18/08/2026</td><td>21h22</td><td>Bancada de pesagem</td><td>ETQ-PC-14</td><td>Peso incompatível</td><td>1,1 kg; peça em vitrine difere da ficha do original.</td></tr><tr><td>18/08/2026</td><td>21h29</td><td>Reserva Técnica B / conferência</td><td>OS-0147/2026</td><td>Vínculo documental</td><td>OS citada para comparar etiqueta, acesso e movimentação logística.</td></tr><tr><td>18/08/2026</td><td>21h41</td><td>Controle de fichas / arquivo</td><td>TERM-ADM-03</td><td>Lacre de envelopes</td><td>cadeia documental preservada para nova vistoria visual.</td></tr></table><p>As divergências foram lacradas em envelopes de controle separados. O registro deve permanecer vinculado à cadeia documental de acesso, escala e movimentação logística antes de qualquer conclusão operacional.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "Lia Figueira",
         "NOME_ASSINANTE": "Lia Figueira",
@@ -651,7 +652,7 @@
         "ASSUNTO": "Trecho do procedimento CAM-SEG-04 — leitura de acessos",
         "CORPO_CARTA": "<p>Trecho extraído do treinamento de funcionários sobre leitura de registros físicos e marcações de escala. O quadro abaixo é arquivado separado da exportação de portas; ele traduz códigos por função, não por nome civil.</p><table><tr><th>ID operacional</th><th>Referência funcional</th><th>Observação</th></tr><tr><td>USR-014</td><td>Curadoria-chefe</td><td>Conferência final e vitrine.</td></tr><tr><td>USR-022</td><td>Curadoria operacional</td><td>Suportes, reserva e vitrine.</td></tr><tr><td>USR-031</td><td>Supervisor noturno</td><td>Guarita, ronda e livro de visitantes.</td></tr><tr><td>TERM-03</td><td>Terminal de depósito</td><td>Movimentação de material de montagem.</td></tr><tr><td>USR-066</td><td>Registro de acervo</td><td>Fichas, etiquetas e validação de vitrine.</td></tr><tr><td>USR-072</td><td>Integridade patrimonial</td><td>Exportação e custódia de relatórios.</td></tr><tr><td>TERM-ADM-03</td><td>Terminal administrativo autorizado</td><td>Consulta de OS em administração; não indica abertura física de reserva.</td></tr></table><p>Portas: P-01 Guarita; P-02 Corredor técnico; P-03 Administração; P-04 Doca de serviço; P-05 Depósito; P-06 Reserva Técnica B; P-07 Reserva Técnica A; P-08 Sala de Segurança; P-09 Vitrine/área pública.</p><p>Setores: SETOR-01 Guarita; SETOR-02 Corredor técnico; SETOR-03 Administração/terminal; SETOR-04 Doca de serviço; SETOR-05 Depósito; SETOR-06 Sala de Segurança; SETOR-07 Reserva Técnica A; SETOR-08 Vitrine/área pública.</p><p><strong>ENTRADA</strong> indica abertura autorizada por credencial válida. <strong>NEGADO</strong> registra tentativa sem abertura. <strong>SAIDA</strong> depende de sensor interno de carga após abertura anterior. <strong>OPERACAO</strong> é marcação de escala, não prova abertura física.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
-        "ASSINATURA_CURSIVA": "V. Matos",
+        "ASSINATURA_CURSIVA": "Vera Matos",
         "NOME_ASSINANTE": "Vera Matos",
         "CARGO_ASSINANTE": "Núcleo de Integridade Patrimonial",
         "ENDERECO_LINHA2": "Porto Claro — setor administrativo",
@@ -691,7 +692,7 @@
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
         "ASSUNTO": "Contrato CAM-APC-44/26",
-        "CORPO_CARTA": "<p>Contrato CAM-APC-44/26 firmado entre Casa de Acervo Mirante e Ateliê Pedra Clara para serviço emergencial de revisão de moldura, embalagem especial e transporte reservado da peça Estudo em cobre nº 14.</p><p>A autorização financeira foi liberada por Otávio Salles às 16h05 de 18/08/2026, com justificativa de risco de inauguração. A prestadora responsável é Celina Duarte.</p><p>Cláusula operacional: a circulação pela doca lateral poderia ocorrer fora do fluxo comum mediante credencial interna de operações.</p>",
+        "CORPO_CARTA": "<p>Contrato CAM-APC-44/26 firmado entre Casa de Acervo Mirante e Ateliê Pedra Clara para revisão de moldura, embalagem especial, transporte reservado e documentação técnica da peça Estudo em cobre nº 14.</p><p>O quadro de compras do mesmo dia também registra Conserva Sul Restauro para laudo, LogisArte Transportes para coleta independente e Mirante Norte Consultoria para apoio administrativo. Este contrato foi aprovado como pacote único por Otávio Salles às 16h05 de 18/08/2026, sob justificativa de prazo de inauguração.</p><p>Cláusula operacional: a circulação pela doca lateral poderia ocorrer fora do fluxo comum mediante credencial interna de operações e referência à OS 0147/2026.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "Otávio Salles",
         "NOME_ASSINANTE": "Otávio Salles",
@@ -741,22 +742,22 @@
         "VALOR_TOTAL": "R$ 18.400,00",
         "VALOR_POR_EXTENSO": "dezoito mil e quatrocentos reais",
         "FORMA_PAGAMENTO": "Transferência bancária",
-        "DESCRICAO_PAGAMENTO": "Revisão de moldura, embalagem especial e transporte reservado conforme CAM-APC-44/26",
+        "DESCRICAO_PAGAMENTO": "Pacote CAM-APC-44/26: revisão de moldura, embalagem especial, transporte reservado e documentação técnica de retorno vinculados à OS 0147/2026",
         "ITENS": [
           {
-            "DESCRICAO_ITEM": "Revisão integral de moldura",
+            "DESCRICAO_ITEM": "Revisão integral de moldura — Ateliê Pedra Clara",
             "QUANTIDADE": "1",
             "VALOR_UNITARIO": "R$ 7.200,00",
             "VALOR_ITEM": "R$ 7.200,00"
           },
           {
-            "DESCRICAO_ITEM": "Transporte reservado noturno",
+            "DESCRICAO_ITEM": "Transporte reservado noturno — subcontratação indicada",
             "QUANTIDADE": "1",
             "VALOR_UNITARIO": "R$ 6.800,00",
             "VALOR_ITEM": "R$ 6.800,00"
           },
           {
-            "DESCRICAO_ITEM": "Documentação técnica de retorno",
+            "DESCRICAO_ITEM": "Documentação técnica de retorno — dossiê fotográfico",
             "QUANTIDADE": "1",
             "VALOR_UNITARIO": "R$ 4.400,00",
             "VALOR_ITEM": "R$ 4.400,00"
@@ -809,7 +810,7 @@
         "DOC_CLIENTE": "41.738.902/0001-64",
         "CONTATO_CLIENTE": "Otávio Salles",
         "TITULO_PROJETO": "Mapa de propostas — OS 0147/2026",
-        "DESCRICAO_REFERENCIA": "Cotações reunidas para serviço emergencial de moldura, acondicionamento, transporte e assessoria administrativa. As linhas abaixo preservam a redação de escopo recebida em compras; a análise depende de comparar prazo, OS, recibo e extrato.",
+        "DESCRICAO_REFERENCIA": "Cotações reunidas para serviço emergencial de moldura, acondicionamento, transporte e assessoria administrativa. As quatro empresas aparecem como alternativas plausíveis; a análise depende de comparar prazo, OS, recibo e extrato.",
         "ITENS": [
           {
             "NUMERO_ITEM": "1",
@@ -860,6 +861,9 @@
           },
           {
             "CONDICAO": "Mirante Norte Consultoria: assessoria para fluxo de fornecedores e documentação administrativa da OS."
+          },
+          {
+            "CONDICAO": "A escolha do pacote deve ser confirmada por OS, recibo e movimentação bancária; o mapa de cotações não decide sozinho."
           }
         ],
         "ASSINATURA_RESPONSAVEL": "Otávio Salles",
@@ -1043,7 +1047,7 @@
         "ASSUNTO": "Aprovação emergencial — OS 0147/2026",
         "AVATAR_INICIAL": "O",
         "AVATAR_COR": "#7A4E2D",
-        "CORPO_EMAIL": "<p>Solicito aprovar ainda hoje a OS 0147/2026. No mapa, a Conserva Sul cobre restauro, a LogisArte cobre logística e a Mirante Norte aparece como apoio administrativo; a opção de pacote completo evita abrir três ordens separadas.</p><p>Operações deve acompanhar a doca lateral e registrar o fluxo conforme o código da OS. A documentação técnica será anexada no fechamento.</p>",
+        "CORPO_EMAIL": "<p>Solicito aprovar ainda hoje a OS 0147/2026. O quadro de compras lista quatro frentes: Conserva Sul para laudo de restauro, LogisArte para coleta, Mirante Norte para apoio administrativo e Ateliê Pedra Clara para pacote com moldura, embalagem, transporte e documentação.</p><p>A opção de pacote único reduz a abertura de ordens separadas, mas peço que compras mantenha os demais fornecedores no dossiê para comparação de escopo e prazo. Operações deve acompanhar a doca lateral e registrar o fluxo conforme o código da OS.</p><p>A documentação técnica será anexada no fechamento; sem o recibo e o extrato, este e-mail não basta para definir benefício ou execução.</p>",
         "NOTA_RODAPE": "E-mail arquivado pela diretoria administrativa.",
         "ANEXOS": false
       }
@@ -1054,7 +1058,7 @@
       "envelope": "E2",
       "tipo": "chat",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Conectar Marina à etiqueta RM-17 e à instrução operacional que confirma a troca.",
+      "objetivo_narrativo": "Sugerir coordenação logística entre OS, doca e etiquetas sem resolver sozinho a autoria; a confirmação depende de cruzar conversa, extrato, recibo e registros operacionais.",
       "pistas_contidas": [
         "Marina escreve que RM-17 deve sair antes da conferência e que a anotação ficará como recebimento."
       ],
@@ -1085,16 +1089,16 @@
             "MOSTRAR_NOME": true,
             "NOME_REMETENTE": "Otávio",
             "COR_REMETENTE": "#7A4E2D",
-            "TEXTO_MENSAGEM": "Confirma que a autorização da Pedra Clara saiu. Preciso que o fluxo não passe pela vitrine.",
-            "HORARIO": "19h36",
+            "TEXTO_MENSAGEM": "A OS 0147 foi liberada. Se a doca congestionar, registrem como recebimento emergencial e avisem só pelo código.",
+            "HORARIO": "19h32",
             "CLASSE_GAP": "gap"
           },
           {
             "DIRECAO": "out",
             "DIRECAO_OUT": true,
             "TICKS": "✓✓",
-            "TEXTO_MENSAGEM": "RM-17 sai pela doca antes da conferência. Vou lançar como recebimento emergencial para fechar a escala.",
-            "HORARIO": "19h44",
+            "TEXTO_MENSAGEM": "Estou na vitrine ainda. O carrinho com RM-17 fica no apoio lateral até a conferência de foto.",
+            "HORARIO": "19h39",
             "CLASSE_GAP": "normal"
           },
           {
@@ -1102,16 +1106,33 @@
             "MOSTRAR_NOME": true,
             "NOME_REMETENTE": "Celina",
             "COR_REMETENTE": "#6A4C3B",
-            "TEXTO_MENSAGEM": "Recibo fica com moldura completa e transporte reservado. A nota de retorno segue depois.",
-            "HORARIO": "19h51",
+            "TEXTO_MENSAGEM": "Pedra Clara consegue receber o pacote de moldura hoje. Transporte reservado só entra se o comprovante ficar no lote certo.",
+            "HORARIO": "19h47",
             "CLASSE_GAP": "gap"
           },
           {
             "DIRECAO": "out",
             "DIRECAO_OUT": true,
             "TICKS": "✓✓",
-            "TEXTO_MENSAGEM": "A etiqueta PC-14 fica na réplica. Sem mexer no livro da portaria.",
-            "HORARIO": "19h56",
+            "TEXTO_MENSAGEM": "Sem mexer no livro da portaria. Deixo a anotação curta de bancada e fecho com o número da OS.",
+            "HORARIO": "19h52",
+            "CLASSE_GAP": "normal"
+          },
+          {
+            "DIRECAO": "in",
+            "MOSTRAR_NOME": true,
+            "NOME_REMETENTE": "Otávio",
+            "COR_REMETENTE": "#7A4E2D",
+            "TEXTO_MENSAGEM": "Não discutam peça por nome aqui. Depois confiram etiqueta, recibo e extrato antes de responder à curadoria.",
+            "HORARIO": "20h04",
+            "CLASSE_GAP": "gap"
+          },
+          {
+            "DIRECAO": "out",
+            "DIRECAO_OUT": true,
+            "TICKS": "✓✓",
+            "TEXTO_MENSAGEM": "Combinado. O que não bater vai aparecer na pesagem de amanhã, então guardo só o mínimo operacional.",
+            "HORARIO": "20h11",
             "CLASSE_GAP": "normal"
           }
         ]
@@ -1344,7 +1365,7 @@
       "emocao_esperada": "confirmação financeira"
     },
     {
-      "descricao": "Chat cita RM-17 saindo pela doca e PC-14 ficando na réplica.",
+      "descricao": "Chat sugere coordenação de doca, OS e etiquetas, mas exige cruzamento com recibo, extrato e auditoria.",
       "documento": "E2-06",
       "o_que_sugere": "Marina executou instrução coordenada com Otávio e Celina.",
       "o_que_prova": "A cadeia final de execução e ocultação.",
@@ -1569,7 +1590,7 @@
       "fase": "E1",
       "titulo": "Começar pela área bloqueada",
       "condicao_uso": "Use se o grupo leu o protocolo e o boletim, mas ainda não delimitou onde a investigação deve concentrar a busca inicial.",
-      "texto": "Oriente o grupo a usar a planta apenas para localizar portas e setores citados nos logs. A planta não tem sequência de percurso; ela serve para traduzir P-xx e SETOR-xx.",
+      "texto": "Oriente o grupo a usar a planta apenas para localizar ambientes e portas citados nos logs. A planta não tem sequência de percurso; ela serve para situar P-xx dentro dos ambientes nomeados.",
       "nivel": "leve",
       "contratos_relacionados": [
         "C-E1-ABERTURA"
