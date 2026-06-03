@@ -321,8 +321,8 @@
           <th>Data</th>
           <th>Hora</th>
           <th>Porta / Zona</th>
-          <th>ID Usuário</th>
-          <th>Nome</th>
+          <th>Usuário / Terminal / OS</th>
+          {{#COLUNA_NOME}}<th>Nome</th>{{/COLUNA_NOME}}
           <th>Evento</th>
           <th>Terminal</th>
           <th>Método</th>
@@ -336,7 +336,7 @@
           <td class="cell-time">{{HORA}}</td>
           <td><span class="cell-door">{{PORTA}}</span></td>
           <td class="cell-id">{{ID_USUARIO}}</td>
-          <td>{{NOME_USUARIO}}</td>
+          {{#COLUNA_NOME}}<td>{{NOME_USUARIO}}</td>{{/COLUNA_NOME}}
           <td class="cell-action-{{TIPO_EVENTO}}">{{EVENTO}}</td>
           <td class="cell-note">{{TERMINAL}}</td>
           <td class="cell-note">{{METODO}}</td>

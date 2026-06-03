@@ -144,9 +144,12 @@ def test_build_visual_documents_gera_pdfs_com_mock_renderer(
     grupos = build_visual_documents(blueprint, tmp_path, strict=True)
 
     assert "E1" in grupos
+    assert "apoio_visual" in grupos
     assert any(path.name.startswith("visual_map_") for path in grupos["E1"])
+    assert all(not path.name.startswith("visual_personagem_") for path in grupos["E1"])
     assert any(call[0] == "visual_map.html" and call[2] is True for call in calls)
-    assert len(grupos["E1"]) == 15
+    assert len(grupos["E1"]) == 1
+    assert len(grupos["apoio_visual"]) == 14
 
 
 def test_caso_canonico_tem_visual_procedural_com_mapa_landscape() -> None:
@@ -178,7 +181,8 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
                 make_pdf(
                     output_dir / "visual_map_casa_acervo_mirante_andar_1.pdf", pages=2
                 )
-            ]
+            ],
+            "apoio_visual": [make_pdf(output_dir / "visual_personagem_01.pdf")],
         }
 
     def fake_render_print_guide(_print_manifest, output_path, strict=True):
@@ -219,7 +223,16 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
     assert visual_map["final_file"] == "01_envelope_1.pdf"
     assert visual_map["page_start"] == 3
     assert visual_map["page_end"] == 4
+    support_file = next(
+        file for file in manifest["files"] if file["id"] == "apoio_visual"
+    )
+    assert support_file["category"] == "visual_support"
+    assert support_file["path"] == "03_apoio_visual.pdf"
+    assert not any(
+        doc["codigo"].startswith("VP-PERSONAGEM-") for doc in manifest["documents"]
+    )
     assert "01_envelope_1.pdf" in {entry["file"] for entry in print_manifest["files"]}
+    assert "03_apoio_visual.pdf" in print_manifest["visual_support_files"]
     assert result["status"] == "passed"
 
 
@@ -253,8 +266,10 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     assert "Sala de Segurança" in svg
     assert "Doca de" in svg
     assert "Serviço" in svg
-    assert "Planta operacional — térreo" in svg
-    assert "identificação de setores e portas" in svg
+    assert "Planta baixa técnica — térreo" in svg
+    assert "setores e portas" in svg
+    assert "P-09 Vitrine" in svg
+    assert 'class="window"' in svg
     assert "Carimbo técnico" in svg
     assert "Rotas não registradas" in svg
     assert "Planta esquemática" not in svg

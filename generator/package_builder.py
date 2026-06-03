@@ -199,48 +199,6 @@ def _build_documents_manifest(
             envelope,
         )
 
-    for personagem in visual.personagens:
-        envelope = "E1"
-        final_file_path = final_by_envelope.get(envelope)
-        source_pdf = rendered_by_name.get(
-            visual_document_path(
-                "character", personagem.personagem_id, package_dir
-            ).name
-        )
-        if final_file_path is None or source_pdf is None:
-            continue
-        titulo = f"Cartão de personagem {personagem.personagem_id}"
-        _append_document_manifest_entry(
-            documents,
-            current_page_by_file,
-            package_dir,
-            final_file_path,
-            source_pdf,
-            visual_document_code("character", personagem.personagem_id),
-            titulo,
-            "visual_procedural",
-            envelope,
-        )
-
-    for local in visual.locais:
-        envelope = "E1"
-        final_file_path = final_by_envelope.get(envelope)
-        source_pdf = rendered_by_name.get(
-            visual_document_path("location", local.id, package_dir).name
-        )
-        if final_file_path is None or source_pdf is None:
-            continue
-        _append_document_manifest_entry(
-            documents,
-            current_page_by_file,
-            package_dir,
-            final_file_path,
-            source_pdf,
-            visual_document_code("location", local.id),
-            local.nome,
-            "visual_procedural",
-            envelope,
-        )
     return documents
 
 
@@ -304,6 +262,23 @@ def _merge_groups(
             }
         )
         final_by_envelope[group] = merged
+        index += 1
+
+    support_pdfs = rendered_groups.get("apoio_visual", [])
+    if support_pdfs:
+        output_path = _numbered_output(package_dir, index, "apoio_visual.pdf")
+        paths["apoio_visual"] = output_path
+        merged = merge_pdfs(support_pdfs, output_path)
+        files.append(
+            {
+                "id": "apoio_visual",
+                "label": "Apoio visual — cartões",
+                "path": _relative(merged, package_dir),
+                "category": "visual_support",
+                "confidential": False,
+                "page_count": count_pdf_pages(merged),
+            }
+        )
         index += 1
 
     for group in ["dicas", "gabarito"]:
