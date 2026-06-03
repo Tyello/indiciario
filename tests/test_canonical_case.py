@@ -22,7 +22,7 @@ def test_caso_canonico_carrega_como_blueprint():
     blueprint = _blueprint()
 
     assert blueprint.titulo == "O Desvio da Reserva Mirante"
-    assert len(blueprint.documentos) == 15
+    assert len(blueprint.documentos) == 17
 
 
 def test_caso_canonico_validator_nao_gera_criticos():
@@ -165,7 +165,7 @@ def test_caso_canonico_e1_distribui_suspeitas_sem_cravar_marina():
     }
     saida_doca = registros_log["19h57"]
 
-    assert saida_doca["PORTA"] == "P-04 / Doca de serviço"
+    assert saida_doca["PORTA"] == "P-04"
     assert saida_doca["TIPO_EVENTO"] == "SAIDA"
     assert saida_doca["ID_USUARIO"] == "OS-0147/2026"
     consulta_os = registros_log["20h08"]

@@ -32,13 +32,13 @@ def test_analyze_playtest_gera_report_valido_serializavel(tmp_path):
 
     output = write_playtest_report(report, tmp_path / "playtest_report.json")
     loaded = json.loads(output.read_text(encoding="utf-8"))
-    assert loaded["summary"]["documents"] == 15
+    assert loaded["summary"]["documents"] == 17
 
 
 def test_tempo_estimado_eh_calculado_por_documentos_contratos_e_envelopes():
     report = analyze_playtest(blueprint_with())
 
-    assert report["summary"]["estimated_minutes"] == 80
+    assert report["summary"]["estimated_minutes"] == 88
 
 
 def test_carga_cognitiva_baixa():
