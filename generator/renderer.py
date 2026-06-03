@@ -49,36 +49,93 @@ ASSINATURA_KEYS = (
 )
 
 
-def _assinatura_svg(texto: str, compacta: bool = False) -> str:
-    """Gera uma assinatura SVG leve, fina e determinística a partir de um nome."""
+def _perfil_assinatura(chave: str) -> str:
+    """Classifica o uso visual da assinatura para variar gesto e composição."""
+    if chave in {"ASSINATURA_GLIFO", "ASSINATURA_TESTEMUNHA", "ASSINATURA_RASCUNHO"}:
+        return "rubrica_curta"
+    if chave in {
+        "ASSINATURA_RESPONSAVEL",
+        "ASSINATURA_PRESTADOR",
+        "ASSINATURA_CLIENTE",
+    }:
+        return "assinatura_comercial"
+    if chave in {"ASSINATURA_CONTRATANTE", "ASSINATURA_ADVOGADO"}:
+        return "assinatura_administrativa"
+    return "assinatura_formal"
+
+
+def _assinatura_svg(texto: str, perfil: str = "assinatura_formal") -> str:
+    """Gera assinatura SVG fina e determinística com perfis visuais distintos."""
     nome = " ".join(str(texto).split())
     if not nome or nome == "—":
         return ""
 
-    largura = 170 if compacta else 230
-    altura = 46 if compacta else 58
-    base_y = 30 if compacta else 38
-    seed = sum((index + 1) * ord(char) for index, char in enumerate(nome))
-    iniciais = "".join(parte[0] for parte in nome.replace(".", " ").split()[:3]).upper()
+    seed = sum((index + 1) * ord(char) for index, char in enumerate(nome + perfil))
+    partes_nome = nome.replace(".", " ").split()
+    iniciais = "".join(parte[0] for parte in partes_nome[:3]).upper()
+    primeiro = partes_nome[0] if partes_nome else nome
+    ultimo = partes_nome[-1] if len(partes_nome) > 1 else ""
     cor = "#1d2733"
-    partes = [
-        f'<svg class="signature-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura} {altura}" '
-        'aria-label="assinatura manuscrita" role="img">',
-        f'<path d="M8 {base_y + (seed % 4) - 2} C {largura * .18:.1f} {base_y - 18 - seed % 5}, '
-        f'{largura * .28:.1f} {base_y + 14}, {largura * .40:.1f} {base_y - 3} '
-        f'S {largura * .62:.1f} {base_y - 17}, {largura * .76:.1f} {base_y - 2} '
-        f'S {largura * .88:.1f} {base_y + 10}, {largura - 12} {base_y - 5}" '
-        f'fill="none" stroke="{cor}" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/>',
-        f'<path d="M24 {base_y + 3} C {largura * .24:.1f} {base_y + 15}, '
-        f'{largura * .46:.1f} {base_y + 1}, {largura * .70:.1f} {base_y + 7} '
-        f'S {largura * .88:.1f} {base_y + 12}, {largura - 18} {base_y + 3}" '
-        f'fill="none" stroke="{cor}" stroke-width="0.9" stroke-linecap="round" opacity="0.42"/>',
-        f'<text x="{12 + seed % 9}" y="{base_y - 2}" font-family="Segoe Script, Lucida Handwriting, Brush Script MT, cursive" '
-        f'font-size="{20 if compacta else 25}" fill="{cor}" opacity="0.58" '
-        f'transform="rotate({-4 + seed % 7} {largura / 2:g} {altura / 2:g})">{escape(iniciais)}</text>',
-        '</svg>',
-    ]
-    return "".join(partes)
+
+    if perfil == "rubrica_curta":
+        largura, altura, base_y = 150, 42, 28
+        texto_principal = iniciais[:3]
+        tamanho = 20 + seed % 3
+        caminhos = [
+            f"M10 {base_y + seed % 3} C 28 {base_y - 15}, 42 {base_y + 12}, 58 {base_y - 2} S 86 {base_y - 16}, 104 {base_y - 1}",
+            f"M36 {base_y + 8} C 58 {base_y + 16}, 86 {base_y + 7}, 132 {base_y + 10}",
+            f"M112 {base_y - 2} l18 {-6 + seed % 5} m-7 {-2} l10 {9 - seed % 4}",
+        ]
+    elif perfil == "assinatura_comercial":
+        largura, altura, base_y = 245, 58, 38
+        texto_principal = f"{primeiro[0]}. {ultimo}" if ultimo else primeiro
+        tamanho = 21 + seed % 4
+        caminhos = [
+            f"M8 {base_y - 4} C 42 {base_y - 24}, 64 {base_y + 12}, 91 {base_y - 8} S 145 {base_y - 24}, 178 {base_y - 4} S 216 {base_y + 8}, 234 {base_y - 8}",
+            f"M22 {base_y + 8} C 62 {base_y + 17}, 123 {base_y + 8}, 224 {base_y + 11}",
+            f"M184 {base_y - 18} C 196 {base_y - 1}, 207 {base_y - 1}, 218 {base_y - 18}",
+        ]
+    elif perfil == "assinatura_administrativa":
+        largura, altura, base_y = 225, 52, 34
+        texto_principal = iniciais if seed % 2 else nome
+        tamanho = 18 + seed % 3
+        caminhos = [
+            f"M12 {base_y - 7} C 47 {base_y - 11}, 68 {base_y + 8}, 102 {base_y - 4} S 158 {base_y - 16}, 210 {base_y - 7}",
+            f"M18 {base_y + 7} L 206 {base_y + 7 + seed % 3}",
+            f"M32 {base_y - 18} C 44 {base_y + 0}, 55 {base_y + 0}, 66 {base_y - 18}",
+        ]
+    else:
+        largura, altura, base_y = 255, 62, 40
+        texto_principal = nome
+        tamanho = 22 + seed % 5
+        caminhos = [
+            f"M10 {base_y - 3} C 45 {base_y - 30}, 73 {base_y + 16}, 104 {base_y - 8} S 157 {base_y - 26}, 190 {base_y - 6} S 226 {base_y + 8}, 242 {base_y - 10}",
+            f"M20 {base_y + 9} C 62 {base_y + 19}, 128 {base_y + 5}, 238 {base_y + 12}",
+            f"M72 {base_y - 24} C 83 {base_y - 2}, 96 {base_y - 1}, 106 {base_y - 23} M184 {base_y - 21} c10 18 22 18 32 0",
+        ]
+
+    rotacao = -6 + seed % 13
+    escala_y = 0.92 + (seed % 9) / 100
+    paths = []
+    for index, caminho in enumerate(caminhos):
+        stroke = 1.45 if index == 0 else 0.9 if index == 1 else 1.05
+        opacity = 0.78 if index == 0 else 0.42 if index == 1 else 0.62
+        paths.append(
+            f'<path d="{caminho}" fill="none" stroke="{cor}" stroke-width="{stroke}" '
+            f'stroke-linecap="round" stroke-linejoin="round" opacity="{opacity}"/>'
+        )
+
+    return "".join(
+        [
+            f'<svg class="signature-svg signature-{perfil}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura} {altura}" '
+            f'aria-label="assinatura manuscrita {perfil.replace("_", " ")}" role="img">',
+            f'<g transform="rotate({rotacao} {largura / 2:g} {altura / 2:g}) scale(1 {escala_y:.2f})">',
+            *paths,
+            f'<text x="{14 + seed % 11}" y="{base_y - 3}" font-family="Segoe Script, Lucida Handwriting, Brush Script MT, cursive" '
+            f'font-size="{tamanho}" fill="{cor}" opacity="0.56">{escape(texto_principal)}</text>',
+            "</g></svg>",
+        ]
+    )
 
 
 def preparar_assinaturas_visuais(dados: dict[str, Any]) -> dict[str, Any]:
@@ -89,7 +146,7 @@ def preparar_assinaturas_visuais(dados: dict[str, Any]) -> dict[str, Any]:
         if isinstance(valor, str) and valor.strip():
             enriquecidos[f"{chave}_VISUAL"] = _assinatura_svg(
                 valor,
-                compacta=chave in {"ASSINATURA_GLIFO", "ASSINATURA_TESTEMUNHA"},
+                perfil=_perfil_assinatura(chave),
             )
     return enriquecidos
 
