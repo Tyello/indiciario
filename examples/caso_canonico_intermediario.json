@@ -410,8 +410,8 @@
       "emocao_esperada": "curiosidade operacional",
       "objetivo_narrativo": "Mostrar funções previstas e limitações de cada hipótese inicial: Marina tinha rotina de vitrine, Otávio tinha OS/terminal, Lia tinha etiquetas sem porta aberta e Tadeu tinha atraso sem credencial de reserva.",
       "pistas_contidas": [
-        "Marina deveria estar no salão oeste até 20h10, mas a escala também coloca Otávio no terminal administrativo e Lia no controle de fichas/etiquetas durante a janela.",
-        "Tadeu atrasou a ronda, porém sua cobertura era a portaria principal e não a reserva B."
+        "A escala coloca vitrine, guarita, controle de fichas e administração em atividade durante a janela crítica.",
+        "Os identificadores USR-022, USR-031, USR-066 e TERM-ADM-03 aparecem em funções operacionais distintas."
       ],
       "confirma": [
         "E1-03",
@@ -455,7 +455,7 @@
             "TIPO_EVENTO": "OPERACAO",
             "EVENTO": "Conferência de iluminação",
             "CLASSE_LINHA": "normal",
-            "OBSERVACAO": "Rotina pré-abertura; sem movimentação logística.",
+            "OBSERVACAO": "Rotina pré-abertura registrada em vitrine.",
             "NOME_USUARIO": "—",
             "TERMINAL": "—",
             "METODO": "registro operacional"
@@ -468,7 +468,7 @@
             "TIPO_EVENTO": "OPERACAO",
             "EVENTO": "Cobertura de suportes da mostra",
             "CLASSE_LINHA": "normal",
-            "OBSERVACAO": "Período crítico; escala não explica sozinha a saída pela doca.",
+            "OBSERVACAO": "Cobertura de suportes anotada para o período de montagem.",
             "NOME_USUARIO": "—",
             "TERMINAL": "—",
             "METODO": "registro operacional"
@@ -481,7 +481,7 @@
             "TIPO_EVENTO": "OPERACAO",
             "EVENTO": "Cobertura de ronda e livro",
             "CLASSE_LINHA": "normal",
-            "OBSERVACAO": "Atraso reduz vigilância, mas posto não autoriza Reserva Técnica B.",
+            "OBSERVACAO": "Cobertura de ronda e livro com atraso anotado no posto.",
             "NOME_USUARIO": "—",
             "TERMINAL": "—",
             "METODO": "registro operacional"
@@ -494,7 +494,7 @@
             "TIPO_EVENTO": "OPERACAO",
             "EVENTO": "Revisão de etiquetas RM-17 e PC-14",
             "CLASSE_LINHA": "normal",
-            "OBSERVACAO": "Hipótese técnica por etiqueta; não é abertura física de porta.",
+            "OBSERVACAO": "Revisão de etiquetas anotada em bancada de fichas.",
             "NOME_USUARIO": "—",
             "TERMINAL": "—",
             "METODO": "registro operacional"
@@ -507,7 +507,7 @@
             "TIPO_EVENTO": "OPERACAO",
             "EVENTO": "Consulta e autorização da OS 0147/2026",
             "CLASSE_LINHA": "normal",
-            "OBSERVACAO": "Autoriza fornecedor e OS; não movimentar acervo sozinho.",
+            "OBSERVACAO": "Consulta administrativa vinculada à OS 0147/2026.",
             "NOME_USUARIO": "—",
             "TERMINAL": "—",
             "METODO": "registro operacional"
@@ -520,7 +520,7 @@
             "TIPO_EVENTO": "OPERACAO",
             "EVENTO": "Conferência final adiada",
             "CLASSE_LINHA": "normal",
-            "OBSERVACAO": "Registro posterior ao intervalo crítico.",
+            "OBSERVACAO": "Conferência final remarcada após aviso de divergência.",
             "NOME_USUARIO": "—",
             "TERMINAL": "—",
             "METODO": "registro operacional"
@@ -570,7 +570,7 @@
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
         "ASSUNTO": "Registro de conferência de etiquetas e pesos",
-        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em bancada e consulta às fichas de acondicionamento. O quadro abaixo usa a mesma estrutura de leitura de E1-05, sem coluna de nome, para manter os identificadores operacionais comparáveis.</p><table><tr><th>Data</th><th>Hora</th><th>Ponto / Porta / Área</th><th>Identificador</th><th>Evento</th><th>Observação curta</th></tr><tr><td>18/08/2026</td><td>21h12</td><td>Controle de fichas / bancada</td><td>USR-066</td><td>Abertura de conferência</td><td>Revisão iniciada após escala congelada; não retroage registro de porta.</td></tr><tr><td>18/08/2026</td><td>21h18</td><td>Bancada de pesagem</td><td>ETQ-RM-17</td><td>Peso incompatível</td><td>3,8 kg; etiqueta de réplica não bate com ficha esperada.</td></tr><tr><td>18/08/2026</td><td>21h22</td><td>Bancada de pesagem</td><td>ETQ-PC-14</td><td>Peso incompatível</td><td>1,1 kg; peça em vitrine difere da ficha do original.</td></tr><tr><td>18/08/2026</td><td>21h29</td><td>Reserva Técnica B / conferência</td><td>OS-0147/2026</td><td>Vínculo documental</td><td>OS citada para comparar etiqueta, acesso e movimentação logística.</td></tr><tr><td>18/08/2026</td><td>21h41</td><td>Controle de fichas / arquivo</td><td>TERM-ADM-03</td><td>Lacre de envelopes</td><td>cadeia documental preservada para nova vistoria visual.</td></tr></table><p>As divergências foram lacradas em envelopes de controle separados. O registro deve permanecer vinculado à cadeia documental de acesso, escala e movimentação logística antes de qualquer conclusão operacional.</p>",
+        "CORPO_CARTA": "<p>Conferência manual feita às 21h20 por dupla de inventário, com pesagem em bancada e consulta às fichas de acondicionamento. O quadro abaixo segue o padrão interno de exportação CAM, sem coluna de nome, para manter os identificadores operacionais comparáveis.</p><table><tr><th>Data</th><th>Hora</th><th>Ponto / Porta / Área</th><th>Identificador</th><th>Evento</th><th>Observação curta</th></tr><tr><td>18/08/2026</td><td>21h12</td><td>Controle de fichas / bancada</td><td>USR-066</td><td>Abertura de conferência</td><td>Revisão iniciada após escala congelada; não retroage registro de porta.</td></tr><tr><td>18/08/2026</td><td>21h18</td><td>Bancada de pesagem</td><td>ETQ-RM-17</td><td>Peso incompatível</td><td>3,8 kg; etiqueta de réplica não bate com ficha esperada.</td></tr><tr><td>18/08/2026</td><td>21h22</td><td>Bancada de pesagem</td><td>ETQ-PC-14</td><td>Peso incompatível</td><td>1,1 kg; peça em vitrine difere da ficha do original.</td></tr><tr><td>18/08/2026</td><td>21h29</td><td>Reserva Técnica B / conferência</td><td>OS-0147/2026</td><td>Vínculo documental</td><td>OS citada para comparar etiqueta, acesso e movimentação logística.</td></tr><tr><td>18/08/2026</td><td>21h41</td><td>Controle de fichas / arquivo</td><td>TERM-ADM-03</td><td>Lacre de envelopes</td><td>cadeia documental preservada para nova vistoria visual.</td></tr></table><p>As divergências foram lacradas em envelopes de controle separados. O registro deve permanecer vinculado à cadeia documental de acesso, escala e movimentação logística antes de qualquer conclusão operacional.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "Lia Figueira",
         "NOME_ASSINANTE": "Lia Figueira",
@@ -777,7 +777,7 @@
       "objetivo_narrativo": "Apresentar quatro empresas visíveis com escopos distintos — moldura/transporte, restauro, transporte e assessoria — sem indicar isoladamente qual fecha a solução.",
       "pistas_contidas": [
         "Quatro fornecedores aparecem em linhas legíveis: Ateliê Pedra Clara, Conserva Sul Restauro, LogisArte Transportes e Mirante Norte Consultoria.",
-        "A comparação exige combinar escopo, prazo, OS, recibo e extrato; nenhuma linha isolada resolve o caso."
+        "As linhas diferem por escopo, prazo, valor e referência administrativa, sem destacar uma resposta visual única."
       ],
       "confirma": [
         "E2-01",
@@ -810,7 +810,7 @@
         "DOC_CLIENTE": "41.738.902/0001-64",
         "CONTATO_CLIENTE": "Otávio Salles",
         "TITULO_PROJETO": "Mapa de propostas — OS 0147/2026",
-        "DESCRICAO_REFERENCIA": "Cotações reunidas para serviço emergencial de moldura, acondicionamento, transporte e assessoria administrativa. As quatro empresas aparecem como alternativas plausíveis; a análise depende de comparar prazo, OS, recibo e extrato.",
+        "DESCRICAO_REFERENCIA": "Cotações reunidas para serviço emergencial de moldura, acondicionamento, transporte e assessoria administrativa. As quatro empresas aparecem como alternativas plausíveis, com diferenças de prazo, escopo, valor e referência administrativa.",
         "ITENS": [
           {
             "NUMERO_ITEM": "1",
@@ -863,7 +863,7 @@
             "CONDICAO": "Mirante Norte Consultoria: assessoria para fluxo de fornecedores e documentação administrativa da OS."
           },
           {
-            "CONDICAO": "A escolha do pacote deve ser confirmada por OS, recibo e movimentação bancária; o mapa de cotações não decide sozinho."
+            "CONDICAO": "Compras manteve todas as linhas no mapa interno por prazo, escopo e disponibilidade de atendimento."
           }
         ],
         "ASSINATURA_RESPONSAVEL": "Otávio Salles",
@@ -1060,7 +1060,8 @@
       "emocao_esperada": "confirmação progressiva",
       "objetivo_narrativo": "Sugerir coordenação logística entre OS, doca e etiquetas sem resolver sozinho a autoria; a confirmação depende de cruzar conversa, extrato, recibo e registros operacionais.",
       "pistas_contidas": [
-        "Marina escreve que RM-17 deve sair antes da conferência e que a anotação ficará como recebimento."
+        "A conversa menciona OS 0147, doca, RM-17, pacote de moldura e uma anotação curta de bancada.",
+        "As mensagens sugerem coordenação operacional e cuidado com linguagem, sem explicar benefício financeiro ou autoria isoladamente."
       ],
       "confirma": [
         "E1-06",
@@ -1123,7 +1124,7 @@
             "MOSTRAR_NOME": true,
             "NOME_REMETENTE": "Otávio",
             "COR_REMETENTE": "#7A4E2D",
-            "TEXTO_MENSAGEM": "Não discutam peça por nome aqui. Depois confiram etiqueta, recibo e extrato antes de responder à curadoria.",
+            "TEXTO_MENSAGEM": "Não discutam peça por nome aqui. Depois deixem só o resumo de fechamento no canal da montagem.",
             "HORARIO": "20h04",
             "CLASSE_GAP": "gap"
           },

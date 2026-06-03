@@ -179,7 +179,8 @@ def test_caso_canonico_e1_distribui_suspeitas_sem_cravar_marina():
     assert "OS 0147/2026" in texto_e1
 
     assert "sem tradução nominal" in e104.objetivo_narrativo
-    assert "não explica sozinha" in str(e105.conteudo)
+    assert "escala não explica sozinha" not in str(e105.conteudo)
+    assert "Cobertura de suportes anotada" in str(e105.conteudo)
 
 
 def test_caso_canonico_e1_falsos_caminhos_tem_limites_justos():
@@ -197,9 +198,11 @@ def test_caso_canonico_e1_falsos_caminhos_tem_limites_justos():
         "NEGADO</strong> registra tentativa sem abertura"
         in e108.conteudo["CORPO_CARTA"]
     )
-    assert "não autoriza Reserva Técnica B" in str(e105.conteudo)
-    assert "não movimentar acervo sozinho" in str(e105.conteudo)
+    assert "não autoriza Reserva Técnica B" not in str(e105.conteudo)
+    assert "não movimentar acervo sozinho" not in str(e105.conteudo)
+    assert "Consulta administrativa vinculada à OS 0147/2026" in str(e105.conteudo)
     assert "cadeia documental" in str(e106.conteudo)
+    assert "estrutura de leitura de E1-05" not in str(e106.conteudo)
     assert "não comprova abertura de porta" not in str(e106.conteudo)
 
 
