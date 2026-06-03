@@ -260,16 +260,17 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     assert ">2<" not in svg
     assert ">3<" not in svg
     assert "rota provável" not in svg
-    assert "Legenda" in svg
-    assert "P-06 Reserva Técnica B" in svg
+    assert "Legenda" not in svg
+    assert "Carimbo técnico" not in svg
+    assert "Rotas não registradas" not in svg
+    assert "P-06" in svg
+    assert "Reserva Técnica B" in svg
     assert "Reserva Técnica A" in svg
     assert "Sala de Segurança" in svg
     assert "Doca de" in svg
     assert "Serviço" in svg
-    assert "Planta baixa técnica — térreo" in svg
-    assert "setores e portas" in svg
-    assert "P-09 Vitrine" in svg
+    assert "Planta baixa — Casa de Acervo Mirante" in svg
+    assert "Ambientes nomeados na planta" in svg
+    assert "P-09" in svg
     assert 'class="window"' in svg
-    assert "Carimbo técnico" in svg
-    assert "Rotas não registradas" in svg
     assert "Planta esquemática" not in svg

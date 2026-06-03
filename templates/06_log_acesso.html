@@ -161,15 +161,12 @@
     vertical-align: top;
   }
 
-  th:nth-child(1) { width: 8%; }
-  th:nth-child(2) { width: 8%; }
-  th:nth-child(3) { width: 12%; }
-  th:nth-child(4) { width: 7%; }
-  th:nth-child(5) { width: 11%; }
+  th:nth-child(1) { width: 10%; }
+  th:nth-child(2) { width: 10%; }
+  th:nth-child(3) { width: 20%; }
+  th:nth-child(4) { width: 16%; }
+  th:nth-child(5) { width: 22%; }
   th:nth-child(6) { width: 22%; }
-  th:nth-child(7) { width: 10%; }
-  th:nth-child(8) { width: 8%; }
-  th:nth-child(9) { width: 14%; }
 
   /* Cell types */
   .cell-date { color: #7d8590; font-size: 10.5px; }
@@ -320,13 +317,10 @@
         <tr>
           <th>Data</th>
           <th>Hora</th>
-          <th>Porta / Zona</th>
-          <th>Usuário / Terminal / OS</th>
-          {{#COLUNA_NOME}}<th>Nome</th>{{/COLUNA_NOME}}
+          <th>Ponto / Porta / Área</th>
+          <th>Identificador</th>
           <th>Evento</th>
-          <th>Terminal</th>
-          <th>Método</th>
-          <th>Observação</th>
+          <th>Observação curta</th>
         </tr>
       </thead>
       <tbody>
@@ -336,10 +330,7 @@
           <td class="cell-time">{{HORA}}</td>
           <td><span class="cell-door">{{PORTA}}</span></td>
           <td class="cell-id">{{ID_USUARIO}}</td>
-          {{#COLUNA_NOME}}<td>{{NOME_USUARIO}}</td>{{/COLUNA_NOME}}
           <td class="cell-action-{{TIPO_EVENTO}}">{{EVENTO}}</td>
-          <td class="cell-note">{{TERMINAL}}</td>
-          <td class="cell-note">{{METODO}}</td>
           <td class="cell-note">{{OBSERVACAO}}</td>
         </tr>
         {{/REGISTROS}}
@@ -355,7 +346,7 @@
     </div>
     <div class="stat-item">
       <span class="stat-value">{{TOTAL_USUARIOS}}</span>
-      <span class="stat-label">Usuários únicos</span>
+      <span class="stat-label">Identificadores</span>
     </div>
     <div class="stat-item highlight">
       <span class="stat-value">{{TOTAL_ENTRADAS}}</span>

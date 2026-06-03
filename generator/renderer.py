@@ -21,6 +21,7 @@ import os
 import json
 import re
 import warnings
+from html import escape
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +29,69 @@ TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
 
 logger = logging.getLogger(__name__)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Assinaturas visuais
+# ──────────────────────────────────────────────────────────────────────────────
+
+ASSINATURA_KEYS = (
+    "ASSINATURA_CURSIVA",
+    "ASSINATURA_RESPONSAVEL",
+    "ASSINATURA_GLIFO",
+    "ASSINATURA_PRESTADOR",
+    "ASSINATURA_CONTRATANTE",
+    "ASSINATURA_CLIENTE",
+    "ASSINATURA_TESTADOR",
+    "ASSINATURA_ADVOGADO",
+    "ASSINATURA_TESTEMUNHA",
+    "ASSINATURA_RASCUNHO",
+)
+
+
+def _assinatura_svg(texto: str, compacta: bool = False) -> str:
+    """Gera uma assinatura SVG leve, fina e determinística a partir de um nome."""
+    nome = " ".join(str(texto).split())
+    if not nome or nome == "—":
+        return ""
+
+    largura = 170 if compacta else 230
+    altura = 46 if compacta else 58
+    base_y = 30 if compacta else 38
+    seed = sum((index + 1) * ord(char) for index, char in enumerate(nome))
+    iniciais = "".join(parte[0] for parte in nome.replace(".", " ").split()[:3]).upper()
+    cor = "#1d2733"
+    partes = [
+        f'<svg class="signature-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura} {altura}" '
+        'aria-label="assinatura manuscrita" role="img">',
+        f'<path d="M8 {base_y + (seed % 4) - 2} C {largura * .18:.1f} {base_y - 18 - seed % 5}, '
+        f'{largura * .28:.1f} {base_y + 14}, {largura * .40:.1f} {base_y - 3} '
+        f'S {largura * .62:.1f} {base_y - 17}, {largura * .76:.1f} {base_y - 2} '
+        f'S {largura * .88:.1f} {base_y + 10}, {largura - 12} {base_y - 5}" '
+        f'fill="none" stroke="{cor}" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/>',
+        f'<path d="M24 {base_y + 3} C {largura * .24:.1f} {base_y + 15}, '
+        f'{largura * .46:.1f} {base_y + 1}, {largura * .70:.1f} {base_y + 7} '
+        f'S {largura * .88:.1f} {base_y + 12}, {largura - 18} {base_y + 3}" '
+        f'fill="none" stroke="{cor}" stroke-width="0.9" stroke-linecap="round" opacity="0.42"/>',
+        f'<text x="{12 + seed % 9}" y="{base_y - 2}" font-family="Segoe Script, Lucida Handwriting, Brush Script MT, cursive" '
+        f'font-size="{20 if compacta else 25}" fill="{cor}" opacity="0.58" '
+        f'transform="rotate({-4 + seed % 7} {largura / 2:g} {altura / 2:g})">{escape(iniciais)}</text>',
+        '</svg>',
+    ]
+    return "".join(partes)
+
+
+def preparar_assinaturas_visuais(dados: dict[str, Any]) -> dict[str, Any]:
+    """Acrescenta campos *_VISUAL para templates que exigem assinatura real."""
+    enriquecidos = dict(dados)
+    for chave in ASSINATURA_KEYS:
+        valor = enriquecidos.get(chave)
+        if isinstance(valor, str) and valor.strip():
+            enriquecidos[f"{chave}_VISUAL"] = _assinatura_svg(
+                valor,
+                compacta=chave in {"ASSINATURA_GLIFO", "ASSINATURA_TESTEMUNHA"},
+            )
+    return enriquecidos
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -64,6 +128,8 @@ def renderizar_html(template: str, dados: dict[str, Any]) -> str:
       3. Seções inversas  {{^CHAVE}}...{{/CHAVE}} onde dados[CHAVE] é falsy
       4. Escalares simples {{CHAVE}}
     """
+    dados = preparar_assinaturas_visuais(dados)
+
     # Padrão: captura nome da seção e conteúdo (não-greedy, DOTALL)
     SECAO_RE = re.compile(r"\{\{([#\^])(\w+)\}\}(.*?)\{\{/\2\}\}", re.DOTALL)
 

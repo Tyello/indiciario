@@ -39,55 +39,56 @@ def _personagem_nome(personagem: PersonagemVisual, blueprint: Blueprint) -> str:
 def _build_mirante_floor_plan_svg(mapa: MapaProcedural) -> str:
     """Monta a planta dedicada do caso canônico Casa de Acervo Mirante."""
     del mapa
-    return """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Planta baixa técnica térrea da Casa de Acervo Mirante">
-  <desc>Planta baixa em tons de cinza com guarita, pátio, administração, sala de segurança, doca, depósito, reservas técnicas A e B, vitrine, paredes, janelas e portas P-01 a P-09. Não há marcação de rota ou sequência de solução.</desc>
+    return """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Planta baixa do térreo da Casa de Acervo Mirante">
+  <desc>Planta baixa em tons de cinza com Guarita, Pátio externo, Administração, Sala de Segurança, Doca de Serviço, Depósito, Reserva Técnica A, Reserva Técnica B, Vitrine / área pública, paredes, janelas e portas codificadas P-01 a P-09 para cruzamento documental.</desc>
   <defs>
-    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eeeeee" stroke-width="1"/></pattern>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#f0f0f0" stroke-width="1"/></pattern>
     <style>
-      .outer{fill:#fbfbfb;stroke:#111;stroke-width:8;stroke-linejoin:miter}.wall{stroke:#111;stroke-width:6;stroke-linecap:square}.partition{stroke:#111;stroke-width:4;stroke-linecap:square}.room{fill:#f7f7f7;stroke:#666;stroke-width:1.4}.service-room{fill:#f1f1f1;stroke:#555;stroke-width:1.4}.reserve-room{fill:#eeeeee;stroke:#444;stroke-width:1.4}.public-room{fill:#fafafa;stroke:#555;stroke-width:1.4}.external-room{fill:#f4f4f4;stroke:#777;stroke-width:1.2;stroke-dasharray:5 4}.label{font-family:Arial,sans-serif;font-size:15px;font-weight:700;fill:#111;text-anchor:middle}.small{font-family:Arial,sans-serif;font-size:10.5px;fill:#555;text-anchor:middle}.micro{font-family:Arial,sans-serif;font-size:10px;fill:#666}.door{fill:none;stroke:#111;stroke-width:2.5;stroke-linecap:round}.door-gap{stroke:#fbfbfb;stroke-width:10;stroke-linecap:square}.window{stroke:#111;stroke-width:2.2;stroke-linecap:square}.window-glass{stroke:#777;stroke-width:1}.legend{font-family:Arial,sans-serif;font-size:11.5px;fill:#111}.legend-title{font-family:Arial,sans-serif;font-size:14px;font-weight:700;fill:#111}.stamp{font-family:Arial,sans-serif;font-size:10px;fill:#111;text-transform:uppercase;letter-spacing:.05em}.door-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;fill:#111;text-anchor:middle}
+      .wall{fill:#fbfbfb;stroke:#111;stroke-width:7;stroke-linejoin:miter}.partition{stroke:#111;stroke-width:4.5;stroke-linecap:square}.room{fill:#f8f8f8;stroke:#5f5f5f;stroke-width:1.2}.service{fill:#f0f0f0;stroke:#555;stroke-width:1.2}.reserve{fill:#e9e9e9;stroke:#444;stroke-width:1.3}.public{fill:#fcfcfc;stroke:#555;stroke-width:1.2}.outside{fill:#f6f6f6;stroke:#777;stroke-width:1.1;stroke-dasharray:6 5}.label{font-family:Arial,sans-serif;font-size:15px;font-weight:700;fill:#111;text-anchor:middle}.small{font-family:Arial,sans-serif;font-size:11px;fill:#565656;text-anchor:middle}.micro{font-family:Arial,sans-serif;font-size:10px;fill:#555}.door-gap{stroke:#fbfbfb;stroke-width:12;stroke-linecap:square}.door{fill:none;stroke:#111;stroke-width:2.4;stroke-linecap:round}.door-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;fill:#111;text-anchor:middle}.window{stroke:#111;stroke-width:2.1;stroke-linecap:square}.window-glass{stroke:#787878;stroke-width:1}.north{font-family:Arial,sans-serif;font-size:11px;fill:#111;text-anchor:middle}
     </style>
   </defs>
   <rect x="0" y="0" width="960" height="540" fill="#fff"/>
-  <rect x="18" y="18" width="924" height="504" fill="url(#grid)" stroke="#d4d4d4"/>
-  <text x="42" y="42" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#111">Planta baixa técnica — térreo</text>
-  <text x="42" y="63" font-family="Arial,sans-serif" font-size="11.5" fill="#555">Casa de Acervo Mirante · setores e portas para cruzamento documental · escala gráfica aproximada</text>
+  <rect x="18" y="18" width="924" height="504" fill="url(#grid)" stroke="#d8d8d8"/>
+  <text x="42" y="42" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#111">Planta baixa — Casa de Acervo Mirante</text>
+  <text x="42" y="63" font-family="Arial,sans-serif" font-size="11.5" fill="#555">Ambientes nomeados na planta; códigos usados apenas nas portas P-01 a P-09.</text>
 
-  <rect x="44" y="86" width="730" height="398" class="outer"/>
-  <rect x="58" y="104" width="138" height="92" class="room"/><text x="127" y="145" class="label">Guarita</text><text x="127" y="163" class="small">SETOR-01</text>
-  <rect x="58" y="214" width="180" height="150" class="external-room"/><text x="148" y="283" class="label"><tspan x="148" dy="0">Área externa</tspan><tspan x="148" dy="18">/ pátio</tspan></text>
-  <rect x="254" y="104" width="170" height="108" class="room"/><text x="339" y="151" class="label">Administração</text><text x="339" y="170" class="small">SETOR-03</text>
-  <rect x="434" y="104" width="142" height="108" class="room"/><text x="505" y="145" class="label"><tspan x="505" dy="0">Sala de</tspan><tspan x="505" dy="18">Segurança</tspan></text><text x="505" y="184" class="small">SETOR-06</text>
-  <rect x="254" y="230" width="322" height="86" class="service-room"/><text x="415" y="268" class="label">Corredor técnico</text><text x="415" y="286" class="small">SETOR-02</text>
-  <rect x="254" y="338" width="160" height="108" class="service-room"/><text x="334" y="384" class="label"><tspan x="334" dy="0">Doca de</tspan><tspan x="334" dy="18">Serviço</tspan></text>
-  <rect x="434" y="338" width="142" height="108" class="service-room"/><text x="505" y="384" class="label">Depósito</text><text x="505" y="402" class="small">SETOR-05</text>
-  <rect x="608" y="104" width="154" height="116" class="reserve-room"/><text x="685" y="154" class="label"><tspan x="685" dy="0">Reserva</tspan><tspan x="685" dy="18">Técnica A</tspan></text>
-  <rect x="608" y="246" width="154" height="116" class="reserve-room"/><text x="685" y="296" class="label"><tspan x="685" dy="0">Reserva</tspan><tspan x="685" dy="18">Técnica B</tspan></text>
-  <rect x="608" y="386" width="154" height="58" class="public-room"/><text x="685" y="411" class="label">Vitrine</text><text x="685" y="428" class="small">área pública</text>
+  <rect x="172" y="84" width="650" height="404" class="wall"/>
+  <rect x="62" y="118" width="86" height="72" class="outside"/><text x="105" y="151" class="label">Guarita</text><text x="105" y="168" class="small">controle externo</text>
+  <rect x="62" y="228" width="112" height="126" class="outside"/><text x="118" y="284" class="label"><tspan x="118" dy="0">Pátio</tspan><tspan x="118" dy="18">externo</tspan></text>
 
-  <line x1="238" y1="86" x2="238" y2="484" class="wall"/><line x1="592" y1="86" x2="592" y2="484" class="wall"/>
-  <line x1="424" y1="86" x2="424" y2="224" class="partition"/>
-  <line x1="424" y1="330" x2="424" y2="484" class="partition"/>
-  <line x1="238" y1="224" x2="592" y2="224" class="partition"/><line x1="238" y1="330" x2="592" y2="330" class="partition"/>
-  <line x1="592" y1="232" x2="774" y2="232" class="partition"/><line x1="592" y1="374" x2="774" y2="374" class="partition"/>
+  <rect x="190" y="102" width="156" height="106" class="room"/><text x="268" y="149" class="label">Administração</text><text x="268" y="167" class="small">terminal interno</text>
+  <rect x="364" y="102" width="150" height="106" class="room"/><text x="439" y="145" class="label"><tspan x="439" dy="0">Sala de</tspan><tspan x="439" dy="18">Segurança</tspan></text>
+  <rect x="190" y="232" width="324" height="78" class="service"/><text x="352" y="266" class="label">Corredor técnico</text><text x="352" y="284" class="small">circulação restrita</text>
+  <rect x="190" y="334" width="158" height="112" class="service"/><text x="269" y="383" class="label"><tspan x="269" dy="0">Doca de</tspan><tspan x="269" dy="18">Serviço</tspan></text>
+  <rect x="366" y="334" width="148" height="112" class="service"/><text x="440" y="384" class="label">Depósito</text><text x="440" y="402" class="small">materiais</text>
 
-  <line x1="126" y1="86" x2="164" y2="86" class="door-gap"/><path d="M126 86 q0 -28 34 -28" class="door"/><text x="145" y="82" class="door-label">P-01</text>
-  <line x1="196" y1="150" x2="238" y2="150" class="door-gap"/><path d="M196 150 q34 0 34 34" class="door"/><text x="220" y="145" class="door-label">P-02</text>
-  <line x1="330" y1="224" x2="372" y2="224" class="door-gap"/><path d="M330 224 q0 -30 38 -30" class="door"/><text x="351" y="220" class="door-label">P-03</text>
-  <line x1="238" y1="382" x2="238" y2="430" class="door-gap"/><path d="M238 382 q-34 12 0 48" class="door"/><text x="224" y="408" class="door-label">P-04</text>
-  <line x1="424" y1="386" x2="424" y2="426" class="door-gap"/><path d="M424 386 q-30 0 -30 36" class="door"/><text x="408" y="408" class="door-label">P-05</text>
-  <line x1="592" y1="276" x2="592" y2="316" class="door-gap"/><path d="M592 276 q-36 0 -36 36" class="door"/><text x="580" y="299" class="door-label">P-06</text>
-  <line x1="592" y1="134" x2="592" y2="174" class="door-gap"/><path d="M592 134 q-36 0 -36 36" class="door"/><text x="580" y="157" class="door-label">P-07</text>
-  <line x1="486" y1="224" x2="526" y2="224" class="door-gap"/><path d="M486 224 q0 -30 36 -30" class="door"/><text x="506" y="220" class="door-label">P-08</text>
-  <line x1="674" y1="374" x2="716" y2="374" class="door-gap"/><path d="M674 374 q0 -28 36 -28" class="door"/><text x="695" y="370" class="door-label">P-09</text>
+  <rect x="548" y="102" width="250" height="98" class="reserve"/><text x="673" y="145" class="label">Reserva Técnica A</text><text x="673" y="164" class="small">acervo embalado</text>
+  <rect x="548" y="234" width="250" height="112" class="reserve"/><text x="673" y="284" class="label">Reserva Técnica B</text><text x="673" y="303" class="small">controle de acesso P-06</text>
+  <rect x="548" y="382" width="250" height="64" class="public"/><text x="673" y="408" class="label">Vitrine / área pública</text><text x="673" y="426" class="small">acesso controlado</text>
 
-  <line x1="280" y1="86" x2="400" y2="86" class="window"/><line x1="280" y1="92" x2="400" y2="92" class="window-glass"/>
-  <line x1="454" y1="86" x2="552" y2="86" class="window"/><line x1="454" y1="92" x2="552" y2="92" class="window-glass"/>
-  <line x1="774" y1="130" x2="774" y2="196" class="window"/><line x1="768" y1="130" x2="768" y2="196" class="window-glass"/>
-  <line x1="774" y1="394" x2="774" y2="438" class="window"/><line x1="768" y1="394" x2="768" y2="438" class="window-glass"/>
-  <line x1="80" y1="484" x2="180" y2="484" class="window"/><line x1="80" y1="478" x2="180" y2="478" class="window-glass"/>
+  <line x1="180" y1="218" x2="522" y2="218" class="partition"/><line x1="180" y1="322" x2="522" y2="322" class="partition"/>
+  <line x1="356" y1="84" x2="356" y2="218" class="partition"/><line x1="356" y1="322" x2="356" y2="488" class="partition"/>
+  <line x1="530" y1="84" x2="530" y2="488" class="partition"/>
+  <line x1="530" y1="218" x2="822" y2="218" class="partition"/><line x1="530" y1="364" x2="822" y2="364" class="partition"/>
 
-  <g transform="translate(800 92)"><rect x="0" y="0" width="148" height="274" rx="4" fill="#fff" stroke="#888"/><text x="14" y="27" class="legend-title">Legenda</text><text x="14" y="52" class="legend">P-01 Guarita</text><text x="14" y="75" class="legend">P-02 Corredor técnico</text><text x="14" y="98" class="legend">P-03 Administração</text><text x="14" y="121" class="legend">P-04 Doca de serviço</text><text x="14" y="144" class="legend">P-05 Depósito</text><text x="14" y="167" class="legend">P-06 Reserva Técnica B</text><text x="14" y="190" class="legend">P-07 Reserva Técnica A</text><text x="14" y="213" class="legend">P-08 Sala de Segurança</text><text x="14" y="236" class="legend">P-09 Vitrine</text><text x="14" y="259" class="micro">Linhas e escala são aproximadas.</text></g>
-  <g transform="translate(800 392)"><rect x="0" y="0" width="148" height="72" fill="#fff" stroke="#777"/><text x="10" y="19" class="stamp">Carimbo técnico</text><line x1="10" y1="30" x2="138" y2="30" stroke="#999"/><text x="10" y="48" class="micro">Uso: apuração interna / E1</text><text x="10" y="62" class="micro">Rotas não registradas</text></g>
+  <line x1="112" y1="118" x2="132" y2="118" class="door-gap"/><path d="M112 118 q0 -22 28 -22" class="door"/><text x="121" y="113" class="door-label">P-01</text>
+  <line x1="172" y1="248" x2="172" y2="288" class="door-gap"/><path d="M172 248 q-30 0 -30 36" class="door"/><text x="158" y="270" class="door-label">P-02</text>
+  <line x1="250" y1="218" x2="294" y2="218" class="door-gap"/><path d="M250 218 q0 -28 36 -28" class="door"/><text x="272" y="214" class="door-label">P-03</text>
+  <line x1="190" y1="372" x2="190" y2="420" class="door-gap"/><path d="M190 372 q-36 10 0 48" class="door"/><text x="176" y="398" class="door-label">P-04</text>
+  <line x1="356" y1="374" x2="356" y2="420" class="door-gap"/><path d="M356 374 q-30 0 -30 36" class="door"/><text x="342" y="397" class="door-label">P-05</text>
+  <line x1="530" y1="272" x2="530" y2="316" class="door-gap"/><path d="M530 272 q-36 0 -36 36" class="door"/><text x="516" y="296" class="door-label">P-06</text>
+  <line x1="530" y1="132" x2="530" y2="174" class="door-gap"/><path d="M530 132 q-36 0 -36 36" class="door"/><text x="516" y="155" class="door-label">P-07</text>
+  <line x1="420" y1="218" x2="466" y2="218" class="door-gap"/><path d="M420 218 q0 -28 36 -28" class="door"/><text x="443" y="214" class="door-label">P-08</text>
+  <line x1="642" y1="364" x2="696" y2="364" class="door-gap"/><path d="M642 364 q0 -28 40 -28" class="door"/><text x="669" y="360" class="door-label">P-09</text>
+
+  <line x1="224" y1="84" x2="324" y2="84" class="window"/><line x1="224" y1="91" x2="324" y2="91" class="window-glass"/>
+  <line x1="394" y1="84" x2="488" y2="84" class="window"/><line x1="394" y1="91" x2="488" y2="91" class="window-glass"/>
+  <line x1="822" y1="124" x2="822" y2="188" class="window"/><line x1="815" y1="124" x2="815" y2="188" class="window-glass"/>
+  <line x1="822" y1="392" x2="822" y2="436" class="window"/><line x1="815" y1="392" x2="815" y2="436" class="window-glass"/>
+  <line x1="78" y1="190" x2="138" y2="190" class="window"/><line x1="78" y1="196" x2="138" y2="196" class="window-glass"/>
+
+  <g transform="translate(872 84)"><path d="M20 0 L32 54 L20 43 L8 54 Z" fill="#fff" stroke="#111"/><text x="20" y="72" class="north">N</text></g>
+  <g transform="translate(72 458)"><line x1="0" y1="0" x2="100" y2="0" stroke="#111" stroke-width="3"/><line x1="0" y1="-5" x2="0" y2="5" stroke="#111"/><line x1="100" y1="-5" x2="100" y2="5" stroke="#111"/><text x="50" y="18" class="micro" text-anchor="middle">escala aproximada</text></g>
 </svg>"""
 
 
