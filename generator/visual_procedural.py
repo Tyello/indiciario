@@ -36,61 +36,357 @@ def _personagem_nome(personagem: PersonagemVisual, blueprint: Blueprint) -> str:
     return personagem.personagem_id
 
 
+
+
 def _build_mirante_floor_plan_svg(mapa: MapaProcedural) -> str:
-    """Monta a planta dedicada do caso canônico Casa de Acervo Mirante."""
-    del mapa
-    return """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Planta baixa do térreo da Casa de Acervo Mirante">
-  <desc>Planta baixa em tons de cinza com Guarita, Pátio externo, Administração, Sala de Segurança, Doca de Serviço, Depósito, Reserva Técnica A, Reserva Técnica B, Vitrine / área pública, paredes, janelas e portas codificadas P-01 a P-09 para cruzamento documental.</desc>
-  <defs>
-    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#f0f0f0" stroke-width="1"/></pattern>
-    <style>
-      .wall{fill:#fbfbfb;stroke:#111;stroke-width:7;stroke-linejoin:miter}.partition{stroke:#111;stroke-width:4.5;stroke-linecap:square}.room{fill:#f8f8f8;stroke:#5f5f5f;stroke-width:1.2}.service{fill:#f0f0f0;stroke:#555;stroke-width:1.2}.reserve{fill:#e9e9e9;stroke:#444;stroke-width:1.3}.public{fill:#fcfcfc;stroke:#555;stroke-width:1.2}.outside{fill:#f6f6f6;stroke:#777;stroke-width:1.1;stroke-dasharray:6 5}.label{font-family:Arial,sans-serif;font-size:15px;font-weight:700;fill:#111;text-anchor:middle}.small{font-family:Arial,sans-serif;font-size:11px;fill:#565656;text-anchor:middle}.micro{font-family:Arial,sans-serif;font-size:10px;fill:#555}.door-gap{stroke:#fbfbfb;stroke-width:12;stroke-linecap:square}.door{fill:none;stroke:#111;stroke-width:2.4;stroke-linecap:round}.door-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;fill:#111;text-anchor:middle}.window{stroke:#111;stroke-width:2.1;stroke-linecap:square}.window-glass{stroke:#787878;stroke-width:1}.north{font-family:Arial,sans-serif;font-size:11px;fill:#111;text-anchor:middle}
-    </style>
-  </defs>
-  <rect x="0" y="0" width="960" height="540" fill="#fff"/>
-  <rect x="18" y="18" width="924" height="504" fill="url(#grid)" stroke="#d8d8d8"/>
-  <text x="42" y="42" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#111">Planta baixa — Casa de Acervo Mirante</text>
-  <text x="42" y="63" font-family="Arial,sans-serif" font-size="11.5" fill="#555">Ambientes nomeados na planta; códigos usados apenas nas portas P-01 a P-09.</text>
+    """Planta baixa arquitetônica do térreo da Casa de Acervo Mirante.
 
-  <rect x="172" y="84" width="650" height="404" class="wall"/>
-  <rect x="62" y="118" width="86" height="72" class="outside"/><text x="105" y="151" class="label">Guarita</text><text x="105" y="168" class="small">controle externo</text>
-  <rect x="62" y="228" width="112" height="126" class="outside"/><text x="118" y="284" class="label"><tspan x="118" dy="0">Pátio</tspan><tspan x="118" dy="18">externo</tspan></text>
+    Melhorias sobre a versão esquemática:
+    - Paredes com hachura diagonal (pattern SVG)
+    - Símbolos de porta com arco de abertura
+    - Símbolos de janela (linhas paralelas na parede)
+    - Câmeras de segurança com campo de visão e estado (ativa/bloqueada)
+    - Reserva Técnica B e Doca de Serviço destacadas como áreas críticas
+    - Trilha investigativa RM-17 indicada
+    - Bloco de título arquitetônico no rodapé
+    - Norte, escala gráfica e legenda cromática
+    """
+    del mapa  # planta dedicada ao caso canônico — layout fixo
+    return """\
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 700"
+     role="img" aria-label="Planta baixa arquitetônica — Casa de Acervo Mirante">
+<desc>Planta baixa do térreo da Casa de Acervo Mirante com paredes hachureadas,
+símbolos de porta e janela, câmeras de segurança e destaque das áreas críticas
+(Reserva Técnica B e Doca de Serviço). Portas codificadas P-01 a P-09.</desc>
 
-  <rect x="190" y="102" width="156" height="106" class="room"/><text x="268" y="149" class="label">Administração</text><text x="268" y="167" class="small">terminal interno</text>
-  <rect x="364" y="102" width="150" height="106" class="room"/><text x="439" y="145" class="label"><tspan x="439" dy="0">Sala de</tspan><tspan x="439" dy="18">Segurança</tspan></text>
-  <rect x="190" y="232" width="324" height="78" class="service"/><text x="352" y="266" class="label">Corredor técnico</text><text x="352" y="284" class="small">circulação restrita</text>
-  <rect x="190" y="334" width="158" height="112" class="service"/><text x="269" y="383" class="label"><tspan x="269" dy="0">Doca de</tspan><tspan x="269" dy="18">Serviço</tspan></text>
-  <rect x="366" y="334" width="148" height="112" class="service"/><text x="440" y="384" class="label">Depósito</text><text x="440" y="402" class="small">materiais</text>
+<defs>
+  <pattern id="hatch" x="0" y="0" width="8" height="8"
+           patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="8" stroke="#9CA3AF" stroke-width="1.5"/>
+  </pattern>
+  <pattern id="hatch-light" x="0" y="0" width="6" height="6"
+           patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#D1D5DB" stroke-width="1"/>
+  </pattern>
+  <pattern id="grid" x="0" y="0" width="40" height="40"
+           patternUnits="userSpaceOnUse">
+    <path d="M40 0H0V40" fill="none" stroke="#F3F4F6" stroke-width="0.8"/>
+  </pattern>
+  <style>
+    text { font-family: \'Arial Narrow\', Arial, sans-serif; }
+    .r-label { font-size:13px; font-weight:700; fill:#111827; text-anchor:middle;
+               dominant-baseline:central; letter-spacing:0.8px; }
+    .r-sub   { font-size:10px; fill:#6B7280; text-anchor:middle; dominant-baseline:central; }
+    .r-code  { font-size:9px;  fill:#9CA3AF; text-anchor:middle; dominant-baseline:central; }
+    .p-code  { font-size:9px;  font-weight:700; fill:#FFFFFF;
+               text-anchor:middle; dominant-baseline:central; }
+    .leg-title { font-size:12px; font-weight:700; fill:#111827; }
+    .leg-text  { font-size:10.5px; fill:#374151; }
+    .leg-note  { font-size:9px; fill:#9CA3AF; }
+    .tb-title  { font-size:14px; font-weight:700; fill:#FFFFFF; letter-spacing:0.5px; }
+    .tb-sub    { font-size:10px; fill:#D1D5DB; }
+    .tb-ref    { font-size:9px; fill:#9CA3AF; letter-spacing:0.3px; }
+    .dim       { font-size:9px; fill:#6B7280; text-anchor:middle; }
+  </style>
+</defs>
 
-  <rect x="548" y="102" width="250" height="98" class="reserve"/><text x="673" y="145" class="label">Reserva Técnica A</text><text x="673" y="164" class="small">acervo embalado</text>
-  <rect x="548" y="234" width="250" height="112" class="reserve"/><text x="673" y="284" class="label">Reserva Técnica B</text><text x="673" y="303" class="small">controle de acesso P-06</text>
-  <rect x="548" y="382" width="250" height="64" class="public"/><text x="673" y="408" class="label">Vitrine / área pública</text><text x="673" y="426" class="small">acesso controlado</text>
+<!-- FUNDO -->
+<rect x="0" y="0" width="1120" height="700" fill="#FAFAF8"/>
+<rect x="20" y="20" width="1080" height="660" fill="url(#grid)"
+      stroke="#E5E7EB" stroke-width="0.8"/>
 
-  <line x1="180" y1="218" x2="522" y2="218" class="partition"/><line x1="180" y1="322" x2="522" y2="322" class="partition"/>
-  <line x1="356" y1="84" x2="356" y2="218" class="partition"/><line x1="356" y1="322" x2="356" y2="488" class="partition"/>
-  <line x1="530" y1="84" x2="530" y2="488" class="partition"/>
-  <line x1="530" y1="218" x2="822" y2="218" class="partition"/><line x1="530" y1="364" x2="822" y2="364" class="partition"/>
+<!-- LIMITE DO LOTE -->
+<rect x="50" y="55" width="960" height="590"
+      fill="none" stroke="#9CA3AF" stroke-width="1.2" stroke-dasharray="12 6"/>
 
-  <line x1="112" y1="118" x2="132" y2="118" class="door-gap"/><path d="M112 118 q0 -22 28 -22" class="door"/><text x="121" y="113" class="door-label">P-01</text>
-  <line x1="172" y1="248" x2="172" y2="288" class="door-gap"/><path d="M172 248 q-30 0 -30 36" class="door"/><text x="158" y="270" class="door-label">P-02</text>
-  <line x1="250" y1="218" x2="294" y2="218" class="door-gap"/><path d="M250 218 q0 -28 36 -28" class="door"/><text x="272" y="214" class="door-label">P-03</text>
-  <line x1="190" y1="372" x2="190" y2="420" class="door-gap"/><path d="M190 372 q-36 10 0 48" class="door"/><text x="176" y="398" class="door-label">P-04</text>
-  <line x1="356" y1="374" x2="356" y2="420" class="door-gap"/><path d="M356 374 q-30 0 -30 36" class="door"/><text x="342" y="397" class="door-label">P-05</text>
-  <line x1="530" y1="272" x2="530" y2="316" class="door-gap"/><path d="M530 272 q-36 0 -36 36" class="door"/><text x="516" y="296" class="door-label">P-06</text>
-  <line x1="530" y1="132" x2="530" y2="174" class="door-gap"/><path d="M530 132 q-36 0 -36 36" class="door"/><text x="516" y="155" class="door-label">P-07</text>
-  <line x1="420" y1="218" x2="466" y2="218" class="door-gap"/><path d="M420 218 q0 -28 36 -28" class="door"/><text x="443" y="214" class="door-label">P-08</text>
-  <line x1="642" y1="364" x2="696" y2="364" class="door-gap"/><path d="M642 364 q0 -28 40 -28" class="door"/><text x="669" y="360" class="door-label">P-09</text>
+<!-- PÁTIO EXTERNO -->
+<rect x="62" y="195" width="145" height="215"
+      fill="#F0FDF4" stroke="#6B7280" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="134" y="285" class="r-label" font-size="11">Pátio</text>
+<text x="134" y="300" class="r-sub">externo</text>
 
-  <line x1="224" y1="84" x2="324" y2="84" class="window"/><line x1="224" y1="91" x2="324" y2="91" class="window-glass"/>
-  <line x1="394" y1="84" x2="488" y2="84" class="window"/><line x1="394" y1="91" x2="488" y2="91" class="window-glass"/>
-  <line x1="822" y1="124" x2="822" y2="188" class="window"/><line x1="815" y1="124" x2="815" y2="188" class="window-glass"/>
-  <line x1="822" y1="392" x2="822" y2="436" class="window"/><line x1="815" y1="392" x2="815" y2="436" class="window-glass"/>
-  <line x1="78" y1="190" x2="138" y2="190" class="window"/><line x1="78" y1="196" x2="138" y2="196" class="window-glass"/>
+<!-- FOOTPRINT DO EDIFÍCIO — paredes externas com hachura -->
+<rect x="205" y="68" width="760" height="524"
+      fill="url(#hatch)" stroke="#1F2937" stroke-width="14" stroke-linejoin="miter"/>
+<rect x="212" y="75" width="746" height="510" fill="#FAFAF8"/>
 
-  <g transform="translate(872 84)"><path d="M20 0 L32 54 L20 43 L8 54 Z" fill="#fff" stroke="#111"/><text x="20" y="72" class="north">N</text></g>
-  <g transform="translate(72 458)"><line x1="0" y1="0" x2="100" y2="0" stroke="#111" stroke-width="3"/><line x1="0" y1="-5" x2="0" y2="5" stroke="#111"/><line x1="100" y1="-5" x2="100" y2="5" stroke="#111"/><text x="50" y="18" class="micro" text-anchor="middle">escala aproximada</text></g>
+<!-- PAREDES DIVISÓRIAS INTERNAS -->
+<rect x="386" y="75"  width="10" height="185" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+<rect x="541" y="75"  width="10" height="185" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+<rect x="696" y="75"  width="10" height="510" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+<rect x="212" y="256" width="490" height="10" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+<rect x="212" y="356" width="490" height="10" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+<rect x="702" y="447" width="254" height="10" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+
+<!-- FUNDOS DAS SALAS -->
+<rect x="214" y="77"  width="170" height="177" fill="#EFF6FF" opacity="0.9"/>
+<rect x="392" y="77"  width="147" height="177" fill="#F9FAFB" opacity="0.9"/>
+<rect x="547" y="77"  width="147" height="177" fill="#EFF6FF" opacity="0.9"/>
+<rect x="706" y="77"  width="250" height="177" fill="#F5F3FF" opacity="0.9"/>
+<rect x="214" y="268" width="480" height="86"  fill="#F0F9FF" opacity="0.9"/>
+<!-- Doca — destaque crítico -->
+<rect x="214" y="368" width="230" height="180" fill="#FFFBEB" opacity="0.95"/>
+<rect x="214" y="368" width="230" height="180"
+      fill="none" stroke="#D97706" stroke-width="2" stroke-dasharray="7 3" opacity="0.7"/>
+<rect x="452" y="368" width="250" height="180" fill="#F9FAFB" opacity="0.9"/>
+<!-- Reserva B — destaque crítico -->
+<rect x="706" y="268" width="250" height="177" fill="#FEF2F2" opacity="0.95"/>
+<rect x="706" y="268" width="250" height="177"
+      fill="none" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="8 4" opacity="0.7"/>
+<rect x="706" y="459" width="250" height="127" fill="#F0FDF4" opacity="0.9"/>
+
+<!-- JANELAS -->
+<rect x="234" y="60"  width="90" height="18" fill="#FAFAF8"/>
+<line x1="234" y1="63" x2="324" y2="63" stroke="#93C5FD" stroke-width="3"/>
+<line x1="234" y1="69" x2="324" y2="69" stroke="#60A5FA" stroke-width="2"/>
+<line x1="234" y1="75" x2="324" y2="75" stroke="#93C5FD" stroke-width="1.5"/>
+<rect x="420" y="60"  width="90" height="18" fill="#FAFAF8"/>
+<line x1="420" y1="63" x2="510" y2="63" stroke="#93C5FD" stroke-width="3"/>
+<line x1="420" y1="69" x2="510" y2="69" stroke="#60A5FA" stroke-width="2"/>
+<line x1="420" y1="75" x2="510" y2="75" stroke="#93C5FD" stroke-width="1.5"/>
+<rect x="950" y="100" width="18" height="80"  fill="#FAFAF8"/>
+<line x1="953" y1="100" x2="953" y2="180" stroke="#93C5FD" stroke-width="3"/>
+<line x1="959" y1="100" x2="959" y2="180" stroke="#60A5FA" stroke-width="2"/>
+<line x1="965" y1="100" x2="965" y2="180" stroke="#93C5FD" stroke-width="1.5"/>
+<rect x="950" y="480" width="18" height="70"  fill="#FAFAF8"/>
+<line x1="953" y1="480" x2="953" y2="550" stroke="#93C5FD" stroke-width="3"/>
+<line x1="959" y1="480" x2="959" y2="550" stroke="#60A5FA" stroke-width="2"/>
+<line x1="965" y1="480" x2="965" y2="550" stroke="#93C5FD" stroke-width="1.5"/>
+<rect x="280" y="579" width="90" height="18"  fill="#FAFAF8"/>
+<line x1="280" y1="581" x2="370" y2="581" stroke="#93C5FD" stroke-width="3"/>
+<line x1="280" y1="587" x2="370" y2="587" stroke="#60A5FA" stroke-width="2"/>
+<line x1="280" y1="593" x2="370" y2="593" stroke="#93C5FD" stroke-width="1.5"/>
+
+<!-- PORTAS com arco de abertura -->
+<!-- P-01 Guarita → Pátio -->
+<rect x="198" y="210" width="20" height="55" fill="#FAFAF8"/>
+<line x1="205" y1="210" x2="205" y2="265" stroke="#1F2937" stroke-width="2"/>
+<path d="M205 210 a55 55 0 0 0 55 55"
+      fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="5 3"/>
+<circle cx="218" cy="238" r="10" fill="#374151"/>
+<text x="218" y="241" class="p-code">P01</text>
+
+<!-- P-02 Guarita → Corredor -->
+<rect x="254" y="250" width="60" height="22" fill="#FAFAF8"/>
+<line x1="254" y1="258" x2="314" y2="258" stroke="#1F2937" stroke-width="2"/>
+<path d="M314 258 a60 60 0 0 0 -60 -60"
+      fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="5 3"/>
+<circle cx="284" cy="254" r="10" fill="#374151"/>
+<text x="284" y="257" class="p-code">P02</text>
+
+<!-- P-03 Admin → Corredor -->
+<rect x="415" y="250" width="55" height="22" fill="#FAFAF8"/>
+<line x1="415" y1="258" x2="470" y2="258" stroke="#1F2937" stroke-width="2"/>
+<path d="M415 258 a55 55 0 0 1 55 -55"
+      fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="5 3"/>
+<circle cx="442" cy="254" r="10" fill="#374151"/>
+<text x="442" y="257" class="p-code">P03</text>
+
+<!-- P-04 Doca → Pátio (CRÍTICA) -->
+<rect x="198" y="395" width="20" height="55" fill="#FAFAF8"/>
+<line x1="205" y1="395" x2="205" y2="450" stroke="#DC2626" stroke-width="2.5"/>
+<path d="M205 395 a55 55 0 0 0 55 55"
+      fill="none" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="5 3"/>
+<circle cx="218" cy="423" r="10" fill="#B91C1C"/>
+<text x="218" y="426" class="p-code">P04</text>
+
+<!-- P-05 Doca → Depósito -->
+<rect x="446" y="405" width="22" height="55" fill="#FAFAF8"/>
+<line x1="452" y1="405" x2="452" y2="460" stroke="#1F2937" stroke-width="2"/>
+<path d="M452 405 a55 55 0 0 1 55 55"
+      fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="5 3"/>
+<circle cx="452" cy="432" r="10" fill="#374151"/>
+<text x="452" y="435" class="p-code">P05</text>
+
+<!-- P-06 Corredor → Reserva B (CRÍTICA) -->
+<rect x="690" y="308" width="22" height="55" fill="#FAFAF8"/>
+<line x1="700" y1="308" x2="700" y2="363" stroke="#DC2626" stroke-width="3"/>
+<path d="M700 308 a55 55 0 0 0 -55 55"
+      fill="none" stroke="#DC2626" stroke-width="3" stroke-dasharray="6 3"/>
+<circle cx="700" cy="335" r="12" fill="#DC2626"/>
+<text x="700" y="338" class="p-code">P06</text>
+
+<!-- P-07 Corredor → Reserva A -->
+<rect x="690" y="163" width="22" height="55" fill="#FAFAF8"/>
+<line x1="700" y1="163" x2="700" y2="218" stroke="#1F2937" stroke-width="2"/>
+<path d="M700 163 a55 55 0 0 0 -55 55"
+      fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="5 3"/>
+<circle cx="700" cy="190" r="10" fill="#374151"/>
+<text x="700" y="193" class="p-code">P07</text>
+
+<!-- P-08 Sala Seg. → Corredor -->
+<rect x="570" y="250" width="55" height="22" fill="#FAFAF8"/>
+<line x1="570" y1="258" x2="625" y2="258" stroke="#1F2937" stroke-width="2"/>
+<path d="M570 258 a55 55 0 0 1 55 -55"
+      fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="5 3"/>
+<circle cx="597" cy="254" r="10" fill="#374151"/>
+<text x="597" y="257" class="p-code">P08</text>
+
+<!-- P-09 Reserva B → Vitrine -->
+<rect x="749" y="443" width="60" height="22" fill="#FAFAF8"/>
+<line x1="749" y1="452" x2="809" y2="452" stroke="#1F2937" stroke-width="2"/>
+<path d="M809 452 a60 60 0 0 0 -60 -60"
+      fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="5 3"/>
+<circle cx="779" cy="448" r="10" fill="#374151"/>
+<text x="779" y="451" class="p-code">P09</text>
+
+<!-- CÂMERAS -->
+<g transform="translate(310 284)">
+  <polygon points="0,-10 -8,5 8,5" fill="#1D4ED8" opacity="0.85"/>
+  <path d="M-16 5 L0 -10 L16 5 Z" fill="none" stroke="#93C5FD"
+        stroke-width="1" opacity="0.5"/>
+  <circle cx="0" cy="5" r="3" fill="#1D4ED8"/>
+  <text x="0" y="22" font-size="8" fill="#1D4ED8" text-anchor="middle"
+        font-weight="700">CAM-01</text>
+</g>
+<g transform="translate(956 270)">
+  <polygon points="0,-10 -8,5 8,5" fill="#DC2626" opacity="0.9"/>
+  <path d="M-20 5 L0 -10 L20 5 Z" fill="none" stroke="#FCA5A5"
+        stroke-width="1.5" opacity="0.6"/>
+  <circle cx="0" cy="5" r="3" fill="#DC2626"/>
+  <text x="0" y="22" font-size="8" fill="#DC2626" text-anchor="middle"
+        font-weight="700">CAM-02</text>
+</g>
+<g transform="translate(333 460)">
+  <polygon points="0,-10 -8,5 8,5" fill="#9CA3AF" opacity="0.7"/>
+  <line x1="-12" y1="-12" x2="12" y2="12" stroke="#EF4444" stroke-width="2.5" opacity="0.9"/>
+  <line x1="12" y1="-12" x2="-12" y2="12" stroke="#EF4444" stroke-width="2.5" opacity="0.9"/>
+  <text x="0" y="22" font-size="8" fill="#9CA3AF" text-anchor="middle"
+        font-weight="700">CAM-03</text>
+  <text x="0" y="32" font-size="7" fill="#EF4444" text-anchor="middle">OFFLINE</text>
+</g>
+<g transform="translate(260 138)">
+  <polygon points="0,-10 -8,5 8,5" fill="#1D4ED8" opacity="0.85"/>
+  <path d="M-14 5 L0 -10 L14 5 Z" fill="none" stroke="#93C5FD"
+        stroke-width="1" opacity="0.5"/>
+  <circle cx="0" cy="5" r="3" fill="#1D4ED8"/>
+  <text x="0" y="22" font-size="8" fill="#1D4ED8" text-anchor="middle"
+        font-weight="700">CAM-04</text>
+</g>
+
+<!-- RÓTULOS DAS SALAS -->
+<text x="299" y="152" class="r-label">Guarita</text>
+<text x="299" y="167" class="r-sub">Controle externo</text>
+<text x="299" y="180" class="r-code">USR-031 · P-01</text>
+
+<text x="464" y="150" class="r-label">Administração</text>
+<text x="464" y="165" class="r-sub">Terminal TERM-ADM-03</text>
+<text x="464" y="178" class="r-code">Otávio Salles</text>
+
+<text x="620" y="150" class="r-label" font-size="12">Sala de Segurança</text>
+<text x="620" y="165" class="r-code">P-08</text>
+
+<text x="831" y="142" class="r-label">Reserva Técnica A</text>
+<text x="831" y="157" class="r-sub">Acervo embalado</text>
+<text x="831" y="170" class="r-code">P-07</text>
+
+<text x="454" y="300" class="r-label">Corredor Técnico</text>
+<text x="454" y="315" class="r-sub">Circulação restrita</text>
+<text x="454" y="328" class="r-code">P-02 · P-03 · P-08</text>
+
+<text x="329" y="432" class="r-label" font-size="12.5" fill="#92400E">Doca de Serviço</text>
+<text x="329" y="448" class="r-sub">Sensor OS 0147/2026</text>
+<text x="329" y="462" class="r-code" fill="#B45309">EVENTO CRÍTICO · P-04</text>
+<rect x="218" y="492" width="130" height="20" rx="3"
+      fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
+<text x="283" y="506" font-size="8.5" fill="#92400E" text-anchor="middle"
+      font-weight="700">TAPUME 19h40–20h05</text>
+
+<text x="577" y="442" class="r-label">Depósito</text>
+<text x="577" y="457" class="r-sub">Materiais · P-05</text>
+
+<text x="831" y="318" class="r-label" fill="#DC2626">Reserva Técnica B</text>
+<text x="831" y="334" class="r-sub">Abertura 19h48 — USR-022</text>
+<text x="831" y="348" class="r-code" fill="#DC2626">ÁREA CRÍTICA · P-06</text>
+<line x1="831" y1="360" x2="831" y2="440"
+      stroke="#DC2626" stroke-width="2" stroke-dasharray="4 3"/>
+<polygon points="831,446 825,434 837,434" fill="#DC2626"/>
+
+<text x="831" y="496" class="r-label">Vitrine</text>
+<text x="831" y="510" class="r-sub">Área pública · P-09</text>
+
+<!-- JANELA DE TEMPO CRÍTICO -->
+<rect x="214" y="140" width="170" height="68" rx="4"
+      fill="#F0F9FF" stroke="#38BDF8" stroke-width="1.2"/>
+<text x="299" y="157" font-size="9.5" fill="#0369A1" text-anchor="middle"
+      font-weight="700">JANELA CRÍTICA</text>
+<text x="299" y="170" font-size="9" fill="#0C4A6E" text-anchor="middle">19h40 — 20h05</text>
+<line x1="228" y1="177" x2="370" y2="177" stroke="#BAE6FD" stroke-width="1"/>
+<text x="299" y="188" font-size="8.5" fill="#0369A1" text-anchor="middle">
+  visão direta bloqueada</text>
+<text x="299" y="200" font-size="8.5" fill="#0369A1" text-anchor="middle">
+  CAM-03 offline</text>
+
+<!-- TRILHA INVESTIGATIVA RM-17 -->
+<path d="M706 340 L540 340 L540 311 L706 311"
+      fill="none" stroke="#DC2626" stroke-width="2.5"
+      stroke-dasharray="10 5" opacity="0.65"/>
+<text x="623" y="302" font-size="9" fill="#B91C1C" text-anchor="middle"
+      font-weight="700">saída RM-17 →</text>
+
+<!-- NORTE -->
+<g transform="translate(1048 82)">
+  <circle cx="0" cy="0" r="28" fill="#FFFFFF" stroke="#374151" stroke-width="1.5"/>
+  <line x1="0" y1="-20" x2="0" y2="20" stroke="#374151" stroke-width="1.5"/>
+  <line x1="-20" y1="0" x2="20" y2="0" stroke="#374151" stroke-width="1.5"/>
+  <polygon points="0,-20 -7,0 0,-4 7,0" fill="#1F2937"/>
+  <polygon points="0,20 -7,0 0,4 7,0" fill="#F9FAFB" stroke="#374151" stroke-width="1"/>
+  <text x="0" y="-25" font-size="11" font-weight="700" fill="#111827"
+        text-anchor="middle">N</text>
+</g>
+
+<!-- ESCALA GRÁFICA -->
+<g transform="translate(70 583)">
+  <line x1="0" y1="0" x2="120" y2="0" stroke="#374151" stroke-width="2"/>
+  <line x1="0"   y1="-5" x2="0"   y2="5" stroke="#374151" stroke-width="2"/>
+  <line x1="60"  y1="-4" x2="60"  y2="4" stroke="#374151" stroke-width="1.5"/>
+  <line x1="120" y1="-5" x2="120" y2="5" stroke="#374151" stroke-width="2"/>
+  <text x="30" y="16" class="dim">5 m</text>
+  <text x="90" y="16" class="dim">5 m</text>
+  <text x="60" y="-9" class="dim">0</text>
+  <text x="0" y="28" class="leg-note">Escala esquemática</text>
+</g>
+
+<!-- LEGENDA -->
+<rect x="50" y="434" width="145" height="140" rx="6"
+      fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+<text x="122" y="452" class="leg-title" text-anchor="middle">Legenda</text>
+<line x1="60" y1="456" x2="185" y2="456" stroke="#E5E7EB" stroke-width="1"/>
+<rect x="62" y="463" width="14" height="10" fill="#EFF6FF" stroke="#374151" stroke-width="1"/>
+<text x="83" y="472" class="leg-text">Controle de acesso</text>
+<rect x="62" y="479" width="14" height="10" fill="#F5F3FF" stroke="#374151" stroke-width="1"/>
+<text x="83" y="488" class="leg-text">Reservas de acervo</text>
+<rect x="62" y="495" width="14" height="10" fill="#FFFBEB" stroke="#374151" stroke-width="1"/>
+<text x="83" y="504" class="leg-text">Área de carga</text>
+<rect x="62" y="511" width="14" height="10" fill="#F0FDF4" stroke="#374151" stroke-width="1"/>
+<text x="83" y="520" class="leg-text">Área pública</text>
+<circle cx="69" cy="534" r="5" fill="#DC2626"/>
+<text x="83" y="538" class="leg-text" fill="#DC2626">Área crítica</text>
+<polygon points="69,552 63,562 75,562" fill="#1D4ED8" opacity="0.85"/>
+<text x="83" y="560" class="leg-text">Câmera ativa</text>
+<line x1="62" y1="572" x2="76" y2="572" stroke="#9CA3AF" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="83" y="575" class="leg-note">Limite do lote</text>
+
+<!-- BLOCO DE TÍTULO -->
+<rect x="50" y="622" width="1020" height="58" fill="#1F2937" rx="4"/>
+<text x="68" y="643" class="tb-title">CASA DE ACERVO MIRANTE</text>
+<text x="68" y="657" class="tb-sub">Planta baixa operacional — térreo</text>
+<text x="68" y="671" class="tb-ref">
+  Ref. CAM-NIP-0826-17 · Uso exclusivo para apuração interna · Indiciários v1.0</text>
+<line x1="440" y1="630" x2="440" y2="672" stroke="#374151" stroke-width="1"/>
+<text x="460" y="643" class="tb-sub">Portas</text>
+<text x="460" y="655" class="tb-ref">P-01 Guarita  P-04 Doca  P-06 Reserva B</text>
+<text x="460" y="666" class="tb-ref">P-03 Admin    P-05 Depósito  P-09 Vitrine</text>
+<line x1="718" y1="630" x2="718" y2="672" stroke="#374151" stroke-width="1"/>
+<text x="736" y="643" class="tb-sub">Câmeras</text>
+<text x="736" y="655" class="tb-ref">CAM-01 Corredor  CAM-02 Reserva B  CAM-04 Guarita</text>
+<text x="736" y="666" class="tb-ref" fill="#EF4444">
+  CAM-03 Doca — OFFLINE na janela 19h40-20h05</text>
+<line x1="950" y1="630" x2="950" y2="672" stroke="#374151" stroke-width="1"/>
+<text x="966" y="645" class="tb-sub">Versão</text>
+<text x="966" y="658" class="tb-ref">18/08/2026</text>
+<text x="966" y="669" class="tb-ref">v1.0</text>
 </svg>"""
-
 
 def build_map_svg(mapa: MapaProcedural) -> str:
     """Monta SVG local para uma planta esquemática simples de um andar."""
@@ -255,7 +551,7 @@ def build_visual_documents(
     strict: bool = True,
     html_debug_dir: Path | None = None,
 ) -> dict[str, list[Path]]:
-    """Renderiza PDFs visuais e agrupa mapas por fase e cartões em apoio visual."""
+    """Renderiza PDFs visuais e agrupa por envelope/fase para o pacote final."""
     visual = blueprint.visual_procedural
     grupos: dict[str, list[Path]] = {}
     if visual is None:
@@ -267,7 +563,7 @@ def build_visual_documents(
         output_path = visual_document_path("map", mapa.id, output_dir)
         dados = {
             "TITULO": mapa.titulo,
-            "SUBTITULO": f"Planta operacional simplificada — {mapa.fase}",
+            "SUBTITULO": f"Mapa procedural — {mapa.fase}",
             "SVG": svg,
         }
         render_kwargs = {"strict": strict, "landscape": True}
@@ -295,7 +591,7 @@ def build_visual_documents(
         caminho = renderizar_documento(
             "visual_character_card.html", dados, output_path, **render_kwargs
         )
-        grupos.setdefault("apoio_visual", []).append(caminho)
+        grupos.setdefault("E1", []).append(caminho)
 
     for local in visual.locais:
         svg = build_location_card_svg(local)
@@ -309,6 +605,6 @@ def build_visual_documents(
         caminho = renderizar_documento(
             "visual_location_card.html", dados, output_path, **render_kwargs
         )
-        grupos.setdefault("apoio_visual", []).append(caminho)
+        grupos.setdefault("E1", []).append(caminho)
 
     return grupos
