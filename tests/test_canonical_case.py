@@ -22,7 +22,7 @@ def test_caso_canonico_carrega_como_blueprint():
     blueprint = _blueprint()
 
     assert blueprint.titulo == "O Desvio da Reserva Mirante"
-    assert len(blueprint.documentos) == 17
+    assert len(blueprint.documentos) == 21
 
 
 def test_caso_canonico_validator_nao_gera_criticos():
@@ -50,10 +50,10 @@ def test_caso_canonico_nao_depende_de_qr_link_internet_ou_app():
 def test_caso_canonico_metadados_de_experiencia():
     blueprint = _blueprint()
 
-    assert blueprint.dificuldade.value == "intermediario"
+    assert blueprint.dificuldade.value == "iniciante"
     assert blueprint.formato_envelopes == 2
     assert blueprint.modo_validacao.value == "offline_puro"
-    assert blueprint.tempo_estimado_min == 70
+    assert blueprint.tempo_estimado_min == 55
     assert blueprint.numero_jogadores == "3 a 5"
 
 
@@ -72,7 +72,7 @@ def test_caso_canonico_pilares_e1_usam_apenas_documentos_e1():
         assert pilar.confirmacao.startswith("E1-")
 
 
-def test_caso_canonico_contratos_obrigatorios_preservam_dificuldade_intermediaria():
+def test_caso_canonico_contratos_obrigatorios_preservam_dificuldade_iniciante():
     blueprint = _blueprint()
     contrato_abertura = next(
         contrato
@@ -131,7 +131,8 @@ def test_caso_canonico_hardening_editorial_pre_playtest():
     assert "USR-022" in str(e108.conteudo)
     assert "USR-MA-022" not in str(e108.conteudo)
     assert "TERM-ADM-03" in str(e108.conteudo)
-    assert "SETOR-06 Sala de Segurança" in str(e108.conteudo)
+    assert "SETOR-06" not in str(e108.conteudo)
+    assert "SETOR-08 — Galeria / Vitrine interna" in str(e108.conteudo)
     assert "SETOR-06 Administração/terminal" not in str(e108.conteudo)
     assert "conclusão técnica" not in str(e207.conteudo).lower()
     assert "fechar a solução" not in e207.objetivo_narrativo.lower()
@@ -201,7 +202,8 @@ def test_caso_canonico_e1_falsos_caminhos_tem_limites_justos():
     assert "não autoriza Reserva Técnica B" not in str(e105.conteudo)
     assert "não movimentar acervo sozinho" not in str(e105.conteudo)
     assert "Consulta administrativa vinculada à OS 0147/2026" in str(e105.conteudo)
-    assert "cadeia documental" in str(e106.conteudo)
+    assert "BANC-REG-01" in str(e106.conteudo)
+    assert "Divergências registradas para nova vistoria técnica." in str(e106.conteudo)
     assert "estrutura de leitura de E1-05" not in str(e106.conteudo)
     assert "não comprova abertura de porta" not in str(e106.conteudo)
 
@@ -220,8 +222,7 @@ def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_
         "LogisArte Transportes",
         "Mirante Norte Consultoria",
     } == empresas
-    rotulos = {item["NOME_ITEM"].split(" — ", 1)[0] for item in e203.conteudo["ITENS"]}
-    assert {"Opção 1", "Opção 2", "Lote A", "Lote B"} == rotulos
+    assert all(" — " not in item["NOME_ITEM"] for item in e203.conteudo["ITENS"])
     texto_cotacao = str(e203.conteudo)
     for label_meta in [
         "PROPOSTA COMPLETA",
@@ -230,16 +231,35 @@ def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_
         "RUÍDO ADMINISTRATIVO",
     ]:
         assert label_meta not in texto_cotacao
-    assert e203.titulo == "Quadro comparativo de cotações emergenciais"
+    assert e203.titulo == "Mapa interno de propostas recebidas"
     assert "Ateliê Pedra Clara" not in e203.titulo
     assert "só a proposta" not in e203.titulo.lower()
     assert len(e203.conteudo["ITENS"]) == 4
 
     assert "sem transporte" in texto_cotacao
-    assert "sem intervenção em acervo" in texto_cotacao
-    assert "assessoria administrativa" in texto_cotacao
-    assert "Ateliê Pedra Clara: revisão de moldura" in str(e203.conteudo["CONDICOES"])
-    assert "única proposta" not in str(e203.conteudo["CONDICOES"])
+    assert "sem intervenção técnica" in texto_cotacao
+    assert "apoio administrativo" in texto_cotacao
+    assert "responsabilidade única" in str(e203.conteudo["CONDICOES"])
+    assert "aproximadamente R$ 20.600,00" in str(e203.conteudo["CONDICOES"])
+
+    propostas = {
+        doc.titulo
+        for doc in blueprint.documentos
+        if doc.codigo in {"E2-09", "E2-10", "E2-11", "E2-12"}
+    }
+    assert propostas == {
+        "Orçamento Ateliê Pedra Clara",
+        "Orçamento Conserva Sul Restauro",
+        "Proposta LogisArte Transportes",
+        "Proposta Mirante Norte Consultoria",
+    }
+    for proposta in [
+        doc
+        for doc in blueprint.documentos
+        if doc.codigo in {"E2-09", "E2-10", "E2-11", "E2-12"}
+    ]:
+        assert len(proposta.conteudo["ITENS"]) == 1
+        assert not proposta.conteudo.get("HAS_QUADRO_EMPRESAS")
 
     assert e204.conteudo["TOTAL_LANCAMENTOS"] == "6"
     assert len(e204.conteudo["LANCAMENTOS"]) == 6

@@ -24,9 +24,18 @@ def test_assinaturas_visuais_tem_perfis_e_tracados_distintos() -> None:
         }
     )
 
-    assert "signature-assinatura_formal" in dados["ASSINATURA_CURSIVA_VISUAL"]
-    assert "signature-rubrica_curta" in dados["ASSINATURA_GLIFO_VISUAL"]
-    assert "signature-assinatura_comercial" in dados["ASSINATURA_RESPONSAVEL_VISUAL"]
+    assert (
+        "signature-asset signature-ines-laranjeira"
+        in dados["ASSINATURA_CURSIVA_VISUAL"]
+    )
+    assert (
+        "signature-asset signature-vera-matos-rubrica"
+        in dados["ASSINATURA_GLIFO_VISUAL"]
+    )
+    assert (
+        "signature-asset signature-otavio-salles"
+        in dados["ASSINATURA_RESPONSAVEL_VISUAL"]
+    )
     assert (
         "signature-assinatura_administrativa" in dados["ASSINATURA_CONTRATANTE_VISUAL"]
     )
@@ -43,7 +52,7 @@ def test_assinaturas_visuais_tem_perfis_e_tracados_distintos() -> None:
     )
 
 
-def test_e1_logs_usam_codigos_puros_nos_campos_operacionais() -> None:
+def test_e1_documentos_usam_padrao_global_de_codigos() -> None:
     e104 = _doc("E1-04")["conteudo"]
     assert {registro["PORTA"] for registro in e104["REGISTROS"]} <= {
         "P-01",
@@ -61,7 +70,7 @@ def test_e1_logs_usam_codigos_puros_nos_campos_operacionais() -> None:
         "SETOR-08",
         "SETOR-01",
         "SETOR-03",
-        "TERM-ADM-03",
+        "SETOR-03",
         "SETOR-08",
     ]
     proibidos = ("Vitrine", "Guarita", "Administração", "Controle de fichas")
@@ -72,10 +81,17 @@ def test_e1_logs_usam_codigos_puros_nos_campos_operacionais() -> None:
     )
 
     corpo_e106 = _doc("E1-06")["conteudo"]["CORPO_CARTA"]
-    for codigo in ["SETOR-03", "ETQ-RM-17", "ETQ-PC-14", "OS-0147/2026", "TERM-ADM-03"]:
+    for codigo in [
+        "BANC-REG-01",
+        "ETQ-RM-17",
+        "ETQ-PC-14",
+        "OS-0147/2026",
+        "TERM-ADM-03",
+    ]:
         assert codigo in corpo_e106
-    assert "Controle de fichas / bancada" not in corpo_e106
-    assert "Reserva Técnica B / conferência" not in corpo_e106
+    assert "SETOR-03</td>" not in corpo_e106
+    assert "As divergências foram lacradas" not in corpo_e106
+    assert "Divergências registradas para nova vistoria técnica." in corpo_e106
 
 
 def test_existe_documento_diegético_de_credenciais_para_pessoa_e_funcao() -> None:
@@ -110,6 +126,7 @@ def test_e203_renderiza_quatro_empresas_com_peso_visual_equivalente() -> None:
     assert "ruído" not in html.lower()
     assert "suspeito" not in html.lower()
     assert "legítimo" not in html.lower()
+    assert "Mapa interno" in doc["titulo"]
 
 
 def test_chats_sao_ambiguos_e_entram_no_envelope_e2_e_manifest(
@@ -132,6 +149,16 @@ def test_chats_sao_ambiguos_e_entram_no_envelope_e2_e_manifest(
     assert "cruze" not in texto_chats
     assert "cruzamento documental" not in texto_chats
     assert "documento prova" not in texto_chats
+    grupo_compras = next(doc for doc in chats if doc["codigo"] == "E2-08")
+    assert (
+        grupo_compras["conteudo"]["NOME_GRUPO"] == "Compras CAM — alinhamento interno"
+    )
+    assert "Conserva Sul" not in grupo_compras["conteudo"]["MEMBROS_LISTA"]
+    assert {
+        mensagem.get("NOME_REMETENTE")
+        for mensagem in grupo_compras["conteudo"]["MENSAGENS"]
+        if mensagem.get("NOME_REMETENTE")
+    } <= {"Paula Monteiro", "Renato Azevedo", "Camila Rocha", "Nara Vidal"}
 
     blueprint = package_builder.Blueprint(**blueprint_data)
     rendered_by_code = {

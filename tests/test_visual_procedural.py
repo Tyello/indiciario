@@ -253,7 +253,7 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
         "Depósito",
         "Reserva Técnica A",
         "Reserva Técnica B",
-        "Vitrine / área pública",
+        "Galeria / Vitrine interna",
     }
     assert labels == []
     assert ">1<" not in svg
@@ -272,5 +272,8 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     assert "Planta baixa — Casa de Acervo Mirante" in svg
     assert "Ambientes nomeados na planta" in svg
     assert "P-09" in svg
+    assert "Galeria / Vitrine interna" in svg
+    assert "wall-doca-deposito" in svg
+    assert "translate(214 96)" in svg
     assert 'class="window"' in svg
     assert "Planta esquemática" not in svg
