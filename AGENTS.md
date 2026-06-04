@@ -1,329 +1,256 @@
-# AGENTS.md — Guia para Agentes de IA
+# AGENTS.md — Guia operacional para agentes de IA
 
-Este arquivo instrui agentes de IA (Codex, Copilot Workspace, Claude Code e similares)
-sobre como atuar neste repositório de forma segura, consistente e alinhada ao projeto.
+Este arquivo orienta agentes de IA, como Codex, Claude Code, Copilot Workspace e similares, sobre como trabalhar neste repositório sem quebrar a direção editorial do Indiciário.
 
-**Leia este arquivo inteiro antes de executar qualquer tarefa.**
+Leia este arquivo antes de executar qualquer tarefa.
 
----
+## O que é o Indiciário
 
-## O que é o Indiciários
+Indiciário é um framework para geração de mistérios investigativos jogáveis em grupo, em formato de dossiê com envelopes, documentos, pistas, dicas, guia do facilitador e PDFs finais.
 
-Indiciários é um gerador de jogos de investigação offline em formato de dossiê com
-envelopes. O sistema recebe parâmetros de um usuário (tema, dificuldade, tom), gera
-um blueprint estruturado via LLM, valida as regras narrativas do framework e renderiza
-documentos em PDF via templates HTML + Playwright/Chromium.
+Princípios do produto:
 
-O produto final são PDFs temáticos — e-mails falsos, logs de acesso, boletins policiais,
-extratos bancários — que formam um jogo de investigação físico ou digital.
+- offline first;
+- sem QR code obrigatório;
+- sem internet obrigatória;
+- sem aplicativos externos;
+- sem links externos como parte da solução;
+- jogável em mesa, notebook, tablet ou impressão;
+- foco em dedução, investigação e experiência de grupo.
 
----
+Slogan atual:
 
-## Estrutura do repositório
+> Todo caso deixa sinais.
 
-```
-/framework/        ← Arquivos .md com as regras do jogo (NÃO são código)
-/templates/        ← Templates HTML dos documentos (viram PDF via renderizador)
-/generator/        ← Código Python: modelos, validador, renderizador, pipeline
-/examples/         ← Blueprints e PDFs de casos de exemplo (não editar manualmente)
-/tests/            ← Testes automatizados
-AGENTS.md          ← Este arquivo
-README.md          ← Documentação pública do projeto
-```
+## Estado atual do projeto
 
----
+O framework está tecnicamente funcional. A prioridade atual é validar a experiência real com jogadores, não criar muitas features novas.
 
-## Regras obrigatórias para qualquer tarefa
+Caso canônico atual:
 
-### 1. Nunca alterar os arquivos de framework sem instrução explícita
+- título: **O Desvio da Reserva Mirante**;
+- arquivo: `examples/caso_canonico_iniciante.json`;
+- dificuldade editorial: **Iniciante**;
+- função: referência narrativa, técnica, fixture de integração e primeiro material de playtest.
 
-Os arquivos em `/framework/*.md` são a fonte da verdade das regras do jogo.
-Eles definem o que é um bom caso, o que é um red herring justo, como validar
-solvabilidade. **Não modifique esses arquivos** a menos que a tarefa diga
-explicitamente "atualizar o framework".
+O antigo caso canônico intermediário foi rebaixado/renomeado para `caso_canonico_iniciante.json`. Não recrie nem referencie `caso_canonico_intermediario.json` salvo se a tarefa pedir explicitamente a criação de um novo caso Intermediário.
 
-### 2. Nunca quebrar a interface do validador
+## Documentação obrigatória antes de alterar o projeto
 
-O arquivo `generator/validator.py` expõe:
-- `BlueprintValidator(blueprint, strict=False).validar()` → `ResultadoValidacao`
-- CLI: `python validator.py <arquivo.json> [--strict] [--json]`
+Antes de alterar conteúdo, blueprint, templates, renderer, validator ou package builder, leia:
 
-Qualquer refatoração deve manter essa interface intacta. Se mudar a assinatura,
-atualize todos os chamadores e os testes correspondentes.
+1. `README.md`
+2. `docs/ESTADO_ATUAL.md`
+3. `docs/DIRETRIZES_EDITORIAIS.md`
+4. `docs/LLM_OPERATING_MANUAL.md`, se existir
+5. `examples/caso_canonico_iniciante.json`, quando a tarefa tocar no caso canônico
 
-### 3. Nunca gerar ou commitar dados de caso reais com nomes reais de pessoas
+## Stack atual
 
-Blueprints e PDFs de exemplo usam **exclusivamente personagens fictícios**.
-Não use nomes de pessoas públicas, empresas reais (exceto como referência genérica
-de estilo) ou dados pessoais reais em qualquer fixture, teste ou exemplo.
+- Python;
+- Blueprint JSON;
+- Schemas YAML;
+- templates HTML/CSS;
+- Playwright/Chromium para renderização;
+- Playwright PDF;
+- `pikepdf` como backend oficial de merge;
+- `pypdf` apenas fallback;
+- pytest para testes;
+- ruff para lint.
 
-### 4. Sempre rodar o validador antes de marcar uma tarefa como concluída
+Não assuma que Telegram, Mercado Pago, dashboard, banco de dados ou multiusuário fazem parte da prioridade atual. Esses temas não devem ser implementados sem instrução explícita.
 
-Se a tarefa envolve geração de blueprint ou modificação no pipeline:
+## Arquivos e responsabilidades
+
+Use esta separação antes de mexer em qualquer coisa:
+
+| Problema | Local provável |
+|---|---|
+| Conteúdo do caso, personagens, documentos, pistas | `examples/caso_canonico_iniciante.json` |
+| Estrutura de dados | `generator/models.py` |
+| Validação narrativa/estrutural | `generator/validator.py` |
+| Renderização de dados em HTML/PDF | `generator/renderer.py` |
+| Mapas e visuais procedurais | `generator/visual_procedural.py` |
+| Templates de documentos | `templates/*.html` |
+| Montagem de pacote final | `scripts.build_package` e módulos relacionados |
+| Estado e diretrizes do produto | `docs/ESTADO_ATUAL.md`, `docs/DIRETRIZES_EDITORIAIS.md` |
+
+Se a tarefa é editorial, prefira mudar o blueprint e/ou documentação. Não refatore código sem necessidade.
+
+## Regra editorial central
+
+Documento de jogador deve conter evidência bruta, não interpretação do autor.
+
+Separação de papéis:
+
+- documento do jogador mostra fatos do mundo da história;
+- guia do facilitador explica significado;
+- dica contextual destrava grupos;
+- gabarito resolve;
+- metadados internos podem usar linguagem analítica, mas não devem vazar para PDFs de jogador.
+
+Nunca coloque em documento de jogador frases como:
+
+- “compare com...”;
+- “a confirmação depende de...”;
+- “não prova sozinho...”;
+- “o preço isolado não decide...”;
+- “recibo, extrato e conversa interna...” como checklist;
+- “red herring”, “ruído controlado”, “hipótese”, “gabarito”;
+- referências a códigos de documentos como `E1-04` ou `E2-02` dentro de conteúdo diegético.
+
+Essas expressões podem existir em guia do facilitador, dicas, QA, graph report, testes e metadados internos, mas não nos documentos de jogador.
+
+## Mapa
+
+Mapa do jogador deve ser uma planta baixa neutra.
+
+Deve conter:
+
+- ambientes;
+- paredes;
+- portas;
+- janelas;
+- câmeras neutras;
+- nomes de ambientes;
+- códigos de portas;
+- norte e escala, se discretos.
+
+Não deve conter:
+
+- rota da peça;
+- seta de solução;
+- área crítica destacada;
+- câmera offline;
+- campo de visão;
+- legenda que explique a investigação;
+- cores fortes que apontem suspeita;
+- texto explicando por que ninguém viu.
+
+A Galeria/Vitrine interna do caso canônico deve ter acesso visual pelo corredor. Não pode depender de passagem por doca, depósito ou reserva técnica.
+
+## Assinaturas e rubricas
+
+Assinatura/rubrica é característica editorial do personagem no blueprint.
+
+Direção atual:
+
+- cada personagem pode ter perfil de assinatura/rubrica;
+- o renderer gera SVG com base nesse perfil;
+- override SVG manual é permitido;
+- fallback procedural existe para compatibilidade.
+
+Não volte para assinatura como simples texto cursivo ou “iniciais + risco” igual para todos.
+
+## E2 e documentos comerciais
+
+Para o caso canônico iniciante:
+
+- não usar mapa/quadro comparativo de propostas como documento de jogador;
+- manter propostas/orçamentos individuais por empresa;
+- contrato, recibo, extrato, e-mails e chats devem ser evidências separadas;
+- o jogador deve comparar porque está investigando, não porque um documento instrui a comparação.
+
+Orçamento deve parecer documento real de uma empresa, não síntese do puzzle.
+
+## O que não reabrir sem evidência nova
+
+Não reabra estes temas sem evidência concreta em PDF/teste/playtest:
+
+- placeholders residuais como `COPIA`;
+- PDFs consolidados em branco;
+- merge oficial com `pikepdf`;
+- Playwright como renderizador oficial;
+- caso canônico atual como Iniciante;
+- remoção de E2-03 como quadro comparativo do jogador;
+- mapa sem rota/área crítica/câmera offline;
+- assinatura/rubrica como atributo de personagem.
+
+## Prioridade atual
+
+Prioridade máxima:
+
+1. gerar pacote atualizado do caso canônico iniciante;
+2. revisar visualmente o PDF final;
+3. realizar o primeiro playtest real;
+4. registrar travamentos, hipóteses erradas, tempo real e diversão percebida;
+5. só depois decidir ajustes estruturais ou criação de novo caso canônico Intermediário.
+
+Não priorizar agora:
+
+- marketplace;
+- dashboard web;
+- banco de dados;
+- editor visual;
+- multiusuário;
+- Telegram comercial;
+- agentes autônomos;
+- IA gerando imagens.
+
+## Comandos obrigatórios
+
+Testes:
 
 ```bash
-cd generator
-python validator.py exemplo_blueprint.json
+pytest tests/ -q
 ```
 
-O resultado deve ser `Risco: Baixo` ou `Risco: Médio-baixo` para a tarefa ser
-considerada concluída.
-
-### 5. Templates HTML são autossuficientes
-
-Cada arquivo em `/templates/*.html` deve funcionar isoladamente — CSS inline,
-sem dependências externas obrigatórias (fontes do Google são permitidas via CDN
-pois são decorativas, não funcionais). Não adicione `<script src="...">` que
-quebre a renderização offline via Playwright/Chromium.
-
----
-
-## Stack técnica
-
-| Camada | Tecnologia |
-|--------|-----------|
-| Linguagem | Python 3.11+ |
-| Modelos de dados | Pydantic v2 |
-| Renderização PDF | Playwright oficial com Chromium |
-| LLM | OpenAI API (GPT-4o) ou Anthropic API (Claude) — configurável via env |
-| Bot | python-telegram-bot |
-| Pagamento | Mercado Pago SDK Python |
-| Testes | pytest |
-| Linting | ruff |
-| Formatação | black |
-
----
-
-## Convenções de código
-
-### Nomes de variáveis e funções
-
-Use português para nomes de domínio do negócio, inglês para infraestrutura:
-
-```python
-# ✅ Correto
-def validar_blueprint(blueprint: Blueprint) -> ResultadoValidacao: ...
-def gerar_documento(doc: Documento) -> str: ...
-class BlueprintValidator: ...
-
-# ✅ Também correto (infraestrutura)
-def render_pdf(html: str, output_path: Path) -> None: ...
-async def handle_telegram_message(update, context): ...
-
-# ❌ Evitar — mistura aleatória
-def validate_personagem(p): ...
-def gerar_pdf_document(d): ...
-```
-
-### Erros e logging
-
-Use o módulo `logging` padrão. Nunca use `print()` em código de produção.
-Erros do validador são retornados como objetos `Erro` — não levante exceções
-para falhas de validação esperadas.
-
-```python
-# ✅
-logger = logging.getLogger(__name__)
-logger.warning("Blueprint com risco médio: %s", blueprint.titulo)
-
-# ❌
-print(f"AVISO: {mensagem}")
-raise ValueError("Blueprint inválido")  # só para erros inesperados
-```
-
-### Type hints
-
-Sempre. Sem `Any` quando o tipo é conhecido.
-
-```python
-# ✅
-def buscar_personagem(id: str, personagens: list[Personagem]) -> Optional[Personagem]:
-
-# ❌
-def buscar_personagem(id, personagens):
-```
-
----
-
-
-### Renderização oficial
-
-Playwright é o renderizador oficial de PDFs do projeto. O `generator/renderer.py` é
-a fonte operacional da renderização: ele injeta dados nos templates HTML e chama o
-Chromium via Playwright para gerar PDFs. O setup local precisa instalar o browser:
+Lint:
 
 ```bash
-pip install -r requirements.txt
+ruff check generator/
+```
+
+Validator strict do caso canônico:
+
+```bash
+python generator/validator.py examples/caso_canonico_iniciante.json --strict
+```
+
+Build do pacote:
+
+```bash
+python -m scripts.build_package examples/caso_canonico_iniciante.json --output output --strict
+```
+
+Se Playwright/Chromium não estiver instalado:
+
+```bash
 python -m playwright install chromium
 ```
 
-A orientação portrait/landscape será definida por template/tipo de documento; nesta
-fase há smoke test manual para ambas as orientações via `python -m scripts.smoke_playwright_pdf`.
+Se o build falhar apenas por ausência de Chromium no ambiente, registre isso explicitamente no relatório da PR.
 
-## Como rodar localmente
-
-```bash
-# Instalar dependências
-pip install -r requirements.txt
-
-# Rodar testes
-pytest tests/ -v
-
-# Validar um blueprint
-python generator/validator.py generator/exemplo_blueprint.json
-
-# Validar em modo estrito (falha em risco Médio)
-python generator/validator.py generator/exemplo_blueprint.json --strict
-
-# Saída em JSON (útil para integração)
-python generator/validator.py generator/exemplo_blueprint.json --json
-```
-
----
-
-## Variáveis de ambiente necessárias
-
-```bash
-# LLM — configure um dos dois
-OPENAI_API_KEY=sk-...
-ANTHROPIC_API_KEY=sk-ant-...
-
-# Qual LLM usar (openai | anthropic)
-LLM_PROVIDER=openai
-LLM_MODEL=gpt-4o
-
-# Telegram
-TELEGRAM_BOT_TOKEN=...
-
-# Mercado Pago
-MP_ACCESS_TOKEN=...
-MP_WEBHOOK_SECRET=...
-
-# Ambiente
-APP_ENV=development   # development | production
-LOG_LEVEL=INFO
-```
-
-Nunca commite valores reais dessas variáveis. Use `.env` local (já no `.gitignore`).
-
----
-
-## Fluxo principal do pipeline
-
-O agente deve entender esse fluxo antes de modificar qualquer parte:
-
-```
-1. Usuário envia parâmetros via Telegram
-        ↓
-2. pipeline.py monta o prompt com base em 07_PROMPT_GERADOR_DE_CASO.md
-        ↓
-3. Chamada ao LLM → retorna blueprint em JSON
-        ↓
-4. Blueprint é parseado via models.Blueprint (Pydantic)
-        ↓
-5. BlueprintValidator.validar() → ResultadoValidacao
-   ├── Risco Alto/Médio-alto → rejeita, pede correção ao LLM (até 2 tentativas)
-   └── Risco Médio-baixo/Baixo → avança
-        ↓
-6. renderer.py injeta dados dos documentos nos templates HTML
-        ↓
-7. Playwright/Chromium converte cada HTML em PDF
-        ↓
-8. merger.py agrupa por envelope (E1, E2, dicas, gabarito)
-        ↓
-9. package_builder.py gera PDFs visuais procedurais quando existirem, manifest.json, print_manifest.json, guia_facilitador.pdf, guia_de_impressao.pdf, qa_report.json, graph_report.json, playtest_report.json e llm_feedback.json
-        ↓
-10. Bot envia os arquivos ao usuário no Telegram
-```
-
----
-
-## Tarefas comuns e como abordá-las
-
-### Adicionar um novo tipo de documento ao catálogo
-
-1. Adicionar o valor em `models.TipoDocumento` (enum).
-2. Criar o template HTML em `/templates/NN_nome.html` com placeholders `{{VARIAVEL}}`.
-3. Adicionar mapeamento em `renderer.py` — qual template usar para o novo tipo.
-4. Atualizar `/framework/03_TIPOS_DE_DOCUMENTOS.md` com a nova entrada.
-5. Rodar `pytest tests/test_renderer.py`.
-
-### Adicionar uma nova regra de validação
-
-1. Identificar a seção correta em `validator.py` (elenco, documentos, pilares, etc.).
-2. Adicionar o método `_verificar_X` ou inserir verificação no método existente.
-3. Definir código único para o erro (ex: `NOVO_001`).
-4. Adicionar teste em `tests/test_validator.py` com blueprint que viola a regra.
-5. Verificar que o blueprint de exemplo ainda passa: `python validator.py exemplo_blueprint.json`.
-
-
-
-### Gerar pacote final completo
-
-Use o entrypoint oficial para transformar um blueprint válido no pacote final:
-
-```bash
-python -m scripts.build_package examples/showcase_tecnico.json --output output --strict
-```
-
-O pacote deve conter envelopes finais, `guia_facilitador.pdf`, `guia_de_impressao.pdf`,
-`manifest.json`, `print_manifest.json`, `qa_report.json`, `graph_report.json`, `playtest_report.json` e `llm_feedback.json`. Dicas e gabarito, quando
-existirem, devem permanecer confidenciais e separados dos arquivos de jogador. O `llm_feedback.json` é artefato técnico interno, não é para jogadores e não entra no `print_manifest.json`.
-
-### Modificar o prompt de geração
-
-O prompt base está em `/framework/07_PROMPT_GERADOR_DE_CASO.md`.
-O código em `pipeline.py` lê esse arquivo e interpola as variáveis do usuário.
-Se mudar a estrutura do prompt, verifique se o JSON retornado ainda é parseável
-por `models.Blueprint`.
-
-### Refatorar o validador
-
-- Mantenha os códigos de erro existentes — eles são referenciados nos logs e testes.
-- Não mude a assinatura de `BlueprintValidator.validar()`.
-- Após refatoração: `pytest tests/test_validator.py -v` deve passar 100%.
-
----
-
-## O que NÃO fazer
-
-- ❌ Não remova verificações do validador sem criar uma verificação equivalente.
-- ❌ Não altere `NivelRisco` sem atualizar `_calcular_risco()` e os testes.
-- ❌ Não commite blueprints com `"pode_gerar": false` na pasta `/examples/`.
-- ❌ Não adicione dependências sem atualizar `requirements.txt` e justificar no PR.
-- ❌ Não use `time.sleep()` no pipeline — use `asyncio.sleep()`.
-- ❌ Não chame a API do LLM diretamente fora de `pipeline.py` — centralize lá.
-- ❌ Não exponha o gabarito no material do jogador — essa separação é regra de negócio crítica.
-
----
-
-## Critério de "tarefa concluída"
+## Critério de tarefa concluída
 
 Uma tarefa só está concluída quando:
 
-- [ ] `pytest tests/` passa sem falhas.
-- [ ] `ruff check generator/` sem erros.
-- [ ] `python validator.py generator/exemplo_blueprint.json` retorna risco Baixo ou Médio-baixo.
-- [ ] Se a tarefa altera o pacote final: `python -m scripts.build_package examples/showcase_tecnico.json --output output --strict` gera `qa_report.json` com `status: passed`.
-- [ ] Nenhuma variável de ambiente real foi commitada.
-- [ ] Se modificou framework ou templates: comportamento antigo ainda funciona (sem regressão).
+- `pytest tests/ -q` passa, ou a falha é explicada como limitação de ambiente;
+- `ruff check generator/` passa quando a tarefa toca em Python;
+- `python generator/validator.py examples/caso_canonico_iniciante.json --strict` passa quando a tarefa toca no blueprint;
+- se a tarefa altera pacote/renderização, o build é tentado;
+- mudanças editoriais não vazam gabarito para documentos de jogador;
+- a PR explica claramente o que mudou, por que mudou e quais comandos foram executados.
 
----
+## Como abrir PRs
 
-## Dúvidas sobre regras do jogo
+Mantenha PRs pequenas e focadas.
 
-Se uma tarefa envolver decisão sobre regras narrativas (o que é um red herring justo,
-quantos pilares um envelope precisa, quando usar três envelopes), consulte os arquivos
-em `/framework/` — especialmente:
+Bons escopos:
 
-- `01_PRINCIPIOS_DO_MODELO.md` — leis invioláveis
-- `04_DESIGN_DE_PISTAS.md` — regras de pistas e códigos
-- `05_CHECKLIST_SOLVABILIDADE.md` — critério de qualidade final
-- `14_GRAFO_DE_PISTAS.md` — grafo lógico e relatório de solvabilidade estrutural
-- `15_CONTROLES_DA_LLM.md` — guard rails da LLM e feedback estruturado para correção futura
-- `16_GUIA_FACILITADOR.md` — guia confidencial de condução e dicas contextuais
-- `17_VISUAL_PROCEDURAL.md` — regras de mapas/cartões visuais gerados por dados
-- `18_PLAYTEST_E_METRICAS.md` — métricas heurísticas e warnings de experiência investigativa
+- “corrigir linguagem de E2”;
+- “ajustar mapa da galeria”;
+- “adicionar perfil de assinatura por personagem”;
+- “atualizar documentação”.
 
-Não tome decisões narrativas por conta própria. Se houver ambiguidade, sinalize
-no PR e aguarde instrução humana.
+Escopos ruins:
+
+- “melhorar tudo”;
+- “refatorar framework inteiro”;
+- “criar novo caso e mudar renderer e validator ao mesmo tempo”.
+
+## Quando parar
+
+Se a tarefa tocar no caso canônico e a mudança não for necessária para o primeiro playtest, prefira registrar como próximo passo em documentação, não implementar agora.
+
+O primeiro playtest vale mais que várias PRs teóricas.
