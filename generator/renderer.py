@@ -16,10 +16,11 @@ from __future__ import annotations
 
 import asyncio
 import importlib
+import json
 import logging
 import os
-import json
 import re
+import unicodedata
 import warnings
 from html import escape
 from pathlib import Path
@@ -27,6 +28,8 @@ from typing import Any
 
 TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
+ASSETS_DIR = Path(__file__).parent.parent / "assets"
+SIGNATURES_DIR = ASSETS_DIR / "signatures"
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +65,25 @@ def _perfil_assinatura(chave: str) -> str:
     if chave in {"ASSINATURA_CONTRATANTE", "ASSINATURA_ADVOGADO"}:
         return "assinatura_administrativa"
     return "assinatura_formal"
+
+
+def _slug_assinatura(texto: str) -> str:
+    """Normaliza nome de personagem para pasta de asset de assinatura."""
+    normalizado = unicodedata.normalize("NFKD", texto)
+    sem_acentos = "".join(
+        char for char in normalizado if not unicodedata.combining(char)
+    )
+    slug = re.sub(r"[^a-z0-9]+", "_", sem_acentos.lower()).strip("_")
+    return slug or "sem_nome"
+
+
+def _asset_assinatura_svg(texto: str, perfil: str) -> str | None:
+    """Carrega assinatura/rubrica individual quando houver asset do personagem."""
+    tipo_asset = "rubrica.svg" if perfil == "rubrica_curta" else "assinatura.svg"
+    asset_path = SIGNATURES_DIR / _slug_assinatura(texto) / tipo_asset
+    if not asset_path.is_file():
+        return None
+    return asset_path.read_text(encoding="utf-8")
 
 
 def _assinatura_svg(texto: str, perfil: str = "assinatura_formal") -> str:
@@ -144,10 +166,10 @@ def preparar_assinaturas_visuais(dados: dict[str, Any]) -> dict[str, Any]:
     for chave in ASSINATURA_KEYS:
         valor = enriquecidos.get(chave)
         if isinstance(valor, str) and valor.strip():
-            enriquecidos[f"{chave}_VISUAL"] = _assinatura_svg(
-                valor,
-                perfil=_perfil_assinatura(chave),
-            )
+            perfil = _perfil_assinatura(chave)
+            enriquecidos[f"{chave}_VISUAL"] = _asset_assinatura_svg(
+                valor, perfil
+            ) or _assinatura_svg(valor, perfil=perfil)
     return enriquecidos
 
 

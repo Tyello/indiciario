@@ -27,18 +27,18 @@ def test_analyze_playtest_gera_report_valido_serializavel(tmp_path):
     report = analyze_playtest(blueprint_with())
 
     assert report["status"] in {"ok", "warnings"}
-    assert report["summary"]["difficulty_declared"] == "intermediario"
+    assert report["summary"]["difficulty_declared"] == "iniciante"
     assert report["issues"] == []
 
     output = write_playtest_report(report, tmp_path / "playtest_report.json")
     loaded = json.loads(output.read_text(encoding="utf-8"))
-    assert loaded["summary"]["documents"] == 17
+    assert loaded["summary"]["documents"] == 21
 
 
 def test_tempo_estimado_eh_calculado_por_documentos_contratos_e_envelopes():
     report = analyze_playtest(blueprint_with())
 
-    assert report["summary"]["estimated_minutes"] == 88
+    assert report["summary"]["estimated_minutes"] == 104
 
 
 def test_carga_cognitiva_baixa():
@@ -52,7 +52,11 @@ def test_carga_cognitiva_baixa():
 
 
 def test_carga_cognitiva_media():
-    report = analyze_playtest(blueprint_with())
+    report = analyze_playtest(
+        blueprint_with(
+            dificuldade="intermediario", documentos=blueprint_data()["documentos"][:17]
+        )
+    )
 
     assert report["summary"]["cognitive_load"] == "medium"
 

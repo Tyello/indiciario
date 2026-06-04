@@ -101,6 +101,8 @@ hachureadas, portas codificadas, janelas externas e câmeras de segurança. Ambi
 <rect x="212" y="256" width="490" height="10" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
 <rect x="212" y="356" width="490" height="10" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
 <rect x="702" y="447" width="254" height="10" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+<rect class="wall wall-doca-deposito" x="444" y="366" width="10" height="38" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
+<rect class="wall wall-doca-deposito" x="444" y="461" width="10" height="87" fill="url(#hatch-light)" stroke="#374151" stroke-width="1.5"/>
 
 <!-- FUNDOS DAS SALAS -->
 <rect x="214" y="77" width="170" height="177" fill="#F3F4F6" opacity="0.82"/>
@@ -176,10 +178,10 @@ hachureadas, portas codificadas, janelas externas e câmeras de segurança. Ambi
 <rect x="582" y="246" width="30" height="16" rx="2" fill="#FAFAF8" stroke="#374151" stroke-width="1"/>
 <text x="597" y="258" class="p-code">P-08</text>
 
-<rect x="749" y="443" width="60" height="22" fill="#FAFAF8"/>
-<line x1="749" y1="452" x2="809" y2="452" stroke="#1F2937" stroke-width="2"/>
-<rect x="764" y="440" width="30" height="16" rx="2" fill="#FAFAF8" stroke="#374151" stroke-width="1"/>
-<text x="779" y="452" class="p-code">P-09</text>
+<rect x="690" y="374" width="22" height="55" fill="#FAFAF8"/>
+<line x1="700" y1="374" x2="700" y2="429" stroke="#1F2937" stroke-width="2"/>
+<rect x="685" y="393" width="30" height="16" rx="2" fill="#FAFAF8" stroke="#374151" stroke-width="1"/>
+<text x="700" y="405" class="p-code">P-09</text>
 
 <!-- Marcadores discretos de controle de acesso -->
 <circle cx="233" cy="234" r="3" fill="#6B7280"/>
@@ -190,7 +192,7 @@ hachureadas, portas codificadas, janelas externas e câmeras de segurança. Ambi
 <circle cx="717" cy="335" r="3" fill="#6B7280"/>
 <circle cx="717" cy="190" r="3" fill="#6B7280"/>
 <circle cx="614" cy="252" r="3" fill="#6B7280"/>
-<circle cx="796" cy="448" r="3" fill="#6B7280"/>
+<circle cx="717" cy="401" r="3" fill="#6B7280"/>
 
 <!-- CÂMERAS -->
 <g transform="translate(310 272)">
@@ -211,11 +213,11 @@ hachureadas, portas codificadas, janelas externas e câmeras de segurança. Ambi
   <line x1="-8" y1="0" x2="-15" y2="0" stroke="#374151" stroke-width="1"/>
   <text x="0" y="25" class="cam-code">CAM-03</text>
 </g>
-<g transform="translate(230 132)">
+<g transform="translate(214 96)">
   <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#F9FAFB" stroke="#374151" stroke-width="1.3"/>
   <circle cx="0" cy="0" r="2.5" fill="#374151"/>
-  <line x1="0" y1="-5" x2="0" y2="-12" stroke="#374151" stroke-width="1"/>
-  <text x="0" y="25" class="cam-code">CAM-04</text>
+  <line x1="-8" y1="0" x2="-15" y2="0" stroke="#374151" stroke-width="1"/>
+  <text x="16" y="-10" class="cam-code">CAM-04</text>
 </g>
 
 <!-- RÓTULOS DAS SALAS -->
@@ -243,8 +245,8 @@ hachureadas, portas codificadas, janelas externas e câmeras de segurança. Ambi
 <text x="831" y="318" class="r-label">Reserva Técnica B</text>
 <text x="831" y="334" class="r-sub">Acervo técnico</text>
 
-<text x="831" y="496" class="r-label">Vitrine</text>
-<text x="831" y="512" class="r-sub">Área pública</text>
+<text x="831" y="496" class="r-label">Galeria / Vitrine interna</text>
+<text x="831" y="512" class="r-sub">Acesso pelo corredor</text>
 
 <!-- NORTE -->
 <g transform="translate(1048 82)">
