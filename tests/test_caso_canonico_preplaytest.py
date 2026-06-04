@@ -147,25 +147,11 @@ def test_existe_documento_diegético_de_credenciais_para_pessoa_e_funcao() -> No
         assert esperado in corpo
 
 
-def test_e203_renderiza_quatro_empresas_com_peso_visual_equivalente() -> None:
-    doc = _doc("E2-03")
-    html = renderer.renderizar_html(
-        Path("templates/08_orcamento.html").read_text(encoding="utf-8"),
-        doc["conteudo"],
-    )
+def test_e203_foi_removido_do_pacote_de_jogador() -> None:
+    blueprint = _blueprint()
+    codigos = {doc["codigo"] for doc in blueprint["documentos"]}
 
-    assert html.count('class="company-card"') == 4
-    for empresa in [
-        "Ateliê Pedra Clara",
-        "Conserva Sul Restauro",
-        "LogisArte Transportes",
-        "Mirante Norte Consultoria",
-    ]:
-        assert empresa in html
-    assert "ruído" not in html.lower()
-    assert "suspeito" not in html.lower()
-    assert "legítimo" not in html.lower()
-    assert "Mapa interno" in doc["titulo"]
+    assert "E2-03" not in codigos
 
 
 def test_chats_sao_ambiguos_e_entram_no_envelope_e2_e_manifest(

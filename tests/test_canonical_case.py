@@ -22,7 +22,7 @@ def test_caso_canonico_carrega_como_blueprint():
     blueprint = _blueprint()
 
     assert blueprint.titulo == "O Desvio da Reserva Mirante"
-    assert len(blueprint.documentos) == 21
+    assert len(blueprint.documentos) == 20
 
 
 def test_caso_canonico_validator_nao_gera_criticos():
@@ -208,39 +208,17 @@ def test_caso_canonico_e1_falsos_caminhos_tem_limites_justos():
     assert "não comprova abertura de porta" not in str(e106.conteudo)
 
 
-def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_unica():
+def test_caso_canonico_e2_remove_mapa_interno_e_mantem_propostas_individuais():
     blueprint = _blueprint()
-    e203 = next(doc for doc in blueprint.documentos if doc.codigo == "E2-03")
+    codigos = {doc.codigo for doc in blueprint.documentos}
+    e201 = next(doc for doc in blueprint.documentos if doc.codigo == "E2-01")
     e204 = next(doc for doc in blueprint.documentos if doc.codigo == "E2-04")
 
-    empresas = {
-        item["NOME_ITEM"].split(" — ", 1)[-1] for item in e203.conteudo["ITENS"]
-    }
-    assert {
-        "Ateliê Pedra Clara",
-        "Conserva Sul Restauro",
-        "LogisArte Transportes",
-        "Mirante Norte Consultoria",
-    } == empresas
-    assert all(" — " not in item["NOME_ITEM"] for item in e203.conteudo["ITENS"])
-    texto_cotacao = str(e203.conteudo)
-    for label_meta in [
-        "PROPOSTA COMPLETA",
-        "RESTAURO LEGÍTIMO",
-        "LOGÍSTICA —",
-        "RUÍDO ADMINISTRATIVO",
-    ]:
-        assert label_meta not in texto_cotacao
-    assert e203.titulo == "Mapa interno de propostas recebidas"
-    assert "Ateliê Pedra Clara" not in e203.titulo
-    assert "só a proposta" not in e203.titulo.lower()
-    assert len(e203.conteudo["ITENS"]) == 4
-
-    assert "sem transporte" in texto_cotacao
-    assert "sem intervenção técnica" in texto_cotacao
-    assert "apoio administrativo" in texto_cotacao
-    assert "responsabilidade única" in str(e203.conteudo["CONDICOES"])
-    assert "aproximadamente R$ 20.600,00" in str(e203.conteudo["CONDICOES"])
+    assert "E2-03" not in codigos
+    assert e201.confirma == ["E2-02", "E2-04"]
+    assert e201.confirmado_por == ["E2-02", "E2-04"]
+    assert "aprovado como pacote único" not in e201.conteudo["CORPO_CARTA"]
+    assert "aprovado por Otávio Salles às 16h05" not in e201.conteudo["CORPO_CARTA"]
 
     propostas = {
         doc.titulo
@@ -260,6 +238,11 @@ def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_
     ]:
         assert len(proposta.conteudo["ITENS"]) == 1
         assert not proposta.conteudo.get("HAS_QUADRO_EMPRESAS")
+        assert proposta.confirma == []
+        texto = str(proposta.conteudo).lower()
+        assert "mapa" not in texto
+        assert "comparação administrativa" not in texto
+        assert "documento interno separado" not in texto
 
     assert e204.conteudo["TOTAL_LANCAMENTOS"] == "6"
     assert len(e204.conteudo["LANCAMENTOS"]) == 6
@@ -270,3 +253,17 @@ def test_caso_canonico_e2_tem_multiplas_empresas_e_cotacoes_sem_resposta_visual_
     assert "Ateliê Pedra Clara" in descricoes
     assert "LogisArte Transportes" in descricoes
     assert "Mirante Norte Consultoria" in descricoes
+
+
+def test_caso_canonico_documentos_de_jogador_nao_tem_handholding_comercial():
+    text = _raw_text().lower()
+
+    for forbidden in [
+        "mapa interno de propostas",
+        "comparação exige",
+        "recibo, extrato e conversa interna",
+        "preço isolado não decide",
+        "documento interno separado",
+        "aprovado por otávio salles às 16h05",
+    ]:
+        assert forbidden not in text

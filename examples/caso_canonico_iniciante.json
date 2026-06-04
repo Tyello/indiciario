@@ -106,7 +106,6 @@
       "verdade": "Planejou a cobertura financeira e direcionou contrato à Ateliê Pedra Clara.",
       "documento_ancoragem": [
         "E2-01",
-        "E2-03",
         "E2-04"
       ],
       "assinatura": {
@@ -813,15 +812,17 @@
       "envelope": "E2",
       "tipo": "contrato",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Revelar a cobertura documental planejada por Otávio para justificar a circulação da peça.",
+      "objetivo_narrativo": "Registrar a contratação emergencial da Ateliê Pedra Clara como termo administrativo ligado à OS 0147/2026, sem transformar o contrato em explicação da decisão.",
       "pistas_contidas": [
-        "Contrato autoriza transporte reservado e restauração de moldura com assinatura aprovada por Otávio."
+        "Contrato CAM-APC-44/26 vincula Ateliê Pedra Clara, OS 0147/2026, revisão de moldura, embalagem especial, transporte reservado e documentação técnica."
       ],
       "confirma": [
-        "E2-03"
+        "E2-02",
+        "E2-04"
       ],
       "confirmado_por": [
-        "E2-05"
+        "E2-02",
+        "E2-04"
       ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
@@ -840,7 +841,7 @@
         "LOCAL_DATA": "Porto Claro, 18 de agosto de 2026",
         "SAUDACAO": "À equipe de apuração interna,",
         "ASSUNTO": "Contrato CAM-APC-44/26",
-        "CORPO_CARTA": "<p>Contrato CAM-APC-44/26 firmado entre Casa de Acervo Mirante e Ateliê Pedra Clara para revisão de moldura, embalagem especial, transporte reservado e documentação técnica da peça Estudo em cobre nº 14.</p><p>O quadro de compras do mesmo dia também registra Conserva Sul Restauro para laudo, LogisArte Transportes para coleta independente e Mirante Norte Consultoria para apoio administrativo. Este contrato foi aprovado como pacote único por Otávio Salles às 16h05 de 18/08/2026, sob justificativa de prazo de inauguração.</p><p>Cláusula operacional: a circulação pela doca lateral poderia ocorrer fora do fluxo comum mediante credencial interna de operações e referência à OS 0147/2026.</p>",
+        "CORPO_CARTA": "<p>Contrato CAM-APC-44/26 firmado entre Casa de Acervo Mirante e Ateliê Pedra Clara para revisão de moldura, embalagem especial, transporte reservado e documentação técnica vinculada à OS 0147/2026, referente à peça Estudo em cobre nº 14.</p><p>Escopo contratado: avaliação de moldura, acondicionamento em embalagem rígida, retirada assistida mediante registro operacional, transporte reservado em janela previamente autorizada e entrega de dossiê técnico de retorno ao acervo.</p><p>Prazos: atendimento emergencial em 18/08/2026, retirada conforme disponibilidade da doca de serviço e fechamento documental até 19/08/2026. A circulação de item acondicionado deve seguir registro de OS, controle de acesso e recibo de retirada.</p><p>Representante administrativo da contratante: Otávio Salles. Representante da contratada: Celina Duarte.</p>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
         "ASSINATURA_CURSIVA": "Otávio Salles",
         "NOME_ASSINANTE": "Otávio Salles",
@@ -861,10 +862,11 @@
         "Recibo de R$ 18.400,00 inclui transporte reservado e moldura completa."
       ],
       "confirma": [
+        "E2-01",
         "E2-04"
       ],
       "confirmado_por": [
-        "E2-03"
+        "E2-04"
       ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
@@ -920,150 +922,16 @@
       }
     },
     {
-      "codigo": "E2-03",
-      "titulo": "Mapa interno de propostas recebidas",
-      "envelope": "E2",
-      "tipo": "orcamento",
-      "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Comparar internamente propostas separadas por empresa sem substituir os orçamentos individuais.",
-      "pistas_contidas": [
-        "Quatro fornecedores aparecem em linhas legíveis: Ateliê Pedra Clara, Conserva Sul Restauro, LogisArte Transportes e Mirante Norte Consultoria.",
-        "As linhas diferem por escopo, prazo, valor e referência administrativa, sem destacar uma resposta visual única."
-      ],
-      "confirma": [
-        "E2-01",
-        "E2-02"
-      ],
-      "confirmado_por": [
-        "E2-07"
-      ],
-      "red_herring_potencial": "Mirante Norte e LogisArte parecem suspeitas pelo nome/transportes, mas não têm recibo de intervenção de acervo nem assinatura final correspondente.",
-      "risco_ambiguidade": "baixo",
-      "ids_citados": [
-        "04",
-        "05"
-      ],
-      "codigos_citados": [],
-      "conteudo": {
-        "NOME_EMPRESA": "Casa de Acervo Mirante — Compras",
-        "TIPO_EMPRESA": "Mapa interno de propostas recebidas",
-        "CNPJ": "41.738.902/0001-64",
-        "ENDERECO": "Rua das Figueiras, 118 — Porto Claro",
-        "SITE_EMAIL": "compras@acervomirante.local",
-        "COR_PRIMARIA": "#3F5E5A",
-        "COR_SECUNDARIA": "#D8C7B0",
-        "NUMERO_ORCAMENTO": "MAP-COMP-0147/2026",
-        "DATA_EMISSAO": "18/08/2026",
-        "DATA_VALIDADE": "25/08/2026",
-        "REVISAO": "comparativo interno",
-        "NOME_CLIENTE": "Casa de Acervo Mirante",
-        "ENDERECO_CLIENTE": "Rua das Figueiras, 118 — Porto Claro",
-        "DOC_CLIENTE": "41.738.902/0001-64",
-        "CONTATO_CLIENTE": "Otávio Salles",
-        "TITULO_PROJETO": "Mapa interno — OS-0147/2026",
-        "DESCRICAO_REFERENCIA": "Comparativo administrativo de propostas recebidas em documentos separados.",
-        "ITENS": [
-          {
-            "NUMERO_ITEM": "1",
-            "NOME_ITEM": "Ateliê Pedra Clara",
-            "DESC_ITEM": "Pacote completo: revisão/moldura, acondicionamento, retirada assistida, seguro, documentação de retorno, prazo imediato e responsabilidade única pela cadeia de custódia.",
-            "QUANTIDADE": "1 pacote",
-            "VALOR_UNITARIO": "R$ 18.400,00",
-            "VALOR_TOTAL_ITEM": "R$ 18.400,00"
-          },
-          {
-            "NUMERO_ITEM": "2",
-            "NOME_ITEM": "Conserva Sul Restauro",
-            "DESC_ITEM": "Revisão/laudo de conservação sem transporte e sem retirada assistida no mesmo pedido.",
-            "QUANTIDADE": "1 serviço",
-            "VALOR_UNITARIO": "R$ 12.900,00",
-            "VALOR_TOTAL_ITEM": "R$ 12.900,00"
-          },
-          {
-            "NUMERO_ITEM": "3",
-            "NOME_ITEM": "LogisArte Transportes",
-            "DESC_ITEM": "Transporte com lacre e escolta, sem intervenção técnica em acervo e sem laudo de retorno.",
-            "QUANTIDADE": "1 trajeto",
-            "VALOR_UNITARIO": "R$ 4.800,00",
-            "VALOR_TOTAL_ITEM": "R$ 4.800,00"
-          },
-          {
-            "NUMERO_ITEM": "4",
-            "NOME_ITEM": "Mirante Norte Consultoria",
-            "DESC_ITEM": "Documentação e apoio administrativo da OS, sem equipe de campo e sem manuseio de acervo.",
-            "QUANTIDADE": "1 consultoria",
-            "VALOR_UNITARIO": "R$ 2.900,00",
-            "VALOR_TOTAL_ITEM": "R$ 2.900,00"
-          }
-        ],
-        "SUBTOTAL": "R$ 38.100,00",
-        "DESCONTO": "R$ 0,00",
-        "IMPOSTOS": "Inclusos/variável por proposta",
-        "VALOR_TOTAL": "Mapa comparativo — sem contratação automática",
-        "CONDICOES": [
-          {
-            "CONDICAO": "Ateliê Pedra Clara reúne o pacote completo em uma única responsabilidade de cadeia de custódia."
-          },
-          {
-            "CONDICAO": "Serviços separados somam aproximadamente R$ 20.600,00 sem oferecer responsabilidade única pelo retorno."
-          },
-          {
-            "CONDICAO": "Diferença principal avaliada por escopo, prazo, OS, recibo, extrato e conversa interna; preço isolado não decide a suspeita."
-          }
-        ],
-        "ASSINATURA_RESPONSAVEL": "Otávio Salles",
-        "NOME_RESPONSAVEL": "Otávio Salles",
-        "CARGO_RESPONSAVEL": "Gerente financeiro",
-        "ASSINATURA_CLIENTE": "Otávio Salles",
-        "DATA_APROVACAO": "18/08/2026 16h05",
-        "QUADRO_EMPRESAS": [
-          {
-            "EMPRESA": "Ateliê Pedra Clara",
-            "ESCOPO": "Pacote completo: revisão/moldura, acondicionamento, retirada assistida, seguro, documentação de retorno, prazo imediato e responsabilidade única pela cadeia de custódia",
-            "PRAZO_OBS": "Pacote completo: revisão/moldura, acondicionamento, retirada assistida, seguro, documentação de retorno, prazo imediato e responsabilidade única pela cadeia de custódia.",
-            "VALOR": "R$ 18.400,00",
-            "REFERENCIA": "OS-0147/2026"
-          },
-          {
-            "EMPRESA": "Conserva Sul Restauro",
-            "ESCOPO": "Revisão/laudo de conservação sem transporte e sem retirada assistida no mesmo pedido",
-            "PRAZO_OBS": "Revisão/laudo de conservação sem transporte e sem retirada assistida no mesmo pedido.",
-            "VALOR": "R$ 12.900,00",
-            "REFERENCIA": "OS-0147/2026"
-          },
-          {
-            "EMPRESA": "LogisArte Transportes",
-            "ESCOPO": "Transporte com lacre e escolta, sem intervenção técnica em acervo e sem laudo de retorno",
-            "PRAZO_OBS": "Transporte com lacre e escolta, sem intervenção técnica em acervo e sem laudo de retorno.",
-            "VALOR": "R$ 4.800,00",
-            "REFERENCIA": "OS-0147/2026"
-          },
-          {
-            "EMPRESA": "Mirante Norte Consultoria",
-            "ESCOPO": "Documentação e apoio administrativo da OS, sem equipe de campo e sem manuseio de acervo",
-            "PRAZO_OBS": "Documentação e apoio administrativo da OS, sem equipe de campo e sem manuseio de acervo.",
-            "VALOR": "R$ 2.900,00",
-            "REFERENCIA": "OS-0147/2026"
-          }
-        ],
-        "HAS_QUADRO_EMPRESAS": true,
-        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "04",
-        "ASSINATURA_CLIENTE_PERSONAGEM_ID": "04"
-      }
-    },
-    {
       "codigo": "E2-09",
       "titulo": "Orçamento Ateliê Pedra Clara",
       "envelope": "E2",
       "tipo": "orcamento",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Registrar proposta individual de empresa, preservando escopo e valor sem criar orçamento multiempresa.",
+      "objetivo_narrativo": "Registrar proposta individual da Ateliê Pedra Clara com escopo, prazo e condições comerciais próprios.",
       "pistas_contidas": [
-        "Ateliê Pedra Clara apresenta escopo específico; comparação exige mapa interno, OS, recibo, extrato e conversa interna."
+        "Ateliê Pedra Clara apresenta proposta de revisão de moldura, acondicionamento, retirada assistida, seguro, transporte reservado e documentação de retorno."
       ],
-      "confirma": [
-        "E2-03"
-      ],
+      "confirma": [],
       "confirmado_por": [
         "E2-08"
       ],
@@ -1107,10 +975,13 @@
         "VALOR_TOTAL": "R$ 18.400,00",
         "CONDICOES": [
           {
-            "CONDICAO": "Pacote completo de revisão/moldura, acondicionamento, retirada assistida, seguro, documentação de retorno e prazo imediato."
+            "CONDICAO": "Validade da proposta: 5 dias corridos a partir da emissão."
           },
           {
-            "CONDICAO": "Proposta emitida individualmente; comparação administrativa consta em documento interno separado."
+            "CONDICAO": "Aprovação formal por assinatura ou autorização administrativa vinculada à OS-0147/2026."
+          },
+          {
+            "CONDICAO": "Transporte condicionado a janela operacional disponibilizada pela contratante e conferência de item acondicionado no ato da retirada."
           }
         ],
         "ASSINATURA_RESPONSAVEL": "Celina Duarte",
@@ -1129,13 +1000,11 @@
       "envelope": "E2",
       "tipo": "orcamento",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Registrar proposta individual de empresa, preservando escopo e valor sem criar orçamento multiempresa.",
+      "objetivo_narrativo": "Registrar proposta individual da Conserva Sul Restauro com escopo, prazo e condições comerciais próprios.",
       "pistas_contidas": [
-        "Conserva Sul Restauro apresenta escopo específico; comparação exige mapa interno, OS, recibo, extrato e conversa interna."
+        "Conserva Sul Restauro apresenta proposta de revisão e laudo de conservação, com limites de logística definidos."
       ],
-      "confirma": [
-        "E2-03"
-      ],
+      "confirma": [],
       "confirmado_por": [
         "E2-08"
       ],
@@ -1179,10 +1048,13 @@
         "VALOR_TOTAL": "R$ 12.900,00",
         "CONDICOES": [
           {
-            "CONDICAO": "Revisão e laudo de conservação, sem transporte, sem retirada noturna assistida e sem responsabilidade logística de retorno."
+            "CONDICAO": "Validade da proposta: 7 dias corridos a partir da emissão."
           },
           {
-            "CONDICAO": "Proposta emitida individualmente; comparação administrativa consta em documento interno separado."
+            "CONDICAO": "Serviço restrito à avaliação técnica e emissão de laudo, sem retirada noturna assistida."
+          },
+          {
+            "CONDICAO": "Materiais especiais de embalagem e deslocamento externo não estão incluídos no valor proposto."
           }
         ],
         "ASSINATURA_RESPONSAVEL": "Bruno Alcântara",
@@ -1200,13 +1072,11 @@
       "envelope": "E2",
       "tipo": "orcamento",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Registrar proposta individual de empresa, preservando escopo e valor sem criar orçamento multiempresa.",
+      "objetivo_narrativo": "Registrar proposta individual da LogisArte Transportes com escopo, prazo e condições comerciais próprios.",
       "pistas_contidas": [
-        "LogisArte Transportes apresenta escopo específico; comparação exige mapa interno, OS, recibo, extrato e conversa interna."
+        "LogisArte Transportes apresenta proposta de trajeto com lacre e escolta, limitada ao transporte."
       ],
-      "confirma": [
-        "E2-03"
-      ],
+      "confirma": [],
       "confirmado_por": [
         "E2-08"
       ],
@@ -1250,10 +1120,13 @@
         "VALOR_TOTAL": "R$ 4.800,00",
         "CONDICOES": [
           {
-            "CONDICAO": "Transporte com lacre e escolta, sem intervenção técnica, sem laudo de conservação e sem fotografia técnica de retorno."
+            "CONDICAO": "Validade da proposta: 5 dias corridos a partir da emissão."
           },
           {
-            "CONDICAO": "Proposta emitida individualmente; comparação administrativa consta em documento interno separado."
+            "CONDICAO": "Serviço restrito ao trajeto contratado, com lacre e escolta conforme disponibilidade de agenda."
+          },
+          {
+            "CONDICAO": "Intervenção técnica, laudo de conservação e documentação fotográfica de acervo não integram esta proposta."
           }
         ],
         "ASSINATURA_RESPONSAVEL": "Sofia Campos",
@@ -1271,13 +1144,11 @@
       "envelope": "E2",
       "tipo": "orcamento",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Registrar proposta individual de empresa, preservando escopo e valor sem criar orçamento multiempresa.",
+      "objetivo_narrativo": "Registrar proposta individual da Mirante Norte Consultoria com escopo, prazo e condições comerciais próprios.",
       "pistas_contidas": [
-        "Mirante Norte Consultoria apresenta escopo específico; comparação exige mapa interno, OS, recibo, extrato e conversa interna."
+        "Mirante Norte Consultoria apresenta proposta de documentação e apoio administrativo da OS, sem serviço de campo."
       ],
-      "confirma": [
-        "E2-03"
-      ],
+      "confirma": [],
       "confirmado_por": [
         "E2-08"
       ],
@@ -1321,10 +1192,13 @@
         "VALOR_TOTAL": "R$ 2.900,00",
         "CONDICOES": [
           {
-            "CONDICAO": "Documentação, apoio administrativo e organização de anexos da OS, sem equipe de campo e sem manuseio de acervo."
+            "CONDICAO": "Validade da proposta: 10 dias corridos a partir da emissão."
           },
           {
-            "CONDICAO": "Proposta emitida individualmente; comparação administrativa consta em documento interno separado."
+            "CONDICAO": "Serviço restrito à organização administrativa de anexos, formulários e documentação de OS."
+          },
+          {
+            "CONDICAO": "Equipe de campo, manuseio de acervo e transporte de item acondicionado não integram esta proposta."
           }
         ],
         "ASSINATURA_RESPONSAVEL": "Nara Vidal",
@@ -1344,14 +1218,15 @@
       "emocao_esperada": "confirmação progressiva",
       "objetivo_narrativo": "Provar o salto financeiro relevante dentro de ruído controlado de pagamentos normais, taxa/estorno e retorno ambíguo por consultoria.",
       "pistas_contidas": [
-        "O extrato mostra quatro nomes empresariais distintos em débitos, estorno e crédito; os lançamentos precisam ser comparados ao mapa de propostas.",
-        "O crédito da Mirante Norte permanece ambíguo sem recibo, contrato e OS."
+        "O extrato mostra débitos, estorno e crédito envolvendo empresas da OS 0147/2026.",
+        "Os lançamentos registram Ateliê Pedra Clara, Conserva Sul Restauro, LogisArte Transportes e Mirante Norte Consultoria em datas próximas."
       ],
       "confirma": [
+        "E2-01",
         "E2-02"
       ],
       "confirmado_por": [
-        "E2-06"
+        "E2-07"
       ],
       "red_herring_potencial": "Pagamentos a Conserva Sul e LogisArte são plausíveis, mas seus escopos não batem com a intervenção completa nem com o recibo final.",
       "risco_ambiguidade": "baixo",
@@ -1481,16 +1356,17 @@
       "envelope": "E2",
       "tipo": "email_institucional",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Manter Otávio como hipótese administrativa até E2, mostrando que a decisão por fornecedor emerge de prazo/escopo e não de um título óbvio.",
+      "objetivo_narrativo": "Registrar a solicitação administrativa de urgência da OS 0147/2026 e a presença de fornecedores no dossiê de compras.",
       "pistas_contidas": [
-        "Otávio pede aprovação emergencial da OS 0147/2026 e cita três alternativas empresariais antes da escolha.",
-        "A mensagem mantém a decisão no nível de escopo operacional; a confirmação depende de recibo, contrato e extrato."
+        "Otávio solicita aprovação emergencial da OS 0147/2026 e encaminha o fluxo para compras e operações.",
+        "A mensagem mantém a decisão no nível administrativo e logístico."
       ],
       "confirma": [
         "E2-01"
       ],
       "confirmado_por": [
-        "E2-03"
+        "E2-01",
+        "E2-08"
       ],
       "red_herring_potencial": "Pressa financeira sem log físico não bastaria para culpar sozinho.",
       "risco_ambiguidade": "baixo",
@@ -1510,7 +1386,7 @@
         "ASSUNTO": "Aprovação emergencial — OS 0147/2026",
         "AVATAR_INICIAL": "O",
         "AVATAR_COR": "#7A4E2D",
-        "CORPO_EMAIL": "<p>Solicito aprovar ainda hoje a OS 0147/2026. O quadro de compras lista quatro frentes: Conserva Sul para laudo de restauro, LogisArte para coleta, Mirante Norte para apoio administrativo e Ateliê Pedra Clara para pacote com moldura, embalagem, transporte e documentação.</p><p>A opção de pacote único reduz a abertura de ordens separadas, mas peço que compras mantenha os demais fornecedores no dossiê para comparação de escopo e prazo. Operações deve acompanhar a doca lateral e registrar o fluxo conforme o código da OS.</p><p>A documentação técnica será anexada no fechamento; sem o recibo e o extrato, este e-mail não basta para definir benefício ou execução.</p>",
+        "CORPO_EMAIL": "<p>Solicito aprovar ainda hoje a OS 0147/2026 para atendimento emergencial de moldura, acondicionamento, retirada assistida e documentação técnica da peça Estudo em cobre nº 14.</p><p>Compras deve manter no dossiê as propostas recebidas de Ateliê Pedra Clara, Conserva Sul Restauro, LogisArte Transportes e Mirante Norte Consultoria, cada uma com seu escopo e prazo de validade. Operações deve acompanhar a doca lateral e registrar o fluxo conforme o código da OS.</p><p>A documentação técnica será anexada no fechamento administrativo da ordem.</p>",
         "NOTA_RODAPE": "E-mail arquivado pela diretoria administrativa.",
         "ANEXOS": false
       }
@@ -1521,7 +1397,7 @@
       "envelope": "E2",
       "tipo": "chat",
       "emocao_esperada": "confirmação progressiva",
-      "objetivo_narrativo": "Sugerir coordenação logística entre OS, doca e etiquetas sem resolver sozinho a autoria; a confirmação depende de cruzar conversa, extrato, recibo e registros operacionais.",
+      "objetivo_narrativo": "Sugerir coordenação logística entre OS, doca e etiquetas sem resolver sozinho a autoria; a confirmação depende de registros materiais e financeiros.",
       "pistas_contidas": [
         "A conversa menciona OS 0147, doca, RM-17, pacote de moldura e uma anotação curta de bancada.",
         "As mensagens sugerem coordenação operacional e cuidado com linguagem, sem explicar benefício financeiro ou autoria isoladamente."
@@ -1607,8 +1483,8 @@
       "confirma": [
         "E1-04",
         "E1-06",
-        "E2-03",
-        "E2-06"
+        "E2-06",
+        "E2-01"
       ],
       "confirmado_por": [
         "E2-04"
@@ -1648,15 +1524,15 @@
       "envelope": "E2",
       "tipo": "chat",
       "emocao_esperada": "ruído controlado",
-      "objetivo_narrativo": "Reforçar a presença perceptível de múltiplas empresas no E2 por conversas ambíguas de compras e fornecedores.",
+      "objetivo_narrativo": "Reforçar a presença de múltiplas propostas no E2 por conversa interna de compras, mantendo ambiguidade comercial.",
       "pistas_contidas": [
         "Conserva Sul, LogisArte, Mirante Norte e Ateliê Pedra Clara aparecem como fornecedores ativos da mesma OS."
       ],
       "confirma": [
-        "E2-03"
+        "E2-05"
       ],
       "confirmado_por": [
-        "E2-03"
+        "E2-05"
       ],
       "red_herring_potencial": "Múltiplos fornecedores parecem plausíveis sem indicar isoladamente autoria ou benefício.",
       "risco_ambiguidade": "medio-baixo",
@@ -1677,7 +1553,7 @@
         "MENSAGENS": [
           {
             "DIRECAO": "in",
-            "TEXTO_MENSAGEM": "Recebi as quatro propostas da OS-0147/2026. Vou separar Ateliê, Conserva, LogisArte e Mirante Norte no mapa interno.",
+            "TEXTO_MENSAGEM": "Recebi as quatro propostas da OS-0147/2026. Vou salvar Ateliê, Conserva, LogisArte e Mirante Norte como anexos separados da ordem.",
             "HORARIO": "16h42",
             "CLASSE_GAP": "gap",
             "MOSTRAR_NOME": true,
@@ -1686,7 +1562,7 @@
           },
           {
             "DIRECAO": "in",
-            "TEXTO_MENSAGEM": "Operacionalmente, Conserva resolve laudo, mas não retira nem transporta hoje. LogisArte só faz trajeto.",
+            "TEXTO_MENSAGEM": "Conserva consegue laudo de conservação, mas não inclui retirada assistida para hoje. LogisArte informou apenas trajeto com lacre.",
             "HORARIO": "16h55",
             "CLASSE_GAP": "normal",
             "MOSTRAR_NOME": true,
@@ -1695,7 +1571,7 @@
           },
           {
             "DIRECAO": "in",
-            "TEXTO_MENSAGEM": "Se contratar separado, laudo + transporte + consultoria fica perto de R$ 20.600,00 e ainda sem responsável único pelo retorno.",
+            "TEXTO_MENSAGEM": "Mirante Norte ficou na parte administrativa de formulários e anexos. Não prevê equipe de campo.",
             "HORARIO": "17h08",
             "CLASSE_GAP": "normal",
             "MOSTRAR_NOME": true,
@@ -1704,7 +1580,7 @@
           },
           {
             "DIRECAO": "in",
-            "TEXTO_MENSAGEM": "Ateliê é mais caro que cada linha isolada, mas inclui revisão, acondicionamento, seguro, retirada assistida e documentação de retorno.",
+            "TEXTO_MENSAGEM": "Ateliê incluiu revisão, acondicionamento, seguro, retirada assistida e documentação de retorno no mesmo atendimento.",
             "HORARIO": "17h24",
             "CLASSE_GAP": "gap",
             "MOSTRAR_NOME": true,
@@ -1713,7 +1589,7 @@
           },
           {
             "DIRECAO": "out",
-            "TEXTO_MENSAGEM": "Vou anexar o mapa interno com as propostas individuais. A decisão precisa citar escopo e prazo, não só valor.",
+            "TEXTO_MENSAGEM": "Vou arquivar as propostas individuais na pasta da OS e deixar a aprovação registrada no fluxo administrativo.",
             "HORARIO": "17h49",
             "CLASSE_GAP": "normal",
             "DIRECAO_OUT": true,
@@ -1729,7 +1605,7 @@
       "evento": "Otávio solicita aprovação emergencial à diretoria para contratação da Ateliê Pedra Clara.",
       "personagem_id": "04",
       "documento_prova": "E2-05",
-      "confirmacao_independente": "E2-03"
+      "confirmacao_independente": "E2-01"
     },
     {
       "data_hora": "18/08/2026 19h40",
@@ -1789,7 +1665,7 @@
       "evento": "Otávio solicita aprovação emergencial à diretoria para contratação da Ateliê Pedra Clara.",
       "personagem_id": "04",
       "documento_prova": "E2-05",
-      "confirmacao_independente": "E2-03"
+      "confirmacao_independente": "E2-01"
     },
     {
       "data_hora": "18/08/2026 19h40",
@@ -1884,27 +1760,27 @@
       "emocao_esperada": "virada lógica"
     },
     {
-      "descricao": "Mapa compara Ateliê Pedra Clara, Conserva Sul, LogisArte e Mirante Norte.",
-      "documento": "E2-03",
-      "o_que_sugere": "A escolha da Pedra Clara é suspeita pelo conjunto escopo/prazo/OS, não pelo nome isolado.",
-      "o_que_prova": "A proposta selecionada é a única que cruza intervenção, transporte assistido e valor que aparece em recibo/extrato.",
-      "confirmacao": "E2-05",
+      "descricao": "Contrato e propostas individuais documentam a OS 0147/2026 sem apresentar uma síntese pronta de decisão.",
+      "documento": "E2-01",
+      "o_que_sugere": "A contratação emergencial da Ateliê Pedra Clara pertence ao conjunto de compras da OS, mas precisa ser lida como registro administrativo.",
+      "o_que_prova": "A OS contratada reúne escopo, prazo e logística que depois aparecem em recibo e extrato.",
+      "confirmacao": "E2-02",
       "risco_ambiguidade": "medio_baixo",
       "emocao_esperada": "motivo revelado"
     },
     {
-      "descricao": "Recibo e extrato batem no valor da opção completa da Ateliê Pedra Clara, enquanto outros fornecedores aparecem como ruído controlado.",
+      "descricao": "Recibo e extrato registram o mesmo valor da Ateliê Pedra Clara, enquanto outros fornecedores aparecem como contexto comercial.",
       "documento": "E2-02",
-      "o_que_sugere": "Celina recebeu benefício direto, mas a prova exige comparar cotação, OS, recibo e extrato.",
+      "o_que_sugere": "Celina recebeu benefício direto ligado à OS contratada.",
       "o_que_prova": "Pagamento a fornecedora ligada ao desvio.",
       "confirmacao": "E2-04",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "confirmação financeira"
     },
     {
-      "descricao": "Chat sugere coordenação de doca, OS e etiquetas, mas exige cruzamento com recibo, extrato e auditoria.",
+      "descricao": "Recibo e extrato batem no valor da Ateliê Pedra Clara, enquanto outros fornecedores permanecem como contexto comercial.",
       "documento": "E2-06",
-      "o_que_sugere": "Marina executou instrução coordenada com Otávio e Celina.",
+      "o_que_sugere": "Celina recebeu benefício direto ligado à OS contratada.",
       "o_que_prova": "A cadeia final de execução e ocultação.",
       "confirmacao": "E2-07",
       "risco_ambiguidade": "baixo",
@@ -2010,7 +1886,7 @@
       "envelope": "E2",
       "condicao_uso": "Grupo não entende o papel da fornecedora.",
       "texto": "Compare o valor aprovado com o que a auditoria diz que de fato ocorreu. Depois procure quem emitiu e recebeu o recibo.",
-      "o_que_desbloqueia": "Cruzamento E2-02, E2-03, E2-04 e E2-07."
+      "o_que_desbloqueia": "Cruzamento E2-01, E2-02, E2-04 e E2-07."
     },
     {
       "numero": 6,
@@ -2077,11 +1953,11 @@
     },
     {
       "id": "C-E2-COBERTURA",
-      "conclusao": "Otávio criou a cobertura contratual antes da conferência técnica, com orçamento emergencial inflado.",
+      "conclusao": "A cobertura contratual da OS 0147/2026 foi formalizada com escopo emergencial amplo e aparece depois no recibo da Ateliê Pedra Clara.",
       "fase": "E2",
       "tipo": "motivo_planejamento",
-      "prova_principal": "E2-03",
-      "confirmacao_independente": "E2-01",
+      "prova_principal": "E2-01",
+      "confirmacao_independente": "E2-02",
       "descarta_alternativas": [
         "E2-05"
       ],
@@ -2089,7 +1965,7 @@
         "04",
         "05"
       ],
-      "acao_esperada_jogador": "Comparar contrato, orçamento e e-mail para separar pressa administrativa de planejamento documental.",
+      "acao_esperada_jogador": "Comparar contrato, recibo e extrato para separar pressa administrativa de benefício financeiro.",
       "risco_ambiguidade": "medio_baixo",
       "obrigatoria_para_avanco": true
     },
@@ -2134,7 +2010,7 @@
     }
   ],
   "versao": "1.0",
-  "observacoes_producao": "Gabarito do facilitador: solução final — Marina Vale executou a troca física; Otávio Salles planejou a contratação emergencial; Celina Duarte recebeu o benefício pela Ateliê Pedra Clara. Sequência: aprovação emergencial às 16h02; bloqueio visual da doca às 19h40; abertura da reserva B pela credencial 02 às 19h48; saída RM-17 às 19h57; pagamento e retorno parcial nos dias seguintes. Evidências: oportunidade por E1-04/E1-05/E1-07; inconsistência por E1-06/E2-07; motivo por E2-01/E2-03/E2-05; benefício por E2-02/E2-04; confirmação final por E2-06/E2-07. Descartes: Inês pressiona, mas não tem porta nem pagamento; Tadeu tem atraso, mas escala e log o colocam na portaria; Lia corrigiu ficha e teve evento negado, explicado pelo glossário. Critério de abertura do E2: hipótese intermediária com janela, credencial 02 e RM-17. Critério final: resposta cobre quem, como, por que, prova principal e alternativas descartadas.",
+  "observacoes_producao": "Gabarito do facilitador: solução final — Marina Vale executou a troca física; Otávio Salles planejou a contratação emergencial; Celina Duarte recebeu o benefício pela Ateliê Pedra Clara. Sequência: aprovação emergencial às 16h02; bloqueio visual da doca às 19h40; abertura da reserva B pela credencial 02 às 19h48; saída RM-17 às 19h57; pagamento e retorno parcial nos dias seguintes. Evidências: oportunidade por E1-04/E1-05/E1-07; inconsistência por E1-06/E2-07; motivo por E2-01/E2-02/E2-05; benefício por E2-02/E2-04; confirmação final por E2-06/E2-07. Descartes: Inês pressiona, mas não tem porta nem pagamento; Tadeu tem atraso, mas escala e log o colocam na portaria; Lia corrigiu ficha e teve evento negado, explicado pelo glossário. Critério de abertura do E2: hipótese intermediária com janela, credencial 02 e RM-17. Critério final: resposta cobre quem, como, por que, prova principal e alternativas descartadas.",
   "dicas_contextuais": [
     {
       "id": "DC-E1-MAPA-01",
@@ -2191,13 +2067,13 @@
       "fase": "E2",
       "titulo": "Cobertura operacional",
       "condicao_uso": "Use se o grupo encontrou a aprovação financeira, mas não entendeu por que o orçamento comparativo enfraquece a justificativa do contrato emergencial.",
-      "texto": "Indique que eles comparem o documento que justifica urgência com o documento que mostra alternativas disponíveis. A contradição não está no preço isolado, mas na necessidade declarada.",
+      "texto": "Sugira que leiam cada registro comercial como peça administrativa: contrato, recibo e extrato precisam apontar para a mesma OS e o mesmo serviço.",
       "nivel": "media",
       "contratos_relacionados": [
         "C-E2-COBERTURA"
       ],
       "documentos_relacionados": [
-        "E2-03",
+        "E2-01",
         "E2-05"
       ]
     },
@@ -2535,7 +2411,7 @@
         "documentos_relacionados": [
           "E1-04",
           "E1-05",
-          "E2-03"
+          "E2-01"
         ]
       },
       {
@@ -2546,7 +2422,7 @@
         "descricao": "Área de coleta e recebimento fora do fluxo público; cruza sensores, OS e lacres.",
         "documentos_relacionados": [
           "E1-04",
-          "E2-03"
+          "E2-01"
         ]
       },
       {
