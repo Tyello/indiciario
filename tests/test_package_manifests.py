@@ -384,7 +384,7 @@ def test_guia_facilitador_no_manifest_print_manifest_e_qa(tmp_path, monkeypatch)
     )
 
     result = build_package(
-        Path("examples/caso_canonico_intermediario.json"), tmp_path, strict=True
+        Path("examples/caso_canonico_iniciante.json"), tmp_path, strict=True
     )
     package_dir = Path(result["output_dir"])
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))

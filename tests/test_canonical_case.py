@@ -7,7 +7,7 @@ from generator.models import Blueprint
 from generator.validator import BlueprintValidator
 
 ROOT = Path(__file__).resolve().parents[1]
-CANONICAL_CASE = ROOT / "examples" / "caso_canonico_intermediario.json"
+CANONICAL_CASE = ROOT / "examples" / "caso_canonico_iniciante.json"
 
 
 def _raw_text() -> str:

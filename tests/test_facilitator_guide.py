@@ -16,7 +16,7 @@ def _make_pdf(path: Path) -> Path:
 
 
 def _canonical() -> Blueprint:
-    return Blueprint(**json.loads(Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8")))
+    return Blueprint(**json.loads(Path("examples/caso_canonico_iniciante.json").read_text(encoding="utf-8")))
 
 
 def test_build_facilitator_context_agrupa_contratos_e_dicas():

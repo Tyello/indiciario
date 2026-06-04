@@ -6,7 +6,7 @@ from generator.playtest_metrics import analyze_playtest, write_playtest_report
 from generator.validator import BlueprintValidator, Severidade
 
 ROOT = Path(__file__).resolve().parents[1]
-CANONICAL = ROOT / "examples" / "caso_canonico_intermediario.json"
+CANONICAL = ROOT / "examples" / "caso_canonico_iniciante.json"
 
 
 def blueprint_data() -> dict:

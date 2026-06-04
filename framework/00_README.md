@@ -167,7 +167,7 @@ Nunca misture no mesmo arquivo ou impressão:
 ## Exemplos oficiais
 
 - `examples/showcase_tecnico.json` — fixture técnica para exercitar schemas, renderização, pacote final, QA, grafo e feedback estruturado. Use para validar cobertura técnica do pipeline.
-- `examples/caso_canonico_intermediario.json` — caso canônico jogável em dificuldade intermediária, com dois envelopes, validação offline pura e foco em experiência real de investigação. Use como referência de produto para casos narrativos completos.
+- `examples/caso_canonico_iniciante.json` — caso canônico jogável em dificuldade iniciante, com dois envelopes, validação offline pura e foco em experiência real de investigação. Use como referência de produto para casos narrativos completos.
 
 ## Renderização técnica oficial
 

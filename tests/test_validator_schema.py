@@ -82,8 +82,8 @@ def test_showcase_tecnico_valida_sem_criticos():
     assert output["criticos"] == []
 
 
-def test_caso_canonico_intermediario_valida_email_e1_02_com_copia():
-    path = ROOT / "examples" / "caso_canonico_intermediario.json"
+def test_caso_canonico_iniciante_valida_email_e1_02_com_copia():
+    path = ROOT / "examples" / "caso_canonico_iniciante.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     resultado = BlueprintValidator(Blueprint(**data)).validar()
 

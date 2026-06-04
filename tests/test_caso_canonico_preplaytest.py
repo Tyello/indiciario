@@ -3,7 +3,7 @@ from pathlib import Path
 
 from generator import package_builder, renderer
 
-BLUEPRINT_PATH = Path("examples/caso_canonico_intermediario.json")
+BLUEPRINT_PATH = Path("examples/caso_canonico_iniciante.json")
 
 
 def _blueprint() -> dict:

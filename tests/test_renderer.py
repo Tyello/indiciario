@@ -175,7 +175,7 @@ def test_caso_canonico_dicas_contextuais_aparecem_no_html_debug(tmp_path, monkey
     monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
 
     grupos = renderer.renderizar_caso(
-        Path("examples/caso_canonico_intermediario.json"),
+        Path("examples/caso_canonico_iniciante.json"),
         tmp_path / "out",
         strict=True,
         html_debug_dir=tmp_path / "html_debug",
@@ -436,7 +436,7 @@ def test_templates_de_logs_usam_landscape_no_renderer(tmp_path, monkeypatch):
 
 def test_caso_canonico_e1_08_nao_tem_texto_meta() -> None:
     blueprint = json.loads(
-        Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8")
+        Path("examples/caso_canonico_iniciante.json").read_text(encoding="utf-8")
     )
     doc = next(item for item in blueprint["documentos"] if item["codigo"] == "E1-08")
     corpo = doc["conteudo"]["CORPO_CARTA"]

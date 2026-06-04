@@ -8,11 +8,11 @@ O caso canônico do repositório é **“O Desvio da Reserva Mirante”**, atual
 
 Arquivo atual:
 
-- `examples/caso_canonico_intermediario.json`
+- `examples/caso_canonico_iniciante.json`
 
 ### Roadmap de nomenclatura
 
-O arquivo acima mantém temporariamente o nome histórico `caso_canonico_intermediario.json` para preservar compatibilidade com testes, scripts e referências existentes. Em uma próxima etapa, ele deverá ser renomeado para:
+O arquivo acima mantém temporariamente o nome histórico `caso_canonico_iniciante.json` para preservar compatibilidade com testes, scripts e referências existentes. Em uma próxima etapa, ele deverá ser renomeado para:
 
 - `examples/caso_canonico_iniciante.json`
 

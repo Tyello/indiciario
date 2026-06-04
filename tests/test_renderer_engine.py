@@ -167,7 +167,7 @@ def test_email_template_sem_residuais_com_dados_completos():
 def test_email_canonico_e1_02_renderiza_sem_copia_residual():
     root = Path(__file__).parent.parent
     template = (root / "templates" / "01_email.html").read_text(encoding="utf-8")
-    blueprint_path = root / "examples" / "caso_canonico_intermediario.json"
+    blueprint_path = root / "examples" / "caso_canonico_iniciante.json"
     blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
     doc = next(
         documento for documento in blueprint["documentos"]
@@ -184,7 +184,7 @@ def test_email_canonico_e1_02_renderiza_sem_copia_residual():
 
 def test_caso_canonico_templates_usados_renderizam_sem_placeholders_residuais():
     root = Path(__file__).parent.parent
-    blueprint_path = root / "examples" / "caso_canonico_intermediario.json"
+    blueprint_path = root / "examples" / "caso_canonico_iniciante.json"
     blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
     residuos_por_doc = {}
 

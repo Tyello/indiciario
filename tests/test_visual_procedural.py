@@ -19,7 +19,7 @@ def make_pdf(path: Path, pages: int = 1) -> Path:
 
 def load_canonical_data() -> dict:
     return json.loads(
-        Path("examples/caso_canonico_intermediario.json").read_text(encoding="utf-8")
+        Path("examples/caso_canonico_iniciante.json").read_text(encoding="utf-8")
     )
 
 
@@ -208,7 +208,7 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
     )
 
     result = package_builder.build_package(
-        Path("examples/caso_canonico_intermediario.json"), tmp_path, strict=True
+        Path("examples/caso_canonico_iniciante.json"), tmp_path, strict=True
     )
     manifest = json.loads(Path(result["manifest_path"]).read_text(encoding="utf-8"))
     print_manifest = json.loads(

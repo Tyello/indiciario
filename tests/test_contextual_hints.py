@@ -6,7 +6,7 @@ from generator.llm_feedback import build_llm_feedback
 from generator.models import Blueprint
 from generator.validator import BlueprintValidator
 
-CANONICAL = Path("examples/caso_canonico_intermediario.json")
+CANONICAL = Path("examples/caso_canonico_iniciante.json")
 LEGACY = Path("examples/exemplo_blueprint.json")
 
 
