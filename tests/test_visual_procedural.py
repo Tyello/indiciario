@@ -273,6 +273,8 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
     assert "Ambientes nomeados na planta" in svg
     assert "P-09" in svg
     assert "Galeria / Vitrine interna" in svg
+    assert '<text x="700" y="523" class="p-code">P-09</text>' in svg
+    assert '<rect x="644" y="350" width="50" height="22" fill="#FAFAF8"/>' in svg
     assert "wall-doca-deposito" in svg
     assert "translate(214 96)" in svg
     assert 'class="window"' in svg
