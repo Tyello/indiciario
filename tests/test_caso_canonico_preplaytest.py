@@ -15,30 +15,21 @@ def _doc(codigo: str) -> dict:
 
 
 def test_assinaturas_visuais_tem_perfis_e_tracados_distintos() -> None:
+    blueprint = _blueprint()
     dados = renderer.preparar_assinaturas_visuais(
         {
             "ASSINATURA_CURSIVA": "Inês Laranjeira",
             "ASSINATURA_GLIFO": "Vera Matos",
             "ASSINATURA_RESPONSAVEL": "Otávio Salles",
             "ASSINATURA_CONTRATANTE": "Marina Vale",
-        }
+        },
+        personagens=blueprint["personagens"],
     )
 
-    assert (
-        "signature-asset signature-ines-laranjeira"
-        in dados["ASSINATURA_CURSIVA_VISUAL"]
-    )
-    assert (
-        "signature-asset signature-vera-matos-rubrica"
-        in dados["ASSINATURA_GLIFO_VISUAL"]
-    )
-    assert (
-        "signature-asset signature-otavio-salles"
-        in dados["ASSINATURA_RESPONSAVEL_VISUAL"]
-    )
-    assert (
-        "signature-assinatura_administrativa" in dados["ASSINATURA_CONTRATANTE_VISUAL"]
-    )
+    assert "signature-perfil signature-assinatura estilo-formal" in dados["ASSINATURA_CURSIVA_VISUAL"]
+    assert "signature-perfil signature-rubrica estilo-administrativa" in dados["ASSINATURA_GLIFO_VISUAL"]
+    assert "signature-perfil signature-assinatura estilo-administrativa" in dados["ASSINATURA_RESPONSAVEL_VISUAL"]
+    assert "signature-perfil signature-assinatura estilo-curta" in dados["ASSINATURA_CONTRATANTE_VISUAL"]
     assert (
         len(
             {
@@ -50,6 +41,54 @@ def test_assinaturas_visuais_tem_perfis_e_tracados_distintos() -> None:
         )
         == 4
     )
+
+
+def test_assinatura_completa_e_rubrica_do_mesmo_personagem_sao_diferentes() -> None:
+    blueprint = _blueprint()
+    dados = renderer.preparar_assinaturas_visuais(
+        {
+            "ASSINATURA_RESPONSAVEL": "Vera Matos",
+            "ASSINATURA_GLIFO": "Vera Matos",
+        },
+        personagens=blueprint["personagens"],
+    )
+
+    assert dados["ASSINATURA_RESPONSAVEL_VISUAL"] != dados["ASSINATURA_GLIFO_VISUAL"]
+    assert "signature-assinatura" in dados["ASSINATURA_RESPONSAVEL_VISUAL"]
+    assert "signature-rubrica" in dados["ASSINATURA_GLIFO_VISUAL"]
+
+
+def test_override_svg_tem_prioridade_sobre_geracao_por_perfil(tmp_path: Path) -> None:
+    asset = tmp_path / "manual.svg"
+    conteudo_svg = '<svg xmlns="http://www.w3.org/2000/svg"><text>manual</text></svg>'
+    asset.write_text(conteudo_svg, encoding="utf-8")
+    personagens = [
+        {
+            "id": "P1",
+            "nome": "Iara Nunes",
+            "assinatura": {
+                "estilo": "formal",
+                "override_assinatura_svg": "manual.svg",
+            },
+        }
+    ]
+
+    dados = renderer.preparar_assinaturas_visuais(
+        {
+            "ASSINATURA_RESPONSAVEL": "qualquer texto",
+            "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "P1",
+        },
+        personagens=personagens,
+        repo_root=tmp_path,
+    )
+
+    assert dados["ASSINATURA_RESPONSAVEL_VISUAL"] == conteudo_svg
+
+
+def test_fallback_sem_perfil_continua_funcionando() -> None:
+    dados = renderer.preparar_assinaturas_visuais({"ASSINATURA_RESPONSAVEL": "Nome Fictício"})
+
+    assert "signature-svg signature-assinatura_comercial" in dados["ASSINATURA_RESPONSAVEL_VISUAL"]
 
 
 def test_e1_documentos_usam_padrao_global_de_codigos() -> None:

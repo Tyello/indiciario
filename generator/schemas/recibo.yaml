@@ -28,7 +28,10 @@
   ],
   "optional": [],
   "required_when": [],
-  "hidden_allowed": [],
+  "hidden_allowed": [
+    "ASSINATURA_PRESTADOR_PERSONAGEM_ID",
+    "ASSINATURA_CONTRATANTE_PERSONAGEM_ID"
+  ],
   "lists": {
     "ITENS": {
       "required": true,
