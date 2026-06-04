@@ -53,7 +53,7 @@ def test_caso_canonico_metadados_de_experiencia():
     assert blueprint.dificuldade.value == "iniciante"
     assert blueprint.formato_envelopes == 2
     assert blueprint.modo_validacao.value == "offline_puro"
-    assert blueprint.tempo_estimado_min == 55
+    assert blueprint.tempo_estimado_min == 70
     assert blueprint.numero_jogadores == "3 a 5"
 
 
