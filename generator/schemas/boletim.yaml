@@ -45,7 +45,10 @@
       ]
     }
   ],
-  "hidden_allowed": [],
+  "hidden_allowed": [
+    "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID",
+    "ASSINATURA_GLIFO_PERSONAGEM_ID"
+  ],
   "lists": {},
   "html_fields": [
     "DESCRICAO_OCORRENCIA"

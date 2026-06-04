@@ -103,6 +103,68 @@ class DirecaoEvento(str, Enum):
     OPERACAO = "operacao"
 
 
+class EstiloAssinatura(str, Enum):
+    FORMAL = "formal"
+    ADMINISTRATIVA = "administrativa"
+    COMERCIAL = "comercial"
+    CURTA = "curta"
+    RUBRICA = "rubrica"
+    LEVE = "leve"
+
+
+class RubricaEstilo(str, Enum):
+    CURTA = "curta"
+    SECA = "seca"
+    FLUIDA = "fluida"
+    MONOGRAMA = "monograma"
+    ADMINISTRATIVA = "administrativa"
+
+
+class LegibilidadeAssinatura(str, Enum):
+    ALTA = "alta"
+    MEDIA = "media"
+    BAIXA = "baixa"
+
+
+class OrnamentoAssinatura(str, Enum):
+    BAIXO = "baixo"
+    MEDIO = "medio"
+    ALTO = "alto"
+
+
+class InclinacaoAssinatura(str, Enum):
+    ESQUERDA = "esquerda"
+    RETA = "reta"
+    DIREITA = "direita"
+
+
+class PressaoAssinatura(str, Enum):
+    LEVE = "leve"
+    MEDIA = "media"
+    FORTE = "forte"
+
+
+class FluidezAssinatura(str, Enum):
+    BAIXA = "baixa"
+    MEDIA = "media"
+    ALTA = "alta"
+
+
+class PerfilAssinatura(BaseModel):
+    """Características editoriais de assinatura/rubrica de um personagem."""
+
+    estilo: Optional[EstiloAssinatura] = None
+    rubrica_estilo: Optional[RubricaEstilo] = None
+    legibilidade: Optional[LegibilidadeAssinatura] = None
+    ornamento: Optional[OrnamentoAssinatura] = None
+    inclinacao: Optional[InclinacaoAssinatura] = None
+    pressao: Optional[PressaoAssinatura] = None
+    fluidez: Optional[FluidezAssinatura] = None
+    variacao: Optional[int] = None
+    override_assinatura_svg: Optional[str] = None
+    override_rubrica_svg: Optional[str] = None
+
+
 class Personagem(BaseModel):
     id: str = Field(..., description="ID único do personagem, ex.: '09' ou 'T-10001'.")
     nome: str
@@ -113,6 +175,10 @@ class Personagem(BaseModel):
     documento_ancoragem: list[str] = Field(
         default_factory=list,
         description="Códigos dos documentos que comprovam existência/papel.",
+    )
+    assinatura: Optional[PerfilAssinatura] = Field(
+        default=None,
+        description="Perfil editorial opcional para assinatura completa e rubrica do personagem.",
     )
 
 

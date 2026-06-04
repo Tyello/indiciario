@@ -38,7 +38,9 @@
       ]
     }
   ],
-  "hidden_allowed": [],
+  "hidden_allowed": [
+    "ASSINATURA_CURSIVA_PERSONAGEM_ID"
+  ],
   "lists": {},
   "html_fields": [
     "CORPO_CARTA"

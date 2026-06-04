@@ -263,6 +263,7 @@ class BlueprintValidator:
         self._ids_contratos: set[str] = {c.id for c in blueprint.contratos_evidencia if c.id}
         self._docs_por_codigo = {d.codigo: d for d in blueprint.documentos}
         self._schemas = load_all_schemas()
+        self._repo_root = Path(__file__).resolve().parents[1]
 
     def validar(self) -> ResultadoValidacao:
         self._verificar_elenco()
@@ -346,6 +347,40 @@ class BlueprintValidator:
                         severidade=Severidade.CRITICO,
                         mensagem=f"Documento de ancoragem '{codigo}' não existe.",
                     ))
+            self._verificar_overrides_assinatura(personagem)
+
+    def _verificar_overrides_assinatura(self, personagem: Any) -> None:
+        perfil = getattr(personagem, "assinatura", None)
+        if perfil is None:
+            return
+        for campo in ("override_assinatura_svg", "override_rubrica_svg"):
+            valor = getattr(perfil, campo, None)
+            if not valor:
+                continue
+            caminho = Path(str(valor))
+            if caminho.is_absolute() or ".." in caminho.parts:
+                self.resultado.adicionar(Erro(
+                    codigo="ASSINATURA_001",
+                    severidade=Severidade.CRITICO,
+                    mensagem=(
+                        f"Override de assinatura de '{personagem.nome}' deve ser caminho "
+                        "relativo ao repositório."
+                    ),
+                ))
+                continue
+            if caminho.suffix.lower() != ".svg":
+                self.resultado.adicionar(Erro(
+                    codigo="ASSINATURA_002",
+                    severidade=Severidade.CRITICO,
+                    mensagem=f"Override de assinatura de '{personagem.nome}' não é SVG: {valor}.",
+                ))
+                continue
+            if not (self._repo_root / caminho).is_file():
+                self.resultado.adicionar(Erro(
+                    codigo="ASSINATURA_003",
+                    severidade=Severidade.CRITICO,
+                    mensagem=f"Override de assinatura de '{personagem.nome}' não existe: {valor}.",
+                ))
 
     def _verificar_documentos(self) -> None:
         codigos_vistos: set[str] = set()

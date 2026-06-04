@@ -34,7 +34,19 @@
       "documento_ancoragem": [
         "E1-01",
         "E1-02"
-      ]
+      ],
+      "assinatura": {
+        "estilo": "formal",
+        "rubrica_estilo": "fluida",
+        "legibilidade": "media",
+        "ornamento": "medio",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "alta",
+        "variacao": 1,
+        "override_assinatura_svg": null,
+        "override_rubrica_svg": null
+      }
     },
     {
       "id": "02",
@@ -47,7 +59,19 @@
         "E1-04",
         "E1-05",
         "E2-06"
-      ]
+      ],
+      "assinatura": {
+        "estilo": "curta",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": 2,
+        "override_assinatura_svg": null,
+        "override_rubrica_svg": null
+      }
     },
     {
       "id": "03",
@@ -59,7 +83,19 @@
       "documento_ancoragem": [
         "E1-03",
         "E1-05"
-      ]
+      ],
+      "assinatura": {
+        "estilo": "rubrica",
+        "rubrica_estilo": "seca",
+        "legibilidade": "baixa",
+        "ornamento": "baixo",
+        "inclinacao": "esquerda",
+        "pressao": "forte",
+        "fluidez": "baixa",
+        "variacao": 3,
+        "override_assinatura_svg": null,
+        "override_rubrica_svg": null
+      }
     },
     {
       "id": "04",
@@ -72,7 +108,19 @@
         "E2-01",
         "E2-03",
         "E2-04"
-      ]
+      ],
+      "assinatura": {
+        "estilo": "administrativa",
+        "rubrica_estilo": "monograma",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": 4,
+        "override_assinatura_svg": null,
+        "override_rubrica_svg": null
+      }
     },
     {
       "id": "05",
@@ -84,7 +132,19 @@
       "documento_ancoragem": [
         "E2-02",
         "E2-04"
-      ]
+      ],
+      "assinatura": {
+        "estilo": "comercial",
+        "rubrica_estilo": "fluida",
+        "legibilidade": "media",
+        "ornamento": "medio",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "alta",
+        "variacao": 5,
+        "override_assinatura_svg": null,
+        "override_rubrica_svg": null
+      }
     },
     {
       "id": "06",
@@ -96,7 +156,19 @@
       "documento_ancoragem": [
         "E1-06",
         "E2-07"
-      ]
+      ],
+      "assinatura": {
+        "estilo": "leve",
+        "rubrica_estilo": "curta",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "leve",
+        "fluidez": "media",
+        "variacao": 6,
+        "override_assinatura_svg": null,
+        "override_rubrica_svg": null
+      }
     },
     {
       "id": "07",
@@ -109,7 +181,19 @@
         "E1-03",
         "E1-04",
         "E1-08"
-      ]
+      ],
+      "assinatura": {
+        "estilo": "administrativa",
+        "rubrica_estilo": "seca",
+        "legibilidade": "baixa",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "fluidez": "baixa",
+        "variacao": 7,
+        "override_assinatura_svg": null,
+        "override_rubrica_svg": null
+      }
     }
   ],
   "documentos": [
@@ -149,7 +233,8 @@
         "NOME_ASSINANTE": "Inês Laranjeira",
         "CARGO_ASSINANTE": "Curadora-chefe",
         "ENDERECO_LINHA2": "Porto Claro — setor administrativo",
-        "ESTILO_LINHAS": "linhas-discretas"
+        "ESTILO_LINHAS": "linhas-discretas",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "01"
       }
     },
     {
@@ -229,7 +314,9 @@
         "NOME_ENVOLVIDO": "Tadeu Nobre",
         "DATA_NASC": "12/04/1984",
         "CONDICAO": "Declarante",
-        "DOCUMENTO_PESSOAL": "Matrícula funcional 1184/NT"
+        "DOCUMENTO_PESSOAL": "Matrícula funcional 1184/NT",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "07",
+        "ASSINATURA_GLIFO_PERSONAGEM_ID": "07"
       }
     },
     {
@@ -399,7 +486,8 @@
         "COLUNA_TERMINAL": true,
         "COLUNA_METODO": true,
         "COLUNA_OBS": true,
-        "ASSINATURA_GLIFO": "Vera Matos"
+        "ASSINATURA_GLIFO": "Vera Matos",
+        "ASSINATURA_GLIFO_PERSONAGEM_ID": "07"
       }
     },
     {
@@ -574,7 +662,8 @@
         "NOME_ASSINANTE": "Lia Figueira",
         "CARGO_ASSINANTE": "Registradora de acervo",
         "ENDERECO_LINHA2": "Porto Claro — setor administrativo",
-        "ESTILO_LINHAS": "linhas-discretas"
+        "ESTILO_LINHAS": "linhas-discretas",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "06"
       }
     },
     {
@@ -614,7 +703,9 @@
         "NOME_RESPONSAVEL": "Vera Matos",
         "ASSINATURA_RESPONSAVEL": "Vera Matos",
         "ASSINATURA_GLIFO": "Vera Matos",
-        "DATA_HORA_ASSINATURA": "18/08/2026 22h10"
+        "DATA_HORA_ASSINATURA": "18/08/2026 22h10",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "07",
+        "ASSINATURA_GLIFO_PERSONAGEM_ID": "07"
       }
     },
     {
@@ -654,7 +745,8 @@
         "NOME_ASSINANTE": "Vera Matos",
         "CARGO_ASSINANTE": "Núcleo de Integridade Patrimonial",
         "ENDERECO_LINHA2": "Porto Claro — setor administrativo",
-        "ESTILO_LINHAS": "linhas-discretas"
+        "ESTILO_LINHAS": "linhas-discretas",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "07"
       }
     },
     {
@@ -711,7 +803,8 @@
         "NOME_ASSINANTE": "Vera Matos",
         "CARGO_ASSINANTE": "Núcleo de Integridade Patrimonial",
         "ENDERECO_LINHA2": "Porto Claro — setor administrativo",
-        "ESTILO_LINHAS": "linhas-discretas"
+        "ESTILO_LINHAS": "linhas-discretas",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "07"
       }
     },
     {
@@ -753,7 +846,8 @@
         "NOME_ASSINANTE": "Otávio Salles",
         "CARGO_ASSINANTE": "Gerente financeiro",
         "ENDERECO_LINHA2": "Porto Claro — setor administrativo",
-        "ESTILO_LINHAS": "linhas-discretas"
+        "ESTILO_LINHAS": "linhas-discretas",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "04"
       }
     },
     {
@@ -820,7 +914,9 @@
         ],
         "ASSINATURA_PRESTADOR": "Celina Duarte",
         "ASSINATURA_CONTRATANTE": "Otávio Salles",
-        "DATA_ASSINATURA": "19/08/2026"
+        "DATA_ASSINATURA": "19/08/2026",
+        "ASSINATURA_PRESTADOR_PERSONAGEM_ID": "05",
+        "ASSINATURA_CONTRATANTE_PERSONAGEM_ID": "04"
       }
     },
     {
@@ -950,7 +1046,9 @@
             "REFERENCIA": "OS-0147/2026"
           }
         ],
-        "HAS_QUADRO_EMPRESAS": true
+        "HAS_QUADRO_EMPRESAS": true,
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "04",
+        "ASSINATURA_CLIENTE_PERSONAGEM_ID": "04"
       }
     },
     {
@@ -1020,7 +1118,9 @@
         "CARGO_RESPONSAVEL": "Responsável técnica",
         "ASSINATURA_CLIENTE": "Otávio Salles",
         "DATA_APROVACAO": "18/08/2026 16h05",
-        "HAS_QUADRO_EMPRESAS": false
+        "HAS_QUADRO_EMPRESAS": false,
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "05",
+        "ASSINATURA_CLIENTE_PERSONAGEM_ID": "04"
       }
     },
     {
@@ -1090,7 +1190,8 @@
         "CARGO_RESPONSAVEL": "Coordenação de laudos",
         "ASSINATURA_CLIENTE": "Otávio Salles",
         "DATA_APROVACAO": "18/08/2026 16h05",
-        "HAS_QUADRO_EMPRESAS": false
+        "HAS_QUADRO_EMPRESAS": false,
+        "ASSINATURA_CLIENTE_PERSONAGEM_ID": "04"
       }
     },
     {
@@ -1160,7 +1261,8 @@
         "CARGO_RESPONSAVEL": "Operações logísticas",
         "ASSINATURA_CLIENTE": "Otávio Salles",
         "DATA_APROVACAO": "18/08/2026 16h05",
-        "HAS_QUADRO_EMPRESAS": false
+        "HAS_QUADRO_EMPRESAS": false,
+        "ASSINATURA_CLIENTE_PERSONAGEM_ID": "04"
       }
     },
     {
@@ -1230,7 +1332,8 @@
         "CARGO_RESPONSAVEL": "Consultoria administrativa",
         "ASSINATURA_CLIENTE": "Otávio Salles",
         "DATA_APROVACAO": "18/08/2026 16h05",
-        "HAS_QUADRO_EMPRESAS": false
+        "HAS_QUADRO_EMPRESAS": false,
+        "ASSINATURA_CLIENTE_PERSONAGEM_ID": "04"
       }
     },
     {
@@ -1535,7 +1638,8 @@
         "NOME_ASSINANTE": "Lia Figueira",
         "CARGO_ASSINANTE": "Registradora de acervo",
         "ENDERECO_LINHA2": "Porto Claro — setor administrativo",
-        "ESTILO_LINHAS": "linhas-discretas"
+        "ESTILO_LINHAS": "linhas-discretas",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "06"
       }
     },
     {

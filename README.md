@@ -10,10 +10,4 @@ Arquivo atual:
 
 - `examples/caso_canonico_iniciante.json`
 
-### Roadmap de nomenclatura
-
-O arquivo acima mantém temporariamente o nome histórico `caso_canonico_iniciante.json` para preservar compatibilidade com testes, scripts e referências existentes. Em uma próxima etapa, ele deverá ser renomeado para:
-
-- `examples/caso_canonico_iniciante.json`
-
-Quando a renomeação for feita, todos os testes, comandos documentados e entrypoints que referenciam o nome antigo deverão ser atualizados juntos.
+Use este arquivo como referência principal em testes, scripts e comandos de validação canônica.

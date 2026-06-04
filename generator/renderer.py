@@ -51,9 +51,33 @@ ASSINATURA_KEYS = (
     "ASSINATURA_RASCUNHO",
 )
 
+RUBRICA_KEYS = {"ASSINATURA_GLIFO", "ASSINATURA_RASCUNHO"}
+ASSINATURA_CURTA_OU_RUBRICA_KEYS = {"ASSINATURA_TESTEMUNHA"}
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def _valor_enum(valor: Any, padrao: str) -> str:
+    if valor is None:
+        return padrao
+    return str(getattr(valor, "value", valor))
+
+
+def _personagem_get(personagem: Any, campo: str, padrao: Any = None) -> Any:
+    if isinstance(personagem, dict):
+        return personagem.get(campo, padrao)
+    return getattr(personagem, campo, padrao)
+
+
+def _perfil_get(perfil: Any, campo: str, padrao: Any = None) -> Any:
+    if perfil is None:
+        return padrao
+    if isinstance(perfil, dict):
+        return perfil.get(campo, padrao)
+    return getattr(perfil, campo, padrao)
+
 
 def _perfil_assinatura(chave: str) -> str:
-    """Classifica o uso visual da assinatura para variar gesto e composição."""
+    """Classifica o uso visual legado da assinatura para fallback compatível."""
     if chave in {"ASSINATURA_GLIFO", "ASSINATURA_TESTEMUNHA", "ASSINATURA_RASCUNHO"}:
         return "rubrica_curta"
     if chave in {
@@ -67,6 +91,19 @@ def _perfil_assinatura(chave: str) -> str:
     return "assinatura_formal"
 
 
+def _tipo_uso_assinatura(chave: str, perfil: Any = None) -> str:
+    """Diferencia assinatura completa de rubrica/visto por chave e perfil."""
+    if chave in RUBRICA_KEYS:
+        return "rubrica"
+    estilo = _valor_enum(_perfil_get(perfil, "estilo"), "")
+    rubrica_estilo = _valor_enum(_perfil_get(perfil, "rubrica_estilo"), "")
+    if chave in ASSINATURA_CURTA_OU_RUBRICA_KEYS and (
+        estilo == "rubrica" or rubrica_estilo in {"seca", "monograma"}
+    ):
+        return "rubrica"
+    return "assinatura"
+
+
 def _slug_assinatura(texto: str) -> str:
     """Normaliza nome de personagem para pasta de asset de assinatura."""
     normalizado = unicodedata.normalize("NFKD", texto)
@@ -78,7 +115,7 @@ def _slug_assinatura(texto: str) -> str:
 
 
 def _asset_assinatura_svg(texto: str, perfil: str) -> str | None:
-    """Carrega assinatura/rubrica individual quando houver asset do personagem."""
+    """Carrega asset legado por slug quando houver assinatura/rubrica individual."""
     tipo_asset = "rubrica.svg" if perfil == "rubrica_curta" else "assinatura.svg"
     asset_path = SIGNATURES_DIR / _slug_assinatura(texto) / tipo_asset
     if not asset_path.is_file():
@@ -86,8 +123,164 @@ def _asset_assinatura_svg(texto: str, perfil: str) -> str | None:
     return asset_path.read_text(encoding="utf-8")
 
 
+def _override_assinatura_svg(perfil: Any, tipo_uso: str, repo_root: Path = REPO_ROOT) -> str | None:
+    campo = "override_rubrica_svg" if tipo_uso == "rubrica" else "override_assinatura_svg"
+    caminho = _perfil_get(perfil, campo)
+    if not isinstance(caminho, str) or not caminho.strip():
+        return None
+    asset_path = repo_root / caminho
+    if asset_path.is_file():
+        return asset_path.read_text(encoding="utf-8")
+    logger.warning("Override de assinatura não encontrado: %s", caminho)
+    return None
+
+
+def _resolver_personagem_assinatura(
+    chave: str,
+    valor: str,
+    dados: dict[str, Any],
+    personagens: list[Any] | None,
+) -> Any | None:
+    """Resolve documento → personagem por ID explícito e depois por nome exato."""
+    if not personagens:
+        return None
+    por_id = {str(_personagem_get(p, "id")): p for p in personagens}
+    id_explicito = dados.get(f"{chave}_PERSONAGEM_ID") or dados.get("PERSONAGEM_ID")
+    if id_explicito is not None and str(id_explicito) in por_id:
+        return por_id[str(id_explicito)]
+
+    valor_normalizado = " ".join(valor.split()).casefold()
+    for personagem in personagens:
+        nome = _personagem_get(personagem, "nome")
+        if isinstance(nome, str) and " ".join(nome.split()).casefold() == valor_normalizado:
+            return personagem
+    return None
+
+
+def _texto_principal_assinatura(nome: str, tipo_uso: str, estilo: str, legibilidade: str) -> str:
+    partes_nome = nome.replace(".", " ").split()
+    iniciais = "".join(parte[0] for parte in partes_nome[:3]).upper()
+    primeiro = partes_nome[0] if partes_nome else nome
+    ultimo = partes_nome[-1] if len(partes_nome) > 1 else ""
+    if tipo_uso == "rubrica":
+        return iniciais[:3]
+    if legibilidade == "baixa" or estilo in {"curta", "rubrica"}:
+        return f"{primeiro[0]}. {ultimo}" if ultimo else primeiro[:3]
+    if estilo in {"administrativa", "comercial"} and ultimo:
+        return f"{primeiro[0]}. {ultimo}"
+    return nome
+
+
+def _assinatura_svg_por_perfil(nome: str, perfil: Any, tipo_uso: str) -> str:
+    """Gera SVG determinístico usando o perfil editorial do personagem."""
+    nome = " ".join(str(nome).split())
+    if not nome or nome == "—":
+        return ""
+
+    estilo = _valor_enum(_perfil_get(perfil, "estilo"), "formal")
+    rubrica_estilo = _valor_enum(_perfil_get(perfil, "rubrica_estilo"), "curta")
+    legibilidade = _valor_enum(_perfil_get(perfil, "legibilidade"), "media")
+    ornamento = _valor_enum(_perfil_get(perfil, "ornamento"), "baixo")
+    inclinacao = _valor_enum(_perfil_get(perfil, "inclinacao"), "direita")
+    pressao = _valor_enum(_perfil_get(perfil, "pressao"), "media")
+    fluidez = _valor_enum(_perfil_get(perfil, "fluidez"), "media")
+    variacao = _perfil_get(perfil, "variacao", 0) or 0
+
+    semente_texto = f"{nome}|{tipo_uso}|{estilo}|{rubrica_estilo}|{legibilidade}|{ornamento}|{inclinacao}|{pressao}|{fluidez}|{variacao}"
+    seed = sum((index + 1) * ord(char) for index, char in enumerate(semente_texto))
+
+    largura = 156 if tipo_uso == "rubrica" else 226 + (18 if estilo == "formal" else 0)
+    altura = 44 if tipo_uso == "rubrica" else 58 + (6 if ornamento == "alto" else 0)
+    base_y = 29 if tipo_uso == "rubrica" else 38
+    texto = _texto_principal_assinatura(nome, tipo_uso, estilo, legibilidade)
+
+    pressao_width = {"leve": 0.85, "media": 1.25, "forte": 1.85}.get(pressao, 1.25)
+    opacidade = {"leve": 0.52, "media": 0.68, "forte": 0.84}.get(pressao, 0.68)
+    tamanho = {"alta": 20, "media": 18, "baixa": 15}.get(legibilidade, 18)
+    if tipo_uso == "rubrica":
+        tamanho -= 1
+    fluidez_delta = {"baixa": 8, "media": 18, "alta": 31}.get(fluidez, 18)
+    ornamento_qtd = {"baixo": 0, "medio": 1, "alto": 2}.get(ornamento, 0)
+    rotacao_base = {"esquerda": -8, "reta": 0, "direita": 7}.get(inclinacao, 7)
+    rotacao = rotacao_base + (seed % 5 - 2)
+    skew = {"esquerda": -8, "reta": 0, "direita": 9}.get(inclinacao, 9)
+    cor = "#1d2733"
+    classe = (
+        f"signature-perfil signature-{tipo_uso} estilo-{estilo} rubrica-{rubrica_estilo} "
+        f"legibilidade-{legibilidade} ornamento-{ornamento} pressao-{pressao} fluidez-{fluidez}"
+    )
+
+    if tipo_uso == "rubrica":
+        if rubrica_estilo == "seca" or fluidez == "baixa":
+            caminhos = [
+                f"M12 {base_y} L46 {base_y - 13 - seed % 4} L78 {base_y + 5} L112 {base_y - 10}",
+                f"M24 {base_y + 9} L132 {base_y + 10 + seed % 3}",
+            ]
+        elif rubrica_estilo == "monograma":
+            caminhos = [
+                f"M18 {base_y + 4} C30 {base_y - 20}, 45 {base_y - 18}, 54 {base_y + 3} C63 {base_y + 22}, 82 {base_y + 8}, 88 {base_y - 10}",
+                f"M82 {base_y - 10} C96 {base_y + 15}, 116 {base_y - 15}, 136 {base_y + 7}",
+            ]
+        else:
+            caminhos = [
+                f"M10 {base_y + seed % 3} C 28 {base_y - fluidez_delta}, 45 {base_y + 12}, 61 {base_y - 2} S 92 {base_y - fluidez_delta + 2}, 116 {base_y - 1}",
+                f"M28 {base_y + 9} C 54 {base_y + 17}, 88 {base_y + 7}, 140 {base_y + 11}",
+            ]
+    else:
+        if estilo == "administrativa":
+            caminhos = [
+                f"M12 {base_y - 7} C48 {base_y - 11}, 72 {base_y + 7}, 106 {base_y - 4} S166 {base_y - 14}, 214 {base_y - 6}",
+                f"M18 {base_y + 8} L210 {base_y + 8 + seed % 3}",
+            ]
+        elif estilo == "comercial":
+            caminhos = [
+                f"M8 {base_y - 4} C42 {base_y - 22}, 66 {base_y + 12}, 92 {base_y - 7} S148 {base_y - 22}, 180 {base_y - 4} S216 {base_y + 7}, 236 {base_y - 8}",
+                f"M22 {base_y + 9} C62 {base_y + 16}, 124 {base_y + 8}, 224 {base_y + 11}",
+            ]
+        elif estilo in {"curta", "rubrica", "leve"}:
+            caminhos = [
+                f"M14 {base_y - 2} C46 {base_y - fluidez_delta}, 70 {base_y + 10}, 105 {base_y - 6} S158 {base_y - 14}, 196 {base_y - 1}",
+                f"M38 {base_y + 9} C74 {base_y + 13}, 134 {base_y + 8}, 202 {base_y + 10}",
+            ]
+        else:
+            caminhos = [
+                f"M10 {base_y - 3} C45 {base_y - 28}, 74 {base_y + 16}, 104 {base_y - 8} S158 {base_y - 25}, 190 {base_y - 6} S226 {base_y + 8}, 244 {base_y - 10}",
+                f"M20 {base_y + 10} C62 {base_y + 19}, 128 {base_y + 5}, 238 {base_y + 12}",
+            ]
+
+    if ornamento_qtd >= 1:
+        caminhos.append(
+            f"M{largura - 64} {base_y - 18} C{largura - 50} {base_y + 1}, {largura - 37} {base_y + 1}, {largura - 24} {base_y - 18}"
+        )
+    if ornamento_qtd >= 2:
+        caminhos.append(
+            f"M32 {base_y - 18} c8 {-8 - seed % 5} 22 {-8} 31 0 c-9 9 -23 9 -31 0"
+        )
+
+    paths = []
+    for index, caminho in enumerate(caminhos):
+        stroke = pressao_width if index == 0 else max(0.7, pressao_width - 0.35)
+        opacity = opacidade if index == 0 else max(0.34, opacidade - 0.24)
+        paths.append(
+            f'<path d="{caminho}" fill="none" stroke="{cor}" stroke-width="{stroke:.2f}" '
+            f'stroke-linecap="round" stroke-linejoin="round" opacity="{opacity:.2f}"/>'
+        )
+
+    return "".join(
+        [
+            f'<svg class="signature-svg {classe}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura} {altura}" '
+            f'aria-label="{tipo_uso} manuscrita {escape(nome)}" role="img">',
+            f'<g transform="rotate({rotacao} {largura / 2:g} {altura / 2:g}) skewX({skew})">',
+            *paths,
+            f'<text x="{12 + seed % 12}" y="{base_y - 3}" font-family="Segoe Script, Lucida Handwriting, Brush Script MT, cursive" '
+            f'font-size="{tamanho}" fill="{cor}" opacity="0.58">{escape(texto)}</text>',
+            "</g></svg>",
+        ]
+    )
+
+
 def _assinatura_svg(texto: str, perfil: str = "assinatura_formal") -> str:
-    """Gera assinatura SVG fina e determinística com perfis visuais distintos."""
+    """Gera assinatura SVG fina e determinística com perfis visuais legados."""
     nome = " ".join(str(texto).split())
     if not nome or nome == "—":
         return ""
@@ -160,16 +353,36 @@ def _assinatura_svg(texto: str, perfil: str = "assinatura_formal") -> str:
     )
 
 
-def preparar_assinaturas_visuais(dados: dict[str, Any]) -> dict[str, Any]:
+def preparar_assinaturas_visuais(
+    dados: dict[str, Any],
+    personagens: list[Any] | None = None,
+    repo_root: Path = REPO_ROOT,
+) -> dict[str, Any]:
     """Acrescenta campos *_VISUAL para templates que exigem assinatura real."""
     enriquecidos = dict(dados)
     for chave in ASSINATURA_KEYS:
         valor = enriquecidos.get(chave)
-        if isinstance(valor, str) and valor.strip():
-            perfil = _perfil_assinatura(chave)
-            enriquecidos[f"{chave}_VISUAL"] = _asset_assinatura_svg(
-                valor, perfil
-            ) or _assinatura_svg(valor, perfil=perfil)
+        if not isinstance(valor, str) or not valor.strip():
+            continue
+
+        personagem = _resolver_personagem_assinatura(chave, valor, enriquecidos, personagens)
+        perfil_personagem = _personagem_get(personagem, "assinatura") if personagem else None
+        tipo_uso = _tipo_uso_assinatura(chave, perfil_personagem)
+
+        if perfil_personagem is not None:
+            override = _override_assinatura_svg(perfil_personagem, tipo_uso, repo_root=repo_root)
+            if override is not None:
+                enriquecidos[f"{chave}_VISUAL"] = override
+                continue
+            enriquecidos[f"{chave}_VISUAL"] = _assinatura_svg_por_perfil(
+                _personagem_get(personagem, "nome", valor), perfil_personagem, tipo_uso
+            )
+            continue
+
+        perfil_legado = _perfil_assinatura(chave)
+        enriquecidos[f"{chave}_VISUAL"] = _asset_assinatura_svg(
+            valor, perfil_legado
+        ) or _assinatura_svg(valor, perfil=perfil_legado)
     return enriquecidos
 
 
@@ -192,12 +405,16 @@ def _injetar_escalares(html: str, dados: dict[str, Any]) -> str:
     return re.sub(r"\{\{([^#/\^].*?)\}\}", sub, html)
 
 
-def _processar_secao(bloco: str, dados: dict[str, Any]) -> str:
+def _processar_secao(
+    bloco: str, dados: dict[str, Any], personagens: list[Any] | None = None
+) -> str:
     """Processa um bloco de seção (lista ou bool) recursivamente."""
-    return renderizar_html(bloco, dados)
+    return renderizar_html(bloco, dados, personagens=personagens)
 
 
-def renderizar_html(template: str, dados: dict[str, Any]) -> str:
+def renderizar_html(
+    template: str, dados: dict[str, Any], personagens: list[Any] | None = None
+) -> str:
     """
     Processa o template HTML completo com suporte a seções e escalares.
 
@@ -207,7 +424,7 @@ def renderizar_html(template: str, dados: dict[str, Any]) -> str:
       3. Seções inversas  {{^CHAVE}}...{{/CHAVE}} onde dados[CHAVE] é falsy
       4. Escalares simples {{CHAVE}}
     """
-    dados = preparar_assinaturas_visuais(dados)
+    dados = preparar_assinaturas_visuais(dados, personagens=personagens)
 
     # Padrão: captura nome da seção e conteúdo (não-greedy, DOTALL)
     SECAO_RE = re.compile(r"\{\{([#\^])(\w+)\}\}(.*?)\{\{/\2\}\}", re.DOTALL)
@@ -228,16 +445,16 @@ def renderizar_html(template: str, dados: dict[str, Any]) -> str:
                         if isinstance(item, dict)
                         else {**dados, "ITEM": item}
                     )
-                    partes.append(renderizar_html(conteudo, contexto))
+                    partes.append(renderizar_html(conteudo, contexto, personagens=personagens))
                 return "".join(partes)
             elif valor:
                 # Bool truthy: renderiza uma vez com o contexto atual
-                return renderizar_html(conteudo, dados)
+                return renderizar_html(conteudo, dados, personagens=personagens)
             else:
                 return ""
         else:  # '^' — seção inversa
             if not valor:
-                return renderizar_html(conteudo, dados)
+                return renderizar_html(conteudo, dados, personagens=personagens)
             return ""
 
     # Processa seções de dentro para fora (re.sub com DOTALL)
@@ -247,9 +464,11 @@ def renderizar_html(template: str, dados: dict[str, Any]) -> str:
     return resultado
 
 
-def injetar_dados(html: str, dados: dict[str, Any]) -> str:
+def injetar_dados(
+    html: str, dados: dict[str, Any], personagens: list[Any] | None = None
+) -> str:
     """API de compatibilidade — delega para renderizar_html."""
-    return renderizar_html(html, dados)
+    return renderizar_html(html, dados, personagens=personagens)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -351,13 +570,15 @@ def renderizar_documento(
     strict: bool = False,
     landscape: bool = False,
     html_debug_path: Path | None = None,
+    personagens: list[Any] | None = None,
 ) -> Path:
     template_path = TEMPLATES_DIR / template_nome
     if not template_path.exists():
         raise FileNotFoundError(f"Template não encontrado: {template_path}")
 
+    personagens_contexto = personagens or dados.get("__PERSONAGENS_ASSINATURA")
     html_raw = template_path.read_text(encoding="utf-8")
-    html_final = renderizar_html(html_raw, dados)
+    html_final = renderizar_html(html_raw, dados, personagens=personagens_contexto)
 
     if html_debug_path is not None:
         html_debug_path.parent.mkdir(parents=True, exist_ok=True)
@@ -589,6 +810,7 @@ def renderizar_caso(
                 render_kwargs["landscape"] = True
             if html_debug_dir is not None:
                 render_kwargs["html_debug_path"] = html_debug_dir / f"{codigo}.html"
+            dados["__PERSONAGENS_ASSINATURA"] = blueprint.get("personagens", [])
             caminho = renderizar_documento(template, dados, pdf_path, **render_kwargs)
             grupos.setdefault(envelope, []).append(caminho)
             logger.info("Documento renderizado: %s → %s", codigo, caminho.name)

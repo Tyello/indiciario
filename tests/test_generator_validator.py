@@ -574,3 +574,30 @@ def test_validator_showcase_tecnico_nao_gera_gp_critico():
     resultado = BlueprintValidator(Blueprint(**data)).validar()
 
     assert not any(erro.codigo.startswith("GP_") for erro in resultado.criticos)
+
+
+def test_validador_rejeita_override_assinatura_svg_inexistente() -> None:
+    data = json.loads(blueprint_valido().model_dump_json())
+    data["personagens"][0]["assinatura"] = {
+        "estilo": "formal",
+        "override_assinatura_svg": "assets/signatures/nao_existe/assinatura.svg",
+    }
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert any(erro.codigo == "ASSINATURA_003" for erro in resultado.erros)
+
+
+def test_validador_rejeita_override_assinatura_absoluto_ou_nao_svg() -> None:
+    data = json.loads(blueprint_valido().model_dump_json())
+    data["personagens"][0]["assinatura"] = {
+        "estilo": "formal",
+        "override_assinatura_svg": "/tmp/assinatura.svg",
+        "override_rubrica_svg": "assets/signatures/vera_matos/rubrica.txt",
+    }
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    codigos = {erro.codigo for erro in resultado.erros}
+    assert "ASSINATURA_001" in codigos
+    assert "ASSINATURA_002" in codigos
