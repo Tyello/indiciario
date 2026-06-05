@@ -16,6 +16,62 @@ Separação de papéis:
 
 Nenhum documento de jogador deve soar como checklist de solução.
 
+A progressão do caso deve estar no plano, nos envelopes, nas dicas contextuais e no guia do facilitador. Não resolva falhas de progressão colocando interpretação dentro do material do jogador.
+
+## Contrato editorial de progressão
+
+Todo caso precisa de uma pergunta pública clara, com:
+
+- quem pediu a apuração;
+- por que pediu;
+- qual impacto concreto existe;
+- por que os documentos foram reunidos.
+
+Todo envelope precisa declarar:
+
+- pergunta diegética;
+- resposta esperada;
+- o que ainda não precisa ser resolvido;
+- critério de avanço;
+- forma diegética de apresentar esse avanço.
+
+O E1 não deve pedir a solução final. Ele deve produzir hipótese parcial, tensão, suspeita inicial plausível ou recontextualização inicial.
+
+O E2 deve recontextualizar algo do E1, não apenas confirmar. A recontextualização pode vir de motivo atual, benefício concreto, versão original de documento, descarte justo de falso suspeito ou cronologia que muda a leitura anterior.
+
+## Motivação e consequência atual
+
+Motivação histórica precisa ter consequência atual.
+
+Não basta existir carta antiga, trauma herdado ou segredo familiar. A motivação precisa pressionar o presente do caso com impacto concreto, como:
+
+- moradia;
+- expulsão;
+- dívida moral;
+- herança;
+- reputação;
+- demissão;
+- perda concreta;
+- risco público.
+
+Sem consequência atual, a motivação vira lore e não objetivo investigativo.
+
+## Informação nova em recados e bilhetes
+
+Se um personagem já sabe uma informação, qualquer recado, bilhete, e-mail ou mensagem posterior precisa trazer algo novo.
+
+A novidade pode ser:
+
+- documento omitido;
+- versão original;
+- lista não repassada;
+- prova concreta;
+- risco imediato;
+- mudança de prazo;
+- pressão nova.
+
+Não use mensagem posterior apenas para repetir ao jogador algo que o destinatário já saberia. Isso quebra a diegese e vira voz do autor.
+
 ## Linguagem permitida em documentos do jogador
 
 Preferir linguagem diegética, administrativa, documental ou narrativa.
@@ -248,6 +304,13 @@ Dicas são permitidas, mas devem ficar separadas dos documentos do jogador.
 
 Devem destravar o grupo, não substituir a investigação.
 
+Cada dica deve indicar:
+
+- condição de uso;
+- intensidade;
+- ação mental esperada;
+- o que desbloqueia.
+
 Dicas podem orientar cruzamento, desde que não entreguem a resposta final.
 
 Exemplo aceitável:
@@ -261,6 +324,23 @@ Exemplo forte demais:
 ```text
 Compare E1-04, E1-06 e E2-04 para descobrir Marina e Otávio.
 ```
+
+## Guia do facilitador
+
+O guia do facilitador deve ser operacional, não apenas um gabarito final.
+
+Ele deve conter:
+
+- pergunta pública;
+- resposta esperada por envelope;
+- quando liberar o próximo envelope;
+- linha do tempo aparente;
+- linha do tempo real;
+- red herrings e descartes;
+- explicação da motivação;
+- solução em síntese.
+
+O guia pode explicar cruzamentos, citar códigos de documentos e usar linguagem analítica. Essa linguagem não deve aparecer em documentos de jogador.
 
 ## Futuro guardrail automático
 
@@ -288,13 +368,21 @@ Esse guardrail deve fazer parte do `--strict` no futuro, mas ainda não é prior
 
 Antes de considerar um caso pronto para playtest, revisar:
 
-1. Algum documento de jogador manda comparar documentos?
-2. Algum documento cita `E1-XX` ou `E2-XX` dentro da diegese?
-3. Algum documento explica a conclusão?
-4. Algum mapa mostra rota, área crítica ou câmera offline?
-5. Algum chat parece confissão?
-6. Algum orçamento funciona como quadro comparativo de solução?
-7. Alguma assinatura parece só nome digitado?
-8. Alguma dica aparece dentro de documento que deveria ser evidência?
-9. O guia do facilitador está separado dos documentos de jogador?
-10. O gabarito não vazou para envelope, mapa, chat ou proposta?
+1. Existe pergunta pública clara com solicitante, motivo, impacto e justificativa do dossiê?
+2. Cada envelope tem pergunta diegética, resposta esperada, critério de avanço e forma diegética de avanço?
+3. O E1 evita pedir a solução final?
+4. O E2 recontextualiza algo do E1?
+5. Toda motivação histórica tem consequência atual concreta?
+6. Recados posteriores trazem informação nova?
+7. Cada dica contextual tem condição de uso, intensidade, ação mental esperada e desbloqueio?
+8. O guia do facilitador explica progressão, linhas do tempo, descartes, motivação e solução?
+9. Algum documento de jogador manda comparar documentos?
+10. Algum documento cita `E1-XX` ou `E2-XX` dentro da diegese?
+11. Algum documento explica a conclusão?
+12. Algum mapa mostra rota, área crítica ou câmera offline?
+13. Algum chat parece confissão?
+14. Algum orçamento funciona como quadro comparativo de solução?
+15. Alguma assinatura parece só nome digitado?
+16. Alguma dica aparece dentro de documento que deveria ser evidência?
+17. O guia do facilitador está separado dos documentos de jogador?
+18. O gabarito não vazou para envelope, mapa, chat ou proposta?

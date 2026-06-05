@@ -35,12 +35,15 @@ Documento bonito não salva história fraca. Template bom não compensa mistéri
 
 O caso só deve avançar para blueprint quando tiver:
 
+- pergunta pública clara;
 - pergunta dramática central;
-- motivo humano;
+- motivo humano com consequência atual;
 - suspeitos plausíveis;
 - mentira aparente;
 - virada investigativa;
 - momentos de descoberta;
+- objetivos por envelope;
+- critérios de avanço por envelope;
 - riscos de obviedade mapeados;
 - riscos de injustiça mapeados.
 
@@ -82,7 +85,34 @@ Formato recomendado:
 
 Selecionar a premissa mais forte antes de continuar.
 
-## Etapa 2 — Núcleo dramático
+## Etapa 2 — Pergunta pública do caso
+
+Antes do núcleo dramático, definir a pergunta pública que coloca os jogadores em ação.
+
+A pergunta pública é diferente da pergunta central interna: ela é o mandato diegético apresentado ao grupo. Ela precisa explicar por que aquelas pessoas foram chamadas, por que aqueles documentos existem e que consequência concreta está em jogo.
+
+Todo caso deve responder:
+
+- quem pediu a apuração;
+- por que pediu;
+- qual impacto concreto existe se o caso não for esclarecido;
+- por que os documentos foram reunidos e entregues ao grupo.
+
+Formato recomendado para planejamento editorial, fora do schema atual:
+
+```json
+"pergunta_publica": {
+  "quem_pediu": "",
+  "por_que_pediu": "",
+  "impacto_concreto": "",
+  "por_que_documentos_foram_reunidos": "",
+  "pergunta_para_os_jogadores": ""
+}
+```
+
+Sem pergunta pública, o grupo lê documentos sem saber qual decisão precisa tomar, qual urgência existe ou por que o dossiê foi montado. `pergunta_publica` ainda não é campo schema-enforced do `Blueprint`; enquanto o schema não for expandido, reflita esse contrato em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+
+## Etapa 3 — Núcleo dramático
 
 Todo caso precisa de núcleo dramático explícito.
 
@@ -145,7 +175,7 @@ Exemplos:
 
 Sem tema humano, o caso vira auditoria.
 
-## Etapa 3 — Verdade real e mentira aparente
+## Etapa 4 — Verdade real e mentira aparente
 
 Separar a verdade do que parece verdade.
 
@@ -169,7 +199,7 @@ Quais documentos recontextualizam a hipótese inicial.
 
 A mentira aparente não deve ser falsa por truque barato. Ela deve ser uma interpretação plausível dos fatos disponíveis.
 
-## Etapa 4 — Suspeitos e curva de suspeita
+## Etapa 5 — Suspeitos e curva de suspeita
 
 Todo suspeito relevante precisa ter função dramática.
 
@@ -206,7 +236,7 @@ Um falso suspeito forte precisa ter:
 
 Se não tiver os quatro, é só ruído.
 
-## Etapa 5 — Mecânica investigativa principal
+## Etapa 6 — Mecânica investigativa principal
 
 Cada caso canônico deve testar uma mecânica investigativa diferente.
 
@@ -232,7 +262,7 @@ A mecânica deve ser definida antes dos documentos.
 }
 ```
 
-## Etapa 6 — Momentos de descoberta
+## Etapa 7 — Momentos de descoberta
 
 Todo caso precisa planejar seus “aha moments”.
 
@@ -253,33 +283,50 @@ Um bom momento de descoberta faz o grupo dizer:
 
 Sem momentos de descoberta, o jogo vira leitura burocrática.
 
-## Etapa 7 — Plano de envelopes
+## Etapa 8 — Plano de envelopes
 
-Antes de documentos finais, definir o que cada envelope deve causar.
+Antes de documentos finais, definir o que cada envelope deve causar e quando o grupo deve avançar. Envelope não é pasta temática: é etapa de progressão investigativa.
+
+Todo envelope precisa ter:
+
+- pergunta diegética;
+- resposta esperada;
+- o que ainda não precisa ser resolvido;
+- critério de avanço;
+- forma diegética de apresentar esse avanço.
 
 ```json
 "objetivos_por_envelope": [
   {
     "envelope": "E1",
     "funcao": "levantar hipótese boa, mas incompleta",
-    "conclusao_esperada": "",
-    "nao_precisa_descobrir_ainda": [],
-    "pilares_obrigatorios": [],
+    "pergunta_diegetica": "",
+    "resposta_esperada": "",
+    "nao_precisa_resolver_ainda": [],
+    "criterio_de_avanco": "",
+    "forma_diegetica_de_avanco": "",
     "riscos": []
   },
   {
     "envelope": "E2",
-    "funcao": "recontextualizar e confirmar solução final",
-    "conclusao_esperada": "",
-    "pilares_obrigatorios": [],
+    "funcao": "recontextualizar algo do E1",
+    "pergunta_diegetica": "",
+    "resposta_esperada": "",
+    "nao_precisa_resolver_ainda": [],
+    "criterio_de_avanco": "",
+    "forma_diegetica_de_avanco": "",
     "riscos": []
   }
 ]
 ```
 
-### Regra importante
+`objetivos_por_envelope` ainda não é campo schema-enforced do `Blueprint`. Enquanto o schema não for expandido, reflita esses objetivos em `contratos_evidencia`, documentos, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
 
-O E1 deve terminar com uma hipótese forte, mas incompleta.
+### Regra do E1
+
+O E1 não deve pedir a solução final.
+
+Ele deve terminar com uma hipótese parcial, uma tensão entre versões ou uma recontextualização inicial.
 
 Ruim:
 
@@ -290,10 +337,28 @@ E1 já resolve quase tudo e E2 só confirma.
 Bom:
 
 ```text
-E1 revela o mecanismo ou oportunidade. E2 revela motivo, benefício ou recontextualização.
+E1 revela oportunidade, mecanismo ou uma contradição forte, mas ainda não fecha motivo, benefício e cadeia de prova.
 ```
 
-## Etapa 8 — Plano documental
+### Regra do E2
+
+O E2 deve recontextualizar algo do E1.
+
+Ele não deve apenas confirmar a hipótese inicial. Ele deve trazer uma virada real: motivo atual, prova concreta de benefício, versão original, descarte justo de falso suspeito ou cronologia que muda a leitura anterior.
+
+### Forma diegética de avanço
+
+O avanço deve existir dentro do mundo da história. Exemplos:
+
+- o solicitante libera um lote de documentos antes retido;
+- uma secretaria encontra a versão original de um anexo;
+- um cartório responde a uma solicitação;
+- a equipe recebe registros complementares após formular uma hipótese parcial;
+- uma testemunha decide entregar material quando percebe risco concreto.
+
+Evitar avanço artificial do tipo “agora abra o E2 porque o jogo precisa continuar” sem justificativa diegética.
+
+## Etapa 9 — Plano documental
 
 Só depois de definir história, suspeitos, virada e envelopes criar documentos.
 
@@ -315,7 +380,92 @@ Para cada documento:
 
 Documento de jogador deve mostrar evidência, não dizer como interpretar.
 
-## Etapa 9 — Riscos de obviedade
+### Recados e bilhetes
+
+Se um personagem já sabe uma informação, qualquer recado, bilhete, e-mail ou mensagem posterior precisa trazer algo novo: documento omitido, versão original, lista não repassada, prova concreta, risco imediato, mudança de prazo ou pressão nova.
+
+Não usar recado posterior apenas para repetir informação que o destinatário já conhece. Isso soa como voz do autor falando com o jogador.
+
+## Etapa 10 — Motivação com consequência atual
+
+Motivação histórica precisa ter consequência atual.
+
+Não basta haver uma carta antiga, trauma familiar ou segredo de décadas atrás. O passado precisa pressionar o presente do caso.
+
+Fraco:
+
+```text
+Carta de 1968 explica uma mágoa antiga.
+```
+
+Forte:
+
+```text
+Carta de 1968 sustenta disputa atual de moradia, risco de expulsão, perda de herança ou exposição pública.
+```
+
+Consequências atuais possíveis:
+
+- moradia;
+- expulsão;
+- dívida moral;
+- herança;
+- reputação;
+- demissão;
+- perda concreta;
+- risco público;
+- fechamento de instituição;
+- rompimento familiar com efeito prático.
+
+Sem consequência atual, motivação histórica vira lore, não urgência investigativa.
+
+## Etapa 11 — Dicas contextuais
+
+Dicas contextuais precisam destravar ações.
+
+Cada dica deve indicar:
+
+- condição de uso;
+- intensidade;
+- ação mental esperada;
+- o que desbloqueia.
+
+```json
+"dicas_contextuais": [
+  {
+    "id": "DC-E1-EXEMPLO-01",
+    "categoria": "logistica",
+    "fase": "E1",
+    "titulo": "Comparar log e escala",
+    "condicao_uso": "Use se o grupo suspeita de várias pessoas, mas ainda não cruzou horário de credencial com a escala.",
+    "texto": "Oriente o grupo a montar duas colunas: quem deveria estar em ronda e qual credencial aparece no intervalo crítico. Não nomeie suspeitos; peça que procurem incompatibilidades.",
+    "nivel": "media",
+    "contratos_relacionados": ["C-E1-OPORTUNIDADE"],
+    "documentos_relacionados": ["E1-04", "E1-05"]
+  }
+]
+```
+
+No schema atual, `condicao_uso` registra a condição de uso, `nivel` registra a intensidade, `texto` deve explicitar a ação mental esperada e o desbloqueio pretendido, e `contratos_relacionados`/`documentos_relacionados` ligam a dica à cadeia de evidência. A dica pode orientar uma operação mental, como comparar horários, separar versão pública de versão real ou procurar consequência atual. Ela não deve entregar culpado, motivo e documentos obrigatórios em formato de checklist.
+
+## Etapa 12 — Guia do facilitador operacional
+
+O guia do facilitador deve permitir conduzir a sessão sem improvisar solução.
+
+Conteúdo mínimo obrigatório:
+
+- pergunta pública;
+- resposta esperada por envelope;
+- quando liberar o próximo envelope;
+- linha do tempo aparente;
+- linha do tempo real;
+- red herrings e descartes;
+- explicação da motivação;
+- solução em síntese.
+
+O guia pode explicar cruzamentos, citar códigos de documentos e usar linguagem analítica. Essa linguagem deve ficar fora dos documentos de jogador.
+
+## Etapa 13 — Riscos de obviedade
 
 Antes do blueprint final, listar riscos de caso fácil demais.
 
@@ -339,7 +489,7 @@ Riscos comuns:
 - um valor é muito diferente dos demais;
 - documento diz quais evidências cruzar.
 
-## Etapa 10 — Riscos de injustiça
+## Etapa 14 — Riscos de injustiça
 
 Também mapear riscos de travamento injusto.
 
@@ -362,7 +512,7 @@ Riscos comuns:
 - red herring não tem descarte justo;
 - detalhe visual importante é pequeno demais no PDF.
 
-## Etapa 11 — Autocrítica antes do JSON
+## Etapa 15 — Autocrítica antes do JSON
 
 Antes de gerar blueprint, produzir uma autoauditoria.
 
@@ -379,7 +529,7 @@ Antes de gerar blueprint, produzir uma autoauditoria.
 
 Se houver problemas graves, corrigir o plano antes de gerar JSON.
 
-## Etapa 12 — Blueprint JSON
+## Etapa 16 — Blueprint JSON
 
 Só gerar o blueprint JSON depois que o plano Markdown estiver aprovado.
 
@@ -389,14 +539,19 @@ O blueprint deve ser a execução do design, não o lugar onde se descobre a his
 
 Antes de gerar o blueprint, o plano precisa responder:
 
+- Qual é a pergunta pública e quem pediu a apuração?
 - Qual é a pergunta dramática central?
 - Qual é a verdade real?
 - Qual é a mentira aparente?
 - Quais são os 4 ou 5 suspeitos plausíveis?
 - Como cada suspeito cresce ou cai ao longo dos envelopes?
 - Quais são os momentos de descoberta?
-- O que o E1 resolve?
+- O que o E1 resolve sem pedir solução final?
+- Qual é o critério de avanço do E1?
 - O que o E2 recontextualiza?
+- Qual consequência atual sustenta a motivação?
+- Como as dicas destravam ações sem entregar solução?
+- O guia do facilitador contém progressão operacional e linhas do tempo?
 - Quais documentos são pista, confirmação, descarte, ruído ou ferramenta?
 - O que pode ficar óbvio demais?
 - O que pode ficar injusto demais?
@@ -426,6 +581,10 @@ Deve nascer com:
 - mais ambiguidade estrutural;
 - suspeitos mais equilibrados;
 - E2 recontextualizando a leitura do E1;
+- pergunta pública clara;
+- objetivo e critério de avanço por envelope;
+- motivação histórica com consequência atual concreta;
+- guia do facilitador operacional;
 - menos explicitação de códigos;
 - pelo menos dois falsos caminhos fortes.
 

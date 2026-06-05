@@ -4,6 +4,8 @@ Este documento orienta como uma LLM deve operar dentro do projeto Indiciário ao
 
 O objetivo não é apenas produzir JSON válido. O objetivo é produzir mistérios jogáveis, solváveis, divertidos e sem vazamento de gabarito no material do jogador.
 
+Após os playtests dos canônicos Iniciante e Intermediário, uma regra ficou explícita: bons documentos não bastam. A LLM deve exigir progressão jogável antes de gerar PDFs: pergunta pública, objetivo por envelope, critério de avanço, motivação com consequência atual e guia do facilitador operacional.
+
 ## Leitura obrigatória antes de qualquer tarefa
 
 Antes de alterar qualquer arquivo, leia nesta ordem:
@@ -12,7 +14,9 @@ Antes de alterar qualquer arquivo, leia nesta ordem:
 2. `README.md`
 3. `docs/ESTADO_ATUAL.md`
 4. `docs/DIRETRIZES_EDITORIAIS.md`
-5. `examples/caso_canonico_iniciante.json`, se a tarefa tocar no caso canônico
+5. `docs/CASE_DESIGN_PIPELINE.md`, se a tarefa envolver criação ou revisão estrutural de caso
+6. `docs/BLUEPRINT_AUTHORING_GUIDE.md`, se a tarefa envolver blueprint ou novo caso
+7. `examples/caso_canonico_iniciante.json`, se a tarefa tocar no caso canônico
 
 Se a tarefa envolver revisão de PDF gerado, use também o feedback visual/playtest fornecido pelo usuário como fonte prioritária.
 
@@ -107,6 +111,27 @@ Local provável:
 - testes em `tests/`;
 - futuro guardrail editorial.
 
+### Problema de progressão do caso
+
+Sintomas:
+
+- os jogadores não sabem por que estão investigando;
+- o E1 tenta resolver o caso inteiro;
+- o E2 apenas confirma algo já óbvio;
+- não existe critério claro para liberar o próximo envelope;
+- a motivação é histórica, mas não tem consequência atual;
+- o facilitador precisa improvisar quando avançar, o que esperar ou como descartar falsos caminhos.
+
+Local provável:
+
+- plano Markdown do caso;
+- blueprint JSON;
+- `docs/CASE_DESIGN_PIPELINE.md`;
+- `docs/BLUEPRINT_AUTHORING_GUIDE.md`;
+- guia do facilitador.
+
+Não resolva esse problema adicionando documentos explicativos ao jogador. Corrija o contrato editorial do caso.
+
 ### Problema de documentação
 
 Sintomas:
@@ -197,6 +222,53 @@ Compare o contrato com o extrato e o recibo.
 ```text
 Contrato vinculado à OS 0147/2026.
 ```
+
+## Contrato mínimo para criar ou revisar blueprints
+
+Antes de gerar ou aprovar um blueprint, confirme que o plano responde aos pontos abaixo.
+
+Nota de schema: `pergunta_publica` e `objetivos_por_envelope` são contrato editorial de planejamento, ainda não campos schema-enforced do `Blueprint`. Enquanto o schema não for expandido, reflita esses conceitos em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+
+### Pergunta pública
+
+Todo caso precisa dizer:
+
+1. quem pediu a apuração;
+2. por que pediu;
+3. qual impacto concreto existe;
+4. por que os documentos foram reunidos.
+
+Sem isso, o grupo recebe um dossiê sem mandato, urgência ou consequência.
+
+### Objetivo por envelope
+
+Todo envelope precisa declarar:
+
+- pergunta diegética;
+- resposta esperada;
+- o que ainda não precisa ser resolvido;
+- critério de avanço;
+- forma diegética de apresentar esse avanço.
+
+O E1 não deve pedir a solução final. Ele deve gerar hipótese parcial, tensão ou recontextualização inicial.
+
+O E2 deve recontextualizar algo do E1. Ele não deve apenas confirmar uma conclusão que o E1 já entregou.
+
+### Motivação atual
+
+Motivação histórica precisa pressionar o presente. Não basta existir “carta de 1968”, segredo antigo ou mágoa familiar. Deve haver consequência atual: moradia, expulsão, dívida moral, herança, reputação, demissão, perda concreta ou risco público.
+
+### Informação nova em recados
+
+Se um personagem já sabe uma informação, qualquer recado posterior precisa trazer algo novo: documento omitido, versão original, lista não repassada, prova concreta ou risco imediato.
+
+### Dicas contextuais
+
+Cada dica deve informar condição de uso, intensidade, ação mental esperada e o que desbloqueia. Dica destrava ação; não substitui investigação.
+
+### Guia do facilitador
+
+Todo guia precisa conter pergunta pública, resposta esperada por envelope, quando liberar o próximo envelope, linha do tempo aparente, linha do tempo real, red herrings e descartes, explicação da motivação e solução em síntese.
 
 ## Como alterar o caso canônico
 
@@ -340,6 +412,14 @@ Ao revisar uma PR:
 - O jogador consegue investigar sem receber checklist?
 - O documento parece existir dentro do mundo da história?
 - O mapa ajuda localização sem apontar solução?
+- Existe pergunta pública com solicitante, motivo, impacto e justificativa do dossiê?
+- Cada envelope tem pergunta diegética, resposta esperada, critério e forma diegética de avanço?
+- O E1 evita pedir a solução final?
+- O E2 recontextualiza algo do E1 em vez de apenas confirmar?
+- A motivação histórica tem consequência atual?
+- Recados posteriores trazem informação nova para quem os recebe?
+- Dicas contextuais têm condição, intensidade, ação mental esperada e desbloqueio?
+- O guia do facilitador é operacional para conduzir progressão e descartes?
 - O E2 não entrega culpado por comparação pronta?
 - As assinaturas pertencem aos personagens?
 - A cadeia de evidência ainda fecha?
