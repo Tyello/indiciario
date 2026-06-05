@@ -695,3 +695,40 @@ def test_validator_exige_respostas_do_guia_para_os_mesmos_envelopes():
     resultado = BlueprintValidator(blueprint).validar()
 
     assert "PROG_013" in _codigos(resultado)
+
+
+def test_validator_bloqueia_e1_pedindo_solucao_final():
+    blueprint = blueprint_valido()
+    blueprint.objetivos_por_envelope[0].pergunta_diegetica = "Como descobrir o culpado final?"
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert "PROG_018" in _codigos(resultado)
+
+
+def test_validator_bloqueia_e1_pedindo_solucao_completa_no_criterio():
+    blueprint = blueprint_valido()
+    blueprint.objetivos_por_envelope[0].criterio_de_avanco = "Liberar E2 quando o grupo formular solução completa."
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert "PROG_018" in _codigos(resultado)
+
+
+def test_validator_exige_paridade_operacional_completa_no_guia():
+    blueprint = blueprint_valido()
+    resposta_e1 = blueprint.guia_operacional.resposta_esperada_por_envelope[0]
+    resposta_e1.pergunta_diegetica = "Pergunta divergente no guia."
+    resposta_e1.criterio_de_avanco = "Critério divergente no guia."
+    resposta_e1.forma_diegetica_de_avanco = "Forma diegética divergente no guia."
+    resposta_e1.documentos_minimos = ["E1-04"]
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    codigos = _codigos(resultado)
+    assert "PROG_014" in codigos
+    prog_014 = next(erro for erro in resultado.erros if erro.codigo == "PROG_014")
+    assert "pergunta_diegetica" in (prog_014.detalhe or "")
+    assert "criterio_de_avanco" in (prog_014.detalhe or "")
+    assert "forma_diegetica_de_avanco" in (prog_014.detalhe or "")
+    assert "documentos_minimos" in (prog_014.detalhe or "")

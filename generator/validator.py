@@ -13,6 +13,7 @@ import importlib
 import json
 import re
 import sys
+import unicodedata
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
@@ -251,6 +252,29 @@ PLACEHOLDERS_INVALIDOS = {
 }
 
 
+E1_SOLUCAO_FINAL_TERMS = {
+    "acusacao final",
+    "acusacao completa",
+    "autoria final",
+    "culpado final",
+    "descobrir o culpado",
+    "descobrir o culpado final",
+    "executor planejador beneficiario",
+    "executor planejador e beneficiario",
+    "fechar o caso",
+    "gabarito",
+    "identificar o culpado",
+    "resolver o caso",
+    "solucao completa",
+    "solucao final",
+}
+
+
+def _normalizar_progressao_texto(texto: str) -> str:
+    sem_acentos = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", " ", sem_acentos.lower()).strip()
+
+
 class BlueprintValidator:
     """Executa validações narrativas, estruturais e offline sobre um blueprint."""
 
@@ -329,13 +353,33 @@ class BlueprintValidator:
                 ))
             objetivos_por_envelope[objetivo.envelope] = objetivo
 
-            for campo in ["pergunta_diegetica", "resposta_esperada", "criterio_de_avanco", "forma_diegetica_de_avanco"]:
+            campos_objetivo = ["pergunta_diegetica", "resposta_esperada", "criterio_de_avanco", "forma_diegetica_de_avanco"]
+            for campo in campos_objetivo:
                 if not getattr(objetivo, campo).strip():
                     self.resultado.adicionar(Erro(
                         "PROG_004",
                         Severidade.CRITICO,
                         f"objetivos_por_envelope[{objetivo.envelope}].{campo} deve ser preenchido.",
                     ))
+
+            if objetivo.envelope == "E1":
+                for campo in campos_objetivo:
+                    valor_normalizado = _normalizar_progressao_texto(getattr(objetivo, campo))
+                    termo_bloqueado = next(
+                        (termo for termo in E1_SOLUCAO_FINAL_TERMS if termo in valor_normalizado),
+                        None,
+                    )
+                    if termo_bloqueado:
+                        self.resultado.adicionar(Erro(
+                            "PROG_018",
+                            Severidade.CRITICO,
+                            (
+                                "Objetivo do E1 exige solução final; E1 deve gerar hipótese parcial, "
+                                "tensão ou recontextualização inicial."
+                            ),
+                            detalhe=f"Campo: {campo}; termo detectado: {termo_bloqueado}.",
+                        ))
+                        break
 
             if objetivo.envelope not in envelopes_esperados:
                 self.resultado.adicionar(Erro(
@@ -403,12 +447,28 @@ class BlueprintValidator:
             ))
         for envelope, objetivo in objetivos_por_envelope.items():
             resposta_guia = respostas_por_envelope.get(envelope)
-            if resposta_guia and resposta_guia.resposta_esperada.strip() != objetivo.resposta_esperada.strip():
-                self.resultado.adicionar(Erro(
-                    "PROG_014",
-                    Severidade.CRITICO,
-                    f"Resposta esperada do guia diverge do objetivo do {envelope}.",
-                ))
+            if resposta_guia:
+                divergencias = []
+                for campo in [
+                    "pergunta_diegetica",
+                    "resposta_esperada",
+                    "criterio_de_avanco",
+                    "forma_diegetica_de_avanco",
+                ]:
+                    if getattr(resposta_guia, campo).strip() != getattr(objetivo, campo).strip():
+                        divergencias.append(campo)
+                if resposta_guia.nao_precisa_resolver_ainda != objetivo.nao_precisa_resolver_ainda:
+                    divergencias.append("nao_precisa_resolver_ainda")
+                if resposta_guia.documentos_minimos != objetivo.documentos_minimos:
+                    divergencias.append("documentos_minimos")
+
+                if divergencias:
+                    self.resultado.adicionar(Erro(
+                        "PROG_014",
+                        Severidade.CRITICO,
+                        f"Resposta operacional do guia diverge do objetivo do {envelope}.",
+                        detalhe=f"Campos divergentes: {', '.join(divergencias)}.",
+                    ))
 
         campos_guia = {
             "linha_tempo_aparente_resumo": guia.linha_tempo_aparente_resumo,
