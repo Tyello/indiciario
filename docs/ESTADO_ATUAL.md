@@ -1,6 +1,6 @@
 # Estado atual do Indiciário
 
-Este documento registra a situação atual do projeto após as rodadas de hardening editorial, visual e técnico do caso canônico.
+Este documento registra a situação atual do projeto após as rodadas de hardening editorial, visual e técnico do caso canônico e após o primeiro playtest real.
 
 ## Visão do produto
 
@@ -27,29 +27,6 @@ Princípios atuais:
 Slogan atual:
 
 > Todo caso deixa sinais.
-
-## Stack atual
-
-Linguagem e estrutura:
-
-- Python;
-- Blueprint JSON;
-- Schemas YAML;
-- Validator;
-- Package Builder.
-
-Renderização e PDF:
-
-- HTML;
-- CSS;
-- Playwright;
-- Chromium;
-- Playwright PDF.
-
-Merge de PDFs:
-
-- `pikepdf` como backend oficial;
-- `pypdf` apenas como fallback.
 
 ## Estado técnico
 
@@ -100,15 +77,35 @@ O caso canônico atual é:
 - Arquivo: `examples/caso_canonico_iniciante.json`
 - Dificuldade editorial atual: **Iniciante**
 
-O caso foi rebaixado de Intermediário para Iniciante por decisão editorial. A estrutura ficou mais adequada como caso introdutório, com orientação mais clara, mas ainda deve preservar investigação real.
+O caso foi rebaixado de Intermediário para Iniciante por decisão editorial e confirmado pelo primeiro playtest como fácil demais para Intermediário.
 
-Papel do caso canônico iniciante:
+Papel atual do caso:
 
-- referência narrativa;
-- referência técnica;
+- régua canônica Iniciante;
+- referência técnica de build/package;
 - fixture de integração;
-- benchmark de qualidade mínima;
-- primeiro material de validação com jogadores.
+- benchmark mínimo de qualidade visual/documental;
+- exemplo de experiência introdutória.
+
+Não tentar transformar o Mirante em Intermediário por ajustes incrementais. O próximo caso Intermediário deve nascer de nova arquitetura investigativa.
+
+## Resultado do primeiro playtest
+
+Primeiro playtest real: **realizado**.
+
+Resultado resumido:
+
+- os jogadores gostaram dos documentos;
+- a experiência documental foi positiva;
+- o caso foi fácil demais;
+- o material funciona como introdução, mas não como régua Intermediária;
+- o próximo salto precisa vir de história, tensão, ambiguidade e mecânica investigativa, não de mais polimento visual.
+
+Interpretação de produto:
+
+- o framework consegue gerar material atraente;
+- o risco principal agora é gerar documentos bonitos para mistérios fracos ou óbvios;
+- o próximo foco deve ser pipeline de design de caso e criação planejada do canônico Intermediário.
 
 ## Decisões recentes relevantes
 
@@ -175,67 +172,64 @@ Evitar em documentos do jogador:
 - “recibo, extrato e conversa interna...” como checklist;
 - frases que concentrem pessoa, ação, motivo e horário em formato de conclusão.
 
-## Playtest
-
-O primeiro playtest real ainda é a prioridade.
-
-Grupo previsto:
-
-- Marcelo;
-- esposa;
-- filha de 11 anos.
-
-Objetivo do playtest:
-
-- validar diversão;
-- validar clareza;
-- validar solvabilidade percebida;
-- observar uso dos envelopes;
-- observar uso do mapa;
-- avaliar utilidade das dicas;
-- avaliar participação da criança;
-- medir tempo real.
-
-Após o playtest, preencher/atualizar dados como:
-
-```json
-"playtest": {
-  "status": "playtestado_com_ajustes",
-  "rodadas": 1,
-  "tempo_real_medio": 0,
-  "jogadores_teste": 3,
-  "travamentos": [],
-  "hipoteses_erradas": [],
-  "ajustes_pos_teste": []
-}
-```
-
 ## Roadmap atual
 
-### Fase A — Playtest real
+### Fase A — Playtest real do Mirante
 
-Prioridade máxima.
+Status: **concluído na primeira rodada**.
 
-Itens:
+Resultado: bom material documental, caso fácil demais.
 
-1. gerar pacote atualizado do caso canônico iniciante;
-2. revisar visualmente o PDF final;
-3. realizar o primeiro playtest real;
-4. registrar métricas reais em `playtest_session.json` ou estrutura equivalente;
-5. ajustar o caso com base em evidência real de mesa.
+Não continuar polindo indefinidamente o Mirante. Ajustes futuros devem ser baseados em evidência concreta, não em busca de perfeição.
 
-### Fase B — Biblioteca canônica
+### Fase B — Pipeline de design de caso
 
-Após o primeiro playtest, criar novas réguas editoriais:
+Prioridade atual.
 
-- `caso_canonico_intermediario.json`;
+Objetivo: impedir que a LLM gere documentos antes de ter uma história investigativa forte.
+
+Criar e usar:
+
+- `docs/CASE_DESIGN_PIPELINE.md`;
+- plano Markdown antes de qualquer blueprint JSON;
+- núcleo dramático;
+- curva de suspeita;
+- momentos de descoberta;
+- riscos de obviedade;
+- riscos de injustiça;
+- mecânica investigativa principal.
+
+### Fase C — Novo caso canônico Intermediário
+
+O próximo canônico deve nascer do zero, não como ajuste do Mirante.
+
+Direção:
+
+- história mais humana;
+- pergunta dramática forte;
+- 4 a 5 suspeitos plausíveis;
+- pelo menos 2 falsos caminhos fortes;
+- E1 com hipótese boa, mas incompleta;
+- E2 que recontextualiza, não apenas confirma;
+- mecânica investigativa diferente do Mirante.
+
+Arquivo de planejamento:
+
+- `docs/canonical_plans/PLANO_CANONICO_INTERMEDIARIO.md`
+
+Só gerar `examples/caso_canonico_intermediario.json` depois que o plano Markdown estiver aprovado.
+
+### Fase D — Biblioteca canônica
+
+Após o novo Intermediário, evoluir para:
+
 - `caso_canonico_avancado.json`;
 - `caso_canonico_especialista.json`;
 - `caso_canonico_mestre.json`.
 
-A criação de novo caso intermediário deve nascer com ambiguidade estrutural desde o planejamento, não apenas pela remoção de dicas óbvias.
+Cada canônico deve testar uma mecânica investigativa diferente, não apenas uma dificuldade maior.
 
-### Fase C — Inteligência editorial
+### Fase E — Inteligência editorial
 
 Após existirem vários casos:
 
@@ -245,20 +239,6 @@ Após existirem vários casos:
 - validação de progressão;
 - validação de red herrings;
 - guardrail automático contra “voz do autor” em documentos de jogador.
-
-### Fase D — Biblioteca visual
-
-Expansão futura:
-
-- hotel;
-- museu;
-- biblioteca;
-- apartamento;
-- galeria;
-- escritório;
-- plantas e documentos específicos por cenário.
-
-Sempre manter mapas em landscape e evitar dependência obrigatória de geração de imagem por IA.
 
 ## O que não priorizar agora
 
@@ -273,7 +253,7 @@ Não priorizar neste momento:
 - agentes autônomos;
 - IA gerando imagens.
 
-Antes disso, validar que o caso é divertido, claro e jogável.
+Antes disso, validar que o framework gera casos realmente interessantes, intrigantes e divertidos.
 
 ## Comandos úteis
 
