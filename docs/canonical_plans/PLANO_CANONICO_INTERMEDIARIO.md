@@ -16,11 +16,11 @@ Título provisório:
 
 > **O Último Brinde do Hotel Aurora**
 
-Direção de twist escolhida:
+Verdade oficial v1 decidida:
 
-> Helena está viva. O desaparecimento não é um sequestro clássico nem uma fuga simples. A virada é que a presença final de Helena no jantar foi fabricada por sinais indiretos — objeto pessoal, lugar à mesa, fala conveniente e registro ambíguo — para fazer todos acreditarem que ela saiu voluntariamente depois do brinde. Na verdade, ela já havia deixado o salão antes, atraída por uma mensagem aparentemente confiável.
+> **Marta Salgado é a responsável final.** Helena está viva. O desaparecimento não é sequestro clássico nem fuga simples. A presença final de Helena no jantar foi fabricada por sinais indiretos — objeto pessoal, lugar à mesa, fala conveniente e registro ambíguo — para fazer todos acreditarem que ela saiu voluntariamente depois do brinde. Na verdade, Helena já havia deixado o salão antes, atraída por uma mensagem aparentemente confiável.
 
-O objetivo agora é consolidar núcleo dramático, suspeitos, curva de suspeita e plano documental antes de qualquer blueprint JSON.
+O objetivo agora é transformar esta arquitetura em plano documental completo antes de qualquer blueprint JSON.
 
 ## Premissa editorial
 
@@ -38,7 +38,7 @@ Ele deve nascer com:
 
 ## Resultado do playtest do canônico Iniciante
 
-Caso: “O Desvio da Reserva Mirante”
+Caso: “O Desvio da Reserva Mirante”.
 
 Resultado:
 
@@ -77,13 +77,13 @@ O novo caso deve atender, no mínimo:
 
 Hotel Aurora, um hotel histórico em processo de reabertura após anos de decadência. A família proprietária realiza um jantar fechado para investidores, antigos funcionários e imprensa local.
 
-O evento acontece em um andar social do hotel, mas sem mapa entregue ao jogador. A geografia deve ser entendida por documentos diegéticos:
+O evento acontece em um andar social do hotel, mas **sem mapa entregue ao jogador**. A geografia deve ser entendida por documentos diegéticos:
 
 - salão de jantar;
 - terraço envidraçado;
 - corredor de serviço;
 - copa/cozinha de apoio;
-- biblioteca ou sala de memória;
+- sala de memória/biblioteca antiga;
 - recepção do andar;
 - elevador social;
 - escada de serviço;
@@ -103,7 +103,7 @@ Mas alguns registros não fecham:
 - um depoimento diz que ela passou pelo corredor de serviço;
 - outro documento sugere presença dela no terraço;
 - o cartão da suíte registra uso em horário incompatível;
-- um objeto pessoal aparece onde não deveria.
+- uma echarpe com broche antigo da família aparece onde não deveria.
 
 ### Pergunta dramática
 
@@ -111,49 +111,81 @@ Helena saiu por vontade própria, foi retirada do jantar ou alguém fabricou sua
 
 ### Motivo humano
 
-Reputação familiar, herança, medo de exposição pública e disputa sobre o futuro do hotel.
+Reputação familiar, memória dos antigos funcionários, medo de apagamento do passado do hotel e disputa sobre o futuro do Hotel Aurora.
 
 O desaparecimento não deve ser apenas “sumiu porque alguém queria dinheiro”. Deve envolver vergonha, controle de narrativa e medo de uma verdade vir à tona durante o jantar.
 
-### Mecânica investigativa principal
+## Verdade oficial v1
 
-**Depoimentos contraditórios + cronologia + objeto com dupla interpretação.**
+### Culpada final
 
-O grupo precisa perceber que a linha do tempo social do jantar não bate com os registros físicos e relatos do hotel.
+**Marta Salgado**, governanta antiga do Hotel Aurora.
 
-A chave do caso não deve ser mapa nem um único log. A solução deve nascer do cruzamento entre:
+Marta não deve parecer vilã caricata. Ela é a memória viva do hotel: conhece funcionários antigos, passagens internas, hábitos da família, salas fechadas, objetos de acervo e histórias que a nova gestão prefere tornar decorativas.
 
-- depoimentos;
-- horários de serviço;
-- cartão de quarto/elevador;
-- bilhete/convite;
-- mensagem de bastidor;
-- objeto pessoal de Helena;
-- lista de convidados/lugares;
-- relatório de recepção;
-- observações de staff sobre circulação entre ambientes.
+### Motivo real
 
-### Por que este caso é bom para Intermediário
+Helena pretendia usar o brinde final para anunciar uma decisão que apagaria parte do passado do hotel: vender/ceder uma ala histórica para investidores, transformar a antiga ala de funcionários em área comercial e encerrar uma promessa informal feita pela família Valença aos empregados antigos.
 
-- cenário fácil de imaginar;
-- tensão social mais forte que auditoria documental;
-- suspeitos podem ter motivos humanos diferentes;
-- depoimentos permitem ambiguidade real;
-- o E1 pode levar a uma hipótese errada, mas plausível;
-- o E2 pode recontextualizar a presença/ausência de Helena;
-- sem mapa, o caso testa leitura social, cronologia e interpretação de relatos.
+Marta descobre o conteúdo do anúncio antes do jantar. Para ela, o anúncio não é apenas decisão empresarial; é uma traição à história do hotel e às pessoas que mantiveram o Aurora vivo enquanto a família estava ausente.
 
-### Risco principal
+### Método
 
-Virar apenas quebra-cabeça de horários.
+Marta atrai Helena para fora do salão antes do brinde usando uma mensagem/bilhete que parece vir de alguém confiável ou ligada a um documento familiar antigo.
 
-Mitigação:
+Helena vai até a sala de memória/biblioteca antiga ou uma suíte reservada acreditando que há algo importante relacionado ao discurso.
 
-- criar motivo humano forte;
-- evitar muitos registros frios;
-- fazer cada suspeito ter comportamento emocionalmente plausível;
-- incluir objeto/documento que muda de significado no E2;
-- usar linguagem de testemunha, etiqueta social e bastidores de hotel para dar textura.
+Enquanto Helena fica temporariamente isolada, retida ou impossibilitada de voltar ao salão, Marta fabrica sinais indiretos de presença:
+
+- mantém o lugar de Helena montado;
+- usa a echarpe com broche antigo de Helena como sinal visual;
+- permite que alguém veja de relance uma silhueta/tecido/movimento perto do terraço;
+- aproveita registros ambíguos de cartão/elevador/serviço;
+- deixa a dinâmica social do brinde sustentar a impressão de que Helena ainda estava por perto.
+
+### O que parecia ter acontecido
+
+Helena teria discutido, ficado abalada e deixado o jantar por vontade própria depois ou perto do brinde final.
+
+Essa mentira é plausível porque:
+
+- houve tensão familiar antes do brinde;
+- Lívia tinha motivo visível para confronto;
+- Caio tenta controlar a narrativa por interesse operacional;
+- Renato circula pelo serviço na janela crítica;
+- Isadora pressiona Helena por uma declaração;
+- a echarpe/broche funciona como sinal social de presença;
+- ninguém tem visão direta incontestável de Helena no momento final.
+
+### O que de fato aconteceu
+
+Helena saiu antes da janela assumida como última presença. A presença dela no fim do jantar foi inferida por sinais indiretos, não testemunhada diretamente.
+
+Marta precisava impedir o anúncio sem criar escândalo imediato. A melhor cobertura era fazer parecer que Helena saiu por vontade própria, emocionalmente abalada, após uma tensão social.
+
+### Como o E1 engana sem mentir
+
+O E1 deve apresentar sinais ambíguos:
+
+- depoimentos com “parecia”, “de relance”, “pensei que era”, “vi o tecido”, “achei que fosse ela”;
+- objeto pessoal em local visível, mas sem prova de que Helena o carregava naquele momento;
+- registros de acesso que mostram cartão/porta/elevador, não corpo/pessoa;
+- tensão familiar suficiente para tornar a saída voluntária plausível;
+- suspeitos fortes o bastante para dividir a mesa.
+
+O E1 não pode afirmar que alguém viu Helena de perto e sem dúvida no horário final.
+
+### Como o E2 revela sem parecer gabarito
+
+O E2 deve apresentar fatos brutos que mudam a leitura:
+
+- mensagem completa ou origem real do bilhete;
+- registro de rouparia/serviço indicando movimentação da echarpe/broche por outra pessoa;
+- documento familiar que mostra o que Helena anunciaria;
+- depoimento complementar que descarta a visão direta no terraço;
+- evidência discreta ligando Marta à sala de memória/biblioteca antiga.
+
+O E2 não deve dizer “Marta fabricou a presença de Helena”. Deve dar ao grupo peças suficientes para chegar nisso.
 
 ## Plot twist recomendado
 
@@ -164,7 +196,7 @@ Helena não desapareceu no momento em que todos acham que ela desapareceu.
 A presença dela no fim do jantar foi fabricada por sinais indiretos:
 
 - o lugar dela permaneceu montado;
-- uma echarpe/broche/carteira dela aparece em local visível;
+- a echarpe/broche aparece em local visível;
 - alguém afirma tê-la visto perto do terraço, mas só viu silhueta, tecido ou movimento;
 - um registro de acesso sugere deslocamento, mas registra cartão/objeto, não necessariamente a pessoa;
 - a fala de um convidado no brinde mantém a impressão social de que Helena ainda estava por perto.
@@ -177,13 +209,13 @@ No E2, os jogadores percebem que a pergunta correta não era “por onde Helena 
 
 ### Estado/destino de Helena
 
-Direção recomendada:
+Direção oficial:
 
 - Helena está viva;
 - não há morte nem violência gráfica;
-- ela foi atraída para uma suíte/sala de memória/antiga biblioteca por uma mensagem que parecia legítima;
+- ela foi atraída para uma suíte/sala de memória/biblioteca antiga por uma mensagem que parecia legítima;
 - ficou temporariamente isolada, retida ou impossibilitada de voltar ao salão durante o brinde;
-- o objetivo do culpado era impedir que ela fizesse um anúncio público, recuperasse um documento ou revelasse uma verdade sobre o hotel.
+- o objetivo de Marta era impedir que Helena fizesse um anúncio público, recuperasse um documento ou revelasse uma verdade sobre o hotel.
 
 Isso mantém o tom jogável e evita transformar o caso em crime pesado demais.
 
@@ -199,87 +231,33 @@ No E1:
 
 No E2:
 
-- o broche/echarpe prova que alguém fabricou a presença de Helena;
 - uma marca, dobra, respingo, posição ou detalhe de fecho mostra que o objeto foi colocado depois;
-- a peça não prova que Helena estava ali; prova que alguém queria que parecesse estar.
+- a peça não prova que Helena estava ali;
+- a peça prova que alguém queria sugerir que Helena estava ali.
 
-### Documento que recontextualiza o E1
+O documento do E2 não deve explicar isso. Ele deve apresentar a informação bruta que permite essa conclusão.
 
-Documento recomendado para o E2:
-
-- uma mensagem completa ou bilhete recuperado, mostrando que Helena foi chamada para a sala de memória/suíte antes do brinde;
-- ou um registro de rouparia/serviço mostrando que a echarpe foi movimentada por outra pessoa;
-- ou uma anotação de staff indicando que o objeto foi encontrado/entregue antes do horário em que supostamente Helena o usava.
-
-O documento não deve dizer “isso prova que o objeto foi plantado”. Ele deve apresentar fato bruto que muda a leitura.
-
-### Por que o twist é justo
-
-O twist é justo se o E1 já contém sinais ambíguos:
-
-- ninguém tem visão direta confiável de Helena no momento final;
-- há mais inferência do que testemunho;
-- o objeto pessoal aparece como prova fraca;
-- registros físicos não identificam corpo/pessoa, apenas cartão, acesso ou objeto;
-- depoimentos usam verbos como “achei”, “parecia”, “vi de relance”, “pensei que era”.
-
-O twist é injusto se o E1 disser claramente que alguém viu Helena de perto no horário final e depois o E2 negar sem explicação.
-
-## Núcleo dramático provisório
+## Núcleo dramático v1
 
 ```json
 {
   "pergunta_central": "Helena saiu por vontade própria, foi retirada do jantar ou alguém fabricou sua presença no horário errado?",
-  "verdade_real": "Helena deixou o salão antes do brinde final após receber uma mensagem/bilhete que parecia vir de alguém de confiança. Sua ausência foi mascarada por um objeto pessoal e por relatos ambíguos, criando a impressão de que ela permaneceu no evento por mais tempo do que realmente permaneceu.",
+  "verdade_real": "Marta Salgado atraiu Helena para fora do salão antes do brinde final e fabricou sinais indiretos de presença para que todos acreditassem que Helena saiu voluntariamente depois da tensão pública.",
   "mentira_aparente": "Helena discutiu com alguém e abandonou o jantar por vontade própria para evitar o anúncio público da reabertura.",
-  "tema_humano": "Reputação familiar, controle da narrativa e medo de exposição pública.",
-  "motivo_emocional": "Alguém precisava impedir que Helena revelasse, durante o brinde, uma informação que mudaria o futuro do hotel e exporia uma vergonha familiar ou profissional.",
+  "tema_humano": "Memória, lealdade, reputação familiar e medo de apagamento do passado.",
+  "motivo_emocional": "Marta queria impedir que Helena anunciasse uma decisão que apagaria a promessa da família Valença aos antigos funcionários do hotel.",
   "virada_principal": "O grupo percebe que a presença de Helena no fim do jantar foi parcialmente fabricada; o objeto usado como sinal de presença não prova que ela estava ali.",
   "sensacao_final_desejada": "Os jogadores devem sentir que todos estavam olhando para a pessoa que saiu, quando a pergunta correta era: quem precisava que todos acreditassem que ela ainda estava lá?"
 }
 ```
-
-## Verdade real e mentira aparente
-
-### Verdade real provisória
-
-Helena sai do salão antes do horário que todos assumem como “última presença”. Ela é atraída para fora por uma comunicação que parece legítima. Enquanto isso, sinais sociais de presença — objeto pessoal, lugar à mesa, fala de outro convidado, movimentação no corredor — mantêm a impressão de que ela ainda circulava pelo jantar.
-
-A intenção do culpado não precisa ser “machucar Helena”. A intenção pode ser:
-
-- atrasar o anúncio;
-- impedir a leitura de um documento;
-- recuperar um objeto/carta/contrato em posse dela;
-- criar uma saída voluntária falsa;
-- fazer outra pessoa parecer responsável.
-
-### Mentira aparente
-
-Helena teria deixado o jantar por impulso após uma discussão.
-
-Essa mentira é plausível porque:
-
-- houve tensão antes do brinde;
-- ao menos uma pessoa viu alguém parecido com Helena perto do terraço;
-- o lugar dela permaneceu montado;
-- um objeto pessoal dela apareceu em local público;
-- um registro físico sugere deslocamento, mas não prova autoria.
-
-### Como a mentira deve cair
-
-O E2 deve mostrar que:
-
-- a linha do tempo dos depoimentos não fecha;
-- o objeto pessoal não prova presença;
-- o registro físico pode ser de cartão/objeto, não da pessoa;
-- alguém tinha motivo para fabricar presença e atraso;
-- a ausência de Helena no momento do brinde era útil para alguém.
 
 ## Suspeitos provisórios
 
 Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
 
 ### 1. Lívia Valença — prima e sócia minoritária
+
+Função: **red herring familiar forte**.
 
 ```json
 {
@@ -289,18 +267,20 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
   "motivo_aparente": "Queria impedir Helena de fazer o anúncio final.",
   "oportunidade_aparente": "Circulou entre salão, terraço e biblioteca durante o jantar.",
   "comportamento_estranho": "Insiste que Helena estava alterada e que saiu por vontade própria.",
-  "evidencia_contra": ["mensagem ambígua", "conhecimento da rotina familiar", "acesso ao objeto pessoal"],
-  "evidencia_que_descarta": [],
+  "evidencia_contra": ["discussão prévia", "conhecimento da tensão familiar", "interesse direto no controle do hotel"],
+  "evidencia_que_descarta": ["não tem acesso natural ao objeto no momento correto", "sua tensão explica motivo aparente, mas não o meio de fabricação da presença"],
   "curva_de_suspeita": {
     "inicio": "medio",
-    "E1": "medio-alto",
-    "E2": "alto",
-    "final": "culpada ou articuladora principal"
+    "E1": "alto",
+    "E2": "medio-baixo",
+    "final": "red herring forte"
   }
 }
 ```
 
 ### 2. Caio Fontes — gerente do hotel
+
+Função: **red herring operacional forte**.
 
 ```json
 {
@@ -310,7 +290,7 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
   "motivo_aparente": "Poderia querer evitar um anúncio que o afastaria do controle do hotel.",
   "oportunidade_aparente": "Tem acesso a chaves, staff e corredores internos.",
   "comportamento_estranho": "Tenta controlar a narrativa com discrição excessiva e orienta funcionários a não alarmarem convidados.",
-  "evidencia_contra": ["controle de acessos", "contato com recepção", "presença no corredor de serviço"],
+  "evidencia_contra": ["controle de acessos", "contato com recepção", "presença em bastidores"],
   "evidencia_que_descarta": ["registro independente o coloca resolvendo ocorrência pública em parte da janela crítica"],
   "curva_de_suspeita": {
     "inicio": "alto",
@@ -323,6 +303,8 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
 
 ### 3. Isadora Nunes — jornalista convidada
 
+Função: **red herring social/jornalístico**.
+
 ```json
 {
   "nome": "Isadora Nunes",
@@ -331,8 +313,8 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
   "motivo_aparente": "Poderia pressionar Helena ou usar o desaparecimento como furo jornalístico.",
   "oportunidade_aparente": "Foi vista perto do terraço e trocou mensagens durante o jantar.",
   "comportamento_estranho": "Anota detalhes demais e muda uma frase no depoimento.",
-  "evidencia_contra": ["anotações", "mensagens", "proximidade com Helena"],
-  "evidencia_que_descarta": ["tem prova de que buscava entrevista, não retirada; seu horário não fecha com o deslocamento físico"],
+  "evidencia_contra": ["anotações", "mensagens", "proximidade social com Helena"],
+  "evidencia_que_descarta": ["buscava entrevista, não retirada; seu horário não fecha com o deslocamento físico"],
   "curva_de_suspeita": {
     "inicio": "medio",
     "E1": "medio-alto",
@@ -344,6 +326,8 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
 
 ### 4. Renato Viana — chef/eventos
 
+Função: **red herring de serviço**.
+
 ```json
 {
   "nome": "Renato Viana",
@@ -351,7 +335,7 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
   "segredo_ou_pressao": "Teve conflito com Helena por cortes de orçamento e demissão de equipe antiga.",
   "motivo_aparente": "Tinha ressentimento e acesso ao corredor de serviço.",
   "oportunidade_aparente": "Circulou entre cozinha, copa e salão no horário crítico.",
-  "comportamento_estranho": "Diz não ter visto Helena, apesar de estar na rota provável de circulação.",
+  "comportamento_estranho": "Diz não ter visto Helena, apesar de estar em rota de circulação de equipe.",
   "evidencia_contra": ["acesso de serviço", "conflito prévio", "horário de prato final"],
   "evidencia_que_descarta": ["sua equipe confirma preparação simultânea e o item de cozinha vira descarte justo"],
   "curva_de_suspeita": {
@@ -365,21 +349,23 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
 
 ### 5. Marta Salgado — governanta antiga
 
+Função: **culpada final simpática/ambígua**.
+
 ```json
 {
   "nome": "Marta Salgado",
   "papel_publico": "Governanta antiga do hotel",
-  "segredo_ou_pressao": "Protege funcionários antigos e sabe segredos da família Valença.",
-  "motivo_aparente": "Poderia querer impedir o anúncio por lealdade ao passado do hotel.",
-  "oportunidade_aparente": "Conhece passagens, salas fechadas e rotinas de serviço.",
+  "segredo_ou_pressao": "Protege funcionários antigos e guarda documentos e memórias que a nova reabertura trata como decoração.",
+  "motivo_aparente": "Poderia querer impedir o anúncio por lealdade ao passado do hotel, mas no E1 isso ainda deve parecer apenas preocupação nostálgica.",
+  "oportunidade_aparente": "Conhece salas, rotinas, objetos, rouparia, chaves antigas e circulação de bastidores.",
   "comportamento_estranho": "Reconhece um detalhe que não deveria ter visto se estivesse onde disse estar.",
-  "evidencia_contra": ["conhecimento espacial", "acesso à rouparia/biblioteca", "depoimento cuidadoso demais"],
-  "evidencia_que_descarta": ["pode revelar uma verdade antiga sem ser autora do desaparecimento"],
+  "evidencia_contra": ["conhecimento do objeto", "acesso à sala de memória", "vínculo com promessa antiga", "capacidade de movimentar a echarpe/broche sem chamar atenção"],
+  "evidencia_que_descarta": [],
   "curva_de_suspeita": {
     "inicio": "baixo",
     "E1": "medio",
-    "E2": "medio",
-    "final": "testemunha-chave ou cúmplice involuntária"
+    "E2": "alto",
+    "final": "culpada final simpática/ambígua"
   }
 }
 ```
@@ -396,9 +382,10 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
     "depoimentos curtos",
     "registro de cartão/elevador",
     "mensagens internas",
-    "objeto pessoal ou anotação",
+    "descrição da echarpe/broche",
     "relatório de recepção",
-    "relatório de serviço/circulação"
+    "relatório de serviço/circulação",
+    "documento familiar sobre promessa antiga"
   ],
   "restricao": "Não usar mapa/planta neste caso.",
   "risco": "Virar puzzle de horários se os documentos não tiverem emoção e comportamento humano."
@@ -422,10 +409,16 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
     "risco": "Virar planilha de horário se não houver motivo emocional claro."
   },
   {
-    "momento": "O grupo reinterpreta o objeto pessoal de Helena: ele não prova que ela esteve no local; prova que alguém queria sugerir isso.",
-    "documentos": ["objeto pessoal", "depoimento", "mensagem de bastidor"],
+    "momento": "O grupo reinterpreta a echarpe/broche de Helena: o objeto não prova que ela esteve no local; prova que alguém queria sugerir isso.",
+    "documentos": ["descrição da echarpe/broche", "depoimento", "mensagem de bastidor", "registro de rouparia/serviço"],
     "emocao": "recontextualização",
     "risco": "Se o objeto for óbvio demais, vira pista única."
+  },
+  {
+    "momento": "O grupo entende o motivo de Marta: não dinheiro, mas preservação distorcida da memória do hotel e da promessa aos antigos funcionários.",
+    "documentos": ["documento familiar", "depoimento de Marta", "anúncio de reabertura"],
+    "emocao": "virada emocional",
+    "risco": "Se parecer confissão, perde força investigativa."
   }
 ]
 ```
@@ -443,9 +436,9 @@ Não usar 3 envelopes neste caso. O objetivo do canônico Intermediário é cria
     "funcao": "hipótese forte, mas incompleta",
     "conclusao_esperada": "Helena provavelmente não saiu simplesmente por vontade própria; a linha do tempo do jantar tem contradições e alguém manipulou sinais de presença.",
     "nao_precisa_descobrir_ainda": [
-      "quem arquitetou a manipulação",
-      "motivo completo",
-      "significado final do objeto pessoal",
+      "que Marta é a responsável",
+      "motivo completo ligado à promessa antiga",
+      "significado final da echarpe/broche",
       "qual documento do E2 recontextualiza o anúncio"
     ],
     "pilares_obrigatorios": [
@@ -455,6 +448,7 @@ Não usar 3 envelopes neste caso. O objetivo do canônico Intermediário é cria
     ],
     "riscos": [
       "grupo acusar o gerente cedo demais",
+      "grupo acusar Lívia cedo demais",
       "grupo tratar o desaparecimento como saída voluntária sem investigar",
       "grupo se perder em horários sem perceber o drama"
     ]
@@ -462,7 +456,7 @@ Não usar 3 envelopes neste caso. O objetivo do canônico Intermediário é cria
   {
     "envelope": "E2",
     "funcao": "recontextualização e solução final",
-    "conclusao_esperada": "A presença final de Helena foi fabricada para atrasar ou impedir um anúncio; a pessoa responsável usou conhecimento social e operacional do hotel para criar uma saída voluntária falsa.",
+    "conclusao_esperada": "A presença final de Helena foi fabricada por Marta para impedir um anúncio que apagaria a promessa da família Valença aos antigos funcionários do hotel.",
     "pilares_obrigatorios": [
       "motivo humano",
       "meio de manipulação",
@@ -471,7 +465,7 @@ Não usar 3 envelopes neste caso. O objetivo do canônico Intermediário é cria
     ],
     "riscos": [
       "E2 apenas confirmar E1 sem virada",
-      "culpado ficar óbvio por excesso de presença documental",
+      "Marta ficar óbvia por excesso de nostalgia documental",
       "documentos explicarem demais a solução"
     ]
   }
@@ -502,11 +496,11 @@ Não é blueprint ainda. É uma lista de funções documentais.
 |---|---|---|---|
 | E2-01 | depoimento revisado ou complemento | recontextualização | muda leitura de E1 |
 | E2-02 | mensagem completa ou origem do bilhete | pista principal | revela manipulação sem checklist |
-| E2-03 | registro de bastidor/serviço | confirmação | confirma meio físico sem mapa |
-| E2-04 | documento familiar/contrato/anúncio | motivo | explica por que impedir o brinde importava |
+| E2-03 | registro de rouparia/serviço | confirmação | mostra movimentação da echarpe/broche sem mapa |
+| E2-04 | documento familiar/promessa antiga | motivo | explica por que impedir o brinde importava |
 | E2-05 | reinterpretação da echarpe/broche | virada | mostra que o objeto foi sinal fabricado de presença |
 | E2-06 | depoimento de descarte | descarta red herring forte |
-| E2-07 | evidência final | confirmação independente | fecha autoria/motivo |
+| E2-07 | evidência final | confirmação independente | fecha autoria/motivo sem confissão direta |
 | E2-08 | dicas contextuais/guia | separado | não entra como documento de jogador se for dica/guia |
 
 ## Riscos de obviedade
@@ -515,8 +509,13 @@ Não é blueprint ainda. É uma lista de funções documentais.
 [
   {
     "risco": "Lívia concentrar motivo familiar e acesso demais desde o E1.",
-    "impacto": "Jogadores acusam a culpada cedo demais.",
-    "mitigacao": "Dar motivos fortes também ao gerente, chef e jornalista; segurar a prova de motivo familiar para E2."
+    "impacto": "Jogadores acusam Lívia cedo demais.",
+    "mitigacao": "Fazer Lívia ser forte como suspeita, mas não ter meio concreto de movimentar a echarpe/broche."
+  },
+  {
+    "risco": "Marta ficar óbvia por nostalgia e acesso a objetos antigos.",
+    "impacto": "Jogadores chegam à culpada antes da virada.",
+    "mitigacao": "No E1, Marta deve parecer testemunha nostálgica e útil, não suspeita central. O motivo real fica para E2."
   },
   {
     "risco": "Objeto pessoal parecer obviamente plantado.",
@@ -561,7 +560,7 @@ Não é blueprint ainda. É uma lista de funções documentais.
     "mitigacao": "Ter confirmação independente em registro de acesso ou serviço."
   },
   {
-    "risco": "Motivo familiar parecer melodrama sem evidência.",
+    "risco": "Motivo de Marta parecer melodrama sem evidência.",
     "impacto": "Solução parece novela e não dedução.",
     "mitigacao": "Motivo deve aparecer por documento concreto no E2, não por confissão."
   },
@@ -577,12 +576,11 @@ Não é blueprint ainda. É uma lista de funções documentais.
 
 Antes de gerar JSON, ainda falta decidir:
 
-1. culpado final: manter Lívia como articuladora principal ou escolher outro suspeito;
-2. localização exata onde Helena fica temporariamente isolada: suíte reservada, sala de memória, biblioteca antiga ou área de serviço;
-3. detalhe físico da echarpe/broche que prova movimentação posterior sem entregar cedo demais;
-4. documento específico do E2 que revela o motivo familiar/profissional;
-5. tom final: elegante/social, familiar sombrio ou suspense leve;
-6. se haverá criança no público-alvo de teste ou se este canônico será mais adulto.
+1. localização exata onde Helena fica temporariamente isolada: suíte reservada, sala de memória, biblioteca antiga ou área de serviço;
+2. detalhe físico da echarpe/broche que prova movimentação posterior sem entregar cedo demais;
+3. documento específico do E2 que revela a promessa antiga/futuro da ala de funcionários;
+4. tom final: elegante/social, familiar sombrio ou suspense leve;
+5. se haverá criança no público-alvo de teste ou se este canônico será mais adulto.
 
 Decisões já tomadas:
 
@@ -590,7 +588,9 @@ Decisões já tomadas:
 - **não usar mapa/planta** neste caso;
 - plot twist com **presença final fabricada**;
 - Helena **viva**, sem morte ou violência gráfica;
-- objeto de dupla interpretação recomendado: **echarpe com broche antigo da família Valença**.
+- objeto de dupla interpretação recomendado: **echarpe com broche antigo da família Valença**;
+- culpada final: **Marta Salgado**;
+- Lívia Valença: **red herring familiar forte**.
 
 ## Critério de aprovação do plano
 
