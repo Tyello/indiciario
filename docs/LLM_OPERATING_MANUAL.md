@@ -14,9 +14,10 @@ Antes de alterar qualquer arquivo, leia nesta ordem:
 2. `README.md`
 3. `docs/ESTADO_ATUAL.md`
 4. `docs/DIRETRIZES_EDITORIAIS.md`
-5. `docs/CASE_DESIGN_PIPELINE.md`, se a tarefa envolver criação ou revisão estrutural de caso
-6. `docs/BLUEPRINT_AUTHORING_GUIDE.md`, se a tarefa envolver blueprint ou novo caso
-7. `examples/caso_canonico_iniciante.json`, se a tarefa tocar no caso canônico
+5. `docs/ANTI_OBVIEDADE.md`
+6. `docs/CASE_DESIGN_PIPELINE.md`, se a tarefa envolver criação ou revisão estrutural de caso
+7. `docs/BLUEPRINT_AUTHORING_GUIDE.md`, se a tarefa envolver blueprint ou novo caso
+8. `examples/caso_canonico_iniciante.json`, se a tarefa tocar no caso canônico
 
 Se a tarefa envolver revisão de PDF gerado, use também o feedback visual/playtest fornecido pelo usuário como fonte prioritária.
 

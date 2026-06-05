@@ -282,6 +282,7 @@ class BlueprintValidator:
         self._verificar_autossuficiencia()
         self._verificar_playtest_metrics()
         self._verificar_conteudo_schema()
+        self._verificar_obviedade()
         self._calcular_risco()
         self._gerar_resumo()
         return self.resultado
@@ -490,6 +491,8 @@ class BlueprintValidator:
 
     def _verificar_contratos_evidencia(self) -> None:
         ids_vistos: set[str] = set()
+        usos_obrigatorios_por_doc: dict[str, set[str]] = {}
+        limite_usos_obrigatorios = 3
         for contrato in self.bp.contratos_evidencia:
             if not contrato.id:
                 self.resultado.adicionar(Erro("CE_001", Severidade.CRITICO, "Contrato de evidência sem id."))
@@ -503,6 +506,9 @@ class BlueprintValidator:
                 self.resultado.adicionar(Erro(
                     "CE_008", Severidade.CRITICO, f"Contrato obrigatório '{contrato.id}' está incompleto."
                 ))
+            if contrato.obrigatoria_para_avanco:
+                for doc_codigo in {codigo for codigo in [prova, confirmacao] if codigo}:
+                    usos_obrigatorios_por_doc.setdefault(doc_codigo, set()).add(contrato.id)
             if not prova or prova not in self._codigos_docs:
                 self.resultado.adicionar(Erro(
                     "CE_003", Severidade.CRITICO, f"prova_principal inexistente no contrato '{contrato.id}': {prova}."
@@ -542,6 +548,19 @@ class BlueprintValidator:
             if contrato.obrigatoria_para_avanco and not contrato.acao_esperada_jogador.strip():
                 self.resultado.adicionar(Erro(
                     "CE_010", Severidade.MODERADO, f"Contrato obrigatório '{contrato.id}' não define ação esperada do jogador."
+                ))
+
+        for doc_codigo, contratos_ids in sorted(usos_obrigatorios_por_doc.items()):
+            if len(contratos_ids) > limite_usos_obrigatorios:
+                self.resultado.adicionar(Erro(
+                    "CE_011",
+                    Severidade.AVISO,
+                    (
+                        f"Documento '{doc_codigo}' aparece em {len(contratos_ids)} contratos obrigatórios; "
+                        "verifique se ele não concentra progressão demais."
+                    ),
+                    detalhe=f"Contratos: {', '.join(sorted(contratos_ids))}",
+                    documento=doc_codigo,
                 ))
 
     def _verificar_grafo_pistas(self) -> None:
@@ -1120,6 +1139,40 @@ class BlueprintValidator:
                         ),
                         documento=doc.codigo,
                     ))
+
+    def _verificar_obviedade(self) -> None:
+        """Integra o guardrail anti-obviedade ao resultado do validator."""
+        try:
+            if __package__:
+                obviousness_module = importlib.import_module(".obviousness_checker", __package__)
+            else:
+                obviousness_module = importlib.import_module("obviousness_checker")
+            check_obviousness = obviousness_module.check_obviousness
+            obviousness_severity = obviousness_module.ObviousnessSeverity
+            report = check_obviousness(self.bp.model_dump(mode="json"))
+        except Exception as exc:  # noqa: BLE001 - validator deve reportar falha interna sem traceback.
+            self.resultado.adicionar(Erro(
+                codigo="OBV_CHECKER_001",
+                severidade=Severidade.CRITICO,
+                mensagem="Falha interna ao executar o checker anti-obviedade.",
+                detalhe=str(exc),
+            ))
+            return
+
+        severity_map = {
+            obviousness_severity.CRITICAL: Severidade.CRITICO,
+            obviousness_severity.MODERATE: Severidade.MODERADO,
+            obviousness_severity.WARNING: Severidade.AVISO,
+        }
+        for finding in report.findings:
+            detail_parts = [part for part in [finding.detail, finding.path] if part]
+            self.resultado.adicionar(Erro(
+                codigo=finding.code,
+                severidade=severity_map[finding.severity],
+                mensagem=finding.message,
+                detalhe=" | ".join(detail_parts) if detail_parts else None,
+                documento=finding.document,
+            ))
 
     def _calcular_risco(self) -> None:
         criticos = len(self.resultado.criticos)

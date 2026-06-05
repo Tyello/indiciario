@@ -2,7 +2,7 @@
 
 Este guia define o contrato editorial mínimo para escrever blueprints de casos no Indiciário.
 
-Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md`, `docs/DIRETRIZES_EDITORIAIS.md` e `docs/LLM_OPERATING_MANUAL.md`. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
+Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md`, `docs/DIRETRIZES_EDITORIAIS.md`, `docs/ANTI_OBVIEDADE.md` e `docs/LLM_OPERATING_MANUAL.md`. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
 
 Nota de schema: `pergunta_publica` e `objetivos_por_envelope` são contratos editoriais de planejamento. Eles ainda não são campos schema-enforced do `Blueprint`. Enquanto o schema não for expandido, esses conceitos devem aparecer refletidos em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
 
@@ -131,6 +131,19 @@ Ao escrever o blueprint, toda motivação central deve indicar a consequência a
 - rompimento familiar com efeito prático.
 
 Sem consequência atual, o motivo vira lore e não urgência investigativa.
+
+## Guardrail anti-obviedade no blueprint
+
+Ao escrever `documentos[].conteudo`, trate `docs/ANTI_OBVIEDADE.md` como contrato obrigatório de evidência bruta. O checker automático integrado ao validator (`generator/obviousness_checker.py`) sinaliza confissões, linguagem conclusiva, chat confessional, depoimento onisciente, vazamento de campos internos e nome de culpado perto de ação incriminadora.
+
+Isso afeta principalmente:
+
+- `conteudo`, que vira PDF de jogador;
+- `emocao_esperada` em E1, que não deve antecipar solução;
+- `objetivo_narrativo`, que é interno, mas não deve contaminar o tom com culpado + ação;
+- logs/sistemas/escalas em Intermediário ou superior, que devem preferir códigos operacionais.
+
+Se o validator emitir `OBV_*`, corrija o documento para sugerir por evidência, não para concluir por texto.
 
 ## Recados, bilhetes e informação já conhecida
 
