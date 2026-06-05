@@ -1793,14 +1793,17 @@
     "locais": []
   },
   "playtest": {
-    "status": "playtestado_revisao_pos_playtest",
+    "status": "validado_pos_playtest_refinamento",
     "rodadas": 1,
     "observacoes": [
       "Playtest com Marcelo (36), Gabi (35) e Marina (11), duração total aproximada de 100 minutos.",
       "Grupo gostou dos documentos e do plot; o caso funcionou como história.",
-      "Falha principal: não ficou claro o que resolver no E1, quando receber E2 e quais perguntas responder no E2.",
+      "Falha principal identificada no playtest: não ficou claro o que resolver no E1, quando receber E2 e quais perguntas responder no E2.",
       "Revisão pós-playtest reforçou pergunta pública, resposta parcial de E1, critério de progressão, motivação da ala antiga e dicas contextuais.",
-      "Decisão mantida: caso sem mapa; orientação espacial permanece textual."
+      "Refinamento diegético posterior consolidou a naturalidade dos documentos sem alterar a solução canônica.",
+      "Decisão mantida: caso sem mapa; orientação espacial permanece textual.",
+      "Status final: régua canônica Intermediária validada após playtest e refinamento editorial/diegético.",
+      "Baseline de geração do pacote: py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict."
     ]
   },
   "versao": "0.1",

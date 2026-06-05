@@ -6,6 +6,18 @@ Arquivo do caso: `examples/caso_canonico_intermediario.json`
 
 Referência de playtest: `docs/playtests/INTERMEDIARIO_RODADA_01.md`
 
+## Status final consolidado
+
+Status: **validado como régua canônica Intermediária**.
+
+Após este refinamento, o Hotel Aurora passa a ser o baseline canônico Intermediário do Indiciário. O objetivo agora é preservar esta versão como régua de comparação, não abrir novo ciclo de alterações narrativas sem evidência nova de playtest, PDF ou validação.
+
+Baseline de geração do pacote:
+
+```bash
+py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
+```
+
 ## Contexto
 
 Após o playtest do Intermediário e uma nova geração visual do pacote, o caso mostrou boa aceitação de plot e documentos, mas ainda tinha documentos que pareciam escritos para orientar o jogador, não documentos que existiriam naturalmente no hotel.
@@ -140,9 +152,9 @@ A versão mais forte do Hotel Aurora é:
 7. O rascunho do brinde mostra que Helena trataria a ala como memória/expansão.
 8. Marta age para impedir que a memória viva vire decoração.
 
-## Checklist específico para nova geração do pacote
+## Checklist específico para baseline de pacote
 
-Antes de novo playtest, revisar visualmente:
+Para manter o baseline Intermediário validado, revisar visualmente em novas gerações:
 
 1. `E1-02` não contém nota administrativa da ala antiga.
 2. `E1-03` não faz Renato assinar a própria pista.
@@ -155,9 +167,9 @@ Antes de novo playtest, revisar visualmente:
 9. Chats não duplicam horário no texto.
 10. Contratos, linha do tempo e dicas apontam para os documentos corretos depois da redistribuição.
 
-## Impacto esperado no próximo playtest
+## Impacto consolidado após refinamento
 
-A experiência deve ficar mais natural porque:
+A experiência validada fica mais natural porque:
 
 - o grupo não recebe explicação administrativa cedo demais;
 - Renato continua distraindo, mas sem parecer artificial;

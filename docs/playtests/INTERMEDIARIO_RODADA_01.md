@@ -2,6 +2,18 @@
 
 Caso: **O Último Brinde do Hotel Aurora**
 
+## Status final após refinamento
+
+Status: **validado como régua canônica Intermediária após playtest, refinamentos editoriais e refinamento diegético**.
+
+Esta rodada deixou de ser uma pendência aberta: os problemas P0 foram incorporados ao blueprint e ao guia operacional do Hotel Aurora. O registro histórico abaixo permanece como diagnóstico da rodada, mas a versão consolidada do caso é `examples/caso_canonico_intermediario.json`.
+
+Baseline de pacote consolidado:
+
+```bash
+py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
+```
+
 Arquivo do caso: `examples/caso_canonico_intermediario.json`
 
 Data de registro: 2026-06-05
@@ -225,7 +237,7 @@ Reescrever o guia com:
 
 ```json
 {
-  "status": "playtestado_com_ajustes",
+  "status": "validado_pos_playtest_refinamento",
   "rodadas": 1,
   "tempo_real_medio": 100,
   "jogadores_teste": 3,
@@ -255,6 +267,8 @@ Reescrever o guia com:
     "guia do facilitador",
     "lógica da pasta Aurora",
     "orientação espacial textual"
-  ]
+  ],
+  "status_final": "régua canônica Intermediária validada",
+  "baseline_pacote": "py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict"
 }
 ```

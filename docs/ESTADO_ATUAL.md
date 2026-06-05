@@ -69,17 +69,20 @@ Problemas já tratados e que não devem ser reabertos sem evidência nova:
 - E2 com mapa comparativo explícito de propostas;
 - assinaturas puramente textuais.
 
-## Caso canônico atual
+## Réguas canônicas atuais
 
-O caso canônico atual é:
+O projeto agora mantém duas réguas canônicas por dificuldade:
+
+### Iniciante
 
 - **O Desvio da Reserva Mirante**
 - Arquivo: `examples/caso_canonico_iniciante.json`
 - Dificuldade editorial atual: **Iniciante**
+- Status: **régua canônica Iniciante**
 
 O caso foi rebaixado de Intermediário para Iniciante por decisão editorial e confirmado pelo primeiro playtest como fácil demais para Intermediário.
 
-Papel atual do caso:
+Papel atual do Mirante:
 
 - régua canônica Iniciante;
 - referência técnica de build/package;
@@ -87,7 +90,29 @@ Papel atual do caso:
 - benchmark mínimo de qualidade visual/documental;
 - exemplo de experiência introdutória.
 
-Não tentar transformar o Mirante em Intermediário por ajustes incrementais. O próximo caso Intermediário deve nascer de nova arquitetura investigativa.
+Não tentar transformar o Mirante em Intermediário por ajustes incrementais.
+
+### Intermediário
+
+- **O Último Brinde do Hotel Aurora**
+- Arquivo: `examples/caso_canonico_intermediario.json`
+- Dificuldade editorial atual: **Intermediário**
+- Status: **régua canônica Intermediária validada após playtest e refinamento**
+
+O Hotel Aurora passou por playtest, refinamentos editoriais e refinamento diegético. Para fins de régua canônica Intermediária, considerar o caso validado.
+
+Papel atual do Hotel Aurora:
+
+- régua canônica Intermediária validada;
+- referência de progressão em 2 envelopes com recontextualização forte;
+- referência de guia do facilitador operacional pós-playtest;
+- baseline de geração do pacote Intermediário.
+
+Baseline de geração registrado:
+
+```bash
+py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
+```
 
 ## Resultado do primeiro playtest
 
@@ -106,15 +131,20 @@ Interpretação de produto:
 - o framework consegue gerar material atraente;
 - o risco principal agora é gerar documentos bonitos para mistérios fracos, óbvios ou sem progressão operacional;
 - bons documentos não bastam se faltar pergunta pública, objetivo por envelope, critério de avanço, motivação atual e guia do facilitador operacional;
-- o próximo foco deve ser pipeline de design de caso e criação planejada do canônico Intermediário.
+- o pipeline de design de caso deve usar Mirante como régua Iniciante e Hotel Aurora como régua Intermediária validada.
 
 ## Decisões recentes relevantes
 
-### Caso canônico iniciante
+### Réguas canônicas
 
-O antigo caso canônico intermediário foi renomeado/rebaixado para `caso_canonico_iniciante.json`.
+O antigo caso canônico intermediário foi renomeado/rebaixado para `caso_canonico_iniciante.json` e permanece como régua Iniciante.
 
-A partir de agora, referências canônicas devem apontar para esse arquivo, salvo quando o objetivo for explicitamente criar uma nova régua Intermediária.
+O novo caso `examples/caso_canonico_intermediario.json` — **O Último Brinde do Hotel Aurora** — passou por playtest e refinamentos, e agora é a régua Intermediária validada.
+
+A partir de agora, referências canônicas devem diferenciar explicitamente:
+
+- `examples/caso_canonico_iniciante.json` para Iniciante;
+- `examples/caso_canonico_intermediario.json` para Intermediário.
 
 ### Assinaturas e rubricas
 
@@ -283,7 +313,7 @@ Não priorizar neste momento:
 - agentes autônomos;
 - IA gerando imagens.
 
-Antes disso, validar que o framework gera casos realmente interessantes, intrigantes e divertidos.
+Antes disso, usar os baselines Iniciante e Intermediário para validar que o framework continua gerando casos interessantes, intrigantes e divertidos.
 
 ## Comandos úteis
 
@@ -297,12 +327,14 @@ Validator strict:
 
 ```bash
 python generator/validator.py examples/caso_canonico_iniciante.json --strict
+python -m generator.validator examples/caso_canonico_intermediario.json --strict
 ```
 
 Build do pacote:
 
 ```bash
 python -m scripts.build_package examples/caso_canonico_iniciante.json --output output --strict
+py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
 ```
 
 Instalação do browser Playwright, se necessário:
