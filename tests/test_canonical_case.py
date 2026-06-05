@@ -267,3 +267,73 @@ def test_caso_canonico_documentos_de_jogador_nao_tem_handholding_comercial():
         "aprovado por otávio salles às 16h05",
     ]:
         assert forbidden not in text
+
+
+INTERMEDIATE_CASE = ROOT / "examples" / "caso_canonico_intermediario.json"
+
+
+def _raw_intermediate_text() -> str:
+    return INTERMEDIATE_CASE.read_text(encoding="utf-8")
+
+
+def _intermediate_blueprint() -> Blueprint:
+    return Blueprint(**json.loads(_raw_intermediate_text()))
+
+
+def test_caso_canonico_intermediario_existe_e_valida_strict():
+    assert INTERMEDIATE_CASE.exists()
+
+    resultado = BlueprintValidator(_intermediate_blueprint(), strict=True).validar()
+
+    assert resultado.criticos == []
+    assert resultado.moderados == []
+    assert resultado.pode_gerar is True
+
+
+def test_caso_canonico_intermediario_metadados_publicos():
+    blueprint = _intermediate_blueprint()
+
+    assert blueprint.titulo == "O Último Brinde do Hotel Aurora"
+    assert blueprint.dificuldade.value == "intermediario"
+    assert blueprint.formato_envelopes == 2
+    assert blueprint.modo_validacao.value == "offline_puro"
+    assert len({doc.envelope for doc in blueprint.documentos}) == 2
+    assert len([doc for doc in blueprint.documentos if doc.envelope == "E1"]) == 9
+    assert len([doc for doc in blueprint.documentos if doc.envelope == "E2"]) == 8
+
+
+def test_caso_canonico_intermediario_nao_usa_mapa_ou_planta():
+    blueprint = _intermediate_blueprint()
+
+    assert all(doc.tipo.value != "mapa" for doc in blueprint.documentos)
+    assert blueprint.visual_procedural is not None
+    assert blueprint.visual_procedural.mapas == []
+    assert "planta" not in _raw_intermediate_text().lower()
+
+
+def test_caso_canonico_intermediario_nao_substitui_iniciante():
+    iniciante = _blueprint()
+    intermediario = _intermediate_blueprint()
+
+    assert iniciante.titulo == "O Desvio da Reserva Mirante"
+    assert iniciante.dificuldade.value == "iniciante"
+    assert intermediario.titulo != iniciante.titulo
+
+
+def test_caso_canonico_intermediario_jogador_sem_voz_de_autor():
+    blueprint = _intermediate_blueprint()
+    forbidden = [
+        "compare com",
+        "a confirmação depende",
+        "isso prova que",
+        "não decide sozinho",
+        "a solução é",
+        "o culpado",
+        "red herring",
+        "gabarito",
+    ]
+
+    for documento in blueprint.documentos:
+        texto = f"{documento.titulo} {documento.conteudo}".lower()
+        for termo in forbidden:
+            assert termo not in texto, documento.codigo

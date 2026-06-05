@@ -1,0 +1,1677 @@
+{
+  "titulo": "O Último Brinde do Hotel Aurora",
+  "subtitulo": "Desaparecimento ambíguo em jantar fechado de reabertura",
+  "genero": "mistério social investigativo",
+  "tom": "suspense leve, elegante e humano",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "intermediario",
+  "tempo_estimado_min": 95,
+  "numero_jogadores": "3 a 5",
+  "formato_envelopes": 2,
+  "premissa": "Durante um jantar fechado de reabertura do histórico Hotel Aurora, a anfitriã Helena Valença não retorna para o brinde final. Em meio a tensões familiares, bastidores de serviço e registros incompletos, o grupo precisa entender se a ausência foi voluntária, encoberta ou construída por sinais ambíguos.",
+  "verdade_real": "Marta Salgado atraiu Helena Valença para a sala de memória antes do brinde final usando a expectativa criada pela pasta Aurora e pela carta familiar antiga. Enquanto Helena ficou temporariamente isolada e sem retornar ao salão, Marta manipulou sinais indiretos de presença, incluindo a echarpe com broche e registros ambíguos de circulação, para fazer o jantar acreditar que Helena ainda estava por perto e depois teria saído por vontade própria.",
+  "executor_id": "02",
+  "planejador_id": "02",
+  "beneficiario_id": "02",
+  "motivacao": "Marta queria impedir que a reabertura apagasse a promessa feita aos antigos funcionários e transformasse a ala histórica em peça comercial sem memória.",
+  "metodo_ocultacao": "Convocação discreta por mensagem ligada ao discurso, isolamento temporário na sala de memória e fabricação de presença por objeto pessoal, chave antiga e percepções de relance.",
+  "erro_que_permite_descobrir": "A presença final de Helena depende de sinais indiretos; registros posteriores mostram que objeto, chave e percepção visual não pertencem necessariamente ao mesmo deslocamento.",
+  "cadeia_causal": [
+    "Helena prepara um brinde que toca na ala antiga e na memória dos funcionários.",
+    "Marta descobre a tensão entre discurso público, pasta Aurora e promessa familiar.",
+    "Helena deixa o salão antes da janela assumida como presença final.",
+    "Sinais sociais e objetos mantêm a impressão de que Helena está próxima do terraço.",
+    "Registros de E2 revelam a origem humana da manipulação e limitam os falsos caminhos."
+  ],
+  "personagens": [
+    {
+      "id": "01",
+      "nome": "Helena Valença",
+      "funcao": "Anfitriã da reabertura e herdeira majoritária",
+      "papel": "beneficiario",
+      "suspeita_aparente": "Sua ausência parece uma saída voluntária após tensão pública.",
+      "verdade": "Vítima viva do isolamento temporário e centro da decisão anunciada.",
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-02",
+        "E2-04"
+      ],
+      "assinatura": {
+        "estilo": "formal",
+        "rubrica_estilo": "fluida",
+        "legibilidade": "alta",
+        "ornamento": "medio",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "alta",
+        "variacao": 11
+      }
+    },
+    {
+      "id": "02",
+      "nome": "Marta Salgado",
+      "funcao": "Governanta antiga do Hotel Aurora",
+      "papel": "executor",
+      "suspeita_aparente": "Conhece bastidores, objetos de acervo e chaves antigas, mas no início parece apenas preservar a rotina do hotel.",
+      "verdade": "Responsável por tirar Helena da vista pública e manipular sinais sociais de presença.",
+      "documento_ancoragem": [
+        "E1-06",
+        "E2-03",
+        "E2-07"
+      ],
+      "assinatura": {
+        "estilo": "administrativa",
+        "rubrica_estilo": "seca",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "forte",
+        "fluidez": "media",
+        "variacao": 4
+      }
+    },
+    {
+      "id": "03",
+      "nome": "Lívia Valença",
+      "funcao": "Prima de Helena e sócia minoritária",
+      "papel": "red_herring",
+      "suspeita_aparente": "Discutiu com Helena e tinha interesse direto no rumo da reabertura.",
+      "verdade": "Pressionou Helena publicamente, mas não executou a manipulação da noite.",
+      "documento_ancoragem": [
+        "E1-02",
+        "E1-05",
+        "E2-06"
+      ],
+      "assinatura": {
+        "estilo": "leve",
+        "rubrica_estilo": "monograma",
+        "legibilidade": "media",
+        "ornamento": "alto",
+        "inclinacao": "direita",
+        "pressao": "leve",
+        "fluidez": "alta",
+        "variacao": 8
+      }
+    },
+    {
+      "id": "04",
+      "nome": "Caio Fontes",
+      "funcao": "Gerente geral do hotel",
+      "papel": "red_herring",
+      "suspeita_aparente": "Controla chaves, recepção e comunicação de bastidores.",
+      "verdade": "Tentou preservar a imagem do evento, mas uma ocorrência pública limita sua janela de ação.",
+      "documento_ancoragem": [
+        "E1-04",
+        "E1-07",
+        "E2-06"
+      ],
+      "assinatura": {
+        "estilo": "administrativa",
+        "rubrica_estilo": "administrativa",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "fluidez": "baixa",
+        "variacao": 6
+      }
+    },
+    {
+      "id": "05",
+      "nome": "Isadora Nunes",
+      "funcao": "Jornalista convidada",
+      "papel": "red_herring",
+      "suspeita_aparente": "Buscava declaração exclusiva e foi vista perto do terraço.",
+      "verdade": "Seguia pauta própria, sem participação no desaparecimento.",
+      "documento_ancoragem": [
+        "E1-02",
+        "E1-08",
+        "E2-01"
+      ],
+      "assinatura": {
+        "estilo": "curta",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "medio",
+        "inclinacao": "esquerda",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": 13
+      }
+    },
+    {
+      "id": "06",
+      "nome": "Renato Viana",
+      "funcao": "Chef responsável pelo jantar",
+      "papel": "red_herring",
+      "suspeita_aparente": "Teve atrito com Helena e circulou pelo corredor de serviço.",
+      "verdade": "Sua equipe estava presa ao serviço de sobremesa durante parte decisiva da janela.",
+      "documento_ancoragem": [
+        "E1-03",
+        "E1-04",
+        "E2-06"
+      ],
+      "assinatura": {
+        "estilo": "comercial",
+        "rubrica_estilo": "fluida",
+        "legibilidade": "baixa",
+        "ornamento": "medio",
+        "inclinacao": "direita",
+        "pressao": "forte",
+        "fluidez": "alta",
+        "variacao": 2
+      }
+    },
+    {
+      "id": "07",
+      "nome": "Otto Almeida",
+      "funcao": "Investidor convidado e narrador da solicitação inicial",
+      "papel": "narrador",
+      "suspeita_aparente": "Insistiu para formalizar a ocorrência antes de chamar imprensa externa.",
+      "verdade": "Convoca a investigação interna para proteger o evento e localizar Helena.",
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-02"
+      ],
+      "assinatura": {
+        "estilo": "formal",
+        "rubrica_estilo": "seca",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": 9
+      }
+    }
+  ],
+  "documentos": [
+    {
+      "codigo": "E1-01",
+      "titulo": "Carta de abertura do jantar Aurora",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "entrada elegante com tensão discreta",
+      "objetivo_narrativo": "Apresentar o evento, o desaparecimento ambíguo e a necessidade de organizar documentos sem entregar interpretação.",
+      "pistas_contidas": [
+        "jantar fechado",
+        "brinde final interrompido",
+        "Helena ausente"
+      ],
+      "confirma": [
+        "E1-02",
+        "E1-03"
+      ],
+      "confirmado_por": [
+        "E2-04"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Hotel Aurora",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Reabertura — Arquivo de Mesa",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 118 — Centro Histórico",
+        "CONTATO": "arquivo@aurora.local | ramal interno 214",
+        "CNPJ": "Aurora Administração Hoteleira Ltda. — CNPJ 18.045.991/0001-72",
+        "COR_TOPO": "#8f5b3e",
+        "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
+        "SAUDACAO": "Aos participantes da apuração interna",
+        "ASSUNTO": "AUR-1705/26 — Abertura de arquivo do jantar",
+        "CORPO_CARTA": "<p>Durante o jantar fechado de reabertura do Hotel Aurora, a anfitriã Helena Valença não retornou ao salão no horário previsto para o brinde final.</p><p>Os convidados permaneceram no andar social enquanto a gerência reuniu registros de mesa, serviço, recepção e declarações iniciais. O material deste envelope corresponde aos documentos disponíveis antes da varredura completa dos bastidores.</p><p>Locais citados nos registros: salão de jantar, terraço envidraçado, corredor de serviço, copa de apoio, sala de memória, recepção do andar, elevador social, escada de serviço e suíte reservada.</p>",
+        "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
+        "ASSINATURA_CURSIVA": "Otto Almeida",
+        "NOME_ASSINANTE": "Otto Almeida",
+        "CARGO_ASSINANTE": "Convidado investidor e solicitante do arquivo",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Abertura de arquivo do j",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "07",
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
+      }
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "Lista de convidados e lugares marcados",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "orientação social do jantar",
+      "objetivo_narrativo": "Dar nomes, papéis e posições sociais do jantar usando linguagem natural em vez de mapa.",
+      "pistas_contidas": [
+        "lugares marcados",
+        "proximidades sociais",
+        "cadeiras mantidas"
+      ],
+      "confirma": [
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E2-01",
+        "E2-06"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Hotel Aurora",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Reabertura — Arquivo de Mesa",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 118 — Centro Histórico",
+        "CONTATO": "arquivo@aurora.local | ramal interno 214",
+        "CNPJ": "Aurora Administração Hoteleira Ltda. — CNPJ 18.045.991/0001-72",
+        "COR_TOPO": "#8f5b3e",
+        "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
+        "SAUDACAO": "Registro interno",
+        "ASSUNTO": "AUR-MESA-17 — Lugares marcados",
+        "CORPO_CARTA": "<p><strong>Mesa presidencial:</strong> Helena Valença ao centro; Lívia Valença à direita; Otto Almeida à esquerda; Isadora Nunes no canto voltado ao terraço.</p><p><strong>Mesa de serviço visível:</strong> Caio Fontes permaneceu entre recepção do andar e salão; Marta Salgado coordenou enxoval, sala de memória e apoio a convidados antigos; Renato Viana entrou apenas para apresentação do menu.</p><p><strong>Observação da recepção:</strong> o lugar de Helena continuou montado até 21h40, com taça limpa e guardanapo dobrado. A echarpe vinho foi citada por dois convidados como peça vista perto do terraço, sempre de passagem.</p>",
+        "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
+        "ASSINATURA_CURSIVA": "Caio Fontes",
+        "NOME_ASSINANTE": "Caio Fontes",
+        "CARGO_ASSINANTE": "Gerência Geral",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Lugares marcados",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "04",
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
+      }
+    },
+    {
+      "codigo": "E1-03",
+      "titulo": "Menu e sequência de serviço",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "ritmo do jantar",
+      "objetivo_narrativo": "Registrar horários públicos do jantar e movimentos naturais da equipe.",
+      "pistas_contidas": [
+        "janela do brinde",
+        "sobremesa",
+        "equipe na copa"
+      ],
+      "confirma": [
+        "E1-04"
+      ],
+      "confirmado_por": [
+        "E2-06"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "06"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Hotel Aurora",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Reabertura — Arquivo de Mesa",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 118 — Centro Histórico",
+        "CONTATO": "arquivo@aurora.local | ramal interno 214",
+        "CNPJ": "Aurora Administração Hoteleira Ltda. — CNPJ 18.045.991/0001-72",
+        "COR_TOPO": "#8f5b3e",
+        "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
+        "SAUDACAO": "Registro interno",
+        "ASSUNTO": "AUR-MENU-17 — Sequência de serviço",
+        "CORPO_CARTA": "<p><strong>20h00</strong> Recepção no salão de jantar. <strong>20h20</strong> entrada fria. <strong>20h45</strong> prato principal. <strong>21h12</strong> sobremesa sob cúpulas de prata na copa de apoio. <strong>21h30</strong> brinde final previsto no salão, com portas do terraço recolhidas.</p><p>Durante a sobremesa, a equipe de cozinha permanece entre copa e passe de serviço. O corredor de serviço liga copa, rouparia pequena, recepção do andar e escada de serviço. A sala de memória fica depois da recepção, em área silenciosa usada para visitas guiadas curtas.</p><p>Renato Viana solicitou que a equipe não levasse bandejas ao terraço entre 21h15 e 21h32 por causa do vento.</p>",
+        "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
+        "ASSINATURA_CURSIVA": "Renato Viana",
+        "NOME_ASSINANTE": "Renato Viana",
+        "CARGO_ASSINANTE": "Chef de eventos",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Sequência de serviço",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "06",
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
+      }
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Declaração inicial de Caio Fontes",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "suspeita operacional",
+      "objetivo_narrativo": "Mostrar controle de bastidores, preocupação de imagem e uma janela pública que limita o gerente.",
+      "pistas_contidas": [
+        "gerência controlando narrativa",
+        "ocorrência pública",
+        "janelas de circulação"
+      ],
+      "confirma": [
+        "E1-07"
+      ],
+      "confirmado_por": [
+        "E2-06"
+      ],
+      "red_herring_potencial": "Caio controla bastidores e parece conter a ocorrência",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "04",
+        "01",
+        "06"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Hotel Aurora",
+        "ORGAO_SUBTITULO": "Registro de ocorrência interna — reabertura",
+        "NUMERO_CASO": "AUR-1705/26",
+        "TIPO_DOCUMENTO": "Termo de declaração",
+        "TIPO_OCORRENCIA": "Ausência de anfitriã durante evento fechado",
+        "DATA": "17/05/2026",
+        "LOCALIZACAO": "Andar social do Hotel Aurora",
+        "HORA_OCORRENCIA": "23h10",
+        "DESCRICAO_OCORRENCIA": "<p>Às 21h18 eu estava na recepção do andar porque a mesa do investidor pediu troca de taça e uma convidada reclamou do som vindo do elevador antigo. Vi Renato discutir com a copa sobre o tempo da sobremesa. Não vi Helena sair pelo elevador social.</p><p>Às 21h27 houve queda de uma bandeja perto da porta do salão. Voltei para acalmar os convidados. Quando Otto pediu o brinde, achei que Helena estava no terraço ou na sala de memória com algum convidado antigo. Pedi discrição à equipe para não transformar atraso em alarme.</p>",
+        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_GLIFO": "NSP",
+        "DATA_HORA_ASSINATURA": "17/05/2026 — 23h10",
+        "CAMPO_NOME": "Declarante",
+        "NOME_ENVOLVIDO": "Caio Fontes",
+        "DATA_NASC": "informado em cadastro do evento",
+        "CONDICAO": "Gerente geral",
+        "DOCUMENTO_PESSOAL": "registro interno retido pela recepção",
+        "MOSTRAR_CARIMBO": false,
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "04"
+      }
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Declaração inicial de Lívia Valença",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "falso caminho familiar forte",
+      "objetivo_narrativo": "Apresentar conflito familiar plausível e percepção indireta de presença.",
+      "pistas_contidas": [
+        "discussão familiar",
+        "visão de relance",
+        "saída voluntária aparente"
+      ],
+      "confirma": [
+        "E1-02",
+        "E1-08"
+      ],
+      "confirmado_por": [
+        "E2-01",
+        "E2-06"
+      ],
+      "red_herring_potencial": "Lívia discutiu com Helena e sustenta a saída voluntária aparente",
+      "risco_ambiguidade": "medio_alto",
+      "ids_citados": [
+        "03",
+        "01",
+        "05"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Hotel Aurora",
+        "ORGAO_SUBTITULO": "Registro de ocorrência interna — reabertura",
+        "NUMERO_CASO": "AUR-1705/26",
+        "TIPO_DOCUMENTO": "Termo de declaração",
+        "TIPO_OCORRENCIA": "Ausência de anfitriã durante evento fechado",
+        "DATA": "17/05/2026",
+        "LOCALIZACAO": "Andar social do Hotel Aurora",
+        "HORA_OCORRENCIA": "23h10",
+        "DESCRICAO_OCORRENCIA": "<p>Helena e eu falamos baixo antes da sobremesa. Ela estava irritada com minhas perguntas sobre a ala antiga, mas não houve escândalo. Por volta de 21h25, vi um tecido vinho junto à porta do terraço envidraçado e pensei que fosse ela evitando a mesa.</p><p>Isadora circulou perto dali com caderno na mão. Eu disse a Otto que Helena talvez precisasse de alguns minutos. A cadeira dela continuava pronta, então ninguém pareceu preocupado de imediato.</p>",
+        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_GLIFO": "NSP",
+        "DATA_HORA_ASSINATURA": "17/05/2026 — 23h10",
+        "CAMPO_NOME": "Declarante",
+        "NOME_ENVOLVIDO": "Lívia Valença",
+        "DATA_NASC": "informado em cadastro do evento",
+        "CONDICAO": "Sócia minoritária",
+        "DOCUMENTO_PESSOAL": "registro interno retido pela recepção",
+        "MOSTRAR_CARIMBO": false,
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "03"
+      }
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Relatório de circulação do andar social",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "substituto diegético de geografia",
+      "objetivo_narrativo": "Explicar circulação sem usar mapa visual, com foco em fluxo operacional.",
+      "pistas_contidas": [
+        "fluxos do hotel",
+        "ambientes por linguagem natural",
+        "sala de memória"
+      ],
+      "confirma": [
+        "E1-03",
+        "E1-07"
+      ],
+      "confirmado_por": [
+        "E2-03"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "02",
+        "04",
+        "06"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Hotel Aurora",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Reabertura — Arquivo de Mesa",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 118 — Centro Histórico",
+        "CONTATO": "arquivo@aurora.local | ramal interno 214",
+        "CNPJ": "Aurora Administração Hoteleira Ltda. — CNPJ 18.045.991/0001-72",
+        "COR_TOPO": "#8f5b3e",
+        "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
+        "SAUDACAO": "Registro interno",
+        "ASSUNTO": "AUR-CIRC-17 — Fluxo de serviço do andar social",
+        "CORPO_CARTA": "<p>O salão de jantar se abre para o terraço envidraçado por portas recolhíveis. A recepção do andar fica antes do elevador social e recebe convidados que sobem da portaria. O corredor de serviço passa atrás da copa de apoio e permite chegar à rouparia pequena sem cruzar a mesa principal.</p><p>A sala de memória permanece destrancada para visitas acompanhadas até 20h50. Depois disso, a chave antiga fica com a governança ou com a recepção do andar, conforme necessidade de acervo.</p><p>A suíte reservada Aurora 3 fica no mesmo corredor silencioso da sala de memória. Ela foi preparada para descanso de convidados idosos e não integra o roteiro público do jantar.</p>",
+        "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
+        "ASSINATURA_CURSIVA": "Marta Salgado",
+        "NOME_ASSINANTE": "Marta Salgado",
+        "CARGO_ASSINANTE": "Governança",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Fluxo de serviço do anda",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "02",
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
+      }
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Exportação de elevador e cartões do andar",
+      "envelope": "E1",
+      "tipo": "log_acesso",
+      "emocao_esperada": "contradição inicial de horários",
+      "objetivo_narrativo": "Registrar usos de cartões e portas como eventos ambíguos, sem afirmar presença física.",
+      "pistas_contidas": [
+        "cartão de suíte",
+        "elevador social",
+        "acesso sala de memória"
+      ],
+      "confirma": [
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E2-02",
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio_alto",
+      "ids_citados": [
+        "01",
+        "02",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "Aurora LocalPass",
+        "SUBTITULO_SISTEMA": "Exportação local — Hotel Aurora",
+        "COR_SISTEMA": "#7b4f36",
+        "COR_SISTEMA_DARK": "#3f281c",
+        "DATA_EXPORTACAO": "17/05/2026",
+        "HORA_EXPORTACAO": "23h42",
+        "OPERADOR_EXPORT": "Caio Fontes",
+        "HASH_REGISTRO": "AUR-17M-LOCAL-4421",
+        "PERIODO_INICIO": "20h45",
+        "PERIODO_FIM": "21h35",
+        "LOCALIZACAO_SISTEMA": "Andar social, elevador histórico, rouparia e copa de apoio",
+        "TOTAL_REGISTROS": "5",
+        "TOTAL_USUARIOS": "7",
+        "TOTAL_ENTRADAS": "3",
+        "TOTAL_NEGADOS": "1",
+        "TOTAL_ANOMALIAS": "0",
+        "COLUNA_NOME": "Portador/Setor",
+        "COLUNA_TERMINAL": "Ponto",
+        "COLUNA_METODO": "Origem",
+        "COLUNA_OBS": "Observação",
+        "REGISTROS": [
+          {
+            "DATA": "17/05/2026",
+            "HORA": "20h52",
+            "PORTA": "MEM-01",
+            "ID_USUARIO": "CH-GOV-02",
+            "NOME_USUARIO": "Governança",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Sala de memória aberta",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Leitor MEM-01",
+            "METODO": "chave antiga",
+            "OBSERVACAO": "Visita curta registrada pela recepção"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h04",
+            "PORTA": "ELV-SOC",
+            "ID_USUARIO": "CARD-HV-01",
+            "NOME_USUARIO": "Cartão Helena Valença",
+            "TIPO_EVENTO": "SAIDA",
+            "EVENTO": "Elevador social chamado para andar térreo",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Painel elevador",
+            "METODO": "cartão de hóspede",
+            "OBSERVACAO": "Registro de cartão, sem imagem associada"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h11",
+            "PORTA": "AUR-3",
+            "ID_USUARIO": "CARD-HV-01",
+            "NOME_USUARIO": "Cartão Helena Valença",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Suíte Aurora 3 destravada",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Fechadura suíte",
+            "METODO": "cartão de hóspede",
+            "OBSERVACAO": "Abertura sem permanência medida"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h19",
+            "PORTA": "MEM-01",
+            "ID_USUARIO": "CH-GOV-02",
+            "NOME_USUARIO": "Governança",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Sala de memória aberta",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Leitor MEM-01",
+            "METODO": "chave antiga",
+            "OBSERVACAO": "Acesso por chave antiga"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h31",
+            "PORTA": "ELV-SOC",
+            "ID_USUARIO": "CARD-CF-04",
+            "NOME_USUARIO": "Gerência",
+            "TIPO_EVENTO": "NEGADO",
+            "EVENTO": "Elevador ocupado em modo serviço",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Painel elevador",
+            "METODO": "cartão gerente",
+            "OBSERVACAO": "Tentativa sem deslocamento"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Anotações de Isadora Nunes",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "pista social ambígua",
+      "objetivo_narrativo": "Mostrar pressão jornalística e registro de fala parcial sem transformá-la em confissão.",
+      "pistas_contidas": [
+        "anotações de entrevista",
+        "chamado sobre discurso",
+        "percepção no terraço"
+      ],
+      "confirma": [
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E2-01",
+        "E2-02"
+      ],
+      "red_herring_potencial": "Isadora pressiona Helena e observa demais",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "05",
+        "01",
+        "03"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Hotel Aurora",
+        "ORGAO_SUBTITULO": "Registro de ocorrência interna — reabertura",
+        "NUMERO_CASO": "AUR-1705/26",
+        "TIPO_DOCUMENTO": "Termo de declaração",
+        "TIPO_OCORRENCIA": "Ausência de anfitriã durante evento fechado",
+        "DATA": "17/05/2026",
+        "LOCALIZACAO": "Andar social do Hotel Aurora",
+        "HORA_OCORRENCIA": "23h18",
+        "DESCRICAO_OCORRENCIA": "<p>Eu queria uma frase de Helena sobre a reabertura. Anotei às 21h02: 'se o brinde mudar, procurar pasta Aurora'. Ela recebeu um bilhete dobrado, leu rápido e saiu pelo lado da recepção, não pelo terraço.</p><p>Depois vi movimento vinho perto do vidro do terraço. Não cheguei perto porque Lívia estava olhando para o mesmo lado e eu não quis parecer invasiva. Minha pauta era a família, não a cozinha.</p>",
+        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_GLIFO": "NSP",
+        "DATA_HORA_ASSINATURA": "17/05/2026 — 23h18",
+        "CAMPO_NOME": "Declarante",
+        "NOME_ENVOLVIDO": "Isadora Nunes",
+        "DATA_NASC": "informado em cadastro do evento",
+        "CONDICAO": "Jornalista convidada",
+        "DOCUMENTO_PESSOAL": "registro interno retido pela recepção",
+        "MOSTRAR_CARIMBO": false,
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "05"
+      }
+    },
+    {
+      "codigo": "E1-09",
+      "titulo": "Termo de guarda da echarpe e broche",
+      "envelope": "E1",
+      "tipo": "boletim",
+      "emocao_esperada": "objeto ambíguo",
+      "objetivo_narrativo": "Registrar achado físico em linguagem bruta.",
+      "pistas_contidas": [
+        "echarpe vinho",
+        "broche antigo",
+        "posição no terraço"
+      ],
+      "confirma": [
+        "E1-02",
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E2-03",
+        "E2-05"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio_alto",
+      "ids_citados": [
+        "01",
+        "02"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Hotel Aurora",
+        "ORGAO_SUBTITULO": "Núcleo de Segurança Patrimonial",
+        "NUMERO_CASO": "AUR-OBJ-17",
+        "TIPO_DOCUMENTO": "Termo de guarda de objeto",
+        "TIPO_OCORRENCIA": "Objeto recolhido em área comum",
+        "DATA": "17/05/2026",
+        "LOCALIZACAO": "Cabide baixo do terraço envidraçado",
+        "HORA_OCORRENCIA": "21h36",
+        "DESCRICAO_OCORRENCIA": "<p>Uma echarpe vinho de tecido leve foi recolhida no cabide baixo junto às portas do terraço envidraçado. Broche metálico antigo preso à ponta curta, formato de estrela de oito raios, fecho voltado para dentro do tecido.</p><p>O tecido apresentava uma dobra marcada no terço médio e perfume floral discreto. Não havia rasgo, sangue, sinal de luta ou sujeira visível. O objeto foi acondicionado em envelope físico AUR-OBJ-17, lacre 0442.</p>",
+        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_GLIFO": "NSP",
+        "DATA_HORA_ASSINATURA": "17/05/2026 — 21h42",
+        "MOSTRAR_CARIMBO": false
+      }
+    },
+    {
+      "codigo": "E2-01",
+      "titulo": "Complemento de declaração de Isadora Nunes",
+      "envelope": "E2",
+      "tipo": "depoimento",
+      "emocao_esperada": "recontextualização de percepção",
+      "objetivo_narrativo": "Ajustar a qualidade do testemunho visual sem explicar a conclusão.",
+      "pistas_contidas": [
+        "visão indireta",
+        "tecido vinho",
+        "porta da recepção"
+      ],
+      "confirma": [
+        "E1-08",
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E2-05"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "05",
+        "01",
+        "03"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Hotel Aurora",
+        "ORGAO_SUBTITULO": "Registro de ocorrência interna — reabertura",
+        "NUMERO_CASO": "AUR-1705/26",
+        "TIPO_DOCUMENTO": "Termo de declaração",
+        "TIPO_OCORRENCIA": "Ausência de anfitriã durante evento fechado",
+        "DATA": "17/05/2026",
+        "LOCALIZACAO": "Andar social do Hotel Aurora",
+        "HORA_OCORRENCIA": "00h12",
+        "DESCRICAO_OCORRENCIA": "<p>Revendo minhas anotações, a frase correta das 21h02 foi: 'se o brinde mudar, a pasta Aurora está na memória'. Eu não ouvi quem entregou o bilhete. Helena leu, guardou dentro do programa do jantar e seguiu pelo lado da recepção.</p><p>Sobre o terraço: vi tecido vinho e metal claro por trás do vidro. Não vi rosto, mãos ou a pessoa de frente. Lívia estava perto de mim quando eu virei, mas também não avançou até o cabide.</p>",
+        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_GLIFO": "NSP",
+        "DATA_HORA_ASSINATURA": "17/05/2026 — 00h12",
+        "CAMPO_NOME": "Declarante",
+        "NOME_ENVOLVIDO": "Isadora Nunes",
+        "DATA_NASC": "informado em cadastro do evento",
+        "CONDICAO": "Jornalista convidada",
+        "DOCUMENTO_PESSOAL": "registro interno retido pela recepção",
+        "MOSTRAR_CARIMBO": false,
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "05"
+      }
+    },
+    {
+      "codigo": "E2-02",
+      "titulo": "E-mail preservado sobre o discurso",
+      "envelope": "E2",
+      "tipo": "email_institucional",
+      "emocao_esperada": "motivo documental",
+      "objetivo_narrativo": "Apresentar o conteúdo público planejado do anúncio e a existência da pasta Aurora.",
+      "pistas_contidas": [
+        "pasta Aurora",
+        "ala antiga",
+        "discurso alterado"
+      ],
+      "confirma": [
+        "E1-08"
+      ],
+      "confirmado_por": [
+        "E2-04",
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "01",
+        "02",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Helena Valença",
+        "REMETENTE_EMAIL": "helena.valenca@aurora.local",
+        "DESTINATARIO_EMAIL": "caio.fontes@aurora.local",
+        "COPIA": "marta.salgado@aurora.local",
+        "DESTINATARIO_LABEL": "caio.fontes@aurora.local",
+        "DATA_HORA": "17/05/2026 — 18h44",
+        "ASSUNTO": "Versão final do brinde",
+        "AVATAR_INICIAL": "H",
+        "AVATAR_COR": "#7b2d42",
+        "CORPO_EMAIL": "<p>Caio, mantenha a versão impressa comigo até a sobremesa. Se eu mudar uma frase no salão, use a pasta Aurora da sala de memória como base, não o release dos investidores.</p><p>Quero mencionar a antiga ala de funcionários com cuidado. A proposta comercial sai amanhã, mas hoje não vou fingir que aquela ala é apenas metragem disponível.</p><p>Depois do brinde, Marta pode devolver ao arquivo as cartas antigas que estavam na mesa de apoio.</p>",
+        "NOTA_RODAPE": "Mensagem arquivada no servidor local do Hotel Aurora.",
+        "ANEXOS": false
+      }
+    },
+    {
+      "codigo": "E2-03",
+      "titulo": "Registro de rouparia e governança",
+      "envelope": "E2",
+      "tipo": "log_acesso",
+      "emocao_esperada": "movimentação de objeto",
+      "objetivo_narrativo": "Registrar movimentações de serviço associadas ao objeto ambíguo.",
+      "pistas_contidas": [
+        "rouparia",
+        "echarpe",
+        "governança"
+      ],
+      "confirma": [
+        "E1-09",
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E2-05",
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "02",
+        "01"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "Aurora Rouparia Local",
+        "SUBTITULO_SISTEMA": "Exportação local — Hotel Aurora",
+        "COR_SISTEMA": "#7b4f36",
+        "COR_SISTEMA_DARK": "#3f281c",
+        "DATA_EXPORTACAO": "17/05/2026",
+        "HORA_EXPORTACAO": "23h42",
+        "OPERADOR_EXPORT": "Caio Fontes",
+        "HASH_REGISTRO": "AUR-17M-LOCAL-4421",
+        "PERIODO_INICIO": "20h55",
+        "PERIODO_FIM": "21h38",
+        "LOCALIZACAO_SISTEMA": "Andar social, elevador histórico, rouparia e copa de apoio",
+        "TOTAL_REGISTROS": "4",
+        "TOTAL_USUARIOS": "7",
+        "TOTAL_ENTRADAS": "3",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "COLUNA_NOME": "Portador/Setor",
+        "COLUNA_TERMINAL": "Ponto",
+        "COLUNA_METODO": "Origem",
+        "COLUNA_OBS": "Observação",
+        "REGISTROS": [
+          {
+            "DATA": "17/05/2026",
+            "HORA": "20h58",
+            "PORTA": "ROUP-02",
+            "ID_USUARIO": "GOV-02",
+            "NOME_USUARIO": "Governança",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Armário de xales e capas aberto",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Rouparia pequena",
+            "METODO": "chave mecânica",
+            "OBSERVACAO": "Retirada de capa preta para convidada idosa"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h06",
+            "PORTA": "ROUP-02",
+            "ID_USUARIO": "GOV-02",
+            "NOME_USUARIO": "Governança",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Prateleira de objetos de mesa acessada",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Rouparia pequena",
+            "METODO": "chave mecânica",
+            "OBSERVACAO": "Registro manual: echarpe vinho deixada para ventilação"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h18",
+            "PORTA": "MEM-01",
+            "ID_USUARIO": "GOV-02",
+            "NOME_USUARIO": "Governança",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Caixa de broches antigos consultada",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Sala de memória",
+            "METODO": "chave antiga",
+            "OBSERVACAO": "Lacre de gaveta recomposto às 21h24"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h33",
+            "PORTA": "TERR-CAB",
+            "ID_USUARIO": "GOV-02",
+            "NOME_USUARIO": "Governança",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Cabide baixo do terraço vistoriado",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Terraço envidraçado",
+            "METODO": "ronda de serviço",
+            "OBSERVACAO": "Assinatura de ronda: M.S."
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-04",
+      "titulo": "Carta antiga do arquivo Valença",
+      "envelope": "E2",
+      "tipo": "manual",
+      "emocao_esperada": "virada emocional",
+      "objetivo_narrativo": "Mostrar a promessa familiar que dá peso humano ao anúncio.",
+      "pistas_contidas": [
+        "promessa antiga",
+        "ala de funcionários",
+        "memória do hotel"
+      ],
+      "confirma": [
+        "E2-02"
+      ],
+      "confirmado_por": [
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "02"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Hotel Aurora",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Reabertura — Arquivo de Mesa",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 118 — Centro Histórico",
+        "CONTATO": "arquivo@aurora.local | ramal interno 214",
+        "CNPJ": "Aurora Administração Hoteleira Ltda. — CNPJ 18.045.991/0001-72",
+        "COR_TOPO": "#8f5b3e",
+        "LOCAL_DATA": "Bela Vista, 4 de setembro de 1968",
+        "SAUDACAO": "Helena, para leitura familiar",
+        "ASSUNTO": "ARQ-VAL-1968 — Carta preservada",
+        "CORPO_CARTA": "<p>Minha filha, se o Aurora voltar a abrir suas portas, lembre que a ala dos fundos não foi sobra de obra. Foi casa, descanso e abrigo de quem manteve este hotel aceso quando a família sumiu para resolver seus próprios nomes.</p><p>Prometi a Marta e aos demais que aquelas salas jamais seriam tratadas como depósito de oportunidades. Se a administração mudar, que ao menos uma parte permaneça como memória dos funcionários, não como vitrine para comprador.</p><p>Guarde esta carta na sala de memória. Ela não vale como contrato, mas vale como palavra.</p>",
+        "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
+        "ASSINATURA_CURSIVA": "A. Valença",
+        "NOME_ASSINANTE": "A. Valença",
+        "CARGO_ASSINANTE": "Arquivo familiar Valença",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Carta preservada",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
+      }
+    },
+    {
+      "codigo": "E2-05",
+      "titulo": "Laudo simples do broche antigo",
+      "envelope": "E2",
+      "tipo": "boletim",
+      "emocao_esperada": "releitura do objeto",
+      "objetivo_narrativo": "Apresentar marcas físicas do broche/echarpe como fato bruto.",
+      "pistas_contidas": [
+        "fecho do broche",
+        "marca recente",
+        "dobra incompatível"
+      ],
+      "confirma": [
+        "E1-09",
+        "E2-03"
+      ],
+      "confirmado_por": [
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "01",
+        "02"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Hotel Aurora",
+        "ORGAO_SUBTITULO": "Núcleo de Segurança Patrimonial",
+        "NUMERO_CASO": "AUR-OBJ-17B",
+        "TIPO_DOCUMENTO": "Verificação de objeto recolhido",
+        "TIPO_OCORRENCIA": "Conferência física de tecido e broche",
+        "DATA": "18/05/2026",
+        "LOCALIZACAO": "Sala de segurança patrimonial",
+        "HORA_OCORRENCIA": "00h28",
+        "DESCRICAO_OCORRENCIA": "<p>Broche antigo com fecho em agulha apresenta marca úmida circular ao redor do ponto de fixação, compatível com pano recém-borrifado. A dobra principal da echarpe passa por baixo do broche, sem marca de pressão prolongada no tecido.</p><p>No verso metálico há resíduo claro semelhante ao pó usado nas luvas de algodão do acervo. A ponta curta ficou presa pelo lado interno, disposição pouco confortável para uso contínuo no pescoço.</p>",
+        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_GLIFO": "NSP",
+        "DATA_HORA_ASSINATURA": "18/05/2026 — 00h35",
+        "MOSTRAR_CARIMBO": false
+      }
+    },
+    {
+      "codigo": "E2-06",
+      "titulo": "Registro combinado de descartes de janela",
+      "envelope": "E2",
+      "tipo": "boletim",
+      "emocao_esperada": "descartar falsos caminhos fortes",
+      "objetivo_narrativo": "Dar limites documentais para suspeitos fortes sem virar resposta narrada.",
+      "pistas_contidas": [
+        "ocorrência pública",
+        "equipe na copa",
+        "Lívia e Isadora no salão"
+      ],
+      "confirma": [
+        "E1-04",
+        "E1-05",
+        "E1-03"
+      ],
+      "confirmado_por": [
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "03",
+        "04",
+        "05",
+        "06"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Hotel Aurora",
+        "ORGAO_SUBTITULO": "Núcleo de Segurança Patrimonial",
+        "NUMERO_CASO": "AUR-JAN-17",
+        "TIPO_DOCUMENTO": "Consolidação de janelas públicas",
+        "TIPO_OCORRENCIA": "Conferência de presenças em áreas comuns",
+        "DATA": "18/05/2026",
+        "LOCALIZACAO": "Salão, copa de apoio e recepção do andar",
+        "HORA_OCORRENCIA": "00h45",
+        "DESCRICAO_OCORRENCIA": "<p>Entre 21h14 e 21h28, Renato Viana aparece em três recibos de passe assinados pela copa de apoio; duas auxiliares confirmam saída conjunta da sobremesa às 21h29.</p><p>Caio Fontes consta no livro da recepção às 21h27 por atendimento à queda de bandeja na entrada do salão. Otto Almeida e uma convidada assinam o mesmo livro como testemunhas da ocorrência.</p><p>Lívia Valença e Isadora Nunes aparecem no registro fotográfico impresso da mesa presidencial às 21h26, ambas voltadas para o lado do terraço. A imagem não mostra Helena.</p>",
+        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
+        "ASSINATURA_GLIFO": "NSP",
+        "DATA_HORA_ASSINATURA": "18/05/2026 — 00h52",
+        "MOSTRAR_CARIMBO": false
+      }
+    },
+    {
+      "codigo": "E2-07",
+      "titulo": "Livro de chaves da sala de memória",
+      "envelope": "E2",
+      "tipo": "log_acesso",
+      "emocao_esperada": "fechamento documental independente",
+      "objetivo_narrativo": "Registrar posse e devolução de chave antiga no período relevante.",
+      "pistas_contidas": [
+        "chave antiga",
+        "sala de memória",
+        "devolução tardia"
+      ],
+      "confirma": [
+        "E2-02",
+        "E2-03",
+        "E2-04"
+      ],
+      "confirmado_por": [
+        "E2-05"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "02",
+        "01",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "Livro Local de Chaves Antigas",
+        "SUBTITULO_SISTEMA": "Exportação local — Hotel Aurora",
+        "COR_SISTEMA": "#7b4f36",
+        "COR_SISTEMA_DARK": "#3f281c",
+        "DATA_EXPORTACAO": "17/05/2026",
+        "HORA_EXPORTACAO": "23h42",
+        "OPERADOR_EXPORT": "Caio Fontes",
+        "HASH_REGISTRO": "AUR-17M-LOCAL-4421",
+        "PERIODO_INICIO": "20h35",
+        "PERIODO_FIM": "21h50",
+        "LOCALIZACAO_SISTEMA": "Andar social, elevador histórico, rouparia e copa de apoio",
+        "TOTAL_REGISTROS": "4",
+        "TOTAL_USUARIOS": "7",
+        "TOTAL_ENTRADAS": "3",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "COLUNA_NOME": "Portador/Setor",
+        "COLUNA_TERMINAL": "Ponto",
+        "COLUNA_METODO": "Origem",
+        "COLUNA_OBS": "Observação",
+        "REGISTROS": [
+          {
+            "DATA": "17/05/2026",
+            "HORA": "20h40",
+            "PORTA": "PORT-AND",
+            "ID_USUARIO": "CH-MEM",
+            "NOME_USUARIO": "Marta Salgado",
+            "TIPO_EVENTO": "SAIDA",
+            "EVENTO": "Retirada do molho cinza",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Recepção do andar",
+            "METODO": "assinatura em livro",
+            "OBSERVACAO": "Finalidade anotada: acervo do jantar"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "20h51",
+            "PORTA": "MEM-01",
+            "ID_USUARIO": "CH-MEM",
+            "NOME_USUARIO": "Marta Salgado",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Sala de memória liberada",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Porta interna",
+            "METODO": "chave antiga",
+            "OBSERVACAO": "Visita curta"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h18",
+            "PORTA": "MEM-01",
+            "ID_USUARIO": "CH-MEM",
+            "NOME_USUARIO": "Marta Salgado",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Sala de memória aberta novamente",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Porta interna",
+            "METODO": "chave antiga",
+            "OBSERVACAO": "Sem anotação de visitante"
+          },
+          {
+            "DATA": "17/05/2026",
+            "HORA": "21h44",
+            "PORTA": "PORT-AND",
+            "ID_USUARIO": "CH-MEM",
+            "NOME_USUARIO": "Marta Salgado",
+            "TIPO_EVENTO": "ENTRADA",
+            "EVENTO": "Molho cinza devolvido",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Recepção do andar",
+            "METODO": "assinatura em livro",
+            "OBSERVACAO": "Devolução após início da busca interna"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-08",
+      "titulo": "Conversa de bastidores após o brinde",
+      "envelope": "E2",
+      "tipo": "chat",
+      "emocao_esperada": "camada humana final",
+      "objetivo_narrativo": "Mostrar fala operacional de bastidores e detalhe de objeto sem enunciar solução.",
+      "pistas_contidas": [
+        "chave antiga",
+        "echarpe no cabide",
+        "bastidores"
+      ],
+      "confirma": [
+        "E2-03"
+      ],
+      "confirmado_por": [
+        "E2-05",
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "02",
+        "04",
+        "06"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "HORA_TELA": "22h58",
+        "NOME_GRUPO": "Aurora — bastidores do jantar",
+        "MEMBROS_LISTA": "Caio, Marta, Renato, Camareiras, Recepção",
+        "DATA_CONVERSA": "17 de maio de 2026",
+        "CONTADOR_NAOVISTOS": "0",
+        "MENSAGENS": [
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "normal",
+            "TEXTO_MENSAGEM": "21h08 — Mesa 4 pediu troca de taça. Vou cobrir salão por cinco minutos.",
+            "HORARIO": "21h08",
+            "MOSTRAR_NOME": true,
+            "NOME_REMETENTE": "Caio",
+            "COR_REMETENTE": "#1f6f8b"
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "TEXTO_MENSAGEM": "21h15 — sobremesa pronta, equipe presa na copa até saída das cúpulas.",
+            "HORARIO": "21h15",
+            "MOSTRAR_NOME": true,
+            "NOME_REMETENTE": "Renato",
+            "COR_REMETENTE": "#8b4f1f"
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "normal",
+            "TEXTO_MENSAGEM": "21h22 — preciso da chave antiga da sala de memória depois do brinde, está no molho cinza?",
+            "HORARIO": "21h22",
+            "MOSTRAR_NOME": true,
+            "NOME_REMETENTE": "Recepção",
+            "COR_REMETENTE": "#6a6a6a"
+          },
+          {
+            "DIRECAO": "out",
+            "CLASSE_GAP": "normal",
+            "TEXTO_MENSAGEM": "21h23 — molho cinza fica comigo. Depois eu devolvo na portaria do andar.",
+            "HORARIO": "21h23",
+            "MOSTRAR_NOME": false,
+            "DIRECAO_OUT": true,
+            "TICKS": "✓✓"
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "TEXTO_MENSAGEM": "21h34 — encontrei uma echarpe vinho no cabide do terraço envidraçado. Broche preso, fecho virado para dentro.",
+            "HORARIO": "21h34",
+            "MOSTRAR_NOME": true,
+            "NOME_REMETENTE": "Camareira Ana",
+            "COR_REMETENTE": "#7c2d62"
+          }
+        ]
+      }
+    }
+  ],
+  "linha_tempo_real": [
+    {
+      "data_hora": "17/05/2026 18h44",
+      "evento": "Helena envia versão final do brinde com menção à pasta Aurora.",
+      "personagem_id": "01",
+      "documento_prova": "E2-02",
+      "confirmacao_independente": "E2-04"
+    },
+    {
+      "data_hora": "17/05/2026 20h40",
+      "evento": "Marta retira chave antiga da sala de memória.",
+      "personagem_id": "02",
+      "documento_prova": "E2-07",
+      "confirmacao_independente": "E1-06"
+    },
+    {
+      "data_hora": "17/05/2026 21h02",
+      "evento": "Helena lê bilhete relacionado à pasta Aurora e deixa o salão pelo lado da recepção.",
+      "personagem_id": "01",
+      "documento_prova": "E1-08",
+      "confirmacao_independente": "E2-01"
+    },
+    {
+      "data_hora": "17/05/2026 21h18",
+      "evento": "Sala de memória é aberta novamente com chave antiga.",
+      "personagem_id": "02",
+      "documento_prova": "E2-07",
+      "confirmacao_independente": "E2-03"
+    },
+    {
+      "data_hora": "17/05/2026 21h33",
+      "evento": "Cabide baixo do terraço é vistoriado em ronda de governança.",
+      "personagem_id": "02",
+      "documento_prova": "E2-03",
+      "confirmacao_independente": "E2-08"
+    },
+    {
+      "data_hora": "17/05/2026 21h36",
+      "evento": "Echarpe e broche são recolhidos no terraço envidraçado.",
+      "personagem_id": "01",
+      "documento_prova": "E1-09",
+      "confirmacao_independente": "E2-05"
+    }
+  ],
+  "linha_tempo_percebida": [
+    {
+      "data_hora": "17/05/2026 21h25",
+      "evento": "Convidados acreditam que Helena está perto do terraço após tensão familiar.",
+      "personagem_id": "01",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-09"
+    },
+    {
+      "data_hora": "17/05/2026 21h30",
+      "evento": "Brinde final é atrasado como se a anfitriã tivesse se afastado por alguns minutos.",
+      "personagem_id": "01",
+      "documento_prova": "E1-01",
+      "confirmacao_independente": "E1-02"
+    }
+  ],
+  "linha_tempo_documental": [
+    {
+      "data_hora": "17/05/2026 20h52",
+      "evento": "Primeira abertura da sala de memória no relatório de circulação.",
+      "personagem_id": "02",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E2-07"
+    },
+    {
+      "data_hora": "17/05/2026 21h04",
+      "evento": "Cartão de Helena aciona elevador social sem imagem associada.",
+      "personagem_id": "01",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-08"
+    },
+    {
+      "data_hora": "17/05/2026 21h06",
+      "evento": "Rouparia registra echarpe vinho em ventilação.",
+      "personagem_id": "02",
+      "documento_prova": "E2-03",
+      "confirmacao_independente": "E2-08"
+    },
+    {
+      "data_hora": "17/05/2026 21h26",
+      "evento": "Registro impresso mostra Lívia e Isadora no salão.",
+      "personagem_id": "03",
+      "documento_prova": "E2-06",
+      "confirmacao_independente": "E1-05"
+    }
+  ],
+  "pilares_validacao": [
+    {
+      "nome": "presença inferida, não visão direta",
+      "documento_principal": "E1-05",
+      "confirmacao": "E1-09",
+      "personagem_id": "01"
+    },
+    {
+      "nome": "circulação textual",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-07",
+      "personagem_id": "01"
+    },
+    {
+      "nome": "conflito familiar plausível",
+      "documento_principal": "E1-02",
+      "confirmacao": "E1-05",
+      "personagem_id": "01"
+    },
+    {
+      "nome": "chamado ligado ao discurso",
+      "documento_principal": "E1-08",
+      "confirmacao": "E1-03",
+      "personagem_id": "01"
+    }
+  ],
+  "intervalo_critico_inicio": "17/05/2026 21h02",
+  "intervalo_critico_fim": "17/05/2026 21h36",
+  "matriz_pistas": [
+    {
+      "descricao": "O último avistamento social de Helena é baseado em tecido e movimento, não em contato frontal.",
+      "documento": "E1-05",
+      "o_que_sugere": "Helena parece ter ido ao terraço após tensão familiar.",
+      "o_que_prova": "A testemunha se apoia em percepção indireta.",
+      "confirmacao": "E2-01",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "dúvida sobre presença"
+    },
+    {
+      "descricao": "Cartão de Helena aparece em registros incompatíveis com o relato de saída simples.",
+      "documento": "E1-07",
+      "o_que_sugere": "Houve uso de credencial associada à anfitriã.",
+      "o_que_prova": "Registros de sistema não equivalem a visão direta da pessoa.",
+      "confirmacao": "E2-07",
+      "risco_ambiguidade": "medio_alto",
+      "emocao_esperada": "virada lógica"
+    },
+    {
+      "descricao": "O objeto pessoal tem marca física recente e disposição incomum.",
+      "documento": "E1-09",
+      "o_que_sugere": "Helena esteve perto do terraço.",
+      "o_que_prova": "O objeto foi manejado como peça física separada da pessoa.",
+      "confirmacao": "E2-05",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "releitura de objeto"
+    },
+    {
+      "descricao": "A promessa antiga dá sentido emocional ao brinde e à tensão de bastidores.",
+      "documento": "E2-04",
+      "o_que_sugere": "O conflito ultrapassa a administração do evento.",
+      "o_que_prova": "A ala antiga tem valor simbólico para funcionários antigos.",
+      "confirmacao": "E2-02",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "virada humana"
+    },
+    {
+      "descricao": "Janelas públicas limitam suspeitos familiares, jornalísticos e de cozinha.",
+      "documento": "E2-06",
+      "o_que_sugere": "Vários comportamentos estranhos têm explicação própria.",
+      "o_que_prova": "Os falsos caminhos fortes têm limites documentais.",
+      "confirmacao": "E1-03",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "limpeza de hipóteses"
+    }
+  ],
+  "red_herrings": [
+    {
+      "personagem_id": "03",
+      "motivo_aparente": "Conflito familiar e interesse no controle da reabertura.",
+      "como_descartar": "Registro combinado mostra posição pública na janela de manipulação do objeto e ausência de acesso natural à rouparia.",
+      "documento_descarte": "E2-06",
+      "categoria": "motivo_sem_meio"
+    },
+    {
+      "personagem_id": "04",
+      "motivo_aparente": "Controle de chaves, recepção e narrativa do evento.",
+      "como_descartar": "Ocorrência pública na recepção e tentativas registradas delimitam a janela de Caio.",
+      "documento_descarte": "E2-06",
+      "categoria": "oportunidade_limitada"
+    },
+    {
+      "personagem_id": "05",
+      "motivo_aparente": "Pressão jornalística e proximidade do terraço.",
+      "como_descartar": "Complemento distingue anotação, tecido e falta de visão direta.",
+      "documento_descarte": "E2-01",
+      "categoria": "percepcao_indireta"
+    },
+    {
+      "personagem_id": "06",
+      "motivo_aparente": "Atrito com Helena e circulação de serviço.",
+      "como_descartar": "Sequência de cozinha e recibos de passe prendem a equipe na copa.",
+      "documento_descarte": "E2-06",
+      "categoria": "janela_operacional_fechada"
+    }
+  ],
+  "cadeia_financeira": [],
+  "codigos": [],
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo trata o caso como fuga simples.",
+      "texto": "Reparem em quais frases descrevem uma pessoa vista de frente e quais descrevem sinais ao redor dela.",
+      "o_que_desbloqueia": "Qualidade dos testemunhos do primeiro envelope."
+    },
+    {
+      "numero": 2,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo se perde nos ambientes por falta de mapa.",
+      "texto": "Usem o relatório de circulação como uma descrição de fluxo: salão, recepção, corredor de serviço, copa, rouparia, sala de memória e suíte reservada.",
+      "o_que_desbloqueia": "Orientação espacial por linguagem natural."
+    },
+    {
+      "numero": 3,
+      "intensidade": "forte",
+      "envelope": "E1",
+      "condicao_uso": "Grupo não percebe a ambiguidade do objeto.",
+      "texto": "O objeto recolhido mostra onde uma peça estava; ainda vale separar isso de onde uma pessoa estava.",
+      "o_que_desbloqueia": "Leitura cautelosa da echarpe e do broche."
+    },
+    {
+      "numero": 4,
+      "intensidade": "leve",
+      "envelope": "E2",
+      "condicao_uso": "Grupo acusa apenas o suspeito familiar.",
+      "texto": "Voltem às janelas públicas do segundo envelope e vejam quais comportamentos estranhos podem ter explicação própria.",
+      "o_que_desbloqueia": "Descarte de falsos caminhos fortes."
+    },
+    {
+      "numero": 5,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo vê motivo operacional, mas não humano.",
+      "texto": "A carta antiga ajuda a entender por que o brinde teria peso para pessoas que não aparecem como sócias ou investidores.",
+      "o_que_desbloqueia": "Camada emocional da decisão pública."
+    },
+    {
+      "numero": 6,
+      "intensidade": "quase_gabarito",
+      "envelope": "E2",
+      "condicao_uso": "Grupo tem todas as peças, mas não articula o fechamento.",
+      "texto": "Organizem três colunas: quem viu Helena diretamente, quem viu um sinal associado a ela e quem podia mover esse sinal sem chamar atenção.",
+      "o_que_desbloqueia": "Síntese final sem depender de confissão."
+    }
+  ],
+  "contratos_evidencia": [
+    {
+      "id": "C-E1-PRESENCA-INDIRETA",
+      "conclusao": "A presença final da anfitriã no salão/terraço é inferida por sinais, não por visão direta confiável.",
+      "fase": "E1",
+      "tipo": "pista_principal",
+      "prova_principal": "E1-05",
+      "confirmacao_independente": "E1-09",
+      "descarta_alternativas": [],
+      "personagens_afetados": [
+        "01",
+        "03",
+        "05"
+      ],
+      "acao_esperada_jogador": "Questionar a qualidade do último avistamento.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E1-CIRCULACAO",
+      "conclusao": "A circulação do andar permite deslocamentos por serviço sem depender de mapa visual.",
+      "fase": "E1",
+      "tipo": "ferramenta_espacial",
+      "prova_principal": "E1-06",
+      "confirmacao_independente": "E1-07",
+      "descarta_alternativas": [],
+      "personagens_afetados": [
+        "02",
+        "04",
+        "06"
+      ],
+      "acao_esperada_jogador": "Montar fluxo por linguagem natural.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-OBJETO",
+      "conclusao": "A echarpe e o broche funcionam como sinal físico manipulável, não como prova direta de presença pessoal.",
+      "fase": "E2",
+      "tipo": "recontextualizacao",
+      "prova_principal": "E2-05",
+      "confirmacao_independente": "E2-03",
+      "descarta_alternativas": [
+        "E1-09"
+      ],
+      "personagens_afetados": [
+        "01",
+        "02"
+      ],
+      "acao_esperada_jogador": "Reinterpretar o objeto ambíguo.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-MOTIVO",
+      "conclusao": "A tensão do brinde envolve memória dos funcionários e destino da ala antiga.",
+      "fase": "E2",
+      "tipo": "motivo_humano",
+      "prova_principal": "E2-04",
+      "confirmacao_independente": "E2-02",
+      "descarta_alternativas": [],
+      "personagens_afetados": [
+        "01",
+        "02"
+      ],
+      "acao_esperada_jogador": "Entender o peso humano do anúncio.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-DESCARTES",
+      "conclusao": "Falsos caminhos fortes têm limites documentais de janela, percepção ou meio.",
+      "fase": "E2",
+      "tipo": "descarte_alternativa",
+      "prova_principal": "E2-06",
+      "confirmacao_independente": "E1-03",
+      "descarta_alternativas": [
+        "E1-04",
+        "E1-05",
+        "E1-08"
+      ],
+      "personagens_afetados": [
+        "03",
+        "04",
+        "05",
+        "06"
+      ],
+      "acao_esperada_jogador": "Separar comportamento estranho de capacidade de execução.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-FINAL-AURORA",
+      "conclusao": "A ausência foi criada por isolamento temporário e por sinais indiretos de presença fabricados nos bastidores do hotel.",
+      "fase": "final",
+      "tipo": "solucao_final",
+      "prova_principal": "E2-07",
+      "confirmacao_independente": "E2-05",
+      "descarta_alternativas": [
+        "E2-02",
+        "E2-03",
+        "E2-04",
+        "E2-06"
+      ],
+      "personagens_afetados": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06"
+      ],
+      "acao_esperada_jogador": "Apresentar uma síntese final com motivo, meio e limites dos falsos caminhos.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    }
+  ],
+  "dicas_contextuais": [
+    {
+      "id": "DC-E1-AVISTAMENTO",
+      "categoria": "documento",
+      "fase": "E1",
+      "titulo": "Avistamento indireto",
+      "condicao_uso": "Grupo assume que tecido equivale a pessoa.",
+      "texto": "Pergunte quais documentos descrevem rosto, voz ou contato direto, e quais descrevem objeto, lugar ou movimento.",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E1-PRESENCA-INDIRETA"
+      ],
+      "documentos_relacionados": [
+        "E1-05",
+        "E1-09"
+      ]
+    },
+    {
+      "id": "DC-E1-FLUXO",
+      "categoria": "logistica",
+      "fase": "E1",
+      "titulo": "Fluxo sem mapa",
+      "condicao_uso": "Grupo não entende a circulação descrita nos documentos.",
+      "texto": "Reforce que o caso usa texto operacional: salão e terraço são públicos; copa, rouparia e corredor de serviço são bastidores; sala de memória e suíte ficam no trecho silencioso da recepção.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E1-CIRCULACAO"
+      ],
+      "documentos_relacionados": [
+        "E1-03",
+        "E1-06",
+        "E1-07"
+      ]
+    },
+    {
+      "id": "DC-E2-OBJETO",
+      "categoria": "documento",
+      "fase": "E2",
+      "titulo": "Objeto ambíguo",
+      "condicao_uso": "Grupo não relê a echarpe após o segundo envelope.",
+      "texto": "Convide o grupo a tratar a peça como evidência física independente: quando aparece, quem poderia tocá-la e como está presa.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E2-OBJETO"
+      ],
+      "documentos_relacionados": [
+        "E1-09",
+        "E2-03",
+        "E2-05"
+      ]
+    },
+    {
+      "id": "DC-E2-MOTIVO",
+      "categoria": "contrato",
+      "fase": "E2",
+      "titulo": "Peso da ala antiga",
+      "condicao_uso": "Grupo vê apenas disputa administrativa.",
+      "texto": "Aponte que o anúncio do jantar atinge pessoas ligadas à memória do hotel, não apenas sócios e investidores.",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E2-MOTIVO"
+      ],
+      "documentos_relacionados": [
+        "E2-02",
+        "E2-04"
+      ]
+    },
+    {
+      "id": "DC-FINAL-SINTESE",
+      "categoria": "solucao",
+      "fase": "final",
+      "titulo": "Síntese final",
+      "condicao_uso": "Grupo identifica documentos certos, mas não junta motivo, meio e objeto.",
+      "texto": "Peça uma versão final com três frases: por que impedir o brinde, como criar ausência sem escândalo imediato e qual sinal físico sustentou a leitura errada.",
+      "nivel": "forte",
+      "contratos_relacionados": [
+        "C-FINAL-AURORA"
+      ],
+      "documentos_relacionados": [
+        "E2-05",
+        "E2-07",
+        "E2-04"
+      ]
+    }
+  ],
+  "visual_procedural": {
+    "mapas": [],
+    "personagens": [],
+    "locais": []
+  },
+  "playtest": {
+    "status": "rascunho_pre_playtest",
+    "rodadas": 0,
+    "observacoes": []
+  },
+  "versao": "0.1",
+  "observacoes_producao": "Novo caso canônico Intermediário em modo spoiler-safe para jogador. Estrutura em dois envelopes, sem mapa visual, com documentos sociais, depoimentos, circulação textual, objeto ambíguo e recontextualização no segundo envelope. O guia do facilitador e os metadados internos contêm solução; documentos de jogador mantêm evidência bruta e evitam voz de autor."
+}
