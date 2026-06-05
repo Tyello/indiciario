@@ -18,6 +18,12 @@ Nenhum documento de jogador deve soar como checklist de solução.
 
 A progressão do caso deve estar no plano, nos envelopes, nas dicas contextuais e no guia do facilitador. Não resolva falhas de progressão colocando interpretação dentro do material do jogador.
 
+## Guardrail anti-obviedade
+
+Use `docs/ANTI_OBVIEDADE.md` como régua específica para impedir que documentos de jogador entreguem a solução cedo demais. O guia detalha regras para logs, chats, depoimentos, E1, linguagem conclusiva, campos internos e exemplos dos canônicos Mirante e Hotel Aurora.
+
+O validator integra essas regras por meio de `generator/obviousness_checker.py`, com códigos `OBV_001` a `OBV_012`. Achados do checker devem ser tratados como revisão editorial do documento, não como convite para mover gabarito para outro documento de jogador.
+
 ## Contrato editorial de progressão
 
 Todo caso precisa de uma pergunta pública clara, com:

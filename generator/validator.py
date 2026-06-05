@@ -44,9 +44,11 @@ except ImportError:  # Execução direta: python generator/validator.py
 
 try:  # Execução como pacote: python -m generator.validator
     from .clue_graph import analyze_clue_graph, build_clue_graph
+    from .obviousness_checker import ObviousnessSeverity, check_obviousness
     from .playtest_metrics import analyze_playtest
 except ImportError:  # Execução direta: python generator/validator.py
     from clue_graph import analyze_clue_graph, build_clue_graph  # type: ignore[no-redef]
+    from obviousness_checker import ObviousnessSeverity, check_obviousness  # type: ignore[no-redef]
     sys.path.append(str(Path(__file__).resolve().parents[1]))
     from generator.playtest_metrics import analyze_playtest  # type: ignore[no-redef]
 
@@ -282,6 +284,7 @@ class BlueprintValidator:
         self._verificar_autossuficiencia()
         self._verificar_playtest_metrics()
         self._verificar_conteudo_schema()
+        self._verificar_obviedade()
         self._calcular_risco()
         self._gerar_resumo()
         return self.resultado
@@ -1120,6 +1123,25 @@ class BlueprintValidator:
                         ),
                         documento=doc.codigo,
                     ))
+
+    def _verificar_obviedade(self) -> None:
+        """Integra o guardrail anti-obviedade ao resultado do validator."""
+        blueprint_dict = self.bp.model_dump(mode="json")
+        report = check_obviousness(blueprint_dict)
+        severity_map = {
+            ObviousnessSeverity.CRITICAL: Severidade.CRITICO,
+            ObviousnessSeverity.MODERATE: Severidade.MODERADO,
+            ObviousnessSeverity.WARNING: Severidade.AVISO,
+        }
+        for finding in report.findings:
+            detail_parts = [part for part in [finding.detail, finding.path] if part]
+            self.resultado.adicionar(Erro(
+                codigo=finding.code,
+                severidade=severity_map[finding.severity],
+                mensagem=finding.message,
+                detalhe=" | ".join(detail_parts) if detail_parts else None,
+                documento=finding.document,
+            ))
 
     def _calcular_risco(self) -> None:
         criticos = len(self.resultado.criticos)

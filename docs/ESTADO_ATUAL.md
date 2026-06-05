@@ -47,6 +47,7 @@ Funcionalidades já existentes no repositório incluem:
 - guia de impressão;
 - visual procedural;
 - métricas de playtest;
+- guardrail anti-obviedade integrado ao validator;
 - package builder;
 - manifest;
 - print manifest;
@@ -185,6 +186,15 @@ Não deve conter:
 - texto que explique por que ninguém viu ou como a rota ocorreu.
 
 A Galeria/Vitrine interna deve ter acesso visual pelo corredor, não depender de passagem por doca, depósito ou reserva técnica.
+
+### Guardrail anti-obviedade
+
+Foi adicionado um guardrail em duas camadas para proteger documentos de jogador contra obviedade excessiva:
+
+- documentação editorial em `docs/ANTI_OBVIEDADE.md`;
+- checker automático em `generator/obviousness_checker.py`, integrado ao validator com códigos `OBV_001` a `OBV_012`.
+
+O objetivo é impedir confissões, conclusões prontas, chats explicativos, depoimentos oniscientes, vazamento de campos internos e nome do culpado associado a ação incriminadora em contexto crítico, sem bloquear a ambiguidade boa dos canônicos atuais.
 
 ### Progressão, motivação e guia operacional
 
