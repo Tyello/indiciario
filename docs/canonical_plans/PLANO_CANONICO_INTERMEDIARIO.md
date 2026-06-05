@@ -14,6 +14,10 @@ Título provisório:
 
 > **O Último Brinde do Hotel Aurora**
 
+Direção de twist escolhida:
+
+> Helena está viva. O desaparecimento não é um sequestro clássico nem uma fuga simples. A virada é que a presença final de Helena no jantar foi fabricada por sinais indiretos — objeto pessoal, lugar à mesa, fala conveniente e registro ambíguo — para fazer todos acreditarem que ela saiu voluntariamente depois do brinde. Na verdade, ela já havia deixado o salão antes, atraída por uma mensagem aparentemente confiável.
+
 Este título ainda pode mudar. O objetivo agora é consolidar núcleo dramático, suspeitos, curva de suspeita e plano documental antes de qualquer blueprint JSON.
 
 ## Premissa editorial
@@ -143,6 +147,76 @@ Mitigação:
 - evitar muitos registros frios;
 - fazer cada suspeito ter comportamento emocionalmente plausível;
 - incluir objeto/documento que muda de significado no E2.
+
+## Plot twist recomendado
+
+### Twist central
+
+Helena não desapareceu no momento em que todos acham que ela desapareceu.
+
+A presença dela no fim do jantar foi fabricada por sinais indiretos:
+
+- o lugar dela permaneceu montado;
+- uma echarpe/broche/carteira dela aparece em local visível;
+- alguém afirma tê-la visto perto do terraço, mas só viu silhueta, tecido ou movimento;
+- um registro de acesso sugere deslocamento, mas registra cartão/objeto, não necessariamente a pessoa;
+- a fala de um convidado no brinde mantém a impressão social de que Helena ainda estava por perto.
+
+No E1, isso sustenta a mentira aparente: Helena saiu por vontade própria depois de uma tensão.
+
+No E2, os jogadores percebem que a pergunta correta não era “por onde Helena saiu?”, mas:
+
+> quem precisava que todos acreditassem que Helena ainda estava no jantar naquele horário?
+
+### Estado/destino de Helena
+
+Direção recomendada:
+
+- Helena está viva;
+- não há morte nem violência gráfica;
+- ela foi atraída para uma suíte/sala de memória/antiga biblioteca por uma mensagem que parecia legítima;
+- ficou temporariamente isolada, retida ou impossibilitada de voltar ao salão durante o brinde;
+- o objetivo do culpado era impedir que ela fizesse um anúncio público, recuperasse um documento ou revelasse uma verdade sobre o hotel.
+
+Isso mantém o tom jogável e evita transformar o caso em crime pesado demais.
+
+### Objeto de dupla interpretação
+
+Objeto recomendado: **echarpe de Helena com broche antigo da família Valença**.
+
+No E1:
+
+- a echarpe/broche sugere que Helena esteve no terraço ou saiu por vontade própria;
+- testemunhas associam a peça à presença dela;
+- o objeto funciona como sinal social de presença.
+
+No E2:
+
+- o broche/echarpe prova que alguém fabricou a presença de Helena;
+- uma marca, dobra, respingo, posição ou detalhe de fecho mostra que o objeto foi colocado depois;
+- a peça não prova que Helena estava ali; prova que alguém queria que parecesse estar.
+
+### Documento que recontextualiza o E1
+
+Documento recomendado para o E2:
+
+- uma mensagem completa ou bilhete recuperado, mostrando que Helena foi chamada para a sala de memória/suíte antes do brinde;
+- ou um registro de rouparia/serviço mostrando que a echarpe foi movimentada por outra pessoa;
+- ou uma anotação de staff indicando que o objeto foi encontrado/entregue antes do horário em que supostamente Helena o usava.
+
+O documento não deve dizer “isso prova que o objeto foi plantado”. Ele deve apresentar fato bruto que muda a leitura.
+
+### Por que o twist é justo
+
+O twist é justo se o E1 já contém sinais ambíguos:
+
+- ninguém tem visão direta confiável de Helena no momento final;
+- há mais inferência do que testemunho;
+- o objeto pessoal aparece como prova fraca;
+- registros físicos não identificam corpo/pessoa, apenas cartão, acesso ou objeto;
+- depoimentos usam verbos como “achei”, “parecia”, “vi de relance”, “pensei que era”.
+
+O twist é injusto se o E1 disser claramente que alguém viu Helena de perto no horário final e depois o E2 negar sem explicação.
 
 ## Núcleo dramático provisório
 
@@ -412,7 +486,7 @@ Não é blueprint ainda. É uma lista de funções documentais.
 | E1-06 | planta do andar | ferramenta | mapa neutro, sem rota |
 | E1-07 | registro de recepção/elevador/cartão | pista principal | mostra deslocamento ou uso de acesso |
 | E1-08 | mensagem/bilhete parcial | pista ambígua | sugere chamado legítimo, mas incompleto |
-| E1-09 | descrição de objeto pessoal | pista ambígua | não deve revelar ainda que foi plantado |
+| E1-09 | descrição da echarpe/broche | pista ambígua | sugere presença de Helena, mas não deve provar presença |
 
 ### Envelope 2
 
@@ -422,7 +496,7 @@ Não é blueprint ainda. É uma lista de funções documentais.
 | E2-02 | mensagem completa ou origem do bilhete | pista principal | revela manipulação sem checklist |
 | E2-03 | registro de bastidor/serviço | confirmação | confirma meio físico |
 | E2-04 | documento familiar/contrato/anúncio | motivo | explica por que impedir o brinde importava |
-| E2-05 | objeto pessoal recontextualizado | virada | prova fabricação de presença |
+| E2-05 | reinterpretação da echarpe/broche | virada | mostra que o objeto foi sinal fabricado de presença |
 | E2-06 | depoimento de descarte | descarta red herring forte |
 | E2-07 | evidência final | confirmação independente | fecha autoria/motivo |
 | E2-08 | dicas contextuais/guia | separado | não entra como documento de jogador se for dica/guia |
@@ -450,6 +524,11 @@ Não é blueprint ainda. É uma lista de funções documentais.
     "risco": "Dois envelopes ficarem lineares demais: E1 pergunta, E2 responde.",
     "impacto": "O caso perde sensação de virada e vira confirmação simples.",
     "mitigacao": "E2 deve recontextualizar pelo menos um documento importante do E1 e descartar red herrings fortes."
+  },
+  {
+    "risco": "Twist parecer truque injusto.",
+    "impacto": "Jogadores sentem que o E2 negou o E1 em vez de reinterpretá-lo.",
+    "mitigacao": "O E1 deve usar linguagem ambígua de percepção e sinais indiretos, nunca visão direta incontestável de Helena."
   }
 ]
 ```
@@ -486,15 +565,18 @@ Não é blueprint ainda. É uma lista de funções documentais.
 Antes de gerar JSON, ainda falta decidir:
 
 1. culpado final: manter Lívia como articuladora principal ou escolher outro suspeito;
-2. destino/estado de Helena: desaparecimento sem dano, retenção temporária, fuga induzida ou encenação parcial;
-3. qual é o objeto pessoal com dupla interpretação;
-4. qual é o documento de E2 que recontextualiza a motivação;
+2. localização exata onde Helena fica temporariamente isolada: suíte reservada, sala de memória, biblioteca antiga ou área de serviço;
+3. detalhe físico da echarpe/broche que prova movimentação posterior sem entregar cedo demais;
+4. documento específico do E2 que revela o motivo familiar/profissional;
 5. tom final: elegante/social, familiar sombrio ou suspense leve;
 6. se haverá criança no público-alvo de teste ou se este canônico será mais adulto.
 
-Decisão já tomada:
+Decisões já tomadas:
 
-- estrutura com **2 envelopes**.
+- estrutura com **2 envelopes**;
+- plot twist com **presença final fabricada**;
+- Helena **viva**, sem morte ou violência gráfica;
+- objeto de dupla interpretação recomendado: **echarpe com broche antigo da família Valença**.
 
 ## Critério de aprovação do plano
 
