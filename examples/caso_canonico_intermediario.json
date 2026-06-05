@@ -9,18 +9,18 @@
   "numero_jogadores": "3 a 5",
   "formato_envelopes": 2,
   "premissa": "Durante um jantar fechado de reabertura do histórico Hotel Aurora, a anfitriã Helena Valença deixa o salão antes do brinde que formalizaria a nova fase do hotel. Otto Almeida, investidor convidado, pede uma apuração interna porque a interrupção compromete a noite e pode indicar retirada pessoal, falha de condução do evento ou algum ponto sensível nos preparativos.",
-  "verdade_real": "Marta Salgado atraiu Helena Valença para a sala de memória antes do brinde usando uma referência discreta à pasta Aurora. Helena conhecia a pasta e a promessa antiga como memória institucional, mas não havia recebido de Caio a lista atual de pessoas ainda ligadas à ala antiga; por isso preparava uma homenagem simbólica sem enfrentar a consequência concreta. Marta, guardiã informal da ala, entendeu o brinde como apagamento de moradores e antigos vínculos do hotel, isolou Helena temporariamente e manipulou sinais indiretos de presença, incluindo a echarpe com broche e registros ambíguos de circulação.",
+  "verdade_real": "Marta Salgado atraiu Helena Valença para a sala de memória antes do brinde usando uma referência discreta ao material do brinde e à pasta Aurora. Helena conhecia a pasta e a promessa antiga como memória institucional, mas não havia recebido de Caio a lista atual de pessoas ainda ligadas à ala antiga; por isso preparava uma homenagem simbólica e ambígua, incorporando a ala ao projeto de memória e expansão sem enfrentar a consequência concreta. Marta, guardiã informal da ala, entendeu o brinde como apagamento de moradores e antigos vínculos do hotel, isolou Helena temporariamente e manipulou sinais indiretos de presença, incluindo a echarpe com broche e registros ambíguos de circulação.",
   "executor_id": "02",
   "planejador_id": "02",
   "beneficiario_id": "02",
   "motivacao": "Marta queria impedir que o brinde transformasse a memória viva da ala antiga em decoração de reabertura enquanto pessoas ainda ligadas ao hotel eram tratadas como detalhe administrativo.",
-  "metodo_ocultacao": "Convocação discreta por anotação ligada ao discurso, isolamento temporário na sala de memória e fabricação de presença por objeto pessoal, chave antiga e percepções de relance.",
+  "metodo_ocultacao": "Convocação discreta por referência em folha ligada ao discurso, isolamento temporário na sala de memória e fabricação de presença por objeto pessoal, chave antiga e percepções de relance.",
   "erro_que_permite_descobrir": "A presença final de Helena depende de sinais indiretos; ao separar pessoa, objeto e registro, fica claro que a saída está ligada ao brinde e à pasta Aurora, não a uma retirada social espontânea.",
   "cadeia_causal": [
-    "Helena prepara um brinde para reabrir publicamente o Aurora e mencionar a ala antiga como memória institucional.",
+    "Helena prepara um brinde para reabrir publicamente o Aurora e mencionar a ala antiga como memória institucional e etapa futura do projeto.",
     "Caio não repassa a Helena a lista atual de pessoas ainda ligadas à ala antiga, mantendo a tensão concreta fora do discurso oficial.",
     "Marta descobre que a homenagem trataria a pasta Aurora como símbolo, não como consequência atual para moradores e antigos funcionários.",
-    "Helena deixa o salão antes do brinde após conferir no programa uma referência marginal ligada ao brinde e ao Aurora.",
+    "Helena deixa o salão antes do brinde depois de conferir uma folha dobrada ligada ao brinde e ao Aurora.",
     "Sinais sociais e objetos mantêm a impressão de que Helena está próxima do terraço enquanto a apuração inicial fica sem resposta final.",
     "Registros de E2 revelam a omissão, o motivo de Marta, o uso da sala de memória e os limites dos falsos caminhos."
   ],
@@ -245,7 +245,8 @@
       "pistas_contidas": [
         "lugares marcados",
         "proximidades sociais",
-        "cadeiras mantidas"
+        "cadeira de Helena mantida",
+        "echarpe citada por convidados"
       ],
       "confirma": [
         "E1-05"
@@ -276,7 +277,7 @@
         "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
         "SAUDACAO": "Registro interno",
         "ASSUNTO": "AUR-MESA-17 — Lugares marcados",
-        "CORPO_CARTA": "<p><strong>Mesa presidencial:</strong> Helena Valença ao centro; Lívia Valença à direita; Otto Almeida à esquerda; Isadora Nunes no canto voltado ao terraço.</p><p><strong>Mesa de serviço visível:</strong> Caio Fontes permaneceu entre recepção do andar e salão; Marta Salgado coordenou enxoval, sala de memória e apoio a convidados antigos; Renato Viana entrou apenas para apresentação do menu.</p><p><strong>Observação da recepção:</strong> o lugar de Helena continuou montado até 21h40, com taça limpa e guardanapo dobrado. A echarpe vinho foi citada por dois convidados como peça vista perto do terraço, sempre de passagem.</p><p><strong>Nota de cadastro:</strong> o Aurora operou por anos em regime reduzido. A ala antiga permaneceu vinculada a antigos funcionários, familiares e pessoas abrigadas pelo hotel, sem circulação pública durante o jantar.</p>",
+        "CORPO_CARTA": "<p><strong>Mesa presidencial:</strong> Helena Valença ao centro; Lívia Valença à direita; Otto Almeida à esquerda; Isadora Nunes no canto voltado ao terraço.</p><p><strong>Apoio visível do jantar:</strong> Caio Fontes circulou entre recepção do andar e salão; Marta Salgado acompanhou convidados antigos na chegada e conferiu enxoval próximo à rouparia; Renato Viana entrou no salão apenas para apresentação do menu.</p><p><strong>Observação da recepção:</strong> o lugar de Helena continuou montado até 21h40, com taça limpa e guardanapo dobrado. A echarpe vinho foi citada por dois convidados como peça vista perto do terraço, sempre de passagem.</p>",
         "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
         "ASSINATURA_CURSIVA": "Caio Fontes",
         "NOME_ASSINANTE": "Caio Fontes",
@@ -298,10 +299,12 @@
       "pistas_contidas": [
         "janela do brinde",
         "sobremesa",
-        "equipe na copa"
+        "equipe na copa",
+        "vento no terraço"
       ],
       "confirma": [
-        "E1-04"
+        "E1-04",
+        "E1-06"
       ],
       "confirmado_por": [
         "E2-06"
@@ -323,7 +326,7 @@
         "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
         "SAUDACAO": "Registro interno",
         "ASSUNTO": "AUR-MENU-17 — Sequência de serviço",
-        "CORPO_CARTA": "<p><strong>20h00</strong> Recepção no salão de jantar. <strong>20h20</strong> entrada fria. <strong>20h45</strong> prato principal. <strong>21h12</strong> sobremesa sob cúpulas de prata na copa de apoio. <strong>21h30</strong> brinde de reabertura previsto no salão, com portas do terraço recolhidas.</p><p>Durante a sobremesa, a equipe de cozinha permanece entre copa e passe de serviço. O corredor de serviço liga copa, rouparia pequena, recepção do andar e escada de serviço. A sala de memória fica depois da recepção, em área silenciosa usada para visitas guiadas curtas.</p><p>A ala antiga não integra o circuito dos convidados. O acesso cotidiano passa por corredores internos usados por governança e antigos ocupantes cadastrados.</p><p>Renato Viana solicitou que a equipe não levasse bandejas ao terraço entre 21h15 e 21h32 por causa do vento.</p>",
+        "CORPO_CARTA": "<p><strong>20h00</strong> Recepção no salão de jantar. <strong>20h20</strong> entrada fria. <strong>20h45</strong> prato principal. <strong>21h12</strong> sobremesa sob cúpulas de prata na copa de apoio. <strong>21h30</strong> brinde de reabertura previsto no salão, com portas do terraço recolhidas por causa do vento.</p><p>Durante a sobremesa, a equipe de cozinha permanece entre copa e passe de serviço. O corredor de serviço liga copa, rouparia pequena, recepção do andar e escada de serviço. A sala de memória fica depois da recepção, em área silenciosa usada para visitas guiadas curtas.</p>",
         "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
         "ASSINATURA_CURSIVA": "Renato Viana",
         "NOME_ASSINANTE": "Renato Viana",
@@ -345,7 +348,8 @@
       "pistas_contidas": [
         "gerência controlando narrativa",
         "ocorrência pública",
-        "janelas de circulação"
+        "janelas de circulação",
+        "orientação verbal sobre o terraço"
       ],
       "confirma": [
         "E1-07"
@@ -370,7 +374,7 @@
         "DATA": "17/05/2026",
         "LOCALIZACAO": "Andar social do Hotel Aurora",
         "HORA_OCORRENCIA": "23h10",
-        "DESCRICAO_OCORRENCIA": "<p>Às 21h18 eu estava na recepção do andar porque a mesa do investidor pediu troca de taça e uma convidada reclamou do som vindo do elevador antigo. Vi Renato discutir com a copa sobre o tempo da sobremesa. Não vi Helena sair pelo elevador social.</p><p>Às 21h27 houve queda de uma bandeja perto da porta do salão. Voltei para acalmar os convidados. Quando Otto pediu o brinde, achei que Helena estava no terraço ou na sala de memória com algum convidado antigo. Pedi discrição à equipe para não transformar atraso em alarme.</p>",
+        "DESCRICAO_OCORRENCIA": "<p>Às 21h18 eu estava na recepção do andar porque a mesa do investidor pediu troca de taça e uma convidada reclamou do som vindo do elevador antigo. Vi Renato discutir com a copa sobre o tempo da sobremesa. Ouvi Renato pedir à copa que evitasse bandejas no terraço por causa do vento; na hora pareceu cuidado normal de serviço. Não vi Helena sair pelo elevador social.</p><p>Às 21h27 houve queda de uma bandeja perto da porta do salão. Voltei para acalmar os convidados. Quando Otto pediu o brinde, achei que Helena estava no terraço ou na sala de memória com algum convidado antigo. Pedi discrição à equipe para não transformar atraso em alarme.</p>",
         "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_GLIFO": "NSP",
@@ -445,7 +449,8 @@
       "pistas_contidas": [
         "fluxos do hotel",
         "ambientes por linguagem natural",
-        "sala de memória"
+        "sala de memória",
+        "serviço reduzido no terraço"
       ],
       "confirma": [
         "E1-03",
@@ -472,7 +477,7 @@
         "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
         "SAUDACAO": "Registro interno",
         "ASSUNTO": "AUR-CIRC-17 — Fluxo de serviço do andar social",
-        "CORPO_CARTA": "<p>O salão de jantar se abre para o terraço envidraçado por portas recolhíveis. A recepção do andar fica antes do elevador social e recebe convidados que sobem da portaria. O corredor de serviço passa atrás da copa de apoio e permite chegar à rouparia pequena sem cruzar a mesa principal.</p><p>A sala de memória permanece destrancada para visitas acompanhadas até 20h50. Depois disso, a chave antiga fica com a governança ou com a recepção do andar, conforme necessidade de acervo.</p><p>A suíte reservada Aurora 3 fica no mesmo corredor silencioso da sala de memória. Ela foi preparada para descanso de convidados idosos e não integra o roteiro público do jantar.</p>",
+        "CORPO_CARTA": "<p>O salão de jantar se abre para o terraço envidraçado por portas recolhíveis. A recepção do andar fica antes do elevador social e recebe convidados que sobem da portaria. O corredor de serviço passa atrás da copa de apoio e permite chegar à rouparia pequena sem cruzar a mesa principal.</p><p>A sala de memória permanece destrancada para visitas acompanhadas até 20h50. Depois disso, a chave antiga fica com a governança ou com a recepção do andar, conforme necessidade de acervo.</p><p>A suíte reservada Aurora 3 fica no mesmo corredor silencioso da sala de memória. Ela foi preparada para descanso de convidados idosos e não integra o roteiro público do jantar.</p><p>Copa registrou orientação verbal para concentrar serviço no salão durante a sobremesa, evitando circulação de bandejas no terraço por causa do vento.</p>",
         "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
         "ASSINATURA_CURSIVA": "Marta Salgado",
         "NOME_ASSINANTE": "Marta Salgado",
@@ -607,17 +612,16 @@
       "envelope": "E1",
       "tipo": "depoimento",
       "emocao_esperada": "pista social ambígua",
-      "objetivo_narrativo": "Mostrar pressão jornalística e uma anotação marginal ambígua, sem transformar o recado em seta central.",
+      "objetivo_narrativo": "Mostrar pressão jornalística e uma percepção indireta sobre material do brinde, sem transformar a folha em recado central.",
       "pistas_contidas": [
-        "anotações de entrevista",
-        "programa do jantar",
+        "folha dobrada",
+        "palavras soltas do brinde",
         "percepção no terraço"
       ],
       "confirma": [
         "E1-05"
       ],
       "confirmado_por": [
-        "E2-01",
         "E2-02"
       ],
       "red_herring_potencial": "Isadora pressiona Helena e observa demais",
@@ -637,7 +641,7 @@
         "DATA": "17/05/2026",
         "LOCALIZACAO": "Andar social do Hotel Aurora",
         "HORA_OCORRENCIA": "23h18",
-        "DESCRICAO_OCORRENCIA": "<p>Eu queria uma frase de Helena sobre a reabertura. No meu programa do jantar há uma anotação de margem, feita por volta de 21h02: “brinde — Aurora?”. Não consigo dizer se copiei de uma fala dela, se era lembrete meu ou se estava marcado quando ela conferiu a ordem do discurso.</p><p>Helena fechou o programa, levantou pelo lado da recepção e não foi na direção do terraço. Depois vi movimento vinho perto do vidro do terraço. Não cheguei perto porque Lívia estava olhando para o mesmo lado e eu não quis parecer invasiva. Minha pauta era a família, não a cozinha.</p>",
+        "DESCRICAO_OCORRENCIA": "<p>Eu queria uma frase de Helena sobre a reabertura. Por volta de 21h02, vi Helena de relance mexendo em uma folha dobrada, menor que o cardápio impresso, como se fosse parte do discurso ou material de apoio do brinde. Consegui ler apenas palavras soltas: “brinde” e “Aurora”. Não sei se era discurso, lembrete, anexo ou página de apoio.</p><p>Helena dobrou a folha, levantou pelo lado da recepção e não foi na direção do terraço. Depois vi movimento vinho perto do vidro do terraço. Não cheguei perto porque Lívia estava olhando para o mesmo lado e eu não quis parecer invasiva. Minha pauta era a família, não a cozinha.</p>",
         "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_GLIFO": "NSP",
@@ -697,73 +701,73 @@
     },
     {
       "codigo": "E2-01",
-      "titulo": "Complemento de declaração de Isadora Nunes",
+      "titulo": "Ficha administrativa da ala Aurora",
       "envelope": "E2",
-      "tipo": "depoimento",
-      "emocao_esperada": "recontextualização de percepção",
-      "objetivo_narrativo": "Recontextualizar a anotação e a qualidade do testemunho visual sem resolver tudo sozinha.",
+      "tipo": "manual",
+      "emocao_esperada": "consequência atual da promessa",
+      "objetivo_narrativo": "Mostrar em documento bruto que a ala antiga ainda tinha uso reduzido e lista atual retida pela gerência.",
       "pistas_contidas": [
-        "anotação parcial",
-        "visão indireta",
-        "tecido vinho"
+        "ala antiga em uso",
+        "ocupantes atuais",
+        "lista retida pela gerência",
+        "lista não anexada ao brinde"
       ],
       "confirma": [
-        "E1-08",
-        "E1-05"
+        "E2-04",
+        "E2-02"
       ],
       "confirmado_por": [
-        "E2-05"
+        "E2-07"
       ],
       "red_herring_potencial": null,
-      "risco_ambiguidade": "medio",
+      "risco_ambiguidade": "baixo",
       "ids_citados": [
-        "05",
-        "01",
-        "03"
+        "02",
+        "04",
+        "01"
       ],
       "codigos_citados": [],
       "conteudo": {
-        "ORGAO_NOME": "Hotel Aurora",
-        "ORGAO_SUBTITULO": "Registro de ocorrência interna — reabertura",
-        "NUMERO_CASO": "AUR-1705/26",
-        "TIPO_DOCUMENTO": "Termo de declaração",
-        "TIPO_OCORRENCIA": "Ausência de anfitriã durante evento fechado",
-        "DATA": "17/05/2026",
-        "LOCALIZACAO": "Andar social do Hotel Aurora",
-        "HORA_OCORRENCIA": "00h12",
-        "DESCRICAO_OCORRENCIA": "<p>Revendo minhas anotações e a foto do programa, a marca da margem não parece uma frase completa. O que consigo ler é “brinde / Aurora / memória”. Não vi quem escreveu primeiro nem posso garantir que tenha sido um recado entregue a Helena. Ela leu a página, guardou o programa do jantar e seguiu pelo lado da recepção.</p><p>Sobre o terraço: vi tecido vinho e metal claro por trás do vidro. Não vi rosto, mãos ou a pessoa de frente. Lívia estava perto de mim quando eu virei, mas também não avançou até o cabide.</p>",
-        "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
-        "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
-        "ASSINATURA_GLIFO": "NSP",
-        "DATA_HORA_ASSINATURA": "17/05/2026 — 00h12",
-        "CAMPO_NOME": "Declarante",
-        "NOME_ENVOLVIDO": "Isadora Nunes",
-        "DATA_NASC": "informado em cadastro do evento",
-        "CONDICAO": "Jornalista convidada",
-        "DOCUMENTO_PESSOAL": "registro interno retido pela recepção",
-        "MOSTRAR_CARIMBO": false,
-        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "05"
+        "NOME_ORGANIZACAO": "Hotel Aurora",
+        "SUBTITULO_ORGANIZACAO": "Administração local — Governança e gerência",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 118 — Centro Histórico",
+        "CONTATO": "arquivo@aurora.local | ramal interno 214",
+        "CNPJ": "Aurora Administração Hoteleira Ltda. — CNPJ 18.045.991/0001-72",
+        "COR_TOPO": "#8f5b3e",
+        "LOCAL_DATA": "Bela Vista, atualização conferida em 16 de maio de 2026",
+        "SAUDACAO": "Controle interno de ocupação",
+        "ASSUNTO": "AUR-ALA-ANTIGA — Relação local retida",
+        "CORPO_CARTA": "<p><strong>Ala Aurora — uso reduzido</strong></p><p>Unidades A-1, A-2 e A-4 permanecem vinculadas a antigos funcionários, familiares ou pessoas autorizadas pela governança histórica. A unidade A-3 está reservada para descanso eventual de convidados idosos durante eventos fechados.</p><p><strong>Relação nominal local:</strong> caderno físico sob guarda da gerência geral, conferido por Marta Salgado em 16/05. Cópia integral não anexada ao release de reabertura nem ao material de brinde entregue à direção executiva.</p><p><strong>Observação administrativa:</strong> Caio Fontes solicitou retenção da lista completa até reunião posterior com jurídico e investidores. Encaminhamento pendente em 17/05, antes do brinde de reabertura.</p>",
+        "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita da administração.",
+        "ASSINATURA_CURSIVA": "Caio Fontes",
+        "NOME_ASSINANTE": "Caio Fontes",
+        "CARGO_ASSINANTE": "Gerência Geral",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Ficha administrativa",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "04",
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
       }
     },
     {
       "codigo": "E2-02",
-      "titulo": "E-mail preservado sobre o discurso",
+      "titulo": "Rascunho impresso do brinde de reabertura",
       "envelope": "E2",
-      "tipo": "email_institucional",
-      "emocao_esperada": "motivo documental",
-      "objetivo_narrativo": "Mostrar que Helena planejava tratar a pasta Aurora como memorial e que dependia de Caio para a informação atual da ala.",
+      "tipo": "manual",
+      "emocao_esperada": "motivo documental ambíguo",
+      "objetivo_narrativo": "Mostrar o tom público planejado por Helena e deixar implícito que a ala antiga seria tratada como memória institucional e expansão futura.",
       "pistas_contidas": [
-        "brinde",
-        "pasta Aurora",
-        "lista atual não repassada",
-        "memorial simbólico"
+        "brinde de reabertura",
+        "ala antiga como área histórica",
+        "expansão futura",
+        "homenagem institucional"
       ],
       "confirma": [
         "E1-08"
       ],
       "confirmado_por": [
         "E2-04",
-        "E2-07"
+        "E2-01"
       ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "medio",
@@ -774,18 +778,25 @@
       ],
       "codigos_citados": [],
       "conteudo": {
-        "REMETENTE_NOME": "Helena Valença",
-        "REMETENTE_EMAIL": "helena.valenca@aurora.local",
-        "DESTINATARIO_EMAIL": "caio.fontes@aurora.local",
-        "COPIA": "marta.salgado@aurora.local",
-        "DESTINATARIO_LABEL": "caio.fontes@aurora.local",
-        "DATA_HORA": "17/05/2026 — 18h44",
-        "ASSUNTO": "Versão final do brinde",
-        "AVATAR_INICIAL": "H",
-        "AVATAR_COR": "#7b2d42",
-        "CORPO_EMAIL": "<p>Caio, mantenha a versão impressa comigo até a sobremesa. Se eu mudar uma frase no salão, use a pasta Aurora da sala de memória como base, não o release dos investidores.</p><p>Quero mencionar a antiga ala de funcionários com cuidado. A proposta comercial sai amanhã, mas hoje não vou fingir que aquela ala é apenas metragem disponível.</p><p>Ainda não recebi sua relação atualizada de ocupantes e dependentes da ala antiga. Sem essa lista, vou tratar o trecho como memorial institucional e retomar as providências concretas depois da coletiva.</p><p>Depois do brinde, Marta pode devolver ao arquivo as cartas antigas que estavam na mesa de apoio.</p>",
-        "NOTA_RODAPE": "Mensagem arquivada no servidor local do Hotel Aurora.",
-        "ANEXOS": false
+        "NOME_ORGANIZACAO": "Hotel Aurora",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Reabertura — Arquivo de Mesa",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 118 — Centro Histórico",
+        "CONTATO": "arquivo@aurora.local | ramal interno 214",
+        "CNPJ": "Aurora Administração Hoteleira Ltda. — CNPJ 18.045.991/0001-72",
+        "COR_TOPO": "#8f5b3e",
+        "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
+        "SAUDACAO": "Rascunho impresso — mesa de apoio",
+        "ASSUNTO": "AUR-BRINDE-17 — Versão anotada",
+        "CORPO_CARTA": "<p><strong>Brinde de reabertura — versão de salão</strong></p><p>Boa noite. O Aurora reabre não como peça de museu, mas como casa capaz de receber outra vez quem chega à cidade procurando abrigo, trabalho e permanência.</p><p>Depois do jantar, teremos um tour completo pelo hotel restaurado: salão, terraço, suítes históricas e a antiga ala Aurora, que passa a integrar a próxima etapa do projeto como área histórica de expansão e memória.</p><p>Quero homenagear os funcionários antigos, suas famílias e todos que mantiveram luz acesa quando este prédio parecia fora do tempo. O memorial previsto para a ala antiga será apresentado com cuidado, preservando nomes, objetos e histórias que pertencem ao Aurora.</p><p><em>Anotação manuscrita à margem:</em> “não prometer prazo hoje; falar em visita acompanhada e projeto completo”.</p>",
+        "FORMULA_ENCERRAMENTO": "Cópia impressa recolhida no arquivo da administração.",
+        "ASSINATURA_CURSIVA": "Helena Valença",
+        "NOME_ASSINANTE": "Helena Valença",
+        "CARGO_ASSINANTE": "Direção executiva",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Rascunho de brinde",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "01",
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
       }
     },
     {
@@ -894,21 +905,21 @@
     },
     {
       "codigo": "E2-04",
-      "titulo": "Carta antiga e ficha da ala Aurora",
+      "titulo": "Carta original da promessa",
       "envelope": "E2",
       "tipo": "manual",
       "emocao_esperada": "virada emocional",
-      "objetivo_narrativo": "Mostrar a promessa familiar e sua consequência atual na ala antiga.",
+      "objetivo_narrativo": "Mostrar a promessa familiar preservada como documento antigo, emocional e limpo.",
       "pistas_contidas": [
         "promessa antiga",
         "ala de funcionários",
-        "ocupação atual",
-        "memória viva"
+        "memória familiar"
       ],
       "confirma": [
         "E2-02"
       ],
       "confirmado_por": [
+        "E2-01",
         "E2-07"
       ],
       "red_herring_potencial": null,
@@ -927,8 +938,8 @@
         "COR_TOPO": "#8f5b3e",
         "LOCAL_DATA": "Bela Vista, 4 de setembro de 1968",
         "SAUDACAO": "Helena, para leitura familiar",
-        "ASSUNTO": "ARQ-VAL-1968/2026 — Carta preservada e ficha de ala",
-        "CORPO_CARTA": "<p><strong>Transcrição da carta preservada — 4 de setembro de 1968</strong></p><p>Minha filha, se o Aurora voltar a abrir suas portas, lembre que a ala dos fundos não foi sobra de obra. Foi casa, descanso e abrigo de quem manteve este hotel aceso quando a família sumiu para resolver seus próprios nomes.</p><p>Prometi a Marta e aos demais que aquelas salas jamais seriam tratadas como depósito de oportunidades. Se a administração mudar, que ao menos uma parte permaneça como memória dos funcionários, não como vitrine para comprador.</p><p>Guarde esta carta na sala de memória. Ela não vale como contrato, mas vale como palavra.</p><hr><p><strong>Anexo físico grampeado ao arquivo — ficha administrativa atualizada em maio de 2026</strong></p><p>Ala antiga com quatro unidades em uso reduzido por antigos funcionários, familiares e pessoas autorizadas pela governança histórica. Relação nominal retida na gerência geral; cópia não anexada ao release de reabertura.</p>",
+        "ASSUNTO": "ARQ-VAL-1968 — Carta preservada",
+        "CORPO_CARTA": "<p><strong>Transcrição da carta preservada — 4 de setembro de 1968</strong></p><p>Minha filha, se o Aurora voltar a abrir suas portas, lembre que a ala dos fundos não foi sobra de obra. Foi casa, descanso e abrigo de quem manteve este hotel aceso quando a família sumiu para resolver seus próprios nomes.</p><p>Prometi a Marta e aos demais que aquelas salas jamais seriam tratadas como depósito de oportunidades. Se a administração mudar, que ao menos uma parte permaneça como memória dos funcionários, não como vitrine para comprador.</p><p>Guarde esta carta na sala de memória. Ela não vale como contrato, mas vale como palavra.</p>",
         "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
         "ASSINATURA_CURSIVA": "A. Valença",
         "NOME_ASSINANTE": "A. Valença",
@@ -991,7 +1002,7 @@
       "objetivo_narrativo": "Dar limites documentais para suspeitos fortes sem virar resposta narrada.",
       "pistas_contidas": [
         "ocorrência pública",
-        "equipe na copa",
+        "Renato preso ao passe da sobremesa",
         "Lívia e Isadora no salão"
       ],
       "confirma": [
@@ -1020,7 +1031,7 @@
         "DATA": "18/05/2026",
         "LOCALIZACAO": "Salão, copa de apoio e recepção do andar",
         "HORA_OCORRENCIA": "00h45",
-        "DESCRICAO_OCORRENCIA": "<p>Entre 21h14 e 21h28, Renato Viana aparece em três recibos de passe assinados pela copa de apoio; duas auxiliares confirmam saída conjunta da sobremesa às 21h29.</p><p>Caio Fontes consta no livro da recepção às 21h27 por atendimento à queda de bandeja na entrada do salão. Otto Almeida e uma convidada assinam o mesmo livro como testemunhas da ocorrência.</p><p>Lívia Valença e Isadora Nunes aparecem no registro fotográfico impresso da mesa presidencial às 21h26, ambas voltadas para o lado do terraço. A imagem não mostra Helena.</p>",
+        "DESCRICAO_OCORRENCIA": "<p>Entre 21h14 e 21h28, Renato Viana aparece em três recibos de passe assinados pela copa de apoio; duas auxiliares confirmam que ele permaneceu no balcão de saída até a liberação conjunta da sobremesa às 21h29.</p><p>Caio Fontes consta no livro da recepção às 21h27 por atendimento à queda de bandeja na entrada do salão. Otto Almeida e uma convidada assinam o mesmo livro como testemunhas da ocorrência.</p><p>Lívia Valença e Isadora Nunes aparecem no registro fotográfico impresso da mesa presidencial às 21h26, ambas voltadas para o lado do terraço. A imagem não mostra Helena.</p>",
         "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_GLIFO": "NSP",
@@ -1135,11 +1146,11 @@
     },
     {
       "codigo": "E2-08",
-      "titulo": "Conversa de bastidores após o brinde",
+      "titulo": "Exportação do grupo operacional do jantar",
       "envelope": "E2",
       "tipo": "chat",
       "emocao_esperada": "camada humana final",
-      "objetivo_narrativo": "Mostrar fala operacional de bastidores e detalhe de objeto sem enunciar solução.",
+      "objetivo_narrativo": "Mostrar conversa operacional de bastidores fornecida pela gerência/recepção e detalhe de objeto sem enunciar solução.",
       "pistas_contidas": [
         "chave antiga",
         "echarpe no cabide",
@@ -1163,14 +1174,14 @@
       "conteudo": {
         "HORA_TELA": "22h58",
         "NOME_GRUPO": "Aurora — bastidores do jantar",
-        "MEMBROS_LISTA": "Caio, Marta, Renato, Camareiras, Recepção",
-        "DATA_CONVERSA": "17 de maio de 2026",
+        "MEMBROS_LISTA": "Caio, Marta, Renato, Camareiras, Bia — recepção, Portaria do andar",
+        "DATA_CONVERSA": "17 de maio de 2026 — exportação fornecida pela gerência/recepção",
         "CONTADOR_NAOVISTOS": "0",
         "MENSAGENS": [
           {
             "DIRECAO": "in",
             "CLASSE_GAP": "normal",
-            "TEXTO_MENSAGEM": "21h08 — Mesa 4 pediu troca de taça. Vou cobrir salão por cinco minutos.",
+            "TEXTO_MENSAGEM": "Mesa 4 pediu troca de taça. Vou cobrir salão por cinco minutos.",
             "HORARIO": "21h08",
             "MOSTRAR_NOME": true,
             "NOME_REMETENTE": "Caio",
@@ -1179,7 +1190,7 @@
           {
             "DIRECAO": "in",
             "CLASSE_GAP": "gap",
-            "TEXTO_MENSAGEM": "21h15 — sobremesa pronta, equipe presa na copa até saída das cúpulas.",
+            "TEXTO_MENSAGEM": "sobremesa pronta, equipe presa na copa até saída das cúpulas.",
             "HORARIO": "21h15",
             "MOSTRAR_NOME": true,
             "NOME_REMETENTE": "Renato",
@@ -1188,16 +1199,16 @@
           {
             "DIRECAO": "in",
             "CLASSE_GAP": "normal",
-            "TEXTO_MENSAGEM": "21h22 — preciso da chave antiga da sala de memória depois do brinde, está no molho cinza?",
+            "TEXTO_MENSAGEM": "preciso da chave antiga da sala de memória depois do brinde, está no molho cinza?",
             "HORARIO": "21h22",
             "MOSTRAR_NOME": true,
-            "NOME_REMETENTE": "Recepção",
+            "NOME_REMETENTE": "Bia — recepção",
             "COR_REMETENTE": "#6a6a6a"
           },
           {
             "DIRECAO": "out",
             "CLASSE_GAP": "normal",
-            "TEXTO_MENSAGEM": "21h23 — molho cinza fica comigo. Depois eu devolvo na portaria do andar.",
+            "TEXTO_MENSAGEM": "molho cinza fica comigo. Depois eu devolvo na portaria do andar.",
             "HORARIO": "21h23",
             "MOSTRAR_NOME": false,
             "DIRECAO_OUT": true,
@@ -1206,7 +1217,7 @@
           {
             "DIRECAO": "in",
             "CLASSE_GAP": "gap",
-            "TEXTO_MENSAGEM": "21h34 — encontrei uma echarpe vinho no cabide do terraço envidraçado. Broche preso, fecho virado para dentro.",
+            "TEXTO_MENSAGEM": "encontrei uma echarpe vinho no cabide do terraço envidraçado. Broche preso, fecho virado para dentro.",
             "HORARIO": "21h34",
             "MOSTRAR_NOME": true,
             "NOME_REMETENTE": "Camareira Ana",
@@ -1218,11 +1229,18 @@
   ],
   "linha_tempo_real": [
     {
+      "data_hora": "17/05/2026 18h30",
+      "evento": "A lista atual da ala Aurora permanece retida na gerência e fora do material de brinde entregue a Helena.",
+      "personagem_id": "04",
+      "documento_prova": "E2-01",
+      "confirmacao_independente": "E2-02"
+    },
+    {
       "data_hora": "17/05/2026 18h44",
-      "evento": "Helena envia versão final do brinde, cobra a lista atual da ala antiga e mantém a pasta Aurora como base simbólica.",
+      "evento": "Helena imprime rascunho do brinde tratando a ala antiga como memória institucional e etapa futura de expansão.",
       "personagem_id": "01",
       "documento_prova": "E2-02",
-      "confirmacao_independente": "E2-04"
+      "confirmacao_independente": "E2-01"
     },
     {
       "data_hora": "17/05/2026 20h40",
@@ -1233,10 +1251,10 @@
     },
     {
       "data_hora": "17/05/2026 21h02",
-      "evento": "Helena confere o programa do jantar, encontra uma referência marginal ligada ao brinde/Aurora e deixa o salão pelo lado da recepção.",
+      "evento": "Helena confere uma folha dobrada ligada ao brinde/Aurora e deixa o salão pelo lado da recepção.",
       "personagem_id": "01",
       "documento_prova": "E1-08",
-      "confirmacao_independente": "E2-01"
+      "confirmacao_independente": "E2-02"
     },
     {
       "data_hora": "17/05/2026 21h18",
@@ -1321,8 +1339,8 @@
     },
     {
       "nome": "omissao_da_ala_antiga",
-      "documento_principal": "E2-02",
-      "confirmacao": "E2-04",
+      "documento_principal": "E2-01",
+      "confirmacao": "E2-02",
       "personagem_id": "02"
     },
     {
@@ -1340,7 +1358,7 @@
       "documento": "E1-05",
       "o_que_sugere": "Helena parece ter ido ao terraço após tensão familiar.",
       "o_que_prova": "A testemunha se apoia em percepção indireta.",
-      "confirmacao": "E2-01",
+      "confirmacao": "E1-08",
       "risco_ambiguidade": "medio",
       "emocao_esperada": "dúvida sobre presença"
     },
@@ -1363,11 +1381,11 @@
       "emocao_esperada": "releitura de objeto"
     },
     {
-      "descricao": "A promessa antiga aparece junto de ficha atual da ala, ligando memória familiar a pessoas ainda vinculadas ao hotel.",
+      "descricao": "A promessa antiga aparece separada da ficha atual da ala, ligando memória familiar a pessoas ainda vinculadas ao hotel.",
       "documento": "E2-04",
       "o_que_sugere": "O conflito ultrapassa a administração do evento.",
-      "o_que_prova": "A ala antiga não é só símbolo de arquivo; há ocupação reduzida e vínculos atuais que davam consequência concreta ao brinde.",
-      "confirmacao": "E2-02",
+      "o_que_prova": "A carta dá origem emocional à promessa; a ficha atual mostra ocupação reduzida e vínculos vivos que davam consequência concreta ao brinde.",
+      "confirmacao": "E2-01",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "virada humana"
     },
@@ -1379,6 +1397,15 @@
       "confirmacao": "E1-03",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "limpeza de hipóteses"
+    },
+    {
+      "descricao": "A ficha administrativa mostra que a lista atual da ala antiga ficou retida pela gerência antes do brinde.",
+      "documento": "E2-01",
+      "o_que_sugere": "Caio administrou o risco de imagem e a informação concreta da ala.",
+      "o_que_prova": "Helena não recebeu a relação atual antes do brinde; Marta tinha motivo atual para reagir à homenagem institucional.",
+      "confirmacao": "E2-02",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "consequência administrativa"
     }
   ],
   "red_herrings": [
@@ -1399,8 +1426,8 @@
     {
       "personagem_id": "05",
       "motivo_aparente": "Pressão jornalística e proximidade do terraço.",
-      "como_descartar": "Complemento distingue anotação, tecido e falta de visão direta.",
-      "documento_descarte": "E2-01",
+      "como_descartar": "Declaração de Isadora assume leitura parcial da folha e o registro combinado limita sua posição no salão.",
+      "documento_descarte": "E2-06",
       "categoria": "percepcao_indireta"
     },
     {
@@ -1435,8 +1462,8 @@
       "intensidade": "forte",
       "envelope": "E1",
       "condicao_uso": "Grupo entende a saída como simples constrangimento social.",
-      "texto": "Procurem o que aparece perto do horário do brinde e que não depende de uma briga pública.",
-      "o_que_desbloqueia": "Resposta parcial: saída ligada ao brinde/pasta Aurora."
+      "texto": "Procurem o que aparece perto do horário do brinde e que não depende de uma briga pública nem de alguém ter visto Helena de frente.",
+      "o_que_desbloqueia": "Resposta parcial: saída ligada ao brinde/Aurora e a uma percepção incompleta."
     },
     {
       "numero": 4,
@@ -1482,7 +1509,7 @@
     },
     {
       "id": "C-E1-SAIDA",
-      "conclusao": "A saída de Helena parece ligada ao brinde, ao programa/anotação e à pasta Aurora, não a uma retirada social espontânea.",
+      "conclusao": "A saída de Helena parece ligada ao brinde, à folha dobrada e à pasta Aurora, não a uma retirada social espontânea.",
       "fase": "E1",
       "tipo": "hipotese_parcial",
       "prova_principal": "E1-08",
@@ -1494,7 +1521,7 @@
         "01",
         "05"
       ],
-      "acao_esperada_jogador": "Separar saída observada, anotação parcial e avistamento indireto no terraço.",
+      "acao_esperada_jogador": "Separar saída observada, folha parcial e avistamento indireto no terraço.",
       "risco_ambiguidade": "medio",
       "obrigatoria_para_avanco": true
     },
@@ -1520,8 +1547,8 @@
       "conclusao": "Caio não repassou a lista atual da ala antiga; isso muda a pasta Aurora de memória simbólica para consequência atual.",
       "fase": "E2",
       "tipo": "recontextualizacao",
-      "prova_principal": "E2-02",
-      "confirmacao_independente": "E2-04",
+      "prova_principal": "E2-01",
+      "confirmacao_independente": "E2-02",
       "descarta_alternativas": [],
       "personagens_afetados": [
         "01",
@@ -1556,13 +1583,13 @@
       "fase": "E2",
       "tipo": "motivo_humano",
       "prova_principal": "E2-04",
-      "confirmacao_independente": "E2-02",
+      "confirmacao_independente": "E2-01",
       "descarta_alternativas": [],
       "personagens_afetados": [
         "01",
         "02"
       ],
-      "acao_esperada_jogador": "Conectar promessa antiga, ocupação atual e interrupção do brinde.",
+      "acao_esperada_jogador": "Conectar promessa antiga, ficha atual da ala e interrupção do brinde.",
       "risco_ambiguidade": "baixo",
       "obrigatoria_para_avanco": false
     },
@@ -1572,7 +1599,7 @@
       "fase": "E2",
       "tipo": "descarte_alternativa",
       "prova_principal": "E2-06",
-      "confirmacao_independente": "E1-03",
+      "confirmacao_independente": "E1-04",
       "descarta_alternativas": [
         "E1-04",
         "E1-05",
@@ -1599,7 +1626,8 @@
         "E2-02",
         "E2-03",
         "E2-04",
-        "E2-06"
+        "E2-06",
+        "E2-01"
       ],
       "personagens_afetados": [
         "01",
@@ -1672,7 +1700,7 @@
       "fase": "E1",
       "titulo": "Hipótese para receber complemento",
       "condicao_uso": "Grupo pergunta se já pode prosseguir ou fica preso tentando solução final.",
-      "texto": "Se a hipótese disser que Helena saiu por algo ligado ao brinde/pasta Aurora e que os avistamentos posteriores são indiretos, a apuração inicial já produziu o suficiente para receber a remessa complementar.",
+      "texto": "Se a hipótese disser que Helena saiu por algo ligado ao brinde/Aurora e que os avistamentos posteriores são indiretos, a apuração inicial já produziu o suficiente para receber a remessa complementar.",
       "nivel": "forte",
       "contratos_relacionados": [
         "C-E1-SAIDA",
@@ -1690,7 +1718,7 @@
       "fase": "E2",
       "titulo": "O que mudou de sentido",
       "condicao_uso": "Grupo lê E2 sem voltar ao primeiro envelope.",
-      "texto": "Peça que escolham um documento de E1 e digam qual informação de E2 muda sua leitura: anotação, objeto, chave ou motivo do brinde.",
+      "texto": "Peça que escolham um documento de E1 e digam qual informação de E2 muda sua leitura: folha dobrada, objeto, chave ou motivo do brinde.",
       "nivel": "leve",
       "contratos_relacionados": [
         "C-E2-OMISSAO",
@@ -1709,13 +1737,14 @@
       "fase": "E2",
       "titulo": "Consequência atual da ala antiga",
       "condicao_uso": "Grupo vê apenas carta antiga ou ressentimento genérico.",
-      "texto": "Aponte que a carta antiga só vira motivo porque E2 mostra efeito atual: lista omitida, ala ainda ocupada e risco de transformar moradores e antigos vínculos em decoração.",
+      "texto": "Aponte que a carta antiga só vira motivo porque E2 mostra efeito atual: lista retida, ala ainda ocupada e risco de transformar moradores e antigos vínculos em decoração.",
       "nivel": "media",
       "contratos_relacionados": [
         "C-E2-OMISSAO",
         "C-E2-MOTIVO"
       ],
       "documentos_relacionados": [
+        "E2-01",
         "E2-02",
         "E2-04"
       ]
@@ -1750,6 +1779,7 @@
         "C-FINAL-AURORA"
       ],
       "documentos_relacionados": [
+        "E2-01",
         "E2-02",
         "E2-04",
         "E2-05",
@@ -1774,5 +1804,5 @@
     ]
   },
   "versao": "0.1",
-  "observacoes_producao": "Guia do facilitador pós-playtest: solução em 5 frases — Otto pede apuração porque Helena saiu antes do brinde de reabertura; no E1, a melhor resposta parcial é que a saída se liga ao brinde/pasta Aurora e não a uma retirada social espontânea; no E2, surge a lista omitida da ala antiga e a ocupação atual que mudam o sentido da pasta; Marta, guardiã informal da ala, usa chave, sala de memória e objeto associado a Helena para interromper o brinde sem escândalo imediato; Lívia, Caio, Renato e Isadora parecem plausíveis, mas caem por janela, meio ou qualidade do testemunho. Linha do tempo aparente: Helena se irrita, deixa a mesa, é associada ao terraço por tecido vinho e atrasa o brinde. Linha do tempo real: Helena confere uma referência marginal ligada ao brinde/Aurora, segue para a sala de memória, Marta mantém o molho de chaves e manipula echarpe/broche enquanto os demais interpretam sinais indiretos. Abrir E2 quando o grupo formular que a pergunta do E1 é por que Helena saiu antes do brinde e que a resposta parcial envolve brinde/Aurora mais sinais indiretos de presença. Resposta esperada do E2: o omitido era a lista atual da ala antiga; a informação concreta mostra moradores e vínculos vivos; Marta tinha motivo atual para provocar a saída; a interrupção do brinde impediu que a memória fosse convertida em homenagem vazia. Caio preservou a imagem do evento e não repassou a lista atual, mas não executou a manipulação; Helena sabia da promessa como símbolo e planejava memorial; Marta via pessoas reais sendo apagadas. Usar dicas em progressão: pergunta pública, direto versus indireto, pessoa/objeto/registro, motivo/meio/oportunidade e síntese quase-gabarito."
+  "observacoes_producao": "Guia do facilitador pós-playtest: solução em 5 frases — Otto pede apuração porque Helena saiu antes do brinde de reabertura; no E1, a melhor resposta parcial é que a saída se liga ao brinde/Aurora e não a uma retirada social espontânea; no E2, surgem a ficha administrativa com lista retida da ala antiga e a ocupação atual que mudam o sentido da pasta; Marta, guardiã informal da ala, usa chave, sala de memória e objeto associado a Helena para interromper o brinde sem escândalo imediato; Lívia, Caio, Renato e Isadora parecem plausíveis, mas caem por janela, meio ou qualidade do testemunho. Linha do tempo aparente: Helena se irrita, deixa a mesa, é associada ao terraço por tecido vinho e atrasa o brinde. Linha do tempo real: Helena confere uma folha dobrada ligada ao brinde/Aurora, segue para a sala de memória, Marta mantém o molho de chaves e manipula echarpe/broche enquanto os demais interpretam sinais indiretos. Abrir E2 quando o grupo formular que a pergunta do E1 é por que Helena saiu antes do brinde e que a resposta parcial envolve brinde/Aurora mais sinais indiretos de presença. Resposta esperada do E2: o omitido era a lista atual da ala antiga; a informação concreta mostra moradores e vínculos vivos; Marta tinha motivo atual para provocar a saída; a interrupção do brinde impediu que a memória fosse convertida em homenagem vazia. Caio preservou a imagem do evento e reteve a lista atual, mas não executou a manipulação; Helena sabia da promessa como símbolo e planejava memorial/expansão em linguagem institucional; Marta via pessoas reais sendo apagadas. Usar dicas em progressão: pergunta pública, direto versus indireto, pessoa/objeto/registro, motivo/meio/oportunidade e síntese quase-gabarito."
 }
