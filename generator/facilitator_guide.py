@@ -120,6 +120,13 @@ def _strip_html(texto: str) -> str:
 
 
 def _pergunta_publica(blueprint: Blueprint) -> str:
+    """Extrai a pergunta pública do documento de abertura, com fallback seguro.
+
+    O guia operacional não deve depender de texto livre em `observacoes_producao`.
+    A pergunta pública vem do documento diegético de abertura porque é exatamente o
+    que o facilitador e os jogadores enxergam como missão narrativa.
+    """
+
     for documento in blueprint.documentos:
         if documento.envelope == "E1" and documento.codigo == "E1-01":
             corpo = _strip_html(str(documento.conteudo.get("CORPO_CARTA", "")))
@@ -132,51 +139,83 @@ def _pergunta_publica(blueprint: Blueprint) -> str:
     return blueprint.premissa
 
 
-def _texto_entre(texto: str, inicio: str, fim: str | None = None) -> str:
-    if inicio not in texto:
-        return ""
-    trecho = texto.split(inicio, 1)[1]
-    if fim and fim in trecho:
-        trecho = trecho.split(fim, 1)[0]
-    return trecho.strip()
-
-
-def _lista_frases(texto: str) -> list[dict[str, str]]:
-    partes = [parte.strip(" .") for parte in texto.split(";") if parte.strip(" .")]
-    return [{"texto": f"{parte}."} for parte in partes]
-
-
-def _conclusoes_por_prefixo(blueprint: Blueprint, fase: str, prefixos: tuple[str, ...]) -> list[dict[str, str]]:
-    conclusoes: list[dict[str, str]] = []
+def _contratos_contexto(
+    blueprint: Blueprint,
+    *,
+    fase: str | None = None,
+    prefixos: tuple[str, ...] = (),
+    obrigatorios: bool | None = None,
+) -> list[dict[str, str]]:
+    contratos: list[dict[str, str]] = []
     for contrato in blueprint.contratos_evidencia:
-        if contrato.fase == fase and contrato.id.startswith(prefixos):
-            conclusoes.append({"id": contrato.id, "texto": contrato.conclusao})
-    return conclusoes
+        if fase is not None and contrato.fase != fase:
+            continue
+        if prefixos and not contrato.id.startswith(prefixos):
+            continue
+        if obrigatorios is not None and contrato.obrigatoria_para_avanco is not obrigatorios:
+            continue
+        contratos.append({"id": contrato.id, "texto": contrato.conclusao})
+    return contratos
+
+
+def _solucao_em_frases(blueprint: Blueprint) -> list[dict[str, str]]:
+    """Monta síntese operacional a partir de campos estruturados do blueprint."""
+
+    contratos_e1 = _contratos_contexto(blueprint, fase="E1", obrigatorios=True)
+    contratos_final = _contratos_contexto(blueprint, fase="final", obrigatorios=True)
+    resposta_e1 = contratos_e1[-1]["texto"] if contratos_e1 else blueprint.erro_que_permite_descobrir
+    solucao_final = contratos_final[-1]["texto"] if contratos_final else blueprint.verdade_real
+
+    frases = [
+        f"Pergunta pública: {_pergunta_publica(blueprint)}",
+        f"Resposta esperada do E1: {resposta_e1}",
+        f"O que muda no E2: {blueprint.motivacao}",
+        f"Solução final: {solucao_final}",
+        "Fechamento: os suspeitos fortes devem cair por janela, meio, oportunidade ou qualidade do testemunho.",
+    ]
+    return [{"texto": frase} for frase in frases]
+
+
+def _resumo_linha_tempo(eventos: list[EventoLinha], fallback: str) -> str:
+    if not eventos:
+        return fallback
+    return " ".join(f"{evento.data_hora}: {evento.evento}" for evento in eventos[:3])
 
 
 def _guia_operacional_context(blueprint: Blueprint) -> dict[str, Any]:
-    observacoes = blueprint.observacoes_producao or ""
-    solucao = _texto_entre(observacoes, "solução em 5 frases — ", " Linha do tempo aparente:")
-    linha_aparente = _texto_entre(observacoes, "Linha do tempo aparente: ", " Linha do tempo real:")
-    linha_real = _texto_entre(observacoes, "Linha do tempo real: ", " Abrir E2")
-    liberar_e2 = _texto_entre(observacoes, "Abrir E2 quando ", " Resposta esperada do E2:")
-    resposta_e2 = _texto_entre(observacoes, "Resposta esperada do E2: ", " Caio preservou")
+    """Monta o guia operacional sem parsear observações textuais livres.
 
-    e1_obrigatorios = [
-        {"id": contrato.id, "texto": contrato.conclusao}
-        for contrato in blueprint.contratos_evidencia
-        if contrato.fase == "E1" and contrato.obrigatoria_para_avanco
-    ]
+    O contexto deriva de campos estruturados: contratos, linhas do tempo, motivação,
+    verdade real e red herrings. Isso evita que o guia quebre quando a redação de
+    `observacoes_producao` mudar.
+    """
+
+    e1_obrigatorios = _contratos_contexto(blueprint, fase="E1", obrigatorios=True)
+    e2_obrigatorios = _contratos_contexto(blueprint, fase="E2", obrigatorios=True)
+    e2_recontexto = _contratos_contexto(blueprint, fase="E2", prefixos=("C-E2",))
 
     return {
         "pergunta_publica": _pergunta_publica(blueprint),
         "resposta_e1": e1_obrigatorios,
-        "quando_liberar_e2": liberar_e2 or "o grupo formular uma resposta parcial sustentada pelas conclusões obrigatórias do E1.",
-        "o_que_muda_e2": _conclusoes_por_prefixo(blueprint, "E2", ("C-E2",)),
-        "solucao_5_frases": _lista_frases(solucao) or [{"texto": blueprint.verdade_real}],
-        "linha_aparente_resumo": linha_aparente or "Ver tabela de linha do tempo aparente.",
-        "linha_real_resumo": linha_real or "Ver tabela de linha do tempo real.",
-        "resposta_e2": resposta_e2 or "Ver contratos obrigatórios do E2.",
+        "quando_liberar_e2": (
+            "o grupo formular uma resposta parcial sustentada pelos contratos obrigatórios do E1, "
+            "sem exigir autoria final antes da remessa complementar."
+        ),
+        "o_que_muda_e2": e2_recontexto,
+        "solucao_5_frases": _solucao_em_frases(blueprint),
+        "linha_aparente_resumo": _resumo_linha_tempo(
+            blueprint.linha_tempo_percebida,
+            "Ver tabela de linha do tempo aparente.",
+        ),
+        "linha_real_resumo": _resumo_linha_tempo(
+            blueprint.linha_tempo_real,
+            "Ver tabela de linha do tempo real.",
+        ),
+        "resposta_e2": (
+            e2_obrigatorios[-1]["texto"]
+            if e2_obrigatorios
+            else "Ver contratos obrigatórios do E2."
+        ),
     }
 
 
