@@ -6,7 +6,14 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from .models import Blueprint, ContratoEvidencia, DicaContextual, Documento
+from .models import (
+    Blueprint,
+    ContratoEvidencia,
+    DicaContextual,
+    Documento,
+    EventoLinha,
+    RedHerring,
+)
 from .renderer import renderizar_documento
 
 
@@ -37,6 +44,26 @@ def _documento_context(documento: Documento) -> dict[str, Any]:
         "titulo": documento.titulo,
         "tipo": documento.tipo.value,
         "envelope": documento.envelope,
+    }
+
+
+def _evento_context(evento: EventoLinha) -> dict[str, Any]:
+    return {
+        "data_hora": evento.data_hora,
+        "evento": evento.evento,
+        "personagem_id": evento.personagem_id,
+        "documento_prova": evento.documento_prova,
+        "confirmacao_independente": evento.confirmacao_independente or "—",
+    }
+
+
+def _red_herring_context(red_herring: RedHerring) -> dict[str, Any]:
+    return {
+        "personagem_id": red_herring.personagem_id,
+        "motivo_aparente": red_herring.motivo_aparente,
+        "como_descartar": red_herring.como_descartar,
+        "documento_descarte": red_herring.documento_descarte,
+        "categoria": red_herring.categoria,
     }
 
 
@@ -137,6 +164,11 @@ def build_facilitator_context(blueprint: Blueprint, graph_report: dict[str, Any]
         "METODO_OCULTACAO": blueprint.metodo_ocultacao,
         "GRAPH_STATUS": graph_status,
         "GRAPH_SUMMARY": graph_summary,
+        "CADEIA_CAUSAL": [{"item": item} for item in blueprint.cadeia_causal],
+        "LINHA_TEMPO_APARENTE": [_evento_context(evento) for evento in blueprint.linha_tempo_percebida],
+        "LINHA_TEMPO_REAL": [_evento_context(evento) for evento in blueprint.linha_tempo_real],
+        "RED_HERRINGS": [_red_herring_context(item) for item in blueprint.red_herrings],
+        "OBSERVACOES_PRODUCAO": blueprint.observacoes_producao or "—",
         "DOCUMENTOS_POR_ENVELOPE": [
             {
                 "envelope": envelope,

@@ -66,13 +66,17 @@
     <h2>3. Ordem dos envelopes</h2>
     <ol>
       <li>Entregue o Envelope 1 com a capa e todo seu conteúdo.</li>
-      <li>Libere o Envelope 2 somente após hipótese intermediária sustentada por evidências.</li>
+      <li>Libere o próximo envelope somente após a resposta esperada da fase atual, sustentada por evidências.</li>
       <li>Mantenha dicas e gabarito separados dos materiais de jogador.</li>
     </ol>
+    <h2>4. Solução em síntese</h2>
+    <p>{{OBSERVACOES_PRODUCAO}}</p>
+    <h3>Cadeia causal</h3>
+    <ol>{{#CADEIA_CAUSAL}}<li>{{item}}</li>{{/CADEIA_CAUSAL}}</ol>
   </section>
 
   <section class="page-section">
-    <h2>4. Objetivo de cada envelope</h2>
+    <h2>5. Objetivo de cada envelope</h2>
     {{#DOCUMENTOS_POR_ENVELOPE}}
       <div class="block">
         <h3>{{envelope}}</h3>
@@ -82,7 +86,7 @@
       </div>
     {{/DOCUMENTOS_POR_ENVELOPE}}
 
-    <h2>5. Critério de avanço entre envelopes</h2>
+    <h2>6. Critério de avanço entre envelopes</h2>
     {{#CRITERIOS_AVANCO}}
       <div class="block">
         <h3>{{fase}}</h3>
@@ -94,17 +98,28 @@
       </div>
     {{/CRITERIOS_AVANCO}}
 
-    <h2>6. O que observar nos jogadores</h2>
+    <h2>7. Linhas do tempo</h2>
+    <div class="block">
+      <h3>Linha do tempo aparente</h3>
+      <table><thead><tr><th>Horário</th><th>Evento percebido</th><th>Prova</th><th>Confirmação</th></tr></thead><tbody>{{#LINHA_TEMPO_APARENTE}}<tr><td>{{data_hora}}</td><td>{{evento}}</td><td class="mono">{{documento_prova}}</td><td class="mono">{{confirmacao_independente}}</td></tr>{{/LINHA_TEMPO_APARENTE}}</tbody></table>
+    </div>
+    <div class="block">
+      <h3>Linha do tempo real</h3>
+      <table><thead><tr><th>Horário</th><th>Evento real</th><th>Personagem</th><th>Prova</th><th>Confirmação</th></tr></thead><tbody>{{#LINHA_TEMPO_REAL}}<tr><td>{{data_hora}}</td><td>{{evento}}</td><td class="mono">{{personagem_id}}</td><td class="mono">{{documento_prova}}</td><td class="mono">{{confirmacao_independente}}</td></tr>{{/LINHA_TEMPO_REAL}}</tbody></table>
+    </div>
+
+    <h2>8. O que observar nos jogadores</h2>
     <ul>
-      <li>Se cruzam logs, mapa e escala antes de acusar uma pessoa.</li>
-      <li>Se diferenciam marcação de escala de abertura física de porta.</li>
-      <li>Se usam documentos financeiros como cobertura documental, não como solução isolada.</li>
+      <li>Se conseguem declarar a pergunta pública e a resposta esperada de cada envelope antes de acusar alguém.</li>
+      <li>Se separam pessoa, objeto e registro ao avaliar presença ou deslocamento.</li>
+      <li>Se tratam o segundo envelope como recontextualização do primeiro, não como mera confirmação.</li>
+      <li>Se usam motivo, meio e oportunidade para descartar suspeitos fortes.</li>
       <li>Se confundem material de dicas com gabarito; nesse caso, reforce que dicas são graduais.</li>
     </ul>
   </section>
 
   <section class="page-section">
-    <h2>7. Dicas graduais</h2>
+    <h2>9. Dicas graduais</h2>
     <p>As dicas abaixo são instruções internas de oferta. As dicas entregáveis aos jogadores são renderizadas no arquivo de dicas do facilitador por contexto; não duplique todas em voz alta.</p>
     {{#SEM_DICAS_CONTEXTUAIS}}<p>Nenhuma dica contextual foi definida neste blueprint.</p>{{/SEM_DICAS_CONTEXTUAIS}}
     {{#DICAS_POR_FASE}}
@@ -121,7 +136,7 @@
   </section>
 
   <section class="page-section">
-    <h2>8. Solução final</h2>
+    <h2>10. Solução final</h2>
     <p>{{GABARITO_RESUMIDO}}</p>
     <h3>Contratos obrigatórios</h3>
     {{#CONTRATOS_POR_FASE}}
@@ -130,15 +145,17 @@
         <table><thead><tr><th>ID</th><th>Conclusão</th><th>Prova</th><th>Confirmação</th><th>Obrigatório</th></tr></thead><tbody>{{#contratos}}<tr><td class="mono">{{id}}</td><td>{{conclusao}}</td><td class="mono">{{prova_principal}}</td><td class="mono">{{confirmacao_independente}}</td><td>{{obrigatoria_para_avanco}}</td></tr>{{/contratos}}</tbody></table>
       </div>
     {{/CONTRATOS_POR_FASE}}
+    <h3>Suspeitos fortes e descartes</h3>
+    <table><thead><tr><th>Personagem</th><th>Por que parecia plausível</th><th>Por que cai</th><th>Documento</th></tr></thead><tbody>{{#RED_HERRINGS}}<tr><td class="mono">{{personagem_id}}</td><td>{{motivo_aparente}}</td><td>{{como_descartar}}</td><td class="mono">{{documento_descarte}}</td></tr>{{/RED_HERRINGS}}</tbody></table>
     <h3>Relatório estrutural</h3>
     <p><strong>Status do grafo:</strong> {{GRAPH_STATUS}}</p>
     <p>{{GRAPH_SUMMARY}}</p>
 
-    <h2>9. Checklist pós-playtest</h2>
+    <h2>11. Checklist pós-playtest</h2>
     <ul>
       <li>Registrar onde os jogadores travaram e qual dica foi suficiente.</li>
       <li>Verificar se houve acusação precoce motivada por viés visual ou título de documento.</li>
-      <li>Anotar qualquer página quebrada, elemento ilegível ou mapa interpretado como rota.</li>
+      <li>Anotar qualquer página quebrada, elemento ilegível ou orientação textual interpretada como rota.</li>
       <li>Confirmar se a solução final foi formulada com documento principal e confirmação.</li>
     </ul>
     <div class="warning">Este guia é confidencial. Critérios, dicas internas e solução final devem ficar fora dos envelopes dos jogadores.</div>
