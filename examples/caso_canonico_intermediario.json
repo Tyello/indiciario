@@ -9,6 +9,107 @@
   "numero_jogadores": "3 a 5",
   "formato_envelopes": 2,
   "premissa": "Durante um jantar fechado de reabertura do histórico Hotel Aurora, a anfitriã Helena Valença deixa o salão antes do brinde que formalizaria a nova fase do hotel. Otto Almeida, investidor convidado, pede uma apuração interna porque a interrupção compromete a noite e pode indicar retirada pessoal, falha de condução do evento ou algum ponto sensível nos preparativos.",
+  "conflito_central": {
+    "pergunta_publica": "Por que Helena saiu antes do brinde de reabertura do Hotel Aurora e que consequência atual a pasta Aurora encobre?",
+    "quem_pede_apuracao": "Otto, responsável pela reabertura e pela condução institucional do jantar.",
+    "motivo_da_apuracao": "A saída de Helena antes do brinde ameaça o sentido público da reabertura e deixa versões incompatíveis sobre a ala antiga.",
+    "risco_concreto": "A reabertura pode consolidar uma narrativa falsa, apagar ocupações atuais da ala antiga e expor o hotel a conflito público.",
+    "verdade_aparente": "Helena teria saído por desconforto social, memória antiga ou decisão própria antes do brinde.",
+    "verdade_real_resumida": "Marta conduziu a leitura falsa da presença de Helena para impedir o brinde sem escândalo imediato, enquanto a lista retida da ala antiga muda o motivo para consequência presente."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Por que Helena saiu antes do brinde e que elementos tornam a saída menos espontânea?",
+      "resposta_esperada": "A saída de Helena se liga ao brinde, à folha dobrada e à pasta Aurora, sem exigir ainda culpado ou motivo completo.",
+      "nao_precisa_resolver_ainda": [
+        "quem manipulou objeto ou leitura de presença",
+        "qual é a consequência atual da ala antiga",
+        "acusação final contra Marta"
+      ],
+      "criterio_de_avanco": "Liberar E2 quando o grupo formular que a saída não foi apenas social e que a pasta Aurora merece apuração específica.",
+      "forma_diegetica_de_avanco": "Otto entrega documentos administrativos e de bastidor reunidos após a primeira conversa sobre a pasta Aurora.",
+      "documentos_minimos": [
+        "E1-01",
+        "E1-04",
+        "E1-06",
+        "E1-08"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "O que a pasta Aurora significa no presente e como a presença de Helena foi lida de forma falsa?",
+      "resposta_esperada": "O E2 mostra que a lista retida da ala antiga dá consequência atual à pasta e que Marta sustentou uma leitura falsa de presença para interromper o brinde.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a hipótese final explicar motivação atual, objeto manipulável, falsa leitura de presença e descarte de Caio/Lívia.",
+      "forma_diegetica_de_avanco": "O facilitador confere a hipótese no guia operacional e revela a solução após consenso documentado.",
+      "documentos_minimos": [
+        "E2-01",
+        "E2-03",
+        "E2-04",
+        "E2-06",
+        "E2-08"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Por que Helena saiu antes do brinde de reabertura do Hotel Aurora e que consequência atual a pasta Aurora encobre?",
+    "solucao_em_5_frases": [
+      "Otto pede apuração porque Helena saiu antes do brinde de reabertura e a ausência ameaça a narrativa pública do hotel.",
+      "No E1, a melhor resposta parcial é que a saída se conecta ao brinde, à folha dobrada e à pasta Aurora, não a uma retirada social espontânea.",
+      "No E2, a ficha administrativa e a lista retida da ala antiga mostram que a pasta tem consequência atual, não apenas memória simbólica.",
+      "Marta usa a chave, a sala de memória e um objeto associado a Helena para sustentar uma leitura falsa de presença e interromper o brinde sem escândalo imediato.",
+      "Lívia e Caio permanecem suspeitos fortes, mas caem quando a mesa separa omissão administrativa, oportunidade física e benefício narrativo."
+    ],
+    "linha_tempo_aparente_resumo": "Aparentemente Helena se afasta do jantar por desconforto, enquanto a equipe tenta manter a cerimônia do brinde.",
+    "linha_tempo_real_resumo": "A pasta Aurora e a lista da ala antiga dão motivo atual; Marta manipula sinais de presença para deslocar a leitura do brinde sem expor a ação diretamente.",
+    "red_herrings_e_descartes": [
+      "03: Registro combinado mostra posição pública na janela de manipulação do objeto e ausência de acesso natural à rouparia.",
+      "04: A omissão explica sua suspeita e pressão reputacional, mas ocorrência pública na recepção e tentativas registradas delimitam sua janela para a manipulação física.",
+      "05: Declaração de Isadora assume leitura parcial da folha e o registro combinado limita sua posição no salão.",
+      "06: Sequência de cozinha e recibos de passe prendem a equipe na copa."
+    ],
+    "quando_usar_dicas": [
+      "Use dica leve se o grupo tentar resolver autoria no E1.",
+      "Use dica média se o grupo tratar a pasta Aurora só como memória histórica.",
+      "Use dica forte se a mesa não distinguir objeto associado, presença real e leitura social de presença."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Por que Helena saiu antes do brinde e que elementos tornam a saída menos espontânea?",
+        "resposta_esperada": "A saída de Helena se liga ao brinde, à folha dobrada e à pasta Aurora, sem exigir ainda culpado ou motivo completo.",
+        "nao_precisa_resolver_ainda": [
+          "quem manipulou objeto ou leitura de presença",
+          "qual é a consequência atual da ala antiga",
+          "acusação final contra Marta"
+        ],
+        "criterio_de_avanco": "Liberar E2 quando o grupo formular que a saída não foi apenas social e que a pasta Aurora merece apuração específica.",
+        "forma_diegetica_de_avanco": "Otto entrega documentos administrativos e de bastidor reunidos após a primeira conversa sobre a pasta Aurora.",
+        "documentos_minimos": [
+          "E1-01",
+          "E1-04",
+          "E1-06",
+          "E1-08"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "O que a pasta Aurora significa no presente e como a presença de Helena foi lida de forma falsa?",
+        "resposta_esperada": "O E2 mostra que a lista retida da ala antiga dá consequência atual à pasta e que Marta sustentou uma leitura falsa de presença para interromper o brinde.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a hipótese final explicar motivação atual, objeto manipulável, falsa leitura de presença e descarte de Caio/Lívia.",
+        "forma_diegetica_de_avanco": "O facilitador confere a hipótese no guia operacional e revela a solução após consenso documentado.",
+        "documentos_minimos": [
+          "E2-01",
+          "E2-03",
+          "E2-04",
+          "E2-06",
+          "E2-08"
+        ]
+      }
+    ]
+  },
   "verdade_real": "Marta Salgado atraiu Helena Valença para a sala de memória antes do brinde usando uma referência discreta ao material do brinde e à pasta Aurora. Helena conhecia a pasta e a promessa antiga como memória institucional, mas não havia recebido de Caio a lista atual de pessoas ainda ligadas à ala antiga; por isso preparava uma homenagem simbólica e ambígua, incorporando a ala ao projeto de memória e expansão sem enfrentar a consequência concreta. Marta, guardiã informal da ala, entendeu o brinde como apagamento de moradores e antigos vínculos do hotel, isolou Helena temporariamente e manipulou sinais indiretos de presença, incluindo a echarpe com broche e registros ambíguos de circulação.",
   "executor_id": "02",
   "planejador_id": "02",

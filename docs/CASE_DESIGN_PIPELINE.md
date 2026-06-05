@@ -98,19 +98,20 @@ Todo caso deve responder:
 - qual impacto concreto existe se o caso não for esclarecido;
 - por que os documentos foram reunidos e entregues ao grupo.
 
-Formato recomendado para planejamento editorial, fora do schema atual:
+Formato obrigatório no schema atual:
 
 ```json
-"pergunta_publica": {
-  "quem_pediu": "",
-  "por_que_pediu": "",
-  "impacto_concreto": "",
-  "por_que_documentos_foram_reunidos": "",
-  "pergunta_para_os_jogadores": ""
+"conflito_central": {
+  "pergunta_publica": "",
+  "quem_pede_apuracao": "",
+  "motivo_da_apuracao": "",
+  "risco_concreto": "",
+  "verdade_aparente": "",
+  "verdade_real_resumida": ""
 }
 ```
 
-Sem pergunta pública, o grupo lê documentos sem saber qual decisão precisa tomar, qual urgência existe ou por que o dossiê foi montado. `pergunta_publica` ainda não é campo schema-enforced do `Blueprint`; enquanto o schema não for expandido, reflita esse contrato em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+Sem pergunta pública, o grupo lê documentos sem saber qual decisão precisa tomar, qual urgência existe ou por que o dossiê foi montado. A pergunta pública deve estar em `conflito_central.pergunta_publica` e ser repetida em `guia_operacional.pergunta_publica`, com os demais campos do conflito central preenchendo solicitante, motivo, risco e verdades aparente/real.
 
 ## Etapa 3 — Núcleo dramático
 
@@ -305,6 +306,7 @@ Todo envelope precisa ter:
     "nao_precisa_resolver_ainda": [],
     "criterio_de_avanco": "",
     "forma_diegetica_de_avanco": "",
+    "documentos_minimos": [],
     "riscos": []
   },
   {
@@ -315,12 +317,13 @@ Todo envelope precisa ter:
     "nao_precisa_resolver_ainda": [],
     "criterio_de_avanco": "",
     "forma_diegetica_de_avanco": "",
+    "documentos_minimos": [],
     "riscos": []
   }
 ]
 ```
 
-`objetivos_por_envelope` ainda não é campo schema-enforced do `Blueprint`. Enquanto o schema não for expandido, reflita esses objetivos em `contratos_evidencia`, documentos, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+`objetivos_por_envelope` é campo schema-enforced do `Blueprint`. Reflita esses objetivos em `contratos_evidencia`, documentos e `dicas_contextuais`; `guia_operacional.resposta_esperada_por_envelope` deve espelhar os mesmos envelopes e respostas para validar a condução do facilitador.
 
 ### Regra do E1
 

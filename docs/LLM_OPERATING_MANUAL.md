@@ -228,7 +228,7 @@ Contrato vinculado à OS 0147/2026.
 
 Antes de gerar ou aprovar um blueprint, confirme que o plano responde aos pontos abaixo.
 
-Nota de schema: `pergunta_publica` e `objetivos_por_envelope` são contrato editorial de planejamento, ainda não campos schema-enforced do `Blueprint`. Enquanto o schema não for expandido, reflita esses conceitos em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+Nota de schema: `conflito_central`, `objetivos_por_envelope` e `guia_operacional` são campos schema-enforced do `Blueprint`. Reflita esses conceitos também em `premissa`, documentos, `contratos_evidencia` e `dicas_contextuais`, mas não dependa de texto livre para progressão.
 
 ### Pergunta pública
 

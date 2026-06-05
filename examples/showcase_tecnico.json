@@ -9,6 +9,97 @@
   "numero_jogadores": "4",
   "formato_envelopes": 2,
   "premissa": "Um incidente precisa ser investigado.",
+  "conflito_central": {
+    "pergunta_publica": "Qual pergunta pública move Showcase Técnico do Indiciário e quais evidências permitem avançar sem depender de recursos externos?",
+    "quem_pede_apuracao": "Solicitante diegético definido no dossiê de abertura.",
+    "motivo_da_apuracao": "Há inconsistências documentais que exigem reconstrução offline pelos jogadores.",
+    "risco_concreto": "Uma decisão narrativa ou institucional fica incorreta se a apuração não for concluída.",
+    "verdade_aparente": "Os primeiros registros parecem compatíveis com uma explicação simples.",
+    "verdade_real_resumida": "A operação foi planejada e executada por personagens fictícios."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Qual hipótese inicial os documentos do primeiro envelope sustentam?",
+      "resposta_esperada": "O grupo identifica a janela investigativa e a hipótese parcial que justifica abrir a remessa complementar.",
+      "nao_precisa_resolver_ainda": [
+        "autoria final completa",
+        "benefício final totalmente comprovado"
+      ],
+      "criterio_de_avanco": "Avançar quando a mesa apresentar hipótese parcial apoiada por documentos mínimos do envelope.",
+      "forma_diegetica_de_avanco": "O facilitador entrega a próxima remessa como complemento do dossiê reunido internamente.",
+      "documentos_minimos": [
+        "E1-01",
+        "E1-02",
+        "E1-03"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Como os documentos finais recontextualizam a hipótese e fecham a solução?",
+      "resposta_esperada": "O grupo combina oportunidade, motivo e confirmação independente para formular a solução final.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a mesa sustentar solução final com prova principal e confirmação.",
+      "forma_diegetica_de_avanco": "O facilitador confronta a hipótese com o guia confidencial e apresenta o gabarito.",
+      "documentos_minimos": [
+        "E2-02",
+        "E2-03",
+        "E2-04"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Qual pergunta pública move Showcase Técnico do Indiciário e quais evidências permitem avançar sem depender de recursos externos?",
+    "solucao_em_5_frases": [
+      "A pergunta pública dá ao grupo um mandato claro para investigar.",
+      "O primeiro envelope deve produzir uma hipótese parcial, não a acusação final.",
+      "O envelope complementar recontextualiza a hipótese inicial com novas confirmações.",
+      "A solução final combina oportunidade, motivo, meio e benefício conforme o gabarito interno.",
+      "Falsos caminhos devem ser descartados por evidência, não por intuição do facilitador."
+    ],
+    "linha_tempo_aparente_resumo": "A sequência aparente reúne o que os documentos iniciais parecem mostrar antes da recontextualização.",
+    "linha_tempo_real_resumo": "A sequência real deve ser lida pelo facilitador a partir da linha do tempo interna e dos contratos de evidência.",
+    "red_herrings_e_descartes": [
+      "05: sem oportunidade",
+      "06: sem benefício"
+    ],
+    "quando_usar_dicas": [
+      "Use dicas leves quando o grupo não souber qual pergunta responder.",
+      "Use dicas médias quando houver cruzamento documental ignorado.",
+      "Use dicas fortes apenas antes de recorrer ao gabarito."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Qual hipótese inicial os documentos do primeiro envelope sustentam?",
+        "resposta_esperada": "O grupo identifica a janela investigativa e a hipótese parcial que justifica abrir a remessa complementar.",
+        "nao_precisa_resolver_ainda": [
+          "autoria final completa",
+          "benefício final totalmente comprovado"
+        ],
+        "criterio_de_avanco": "Avançar quando a mesa apresentar hipótese parcial apoiada por documentos mínimos do envelope.",
+        "forma_diegetica_de_avanco": "O facilitador entrega a próxima remessa como complemento do dossiê reunido internamente.",
+        "documentos_minimos": [
+          "E1-01",
+          "E1-02",
+          "E1-03"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Como os documentos finais recontextualizam a hipótese e fecham a solução?",
+        "resposta_esperada": "O grupo combina oportunidade, motivo e confirmação independente para formular a solução final.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a mesa sustentar solução final com prova principal e confirmação.",
+        "forma_diegetica_de_avanco": "O facilitador confronta a hipótese com o guia confidencial e apresenta o gabarito.",
+        "documentos_minimos": [
+          "E2-02",
+          "E2-03",
+          "E2-04"
+        ]
+      }
+    ]
+  },
   "verdade_real": "A operação foi planejada e executada por personagens fictícios.",
   "executor_id": "01",
   "planejador_id": "02",

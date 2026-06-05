@@ -9,6 +9,108 @@
   "numero_jogadores": "3 a 5",
   "formato_envelopes": 2,
   "premissa": "Na véspera da abertura de uma mostra, uma peça de pequeno porte da Casa de Acervo Mirante foi substituída por uma réplica autorizada para restauro. A direção pede que os investigadores reconstruam a operação interna, identifiquem quem abriu a janela operacional e determinem se houve desvio financeiro associado.",
+  "conflito_central": {
+    "pergunta_publica": "Por que a peça da Reserva Mirante foi substituída na véspera da abertura e se a operação interna encobriu um desvio financeiro?",
+    "quem_pede_apuracao": "Inês Laranjeira, curadora-chefe da Casa de Acervo Mirante.",
+    "motivo_da_apuracao": "A divergência entre protocolo, vitrine e movimentação de reserva surgiu antes da abertura pública da mostra.",
+    "risco_concreto": "A mostra pode abrir com acervo desviado, contrato irregular e responsabilidade institucional indefinida.",
+    "verdade_aparente": "A substituição parece resultado de recebimento emergencial, etiqueta de restauro e falha operacional da doca.",
+    "verdade_real_resumida": "Marina executou a troca física, Otávio estruturou a cobertura contratual e Celina recebeu o benefício financeiro."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Que janela operacional permitiu a substituição da peça e qual registro contradiz a versão de rotina?",
+      "resposta_esperada": "A janela crítica converge para a credencial 02 na reserva B e para a etiqueta RM-17, mas ainda não fecha motivo ou benefício financeiro.",
+      "nao_precisa_resolver_ainda": [
+        "quem planejou a cobertura financeira",
+        "quem recebeu o benefício final",
+        "a solução completa de executor, planejador e beneficiário"
+      ],
+      "criterio_de_avanco": "Liberar E2 quando o grupo sustentar que houve oportunidade operacional e inconsistência de etiqueta com documentos mínimos do E1.",
+      "forma_diegetica_de_avanco": "A curadoria recebe uma remessa complementar da administração e dos fornecedores após a triagem inicial da reserva.",
+      "documentos_minimos": [
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-07"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Como a operação foi coberta por documentação comercial e quem se beneficiou do escopo inflado?",
+      "resposta_esperada": "O E2 liga contrato, recibo, extrato, chat e nota técnica para fechar Marina como executora, Otávio como planejador e Celina/Ateliê como beneficiária.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a mesa explicar executor, planejamento e benefício com prova principal e confirmação independente.",
+      "forma_diegetica_de_avanco": "O facilitador usa o guia confidencial para comparar a hipótese final com os contratos de evidência e revelar o gabarito.",
+      "documentos_minimos": [
+        "E2-01",
+        "E2-02",
+        "E2-04",
+        "E2-05",
+        "E2-06",
+        "E2-07"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Por que a peça da Reserva Mirante foi substituída na véspera da abertura e se a operação interna encobriu um desvio financeiro?",
+    "solucao_em_5_frases": [
+      "Inês pede apuração porque a peça em vitrine não fecha com protocolo, reserva e abertura pública iminente.",
+      "No E1, a resposta aceitável é que a janela operacional da doca/reserva e a etiqueta RM-17 tornam a versão de rotina insuficiente.",
+      "No E2, os documentos comerciais recontextualizam a etiqueta e mostram cobertura de OS emergencial, recibo e benefício financeiro.",
+      "Marina executou a troca física, Otávio planejou a contratação inflada e Celina recebeu o pagamento pela Ateliê Pedra Clara.",
+      "Os falsos caminhos caem quando oportunidade, motivo e benefício são separados e confirmados por documentos independentes."
+    ],
+    "linha_tempo_aparente_resumo": "Aparentemente houve recebimento emergencial, manuseio operacional e retorno de item em restauro próximo à abertura da mostra.",
+    "linha_tempo_real_resumo": "Otávio aprovou a cobertura emergencial, Marina usou a janela da doca/reserva para trocar a peça e Celina recebeu o pagamento inflado nos dias seguintes.",
+    "red_herrings_e_descartes": [
+      "Inês parece pressionada pela abertura, mas é quem aciona a apuração e não aparece na janela crítica.",
+      "Rafael aparece em rotinas técnicas, mas os registros mínimos não ligam seu acesso à saída RM-17.",
+      "Paulo tem atrito operacional, mas a cadeia financeira não leva benefício a ele."
+    ],
+    "quando_usar_dicas": [
+      "Use dica leve se o grupo tratar E1 como acusação final antes de formular a janela operacional.",
+      "Use dica média se o grupo não cruzar etiqueta, peso e acesso.",
+      "Use dica forte se, após E2, a mesa não separar executor físico de planejador financeiro e beneficiária."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Que janela operacional permitiu a substituição da peça e qual registro contradiz a versão de rotina?",
+        "resposta_esperada": "A janela crítica converge para a credencial 02 na reserva B e para a etiqueta RM-17, mas ainda não fecha motivo ou benefício financeiro.",
+        "nao_precisa_resolver_ainda": [
+          "quem planejou a cobertura financeira",
+          "quem recebeu o benefício final",
+          "a solução completa de executor, planejador e beneficiário"
+        ],
+        "criterio_de_avanco": "Liberar E2 quando o grupo sustentar que houve oportunidade operacional e inconsistência de etiqueta com documentos mínimos do E1.",
+        "forma_diegetica_de_avanco": "A curadoria recebe uma remessa complementar da administração e dos fornecedores após a triagem inicial da reserva.",
+        "documentos_minimos": [
+          "E1-04",
+          "E1-05",
+          "E1-06",
+          "E1-07"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Como a operação foi coberta por documentação comercial e quem se beneficiou do escopo inflado?",
+        "resposta_esperada": "O E2 liga contrato, recibo, extrato, chat e nota técnica para fechar Marina como executora, Otávio como planejador e Celina/Ateliê como beneficiária.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a mesa explicar executor, planejamento e benefício com prova principal e confirmação independente.",
+        "forma_diegetica_de_avanco": "O facilitador usa o guia confidencial para comparar a hipótese final com os contratos de evidência e revelar o gabarito.",
+        "documentos_minimos": [
+          "E2-01",
+          "E2-02",
+          "E2-04",
+          "E2-05",
+          "E2-06",
+          "E2-07"
+        ]
+      }
+    ]
+  },
   "verdade_real": "Marina Vale executou a troca usando a janela criada na escala de recebimento e no bloqueio da doca lateral. Otávio Salles planejou a contratação da restauração inflada para gerar cobertura documental. Celina Duarte, fornecedora da Ateliê Pedra Clara, recebeu o pagamento e devolveu parte do valor por uma nota de consultoria para a conta indicada por Otávio. O erro foi registrar a etiqueta RM-17 em uma mensagem de chat e em uma nota técnica interna, ligando a réplica à saída indevida da peça original.",
   "executor_id": "02",
   "planejador_id": "04",
