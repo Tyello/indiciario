@@ -4,6 +4,8 @@ Este guia define o contrato editorial mínimo para escrever blueprints de casos 
 
 Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md`, `docs/DIRETRIZES_EDITORIAIS.md` e `docs/LLM_OPERATING_MANUAL.md`. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
 
+Nota de schema: `pergunta_publica` e `objetivos_por_envelope` são contratos editoriais de planejamento. Eles ainda não são campos schema-enforced do `Blueprint`. Enquanto o schema não for expandido, esses conceitos devem aparecer refletidos em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+
 ## Objetivo do guia
 
 Evitar que próximos casos sejam apenas coleções de bons documentos.
@@ -28,7 +30,7 @@ A pergunta pública deve responder:
 3. **Qual impacto concreto existe se nada for esclarecido?**
 4. **Por que estes documentos foram reunidos e entregues ao grupo?**
 
-Formato recomendado para planejamento:
+Formato recomendado para planejamento editorial, fora do schema atual:
 
 ```json
 "pergunta_publica": {
@@ -40,7 +42,7 @@ Formato recomendado para planejamento:
 }
 ```
 
-A pergunta pública não precisa revelar a verdade real. Ela precisa dar ao grupo um mandato diegético: por que estão lendo aquele dossiê e qual decisão, reparo, risco ou consequência está em jogo.
+A pergunta pública não precisa revelar a verdade real. Ela precisa dar ao grupo um mandato diegético: por que estão lendo aquele dossiê e qual decisão, reparo, risco ou consequência está em jogo. Enquanto não houver campo próprio no schema, registre essa intenção em `premissa`, nos documentos de abertura, em contratos de evidência, nas dicas contextuais, em `observacoes_producao` e no guia do facilitador.
 
 ## Objetivo obrigatório por envelope
 
@@ -54,7 +56,7 @@ Para cada envelope, defina:
 - **critério de avanço:** evidências, hipótese ou consenso mínimo que libera o próximo envelope;
 - **forma diegética de apresentar o avanço:** como a liberação aparece dentro do mundo da história.
 
-Formato recomendado:
+Formato recomendado para planejamento editorial, fora do schema atual:
 
 ```json
 "objetivos_por_envelope": [
@@ -68,6 +70,8 @@ Formato recomendado:
   }
 ]
 ```
+
+Enquanto não houver campo próprio no schema, reflita esses objetivos em `contratos_evidencia`, na distribuição dos documentos por envelope, nas `dicas_contextuais`, em `observacoes_producao` e no guia do facilitador.
 
 ### Regra do E1
 
@@ -156,21 +160,25 @@ Cada dica deve declarar:
 - **ação mental esperada:** comparar horários, separar versão pública de versão real, mapear benefício, checar ausência de registro etc.;
 - **o que desbloqueia:** qual travamento a dica deve resolver.
 
-Formato recomendado:
+Formato compatível com o modelo atual:
 
 ```json
 "dicas_contextuais": [
   {
-    "condicao_de_uso": "",
-    "intensidade": "leve|media|forte",
-    "acao_mental_esperada": "",
-    "desbloqueia": "",
-    "texto_para_facilitador": ""
+    "id": "DC-E1-EXEMPLO-01",
+    "categoria": "logistica",
+    "fase": "E1",
+    "titulo": "Comparar log e escala",
+    "condicao_uso": "Use se o grupo suspeita de várias pessoas, mas ainda não cruzou horário de credencial com a escala.",
+    "texto": "Oriente o grupo a montar duas colunas: quem deveria estar em ronda e qual credencial aparece no intervalo crítico. Não nomeie suspeitos; peça que procurem incompatibilidades.",
+    "nivel": "media",
+    "contratos_relacionados": ["C-E1-OPORTUNIDADE"],
+    "documentos_relacionados": ["E1-04", "E1-05"]
   }
 ]
 ```
 
-Dica pode orientar uma ação mental. Ela não deve listar resposta final, culpado, motivo e documentos em formato de checklist.
+No schema atual, `condicao_uso` registra a condição de uso, `nivel` registra a intensidade, `texto` deve explicitar a ação mental esperada e o desbloqueio pretendido, e `contratos_relacionados`/`documentos_relacionados` ligam a dica à cadeia de evidência. Dica pode orientar uma ação mental. Ela não deve listar resposta final, culpado, motivo e documentos em formato de checklist.
 
 ## Guia do facilitador operacional
 

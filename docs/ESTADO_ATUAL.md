@@ -169,6 +169,8 @@ Regras atuais:
 - dicas contextuais devem destravar ações e declarar condição de uso, intensidade, ação mental esperada e desbloqueio;
 - o guia do facilitador deve conter pergunta pública, resposta esperada por envelope, liberação do próximo envelope, linha do tempo aparente, linha do tempo real, red herrings, descartes, motivação e síntese da solução.
 
+`pergunta_publica` e `objetivos_por_envelope` são, por enquanto, contrato editorial de planejamento, ainda não campos schema-enforced do `Blueprint`. Enquanto o schema não for expandido, esses conceitos devem aparecer refletidos em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+
 Documento de jogador continua sendo evidência bruta. Interpretação, cruzamentos, gabarito e linguagem analítica pertencem ao guia, às dicas e aos metadados internos.
 
 ### E2 e documentos comerciais
@@ -265,7 +267,8 @@ Após existirem vários casos:
 - calibragem de dificuldade;
 - validação de progressão;
 - validação de red herrings;
-- guardrail automático contra “voz do autor” em documentos de jogador.
+- guardrail automático contra “voz do autor” em documentos de jogador;
+- expansão futura do schema para campos como `pergunta_publica`, `objetivos_por_envelope` e `guia_operacional`.
 
 ## O que não priorizar agora
 

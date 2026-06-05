@@ -98,7 +98,7 @@ Todo caso deve responder:
 - qual impacto concreto existe se o caso não for esclarecido;
 - por que os documentos foram reunidos e entregues ao grupo.
 
-Formato recomendado:
+Formato recomendado para planejamento editorial, fora do schema atual:
 
 ```json
 "pergunta_publica": {
@@ -110,7 +110,7 @@ Formato recomendado:
 }
 ```
 
-Sem pergunta pública, o grupo lê documentos sem saber qual decisão precisa tomar, qual urgência existe ou por que o dossiê foi montado.
+Sem pergunta pública, o grupo lê documentos sem saber qual decisão precisa tomar, qual urgência existe ou por que o dossiê foi montado. `pergunta_publica` ainda não é campo schema-enforced do `Blueprint`; enquanto o schema não for expandido, reflita esse contrato em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
 
 ## Etapa 3 — Núcleo dramático
 
@@ -320,6 +320,8 @@ Todo envelope precisa ter:
 ]
 ```
 
+`objetivos_por_envelope` ainda não é campo schema-enforced do `Blueprint`. Enquanto o schema não for expandido, reflita esses objetivos em `contratos_evidencia`, documentos, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+
 ### Regra do E1
 
 O E1 não deve pedir a solução final.
@@ -431,16 +433,20 @@ Cada dica deve indicar:
 ```json
 "dicas_contextuais": [
   {
-    "condicao_de_uso": "",
-    "intensidade": "leve|media|forte",
-    "acao_mental_esperada": "",
-    "desbloqueia": "",
-    "texto_para_facilitador": ""
+    "id": "DC-E1-EXEMPLO-01",
+    "categoria": "logistica",
+    "fase": "E1",
+    "titulo": "Comparar log e escala",
+    "condicao_uso": "Use se o grupo suspeita de várias pessoas, mas ainda não cruzou horário de credencial com a escala.",
+    "texto": "Oriente o grupo a montar duas colunas: quem deveria estar em ronda e qual credencial aparece no intervalo crítico. Não nomeie suspeitos; peça que procurem incompatibilidades.",
+    "nivel": "media",
+    "contratos_relacionados": ["C-E1-OPORTUNIDADE"],
+    "documentos_relacionados": ["E1-04", "E1-05"]
   }
 ]
 ```
 
-A dica pode orientar uma operação mental, como comparar horários, separar versão pública de versão real ou procurar consequência atual. Ela não deve entregar culpado, motivo e documentos obrigatórios em formato de checklist.
+No schema atual, `condicao_uso` registra a condição de uso, `nivel` registra a intensidade, `texto` deve explicitar a ação mental esperada e o desbloqueio pretendido, e `contratos_relacionados`/`documentos_relacionados` ligam a dica à cadeia de evidência. A dica pode orientar uma operação mental, como comparar horários, separar versão pública de versão real ou procurar consequência atual. Ela não deve entregar culpado, motivo e documentos obrigatórios em formato de checklist.
 
 ## Etapa 12 — Guia do facilitador operacional
 
