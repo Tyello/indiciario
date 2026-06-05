@@ -1803,7 +1803,7 @@
       "Refinamento diegético posterior consolidou a naturalidade dos documentos sem alterar a solução canônica.",
       "Decisão mantida: caso sem mapa; orientação espacial permanece textual.",
       "Status final: régua canônica Intermediária validada após playtest e refinamento editorial/diegético.",
-      "Baseline de geração do pacote: py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict."
+      "Comando oficial para geração do baseline: python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict. A geração final do pacote deve ser confirmada em ambiente local com Chromium/Playwright disponível."
     ]
   },
   "versao": "0.1",

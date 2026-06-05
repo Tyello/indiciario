@@ -8,11 +8,13 @@ Status: **validado como régua canônica Intermediária após playtest, refiname
 
 Esta rodada deixou de ser uma pendência aberta: os problemas P0 foram incorporados ao blueprint e ao guia operacional do Hotel Aurora. O registro histórico abaixo permanece como diagnóstico da rodada, mas a versão consolidada do caso é `examples/caso_canonico_intermediario.json`.
 
-Baseline de pacote consolidado:
+Comando oficial para geração do baseline:
 
 ```bash
-py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
+python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
 ```
+
+A geração final do pacote deve ser confirmada em ambiente local com Chromium/Playwright disponível.
 
 Arquivo do caso: `examples/caso_canonico_intermediario.json`
 
@@ -269,6 +271,7 @@ Reescrever o guia com:
     "orientação espacial textual"
   ],
   "status_final": "régua canônica Intermediária validada",
-  "baseline_pacote": "py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict"
+  "comando_oficial_geracao_baseline": "python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict",
+  "confirmacao_pacote_final": "A geração final do pacote deve ser confirmada em ambiente local com Chromium/Playwright disponível."
 }
 ```

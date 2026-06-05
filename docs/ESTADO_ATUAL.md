@@ -106,13 +106,15 @@ Papel atual do Hotel Aurora:
 - régua canônica Intermediária validada;
 - referência de progressão em 2 envelopes com recontextualização forte;
 - referência de guia do facilitador operacional pós-playtest;
-- baseline de geração do pacote Intermediário.
+- comando oficial para geração do baseline Intermediário.
 
-Baseline de geração registrado:
+Comando oficial para geração do baseline:
 
 ```bash
-py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
+python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
 ```
+
+A geração final do pacote deve ser confirmada em ambiente local com Chromium/Playwright disponível.
 
 ## Resultado do primeiro playtest
 
@@ -313,7 +315,7 @@ Não priorizar neste momento:
 - agentes autônomos;
 - IA gerando imagens.
 
-Antes disso, usar os baselines Iniciante e Intermediário para validar que o framework continua gerando casos interessantes, intrigantes e divertidos.
+Antes disso, usar as réguas Iniciante e Intermediária para validar que o framework continua gerando casos interessantes, intrigantes e divertidos.
 
 ## Comandos úteis
 
@@ -334,7 +336,7 @@ Build do pacote:
 
 ```bash
 python -m scripts.build_package examples/caso_canonico_iniciante.json --output output --strict
-py -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
+python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
 ```
 
 Instalação do browser Playwright, se necessário:
