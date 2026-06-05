@@ -10,93 +10,101 @@
   "formato_envelopes": 2,
   "premissa": "Na vespera do pitch para o fundo Horizonte Norte, a demonstracao da PipaLab travou durante o ensaio final. O painel de entregas mostrou pedidos duplicados, rotas impossiveis e uma tela verde piscando no lugar do mapa. Os logs apontam uma alteracao as 02:17 feita com credencial valida, e a diretora de produto pede uma investigacao discreta porque a rodada de investimento depende da demo.",
   "conflito_central": {
-    "pergunta_publica": "Qual pergunta pública move Sinal Verde e quais evidências permitem avançar sem depender de recursos externos?",
-    "quem_pede_apuracao": "Solicitante diegético definido no dossiê de abertura.",
-    "motivo_da_apuracao": "Há inconsistências documentais que exigem reconstrução offline pelos jogadores.",
-    "risco_concreto": "Uma decisão narrativa ou institucional fica incorreta se a apuração não for concluída.",
-    "verdade_aparente": "Os primeiros registros parecem compatíveis com uma explicação simples.",
-    "verdade_real_resumida": "Nina Prado, diretora de crescimento da PipaLab, planejou a sabotagem para atrasar a rodada e favorecer a compra barata de sua participacao por Renan Veiga, consultor da incubadora Vela Clara. Ela contratou indiretamente Bruno Teles, tecnico terceirizado da CloudBox Manutencao, para acessar a sala de demo de madrugada e trocar a variavel DEMO_ROUTE_MODE para stress_test. Bruno executou a alteracao "
+    "pergunta_publica": "Quem alterou a demonstração da PipaLab antes do pitch e por que a falha técnica ameaça a rodada de investimento?",
+    "quem_pede_apuracao": "A diretora de produto da PipaLab, responsável por preservar o ensaio e a apresentação ao fundo Horizonte Norte.",
+    "motivo_da_apuracao": "A demo travou na véspera do pitch com uma alteração feita de madrugada por credencial válida.",
+    "risco_concreto": "A rodada pode ser adiada ou reprecificada se a instabilidade parecer falha estrutural do produto.",
+    "verdade_aparente": "O travamento parece consequência de deploy interno malfeito ou de manutenção preventiva confusa da CloudBox.",
+    "verdade_real_resumida": "Nina Prado planejou a sabotagem para favorecer a recompra barata de sua participação por Renan Veiga; contratou indiretamente Bruno Teles, que entrou de madrugada, usou o terminal KIOSK-03 com o ID terceirizado 81017 e alterou DEMO_ROUTE_MODE para stress_test, enquanto o E2 liga a ordem de manutenção e o pagamento ao arranjo financeiro."
   },
   "objetivos_por_envelope": [
     {
       "envelope": "E1",
-      "pergunta_diegetica": "Qual hipótese inicial os documentos do primeiro envelope sustentam?",
-      "resposta_esperada": "O grupo identifica a janela investigativa e a hipótese parcial que justifica abrir a remessa complementar.",
+      "pergunta_diegetica": "Que acesso técnico explica a alteração de madrugada na demo?",
+      "resposta_esperada": "O E1 deve apontar o ID terceirizado 81017 no prédio, no KIOSK-03, no log do ambiente e na ordem de manutenção, sem fechar ainda a mandante ou o benefício.",
       "nao_precisa_resolver_ainda": [
-        "autoria final completa",
-        "benefício final totalmente comprovado"
+        "quem encomendou a manutenção",
+        "como o pagamento foi mascarado",
+        "quem lucraria com a rodada reprecificada"
       ],
-      "criterio_de_avanco": "Avançar quando a mesa apresentar hipótese parcial apoiada por documentos mínimos do envelope.",
-      "forma_diegetica_de_avanco": "O facilitador entrega a próxima remessa como complemento do dossiê reunido internamente.",
+      "criterio_de_avanco": "Liberar E2 quando a mesa sustentar que a alteração veio do acesso terceirizado 81017 e não apenas de um erro de deploy interno.",
+      "forma_diegetica_de_avanco": "A diretoria reúne e entrega a remessa administrativa-financeira após a triagem dos logs técnicos.",
       "documentos_minimos": [
-        "E1-01",
-        "E1-02",
-        "E1-03"
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-07"
       ]
     },
     {
       "envelope": "E2",
-      "pergunta_diegetica": "Como os documentos finais recontextualizam a hipótese e fecham a solução?",
-      "resposta_esperada": "O grupo combina oportunidade, motivo e confirmação independente para formular a solução final.",
+      "pergunta_diegetica": "Quem acionou a manutenção e qual benefício financeiro dependia da demo parecer instável?",
+      "resposta_esperada": "O E2 conecta escopo de manutenção, recibo, extrato e consultoria para mostrar Bruno como executor terceirizado, Nina como articuladora e Renan como beneficiário financeiro.",
       "nao_precisa_resolver_ainda": [],
-      "criterio_de_avanco": "Encerrar quando a mesa sustentar solução final com prova principal e confirmação.",
-      "forma_diegetica_de_avanco": "O facilitador confronta a hipótese com o guia confidencial e apresenta o gabarito.",
+      "criterio_de_avanco": "Encerrar quando a mesa explicar acesso técnico, ordem de manutenção e benefício financeiro com confirmação documental.",
+      "forma_diegetica_de_avanco": "O facilitador usa o guia confidencial para comparar a hipótese final com a cadeia técnica e financeira.",
       "documentos_minimos": [
-        "E2-01",
         "E2-02",
-        "E2-03"
+        "E2-03",
+        "E2-04",
+        "E2-05",
+        "E2-06"
       ]
     }
   ],
   "guia_operacional": {
-    "pergunta_publica": "Qual pergunta pública move Sinal Verde e quais evidências permitem avançar sem depender de recursos externos?",
+    "pergunta_publica": "Quem alterou a demonstração da PipaLab antes do pitch e por que a falha técnica ameaça a rodada de investimento?",
     "solucao_em_5_frases": [
-      "A pergunta pública dá ao grupo um mandato claro para investigar.",
-      "O primeiro envelope deve produzir uma hipótese parcial, não a acusação final.",
-      "O envelope complementar recontextualiza a hipótese inicial com novas confirmações.",
-      "A solução final combina oportunidade, motivo, meio e benefício conforme o gabarito interno.",
-      "Falsos caminhos devem ser descartados por evidência, não por intuição do facilitador."
+      "A diretora de produto pede apuração porque a demo travou na véspera do pitch e ameaça a rodada de investimento.",
+      "No E1, a leitura esperada é que o ID 81017 aparece nos registros técnicos críticos e desloca a hipótese de erro interno simples.",
+      "No E2, a manutenção, o recibo e o extrato mostram que a intervenção foi encomendada e paga por fora da rotina comum.",
+      "Bruno executou a alteração técnica, Nina articulou a sabotagem e Renan se beneficiaria da recompra barata de participação.",
+      "Caio, Luma e Artur devem cair por logs, escopo de deploy e negativa de acesso, não por falta de suspeita inicial."
     ],
-    "linha_tempo_aparente_resumo": "A sequência aparente reúne o que os documentos iniciais parecem mostrar antes da recontextualização.",
-    "linha_tempo_real_resumo": "A sequência real deve ser lida pelo facilitador a partir da linha do tempo interna e dos contratos de evidência.",
+    "linha_tempo_aparente_resumo": "Aparentemente a demo falhou por deploy instável, manutenção preventiva e confusão de acessos na madrugada.",
+    "linha_tempo_real_resumo": "Bruno entrou com ID 81017, usou o KIOSK-03 e alterou a variável da demo; depois, E2 mostra a encomenda de Nina e o benefício de Renan.",
     "red_herrings_e_descartes": [
-      "302: O log mostra Caio em sessao remota gravada e sem uso do KIOSK-03 na hora critica.",
-      "304: Seu deploy foi de texto, antes da madrugada, e nao tocou na variavel de rota.",
-      "305: O acesso dele foi negado e nao ha registro de entrada posterior."
+      "302: Caio tem sessão remota gravada e não usa o KIOSK-03 na hora crítica.",
+      "304: Luma fez deploy textual antes da madrugada e não alterou a variável de rota.",
+      "305: Artur teve acesso negado e não há entrada posterior no prédio."
     ],
     "quando_usar_dicas": [
-      "Use dicas leves quando o grupo não souber qual pergunta responder.",
-      "Use dicas médias quando houver cruzamento documental ignorado.",
-      "Use dicas fortes apenas antes de recorrer ao gabarito."
+      "Use dica leve se o grupo tratar deploy interno como explicação suficiente.",
+      "Use dica média se a mesa não cruzar prédio, terminal e log de ambiente para o ID 81017.",
+      "Use dica forte se, no E2, a manutenção não for ligada ao pagamento e ao benefício da recompra."
     ],
     "resposta_esperada_por_envelope": [
       {
         "envelope": "E1",
-        "pergunta_diegetica": "Qual hipótese inicial os documentos do primeiro envelope sustentam?",
-        "resposta_esperada": "O grupo identifica a janela investigativa e a hipótese parcial que justifica abrir a remessa complementar.",
+        "pergunta_diegetica": "Que acesso técnico explica a alteração de madrugada na demo?",
+        "resposta_esperada": "O E1 deve apontar o ID terceirizado 81017 no prédio, no KIOSK-03, no log do ambiente e na ordem de manutenção, sem fechar ainda a mandante ou o benefício.",
         "nao_precisa_resolver_ainda": [
-          "autoria final completa",
-          "benefício final totalmente comprovado"
+          "quem encomendou a manutenção",
+          "como o pagamento foi mascarado",
+          "quem lucraria com a rodada reprecificada"
         ],
-        "criterio_de_avanco": "Avançar quando a mesa apresentar hipótese parcial apoiada por documentos mínimos do envelope.",
-        "forma_diegetica_de_avanco": "O facilitador entrega a próxima remessa como complemento do dossiê reunido internamente.",
+        "criterio_de_avanco": "Liberar E2 quando a mesa sustentar que a alteração veio do acesso terceirizado 81017 e não apenas de um erro de deploy interno.",
+        "forma_diegetica_de_avanco": "A diretoria reúne e entrega a remessa administrativa-financeira após a triagem dos logs técnicos.",
         "documentos_minimos": [
-          "E1-01",
-          "E1-02",
-          "E1-03"
+          "E1-04",
+          "E1-05",
+          "E1-06",
+          "E1-07"
         ]
       },
       {
         "envelope": "E2",
-        "pergunta_diegetica": "Como os documentos finais recontextualizam a hipótese e fecham a solução?",
-        "resposta_esperada": "O grupo combina oportunidade, motivo e confirmação independente para formular a solução final.",
+        "pergunta_diegetica": "Quem acionou a manutenção e qual benefício financeiro dependia da demo parecer instável?",
+        "resposta_esperada": "O E2 conecta escopo de manutenção, recibo, extrato e consultoria para mostrar Bruno como executor terceirizado, Nina como articuladora e Renan como beneficiário financeiro.",
         "nao_precisa_resolver_ainda": [],
-        "criterio_de_avanco": "Encerrar quando a mesa sustentar solução final com prova principal e confirmação.",
-        "forma_diegetica_de_avanco": "O facilitador confronta a hipótese com o guia confidencial e apresenta o gabarito.",
+        "criterio_de_avanco": "Encerrar quando a mesa explicar acesso técnico, ordem de manutenção e benefício financeiro com confirmação documental.",
+        "forma_diegetica_de_avanco": "O facilitador usa o guia confidencial para comparar a hipótese final com a cadeia técnica e financeira.",
         "documentos_minimos": [
-          "E2-01",
           "E2-02",
-          "E2-03"
+          "E2-03",
+          "E2-04",
+          "E2-05",
+          "E2-06"
         ]
       }
     ]

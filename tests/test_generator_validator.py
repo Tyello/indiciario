@@ -732,3 +732,34 @@ def test_validator_exige_paridade_operacional_completa_no_guia():
     assert "criterio_de_avanco" in (prog_014.detalhe or "")
     assert "forma_diegetica_de_avanco" in (prog_014.detalhe or "")
     assert "documentos_minimos" in (prog_014.detalhe or "")
+
+
+def test_exemplos_de_demonstracao_nao_usam_progressao_generica_ou_truncada():
+    forbidden_snippets = [
+        "Qual pergunta pública move",
+        "Solicitante diegético definido",
+        "Há inconsistências documentais",
+        "A pergunta pública dá ao grupo",
+        "A sequência real deve ser lida",
+        "vendido pa",
+        "Bruno executou a alteracao ",
+    ]
+    for path in [
+        ROOT / "examples" / "exemplo_blueprint.json",
+        ROOT / "examples" / "sinal_verde_demo_blueprint.json",
+        ROOT / "examples" / "showcase_tecnico.json",
+    ]:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        structured_text = json.dumps(
+            {
+                "conflito_central": data["conflito_central"],
+                "objetivos_por_envelope": data["objetivos_por_envelope"],
+                "guia_operacional": data["guia_operacional"],
+            },
+            ensure_ascii=False,
+        )
+        for snippet in forbidden_snippets:
+            assert snippet not in structured_text, path
+        for value in data["conflito_central"].values():
+            assert value == value.strip(), path
+            assert value.endswith(".") or value.endswith("?") or value.endswith("!"), path
