@@ -252,6 +252,8 @@ def build_facilitator_context(blueprint: Blueprint, graph_report: dict[str, Any]
         summary = graph_report.get("summary", {})
         graph_summary = ", ".join(f"{chave}: {valor}" for chave, valor in summary.items()) or graph_summary
 
+    guia_operacional = _guia_operacional_context(blueprint)
+
     return {
         "CASE_TITLE": blueprint.titulo,
         "CASE_SUBTITLE": blueprint.subtitulo,
@@ -273,7 +275,12 @@ def build_facilitator_context(blueprint: Blueprint, graph_report: dict[str, Any]
         "LINHA_TEMPO_APARENTE": [_evento_context(evento) for evento in blueprint.linha_tempo_percebida],
         "LINHA_TEMPO_REAL": [_evento_context(evento) for evento in blueprint.linha_tempo_real],
         "RED_HERRINGS": [_red_herring_context(item) for item in blueprint.red_herrings],
-        "GUIA_OPERACIONAL": _guia_operacional_context(blueprint),
+        "GUIA_OPERACIONAL": guia_operacional,
+        "pergunta_publica": guia_operacional["pergunta_publica"],
+        "quando_liberar_e2": guia_operacional["quando_liberar_e2"],
+        "resposta_e2": guia_operacional["resposta_e2"],
+        "linha_aparente_resumo": guia_operacional["linha_aparente_resumo"],
+        "linha_real_resumo": guia_operacional["linha_real_resumo"],
         "DOCUMENTOS_POR_ENVELOPE": [
             {
                 "envelope": envelope,
