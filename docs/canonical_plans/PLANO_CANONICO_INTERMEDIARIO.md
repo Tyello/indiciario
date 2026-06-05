@@ -8,11 +8,13 @@ Não gerar `examples/caso_canonico_intermediario.json` antes deste plano estar e
 
 Premissa escolhida: **Hotel / desaparecimento em jantar fechado**.
 
+Estrutura decidida: **2 envelopes**.
+
 Título provisório:
 
 > **O Último Brinde do Hotel Aurora**
 
-Este título ainda pode mudar. O objetivo agora é consolidar núcleo dramático, suspeitos, curva de suspeita e plano de envelopes antes de qualquer blueprint JSON.
+Este título ainda pode mudar. O objetivo agora é consolidar núcleo dramático, suspeitos, curva de suspeita e plano documental antes de qualquer blueprint JSON.
 
 ## Premissa editorial
 
@@ -346,13 +348,17 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
 ]
 ```
 
-## Plano de envelopes provisório
+## Plano de envelopes definitivo
+
+Estrutura decidida: **2 envelopes**.
+
+Não usar 3 envelopes neste caso. O objetivo do canônico Intermediário é criar recontextualização forte dentro de uma estrutura ainda enxuta e jogável em mesa.
 
 ```json
 [
   {
     "envelope": "E1",
-    "funcao": "gerar hipótese forte, mas incompleta",
+    "funcao": "hipótese forte, mas incompleta",
     "conclusao_esperada": "Helena provavelmente não saiu simplesmente por vontade própria; a linha do tempo do jantar tem contradições e alguém manipulou sinais de presença.",
     "nao_precisa_descobrir_ainda": [
       "quem arquitetou a manipulação",
@@ -373,7 +379,7 @@ Os nomes abaixo são provisórios. Podem mudar antes do blueprint.
   },
   {
     "envelope": "E2",
-    "funcao": "recontextualizar a ausência e fechar motivo/autoria",
+    "funcao": "recontextualização e solução final",
     "conclusao_esperada": "A presença final de Helena foi fabricada para atrasar ou impedir um anúncio; a pessoa responsável usou conhecimento social e espacial do hotel para criar uma saída voluntária falsa.",
     "pilares_obrigatorios": [
       "motivo humano",
@@ -419,7 +425,7 @@ Não é blueprint ainda. É uma lista de funções documentais.
 | E2-05 | objeto pessoal recontextualizado | virada | prova fabricação de presença |
 | E2-06 | depoimento de descarte | descarta red herring forte |
 | E2-07 | evidência final | confirmação independente | fecha autoria/motivo |
-| E2-08 | guia do facilitador/dicas | separado | não entra como documento de jogador |
+| E2-08 | dicas contextuais/guia | separado | não entra como documento de jogador se for dica/guia |
 
 ## Riscos de obviedade
 
@@ -439,6 +445,11 @@ Não é blueprint ainda. É uma lista de funções documentais.
     "risco": "Cronologia virar checklist de horários.",
     "impacto": "Caso fica frio e mecânico.",
     "mitigacao": "Depoimentos precisam ter intenção emocional e contradições humanas, não só timestamps."
+  },
+  {
+    "risco": "Dois envelopes ficarem lineares demais: E1 pergunta, E2 responde.",
+    "impacto": "O caso perde sensação de virada e vira confirmação simples.",
+    "mitigacao": "E2 deve recontextualizar pelo menos um documento importante do E1 e descartar red herrings fortes."
   }
 ]
 ```
@@ -461,6 +472,11 @@ Não é blueprint ainda. É uma lista de funções documentais.
     "risco": "Motivo familiar parecer melodrama sem evidência.",
     "impacto": "Solução parece novela e não dedução.",
     "mitigacao": "Motivo deve aparecer por documento concreto no E2, não por confissão."
+  },
+  {
+    "risco": "Dois envelopes não darem espaço para todos os suspeitos respirarem.",
+    "impacto": "Suspeitos secundários parecem decorativos.",
+    "mitigacao": "Cada red herring forte precisa ter motivo, oportunidade e descarte documental dentro dos dois envelopes."
   }
 ]
 ```
@@ -473,9 +489,12 @@ Antes de gerar JSON, ainda falta decidir:
 2. destino/estado de Helena: desaparecimento sem dano, retenção temporária, fuga induzida ou encenação parcial;
 3. qual é o objeto pessoal com dupla interpretação;
 4. qual é o documento de E2 que recontextualiza a motivação;
-5. se o caso terá 2 ou 3 envelopes;
-6. tom final: elegante/social, familiar sombrio ou suspense leve;
-7. se haverá criança no público-alvo de teste ou se este canônico será mais adulto.
+5. tom final: elegante/social, familiar sombrio ou suspense leve;
+6. se haverá criança no público-alvo de teste ou se este canônico será mais adulto.
+
+Decisão já tomada:
+
+- estrutura com **2 envelopes**.
 
 ## Critério de aprovação do plano
 
