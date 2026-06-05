@@ -3,10 +3,18 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import re
 from pathlib import Path
 from typing import Any
 
-from .models import Blueprint, ContratoEvidencia, DicaContextual, Documento
+from .models import (
+    Blueprint,
+    ContratoEvidencia,
+    DicaContextual,
+    Documento,
+    EventoLinha,
+    RedHerring,
+)
 from .renderer import renderizar_documento
 
 
@@ -37,6 +45,26 @@ def _documento_context(documento: Documento) -> dict[str, Any]:
         "titulo": documento.titulo,
         "tipo": documento.tipo.value,
         "envelope": documento.envelope,
+    }
+
+
+def _evento_context(evento: EventoLinha) -> dict[str, Any]:
+    return {
+        "data_hora": evento.data_hora,
+        "evento": evento.evento,
+        "personagem_id": evento.personagem_id,
+        "documento_prova": evento.documento_prova,
+        "confirmacao_independente": evento.confirmacao_independente or "—",
+    }
+
+
+def _red_herring_context(red_herring: RedHerring) -> dict[str, Any]:
+    return {
+        "personagem_id": red_herring.personagem_id,
+        "motivo_aparente": red_herring.motivo_aparente,
+        "como_descartar": red_herring.como_descartar,
+        "documento_descarte": red_herring.documento_descarte,
+        "categoria": red_herring.categoria,
     }
 
 
@@ -85,6 +113,110 @@ def _dicas_por_fase_categoria(dicas: list[DicaContextual]) -> list[dict[str, Any
             ],
         })
     return fases
+
+
+def _strip_html(texto: str) -> str:
+    return re.sub(r"<[^>]+>", " ", texto).replace("  ", " ").strip()
+
+
+def _pergunta_publica(blueprint: Blueprint) -> str:
+    """Extrai a pergunta pública do documento de abertura, com fallback seguro.
+
+    O guia operacional não deve depender de texto livre em `observacoes_producao`.
+    A pergunta pública vem do documento diegético de abertura porque é exatamente o
+    que o facilitador e os jogadores enxergam como missão narrativa.
+    """
+
+    for documento in blueprint.documentos:
+        if documento.envelope == "E1" and documento.codigo == "E1-01":
+            corpo = _strip_html(str(documento.conteudo.get("CORPO_CARTA", "")))
+            marcador = "por que "
+            inicio = corpo.lower().find(marcador)
+            if inicio >= 0:
+                fim = corpo.find("?", inicio)
+                if fim >= 0:
+                    return corpo[inicio:fim + 1]
+    return blueprint.premissa
+
+
+def _contratos_contexto(
+    blueprint: Blueprint,
+    *,
+    fase: str | None = None,
+    prefixos: tuple[str, ...] = (),
+    obrigatorios: bool | None = None,
+) -> list[dict[str, str]]:
+    contratos: list[dict[str, str]] = []
+    for contrato in blueprint.contratos_evidencia:
+        if fase is not None and contrato.fase != fase:
+            continue
+        if prefixos and not contrato.id.startswith(prefixos):
+            continue
+        if obrigatorios is not None and contrato.obrigatoria_para_avanco is not obrigatorios:
+            continue
+        contratos.append({"id": contrato.id, "texto": contrato.conclusao})
+    return contratos
+
+
+def _solucao_em_frases(blueprint: Blueprint) -> list[dict[str, str]]:
+    """Monta síntese operacional a partir de campos estruturados do blueprint."""
+
+    contratos_e1 = _contratos_contexto(blueprint, fase="E1", obrigatorios=True)
+    contratos_final = _contratos_contexto(blueprint, fase="final", obrigatorios=True)
+    resposta_e1 = contratos_e1[-1]["texto"] if contratos_e1 else blueprint.erro_que_permite_descobrir
+    solucao_final = contratos_final[-1]["texto"] if contratos_final else blueprint.verdade_real
+
+    frases = [
+        f"Pergunta pública: {_pergunta_publica(blueprint)}",
+        f"Resposta esperada do E1: {resposta_e1}",
+        f"O que muda no E2: {blueprint.motivacao}",
+        f"Solução final: {solucao_final}",
+        "Fechamento: os suspeitos fortes devem cair por janela, meio, oportunidade ou qualidade do testemunho.",
+    ]
+    return [{"texto": frase} for frase in frases]
+
+
+def _resumo_linha_tempo(eventos: list[EventoLinha], fallback: str) -> str:
+    if not eventos:
+        return fallback
+    return " ".join(f"{evento.data_hora}: {evento.evento}" for evento in eventos[:3])
+
+
+def _guia_operacional_context(blueprint: Blueprint) -> dict[str, Any]:
+    """Monta o guia operacional sem parsear observações textuais livres.
+
+    O contexto deriva de campos estruturados: contratos, linhas do tempo, motivação,
+    verdade real e red herrings. Isso evita que o guia quebre quando a redação de
+    `observacoes_producao` mudar.
+    """
+
+    e1_obrigatorios = _contratos_contexto(blueprint, fase="E1", obrigatorios=True)
+    e2_obrigatorios = _contratos_contexto(blueprint, fase="E2", obrigatorios=True)
+    e2_recontexto = _contratos_contexto(blueprint, fase="E2", prefixos=("C-E2",))
+
+    return {
+        "pergunta_publica": _pergunta_publica(blueprint),
+        "resposta_e1": e1_obrigatorios,
+        "quando_liberar_e2": (
+            "o grupo formular uma resposta parcial sustentada pelos contratos obrigatórios do E1, "
+            "sem exigir autoria final antes da remessa complementar."
+        ),
+        "o_que_muda_e2": e2_recontexto,
+        "solucao_5_frases": _solucao_em_frases(blueprint),
+        "linha_aparente_resumo": _resumo_linha_tempo(
+            blueprint.linha_tempo_percebida,
+            "Ver tabela de linha do tempo aparente.",
+        ),
+        "linha_real_resumo": _resumo_linha_tempo(
+            blueprint.linha_tempo_real,
+            "Ver tabela de linha do tempo real.",
+        ),
+        "resposta_e2": (
+            e2_obrigatorios[-1]["texto"]
+            if e2_obrigatorios
+            else "Ver contratos obrigatórios do E2."
+        ),
+    }
 
 
 def _criterios_avanco(blueprint: Blueprint) -> list[dict[str, Any]]:
@@ -137,6 +269,11 @@ def build_facilitator_context(blueprint: Blueprint, graph_report: dict[str, Any]
         "METODO_OCULTACAO": blueprint.metodo_ocultacao,
         "GRAPH_STATUS": graph_status,
         "GRAPH_SUMMARY": graph_summary,
+        "CADEIA_CAUSAL": [{"item": item} for item in blueprint.cadeia_causal],
+        "LINHA_TEMPO_APARENTE": [_evento_context(evento) for evento in blueprint.linha_tempo_percebida],
+        "LINHA_TEMPO_REAL": [_evento_context(evento) for evento in blueprint.linha_tempo_real],
+        "RED_HERRINGS": [_red_herring_context(item) for item in blueprint.red_herrings],
+        "GUIA_OPERACIONAL": _guia_operacional_context(blueprint),
         "DOCUMENTOS_POR_ENVELOPE": [
             {
                 "envelope": envelope,
