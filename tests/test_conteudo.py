@@ -29,8 +29,52 @@ def blueprint_minimo(documentos: list[dict]) -> Blueprint:
         "dificuldade": "medio",
         "tempo_estimado_min": 60,
         "numero_jogadores": "4",
-        "formato_envelopes": 2,
+        "formato_envelopes": 1,
         "premissa": "Premissa de teste.",
+        "conflito_central": {
+            "pergunta_publica": "Qual inconsistência os documentos de teste devem apurar?",
+            "quem_pede_apuracao": "Solicitante de teste",
+            "motivo_da_apuracao": "Validar conteúdo mínimo em documentos.",
+            "risco_concreto": "O blueprint de teste não pode gerar material inconsistente.",
+            "verdade_aparente": "Parece haver apenas uma falha de preenchimento.",
+            "verdade_real_resumida": "O teste exercita a validação de conteúdo.",
+        },
+        "objetivos_por_envelope": [
+            {
+                "envelope": "E1",
+                "pergunta_diegetica": "Que campo documental está ausente ou inconsistente?",
+                "resposta_esperada": "O grupo identifica a inconsistência documental do envelope de teste.",
+                "nao_precisa_resolver_ainda": [],
+                "criterio_de_avanco": "Encerrar quando o documento mínimo for avaliado.",
+                "forma_diegetica_de_avanco": "O facilitador registra o resultado da validação.",
+                "documentos_minimos": [documentos[0]["codigo"]],
+            }
+        ],
+        "guia_operacional": {
+            "pergunta_publica": "Qual inconsistência os documentos de teste devem apurar?",
+            "resposta_esperada_por_envelope": [
+                {
+                    "envelope": "E1",
+                    "pergunta_diegetica": "Que campo documental está ausente ou inconsistente?",
+                    "resposta_esperada": "O grupo identifica a inconsistência documental do envelope de teste.",
+                    "nao_precisa_resolver_ainda": [],
+                    "criterio_de_avanco": "Encerrar quando o documento mínimo for avaliado.",
+                    "forma_diegetica_de_avanco": "O facilitador registra o resultado da validação.",
+                    "documentos_minimos": [documentos[0]["codigo"]],
+                }
+            ],
+            "solucao_em_5_frases": [
+                "A pergunta pública orienta o teste.",
+                "O envelope único concentra os documentos mínimos.",
+                "A validação identifica campos ausentes ou inválidos.",
+                "O facilitador de teste registra o resultado.",
+                "Não há dependência externa para resolver a amostra.",
+            ],
+            "linha_tempo_aparente_resumo": "Linha aparente de teste.",
+            "linha_tempo_real_resumo": "Linha real de teste.",
+            "red_herrings_e_descartes": ["14: c", "31: c"],
+            "quando_usar_dicas": ["Use dica quando o teste travar."],
+        },
         "verdade_real": "Verdade interna.",
         "executor_id": "09",
         "planejador_id": "09",

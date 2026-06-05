@@ -9,6 +9,106 @@
   "numero_jogadores": "3",
   "formato_envelopes": 2,
   "premissa": "Na vespera do pitch para o fundo Horizonte Norte, a demonstracao da PipaLab travou durante o ensaio final. O painel de entregas mostrou pedidos duplicados, rotas impossiveis e uma tela verde piscando no lugar do mapa. Os logs apontam uma alteracao as 02:17 feita com credencial valida, e a diretora de produto pede uma investigacao discreta porque a rodada de investimento depende da demo.",
+  "conflito_central": {
+    "pergunta_publica": "Quem alterou a demonstração da PipaLab antes do pitch e por que a falha técnica ameaça a rodada de investimento?",
+    "quem_pede_apuracao": "A diretora de produto da PipaLab, responsável por preservar o ensaio e a apresentação ao fundo Horizonte Norte.",
+    "motivo_da_apuracao": "A demo travou na véspera do pitch com uma alteração feita de madrugada por credencial válida.",
+    "risco_concreto": "A rodada pode ser adiada ou reprecificada se a instabilidade parecer falha estrutural do produto.",
+    "verdade_aparente": "O travamento parece consequência de deploy interno malfeito ou de manutenção preventiva confusa da CloudBox.",
+    "verdade_real_resumida": "Nina Prado planejou a sabotagem para favorecer a recompra barata de sua participação por Renan Veiga; contratou indiretamente Bruno Teles, que entrou de madrugada, usou o terminal KIOSK-03 com o ID terceirizado 81017 e alterou DEMO_ROUTE_MODE para stress_test, enquanto o E2 liga a ordem de manutenção e o pagamento ao arranjo financeiro."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Que acesso técnico explica a alteração de madrugada na demo?",
+      "resposta_esperada": "O E1 deve apontar o ID terceirizado 81017 no prédio, no KIOSK-03, no log do ambiente e na ordem de manutenção, sem fechar ainda a mandante ou o benefício.",
+      "nao_precisa_resolver_ainda": [
+        "quem encomendou a manutenção",
+        "como o pagamento foi mascarado",
+        "quem lucraria com a rodada reprecificada"
+      ],
+      "criterio_de_avanco": "Liberar E2 quando a mesa sustentar que a alteração veio do acesso terceirizado 81017 e não apenas de um erro de deploy interno.",
+      "forma_diegetica_de_avanco": "A diretoria reúne e entrega a remessa administrativa-financeira após a triagem dos logs técnicos.",
+      "documentos_minimos": [
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-07"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Quem acionou a manutenção e qual benefício financeiro dependia da demo parecer instável?",
+      "resposta_esperada": "O E2 conecta escopo de manutenção, recibo, extrato e consultoria para mostrar Bruno como executor terceirizado, Nina como articuladora e Renan como beneficiário financeiro.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a mesa explicar acesso técnico, ordem de manutenção e benefício financeiro com confirmação documental.",
+      "forma_diegetica_de_avanco": "O facilitador usa o guia confidencial para comparar a hipótese final com a cadeia técnica e financeira.",
+      "documentos_minimos": [
+        "E2-02",
+        "E2-03",
+        "E2-04",
+        "E2-05",
+        "E2-06"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Quem alterou a demonstração da PipaLab antes do pitch e por que a falha técnica ameaça a rodada de investimento?",
+    "solucao_em_5_frases": [
+      "A diretora de produto pede apuração porque a demo travou na véspera do pitch e ameaça a rodada de investimento.",
+      "No E1, a leitura esperada é que o ID 81017 aparece nos registros técnicos críticos e desloca a hipótese de erro interno simples.",
+      "No E2, a manutenção, o recibo e o extrato mostram que a intervenção foi encomendada e paga por fora da rotina comum.",
+      "Bruno executou a alteração técnica, Nina articulou a sabotagem e Renan se beneficiaria da recompra barata de participação.",
+      "Caio, Luma e Artur devem cair por logs, escopo de deploy e negativa de acesso, não por falta de suspeita inicial."
+    ],
+    "linha_tempo_aparente_resumo": "Aparentemente a demo falhou por deploy instável, manutenção preventiva e confusão de acessos na madrugada.",
+    "linha_tempo_real_resumo": "Bruno entrou com ID 81017, usou o KIOSK-03 e alterou a variável da demo; depois, E2 mostra a encomenda de Nina e o benefício de Renan.",
+    "red_herrings_e_descartes": [
+      "302: Caio tem sessão remota gravada e não usa o KIOSK-03 na hora crítica.",
+      "304: Luma fez deploy textual antes da madrugada e não alterou a variável de rota.",
+      "305: Artur teve acesso negado e não há entrada posterior no prédio."
+    ],
+    "quando_usar_dicas": [
+      "Use dica leve se o grupo tratar deploy interno como explicação suficiente.",
+      "Use dica média se a mesa não cruzar prédio, terminal e log de ambiente para o ID 81017.",
+      "Use dica forte se, no E2, a manutenção não for ligada ao pagamento e ao benefício da recompra."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Que acesso técnico explica a alteração de madrugada na demo?",
+        "resposta_esperada": "O E1 deve apontar o ID terceirizado 81017 no prédio, no KIOSK-03, no log do ambiente e na ordem de manutenção, sem fechar ainda a mandante ou o benefício.",
+        "nao_precisa_resolver_ainda": [
+          "quem encomendou a manutenção",
+          "como o pagamento foi mascarado",
+          "quem lucraria com a rodada reprecificada"
+        ],
+        "criterio_de_avanco": "Liberar E2 quando a mesa sustentar que a alteração veio do acesso terceirizado 81017 e não apenas de um erro de deploy interno.",
+        "forma_diegetica_de_avanco": "A diretoria reúne e entrega a remessa administrativa-financeira após a triagem dos logs técnicos.",
+        "documentos_minimos": [
+          "E1-04",
+          "E1-05",
+          "E1-06",
+          "E1-07"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Quem acionou a manutenção e qual benefício financeiro dependia da demo parecer instável?",
+        "resposta_esperada": "O E2 conecta escopo de manutenção, recibo, extrato e consultoria para mostrar Bruno como executor terceirizado, Nina como articuladora e Renan como beneficiário financeiro.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a mesa explicar acesso técnico, ordem de manutenção e benefício financeiro com confirmação documental.",
+        "forma_diegetica_de_avanco": "O facilitador usa o guia confidencial para comparar a hipótese final com a cadeia técnica e financeira.",
+        "documentos_minimos": [
+          "E2-02",
+          "E2-03",
+          "E2-04",
+          "E2-05",
+          "E2-06"
+        ]
+      }
+    ]
+  },
   "verdade_real": "Nina Prado, diretora de crescimento da PipaLab, planejou a sabotagem para atrasar a rodada e favorecer a compra barata de sua participacao por Renan Veiga, consultor da incubadora Vela Clara. Ela contratou indiretamente Bruno Teles, tecnico terceirizado da CloudBox Manutencao, para acessar a sala de demo de madrugada e trocar a variavel DEMO_ROUTE_MODE para stress_test. Bruno executou a alteracao usando seu ID terceirizado 81017 no terminal KIOSK-03. A ocultacao tentou jogar suspeita sobre a estagiaria que errou um deploy, o CTO que discutiu com investidores e o designer que pediu acesso fora do horario. O erro foi Bruno aparecer nos quatro pilares do E1: entrada fisica, terminal, comando de sistema e ordem de manutencao. O E2 mostra que a ordem veio de Nina e que o pagamento final beneficiou Renan por meio de uma nota de consultoria ficticia.",
   "executor_id": "81017",
   "planejador_id": "303",
@@ -35,7 +135,11 @@
       "papel": "narrador",
       "suspeita_aparente": "Tem interesse em preservar a propria area e conduzir a narrativa para fora do produto.",
       "verdade": "Pediu a investigacao para salvar a rodada, mas nao participou da sabotagem.",
-      "documento_ancoragem": ["E1-01", "E1-02", "E1-08"]
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-02",
+        "E1-08"
+      ]
     },
     {
       "id": "302",
@@ -44,7 +148,11 @@
       "papel": "red_herring",
       "suspeita_aparente": "Discutiu com investidores e tinha acesso total ao ambiente de demo.",
       "verdade": "Estava em chamada gravada com o time de infraestrutura quando a alteracao ocorreu.",
-      "documento_ancoragem": ["E1-03", "E1-05", "E1-08"]
+      "documento_ancoragem": [
+        "E1-03",
+        "E1-05",
+        "E1-08"
+      ]
     },
     {
       "id": "303",
@@ -53,7 +161,12 @@
       "papel": "planejador",
       "suspeita_aparente": "Parecia apenas preocupada com a apresentacao comercial.",
       "verdade": "Planejou a sabotagem, abriu a ordem de manutencao vaga e combinou o repasse com Renan.",
-      "documento_ancoragem": ["E1-02", "E2-02", "E2-05", "E2-06"]
+      "documento_ancoragem": [
+        "E1-02",
+        "E2-02",
+        "E2-05",
+        "E2-06"
+      ]
     },
     {
       "id": "304",
@@ -62,7 +175,11 @@
       "papel": "red_herring",
       "suspeita_aparente": "Fez um deploy pequeno no fim da tarde anterior e assumiu ter esquecido uma nota de versao.",
       "verdade": "O deploy terminou antes da janela critica e nao tocou na variavel sabotada.",
-      "documento_ancoragem": ["E1-04", "E1-05", "E1-08"]
+      "documento_ancoragem": [
+        "E1-04",
+        "E1-05",
+        "E1-08"
+      ]
     },
     {
       "id": "305",
@@ -71,7 +188,11 @@
       "papel": "red_herring",
       "suspeita_aparente": "Pediu acesso noturno para trocar imagens da demo e reclamou do roteiro do pitch.",
       "verdade": "Teve acesso negado e seu pedido era somente para assets visuais.",
-      "documento_ancoragem": ["E1-03", "E1-06", "E1-08"]
+      "documento_ancoragem": [
+        "E1-03",
+        "E1-06",
+        "E1-08"
+      ]
     },
     {
       "id": "306",
@@ -80,7 +201,10 @@
       "papel": "testemunha",
       "suspeita_aparente": "Processou pagamentos incomuns perto da data do pitch.",
       "verdade": "Aprovou pagamentos com base em contratos enviados por Nina.",
-      "documento_ancoragem": ["E2-03", "E2-04"]
+      "documento_ancoragem": [
+        "E2-03",
+        "E2-04"
+      ]
     },
     {
       "id": "307",
@@ -89,7 +213,10 @@
       "papel": "beneficiario",
       "suspeita_aparente": "Aparece como conselheiro externo, nao como operador tecnico.",
       "verdade": "Beneficiario financeiro do atraso da rodada e destinatario final do repasse.",
-      "documento_ancoragem": ["E2-05", "E2-06"]
+      "documento_ancoragem": [
+        "E2-05",
+        "E2-06"
+      ]
     },
     {
       "id": "81017",
@@ -98,7 +225,12 @@
       "papel": "executor",
       "suspeita_aparente": "Aparece como manutencao autorizada, nao como funcionario da startup.",
       "verdade": "Executou a alteracao que derrubou a demo.",
-      "documento_ancoragem": ["E1-04", "E1-05", "E1-06", "E1-07"]
+      "documento_ancoragem": [
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-07"
+      ]
     },
     {
       "id": "81018",
@@ -107,7 +239,10 @@
       "papel": "intermediario",
       "suspeita_aparente": "Assina a agenda tecnica que permitiu o acesso noturno.",
       "verdade": "Repassou a escala recebida, sem participar do plano.",
-      "documento_ancoragem": ["E1-07", "E2-02"]
+      "documento_ancoragem": [
+        "E1-07",
+        "E2-02"
+      ]
     }
   ],
   "linha_tempo_real": [
@@ -236,13 +371,33 @@
       "tipo": "email_narrador",
       "emocao_esperada": "urgencia",
       "objetivo_narrativo": "Apresentar a falha da demo por uma narradora com interesse proprio.",
-      "pistas_contidas": ["Julia quer proteger produto e rodada", "Contagem de anexos do E1"],
-      "confirma": ["E1-02"],
-      "confirmado_por": ["E1-08"],
+      "pistas_contidas": [
+        "Julia quer proteger produto e rodada",
+        "Contagem de anexos do E1"
+      ],
+      "confirma": [
+        "E1-02"
+      ],
+      "confirmado_por": [
+        "E1-08"
+      ],
       "red_herring_potencial": "Julia pode parecer interessada em controlar a investigacao.",
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["301", "302", "303", "304"],
-      "codigos_citados": ["E1-02", "E1-03", "E1-04", "E1-05", "E1-06", "E1-07", "E1-08"],
+      "ids_citados": [
+        "301",
+        "302",
+        "303",
+        "304"
+      ],
+      "codigos_citados": [
+        "E1-02",
+        "E1-03",
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-07",
+        "E1-08"
+      ],
       "conteudo": {
         "REMETENTE_NOME": "Julia Marim",
         "REMETENTE_EMAIL": "julia.marim@pipalab.ficticio",
@@ -258,13 +413,34 @@
         "TOTAL_ANEXOS": "7",
         "ANEXOS": true,
         "CADA_ANEXO": [
-          {"NOME_ARQUIVO": "protocolo_e1.pdf", "TAMANHO_KB": "82"},
-          {"NOME_ARQUIVO": "chat_pitch.pdf", "TAMANHO_KB": "96"},
-          {"NOME_ARQUIVO": "acesso_predio.csv.pdf", "TAMANHO_KB": "104"},
-          {"NOME_ARQUIVO": "terminal_kiosk03.pdf", "TAMANHO_KB": "88"},
-          {"NOME_ARQUIVO": "log_demo.pdf", "TAMANHO_KB": "111"},
-          {"NOME_ARQUIVO": "escala_manutencao.pdf", "TAMANHO_KB": "73"},
-          {"NOME_ARQUIVO": "folha_cruzamento.pdf", "TAMANHO_KB": "90"}
+          {
+            "NOME_ARQUIVO": "protocolo_e1.pdf",
+            "TAMANHO_KB": "82"
+          },
+          {
+            "NOME_ARQUIVO": "chat_pitch.pdf",
+            "TAMANHO_KB": "96"
+          },
+          {
+            "NOME_ARQUIVO": "acesso_predio.csv.pdf",
+            "TAMANHO_KB": "104"
+          },
+          {
+            "NOME_ARQUIVO": "terminal_kiosk03.pdf",
+            "TAMANHO_KB": "88"
+          },
+          {
+            "NOME_ARQUIVO": "log_demo.pdf",
+            "TAMANHO_KB": "111"
+          },
+          {
+            "NOME_ARQUIVO": "escala_manutencao.pdf",
+            "TAMANHO_KB": "73"
+          },
+          {
+            "NOME_ARQUIVO": "folha_cruzamento.pdf",
+            "TAMANHO_KB": "90"
+          }
         ]
       }
     },
@@ -275,13 +451,35 @@
       "tipo": "protocolo",
       "emocao_esperada": "urgencia",
       "objetivo_narrativo": "Definir objetivo do E1 e confirmar a contagem real de documentos.",
-      "pistas_contidas": ["Envelope 1 tem 8 documentos", "Pergunta do envelope e identificar executor operacional"],
-      "confirma": ["E1-01"],
-      "confirmado_por": ["E1-08"],
+      "pistas_contidas": [
+        "Envelope 1 tem 8 documentos",
+        "Pergunta do envelope e identificar executor operacional"
+      ],
+      "confirma": [
+        "E1-01"
+      ],
+      "confirmado_por": [
+        "E1-08"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["301", "302", "303", "304", "305", "81017"],
-      "codigos_citados": ["E1-01", "E1-03", "E1-04", "E1-05", "E1-06", "E1-07", "E1-08"],
+      "ids_citados": [
+        "301",
+        "302",
+        "303",
+        "304",
+        "305",
+        "81017"
+      ],
+      "codigos_citados": [
+        "E1-01",
+        "E1-03",
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-07",
+        "E1-08"
+      ],
       "conteudo": {
         "NOME_ORGANIZACAO": "PipaLab Tecnologia Ficticia",
         "SUBTITULO_ORGANIZACAO": "Comite de Crise da Demo",
@@ -313,12 +511,26 @@
       "tipo": "chat",
       "emocao_esperada": "suspeita",
       "objetivo_narrativo": "Criar suspeitas aparentes sobre CTO, estagiaria e designer.",
-      "pistas_contidas": ["Caio estava em chamada", "Davi teve acesso negado", "Lara fez deploy antes da madrugada"],
-      "confirma": ["E1-05", "E1-06"],
-      "confirmado_por": ["E1-08"],
+      "pistas_contidas": [
+        "Caio estava em chamada",
+        "Davi teve acesso negado",
+        "Lara fez deploy antes da madrugada"
+      ],
+      "confirma": [
+        "E1-05",
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E1-08"
+      ],
       "red_herring_potencial": "Caio, Lara e Davi parecem ter motivo.",
       "risco_ambiguidade": "medio",
-      "ids_citados": ["302", "303", "304", "305"],
+      "ids_citados": [
+        "302",
+        "303",
+        "304",
+        "305"
+      ],
       "codigos_citados": [],
       "conteudo": {
         "HORA_TELA": "09:11",
@@ -327,10 +539,50 @@
         "MEMBROS_LISTA": "Julia, Caio, Nina, Lara, Davi",
         "DATA_CONVERSA": "13 abr 2026",
         "MENSAGENS": [
-          {"DIRECAO": "in", "CLASSE_GAP": "gap", "MOSTRAR_NOME": true, "COR_REMETENTE": "color-1", "NOME_REMETENTE": "Caio - CTO", "TEXTO_MENSAGEM": "Se o mapa falhar hoje eu vou dizer que nao deveriamos prometer rota em tempo real.", "HORARIO": "08:50", "DIRECAO_OUT": false, "TICKS": ""},
-          {"DIRECAO": "in", "CLASSE_GAP": "gap", "MOSTRAR_NOME": true, "COR_REMETENTE": "color-2", "NOME_REMETENTE": "Lara - Eng.", "TEXTO_MENSAGEM": "Meu deploy de texto fechou ontem as 18:22. Nao mexi em variavel de rota.", "HORARIO": "08:52", "DIRECAO_OUT": false, "TICKS": ""},
-          {"DIRECAO": "in", "CLASSE_GAP": "gap", "MOSTRAR_NOME": true, "COR_REMETENTE": "color-3", "NOME_REMETENTE": "Davi - Design", "TEXTO_MENSAGEM": "Eu pedi acesso so para trocar as imagens. O predio negou meu badge depois das 21h.", "HORARIO": "08:54", "DIRECAO_OUT": false, "TICKS": ""},
-          {"DIRECAO": "out", "CLASSE_GAP": "gap", "MOSTRAR_NOME": false, "COR_REMETENTE": "", "NOME_REMETENTE": "", "TEXTO_MENSAGEM": "Guardem tudo. Quem mexeu as 02:17 nao vai ser resolvido no grito.", "HORARIO": "08:57", "DIRECAO_OUT": true, "TICKS": "vv"}
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-1",
+            "NOME_REMETENTE": "Caio - CTO",
+            "TEXTO_MENSAGEM": "Se o mapa falhar hoje eu vou dizer que nao deveriamos prometer rota em tempo real.",
+            "HORARIO": "08:50",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-2",
+            "NOME_REMETENTE": "Lara - Eng.",
+            "TEXTO_MENSAGEM": "Meu deploy de texto fechou ontem as 18:22. Nao mexi em variavel de rota.",
+            "HORARIO": "08:52",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-3",
+            "NOME_REMETENTE": "Davi - Design",
+            "TEXTO_MENSAGEM": "Eu pedi acesso so para trocar as imagens. O predio negou meu badge depois das 21h.",
+            "HORARIO": "08:54",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "out",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": false,
+            "COR_REMETENTE": "",
+            "NOME_REMETENTE": "",
+            "TEXTO_MENSAGEM": "Guardem tudo. Quem mexeu as 02:17 nao vai ser resolvido no grito.",
+            "HORARIO": "08:57",
+            "DIRECAO_OUT": true,
+            "TICKS": "vv"
+          }
         ]
       }
     },
@@ -341,13 +593,26 @@
       "tipo": "log_acesso",
       "emocao_esperada": "satisfacao de cruzamento",
       "objetivo_narrativo": "Provar presenca fisica de Bruno e descartar Davi.",
-      "pistas_contidas": ["ID 81017 entrou as 02:03", "ID 305 teve acesso negado as 21:12"],
-      "confirma": ["E1-07"],
-      "confirmado_por": ["E1-06"],
+      "pistas_contidas": [
+        "ID 81017 entrou as 02:03",
+        "ID 305 teve acesso negado as 21:12"
+      ],
+      "confirma": [
+        "E1-07"
+      ],
+      "confirmado_por": [
+        "E1-06"
+      ],
       "red_herring_potencial": "Davi pediu acesso fora do horario, mas foi negado.",
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["305", "81017", "81018"],
-      "codigos_citados": ["KIOSK-03"],
+      "ids_citados": [
+        "305",
+        "81017",
+        "81018"
+      ],
+      "codigos_citados": [
+        "KIOSK-03"
+      ],
       "conteudo": {
         "NOME_SISTEMA": "CONTROLE DE ACESSOS - PIPALAB",
         "SUBTITULO_SISTEMA": "Exportacao auditada - uso investigativo",
@@ -370,10 +635,50 @@
         "TOTAL_NEGADOS": "1",
         "TOTAL_ANOMALIAS": "1",
         "REGISTROS": [
-          {"CLASSE_LINHA": "", "DATA": "13/04/2026", "HORA": "01:58:44", "PORTA": "TEC-1", "ID_USUARIO": "81018", "NOME_USUARIO": "Helio Naves", "TIPO_EVENTO": "in", "EVENTO": "ENTRADA", "OBSERVACAO": "supervisor terceirizado conferiu sala"},
-          {"CLASSE_LINHA": "highlight", "DATA": "13/04/2026", "HORA": "02:03:12", "PORTA": "TEC-1", "ID_USUARIO": "81017", "NOME_USUARIO": "Bruno Teles", "TIPO_EVENTO": "in", "EVENTO": "ENTRADA", "OBSERVACAO": "ordem CloudBox CB-441"},
-          {"CLASSE_LINHA": "anomaly", "DATA": "13/04/2026", "HORA": "02:34:29", "PORTA": "TEC-1", "ID_USUARIO": "81017", "NOME_USUARIO": "Bruno Teles", "TIPO_EVENTO": "out", "EVENTO": "SAIDA", "OBSERVACAO": "permanencia curta fora da rotina"},
-          {"CLASSE_LINHA": "", "DATA": "12/04/2026", "HORA": "21:12:08", "PORTA": "SOC-2", "ID_USUARIO": "305", "NOME_USUARIO": "Davi Roque", "TIPO_EVENTO": "denied", "EVENTO": "NEGADO", "OBSERVACAO": "perfil sem acesso noturno"}
+          {
+            "CLASSE_LINHA": "",
+            "DATA": "13/04/2026",
+            "HORA": "01:58:44",
+            "PORTA": "TEC-1",
+            "ID_USUARIO": "81018",
+            "NOME_USUARIO": "Helio Naves",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "ENTRADA",
+            "OBSERVACAO": "supervisor terceirizado conferiu sala"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "13/04/2026",
+            "HORA": "02:03:12",
+            "PORTA": "TEC-1",
+            "ID_USUARIO": "81017",
+            "NOME_USUARIO": "Bruno Teles",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "ENTRADA",
+            "OBSERVACAO": "ordem CloudBox CB-441"
+          },
+          {
+            "CLASSE_LINHA": "anomaly",
+            "DATA": "13/04/2026",
+            "HORA": "02:34:29",
+            "PORTA": "TEC-1",
+            "ID_USUARIO": "81017",
+            "NOME_USUARIO": "Bruno Teles",
+            "TIPO_EVENTO": "out",
+            "EVENTO": "SAIDA",
+            "OBSERVACAO": "permanencia curta fora da rotina"
+          },
+          {
+            "CLASSE_LINHA": "",
+            "DATA": "12/04/2026",
+            "HORA": "21:12:08",
+            "PORTA": "SOC-2",
+            "ID_USUARIO": "305",
+            "NOME_USUARIO": "Davi Roque",
+            "TIPO_EVENTO": "denied",
+            "EVENTO": "NEGADO",
+            "OBSERVACAO": "perfil sem acesso noturno"
+          }
         ]
       }
     },
@@ -384,13 +689,29 @@
       "tipo": "log_sistema",
       "emocao_esperada": "satisfacao de cruzamento",
       "objetivo_narrativo": "Ligar Bruno ao terminal usado na sala de demo.",
-      "pistas_contidas": ["Autenticacao de 81017 no KIOSK-03", "Deploy de Lara ocorreu antes e em outro terminal", "Caio estava em terminal remoto de chamada"],
-      "confirma": ["E1-06"],
-      "confirmado_por": ["E1-03", "E1-04"],
+      "pistas_contidas": [
+        "Autenticacao de 81017 no KIOSK-03",
+        "Deploy de Lara ocorreu antes e em outro terminal",
+        "Caio estava em terminal remoto de chamada"
+      ],
+      "confirma": [
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E1-03",
+        "E1-04"
+      ],
       "red_herring_potencial": "Lara e Caio tinham acesso tecnico, mas nao no ponto critico.",
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["302", "304", "81017"],
-      "codigos_citados": ["KIOSK-03", "DEMO_ROUTE_MODE"],
+      "ids_citados": [
+        "302",
+        "304",
+        "81017"
+      ],
+      "codigos_citados": [
+        "KIOSK-03",
+        "DEMO_ROUTE_MODE"
+      ],
       "conteudo": {
         "NOME_SISTEMA": "TERMINAIS INTERNOS - PIPALAB",
         "SUBTITULO_SISTEMA": "Sessao local e terminal usado",
@@ -413,10 +734,50 @@
         "TOTAL_NEGADOS": "0",
         "TOTAL_ANOMALIAS": "1",
         "REGISTROS": [
-          {"CLASSE_LINHA": "", "DATA": "12/04/2026", "HORA": "18:22:31", "PORTA": "DEV-12", "ID_USUARIO": "304", "NOME_USUARIO": "Lara Bittar", "TIPO_EVENTO": "operacao", "EVENTO": "DEPLOY TEXTO", "OBSERVACAO": "sem acesso a variavel de rota"},
-          {"CLASSE_LINHA": "", "DATA": "13/04/2026", "HORA": "01:55:02", "PORTA": "CALL-REM", "ID_USUARIO": "302", "NOME_USUARIO": "Caio Leme", "TIPO_EVENTO": "operacao", "EVENTO": "CHAMADA REMOTA", "OBSERVACAO": "sessao de suporte gravada"},
-          {"CLASSE_LINHA": "highlight", "DATA": "13/04/2026", "HORA": "02:12:09", "PORTA": "KIOSK-03", "ID_USUARIO": "81017", "NOME_USUARIO": "Bruno Teles", "TIPO_EVENTO": "in", "EVENTO": "LOGIN LOCAL", "OBSERVACAO": "ordem CB-441"},
-          {"CLASSE_LINHA": "anomaly", "DATA": "13/04/2026", "HORA": "02:17:36", "PORTA": "KIOSK-03", "ID_USUARIO": "81017", "NOME_USUARIO": "Bruno Teles", "TIPO_EVENTO": "operacao", "EVENTO": "ALTERACAO CONFIG", "OBSERVACAO": "DEMO_ROUTE_MODE"}
+          {
+            "CLASSE_LINHA": "",
+            "DATA": "12/04/2026",
+            "HORA": "18:22:31",
+            "PORTA": "DEV-12",
+            "ID_USUARIO": "304",
+            "NOME_USUARIO": "Lara Bittar",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "DEPLOY TEXTO",
+            "OBSERVACAO": "sem acesso a variavel de rota"
+          },
+          {
+            "CLASSE_LINHA": "",
+            "DATA": "13/04/2026",
+            "HORA": "01:55:02",
+            "PORTA": "CALL-REM",
+            "ID_USUARIO": "302",
+            "NOME_USUARIO": "Caio Leme",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "CHAMADA REMOTA",
+            "OBSERVACAO": "sessao de suporte gravada"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "13/04/2026",
+            "HORA": "02:12:09",
+            "PORTA": "KIOSK-03",
+            "ID_USUARIO": "81017",
+            "NOME_USUARIO": "Bruno Teles",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "LOGIN LOCAL",
+            "OBSERVACAO": "ordem CB-441"
+          },
+          {
+            "CLASSE_LINHA": "anomaly",
+            "DATA": "13/04/2026",
+            "HORA": "02:17:36",
+            "PORTA": "KIOSK-03",
+            "ID_USUARIO": "81017",
+            "NOME_USUARIO": "Bruno Teles",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "ALTERACAO CONFIG",
+            "OBSERVACAO": "DEMO_ROUTE_MODE"
+          }
         ]
       }
     },
@@ -427,13 +788,26 @@
       "tipo": "log_sistema",
       "emocao_esperada": "frustracao produtiva",
       "objetivo_narrativo": "Mostrar a variavel sabotada e separar bug real de erro aparente.",
-      "pistas_contidas": ["DEMO_ROUTE_MODE alterado por 81017", "Falha das 09:15 deriva da configuracao stress_test"],
-      "confirma": ["E1-05"],
-      "confirmado_por": ["E1-04"],
+      "pistas_contidas": [
+        "DEMO_ROUTE_MODE alterado por 81017",
+        "Falha das 09:15 deriva da configuracao stress_test"
+      ],
+      "confirma": [
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E1-04"
+      ],
       "red_herring_potencial": "Parece bug comum ate cruzar com terminal e acesso.",
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["304", "81017"],
-      "codigos_citados": ["DEMO_ROUTE_MODE", "stress_test"],
+      "ids_citados": [
+        "304",
+        "81017"
+      ],
+      "codigos_citados": [
+        "DEMO_ROUTE_MODE",
+        "stress_test"
+      ],
       "conteudo": {
         "NOME_SISTEMA": "DEMO ROUTER - PIPALAB",
         "SUBTITULO_SISTEMA": "Historico de configuracao do ambiente de demonstracao",
@@ -456,9 +830,39 @@
         "TOTAL_NEGADOS": "0",
         "TOTAL_ANOMALIAS": "1",
         "REGISTROS": [
-          {"CLASSE_LINHA": "", "DATA": "12/04/2026", "HORA": "18:23:04", "PORTA": "PIPELINE", "ID_USUARIO": "304", "NOME_USUARIO": "Lara Bittar", "TIPO_EVENTO": "operacao", "EVENTO": "DEPLOY COPY", "OBSERVACAO": "textos da tela inicial"},
-          {"CLASSE_LINHA": "anomaly", "DATA": "13/04/2026", "HORA": "02:17:36", "PORTA": "KIOSK-03", "ID_USUARIO": "81017", "NOME_USUARIO": "Bruno Teles", "TIPO_EVENTO": "operacao", "EVENTO": "SET DEMO_ROUTE_MODE=stress_test", "OBSERVACAO": "altera algoritmo de rota usado no pitch"},
-          {"CLASSE_LINHA": "highlight", "DATA": "13/04/2026", "HORA": "09:15:19", "PORTA": "DEMO", "ID_USUARIO": "301", "NOME_USUARIO": "Julia Marim", "TIPO_EVENTO": "operacao", "EVENTO": "FALHA DE ROTA", "OBSERVACAO": "pedidos duplicados por modo stress_test"}
+          {
+            "CLASSE_LINHA": "",
+            "DATA": "12/04/2026",
+            "HORA": "18:23:04",
+            "PORTA": "PIPELINE",
+            "ID_USUARIO": "304",
+            "NOME_USUARIO": "Lara Bittar",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "DEPLOY COPY",
+            "OBSERVACAO": "textos da tela inicial"
+          },
+          {
+            "CLASSE_LINHA": "anomaly",
+            "DATA": "13/04/2026",
+            "HORA": "02:17:36",
+            "PORTA": "KIOSK-03",
+            "ID_USUARIO": "81017",
+            "NOME_USUARIO": "Bruno Teles",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "SET DEMO_ROUTE_MODE=stress_test",
+            "OBSERVACAO": "altera algoritmo de rota usado no pitch"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "13/04/2026",
+            "HORA": "09:15:19",
+            "PORTA": "DEMO",
+            "ID_USUARIO": "301",
+            "NOME_USUARIO": "Julia Marim",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "FALHA DE ROTA",
+            "OBSERVACAO": "pedidos duplicados por modo stress_test"
+          }
         ]
       }
     },
@@ -469,13 +873,29 @@
       "tipo": "escala",
       "emocao_esperada": "satisfacao de cruzamento",
       "objetivo_narrativo": "Confirmar que Bruno estava escalado e incluir legenda de nomes.",
-      "pistas_contidas": ["Legenda de IDs", "Ordem CB-441", "Bruno designado para sala de demo"],
-      "confirma": ["E1-04", "E1-05"],
-      "confirmado_por": ["E2-02"],
+      "pistas_contidas": [
+        "Legenda de IDs",
+        "Ordem CB-441",
+        "Bruno designado para sala de demo"
+      ],
+      "confirma": [
+        "E1-04",
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E2-02"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["81017", "81018", "303"],
-      "codigos_citados": ["CB-441", "KIOSK-03"],
+      "ids_citados": [
+        "81017",
+        "81018",
+        "303"
+      ],
+      "codigos_citados": [
+        "CB-441",
+        "KIOSK-03"
+      ],
       "conteudo": {
         "NOME_SISTEMA": "CLOUDBOX MANUTENCAO",
         "SUBTITULO_SISTEMA": "Escala tecnica com legenda de nomes",
@@ -498,9 +918,39 @@
         "TOTAL_NEGADOS": "0",
         "TOTAL_ANOMALIAS": "1",
         "REGISTROS": [
-          {"CLASSE_LINHA": "", "DATA": "13/04/2026", "HORA": "01:45:00", "PORTA": "LEGENDA", "ID_USUARIO": "81017", "NOME_USUARIO": "Bruno Teles", "TIPO_EVENTO": "operacao", "EVENTO": "TECNICO CAMPO", "OBSERVACAO": "legenda: 81017 = Bruno Teles"},
-          {"CLASSE_LINHA": "", "DATA": "13/04/2026", "HORA": "01:45:00", "PORTA": "LEGENDA", "ID_USUARIO": "81018", "NOME_USUARIO": "Helio Naves", "TIPO_EVENTO": "operacao", "EVENTO": "SUPERVISOR", "OBSERVACAO": "legenda: 81018 = Helio Naves"},
-          {"CLASSE_LINHA": "highlight", "DATA": "13/04/2026", "HORA": "02:00:00", "PORTA": "KIOSK-03", "ID_USUARIO": "81017", "NOME_USUARIO": "Bruno Teles", "TIPO_EVENTO": "operacao", "EVENTO": "ORDEM CB-441", "OBSERVACAO": "escopo recebido: estabilidade de demo solicitada por Nina Prado"}
+          {
+            "CLASSE_LINHA": "",
+            "DATA": "13/04/2026",
+            "HORA": "01:45:00",
+            "PORTA": "LEGENDA",
+            "ID_USUARIO": "81017",
+            "NOME_USUARIO": "Bruno Teles",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "TECNICO CAMPO",
+            "OBSERVACAO": "legenda: 81017 = Bruno Teles"
+          },
+          {
+            "CLASSE_LINHA": "",
+            "DATA": "13/04/2026",
+            "HORA": "01:45:00",
+            "PORTA": "LEGENDA",
+            "ID_USUARIO": "81018",
+            "NOME_USUARIO": "Helio Naves",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "SUPERVISOR",
+            "OBSERVACAO": "legenda: 81018 = Helio Naves"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "13/04/2026",
+            "HORA": "02:00:00",
+            "PORTA": "KIOSK-03",
+            "ID_USUARIO": "81017",
+            "NOME_USUARIO": "Bruno Teles",
+            "TIPO_EVENTO": "operacao",
+            "EVENTO": "ORDEM CB-441",
+            "OBSERVACAO": "escopo recebido: estabilidade de demo solicitada por Nina Prado"
+          }
         ]
       }
     },
@@ -511,12 +961,29 @@
       "tipo": "folha_cruzamento",
       "emocao_esperada": "satisfacao de cruzamento",
       "objetivo_narrativo": "Dar ao jogador uma matriz manual para cruzar suspeitos e quatro pilares.",
-      "pistas_contidas": ["Todos os suspeitos relevantes", "Quatro pilares do E1"],
-      "confirma": ["E1-02"],
-      "confirmado_por": ["E1-04", "E1-05", "E1-06", "E1-07"],
+      "pistas_contidas": [
+        "Todos os suspeitos relevantes",
+        "Quatro pilares do E1"
+      ],
+      "confirma": [
+        "E1-02"
+      ],
+      "confirmado_por": [
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-07"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["301", "302", "303", "304", "305", "81017"],
+      "ids_citados": [
+        "301",
+        "302",
+        "303",
+        "304",
+        "305",
+        "81017"
+      ],
       "codigos_citados": [],
       "conteudo": {
         "NOME_ORGANIZACAO": "PipaLab Tecnologia Ficticia",
@@ -549,13 +1016,33 @@
       "tipo": "protocolo",
       "emocao_esperada": "surpresa justa",
       "objetivo_narrativo": "Abrir a cadeia completa sem invalidar o E1.",
-      "pistas_contidas": ["E2 amplia E1", "Perguntas de planejador e beneficiario"],
-      "confirma": ["E1-02"],
-      "confirmado_por": ["E2-06"],
+      "pistas_contidas": [
+        "E2 amplia E1",
+        "Perguntas de planejador e beneficiario"
+      ],
+      "confirma": [
+        "E1-02"
+      ],
+      "confirmado_por": [
+        "E2-06"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["303", "306", "307", "81017", "81018"],
-      "codigos_citados": ["E2-02", "E2-03", "E2-04", "E2-05", "E2-06", "E2-07"],
+      "ids_citados": [
+        "303",
+        "306",
+        "307",
+        "81017",
+        "81018"
+      ],
+      "codigos_citados": [
+        "E2-02",
+        "E2-03",
+        "E2-04",
+        "E2-05",
+        "E2-06",
+        "E2-07"
+      ],
       "conteudo": {
         "NOME_ORGANIZACAO": "PipaLab Tecnologia Ficticia",
         "SUBTITULO_ORGANIZACAO": "Comite de Crise da Demo",
@@ -587,13 +1074,28 @@
       "tipo": "email_institucional",
       "emocao_esperada": "surpresa justa",
       "objetivo_narrativo": "Mostrar Nina abrindo a oportunidade operacional.",
-      "pistas_contidas": ["Nina solicita janela noturna", "Escopo vago bate com CB-441", "Helio repassa ordem"],
-      "confirma": ["E1-07"],
-      "confirmado_por": ["E2-03"],
+      "pistas_contidas": [
+        "Nina solicita janela noturna",
+        "Escopo vago bate com CB-441",
+        "Helio repassa ordem"
+      ],
+      "confirma": [
+        "E1-07"
+      ],
+      "confirmado_por": [
+        "E2-03"
+      ],
       "red_herring_potencial": "Nina parece apenas diligente.",
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["303", "81018", "81017"],
-      "codigos_citados": ["CB-441", "KIOSK-03"],
+      "ids_citados": [
+        "303",
+        "81018",
+        "81017"
+      ],
+      "codigos_citados": [
+        "CB-441",
+        "KIOSK-03"
+      ],
       "conteudo": {
         "REMETENTE_NOME": "Nina Prado",
         "REMETENTE_EMAIL": "nina.prado@pipalab.ficticio",
@@ -609,7 +1111,10 @@
         "TOTAL_ANEXOS": "1",
         "ANEXOS": true,
         "CADA_ANEXO": [
-          {"NOME_ARQUIVO": "ordem_cb441.pdf", "TAMANHO_KB": "77"}
+          {
+            "NOME_ARQUIVO": "ordem_cb441.pdf",
+            "TAMANHO_KB": "77"
+          }
         ]
       }
     },
@@ -620,13 +1125,27 @@
       "tipo": "recibo",
       "emocao_esperada": "frustracao produtiva",
       "objetivo_narrativo": "Documentar o pagamento para a empresa usada no salto operacional.",
-      "pistas_contidas": ["CB-441", "Servico na madrugada", "Tecnico Bruno Teles"],
-      "confirma": ["E2-02"],
-      "confirmado_por": ["E2-04"],
+      "pistas_contidas": [
+        "CB-441",
+        "Servico na madrugada",
+        "Tecnico Bruno Teles"
+      ],
+      "confirma": [
+        "E2-02"
+      ],
+      "confirmado_por": [
+        "E2-04"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["303", "306", "81017"],
-      "codigos_citados": ["CB-441"],
+      "ids_citados": [
+        "303",
+        "306",
+        "81017"
+      ],
+      "codigos_citados": [
+        "CB-441"
+      ],
       "conteudo": {
         "NOME_EMPRESA": "CloudBox Manutencao Ltda.",
         "TAGLINE_EMPRESA": "Suporte presencial e redes internas",
@@ -650,7 +1169,12 @@
         "ASSINATURA_CONTRATANTE": "Nina Prado",
         "DATA_ASSINATURA": "13/04/2026",
         "ITENS": [
-          {"DESCRICAO_ITEM": "Atendimento tecnico noturno - Bruno Teles ID 81017", "QUANTIDADE": "1", "VALOR_UNITARIO": "R$ 4.800,00", "VALOR_ITEM": "R$ 4.800,00"}
+          {
+            "DESCRICAO_ITEM": "Atendimento tecnico noturno - Bruno Teles ID 81017",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 4.800,00",
+            "VALOR_ITEM": "R$ 4.800,00"
+          }
         ]
       }
     },
@@ -661,13 +1185,25 @@
       "tipo": "extrato",
       "emocao_esperada": "satisfacao de cruzamento",
       "objetivo_narrativo": "Provar a saida financeira da PipaLab para CloudBox e ancorar Marta.",
-      "pistas_contidas": ["Pagamento de R$ 4.800,00 para CloudBox", "Referencia CB-441"],
-      "confirma": ["E2-03"],
-      "confirmado_por": ["E2-05"],
+      "pistas_contidas": [
+        "Pagamento de R$ 4.800,00 para CloudBox",
+        "Referencia CB-441"
+      ],
+      "confirma": [
+        "E2-03"
+      ],
+      "confirmado_por": [
+        "E2-05"
+      ],
       "red_herring_potencial": "Marta processou o pagamento, mas nao criou o escopo.",
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["306", "303"],
-      "codigos_citados": ["CB-441"],
+      "ids_citados": [
+        "306",
+        "303"
+      ],
+      "codigos_citados": [
+        "CB-441"
+      ],
       "conteudo": {
         "LOGO_SIGLA": "BF",
         "NOME_BANCO": "Banco Farol",
@@ -696,7 +1232,18 @@
         "CNPJ_BANCO": "00.111.222/0001-33",
         "ENDERECO_BANCO": "Av. Ficticia, 1000 - Sao Paulo, SP",
         "LANCAMENTOS": [
-          {"CLASSE_LINHA": "flagged", "DATA": "13/04/2026", "DESCRICAO": "TED ENVIADA", "DETALHE": "CloudBox Manutencao - Ref CB-441 autorizada por Nina Prado", "TIPO": "TED", "TIPO_LOWER": "ted", "DIRECAO": "debit", "VALOR": "- R$ 4.800,00", "COR_SALDO": "negative", "SALDO_ACUMULADO": "R$ 83.800,00"}
+          {
+            "CLASSE_LINHA": "flagged",
+            "DATA": "13/04/2026",
+            "DESCRICAO": "TED ENVIADA",
+            "DETALHE": "CloudBox Manutencao - Ref CB-441 autorizada por Nina Prado",
+            "TIPO": "TED",
+            "TIPO_LOWER": "ted",
+            "DIRECAO": "debit",
+            "VALOR": "- R$ 4.800,00",
+            "COR_SALDO": "negative",
+            "SALDO_ACUMULADO": "R$ 83.800,00"
+          }
         ]
       }
     },
@@ -707,13 +1254,27 @@
       "tipo": "extrato",
       "emocao_esperada": "surpresa justa",
       "objetivo_narrativo": "Mostrar o salto final ate a entidade de Renan.",
-      "pistas_contidas": ["Credito de R$ 4.800,00 na Vela Clara", "Descricao contingencia demo PipaLab", "Titular ligado a Renan"],
-      "confirma": ["E2-04", "E2-06"],
-      "confirmado_por": ["E2-06"],
+      "pistas_contidas": [
+        "Credito de R$ 4.800,00 na Vela Clara",
+        "Descricao contingencia demo PipaLab",
+        "Titular ligado a Renan"
+      ],
+      "confirma": [
+        "E2-04",
+        "E2-06"
+      ],
+      "confirmado_por": [
+        "E2-06"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["307"],
-      "codigos_citados": ["VC-209", "CB-441"],
+      "ids_citados": [
+        "307"
+      ],
+      "codigos_citados": [
+        "VC-209",
+        "CB-441"
+      ],
       "conteudo": {
         "LOGO_SIGLA": "BC",
         "NOME_BANCO": "Banco Candeia",
@@ -742,7 +1303,18 @@
         "CNPJ_BANCO": "00.333.444/0001-55",
         "ENDERECO_BANCO": "Rua Bancaria, 220 - Sao Paulo, SP",
         "LANCAMENTOS": [
-          {"CLASSE_LINHA": "flagged", "DATA": "14/04/2026", "DESCRICAO": "PIX RECEBIDO", "DETALHE": "Consultoria contingencia demo PipaLab - VC-209", "TIPO": "PIX", "TIPO_LOWER": "pix", "DIRECAO": "credit", "VALOR": "+ R$ 4.800,00", "COR_SALDO": "positive", "SALDO_ACUMULADO": "R$ 17.100,00"}
+          {
+            "CLASSE_LINHA": "flagged",
+            "DATA": "14/04/2026",
+            "DESCRICAO": "PIX RECEBIDO",
+            "DETALHE": "Consultoria contingencia demo PipaLab - VC-209",
+            "TIPO": "PIX",
+            "TIPO_LOWER": "pix",
+            "DIRECAO": "credit",
+            "VALOR": "+ R$ 4.800,00",
+            "COR_SALDO": "positive",
+            "SALDO_ACUMULADO": "R$ 17.100,00"
+          }
         ]
       }
     },
@@ -753,13 +1325,27 @@
       "tipo": "contrato",
       "emocao_esperada": "surpresa justa",
       "objetivo_narrativo": "Confirmar independentemente Renan como beneficiario e explicar o motivo.",
-      "pistas_contidas": ["Renan assina pela Vela Clara", "Bonus se rodada atrasar", "Referencia VC-209"],
-      "confirma": ["E2-05", "E2-02"],
-      "confirmado_por": ["E2-05"],
+      "pistas_contidas": [
+        "Renan assina pela Vela Clara",
+        "Bonus se rodada atrasar",
+        "Referencia VC-209"
+      ],
+      "confirma": [
+        "E2-05",
+        "E2-02"
+      ],
+      "confirmado_por": [
+        "E2-05"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
-      "ids_citados": ["303", "307"],
-      "codigos_citados": ["VC-209"],
+      "ids_citados": [
+        "303",
+        "307"
+      ],
+      "codigos_citados": [
+        "VC-209"
+      ],
       "conteudo": {
         "NOME_ORGANIZACAO": "Vela Clara Consultoria Ltda.",
         "SUBTITULO_ORGANIZACAO": "Contrato Particular de Contingencia Comercial",
@@ -791,13 +1377,27 @@
       "tipo": "glossario",
       "emocao_esperada": "frustracao produtiva",
       "objetivo_narrativo": "Tornar os logs tecnicos autossuficientes para jogadores sem conhecimento previo.",
-      "pistas_contidas": ["DEMO_ROUTE_MODE e variavel de comportamento", "KIOSK-03 e terminal local", "stress_test nao e modo de pitch"],
-      "confirma": ["E1-05", "E1-06"],
-      "confirmado_por": ["E1-05", "E1-06"],
+      "pistas_contidas": [
+        "DEMO_ROUTE_MODE e variavel de comportamento",
+        "KIOSK-03 e terminal local",
+        "stress_test nao e modo de pitch"
+      ],
+      "confirma": [
+        "E1-05",
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E1-05",
+        "E1-06"
+      ],
       "red_herring_potencial": null,
       "risco_ambiguidade": "baixo",
       "ids_citados": [],
-      "codigos_citados": ["DEMO_ROUTE_MODE", "KIOSK-03", "stress_test"],
+      "codigos_citados": [
+        "DEMO_ROUTE_MODE",
+        "KIOSK-03",
+        "stress_test"
+      ],
       "conteudo": {
         "NOME_ORGANIZACAO": "PipaLab Tecnologia Ficticia",
         "SUBTITULO_ORGANIZACAO": "Glossario de leitura dos logs",
@@ -932,13 +1532,22 @@
     {
       "documento": "E1-08",
       "criterio": "ids_personagens",
-      "elementos": ["302", "304", "305", "81017"],
+      "elementos": [
+        "302",
+        "304",
+        "305",
+        "81017"
+      ],
       "chave_em": "E1-02"
     },
     {
       "documento": "E1-05",
       "criterio": "ids_personagens",
-      "elementos": ["304", "302", "81017"],
+      "elementos": [
+        "304",
+        "302",
+        "81017"
+      ],
       "chave_em": "E1-07"
     }
   ],

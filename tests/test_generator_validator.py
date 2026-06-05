@@ -5,13 +5,16 @@ from pathlib import Path
 
 from generator.models import (
     Blueprint,
+    ConflitoCentral,
     Dica,
     Dificuldade,
     Documento,
     Envelope,
     EventoLinha,
+    GuiaOperacional,
     Intensidade,
     ModoValidacao,
+    ObjetivoEnvelope,
     PapelPersonagem,
     Personagem,
     Pilar,
@@ -178,6 +181,68 @@ def blueprint_valido() -> Blueprint:
         numero_jogadores="4",
         formato_envelopes=2,
         premissa="Um incidente precisa ser investigado.",
+        conflito_central=ConflitoCentral(
+            pergunta_publica="Por que o incidente operacional ocorreu e quem precisa responder por ele?",
+            quem_pede_apuracao="Direção fictícia",
+            motivo_da_apuracao="Um registro operacional contradiz a versão inicial.",
+            risco_concreto="A decisão administrativa fica suspensa até a apuração.",
+            verdade_aparente="Um erro de rotina parece explicar o incidente.",
+            verdade_real_resumida="A operação combinou executor, planejamento e benefício financeiro.",
+        ),
+        objetivos_por_envelope=[
+            ObjetivoEnvelope(
+                envelope="E1",
+                pergunta_diegetica="Qual janela operacional explica o incidente?",
+                resposta_esperada="A janela crítica converge para a credencial operacional e para registros de acesso.",
+                nao_precisa_resolver_ainda=["benefício financeiro final"],
+                criterio_de_avanco="Liberar E2 quando o grupo sustentar presença e ação crítica com prova e confirmação.",
+                forma_diegetica_de_avanco="A direção encaminha complemento administrativo após a primeira triagem.",
+                documentos_minimos=["E1-04", "E1-05"],
+            ),
+            ObjetivoEnvelope(
+                envelope="E2",
+                pergunta_diegetica="Quem planejou e se beneficiou da operação?",
+                resposta_esperada="O E2 liga planejamento e benefício à cadeia documental, fechando executor, planejador e beneficiário.",
+                nao_precisa_resolver_ainda=[],
+                criterio_de_avanco="Encerrar quando a acusação explicar executor, planejador e beneficiário com confirmação independente.",
+                forma_diegetica_de_avanco="O facilitador abre o gabarito confidencial apenas após consenso final.",
+                documentos_minimos=["E2-02", "E2-03", "E2-04"],
+            ),
+        ],
+        guia_operacional=GuiaOperacional(
+            pergunta_publica="Por que o incidente operacional ocorreu e quem precisa responder por ele?",
+            resposta_esperada_por_envelope=[
+                ObjetivoEnvelope(
+                    envelope="E1",
+                    pergunta_diegetica="Qual janela operacional explica o incidente?",
+                    resposta_esperada="A janela crítica converge para a credencial operacional e para registros de acesso.",
+                    nao_precisa_resolver_ainda=["benefício financeiro final"],
+                    criterio_de_avanco="Liberar E2 quando o grupo sustentar presença e ação crítica com prova e confirmação.",
+                    forma_diegetica_de_avanco="A direção encaminha complemento administrativo após a primeira triagem.",
+                    documentos_minimos=["E1-04", "E1-05"],
+                ),
+                ObjetivoEnvelope(
+                    envelope="E2",
+                    pergunta_diegetica="Quem planejou e se beneficiou da operação?",
+                    resposta_esperada="O E2 liga planejamento e benefício à cadeia documental, fechando executor, planejador e beneficiário.",
+                    nao_precisa_resolver_ainda=[],
+                    criterio_de_avanco="Encerrar quando a acusação explicar executor, planejador e beneficiário com confirmação independente.",
+                    forma_diegetica_de_avanco="O facilitador abre o gabarito confidencial apenas após consenso final.",
+                    documentos_minimos=["E2-02", "E2-03", "E2-04"],
+                ),
+            ],
+            solucao_em_5_frases=[
+                "A pergunta pública é explicar o incidente e seus responsáveis.",
+                "O E1 localiza a janela crítica e a credencial operacional.",
+                "O E2 mostra que a cadeia documental foi planejada.",
+                "A solução combina executor, planejador e beneficiário.",
+                "Falsos caminhos caem por ausência de oportunidade ou benefício.",
+            ],
+            linha_tempo_aparente_resumo="A rotina parece ter sido apenas irregular.",
+            linha_tempo_real_resumo="A preparação, execução e benefício formam uma cadeia deliberada.",
+            red_herrings_e_descartes=["Eva cai por falta de oportunidade.", "Fábio cai por falta de benefício."],
+            quando_usar_dicas=["Use dicas leves após travamento de leitura.", "Use dicas fortes antes do gabarito final."],
+        ),
         verdade_real="A operação foi planejada e executada por personagens fictícios.",
         executor_id="01",
         planejador_id="02",
@@ -364,6 +429,8 @@ def test_validator_permite_um_envelope_sem_bloqueio_por_tamanho_esperado():
     blueprint.red_herrings[1].documento_descarte = "E1-04"
     blueprint.dificuldade = Dificuldade.INICIANTE
     blueprint.formato_envelopes = 1
+    blueprint.objetivos_por_envelope = blueprint.objetivos_por_envelope[:1]
+    blueprint.guia_operacional.resposta_esperada_por_envelope = blueprint.guia_operacional.resposta_esperada_por_envelope[:1]
 
     resultado = BlueprintValidator(blueprint, strict=True).validar()
 
@@ -601,3 +668,98 @@ def test_validador_rejeita_override_assinatura_absoluto_ou_nao_svg() -> None:
     codigos = {erro.codigo for erro in resultado.erros}
     assert "ASSINATURA_001" in codigos
     assert "ASSINATURA_002" in codigos
+
+
+def test_validator_exige_guia_operacional_consistente_com_conflito():
+    blueprint = blueprint_valido()
+    blueprint.guia_operacional.pergunta_publica = "Pergunta divergente."
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert "PROG_002" in _codigos(resultado)
+
+
+def test_validator_rejeita_objetivo_com_documento_de_outro_envelope():
+    blueprint = blueprint_valido()
+    blueprint.objetivos_por_envelope[0].documentos_minimos = ["E2-02"]
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert "PROG_009" in _codigos(resultado)
+
+
+def test_validator_exige_respostas_do_guia_para_os_mesmos_envelopes():
+    blueprint = blueprint_valido()
+    blueprint.guia_operacional.resposta_esperada_por_envelope = blueprint.guia_operacional.resposta_esperada_por_envelope[:1]
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert "PROG_013" in _codigos(resultado)
+
+
+def test_validator_bloqueia_e1_pedindo_solucao_final():
+    blueprint = blueprint_valido()
+    blueprint.objetivos_por_envelope[0].pergunta_diegetica = "Como descobrir o culpado final?"
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert "PROG_018" in _codigos(resultado)
+
+
+def test_validator_bloqueia_e1_pedindo_solucao_completa_no_criterio():
+    blueprint = blueprint_valido()
+    blueprint.objetivos_por_envelope[0].criterio_de_avanco = "Liberar E2 quando o grupo formular solução completa."
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    assert "PROG_018" in _codigos(resultado)
+
+
+def test_validator_exige_paridade_operacional_completa_no_guia():
+    blueprint = blueprint_valido()
+    resposta_e1 = blueprint.guia_operacional.resposta_esperada_por_envelope[0]
+    resposta_e1.pergunta_diegetica = "Pergunta divergente no guia."
+    resposta_e1.criterio_de_avanco = "Critério divergente no guia."
+    resposta_e1.forma_diegetica_de_avanco = "Forma diegética divergente no guia."
+    resposta_e1.documentos_minimos = ["E1-04"]
+
+    resultado = BlueprintValidator(blueprint).validar()
+
+    codigos = _codigos(resultado)
+    assert "PROG_014" in codigos
+    prog_014 = next(erro for erro in resultado.erros if erro.codigo == "PROG_014")
+    assert "pergunta_diegetica" in (prog_014.detalhe or "")
+    assert "criterio_de_avanco" in (prog_014.detalhe or "")
+    assert "forma_diegetica_de_avanco" in (prog_014.detalhe or "")
+    assert "documentos_minimos" in (prog_014.detalhe or "")
+
+
+def test_exemplos_de_demonstracao_nao_usam_progressao_generica_ou_truncada():
+    forbidden_snippets = [
+        "Qual pergunta pública move",
+        "Solicitante diegético definido",
+        "Há inconsistências documentais",
+        "A pergunta pública dá ao grupo",
+        "A sequência real deve ser lida",
+        "vendido pa",
+        "Bruno executou a alteracao ",
+    ]
+    for path in [
+        ROOT / "examples" / "exemplo_blueprint.json",
+        ROOT / "examples" / "sinal_verde_demo_blueprint.json",
+        ROOT / "examples" / "showcase_tecnico.json",
+    ]:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        structured_text = json.dumps(
+            {
+                "conflito_central": data["conflito_central"],
+                "objetivos_por_envelope": data["objetivos_por_envelope"],
+                "guia_operacional": data["guia_operacional"],
+            },
+            ensure_ascii=False,
+        )
+        for snippet in forbidden_snippets:
+            assert snippet not in structured_text, path
+        for value in data["conflito_central"].values():
+            assert value == value.strip(), path
+            assert value.endswith(".") or value.endswith("?") or value.endswith("!"), path

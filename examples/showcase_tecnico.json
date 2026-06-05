@@ -9,6 +9,99 @@
   "numero_jogadores": "4",
   "formato_envelopes": 2,
   "premissa": "Um incidente precisa ser investigado.",
+  "conflito_central": {
+    "pergunta_publica": "Que exceção operacional do showcase abriu a janela crítica e como a cadeia financeira confirma que o benefício não ficou no operador?",
+    "quem_pede_apuracao": "Coordenação técnica fictícia usada para demonstrar o pipeline do Indiciário.",
+    "motivo_da_apuracao": "O pacote técnico precisa exercitar logs, contratos, glossário, mapa, dica e guia sem depender de texto genérico.",
+    "risco_concreto": "Se a exceção operacional não for explicada, o pacote de demonstração deixa de validar progressão, evidência e renderização de forma confiável.",
+    "verdade_aparente": "O incidente parece uma exceção de rotina executada por um operador isolado durante uma janela autorizada.",
+    "verdade_real_resumida": "A amostra técnica demonstra uma cadeia em três partes: acesso operacional na janela crítica, cobertura documental posterior e benefício financeiro separado do executor, permitindo testar validação, grafo de pistas e guia do facilitador com dados ficcionais completos."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Que registro operacional mostra que a janela crítica não foi um evento isolado?",
+      "resposta_esperada": "O E1 deve levar a mesa a reconhecer que acesso, log e documento de apoio formam uma hipótese operacional verificável.",
+      "nao_precisa_resolver_ainda": [
+        "cadeia financeira posterior",
+        "beneficiário fora da operação",
+        "contrato financeiro complementar"
+      ],
+      "criterio_de_avanco": "Avançar quando a mesa sustentar a hipótese de exceção operacional com documentos mínimos do envelope.",
+      "forma_diegetica_de_avanco": "O facilitador entrega a remessa comercial-financeira como complemento do dossiê técnico.",
+      "documentos_minimos": [
+        "E1-01",
+        "E1-06",
+        "E1-07"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Como a documentação complementar mostra que o benefício saiu da camada operacional?",
+      "resposta_esperada": "O E2 deve demonstrar que contrato, manual/glossário e registros financeiros deslocam a leitura de erro operacional para cadeia planejada.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a mesa combinar oportunidade operacional, cobertura documental e benefício separado do executor.",
+      "forma_diegetica_de_avanco": "O facilitador confere a hipótese com contratos de evidência e relatório estrutural do showcase.",
+      "documentos_minimos": [
+        "E2-02",
+        "E2-04",
+        "E2-06"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Que exceção operacional do showcase abriu a janela crítica e como a cadeia financeira confirma que o benefício não ficou no operador?",
+    "solucao_em_5_frases": [
+      "O showcase existe para demonstrar uma investigação offline completa com logs, documentos comerciais, glossário e guia.",
+      "No E1, a hipótese esperada é uma exceção operacional sustentada por acesso e registro de sistema.",
+      "No E2, a documentação complementar desloca a leitura para cobertura e benefício fora da camada operacional.",
+      "A solução técnica exige combinar oportunidade, planejamento documental e benefício separado do executor.",
+      "Os falsos caminhos devem ser descartados por ausência de oportunidade ou ausência de benefício, preservando a função didática do exemplo."
+    ],
+    "linha_tempo_aparente_resumo": "Aparentemente houve uma exceção operacional comum durante uma janela autorizada de testes.",
+    "linha_tempo_real_resumo": "A cadeia demonstrativa combina acesso crítico, cobertura documental e benefício financeiro separado para exercitar o validator e o guia.",
+    "red_herrings_e_descartes": [
+      "05: a alternativa cai por falta de oportunidade operacional nos registros mínimos.",
+      "06: a alternativa cai porque a cadeia financeira não aponta benefício documentado."
+    ],
+    "quando_usar_dicas": [
+      "Use dica leve se a mesa não identificar a função de cada tipo documental no showcase.",
+      "Use dica média se a hipótese operacional não for ligada aos documentos mínimos.",
+      "Use dica forte se o E2 não for tratado como recontextualização financeira e documental."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Que registro operacional mostra que a janela crítica não foi um evento isolado?",
+        "resposta_esperada": "O E1 deve levar a mesa a reconhecer que acesso, log e documento de apoio formam uma hipótese operacional verificável.",
+        "nao_precisa_resolver_ainda": [
+          "cadeia financeira posterior",
+          "beneficiário fora da operação",
+          "contrato financeiro complementar"
+        ],
+        "criterio_de_avanco": "Avançar quando a mesa sustentar a hipótese de exceção operacional com documentos mínimos do envelope.",
+        "forma_diegetica_de_avanco": "O facilitador entrega a remessa comercial-financeira como complemento do dossiê técnico.",
+        "documentos_minimos": [
+          "E1-01",
+          "E1-06",
+          "E1-07"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Como a documentação complementar mostra que o benefício saiu da camada operacional?",
+        "resposta_esperada": "O E2 deve demonstrar que contrato, manual/glossário e registros financeiros deslocam a leitura de erro operacional para cadeia planejada.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a mesa combinar oportunidade operacional, cobertura documental e benefício separado do executor.",
+        "forma_diegetica_de_avanco": "O facilitador confere a hipótese com contratos de evidência e relatório estrutural do showcase.",
+        "documentos_minimos": [
+          "E2-02",
+          "E2-04",
+          "E2-06"
+        ]
+      }
+    ]
+  },
   "verdade_real": "A operação foi planejada e executada por personagens fictícios.",
   "executor_id": "01",
   "planejador_id": "02",

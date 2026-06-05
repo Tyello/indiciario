@@ -9,6 +9,101 @@
   "numero_jogadores": "3-5",
   "formato_envelopes": 2,
   "premissa": "Na tarde de uma quarta-feira, durante uma manutenção programada que desligou as câmeras por 45 minutos, o quadro 'Véspera' — avaliado em R$ 3 milhões — desapareceu da Galeria Principal do Museu Municipal. O museu estava fechado ao público. Apenas quatro funcionários e dois fornecedores tinham acesso.",
+  "conflito_central": {
+    "pergunta_publica": "Como o quadro 'Véspera' saiu da Galeria Principal durante a manutenção das câmeras e que registros sustentam a reconstrução?",
+    "quem_pede_apuracao": "Roberta, representante da direção do Museu Municipal.",
+    "motivo_da_apuracao": "O desaparecimento ocorreu com o museu fechado ao público e durante uma janela programada de câmeras offline.",
+    "risco_concreto": "O museu precisa acionar seguro, polícia e fornecedores sem acusar a pessoa errada nem perder a trilha logística da obra.",
+    "verdade_aparente": "A manutenção das câmeras e o uso do crachá de Helena fazem parecer uma falha de rotina ou responsabilidade da supervisora.",
+    "verdade_real_resumida": "Marcelo Faria combinou com Paulo Leite a retirada do quadro durante a manutenção; usou o crachá de emergência de Helena para abrir a área restrita, enquanto Paulo mantinha a van da TransArte na entrada de serviço e levou a obra para um galpão em Osasco antes da intermediação pela Galeria Sombria."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Que janela de acesso explica a saída do quadro sem câmeras ativas?",
+      "resposta_esperada": "O E1 deve levar o grupo a perceber que o uso do crachá de Helena às 15h22 conflita com sua saída biométrica às 14h50 e abre uma hipótese de uso indevido de credencial.",
+      "nao_precisa_resolver_ainda": [
+        "destino da obra após sair do museu",
+        "papel exato da TransArte",
+        "intermediário externo da venda"
+      ],
+      "criterio_de_avanco": "Liberar E2 quando a mesa sustentar a janela de acesso e a inconsistência do crachá com registro físico e manutenção das câmeras.",
+      "forma_diegetica_de_avanco": "A direção encaminha boletim, cadastro de terceiros e depoimento complementar após a triagem interna dos acessos.",
+      "documentos_minimos": [
+        "E1-04",
+        "E1-05",
+        "E1-06"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Para onde a obra foi levada e quem participou da saída logística?",
+      "resposta_esperada": "O E2 liga a van da TransArte, o galpão em Osasco e o depoimento complementar para diferenciar uso de crachá, transporte e destino da obra.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a mesa reconstruir acesso, transporte e destino com prova principal e confirmação independente.",
+      "forma_diegetica_de_avanco": "O facilitador compara a reconstrução da mesa com o guia confidencial e apresenta o fechamento do caso.",
+      "documentos_minimos": [
+        "E2-01",
+        "E2-02",
+        "E2-03",
+        "E2-04"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Como o quadro 'Véspera' saiu da Galeria Principal durante a manutenção das câmeras e que registros sustentam a reconstrução?",
+    "solucao_em_5_frases": [
+      "Roberta pede apuração porque 'Véspera' desapareceu enquanto o museu estava fechado e as câmeras estavam em manutenção.",
+      "No E1, o grupo deve perceber que o crachá de Helena foi usado depois de sua saída biométrica, tornando a versão simples insuficiente.",
+      "No E2, a van da TransArte, o galpão em Osasco e o depoimento complementar explicam a logística da retirada.",
+      "Marcelo organizou o acesso indevido com crachá de emergência e Paulo executou o transporte para fora do museu.",
+      "Helena e Túlio deixam de ser respostas centrais quando horário, credencial e logística são lidos em conjunto."
+    ],
+    "linha_tempo_aparente_resumo": "Aparentemente o sumiço coincide com manutenção técnica e uso nominal do crachá de Helena na área restrita.",
+    "linha_tempo_real_resumo": "Helena já havia saído; Marcelo usou o crachá de emergência durante a janela sem câmeras e Paulo retirou a obra pela logística da TransArte.",
+    "red_herrings_e_descartes": [
+      "Helena cai pelo registro biométrico de saída anterior ao uso do crachá.",
+      "Túlio ganha contexto no depoimento completo e não fecha a logística da retirada."
+    ],
+    "quando_usar_dicas": [
+      "Use dica leve se o grupo ignorar a diferença entre crachá e presença física.",
+      "Use dica média se a mesa não cruzar manutenção das câmeras com registro biométrico.",
+      "Use dica forte se, no E2, a van e o galpão não forem conectados ao trajeto da obra."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Que janela de acesso explica a saída do quadro sem câmeras ativas?",
+        "resposta_esperada": "O E1 deve levar o grupo a perceber que o uso do crachá de Helena às 15h22 conflita com sua saída biométrica às 14h50 e abre uma hipótese de uso indevido de credencial.",
+        "nao_precisa_resolver_ainda": [
+          "destino da obra após sair do museu",
+          "papel exato da TransArte",
+          "intermediário externo da venda"
+        ],
+        "criterio_de_avanco": "Liberar E2 quando a mesa sustentar a janela de acesso e a inconsistência do crachá com registro físico e manutenção das câmeras.",
+        "forma_diegetica_de_avanco": "A direção encaminha boletim, cadastro de terceiros e depoimento complementar após a triagem interna dos acessos.",
+        "documentos_minimos": [
+          "E1-04",
+          "E1-05",
+          "E1-06"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Para onde a obra foi levada e quem participou da saída logística?",
+        "resposta_esperada": "O E2 liga a van da TransArte, o galpão em Osasco e o depoimento complementar para diferenciar uso de crachá, transporte e destino da obra.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a mesa reconstruir acesso, transporte e destino com prova principal e confirmação independente.",
+        "forma_diegetica_de_avanco": "O facilitador compara a reconstrução da mesa com o guia confidencial e apresenta o fechamento do caso.",
+        "documentos_minimos": [
+          "E2-01",
+          "E2-02",
+          "E2-03",
+          "E2-04"
+        ]
+      }
+    ]
+  },
   "verdade_real": "Marcelo Faria, analista de segurança, combinou com Paulo Leite, motorista da empresa TransArte, a retirada do quadro durante a janela de câmeras offline. Marcelo usou o crachá de emergência da supervisora Helena para liberar a sala restrita sem gerar registro em seu próprio ID. Paulo tinha um van estacionada na entrada de serviço. O quadro foi levado para um galpão em Osasco, onde seria vendido para um colecionador via intermediária Galeria Sombria.",
   "executor_id": "14",
   "planejador_id": "14",

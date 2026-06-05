@@ -120,23 +120,9 @@ def _strip_html(texto: str) -> str:
 
 
 def _pergunta_publica(blueprint: Blueprint) -> str:
-    """Extrai a pergunta pública do documento de abertura, com fallback seguro.
+    """Retorna a pergunta pública estruturada do blueprint."""
 
-    O guia operacional não deve depender de texto livre em `observacoes_producao`.
-    A pergunta pública vem do documento diegético de abertura porque é exatamente o
-    que o facilitador e os jogadores enxergam como missão narrativa.
-    """
-
-    for documento in blueprint.documentos:
-        if documento.envelope == "E1" and documento.codigo == "E1-01":
-            corpo = _strip_html(str(documento.conteudo.get("CORPO_CARTA", "")))
-            marcador = "por que "
-            inicio = corpo.lower().find(marcador)
-            if inicio >= 0:
-                fim = corpo.find("?", inicio)
-                if fim >= 0:
-                    return corpo[inicio:fim + 1]
-    return blueprint.premissa
+    return blueprint.conflito_central.pergunta_publica
 
 
 def _contratos_contexto(
@@ -159,21 +145,9 @@ def _contratos_contexto(
 
 
 def _solucao_em_frases(blueprint: Blueprint) -> list[dict[str, str]]:
-    """Monta síntese operacional a partir de campos estruturados do blueprint."""
+    """Monta síntese operacional a partir do guia estruturado."""
 
-    contratos_e1 = _contratos_contexto(blueprint, fase="E1", obrigatorios=True)
-    contratos_final = _contratos_contexto(blueprint, fase="final", obrigatorios=True)
-    resposta_e1 = contratos_e1[-1]["texto"] if contratos_e1 else blueprint.erro_que_permite_descobrir
-    solucao_final = contratos_final[-1]["texto"] if contratos_final else blueprint.verdade_real
-
-    frases = [
-        f"Pergunta pública: {_pergunta_publica(blueprint)}",
-        f"Resposta esperada do E1: {resposta_e1}",
-        f"O que muda no E2: {blueprint.motivacao}",
-        f"Solução final: {solucao_final}",
-        "Fechamento: os suspeitos fortes devem cair por janela, meio, oportunidade ou qualidade do testemunho.",
-    ]
-    return [{"texto": frase} for frase in frases]
+    return [{"texto": frase} for frase in blueprint.guia_operacional.solucao_em_5_frases]
 
 
 def _resumo_linha_tempo(eventos: list[EventoLinha], fallback: str) -> str:
@@ -182,57 +156,54 @@ def _resumo_linha_tempo(eventos: list[EventoLinha], fallback: str) -> str:
     return " ".join(f"{evento.data_hora}: {evento.evento}" for evento in eventos[:3])
 
 
+def _objetivo_envelope_context(objetivo: Any) -> dict[str, Any]:
+    return {
+        "envelope": objetivo.envelope,
+        "pergunta_diegetica": objetivo.pergunta_diegetica,
+        "resposta_esperada": objetivo.resposta_esperada,
+        "nao_precisa_resolver_ainda": [{"item": item} for item in objetivo.nao_precisa_resolver_ainda],
+        "criterio_de_avanco": objetivo.criterio_de_avanco,
+        "forma_diegetica_de_avanco": objetivo.forma_diegetica_de_avanco,
+        "documentos_minimos": [{"codigo": codigo} for codigo in objetivo.documentos_minimos],
+    }
+
+
 def _guia_operacional_context(blueprint: Blueprint) -> dict[str, Any]:
-    """Monta o guia operacional sem parsear observações textuais livres.
+    """Monta o guia operacional a partir dos campos estruturados do blueprint."""
 
-    O contexto deriva de campos estruturados: contratos, linhas do tempo, motivação,
-    verdade real e red herrings. Isso evita que o guia quebre quando a redação de
-    `observacoes_producao` mudar.
-    """
-
-    e1_obrigatorios = _contratos_contexto(blueprint, fase="E1", obrigatorios=True)
-    e2_obrigatorios = _contratos_contexto(blueprint, fase="E2", obrigatorios=True)
-    e2_recontexto = _contratos_contexto(blueprint, fase="E2", prefixos=("C-E2",))
+    objetivos = sorted(blueprint.objetivos_por_envelope, key=lambda objetivo: _fase_sort_key(objetivo.envelope))
+    objetivos_context = [_objetivo_envelope_context(objetivo) for objetivo in objetivos]
+    respostas_por_envelope = {item["envelope"]: item for item in objetivos_context}
+    e1 = respostas_por_envelope.get("E1")
+    e2 = respostas_por_envelope.get("E2")
 
     return {
-        "pergunta_publica": _pergunta_publica(blueprint),
-        "resposta_e1": e1_obrigatorios,
-        "quando_liberar_e2": (
-            "o grupo formular uma resposta parcial sustentada pelos contratos obrigatórios do E1, "
-            "sem exigir autoria final antes da remessa complementar."
-        ),
-        "o_que_muda_e2": e2_recontexto,
+        "pergunta_publica": blueprint.guia_operacional.pergunta_publica,
+        "objetivos_por_envelope": objetivos_context,
+        "resposta_e1": ([{"id": "E1", "texto": e1["resposta_esperada"]}] if e1 else []),
+        "quando_liberar_e2": e1["criterio_de_avanco"] if e1 else "Ver objetivo estruturado do envelope atual.",
+        "o_que_muda_e2": ([{"id": "E2", "texto": e2["pergunta_diegetica"]}] if e2 else []),
         "solucao_5_frases": _solucao_em_frases(blueprint),
-        "linha_aparente_resumo": _resumo_linha_tempo(
-            blueprint.linha_tempo_percebida,
-            "Ver tabela de linha do tempo aparente.",
-        ),
-        "linha_real_resumo": _resumo_linha_tempo(
-            blueprint.linha_tempo_real,
-            "Ver tabela de linha do tempo real.",
-        ),
-        "resposta_e2": (
-            e2_obrigatorios[-1]["texto"]
-            if e2_obrigatorios
-            else "Ver contratos obrigatórios do E2."
-        ),
+        "linha_aparente_resumo": blueprint.guia_operacional.linha_tempo_aparente_resumo,
+        "linha_real_resumo": blueprint.guia_operacional.linha_tempo_real_resumo,
+        "resposta_e2": e2["resposta_esperada"] if e2 else "Ver objetivo estruturado do envelope final.",
+        "red_herrings_e_descartes": [{"item": item} for item in blueprint.guia_operacional.red_herrings_e_descartes],
+        "quando_usar_dicas": [{"item": item} for item in blueprint.guia_operacional.quando_usar_dicas],
     }
 
 
 def _criterios_avanco(blueprint: Blueprint) -> list[dict[str, Any]]:
-    fases = sorted({doc.envelope for doc in blueprint.documentos}, key=lambda fase: _fase_sort_key(fase))
     criterios: list[dict[str, Any]] = []
-    for fase in fases:
+    for objetivo in sorted(blueprint.objetivos_por_envelope, key=lambda item: _fase_sort_key(item.envelope)):
         obrigatorios = [
             contrato for contrato in blueprint.contratos_evidencia
-            if contrato.fase == fase and contrato.obrigatoria_para_avanco
+            if contrato.fase == objetivo.envelope and contrato.obrigatoria_para_avanco
         ]
         criterios.append({
-            "fase": fase,
-            "criterio": (
-                "Liberar o próximo envelope quando o grupo formular as conclusões obrigatórias desta fase "
-                "com prova principal e confirmação independente."
-            ),
+            "fase": objetivo.envelope,
+            "criterio": objetivo.criterio_de_avanco,
+            "forma_diegetica_de_avanco": objetivo.forma_diegetica_de_avanco,
+            "resposta_esperada": objetivo.resposta_esperada,
             "contratos": [_contrato_context(contrato) for contrato in sorted(obrigatorios, key=lambda c: c.id)],
             "sem_contratos": not obrigatorios,
         })

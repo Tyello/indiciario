@@ -4,7 +4,7 @@ Este guia define o contrato editorial mínimo para escrever blueprints de casos 
 
 Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md`, `docs/DIRETRIZES_EDITORIAIS.md`, `docs/ANTI_OBVIEDADE.md` e `docs/LLM_OPERATING_MANUAL.md`. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
 
-Nota de schema: `pergunta_publica` e `objetivos_por_envelope` são contratos editoriais de planejamento. Eles ainda não são campos schema-enforced do `Blueprint`. Enquanto o schema não for expandido, esses conceitos devem aparecer refletidos em `premissa`, documentos, `contratos_evidencia`, `dicas_contextuais`, `observacoes_producao` e guia do facilitador.
+Nota de schema: `conflito_central`, `objetivos_por_envelope` e `guia_operacional` agora são campos estruturados e schema-enforced do `Blueprint`. Eles continuam podendo ser refletidos em `premissa`, documentos, `contratos_evidencia` e `dicas_contextuais`, mas a fonte de verdade para progressão e condução é o blueprint estruturado.
 
 ## Objetivo do guia
 
@@ -30,19 +30,20 @@ A pergunta pública deve responder:
 3. **Qual impacto concreto existe se nada for esclarecido?**
 4. **Por que estes documentos foram reunidos e entregues ao grupo?**
 
-Formato recomendado para planejamento editorial, fora do schema atual:
+Formato obrigatório no schema atual:
 
 ```json
-"pergunta_publica": {
-  "quem_pediu": "",
-  "por_que_pediu": "",
-  "impacto_concreto": "",
-  "por_que_documentos_foram_reunidos": "",
-  "pergunta_para_os_jogadores": ""
+"conflito_central": {
+  "pergunta_publica": "",
+  "quem_pede_apuracao": "",
+  "motivo_da_apuracao": "",
+  "risco_concreto": "",
+  "verdade_aparente": "",
+  "verdade_real_resumida": ""
 }
 ```
 
-A pergunta pública não precisa revelar a verdade real. Ela precisa dar ao grupo um mandato diegético: por que estão lendo aquele dossiê e qual decisão, reparo, risco ou consequência está em jogo. Enquanto não houver campo próprio no schema, registre essa intenção em `premissa`, nos documentos de abertura, em contratos de evidência, nas dicas contextuais, em `observacoes_producao` e no guia do facilitador.
+A pergunta pública não precisa revelar a verdade real. Ela precisa dar ao grupo um mandato diegético: por que estão lendo aquele dossiê e qual decisão, reparo, risco ou consequência está em jogo. Registre essa intenção em `conflito_central.pergunta_publica` e repita a mesma pergunta em `guia_operacional.pergunta_publica`, para que o facilitador e os relatórios usem a mesma fonte estruturada.
 
 ## Objetivo obrigatório por envelope
 
@@ -56,7 +57,7 @@ Para cada envelope, defina:
 - **critério de avanço:** evidências, hipótese ou consenso mínimo que libera o próximo envelope;
 - **forma diegética de apresentar o avanço:** como a liberação aparece dentro do mundo da história.
 
-Formato recomendado para planejamento editorial, fora do schema atual:
+Formato obrigatório no schema atual:
 
 ```json
 "objetivos_por_envelope": [
@@ -66,12 +67,13 @@ Formato recomendado para planejamento editorial, fora do schema atual:
     "resposta_esperada": "",
     "nao_precisa_resolver_ainda": [],
     "criterio_de_avanco": "",
-    "forma_diegetica_de_avanco": ""
+    "forma_diegetica_de_avanco": "",
+    "documentos_minimos": []
   }
 ]
 ```
 
-Enquanto não houver campo próprio no schema, reflita esses objetivos em `contratos_evidencia`, na distribuição dos documentos por envelope, nas `dicas_contextuais`, em `observacoes_producao` e no guia do facilitador.
+Além de declarar esses objetivos, reflita-os em `contratos_evidencia`, na distribuição dos documentos por envelope e nas `dicas_contextuais`. `guia_operacional.resposta_esperada_por_envelope` deve espelhar os mesmos envelopes e respostas esperadas para permitir validação de consistência.
 
 ### Regra do E1
 

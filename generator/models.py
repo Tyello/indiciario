@@ -10,7 +10,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Any, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class Dificuldade(str, Enum):
@@ -83,6 +83,52 @@ def normalizar_envelope(valor: object) -> str:
     if not envelope.startswith("E") or not envelope[1:].isdigit() or int(envelope[1:]) < 1:
         raise ValueError("Envelope deve seguir o padrão E + inteiro positivo, ex.: E1, E2, E3.")
     return envelope
+
+
+class ConflitoCentral(BaseModel):
+    """Contrato editorial da pergunta pública e do conflito central do caso."""
+
+    pergunta_publica: str
+    quem_pede_apuracao: str
+    motivo_da_apuracao: str
+    risco_concreto: str
+    verdade_aparente: str
+    verdade_real_resumida: str
+
+
+class ObjetivoEnvelope(BaseModel):
+    """Progressão esperada para um envelope do dossiê."""
+
+    envelope: str
+    pergunta_diegetica: str
+    resposta_esperada: str
+    nao_precisa_resolver_ainda: list[str] = Field(default_factory=list)
+    criterio_de_avanco: str
+    forma_diegetica_de_avanco: str
+    documentos_minimos: list[str] = Field(default_factory=list)
+
+    @field_validator("envelope", mode="before")
+    @classmethod
+    def _normalizar_envelope(cls, valor: object) -> str:
+        return normalizar_envelope(valor)
+
+
+class GuiaOperacional(BaseModel):
+    """Guia operacional estruturado para o facilitador conduzir a sessão."""
+
+    pergunta_publica: str
+    resposta_esperada_por_envelope: list[ObjetivoEnvelope] = Field(default_factory=list)
+    solucao_em_5_frases: list[str] = Field(..., min_length=1, max_length=5)
+    linha_tempo_aparente_resumo: str
+    linha_tempo_real_resumo: str
+    red_herrings_e_descartes: list[str] = Field(default_factory=list)
+    quando_usar_dicas: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _limitar_solucao_a_5_frases(self) -> "GuiaOperacional":
+        if len(self.solucao_em_5_frases) != 5:
+            raise ValueError("solucao_em_5_frases deve conter exatamente 5 frases.")
+        return self
 
 
 class PapelPersonagem(str, Enum):
@@ -444,6 +490,9 @@ class Blueprint(BaseModel):
     formato_envelopes: int = Field(..., ge=1)
 
     premissa: str = Field(..., description="Versão do jogador.")
+    conflito_central: ConflitoCentral
+    objetivos_por_envelope: list[ObjetivoEnvelope] = Field(..., min_length=1)
+    guia_operacional: GuiaOperacional
     verdade_real: str = Field(..., description="O que realmente aconteceu; interno.")
     executor_id: str
     planejador_id: str

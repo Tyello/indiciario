@@ -97,6 +97,14 @@
         <p><strong>Aparente:</strong> {{linha_aparente_resumo}}</p>
         <p><strong>Real:</strong> {{linha_real_resumo}}</p>
       </div>
+      <div class="block">
+        <h3>Quando usar dicas</h3>
+        <ul>{{#quando_usar_dicas}}<li>{{item}}</li>{{/quando_usar_dicas}}</ul>
+      </div>
+      <div class="block">
+        <h3>Red herrings e descartes operacionais</h3>
+        <ul>{{#red_herrings_e_descartes}}<li>{{item}}</li>{{/red_herrings_e_descartes}}</ul>
+      </div>
     {{/GUIA_OPERACIONAL}}
     <h3>Cadeia causal</h3>
     <ol>{{#CADEIA_CAUSAL}}<li>{{item}}</li>{{/CADEIA_CAUSAL}}</ol>
@@ -104,9 +112,22 @@
 
   <section class="page-section">
     <h2>5. Objetivo de cada envelope</h2>
+    {{#GUIA_OPERACIONAL}}
+      {{#objetivos_por_envelope}}
+        <div class="block">
+          <h3>{{envelope}}</h3>
+          <p><strong>Pergunta diegética:</strong> {{pergunta_diegetica}}</p>
+          <p><strong>Resposta esperada:</strong> {{resposta_esperada}}</p>
+          <p><strong>Critério de avanço:</strong> {{criterio_de_avanco}}</p>
+          <p><strong>Forma diegética de avanço:</strong> {{forma_diegetica_de_avanco}}</p>
+          <p><strong>Documentos mínimos:</strong> {{#documentos_minimos}}<span class="mono">{{codigo}}</span> {{/documentos_minimos}}</p>
+          {{#nao_precisa_resolver_ainda}}<p class="small"><strong>Ainda não precisa resolver:</strong> {{item}}</p>{{/nao_precisa_resolver_ainda}}
+        </div>
+      {{/objetivos_por_envelope}}
+    {{/GUIA_OPERACIONAL}}
     {{#DOCUMENTOS_POR_ENVELOPE}}
       <div class="block">
-        <h3>{{envelope}}</h3>
+        <h3>Documentos de {{envelope}}</h3>
         <ul>
           {{#documentos}}<li><span class="mono">{{codigo}}</span> — {{titulo}} ({{tipo}})</li>{{/documentos}}
         </ul>
@@ -118,6 +139,8 @@
       <div class="block">
         <h3>{{fase}}</h3>
         <p>{{criterio}}</p>
+        <p><strong>Forma diegética:</strong> {{forma_diegetica_de_avanco}}</p>
+        <p><strong>Resposta esperada:</strong> {{resposta_esperada}}</p>
         {{#sem_contratos}}<p class="small">Nenhum contrato obrigatório marcado para esta fase.</p>{{/sem_contratos}}
         {{#contratos}}
           <div class="hint"><strong class="mono">{{id}}</strong> — {{conclusao}}<br><span class="small">Prova: {{prova_principal}} | Confirmação: {{confirmacao_independente}} | Ação esperada: {{acao_esperada_jogador}}</span></div>

@@ -337,3 +337,18 @@ def test_caso_canonico_intermediario_jogador_sem_voz_de_autor():
         texto = f"{documento.titulo} {documento.conteudo}".lower()
         for termo in forbidden:
             assert termo not in texto, documento.codigo
+
+
+def test_casos_canonicos_declaram_progressao_estruturada():
+    for blueprint in [_blueprint(), _intermediate_blueprint()]:
+        assert blueprint.conflito_central.pergunta_publica
+        assert blueprint.guia_operacional.pergunta_publica == blueprint.conflito_central.pergunta_publica
+        assert len(blueprint.objetivos_por_envelope) == blueprint.formato_envelopes
+        assert {objetivo.envelope for objetivo in blueprint.objetivos_por_envelope} == {"E1", "E2"}
+        for objetivo in blueprint.objetivos_por_envelope:
+            assert objetivo.pergunta_diegetica
+            assert objetivo.resposta_esperada
+            assert objetivo.criterio_de_avanco
+            assert objetivo.forma_diegetica_de_avanco
+            assert objetivo.documentos_minimos
+        assert len(blueprint.guia_operacional.solucao_em_5_frases) == 5
