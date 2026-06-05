@@ -8,7 +8,7 @@
   "tempo_estimado_min": 95,
   "numero_jogadores": "3 a 5",
   "formato_envelopes": 2,
-  "premissa": "Durante um jantar fechado de reabertura do histórico Hotel Aurora, a anfitriã Helena Valença deixa o salão antes do brinde que formalizaria a nova fase do hotel. Otto Almeida, investidor convidado, pede uma apuração interna porque a interrupção compromete a noite e pode indicar retirada pessoal, falha de condução do evento ou interferência nos preparativos.",
+  "premissa": "Durante um jantar fechado de reabertura do histórico Hotel Aurora, a anfitriã Helena Valença deixa o salão antes do brinde que formalizaria a nova fase do hotel. Otto Almeida, investidor convidado, pede uma apuração interna porque a interrupção compromete a noite e pode indicar retirada pessoal, falha de condução do evento ou algum ponto sensível nos preparativos.",
   "verdade_real": "Marta Salgado atraiu Helena Valença para a sala de memória antes do brinde usando uma referência discreta à pasta Aurora. Helena conhecia a pasta e a promessa antiga como memória institucional, mas não havia recebido de Caio a lista atual de pessoas ainda ligadas à ala antiga; por isso preparava uma homenagem simbólica sem enfrentar a consequência concreta. Marta, guardiã informal da ala, entendeu o brinde como apagamento de moradores e antigos vínculos do hotel, isolou Helena temporariamente e manipulou sinais indiretos de presença, incluindo a echarpe com broche e registros ambíguos de circulação.",
   "executor_id": "02",
   "planejador_id": "02",
@@ -20,7 +20,7 @@
     "Helena prepara um brinde para reabrir publicamente o Aurora e mencionar a ala antiga como memória institucional.",
     "Caio não repassa a Helena a lista atual de pessoas ainda ligadas à ala antiga, mantendo a tensão concreta fora do discurso oficial.",
     "Marta descobre que a homenagem trataria a pasta Aurora como símbolo, não como consequência atual para moradores e antigos funcionários.",
-    "Helena deixa o salão antes do brinde após encontrar uma referência discreta à pasta Aurora no programa do jantar.",
+    "Helena deixa o salão antes do brinde após conferir no programa uma referência marginal ligada ao brinde e ao Aurora.",
     "Sinais sociais e objetos mantêm a impressão de que Helena está próxima do terraço enquanto a apuração inicial fica sem resposta final.",
     "Registros de E2 revelam a omissão, o motivo de Marta, o uso da sala de memória e os limites dos falsos caminhos."
   ],
@@ -223,7 +223,7 @@
         "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
         "SAUDACAO": "Aos participantes da apuração interna",
         "ASSUNTO": "AUR-1705/26 — Abertura de arquivo do jantar",
-        "CORPO_CARTA": "<p>Durante o jantar fechado de reabertura do Hotel Aurora, a anfitriã Helena Valença deixou o salão antes do brinde que formalizaria a nova fase do hotel.</p><p>Como investidor convidado, peço que os registros iniciais sejam organizados antes de qualquer comunicação externa: por que Helena Valença deixou o salão antes do brinde que formalizaria a reabertura, e isso indica retirada pessoal, falha de condução do evento ou interferência nos preparativos da noite?</p><p>Os documentos reunidos neste envelope correspondem ao que a gerência tinha à mão antes da varredura completa dos bastidores: mesa, serviço, recepção, circulação textual e declarações iniciais.</p><p>Locais citados nos registros: salão de jantar, terraço envidraçado, corredor de serviço, copa de apoio, sala de memória, recepção do andar, elevador social, escada de serviço e suíte reservada.</p>",
+        "CORPO_CARTA": "<p>Durante o jantar fechado de reabertura do Hotel Aurora, a anfitriã Helena Valença deixou o salão antes do brinde que formalizaria a nova fase do hotel.</p><p>Como investidor convidado, peço que os registros iniciais sejam organizados antes de qualquer comunicação externa: por que Helena Valença deixou o salão antes do brinde que formalizaria a reabertura, e isso indica retirada pessoal, falha de condução do evento ou algum ponto sensível nos preparativos da noite?</p><p>Os documentos reunidos neste envelope correspondem ao que a gerência tinha à mão antes da varredura completa dos bastidores: mesa, serviço, recepção, circulação textual e declarações iniciais.</p><p>Locais citados nos registros: salão de jantar, terraço envidraçado, corredor de serviço, copa de apoio, sala de memória, recepção do andar, elevador social, escada de serviço e suíte reservada.</p>",
         "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
         "ASSINATURA_CURSIVA": "Otto Almeida",
         "NOME_ASSINANTE": "Otto Almeida",
@@ -607,7 +607,7 @@
       "envelope": "E1",
       "tipo": "depoimento",
       "emocao_esperada": "pista social ambígua",
-      "objetivo_narrativo": "Mostrar pressão jornalística e registro parcial de anotação, sem transformar o recado em seta central.",
+      "objetivo_narrativo": "Mostrar pressão jornalística e uma anotação marginal ambígua, sem transformar o recado em seta central.",
       "pistas_contidas": [
         "anotações de entrevista",
         "programa do jantar",
@@ -637,7 +637,7 @@
         "DATA": "17/05/2026",
         "LOCALIZACAO": "Andar social do Hotel Aurora",
         "HORA_OCORRENCIA": "23h18",
-        "DESCRICAO_OCORRENCIA": "<p>Eu queria uma frase de Helena sobre a reabertura. No meu programa do jantar ficou anotado, às 21h02: “se o brinde mudar, pasta Aurora / memória”. Havia um papel pequeno dobrado entre as páginas quando Helena conferiu a ordem do discurso.</p><p>Ela guardou o programa, levantou pelo lado da recepção e não foi na direção do terraço. Depois vi movimento vinho perto do vidro do terraço. Não cheguei perto porque Lívia estava olhando para o mesmo lado e eu não quis parecer invasiva. Minha pauta era a família, não a cozinha.</p>",
+        "DESCRICAO_OCORRENCIA": "<p>Eu queria uma frase de Helena sobre a reabertura. No meu programa do jantar há uma anotação de margem, feita por volta de 21h02: “brinde — Aurora?”. Não consigo dizer se copiei de uma fala dela, se era lembrete meu ou se estava marcado quando ela conferiu a ordem do discurso.</p><p>Helena fechou o programa, levantou pelo lado da recepção e não foi na direção do terraço. Depois vi movimento vinho perto do vidro do terraço. Não cheguei perto porque Lívia estava olhando para o mesmo lado e eu não quis parecer invasiva. Minha pauta era a família, não a cozinha.</p>",
         "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_GLIFO": "NSP",
@@ -731,7 +731,7 @@
         "DATA": "17/05/2026",
         "LOCALIZACAO": "Andar social do Hotel Aurora",
         "HORA_OCORRENCIA": "00h12",
-        "DESCRICAO_OCORRENCIA": "<p>Revendo minhas anotações, não posso afirmar que ouvi uma mensagem completa. O que ficou no meu programa foi: “brinde / pasta Aurora / sala de memória”. Eu não vi quem pôs o papel dobrado ali. Helena leu, guardou dentro do programa do jantar e seguiu pelo lado da recepção.</p><p>Sobre o terraço: vi tecido vinho e metal claro por trás do vidro. Não vi rosto, mãos ou a pessoa de frente. Lívia estava perto de mim quando eu virei, mas também não avançou até o cabide.</p>",
+        "DESCRICAO_OCORRENCIA": "<p>Revendo minhas anotações e a foto do programa, a marca da margem não parece uma frase completa. O que consigo ler é “brinde / Aurora / memória”. Não vi quem escreveu primeiro nem posso garantir que tenha sido um recado entregue a Helena. Ela leu a página, guardou o programa do jantar e seguiu pelo lado da recepção.</p><p>Sobre o terraço: vi tecido vinho e metal claro por trás do vidro. Não vi rosto, mãos ou a pessoa de frente. Lívia estava perto de mim quando eu virei, mas também não avançou até o cabide.</p>",
         "NOME_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_RESPONSAVEL": "Núcleo de Segurança Patrimonial",
         "ASSINATURA_GLIFO": "NSP",
@@ -928,7 +928,7 @@
         "LOCAL_DATA": "Bela Vista, 4 de setembro de 1968",
         "SAUDACAO": "Helena, para leitura familiar",
         "ASSUNTO": "ARQ-VAL-1968/2026 — Carta preservada e ficha de ala",
-        "CORPO_CARTA": "<p>Minha filha, se o Aurora voltar a abrir suas portas, lembre que a ala dos fundos não foi sobra de obra. Foi casa, descanso e abrigo de quem manteve este hotel aceso quando a família sumiu para resolver seus próprios nomes.</p><p>Prometi a Marta e aos demais que aquelas salas jamais seriam tratadas como depósito de oportunidades. Se a administração mudar, que ao menos uma parte permaneça como memória dos funcionários, não como vitrine para comprador.</p><p>Guarde esta carta na sala de memória. Ela não vale como contrato, mas vale como palavra.</p><p><strong>Ficha anexada ao arquivo físico — atualização de maio de 2026:</strong> Ala antiga com quatro unidades em uso reduzido por antigos funcionários, familiares e pessoas autorizadas pela governança histórica. Relação nominal retida na gerência geral; cópia não anexada ao release de reabertura.</p>",
+        "CORPO_CARTA": "<p><strong>Transcrição da carta preservada — 4 de setembro de 1968</strong></p><p>Minha filha, se o Aurora voltar a abrir suas portas, lembre que a ala dos fundos não foi sobra de obra. Foi casa, descanso e abrigo de quem manteve este hotel aceso quando a família sumiu para resolver seus próprios nomes.</p><p>Prometi a Marta e aos demais que aquelas salas jamais seriam tratadas como depósito de oportunidades. Se a administração mudar, que ao menos uma parte permaneça como memória dos funcionários, não como vitrine para comprador.</p><p>Guarde esta carta na sala de memória. Ela não vale como contrato, mas vale como palavra.</p><hr><p><strong>Anexo físico grampeado ao arquivo — ficha administrativa atualizada em maio de 2026</strong></p><p>Ala antiga com quatro unidades em uso reduzido por antigos funcionários, familiares e pessoas autorizadas pela governança histórica. Relação nominal retida na gerência geral; cópia não anexada ao release de reabertura.</p>",
         "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita do evento.",
         "ASSINATURA_CURSIVA": "A. Valença",
         "NOME_ASSINANTE": "A. Valença",
@@ -1233,7 +1233,7 @@
     },
     {
       "data_hora": "17/05/2026 21h02",
-      "evento": "Helena encontra anotação discreta ligada à pasta Aurora no programa do jantar e deixa o salão pelo lado da recepção.",
+      "evento": "Helena confere o programa do jantar, encontra uma referência marginal ligada ao brinde/Aurora e deixa o salão pelo lado da recepção.",
       "personagem_id": "01",
       "documento_prova": "E1-08",
       "confirmacao_independente": "E2-01"
@@ -1774,5 +1774,5 @@
     ]
   },
   "versao": "0.1",
-  "observacoes_producao": "Guia do facilitador pós-playtest: solução em 5 frases — Otto pede apuração porque Helena saiu antes do brinde de reabertura; no E1, a melhor resposta parcial é que a saída se liga ao brinde/pasta Aurora e não a uma retirada social espontânea; no E2, surge a lista omitida da ala antiga e a ocupação atual que mudam o sentido da pasta; Marta, guardiã informal da ala, usa chave, sala de memória e objeto associado a Helena para interromper o brinde sem escândalo imediato; Lívia, Caio, Renato e Isadora parecem plausíveis, mas caem por janela, meio ou qualidade do testemunho. Linha do tempo aparente: Helena se irrita, deixa a mesa, é associada ao terraço por tecido vinho e atrasa o brinde. Linha do tempo real: Helena recebe/anota referência discreta à pasta Aurora, segue para a sala de memória, Marta mantém o molho de chaves e manipula echarpe/broche enquanto os demais interpretam sinais indiretos. Abrir E2 quando o grupo formular que a pergunta do E1 é por que Helena saiu antes do brinde e que a resposta parcial envolve brinde/pasta Aurora mais sinais indiretos de presença. Resposta esperada do E2: o omitido era a lista atual da ala antiga; a informação concreta mostra moradores e vínculos vivos; Marta tinha motivo atual para provocar a saída; a interrupção do brinde impediu que a memória fosse convertida em homenagem vazia. Caio preservou a imagem do evento e não repassou a lista atual, mas não executou a manipulação; Helena sabia da promessa como símbolo e planejava memorial; Marta via pessoas reais sendo apagadas. Usar dicas em progressão: pergunta pública, direto versus indireto, pessoa/objeto/registro, motivo/meio/oportunidade e síntese quase-gabarito."
+  "observacoes_producao": "Guia do facilitador pós-playtest: solução em 5 frases — Otto pede apuração porque Helena saiu antes do brinde de reabertura; no E1, a melhor resposta parcial é que a saída se liga ao brinde/pasta Aurora e não a uma retirada social espontânea; no E2, surge a lista omitida da ala antiga e a ocupação atual que mudam o sentido da pasta; Marta, guardiã informal da ala, usa chave, sala de memória e objeto associado a Helena para interromper o brinde sem escândalo imediato; Lívia, Caio, Renato e Isadora parecem plausíveis, mas caem por janela, meio ou qualidade do testemunho. Linha do tempo aparente: Helena se irrita, deixa a mesa, é associada ao terraço por tecido vinho e atrasa o brinde. Linha do tempo real: Helena confere uma referência marginal ligada ao brinde/Aurora, segue para a sala de memória, Marta mantém o molho de chaves e manipula echarpe/broche enquanto os demais interpretam sinais indiretos. Abrir E2 quando o grupo formular que a pergunta do E1 é por que Helena saiu antes do brinde e que a resposta parcial envolve brinde/Aurora mais sinais indiretos de presença. Resposta esperada do E2: o omitido era a lista atual da ala antiga; a informação concreta mostra moradores e vínculos vivos; Marta tinha motivo atual para provocar a saída; a interrupção do brinde impediu que a memória fosse convertida em homenagem vazia. Caio preservou a imagem do evento e não repassou a lista atual, mas não executou a manipulação; Helena sabia da promessa como símbolo e planejava memorial; Marta via pessoas reais sendo apagadas. Usar dicas em progressão: pergunta pública, direto versus indireto, pessoa/objeto/registro, motivo/meio/oportunidade e síntese quase-gabarito."
 }

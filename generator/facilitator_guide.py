@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import re
 from pathlib import Path
 from typing import Any
 
@@ -114,6 +115,71 @@ def _dicas_por_fase_categoria(dicas: list[DicaContextual]) -> list[dict[str, Any
     return fases
 
 
+def _strip_html(texto: str) -> str:
+    return re.sub(r"<[^>]+>", " ", texto).replace("  ", " ").strip()
+
+
+def _pergunta_publica(blueprint: Blueprint) -> str:
+    for documento in blueprint.documentos:
+        if documento.envelope == "E1" and documento.codigo == "E1-01":
+            corpo = _strip_html(str(documento.conteudo.get("CORPO_CARTA", "")))
+            marcador = "por que "
+            inicio = corpo.lower().find(marcador)
+            if inicio >= 0:
+                fim = corpo.find("?", inicio)
+                if fim >= 0:
+                    return corpo[inicio:fim + 1]
+    return blueprint.premissa
+
+
+def _texto_entre(texto: str, inicio: str, fim: str | None = None) -> str:
+    if inicio not in texto:
+        return ""
+    trecho = texto.split(inicio, 1)[1]
+    if fim and fim in trecho:
+        trecho = trecho.split(fim, 1)[0]
+    return trecho.strip()
+
+
+def _lista_frases(texto: str) -> list[dict[str, str]]:
+    partes = [parte.strip(" .") for parte in texto.split(";") if parte.strip(" .")]
+    return [{"texto": f"{parte}."} for parte in partes]
+
+
+def _conclusoes_por_prefixo(blueprint: Blueprint, fase: str, prefixos: tuple[str, ...]) -> list[dict[str, str]]:
+    conclusoes: list[dict[str, str]] = []
+    for contrato in blueprint.contratos_evidencia:
+        if contrato.fase == fase and contrato.id.startswith(prefixos):
+            conclusoes.append({"id": contrato.id, "texto": contrato.conclusao})
+    return conclusoes
+
+
+def _guia_operacional_context(blueprint: Blueprint) -> dict[str, Any]:
+    observacoes = blueprint.observacoes_producao or ""
+    solucao = _texto_entre(observacoes, "solução em 5 frases — ", " Linha do tempo aparente:")
+    linha_aparente = _texto_entre(observacoes, "Linha do tempo aparente: ", " Linha do tempo real:")
+    linha_real = _texto_entre(observacoes, "Linha do tempo real: ", " Abrir E2")
+    liberar_e2 = _texto_entre(observacoes, "Abrir E2 quando ", " Resposta esperada do E2:")
+    resposta_e2 = _texto_entre(observacoes, "Resposta esperada do E2: ", " Caio preservou")
+
+    e1_obrigatorios = [
+        {"id": contrato.id, "texto": contrato.conclusao}
+        for contrato in blueprint.contratos_evidencia
+        if contrato.fase == "E1" and contrato.obrigatoria_para_avanco
+    ]
+
+    return {
+        "pergunta_publica": _pergunta_publica(blueprint),
+        "resposta_e1": e1_obrigatorios,
+        "quando_liberar_e2": liberar_e2 or "o grupo formular uma resposta parcial sustentada pelas conclusões obrigatórias do E1.",
+        "o_que_muda_e2": _conclusoes_por_prefixo(blueprint, "E2", ("C-E2",)),
+        "solucao_5_frases": _lista_frases(solucao) or [{"texto": blueprint.verdade_real}],
+        "linha_aparente_resumo": linha_aparente or "Ver tabela de linha do tempo aparente.",
+        "linha_real_resumo": linha_real or "Ver tabela de linha do tempo real.",
+        "resposta_e2": resposta_e2 or "Ver contratos obrigatórios do E2.",
+    }
+
+
 def _criterios_avanco(blueprint: Blueprint) -> list[dict[str, Any]]:
     fases = sorted({doc.envelope for doc in blueprint.documentos}, key=lambda fase: _fase_sort_key(fase))
     criterios: list[dict[str, Any]] = []
@@ -168,7 +234,7 @@ def build_facilitator_context(blueprint: Blueprint, graph_report: dict[str, Any]
         "LINHA_TEMPO_APARENTE": [_evento_context(evento) for evento in blueprint.linha_tempo_percebida],
         "LINHA_TEMPO_REAL": [_evento_context(evento) for evento in blueprint.linha_tempo_real],
         "RED_HERRINGS": [_red_herring_context(item) for item in blueprint.red_herrings],
-        "OBSERVACOES_PRODUCAO": blueprint.observacoes_producao or "—",
+        "GUIA_OPERACIONAL": _guia_operacional_context(blueprint),
         "DOCUMENTOS_POR_ENVELOPE": [
             {
                 "envelope": envelope,

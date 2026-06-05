@@ -69,8 +69,35 @@
       <li>Libere o próximo envelope somente após a resposta esperada da fase atual, sustentada por evidências.</li>
       <li>Mantenha dicas e gabarito separados dos materiais de jogador.</li>
     </ol>
-    <h2>4. Solução em síntese</h2>
-    <p>{{OBSERVACOES_PRODUCAO}}</p>
+    <h2>4. Guia operacional da sessão</h2>
+    {{#GUIA_OPERACIONAL}}
+      <div class="block">
+        <h3>Pergunta pública</h3>
+        <p>{{pergunta_publica}}</p>
+      </div>
+      <div class="block">
+        <h3>Resposta esperada do E1</h3>
+        <ul>{{#resposta_e1}}<li><span class="mono">{{id}}</span> — {{texto}}</li>{{/resposta_e1}}</ul>
+      </div>
+      <div class="block">
+        <h3>Quando liberar E2</h3>
+        <p>{{quando_liberar_e2}}</p>
+      </div>
+      <div class="block">
+        <h3>O que muda no E2</h3>
+        <p>{{resposta_e2}}</p>
+        <ul>{{#o_que_muda_e2}}<li><span class="mono">{{id}}</span> — {{texto}}</li>{{/o_que_muda_e2}}</ul>
+      </div>
+      <div class="block">
+        <h3>Solução em 5 frases</h3>
+        <ol>{{#solucao_5_frases}}<li>{{texto}}</li>{{/solucao_5_frases}}</ol>
+      </div>
+      <div class="block">
+        <h3>Linha aparente / real</h3>
+        <p><strong>Aparente:</strong> {{linha_aparente_resumo}}</p>
+        <p><strong>Real:</strong> {{linha_real_resumo}}</p>
+      </div>
+    {{/GUIA_OPERACIONAL}}
     <h3>Cadeia causal</h3>
     <ol>{{#CADEIA_CAUSAL}}<li>{{item}}</li>{{/CADEIA_CAUSAL}}</ol>
   </section>
