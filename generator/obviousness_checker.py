@@ -214,6 +214,7 @@ def check_obviousness(blueprint: dict[str, Any]) -> ObviousnessReport:
     report = ObviousnessReport()
     difficulty = _norm(str(blueprint.get("dificuldade", "")))
     culprit_names = _culprit_names(blueprint)
+    internal_fragments = _internal_value_fragments(blueprint)
     documents = blueprint.get("documentos", [])
     if not isinstance(documents, list):
         return report
@@ -233,7 +234,7 @@ def check_obviousness(blueprint: dict[str, Any]) -> ObviousnessReport:
         objective_norm = _norm(objective)
         emotion_norm = _norm(str(document.get("emocao_esperada", "")))
 
-        _check_internal_leaks(report, code, content_items)
+        _check_internal_leaks(report, code, content_items, internal_fragments)
         _check_confessions(report, code, content_norm, doc_type)
         _check_conclusive_language(report, code, content_norm)
         _check_authorial_language(report, code, content_norm)
@@ -270,7 +271,56 @@ def _culprit_names(blueprint: dict[str, Any]) -> set[str]:
     return names
 
 
-def _check_internal_leaks(report: ObviousnessReport, code: str, items: list[tuple[str, str]]) -> None:
+def _internal_value_fragments(blueprint: dict[str, Any]) -> list[tuple[str, str]]:
+    fragments: list[tuple[str, str]] = []
+    for field_name in ["verdade_real", "metodo_ocultacao", "observacoes_producao"]:
+        value = blueprint.get(field_name)
+        fragments.extend((f"{field_name}: {fragment}", fragment) for fragment in _relevant_fragments(value))
+
+    causal_chain = blueprint.get("cadeia_causal", [])
+    if isinstance(causal_chain, list):
+        for index, item in enumerate(causal_chain):
+            fragments.extend((f"cadeia_causal[{index}]: {fragment}", fragment) for fragment in _relevant_fragments(item))
+
+    unique: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for source, fragment in fragments:
+        if fragment not in seen:
+            unique.append((source, fragment))
+            seen.add(fragment)
+    return unique
+
+
+def _relevant_fragments(value: Any) -> list[str]:
+    if not isinstance(value, str):
+        return []
+    normalized = _norm(value)
+    if len(normalized) < 40:
+        return []
+
+    fragments: list[str] = []
+    if len(normalized) <= 220:
+        fragments.append(normalized)
+
+    for sentence in _sentences(normalized):
+        if len(sentence) >= 50:
+            fragments.append(sentence)
+
+    for separator in [";", " — ", " - "]:
+        for part in normalized.split(separator):
+            part = part.strip()
+            if len(part) >= 60:
+                fragments.append(part)
+
+    return fragments
+
+
+def _check_internal_leaks(
+    report: ObviousnessReport,
+    code: str,
+    items: list[tuple[str, str]],
+    internal_fragments: list[tuple[str, str]],
+) -> None:
     for path, text in items:
         normalized = _norm(text)
         for field_name in _INTERNAL_FIELD_NAMES:
@@ -281,6 +331,16 @@ def _check_internal_leaks(report: ObviousnessReport, code: str, items: list[tupl
                     "Campo interno parece ter vazado para conteúdo de documento do jogador.",
                     document=code,
                     detail=field_name,
+                    path=path,
+                )
+        for source, fragment in internal_fragments:
+            if fragment in normalized:
+                report.add(
+                    "OBV_010",
+                    ObviousnessSeverity.CRITICAL,
+                    "Valor interno do blueprint parece ter vazado para conteúdo de documento do jogador.",
+                    document=code,
+                    detail=source,
                     path=path,
                 )
 
