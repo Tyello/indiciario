@@ -22,6 +22,9 @@ Use este arquivo como referência principal em testes, scripts, validações can
 
 - [`docs/ESTADO_ATUAL.md`](docs/ESTADO_ATUAL.md): visão atual do produto, stack, decisões recentes, caso canônico e próximos passos.
 - [`docs/DIRETRIZES_EDITORIAIS.md`](docs/DIRETRIZES_EDITORIAIS.md): regras editoriais para evitar documentos com dicas óbvias, voz do autor ou gabarito disfarçado.
+- [`docs/CASE_DESIGN_PIPELINE.md`](docs/CASE_DESIGN_PIPELINE.md): pipeline para planejar pergunta pública, progressão por envelope, motivação e risco antes do blueprint.
+- [`docs/BLUEPRINT_AUTHORING_GUIDE.md`](docs/BLUEPRINT_AUTHORING_GUIDE.md): contrato mínimo de autoria para blueprints jogáveis, com critérios de avanço, dicas e guia do facilitador operacional.
+- [`docs/LLM_OPERATING_MANUAL.md`](docs/LLM_OPERATING_MANUAL.md): manual para LLMs criarem, revisarem e corrigirem casos sem repetir falhas editoriais.
 
 ## Comandos principais
 

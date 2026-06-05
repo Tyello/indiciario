@@ -104,7 +104,8 @@ Resultado resumido:
 Interpretação de produto:
 
 - o framework consegue gerar material atraente;
-- o risco principal agora é gerar documentos bonitos para mistérios fracos ou óbvios;
+- o risco principal agora é gerar documentos bonitos para mistérios fracos, óbvios ou sem progressão operacional;
+- bons documentos não bastam se faltar pergunta pública, objetivo por envelope, critério de avanço, motivação atual e guia do facilitador operacional;
 - o próximo foco deve ser pipeline de design de caso e criação planejada do canônico Intermediário.
 
 ## Decisões recentes relevantes
@@ -153,6 +154,23 @@ Não deve conter:
 
 A Galeria/Vitrine interna deve ter acesso visual pelo corredor, não depender de passagem por doca, depósito ou reserva técnica.
 
+### Progressão, motivação e guia operacional
+
+Após playtests dos canônicos Iniciante e Intermediário, ficou estabelecido que todo novo caso precisa explicitar progressão antes de gerar documentos finais.
+
+Regras atuais:
+
+- todo caso precisa de pergunta pública clara: quem pediu a apuração, por que pediu, qual impacto concreto existe e por que os documentos foram reunidos;
+- todo envelope precisa de pergunta diegética, resposta esperada, o que ainda não precisa ser resolvido, critério de avanço e forma diegética de apresentar o avanço;
+- E1 não deve pedir a solução final, apenas hipótese parcial, tensão ou recontextualização inicial;
+- E2 deve recontextualizar algo do E1, não apenas confirmar;
+- motivação histórica precisa ter consequência atual, como moradia, expulsão, herança, reputação, demissão, perda concreta ou risco público;
+- recados posteriores só devem existir se trouxerem algo novo para quem os recebe;
+- dicas contextuais devem destravar ações e declarar condição de uso, intensidade, ação mental esperada e desbloqueio;
+- o guia do facilitador deve conter pergunta pública, resposta esperada por envelope, liberação do próximo envelope, linha do tempo aparente, linha do tempo real, red herrings, descartes, motivação e síntese da solução.
+
+Documento de jogador continua sendo evidência bruta. Interpretação, cruzamentos, gabarito e linguagem analítica pertencem ao guia, às dicas e aos metadados internos.
+
 ### E2 e documentos comerciais
 
 O E2 não deve entregar a solução por comparação pronta.
@@ -191,13 +209,18 @@ Objetivo: impedir que a LLM gere documentos antes de ter uma história investiga
 Criar e usar:
 
 - `docs/CASE_DESIGN_PIPELINE.md`;
+- `docs/BLUEPRINT_AUTHORING_GUIDE.md`;
 - plano Markdown antes de qualquer blueprint JSON;
+- pergunta pública;
+- objetivo e critério de avanço por envelope;
 - núcleo dramático;
 - curva de suspeita;
 - momentos de descoberta;
 - riscos de obviedade;
 - riscos de injustiça;
-- mecânica investigativa principal.
+- mecânica investigativa principal;
+- motivação com consequência atual;
+- guia do facilitador operacional.
 
 ### Fase C — Novo caso canônico Intermediário
 
@@ -209,8 +232,12 @@ Direção:
 - pergunta dramática forte;
 - 4 a 5 suspeitos plausíveis;
 - pelo menos 2 falsos caminhos fortes;
-- E1 com hipótese boa, mas incompleta;
+- pergunta pública forte e concreta;
+- E1 com hipótese boa, mas incompleta, sem pedir solução final;
 - E2 que recontextualiza, não apenas confirma;
+- critério de avanço diegético por envelope;
+- motivação histórica conectada a consequência atual;
+- guia do facilitador operacional;
 - mecânica investigativa diferente do Mirante.
 
 Arquivo de planejamento:
