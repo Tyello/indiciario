@@ -344,14 +344,19 @@ def _asset_assinatura_svg(texto: str, perfil: str) -> str | None:
 
 
 def _override_assinatura_svg(perfil: Any, tipo_uso: str, repo_root: Path = REPO_ROOT) -> str | None:
-    campo = "override_rubrica_svg" if tipo_uso == "rubrica" else "override_assinatura_svg"
-    caminho = _perfil_get(perfil, campo)
-    if not isinstance(caminho, str) or not caminho.strip():
-        return None
-    asset_path = repo_root / caminho
-    if asset_path.is_file():
-        return asset_path.read_text(encoding="utf-8")
-    logger.warning("Override de assinatura não encontrado: %s", caminho)
+    campos = (
+        ("override_rubrica_svg", "rubrica_svg_override")
+        if tipo_uso == "rubrica"
+        else ("override_assinatura_svg", "assinatura_svg_override")
+    )
+    for campo in campos:
+        caminho = _perfil_get(perfil, campo)
+        if not isinstance(caminho, str) or not caminho.strip():
+            continue
+        asset_path = repo_root / caminho
+        if asset_path.is_file():
+            return asset_path.read_text(encoding="utf-8")
+        logger.warning("Override de assinatura não encontrado em %s: %s", campo, caminho)
     return None
 
 
