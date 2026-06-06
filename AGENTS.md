@@ -24,16 +24,22 @@ Slogan atual:
 
 ## Estado atual do projeto
 
-O framework está tecnicamente funcional. A prioridade atual é validar a experiência real com jogadores, não criar muitas features novas.
+O framework está tecnicamente funcional e já possui duas réguas canônicas validadas. A prioridade atual é gerar baseline visual real dos PDFs com Playwright/Chromium, revisar os pacotes canônicos e corrigir apenas falhas comprovadas de layout/renderização antes de novo playtest.
 
-Caso canônico atual:
+Casos canônicos atuais:
 
-- título: **O Desvio da Reserva Mirante**;
-- arquivo: `examples/caso_canonico_iniciante.json`;
-- dificuldade editorial: **Iniciante**;
-- função: referência narrativa, técnica, fixture de integração e primeiro material de playtest.
+1. **O Desvio da Reserva Mirante**
+   - arquivo: `examples/caso_canonico_iniciante.json`;
+   - dificuldade editorial: **Iniciante**;
+   - função: régua canônica iniciante, referência narrativa/técnica e fixture de integração.
 
-O antigo caso canônico intermediário foi rebaixado/renomeado para `caso_canonico_iniciante.json`. Não recrie nem referencie `caso_canonico_intermediario.json` salvo se a tarefa pedir explicitamente a criação de um novo caso Intermediário.
+2. **O Último Brinde do Hotel Aurora**
+   - arquivo: `examples/caso_canonico_intermediario.json`;
+   - dificuldade editorial: **Intermediário**;
+   - função: régua canônica intermediária validada após playtest e refinamentos;
+   - decisão importante: **Hotel Aurora deve continuar sem mapa**, salvo evidência nova de playtest ou instrução explícita.
+
+Não rebaixe, ignore ou recrie o Hotel Aurora como se fosse arquivo legado. Ele faz parte do estado atual do projeto.
 
 ## Documentação obrigatória antes de alterar o projeto
 
@@ -41,9 +47,15 @@ Antes de alterar conteúdo, blueprint, templates, renderer, validator ou package
 
 1. `README.md`
 2. `docs/ESTADO_ATUAL.md`
-3. `docs/DIRETRIZES_EDITORIAIS.md`
-4. `docs/LLM_OPERATING_MANUAL.md`, se existir
-5. `examples/caso_canonico_iniciante.json`, quando a tarefa tocar no caso canônico
+3. `docs/ROADMAP.md`
+4. `docs/DIRETRIZES_EDITORIAIS.md`
+5. `docs/LLM_OPERATING_MANUAL.md`, se existir
+6. `docs/VISUAL_SYSTEM.md`, quando a tarefa tocar visual/renderização
+7. `docs/PRINTABLES.md`, quando a tarefa tocar cartões/apoios de mesa
+8. `docs/FLOORPLANS.md`, quando a tarefa tocar mapas/planta baixa
+9. `docs/SIGNATURES_AND_HANDWRITING.md`, quando a tarefa tocar assinaturas/rubricas/manuscritos
+10. `examples/caso_canonico_iniciante.json`, quando a tarefa tocar o canônico Iniciante
+11. `examples/caso_canonico_intermediario.json`, quando a tarefa tocar o canônico Intermediário ou baseline visual completo
 
 ## Stack atual
 
@@ -66,14 +78,17 @@ Use esta separação antes de mexer em qualquer coisa:
 
 | Problema | Local provável |
 |---|---|
-| Conteúdo do caso, personagens, documentos, pistas | `examples/caso_canonico_iniciante.json` |
+| Conteúdo do caso iniciante, personagens, documentos, pistas | `examples/caso_canonico_iniciante.json` |
+| Conteúdo do caso intermediário, personagens, documentos, pistas | `examples/caso_canonico_intermediario.json` |
 | Estrutura de dados | `generator/models.py` |
 | Validação narrativa/estrutural | `generator/validator.py` |
 | Renderização de dados em HTML/PDF | `generator/renderer.py` |
-| Mapas e visuais procedurais | `generator/visual_procedural.py` |
+| Mapas e visuais procedurais | `generator/visual_procedural.py`, `generator/floorplan_renderer.py` |
+| Printables/cartões de apoio | `generator/printable_cards.py`, `templates/printable_cards.html` |
+| Assinaturas/rubricas/manuscritos | `generator/signature_renderer.py` |
 | Templates de documentos | `templates/*.html` |
 | Montagem de pacote final | `scripts.build_package` e módulos relacionados |
-| Estado e diretrizes do produto | `docs/ESTADO_ATUAL.md`, `docs/DIRETRIZES_EDITORIAIS.md` |
+| Estado e diretrizes do produto | `docs/ESTADO_ATUAL.md`, `docs/ROADMAP.md`, `docs/DIRETRIZES_EDITORIAIS.md` |
 
 Se a tarefa é editorial, prefira mudar o blueprint e/ou documentação. Não refatore código sem necessidade.
 
@@ -127,7 +142,9 @@ Não deve conter:
 - cores fortes que apontem suspeita;
 - texto explicando por que ninguém viu.
 
-A Galeria/Vitrine interna do caso canônico deve ter acesso visual pelo corredor. Não pode depender de passagem por doca, depósito ou reserva técnica.
+Mapas são plantas operacionais, não pistas visuais comentadas.
+
+Para o canônico Intermediário **O Último Brinde do Hotel Aurora**, mantenha a decisão validada: **sem mapa**.
 
 ## Assinaturas e rubricas
 
@@ -144,14 +161,13 @@ Não volte para assinatura como simples texto cursivo ou “iniciais + risco” 
 
 ## E2 e documentos comerciais
 
-Para o caso canônico iniciante:
+Para casos com documentos comerciais, financeiros, logísticos ou administrativos:
 
-- não usar mapa/quadro comparativo de propostas como documento de jogador;
-- manter propostas/orçamentos individuais por empresa;
-- contrato, recibo, extrato, e-mails e chats devem ser evidências separadas;
+- não usar quadro comparativo como documento de jogador quando ele funcionar como síntese do puzzle;
+- manter propostas, orçamentos, recibos, contratos, extratos, e-mails e chats como evidências separadas quando isso aumentar a investigação;
 - o jogador deve comparar porque está investigando, não porque um documento instrui a comparação.
 
-Orçamento deve parecer documento real de uma empresa, não síntese do puzzle.
+Documento comercial deve parecer documento real de uma empresa, não síntese do puzzle.
 
 ## O que não reabrir sem evidência nova
 
@@ -161,20 +177,23 @@ Não reabra estes temas sem evidência concreta em PDF/teste/playtest:
 - PDFs consolidados em branco;
 - merge oficial com `pikepdf`;
 - Playwright como renderizador oficial;
-- caso canônico atual como Iniciante;
-- remoção de E2-03 como quadro comparativo do jogador;
+- existência dos dois canônicos atuais: Iniciante/Mirante e Intermediário/Aurora;
+- Hotel Aurora sem mapa;
+- remoção de quadros comparativos que funcionem como dica/gabarito para jogador;
 - mapa sem rota/área crítica/câmera offline;
-- assinatura/rubrica como atributo de personagem.
+- assinatura/rubrica como atributo de personagem;
+- cartões como apoio de mesa, não evidência principal.
 
 ## Prioridade atual
 
 Prioridade máxima:
 
-1. gerar pacote atualizado do caso canônico iniciante;
-2. revisar visualmente o PDF final;
-3. realizar o primeiro playtest real;
-4. registrar travamentos, hipóteses erradas, tempo real e diversão percebida;
-5. só depois decidir ajustes estruturais ou criação de novo caso canônico Intermediário.
+1. gerar baseline visual real dos dois canônicos com Playwright/Chromium;
+2. revisar visualmente os PDFs finais, manifests e print manifests;
+3. corrigir somente falhas comprovadas de layout/renderização;
+4. realizar novo playtest do Intermediário com pessoas novas;
+5. registrar travamentos, hipóteses erradas, tempo real, uso de dicas/cartões e diversão percebida;
+6. só depois decidir ajustes finos ou planejar o canônico Avançado.
 
 Não priorizar agora:
 
@@ -185,7 +204,10 @@ Não priorizar agora:
 - multiusuário;
 - Telegram comercial;
 - agentes autônomos;
-- IA gerando imagens.
+- geração em massa;
+- pagamento;
+- IA gerando imagens;
+- canônico Avançado antes do baseline visual e novo playtest.
 
 ## Comandos obrigatórios
 
@@ -201,16 +223,18 @@ Lint:
 ruff check generator/
 ```
 
-Validator strict do caso canônico:
+Validator strict dos canônicos:
 
 ```bash
 python generator/validator.py examples/caso_canonico_iniciante.json --strict
+python generator/validator.py examples/caso_canonico_intermediario.json --strict
 ```
 
-Build do pacote:
+Build dos pacotes canônicos:
 
 ```bash
-python -m scripts.build_package examples/caso_canonico_iniciante.json --output output --strict
+python -m scripts.build_package examples/caso_canonico_iniciante.json --output output/iniciante --strict
+python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
 ```
 
 Se Playwright/Chromium não estiver instalado:
@@ -219,7 +243,7 @@ Se Playwright/Chromium não estiver instalado:
 python -m playwright install chromium
 ```
 
-Se o build falhar apenas por ausência de Chromium no ambiente, registre isso explicitamente no relatório da PR.
+Se o build falhar apenas por ausência de Chromium no ambiente, registre isso explicitamente no relatório da PR. Não use build fake como prova de baseline visual real.
 
 ## Critério de tarefa concluída
 
@@ -227,8 +251,9 @@ Uma tarefa só está concluída quando:
 
 - `pytest tests/ -q` passa, ou a falha é explicada como limitação de ambiente;
 - `ruff check generator/` passa quando a tarefa toca em Python;
-- `python generator/validator.py examples/caso_canonico_iniciante.json --strict` passa quando a tarefa toca no blueprint;
-- se a tarefa altera pacote/renderização, o build é tentado;
+- validators strict dos canônicos passam quando a tarefa toca em blueprint, documentação de estado, baseline ou pacote;
+- se a tarefa altera pacote/renderização, o build real é tentado;
+- se o build real não for possível por limitação de ambiente, isso fica explícito na PR;
 - mudanças editoriais não vazam gabarito para documentos de jogador;
 - a PR explica claramente o que mudou, por que mudou e quais comandos foram executados.
 
@@ -239,18 +264,21 @@ Mantenha PRs pequenas e focadas.
 Bons escopos:
 
 - “corrigir linguagem de E2”;
-- “ajustar mapa da galeria”;
+- “ajustar mapa do canônico iniciante”;
+- “manter Hotel Aurora sem mapa e atualizar docs”;
 - “adicionar perfil de assinatura por personagem”;
-- “atualizar documentação”.
+- “atualizar documentação”;
+- “registrar baseline visual”.
 
 Escopos ruins:
 
 - “melhorar tudo”;
 - “refatorar framework inteiro”;
-- “criar novo caso e mudar renderer e validator ao mesmo tempo”.
+- “criar novo caso e mudar renderer e validator ao mesmo tempo”;
+- “criar canônico Avançado antes do baseline visual”.
 
 ## Quando parar
 
-Se a tarefa tocar no caso canônico e a mudança não for necessária para o primeiro playtest, prefira registrar como próximo passo em documentação, não implementar agora.
+Se a tarefa tocar narrativa, dificuldade ou solução dos canônicos e a mudança não for necessária por evidência de PDF/teste/playtest, prefira registrar como próximo passo em documentação, não implementar agora.
 
-O primeiro playtest vale mais que várias PRs teóricas.
+Baseline visual real e playtest valem mais que várias PRs teóricas.
