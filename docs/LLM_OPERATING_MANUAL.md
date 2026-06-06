@@ -133,6 +133,24 @@ Local provável:
 
 Não resolva esse problema adicionando documentos explicativos ao jogador. Corrija o contrato editorial do caso.
 
+### Problema de sistema visual documental
+
+Sintomas:
+
+- documentos corretos parecem “HTML bonito” em vez de artefatos físicos;
+- tabelas parecem genéricas ou dependem de cor;
+- cabeçalhos, rodapés, carimbos e assinaturas não sustentam a diegese;
+- guia do facilitador se confunde visualmente com material dos jogadores.
+
+Local provável:
+
+- `templates/styles/document_system.css`;
+- templates HTML principais;
+- `generator/renderer.py`, apenas para injeção sistêmica de classes/metadados;
+- `docs/VISUAL_SYSTEM.md`.
+
+Não peça “visual bonito” genérico. Preserve offline first, P&B first, evidência bruta e separação jogador/facilitador.
+
 ### Problema de documentação
 
 Sintomas:
