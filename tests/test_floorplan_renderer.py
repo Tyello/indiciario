@@ -31,3 +31,15 @@ def test_floorplan_svg_p2_pb_sem_residuos_tecnicos() -> None:
     assert ">rota<" not in svg.lower()
     assert "offline" not in svg.lower()
     assert "#1d4ed8" not in svg
+
+
+def test_porta_entre_areas_adjacentes_abre_gap_nas_duas_paredes() -> None:
+    svg = render_floorplan_svg(_mapa())
+
+    # A porta fica na parede compartilhada x=130, entre y=55 e y=80.
+    # As duas áreas podem desenhar suas paredes, mas nenhuma delas deve manter
+    # uma linha contínua atravessando a abertura.
+    assert '<line x1="130" y1="30" x2="130" y2="110" />' not in svg
+    assert svg.count('<line x1="130" y1="30" x2="130" y2="55" />') == 2
+    assert svg.count('<line x1="130" y1="80" x2="130" y2="110" />') == 2
+    assert '<path d="M130,55' in svg

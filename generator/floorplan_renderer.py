@@ -8,6 +8,8 @@ from typing import NamedTuple
 from .models import AreaMapa, CameraMapa, JanelaMapa, MapaProcedural, PortaMapa
 
 WALLS = {"norte", "sul", "leste", "oeste"}
+OPPOSITE_WALL = {"norte": "sul", "sul": "norte", "leste": "oeste", "oeste": "leste"}
+EPSILON = 0.01
 
 
 class Segment(NamedTuple):
@@ -26,6 +28,37 @@ def _area_by_id(mapa: MapaProcedural) -> dict[str, AreaMapa]:
 
 def _wall_length(area: AreaMapa, parede: str) -> float:
     return area.w if parede in {"norte", "sul"} else area.h
+
+
+def _wall_coordinate(area: AreaMapa, parede: str) -> float:
+    if parede == "norte":
+        return area.y
+    if parede == "sul":
+        return area.y + area.h
+    if parede == "oeste":
+        return area.x
+    return area.x + area.w
+
+
+def _wall_axis_start(area: AreaMapa, parede: str) -> float:
+    return area.x if parede in {"norte", "sul"} else area.y
+
+
+def _mirrored_door_gap(area_a: AreaMapa, area_b: AreaMapa, porta: PortaMapa) -> tuple[str, float, float] | None:
+    """Retorna o gap equivalente na parede oposta de area_b quando há adjacência real."""
+    opposite = OPPOSITE_WALL.get(porta.parede)
+    if opposite is None:
+        return None
+    if abs(_wall_coordinate(area_a, porta.parede) - _wall_coordinate(area_b, opposite)) > EPSILON:
+        return None
+
+    door_start = _wall_axis_start(area_a, porta.parede) + porta.posicao
+    door_end = door_start + porta.largura
+    b_start = _wall_axis_start(area_b, opposite)
+    b_end = b_start + _wall_length(area_b, opposite)
+    if door_start < b_start - EPSILON or door_end > b_end + EPSILON:
+        return None
+    return opposite, max(0.0, door_start - b_start), porta.largura
 
 
 def _gap_segments(length: float, gaps: list[tuple[float, float]]) -> list[Segment]:
@@ -112,8 +145,15 @@ def render_floorplan_svg(mapa: MapaProcedural) -> str:
     areas = _area_by_id(mapa)
     gaps: dict[tuple[str, str], list[tuple[float, float]]] = {}
     for porta in mapa.portas:
-        if porta.area_a in areas and porta.parede in WALLS:
+        area_a = areas.get(porta.area_a)
+        if area_a is not None and porta.parede in WALLS:
             gaps.setdefault((porta.area_a, porta.parede), []).append((porta.posicao, porta.posicao + porta.largura))
+            area_b = areas.get(porta.area_b or "")
+            if area_b is not None:
+                mirrored_gap = _mirrored_door_gap(area_a, area_b, porta)
+                if mirrored_gap is not None:
+                    parede_b, posicao_b, largura_b = mirrored_gap
+                    gaps.setdefault((area_b.id, parede_b), []).append((posicao_b, posicao_b + largura_b))
     for janela in mapa.janelas:
         if janela.area in areas and janela.parede in WALLS:
             gaps.setdefault((janela.area, janela.parede), []).append((janela.posicao, janela.posicao + janela.largura))
