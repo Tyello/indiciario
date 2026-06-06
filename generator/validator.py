@@ -318,6 +318,24 @@ def _normalizar_progressao_texto(texto: str) -> str:
     sem_acentos = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode("ascii")
     return re.sub(r"[^a-z0-9]+", " ", sem_acentos.lower()).strip()
 
+MAP_FORBIDDEN_TERMS = {
+    "rota",
+    "provavel",
+    "suspeito",
+    "culpado",
+    "area critica",
+    "caminho",
+    "offline",
+    "bloqueio visual",
+    "ponto cego",
+    "usar para cruzar",
+    "compare com",
+    "solucao",
+    "gabarito",
+}
+MAP_SOLUTION_TERMS = {"rota", "area critica", "solucao", "gabarito"}
+MAP_WALLS = {"norte", "sul", "leste", "oeste"}
+
 
 class BlueprintValidator:
     """Executa validações narrativas, estruturais e offline sobre um blueprint."""
@@ -1078,6 +1096,11 @@ class BlueprintValidator:
                     Severidade.CRITICO,
                     f"Mapa procedural '{mapa_id or mapa.titulo}' deve usar orientacao landscape.",
                 ))
+                self.resultado.adicionar(Erro(
+                    "MAP_001",
+                    Severidade.CRITICO,
+                    f"Mapa '{mapa_id or mapa.titulo}' não está em landscape.",
+                ))
             if mapa.largura <= 0 or mapa.altura <= 0:
                 self.resultado.adicionar(Erro(
                     "VP_004",
@@ -1106,6 +1129,18 @@ class BlueprintValidator:
                         f"Área '{area_id or area.nome}' tem dimensões inválidas no mapa '{mapa_id or mapa.titulo}'.",
                     ))
 
+            def _parede_len(area_id: str, parede: str) -> float:
+                area = next((item for item in mapa.areas if item.id == area_id), None)
+                if area is None:
+                    return 0
+                return area.w if parede in {"norte", "sul"} else area.h
+
+            def _posicao_valida(area_id: str, parede: str, posicao: float, largura: float = 0) -> bool:
+                if parede not in MAP_WALLS:
+                    return False
+                limite = _parede_len(area_id, parede)
+                return posicao >= 0 and largura > 0 and posicao + largura <= limite
+
             for conexao in mapa.conexoes:
                 if conexao.origem not in area_ids or conexao.destino not in area_ids:
                     self.resultado.adicionar(Erro(
@@ -1113,6 +1148,84 @@ class BlueprintValidator:
                         Severidade.CRITICO,
                         f"Conexão do mapa '{mapa_id or mapa.titulo}' referencia área inexistente.",
                     ))
+
+            for porta in mapa.portas:
+                if porta.area_a not in area_ids or (porta.area_b and porta.area_b not in area_ids):
+                    self.resultado.adicionar(Erro(
+                        "MAP_002",
+                        Severidade.CRITICO,
+                        f"Porta '{porta.id}' do mapa '{mapa_id or mapa.titulo}' referencia área inexistente.",
+                    ))
+                if porta.area_a in area_ids and not _posicao_valida(porta.area_a, porta.parede, porta.posicao, porta.largura):
+                    self.resultado.adicionar(Erro(
+                        "MAP_005",
+                        Severidade.CRITICO,
+                        f"Porta '{porta.id}' do mapa '{mapa_id or mapa.titulo}' está fora dos limites da parede.",
+                    ))
+
+            for janela in mapa.janelas:
+                if janela.area not in area_ids:
+                    self.resultado.adicionar(Erro(
+                        "MAP_003",
+                        Severidade.CRITICO,
+                        f"Janela '{janela.id}' do mapa '{mapa_id or mapa.titulo}' referencia área inexistente.",
+                    ))
+                if janela.area in area_ids and not _posicao_valida(janela.area, janela.parede, janela.posicao, janela.largura):
+                    self.resultado.adicionar(Erro(
+                        "MAP_006",
+                        Severidade.CRITICO,
+                        f"Janela '{janela.id}' do mapa '{mapa_id or mapa.titulo}' está fora dos limites da parede.",
+                    ))
+
+            for camera in mapa.cameras:
+                if camera.area not in area_ids:
+                    self.resultado.adicionar(Erro(
+                        "MAP_004",
+                        Severidade.CRITICO,
+                        f"Câmera '{camera.id}' do mapa '{mapa_id or mapa.titulo}' referencia área inexistente.",
+                    ))
+                if camera.parede not in MAP_WALLS or camera.posicao is None:
+                    self.resultado.adicionar(Erro(
+                        "MAP_007",
+                        Severidade.CRITICO,
+                        f"Câmera '{camera.id}' do mapa '{mapa_id or mapa.titulo}' precisa de parede e posição.",
+                    ))
+                elif camera.area in area_ids and not (0 <= camera.posicao <= _parede_len(camera.area, camera.parede)):
+                    self.resultado.adicionar(Erro(
+                        "MAP_007",
+                        Severidade.CRITICO,
+                        f"Câmera '{camera.id}' do mapa '{mapa_id or mapa.titulo}' está fora dos limites da parede.",
+                    ))
+
+            textos_mapa = [mapa.titulo, mapa.categoria]
+            textos_mapa.extend(area.nome for area in mapa.areas)
+            textos_mapa.extend(area.observacao for area in mapa.areas)
+            textos_mapa.extend(conexao.observacao for conexao in mapa.conexoes)
+            textos_mapa.extend(marcador.label for marcador in mapa.marcadores)
+            textos_mapa.extend(item.descricao for item in mapa.legenda)
+            textos_mapa.extend(porta.controle_acesso or "" for porta in mapa.portas)
+            texto_normalizado = _normalizar_progressao_texto(" ".join(textos_mapa))
+            if any(termo in texto_normalizado for termo in MAP_FORBIDDEN_TERMS):
+                self.resultado.adicionar(Erro(
+                    "MAP_008",
+                    Severidade.CRITICO,
+                    f"Mapa '{mapa_id or mapa.titulo}' contém linguagem interpretativa proibida.",
+                ))
+            if any(termo in texto_normalizado for termo in MAP_SOLUTION_TERMS):
+                self.resultado.adicionar(Erro(
+                    "MAP_010",
+                    Severidade.CRITICO,
+                    f"Mapa '{mapa_id or mapa.titulo}' tenta destacar rota/área crítica/solução.",
+                ))
+            descricoes_legenda = {_normalizar_progressao_texto(item.descricao) for item in mapa.legenda}
+            nomes_areas = {_normalizar_progressao_texto(area.nome) for area in mapa.areas}
+            areas_usam_codigos = any(area.observacao.strip().startswith("P-") for area in mapa.areas)
+            if mapa.legenda and not areas_usam_codigos and len(descricoes_legenda & nomes_areas) >= 2:
+                self.resultado.adicionar(Erro(
+                    "MAP_009",
+                    Severidade.MODERADO,
+                    f"Mapa '{mapa_id or mapa.titulo}' usa legenda redundante com nomes completos já presentes nas áreas.",
+                ))
 
             for marcador in mapa.marcadores:
                 if marcador.documento_relacionado:

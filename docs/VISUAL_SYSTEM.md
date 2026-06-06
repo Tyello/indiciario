@@ -184,3 +184,9 @@ Ver também `docs/PRINTABLES.md`.
 8. A impressão P&B continua legível?
 9. Não há CDN, imagem externa ou fonte binária?
 10. Não houve alteração narrativa acidental nos canônicos?
+
+## P2 — plantas baixas profissionais procedurais
+
+Mapas agora seguem o contrato em `docs/FLOORPLANS.md`: A4 landscape, P&B first, fundo branco, paredes fechadas, portas com gap real, janelas paralelas na parede e câmeras presas em parede/canto. O renderer dedicado `generator/floorplan_renderer.py` gera SVG inline sem imagem externa e o template `templates/floorplan.html` preserva uma página paisagem.
+
+A planta baixa não pode virar pista visual interpretativa. Rotas, áreas críticas, câmera offline, campo de visão, suspeitos, solução e instruções de cruzamento pertencem ao facilitador/dicas/gabarito, nunca ao mapa de jogador.

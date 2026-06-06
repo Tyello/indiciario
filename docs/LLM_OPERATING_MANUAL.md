@@ -495,3 +495,7 @@ Peça decisão humana quando:
 - a tarefa entra em temas fora da prioridade atual.
 
 Não invente direção nova quando o usuário já definiu o caminho.
+
+## P2 visual — mapas/planta baixa
+
+Ao criar ou revisar mapas, use `docs/FLOORPLANS.md` como contrato. Em `visual_procedural.mapas`, prefira portas, janelas e câmeras estruturadas em vez de linhas soltas. Todo mapa de jogador deve ser A4 landscape, P&B first e neutro; não adicione rota, campo de visão, câmera offline, área crítica, suspeito, solução ou instrução de cruzamento. Hotel Aurora continua sem mapa salvo pedido explícito posterior.

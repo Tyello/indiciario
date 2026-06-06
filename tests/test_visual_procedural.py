@@ -147,7 +147,7 @@ def test_build_visual_documents_gera_pdfs_com_mock_renderer(
     assert "apoio_visual" in grupos
     assert any(path.name.startswith("visual_map_") for path in grupos["E1"])
     assert all(not path.name.startswith("visual_personagem_") for path in grupos["E1"])
-    assert any(call[0] == "visual_map.html" and call[2] is True for call in calls)
+    assert any(call[0] == "floorplan.html" and call[2] is True for call in calls)
     assert len(grupos["E1"]) == 1
     assert len(grupos["apoio_visual"]) == 14
 
@@ -223,6 +223,9 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
     assert visual_map["final_file"] == "01_envelope_1.pdf"
     assert visual_map["page_start"] == 3
     assert visual_map["page_end"] == 4
+    assert visual_map["orientation"] == "landscape"
+    assert visual_map["map_category"] == "documento_jogador"
+    assert "A4 paisagem" in visual_map["print_instructions"]
     support_file = next(
         file for file in manifest["files"] if file["id"] == "apoio_visual"
     )
@@ -236,11 +239,10 @@ def test_build_package_inclui_visual_no_envelope_manifest_print_e_qa(
     assert result["status"] == "passed"
 
 
-def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
+def test_mapa_canonico_tem_planta_p2_neutra_com_elementos_tecnicos() -> None:
     blueprint = Blueprint(**load_canonical_data())
     mapa = blueprint.visual_procedural.mapas[0]  # type: ignore[union-attr]
     nomes = {area.nome for area in mapa.areas}
-    labels = [marcador.label for marcador in mapa.marcadores]
     svg = build_map_svg(mapa)
 
     assert nomes == {
@@ -255,27 +257,17 @@ def test_mapa_canonico_tem_planta_simples_e_marcadores_curtos() -> None:
         "Reserva Técnica B",
         "Galeria / Vitrine interna",
     }
-    assert labels == []
-    assert ">1<" not in svg
-    assert ">2<" not in svg
-    assert ">3<" not in svg
-    assert "rota provável" not in svg
-    assert "Legenda" not in svg
-    assert "Carimbo técnico" not in svg
-    assert "Rotas não registradas" not in svg
-    assert "P-06" in svg
-    assert "Reserva Técnica B" in svg
-    assert "Reserva Técnica A" in svg
-    assert "Sala de Segurança" in svg
-    assert "Doca de" in svg
-    assert "Serviço" in svg
-    assert "Planta baixa — Casa de Acervo Mirante" in svg
-    assert "Ambientes nomeados na planta" in svg
-    assert "P-09" in svg
-    assert "Galeria / Vitrine interna" in svg
-    assert '<text x="700" y="523" class="p-code">P-09</text>' in svg
-    assert '<rect x="644" y="350" width="50" height="22" fill="#FAFAF8"/>' in svg
-    assert "wall-doca-deposito" in svg
-    assert "translate(214 96)" in svg
+    assert mapa.portas
+    assert mapa.janelas
+    assert mapa.cameras
+    assert svg.startswith("<svg")
+    assert 'class="door"' in svg
     assert 'class="window"' in svg
-    assert "Planta esquemática" not in svg
+    assert 'class="camera"' in svg
+    assert "Planta operacional simplificada" in svg
+    assert "P&B" in svg
+    assert "rota provável" not in svg
+    assert "área crítica" not in svg
+    assert "offline" not in svg
+    assert "stroke="#1d4ed8"" not in svg
+    assert "stroke-dasharray" not in svg
