@@ -56,7 +56,8 @@ Funcionalidades já existentes no repositório incluem:
 - mapa procedural canônico;
 - suporte a assinatura/rubrica por perfil de personagem no blueprint;
 - possibilidade de override SVG para assinatura/rubrica.
-- sistema visual documental v1 com tokens CSS globais, cabeçalho/rodapé documental, classes por tipo e família, tabelas P&B first e carimbos burocráticos opcionais.
+- sistema visual documental v1 com tokens CSS globais, cabeçalho/rodapé documental, classes por tipo e família, tabelas P&B first e carimbos burocráticos opcionais;
+- printables apartados P1 para cartões recortáveis de personagem, local e objeto, registrados no manifest e no guia de impressão como apoio de mesa.
 
 Problemas já tratados e que não devem ser reabertos sem evidência nova:
 
@@ -360,4 +361,11 @@ python -m playwright install chromium
 
 Foi criada a base P0 do sistema visual documental em `templates/styles/document_system.css`, injetada automaticamente pelo renderer nos HTMLs finais. A camada adiciona tokens tipográficos, escala de cinzas, espaçamentos, bordas, cabeçalho/rodapé documental para documentos de jogador, classes por tipo e família documental, padrões de tabela, carimbos opcionais e regras de impressão P&B.
 
-Essa mudança é sistêmica e não altera narrativa, solução, dificuldade, mapas nem cartões apartados dos canônicos. O objetivo é aumentar a credibilidade material dos PDFs antes de novas rodadas de playtest, mantendo evidência bruta nos documentos de jogador e separação visual do material confidencial do facilitador.
+Essa mudança é sistêmica e não altera narrativa, solução, dificuldade nem mapas dos canônicos. O objetivo é aumentar a credibilidade material dos PDFs antes de novas rodadas de playtest, mantendo evidência bruta nos documentos de jogador e separação visual do material confidencial do facilitador.
+
+
+## Printables apartados P1
+
+O pacote agora pode gerar cartões recortáveis de personagem, local e objeto como apoio de mesa separado dos envelopes. Os canônicos Iniciante e Intermediário receberam cartões públicos e não interpretativos; os cartões não alteram solução, dificuldade ou cadeia de evidência.
+
+Os PDFs são gravados em `printables/`, aparecem no `manifest.json` e no `print_manifest.json`, e o guia de impressão informa recorte, papel recomendado e separação em relação a envelopes, dicas e material confidencial do facilitador.

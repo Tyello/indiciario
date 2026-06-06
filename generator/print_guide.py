@@ -47,12 +47,12 @@ def _file_instruction(file_entry: dict[str, Any]) -> dict[str, Any]:
             "deliver_to": "Jogadores",
             "instructions": "Entregar no envelope indicado, sem misturar com material confidencial.",
         }
-    if category == "visual_support":
+    if category in {"visual_support", "printable_support"}:
         return {
             "paper": "A4 180g recomendado",
             "color": "Colorido recomendado; P&B aceitável",
-            "deliver_to": "Apoio visual",
-            "instructions": "Imprimir separado dos envelopes; cartões podem ser recortados e entregues como apoio visual opcional.",
+            "deliver_to": "Apoio de mesa",
+            "instructions": "Imprimir separado dos envelopes; recortar cartões quando indicado. Não tratar como documento de prova nem substituir evidências.",
         }
     if file_id == "guia_de_impressao":
         return {
@@ -100,7 +100,7 @@ def build_print_manifest(
                 "color": instructions["color"],
                 "orientation": orientation,
                 "duplex": False,
-                "cut_required": False,
+                "cut_required": bool(file_entry.get("cut_required", False)),
                 "confidential": bool(file_entry.get("confidential")),
                 "deliver_to": instructions["deliver_to"],
                 "instructions": instructions["instructions"],
@@ -111,7 +111,7 @@ def build_print_manifest(
         entry["file"] for entry in files if entry["deliver_to"] == "Jogadores"
     ]
     visual_support_files = [
-        entry["file"] for entry in files if entry["deliver_to"] == "Apoio visual"
+        entry["file"] for entry in files if entry["deliver_to"] in {"Apoio visual", "Apoio de mesa"}
     ]
     facilitator_files = [
         entry["file"] for entry in files if entry["deliver_to"] == "Facilitador"

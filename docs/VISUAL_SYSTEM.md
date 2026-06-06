@@ -146,6 +146,31 @@ Não usar fonte externa, imagem gerada por IA ou assinatura textual simples como
 - Guia do facilitador: pode conter interpretação, confirmação, contrato lógico, dicas e gabarito, mas deve ser visualmente confidencial.
 - Dicas contextuais: sempre separadas fisicamente dos envelopes dos jogadores.
 
+
+## P1 — Printables apartados
+
+O P1 adiciona cartões recortáveis de apoio de mesa em `templates/printable_cards.html`, usando o mesmo princípio P&B first do sistema documental v1. Os cartões são gerados como printables separados em `printables/`, registrados no `manifest.json` e no `print_manifest.json`, e não entram automaticamente nos envelopes de investigação.
+
+Classes principais:
+
+- `printable-card-sheet`;
+- `printable-card`;
+- `printable-card--personagem`;
+- `printable-card--local`;
+- `printable-card--objeto`;
+- `cut-line`;
+- `card-code`;
+- `card-meta`.
+
+Regras editoriais:
+
+- cartão é referência de mesa, não evidência primária;
+- não pode conter culpa, motivação secreta, gabarito ou orientação de cruzamento;
+- deve funcionar sem cor, imagem externa, fonte externa, QR code ou internet;
+- deve ser impresso separado dos envelopes e recortado quando indicado pelo guia de impressão.
+
+Ver também `docs/PRINTABLES.md`.
+
 ## Checklist visual antes de playtest
 
 1. Os documentos parecem artefatos reais, não cards explicativos?

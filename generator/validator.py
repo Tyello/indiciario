@@ -252,6 +252,35 @@ PLACEHOLDERS_INVALIDOS = {
 }
 
 
+CARD_SOLUTION_TERMS = {
+    "culpado",
+    "executor",
+    "planejador",
+    "beneficiario",
+    "beneficiário",
+    "verdade real",
+    "gabarito",
+    "confissao",
+    "confissão",
+    "responsavel final",
+    "responsável final",
+}
+
+CARD_CROSSING_TERMS = {
+    "usar para cruzar",
+    "compare com",
+    "comparar com",
+    "cruze com",
+    "cruzar com",
+    "prova de que",
+    "confirma que",
+    "suspeito principal",
+    "motivo real",
+}
+
+CARD_INTERNAL_ID_RE = re.compile(r"\b(?:C-(?:E\d+|FINAL)-[A-Z0-9_-]+|E\d+-\d{2})\b", re.IGNORECASE)
+
+
 E1_SOLUCAO_FINAL_TERMS = {
     "acusacao final",
     "acusacao completa",
@@ -304,6 +333,7 @@ class BlueprintValidator:
         self._verificar_dicas()
         self._verificar_dicas_contextuais()
         self._verificar_visual_procedural()
+        self._verificar_printable_cards()
         self._verificar_autossuficiencia()
         self._verificar_playtest_metrics()
         self._verificar_conteudo_schema()
@@ -1076,6 +1106,76 @@ class BlueprintValidator:
                 Severidade.MODERADO,
                 "Visual procedural existe, mas nenhum elemento tem função narrativa relacionada.",
             ))
+
+
+    def _verificar_printable_cards(self) -> None:
+        envelopes_validos = {f"E{numero}" for numero in range(1, self.bp.formato_envelopes + 1)}
+        ids_vistos: set[str] = set()
+        termos_proibidos = CARD_SOLUTION_TERMS | CARD_CROSSING_TERMS
+        for card in self.bp.printable_cards:
+            card_id = card.id.strip()
+            if not card_id:
+                self.resultado.adicionar(Erro(
+                    "CARD_003",
+                    Severidade.CRITICO,
+                    "Cartão apartado sem id.",
+                ))
+                continue
+            if card_id in ids_vistos:
+                self.resultado.adicionar(Erro(
+                    "CARD_003",
+                    Severidade.CRITICO,
+                    f"Cartão apartado duplicado: {card_id}.",
+                ))
+            ids_vistos.add(card_id)
+
+            campos_texto = [
+                card.id,
+                card.titulo,
+                card.subtitulo or "",
+                card.descricao_curta or "",
+                card.codigo_visual or "",
+                card.observacao_publica or "",
+                *card.tags_visuais,
+            ]
+            texto_normalizado = _normalizar_progressao_texto(" ".join(campos_texto))
+            for termo in termos_proibidos:
+                termo_normalizado = _normalizar_progressao_texto(termo)
+                if termo_normalizado and termo_normalizado in texto_normalizado:
+                    self.resultado.adicionar(Erro(
+                        "CARD_001",
+                        Severidade.CRITICO,
+                        f"Cartão '{card_id}' contém linguagem de solução ou orientação investigativa.",
+                        detalhe=f"Termo detectado: {termo}",
+                    ))
+                    break
+
+            texto_bruto = " ".join(campos_texto)
+            contrato_citado = next(
+                (contrato_id for contrato_id in self._ids_contratos if contrato_id and contrato_id in texto_bruto),
+                None,
+            )
+            if contrato_citado or CARD_INTERNAL_ID_RE.search(texto_bruto):
+                self.resultado.adicionar(Erro(
+                    "CARD_002",
+                    Severidade.CRITICO,
+                    f"Cartão '{card_id}' cita contrato, evidência ou ID interno.",
+                    detalhe=f"Referência detectada: {contrato_citado or CARD_INTERNAL_ID_RE.search(texto_bruto).group(0)}",
+                ))
+
+            if card.entregar_apartado and (not card.titulo.strip() or not (card.descricao_curta or "").strip()):
+                self.resultado.adicionar(Erro(
+                    "CARD_003",
+                    Severidade.CRITICO,
+                    f"Cartão apartado '{card_id}' precisa de título e descrição curta.",
+                ))
+
+            if card.envelope_recomendado and card.envelope_recomendado not in envelopes_validos:
+                self.resultado.adicionar(Erro(
+                    "CARD_004",
+                    Severidade.CRITICO,
+                    f"Cartão '{card_id}' referencia envelope inexistente: {card.envelope_recomendado}.",
+                ))
 
     def _verificar_playtest_metrics(self) -> None:
         """Registra warnings heurísticos de playtest sem bloquear geração."""

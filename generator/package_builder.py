@@ -21,6 +21,7 @@ from .merger import (
 )
 from .playtest_metrics import analyze_playtest, write_playtest_report
 from .models import Blueprint
+from .printable_cards import build_printable_card_documents
 from .print_guide import build_print_manifest, render_print_guide, write_print_manifest
 from .qa import report_to_dict, run_qa, write_qa_report
 from .renderer import renderizar_caso, renderizar_documento
@@ -329,6 +330,29 @@ def _append_facilitator_guide_file(
     manifest["files"].append(entry)
 
 
+
+def _append_printable_card_files(
+    manifest: dict[str, Any], card_paths: list[Path], package_dir: Path
+) -> None:
+    existing = {file.get("path") for file in manifest.get("files", [])}
+    for path in card_paths:
+        relative_path = _relative(path, package_dir)
+        if relative_path in existing:
+            continue
+        label_base = path.stem.replace("cards_", "Cartões — ").replace("_", " ")
+        manifest["files"].append(
+            {
+                "id": f"printable_{path.stem}",
+                "label": label_base.capitalize(),
+                "path": relative_path,
+                "category": "printable_support",
+                "confidential": False,
+                "page_count": count_pdf_pages(path),
+                "cut_required": True,
+            }
+        )
+
+
 def _next_file_index(files: list[dict[str, Any]]) -> int:
     return len(files) + 1
 
@@ -395,6 +419,14 @@ def build_package(
     graph = build_clue_graph(blueprint)
     graph_report = analyze_clue_graph(graph, blueprint)
 
+    printable_card_paths = build_printable_card_documents(
+        blueprint,
+        package_dir,
+        strict=strict,
+        html_debug_dir=paths["html_debug_dir"],
+        render_func=renderizar_documento,
+    )
+
     manifest: dict[str, Any] = {
         "case": _case_metadata(blueprint, safe_slug(blueprint.titulo)),
         "generated_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
@@ -408,6 +440,15 @@ def build_package(
             cover_pages_by_envelope,
         ),
         "warnings": warnings,
+        "printables": [
+            {
+                "id": path.stem,
+                "path": _relative(path, package_dir),
+                "kind": "cards",
+                "cut_required": True,
+            }
+            for path in printable_card_paths
+        ],
         "reports": {
             "qa": "qa_report.json",
             "graph": "graph_report.json",
@@ -417,7 +458,7 @@ def build_package(
     }
 
     paths["guia_facilitador"] = _numbered_output(
-        package_dir, _next_file_index(files), "guia_facilitador.pdf"
+        package_dir, _next_file_index(manifest["files"]), "guia_facilitador.pdf"
     )
     render_facilitator_guide(
         blueprint, paths["guia_facilitador"], graph_report=graph_report, strict=strict
@@ -427,6 +468,7 @@ def build_package(
     paths["guia_de_impressao"] = _numbered_output(
         package_dir, _next_file_index(manifest["files"]), "guia_de_impressao.pdf"
     )
+    _append_printable_card_files(manifest, printable_card_paths, package_dir)
     preliminary_print_manifest = build_print_manifest(manifest, package_dir)
     render_print_guide(
         preliminary_print_manifest, paths["guia_de_impressao"], strict=strict
