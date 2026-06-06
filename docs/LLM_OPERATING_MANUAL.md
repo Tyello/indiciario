@@ -13,25 +13,37 @@ Antes de alterar qualquer arquivo, leia nesta ordem:
 1. `AGENTS.md`
 2. `README.md`
 3. `docs/ESTADO_ATUAL.md`
-4. `docs/DIRETRIZES_EDITORIAIS.md`
-5. `docs/ANTI_OBVIEDADE.md`
-6. `docs/CASE_DESIGN_PIPELINE.md`, se a tarefa envolver criação ou revisão estrutural de caso
-7. `docs/BLUEPRINT_AUTHORING_GUIDE.md`, se a tarefa envolver blueprint ou novo caso
-8. `examples/caso_canonico_iniciante.json`, se a tarefa tocar no caso canônico
+4. `docs/ROADMAP.md`
+5. `docs/DIRETRIZES_EDITORIAIS.md`
+6. `docs/DIEGESE_DOCUMENTAL.md`
+7. `docs/ANTI_OBVIEDADE.md`
+8. `docs/VISUAL_SYSTEM.md`, se a tarefa envolver visual, templates ou PDF
+9. `docs/PRINTABLES.md`, se a tarefa envolver cartões/material de mesa
+10. `docs/SIGNATURES_AND_HANDWRITING.md`, se a tarefa envolver assinatura, rubrica ou manuscrito
+11. `docs/FLOORPLANS.md`, se a tarefa envolver mapas/planta baixa
+12. `docs/CASE_DESIGN_PIPELINE.md`, se a tarefa envolver criação ou revisão estrutural de caso
+13. `docs/BLUEPRINT_AUTHORING_GUIDE.md`, se a tarefa envolver blueprint ou novo caso
+14. `examples/caso_canonico_iniciante.json`, se a tarefa tocar em régua Iniciante
+15. `examples/caso_canonico_intermediario.json`, se a tarefa tocar em régua Intermediária
 
 Se a tarefa envolver revisão de PDF gerado, use também o feedback visual/playtest fornecido pelo usuário como fonte prioritária.
 
 ## Estado atual que deve guiar decisões
 
-O caso canônico atual é:
+Réguas canônicas atuais:
 
-- **O Desvio da Reserva Mirante**
-- arquivo: `examples/caso_canonico_iniciante.json`
-- dificuldade: **Iniciante**
+- **O Desvio da Reserva Mirante** — `examples/caso_canonico_iniciante.json` — dificuldade **Iniciante**.
+- **O Último Brinde do Hotel Aurora** — `examples/caso_canonico_intermediario.json` — dificuldade **Intermediário**.
 
-A prioridade do projeto é realizar o primeiro playtest real.
+Prioridade atual do projeto:
 
-Não crie novo caso, novo marketplace, dashboard, bot comercial, banco de dados ou editor visual sem pedido explícito.
+1. gerar baseline real dos PDFs dos dois canônicos com Playwright/Chromium local;
+2. revisar visualmente os pacotes pós-P0/P1/P2/P3;
+3. corrigir apenas falhas comprovadas de layout/renderização/pacote;
+4. realizar novo playtest do Intermediário com pessoas novas;
+5. só depois planejar o canônico Avançado.
+
+Não crie novo caso Avançado, marketplace, dashboard, bot comercial, banco de dados, editor visual, app ou automação de venda sem pedido explícito.
 
 ## Diagnóstico inicial: que tipo de problema é?
 
@@ -49,68 +61,11 @@ Sintomas:
 
 Local provável:
 
-- `examples/caso_canonico_iniciante.json`;
+- blueprint JSON;
+- plano Markdown do caso;
 - documentação editorial.
 
 Não comece por template ou renderer se o problema é texto.
-
-### Problema de template
-
-Sintomas:
-
-- conteúdo correto, mas layout quebra;
-- colunas sobrescrevem;
-- assinatura aparece no lugar errado;
-- campo renderiza mesmo quando falso;
-- documento tem hierarquia visual ruim.
-
-Local provável:
-
-- `templates/*.html`;
-- testes de renderer.
-
-### Problema de renderer
-
-Sintomas:
-
-- assinatura/rubrica não é gerada corretamente;
-- campo derivado não é injetado;
-- template certo não é escolhido;
-- HTML/PDF falha para um tipo de documento.
-
-Local provável:
-
-- `generator/renderer.py`.
-
-### Problema de mapa/visual procedural
-
-Sintomas:
-
-- planta tem porta sem parede;
-- câmera está solta;
-- acesso físico não faz sentido;
-- mapa entrega rota ou solução;
-- mapa quebra a experiência de investigação.
-
-Local provável:
-
-- `generator/visual_procedural.py`;
-- dados de `visual_procedural` no blueprint.
-
-### Problema de validação
-
-Sintomas:
-
-- blueprint inválido passa;
-- blueprint válido falha;
-- erro de validação está errado ou ausente;
-- regra editorial deve ser automatizada.
-
-Local provável:
-
-- `generator/validator.py`;
-- testes em `tests/`;
-- futuro guardrail editorial.
 
 ### Problema de progressão do caso
 
@@ -127,11 +82,94 @@ Local provável:
 
 - plano Markdown do caso;
 - blueprint JSON;
+- `conflito_central`;
+- `objetivos_por_envelope`;
+- `guia_operacional`;
 - `docs/CASE_DESIGN_PIPELINE.md`;
-- `docs/BLUEPRINT_AUTHORING_GUIDE.md`;
-- guia do facilitador.
+- `docs/BLUEPRINT_AUTHORING_GUIDE.md`.
 
 Não resolva esse problema adicionando documentos explicativos ao jogador. Corrija o contrato editorial do caso.
+
+### Problema de diegese documental
+
+Sintomas:
+
+- informação correta aparece no documento errado;
+- e-mail explica demais;
+- carta antiga traz anexo moderno artificial;
+- chat parece conversa mágica da vítima;
+- red herring parece autoincriminação.
+
+Local provável:
+
+- blueprint JSON;
+- `docs/DIEGESE_DOCUMENTAL.md`;
+- contratos de evidência;
+- documentos do envelope.
+
+Regra central:
+
+> Uma boa pista no documento errado vira pista artificial.
+
+### Problema de template
+
+Sintomas:
+
+- conteúdo correto, mas layout quebra;
+- colunas sobrescrevem;
+- assinatura aparece no lugar errado;
+- campo renderiza mesmo quando falso;
+- documento tem hierarquia visual ruim.
+
+Local provável:
+
+- `templates/*.html`;
+- `templates/styles/document_system.css`;
+- testes de renderer.
+
+### Problema de renderer
+
+Sintomas:
+
+- assinatura/rubrica não é gerada corretamente;
+- campo derivado não é injetado;
+- template certo não é escolhido;
+- HTML/PDF falha para um tipo de documento;
+- manifest ou print manifest sai errado.
+
+Local provável:
+
+- `generator/renderer.py`;
+- `generator/package_builder.py`;
+- renderer específico do recurso afetado.
+
+### Problema de mapa/planta baixa
+
+Sintomas:
+
+- planta tem porta sem parede;
+- porta não abre gap real;
+- janela não está na parede;
+- câmera está solta;
+- acesso físico não faz sentido;
+- mapa entrega rota ou solução;
+- mapa quebra a experiência de investigação.
+
+Local provável:
+
+- `generator/floorplan_renderer.py`;
+- `templates/floorplan.html`;
+- dados de `visual_procedural.mapas` no blueprint;
+- `docs/FLOORPLANS.md`.
+
+Regras críticas:
+
+- A4 landscape;
+- P&B first;
+- portas somente em paredes e com gap real;
+- portas entre áreas adjacentes devem abrir a parede compartilhada quando houver coincidência real;
+- câmeras em parede/canto;
+- sem rota, área crítica, campo de visão, câmera offline ou linguagem interpretativa.
 
 ### Problema de printables apartados
 
@@ -153,6 +191,25 @@ Local provável:
 
 Cartões são material público de mesa, mas não são evidência primária. Não inclua culpa, motivação secreta, gabarito, contratos de evidência ou orientação explícita de cruzamento.
 
+### Problema de assinatura, rubrica ou manuscrito
+
+Sintomas:
+
+- assinaturas parecem iguais;
+- rubrica parece assinatura reduzida sem identidade;
+- manuscrito parece fonte decorativa;
+- manuscrito está longo demais;
+- override SVG não é respeitado.
+
+Local provável:
+
+- `generator/signature_renderer.py`;
+- campos de perfil visual do personagem;
+- templates que exibem assinatura/rubrica/manuscrito;
+- `docs/SIGNATURES_AND_HANDWRITING.md`.
+
+Assinatura, rubrica e manuscrito são características editoriais do personagem, não decoração genérica.
+
 ### Problema de sistema visual documental
 
 Sintomas:
@@ -171,6 +228,21 @@ Local provável:
 
 Não peça “visual bonito” genérico. Preserve offline first, P&B first, evidência bruta e separação jogador/facilitador.
 
+### Problema de validação
+
+Sintomas:
+
+- blueprint inválido passa;
+- blueprint válido falha;
+- erro de validação está errado ou ausente;
+- regra editorial deve ser automatizada.
+
+Local provável:
+
+- `generator/validator.py`;
+- testes em `tests/`;
+- checker específico, se houver.
+
 ### Problema de documentação
 
 Sintomas:
@@ -178,7 +250,8 @@ Sintomas:
 - decisões do projeto só existem em chat;
 - README está desatualizado;
 - LLMs repetem erros já corrigidos;
-- falta guia para novos casos.
+- falta guia para novos casos;
+- roadmap ainda cita fase já concluída.
 
 Local provável:
 
@@ -309,193 +382,29 @@ Cada dica deve informar condição de uso, intensidade, ação mental esperada e
 
 Todo guia precisa conter pergunta pública, resposta esperada por envelope, quando liberar o próximo envelope, linha do tempo aparente, linha do tempo real, red herrings e descartes, explicação da motivação e solução em síntese.
 
-## Como alterar o caso canônico
+## Como alterar casos canônicos
 
 Ao alterar `examples/caso_canonico_iniciante.json`:
 
 1. Preserve a dificuldade **Iniciante**.
-2. Não recrie `caso_canonico_intermediario.json`.
+2. Não tente transformá-lo em Intermediário por polimento incremental.
 3. Não adicione documentos apenas para explicar solução.
-4. Prefira evidências curtas e diegéticas.
+4. Preserve sua função de régua introdutória e fixture de integração.
 5. Verifique `confirma` e `confirmado_por` após remover/adicionar documentos.
-6. Verifique contratos de evidência.
-7. Verifique dicas contextuais.
-8. Verifique `observacoes_producao`.
-9. Atualize testes se o número de documentos mudar.
-10. Rode validator strict.
 
-## Como decidir se um documento deve existir
+Ao alterar `examples/caso_canonico_intermediario.json`:
 
-Antes de adicionar um documento, responda:
+1. Preserve a dificuldade **Intermediário**.
+2. Preserve a decisão de manter Hotel Aurora sem mapa.
+3. Não altere a solução sem novo playtest ou decisão explícita.
+4. Preserve a progressão em dois envelopes com recontextualização no E2.
+5. Verifique pergunta pública, objetivos por envelope e guia operacional.
 
-1. Ele existe naturalmente no mundo da história?
-2. Ele traz uma evidência nova?
-3. Ele melhora a experiência de mesa?
-4. Ele reduz ambiguidade injusta sem entregar solução?
-5. Ele não duplica outro documento?
-6. Ele não é apenas um resumo para o jogador?
+## Antes de iniciar novo caso
 
-Se a resposta principal for “ajuda a explicar a solução”, não crie o documento. Coloque essa explicação no guia do facilitador ou em uma dica contextual.
+Não iniciar novo canônico Avançado sem:
 
-## Como revisar documentos comerciais
-
-Documentos comerciais devem parecer reais:
-
-- orçamento/proposta é de uma empresa;
-- recibo comprova pagamento/serviço;
-- contrato formaliza relação;
-- extrato mostra movimentação;
-- e-mail/chat mostra contexto operacional.
-
-Evite:
-
-- orçamento com várias empresas dentro;
-- quadro comparativo que funcione como resposta;
-- condições que ensinem a investigar;
-- frases como “comparação exige...”;
-- lista “OS, recibo, extrato e conversa interna”.
-
-Para o caso canônico iniciante, o documento `E2-03` foi removido porque facilitava demais a solução como mapa comparativo de propostas. Não o recrie sem instrução explícita.
-
-## Como revisar mapas
-
-Mapa do jogador deve ser planta baixa neutra.
-
-Ao revisar ou alterar mapa:
-
-1. Portas precisam estar em paredes.
-2. Janelas precisam fazer sentido em paredes externas.
-3. Câmeras devem estar em parede/canto plausível, não no meio da sala.
-4. Área pública deve ter acesso coerente.
-5. Galeria/Vitrine interna deve ter acesso pelo corredor.
-6. Doca, depósito e reserva precisam ter divisões físicas coerentes.
-7. Não desenhe rota da peça.
-8. Não marque câmera offline.
-9. Não destaque área crítica.
-10. Não use legenda que explique a investigação.
-
-Se uma versão analítica do mapa for útil, ela pertence ao guia do facilitador, não ao envelope do jogador.
-
-## Como revisar assinaturas, rubricas e manuscritos
-
-Assinatura/rubrica/manuscrito curto pertence ao personagem.
-
-Ao mexer nisso:
-
-1. Confira o perfil de assinatura no personagem.
-2. Use `*_PERSONAGEM_ID` quando o documento souber quem assina.
-3. Preserve fallback procedural.
-4. Use override SVG apenas quando necessário.
-5. Não volte a usar nome digitado como assinatura.
-6. Assinatura completa e rubrica devem ser diferentes.
-7. Personagens diferentes devem ter assinaturas visualmente diferentes.
-8. Manuscrito deve ser curto (até 120 caracteres), associado a personagem e nunca virar bloco longo ou dica de solução.
-
-## Como revisar dificuldade
-
-O nível atual do Mirante é Iniciante.
-
-Isso permite:
-
-- códigos mais explícitos;
-- relação ID → pessoa mais clara;
-- mapas mais legíveis;
-- dicas mais úteis;
-- menor ambiguidade.
-
-Mas não permite:
-
-- documento explicando a solução;
-- chat confessando crime;
-- mapa mostrando rota;
-- orçamento comparativo funcionando como resposta.
-
-Para futuro caso Intermediário:
-
-- usar mais códigos brutos;
-- exigir mais cruzamento;
-- aumentar red herrings justos;
-- reduzir explicações;
-- criar ambiguidade estrutural desde o planejamento.
-
-Não tente transformar o Mirante em Intermediário apenas removendo textos. Ele é a régua Iniciante.
-
-## Fluxo recomendado para PRs de correção
-
-1. Leia o feedback do usuário.
-2. Localize o arquivo responsável.
-3. Identifique se o problema é conteúdo, template, renderer, mapa, validação ou documentação.
-4. Faça a menor alteração possível.
-5. Atualize testes quando a expectativa muda.
-6. Rode comandos obrigatórios.
-7. Explique no resumo da PR:
-   - o que mudou;
-   - por que mudou;
-   - o que não foi mexido;
-   - quais comandos foram executados;
-   - limitações de ambiente, se houver.
-
-## Fluxo recomendado para revisão de PR
-
-Ao revisar uma PR:
-
-1. Verifique se o escopo bate com a solicitação.
-2. Verifique se não reabre problemas já resolvidos.
-3. Verifique se não introduz voz do autor no material do jogador.
-4. Verifique se documentos removidos não ficaram referenciados em `confirma`, `confirmado_por`, dicas, contratos ou testes.
-5. Verifique se testes e validator foram executados.
-6. Verifique se falha de Playwright é apenas ambiente ou regressão real.
-7. Dê veredito claro: merge, pedir ajuste ou abandonar.
-
-## Checklist rápido antes de considerar uma alteração boa
-
-- O jogador consegue investigar sem receber checklist?
-- O documento parece existir dentro do mundo da história?
-- O mapa ajuda localização sem apontar solução?
-- Existe pergunta pública com solicitante, motivo, impacto e justificativa do dossiê?
-- Cada envelope tem pergunta diegética, resposta esperada, critério e forma diegética de avanço?
-- O E1 evita pedir a solução final?
-- O E2 recontextualiza algo do E1 em vez de apenas confirmar?
-- A motivação histórica tem consequência atual?
-- Recados posteriores trazem informação nova para quem os recebe?
-- Dicas contextuais têm condição, intensidade, ação mental esperada e desbloqueio?
-- O guia do facilitador é operacional para conduzir progressão e descartes?
-- O E2 não entrega culpado por comparação pronta?
-- As assinaturas pertencem aos personagens?
-- A cadeia de evidência ainda fecha?
-- O Envelope 1 não depende de documento do Envelope 2 para avanço?
-- O guia do facilitador continua separado?
-- O caso continua adequado para Iniciante?
-- O primeiro playtest continua sendo o próximo objetivo?
-
-## Futuro guardrail editorial
-
-Ainda não implementar sem solicitação explícita, mas manter como próximo passo provável.
-
-Ideia futura:
-
-- criar `generator/player_content_guardrail.py`;
-- integrar ao `validator.py` no modo strict;
-- bloquear frases de handholding em documentos de jogador;
-- permitir linguagem analítica em guia, dicas e metadados;
-- gerar códigos como `HAND_001`, `HAND_002`, etc.
-
-Enquanto esse guardrail não existe, use `docs/DIRETRIZES_EDITORIAIS.md` como regra manual.
-
-## Quando pedir decisão humana
-
-Peça decisão humana quando:
-
-- a mudança altera dificuldade;
-- a mudança remove documento importante;
-- o ajuste muda solução/gabarito;
-- há dúvida se uma pista ficou fácil demais;
-- o mapa precisa de decisão editorial de espaço;
-- a alteração envolve nova arquitetura;
-- a tarefa entra em temas fora da prioridade atual.
-
-Não invente direção nova quando o usuário já definiu o caminho.
-
-## P2 visual — mapas/planta baixa
-
-Ao criar ou revisar mapas, use `docs/FLOORPLANS.md` como contrato. Em `visual_procedural.mapas`, prefira portas, janelas e câmeras estruturadas em vez de linhas soltas. Todo mapa de jogador deve ser A4 landscape, P&B first e neutro; não adicione rota, campo de visão, câmera offline, área crítica, suspeito, solução ou instrução de cruzamento. Hotel Aurora continua sem mapa salvo pedido explícito posterior.
+1. baseline real dos PDFs Iniciante e Intermediário com Playwright;
+2. revisão visual pós-P0/P1/P2/P3;
+3. novo playtest do Intermediário ou decisão explícita de pular essa etapa;
+4. plano Markdown do Avançado aprovado antes do JSON.
