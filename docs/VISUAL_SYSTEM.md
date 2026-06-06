@@ -58,19 +58,19 @@ O renderer adiciona classes ao `<body>` no formato:
 
 - `doc-system`;
 - `doc-player`, quando é material de jogador;
-- `doc-type-<tipo>`.
+- `doc-type-<tipo>`, preservando o tipo real do blueprint;
+- `doc-family-<familia>`, agrupando tipos equivalentes para aplicar a mesma linguagem visual.
 
-Tipos cobertos no P0:
+Famílias visuais cobertas no P0:
 
-- `doc-type-carta`;
-- `doc-type-email`;
-- `doc-type-chat`;
-- `doc-type-log_acesso` e `doc-type-log_sistema`;
-- `doc-type-depoimento`;
-- `doc-type-contrato`, `doc-type-orcamento` e `doc-type-recibo`;
-- `doc-type-extrato`;
-- `doc-type-protocolo`, `doc-type-glossario`, `doc-type-folha_cruzamento` e `doc-type-manual`;
-- `facilitator-doc` para guia do facilitador, dicas contextuais e guia de impressão.
+- `doc-family-email` para `email_narrador`, `email_institucional` e afins;
+- `doc-family-chat`;
+- `doc-family-log` para `log_acesso`, `log_sistema` e `escala`;
+- `doc-family-admin` para `boletim` e `depoimento`;
+- `doc-family-commercial` para `contrato`, `orcamento` e `recibo`;
+- `doc-family-finance` para `extrato`;
+- `doc-family-letter` para `carta`, `protocolo`, `glossario`, `folha_cruzamento`, `manual` e `outro`;
+- `facilitator-doc` / `doc-family-facilitator` para guia do facilitador, dicas contextuais e guia de impressão.
 
 ### Direção visual por tipo
 

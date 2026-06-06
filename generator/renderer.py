@@ -64,6 +64,29 @@ TEMPLATE_DOCUMENT_CLASS = {
     "print_guide.html": "facilitator",
 }
 
+DOCUMENT_TYPE_FAMILIES = {
+    "email_narrador": "email",
+    "email_institucional": "email",
+    "email": "email",
+    "chat": "chat",
+    "log_acesso": "log",
+    "log_sistema": "log",
+    "escala": "log",
+    "boletim": "admin",
+    "depoimento": "admin",
+    "contrato": "commercial",
+    "orcamento": "commercial",
+    "recibo": "commercial",
+    "extrato": "finance",
+    "carta": "letter",
+    "protocolo": "letter",
+    "glossario": "letter",
+    "folha_cruzamento": "letter",
+    "manual": "letter",
+    "outro": "letter",
+    "facilitator": "facilitator",
+}
+
 
 def _document_system_css() -> str:
     if not DOCUMENT_SYSTEM_CSS_PATH.is_file():
@@ -89,12 +112,22 @@ def _classe_tipo_documental(template_nome: str, dados: dict[str, Any]) -> str:
     return tipo
 
 
+def _familia_visual_documental(template_nome: str, tipo: str) -> str:
+    familia = DOCUMENT_TYPE_FAMILIES.get(tipo)
+    if not familia:
+        familia = DOCUMENT_TYPE_FAMILIES.get(
+            TEMPLATE_DOCUMENT_CLASS.get(template_nome, "")
+        )
+    return familia or "document"
+
+
 def _injetar_classes_body(html: str, template_nome: str, dados: dict[str, Any]) -> str:
     tipo = _classe_tipo_documental(template_nome, dados)
-    classes = ["doc-system", f"doc-type-{tipo}"]
+    familia = _familia_visual_documental(template_nome, tipo)
+    classes = ["doc-system", f"doc-type-{tipo}", f"doc-family-{familia}"]
     if template_nome in DOCUMENT_PLAYER_TEMPLATES:
         classes.append("doc-player")
-    if tipo == "facilitator":
+    if familia == "facilitator":
         classes.append("facilitator-doc")
 
     def sub(match: re.Match) -> str:
@@ -148,7 +181,10 @@ def _injetar_cabecalho_rodape_documental(
     if '<aside class="ind-doc-meta-header"' not in html:
         html = re.sub(
             r"<body([^>]*)>",
-            lambda match: f"<body{match.group(1)}>" + _documento_stamped_header_footer(dados),
+            lambda match: (
+                f"<body{match.group(1)}>"
+                + _documento_stamped_header_footer(dados)
+            ),
             html,
             count=1,
             flags=re.IGNORECASE,
@@ -156,6 +192,20 @@ def _injetar_cabecalho_rodape_documental(
     if '<footer class="ind-doc-meta-footer"' not in html:
         html = html.replace("</body>", _documento_footer() + "\n</body>", 1)
     return html
+
+
+def _primeiro_campo_documental(
+    dados: dict[str, Any], *campos: str, padrao: str
+) -> str:
+    for campo in campos:
+        valor = dados.get(campo)
+        if isinstance(valor, str) and valor.strip():
+            return valor.strip()
+        if valor is not None and not isinstance(valor, (list, dict)):
+            texto = str(valor).strip()
+            if texto:
+                return texto
+    return padrao
 
 
 def _preparar_dados_documentais(
@@ -170,7 +220,25 @@ def _preparar_dados_documentais(
     )
     preparados.setdefault("TIPO_DOCUMENTAL_SLUG", tipo_slug)
     preparados.setdefault("DOC_TIPO_LABEL", tipo_label)
-    preparados.setdefault("DOC_EMISSOR", preparados.get("EMISSOR") or preparados.get("NOME_EMPRESA") or preparados.get("NOME_SISTEMA") or "Arquivo documental")
+    preparados.setdefault(
+        "DOC_EMISSOR",
+        _primeiro_campo_documental(
+            preparados,
+            "EMISSOR",
+            "REMETENTE_NOME",
+            "NOME_ORGANIZACAO",
+            "ORGAO_EMISSOR",
+            "ÓRGÃO_EMISSOR",
+            "NOME_EMPRESA",
+            "NOME_SISTEMA",
+            "NOME_BANCO",
+            "INSTITUICAO",
+            "NOME_INSTITUICAO",
+            "SETOR",
+            "DEPARTAMENTO",
+            padrao="Arquivo documental",
+        ),
+    )
     preparados.setdefault("DOC_REFERENCIA", preparados.get("DATA") or preparados.get("DATA_HORA") or preparados.get("PERIODO") or preparados.get("DATA_EMISSAO") or "Referência interna")
     preparados.setdefault("DOC_STATUS", preparados.get("STATUS_DOCUMENTAL") or "registro")
     preparados.setdefault("DOC_CONTROLE", preparados.get("CONTROLE_DOCUMENTAL") or "controle de dossiê")
