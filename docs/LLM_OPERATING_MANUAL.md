@@ -133,6 +133,26 @@ Local provável:
 
 Não resolva esse problema adicionando documentos explicativos ao jogador. Corrija o contrato editorial do caso.
 
+### Problema de printables apartados
+
+Sintomas:
+
+- cartões de personagem, local ou objeto aparecem misturados aos envelopes;
+- um cartão parece pista, checklist ou interpretação;
+- falta orientação de impressão/recorte para apoio de mesa.
+
+Local provável:
+
+- `generator/models.py`;
+- `generator/printable_cards.py`;
+- `templates/printable_cards.html`;
+- `generator/package_builder.py`;
+- `generator/print_guide.py`;
+- `docs/PRINTABLES.md`;
+- campo `printable_cards` do blueprint.
+
+Cartões são material público de mesa, mas não são evidência primária. Não inclua culpa, motivação secreta, gabarito, contratos de evidência ou orientação explícita de cruzamento.
+
 ### Problema de sistema visual documental
 
 Sintomas:

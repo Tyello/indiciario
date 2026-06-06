@@ -47,6 +47,12 @@ class Intensidade(str, Enum):
     QUASE_GABARITO = "quase_gabarito"
 
 
+class TipoPrintableCard(str, Enum):
+    PERSONAGEM = "personagem"
+    LOCAL = "local"
+    OBJETO = "objeto"
+
+
 class TipoDocumento(str, Enum):
     PROTO = "protocolo"
     EMAIL_N = "email_narrador"
@@ -463,6 +469,28 @@ class VisualProcedural(BaseModel):
     locais: list[LocalVisual] = Field(default_factory=list)
 
 
+class PrintableCard(BaseModel):
+    """Cartão recortável apartado para apoio de mesa, não evidência primária."""
+
+    id: str
+    tipo: TipoPrintableCard
+    titulo: str
+    subtitulo: Optional[str] = None
+    descricao_curta: Optional[str] = None
+    codigo_visual: Optional[str] = None
+    tags_visuais: list[str] = Field(default_factory=list)
+    envelope_recomendado: Optional[str] = None
+    entregar_apartado: bool = True
+    observacao_publica: Optional[str] = None
+
+    @field_validator("envelope_recomendado", mode="before")
+    @classmethod
+    def _normalizar_envelope_recomendado(cls, valor: object) -> object:
+        if valor in (None, ""):
+            return None
+        return normalizar_envelope(valor)
+
+
 class PlaytestMetadata(BaseModel):
     status: str = "simulado"
     rodadas: int = 0
@@ -523,6 +551,7 @@ class Blueprint(BaseModel):
     dicas_contextuais: list[DicaContextual] = Field(default_factory=list)
     contratos_evidencia: list[ContratoEvidencia] = Field(default_factory=list)
     visual_procedural: VisualProcedural | None = None
+    printable_cards: list[PrintableCard] = Field(default_factory=list)
     playtest: PlaytestMetadata | None = None
 
     versao: str = "0.1"

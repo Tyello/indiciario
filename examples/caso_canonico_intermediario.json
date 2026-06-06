@@ -1908,5 +1908,137 @@
     ]
   },
   "versao": "0.1",
-  "observacoes_producao": "Guia do facilitador pós-playtest: solução em 5 frases — Otto pede apuração porque Helena saiu antes do brinde de reabertura; no E1, a melhor resposta parcial é que a saída se liga ao brinde/Aurora e não a uma retirada social espontânea; no E2, surgem a ficha administrativa com lista retida da ala antiga e a ocupação atual que mudam o sentido da pasta; Marta, guardiã informal da ala, usa chave, sala de memória e objeto associado a Helena para interromper o brinde sem escândalo imediato; Lívia, Caio, Renato e Isadora parecem plausíveis, mas caem por janela, meio ou qualidade do testemunho. Linha do tempo aparente: Helena se irrita, deixa a mesa, é associada ao terraço por tecido vinho e atrasa o brinde. Linha do tempo real: Helena confere uma folha dobrada ligada ao brinde/Aurora, segue para a sala de memória, Marta mantém o molho de chaves e manipula echarpe/broche enquanto os demais interpretam sinais indiretos. Abrir E2 quando o grupo formular que a pergunta do E1 é por que Helena saiu antes do brinde e que a resposta parcial envolve brinde/Aurora mais sinais indiretos de presença. Resposta esperada do E2: o omitido era a lista atual da ala antiga; a informação concreta mostra moradores e vínculos vivos; Marta tinha motivo atual para provocar a saída; a interrupção do brinde impediu que a memória fosse convertida em homenagem vazia. Caio preservou a imagem do evento e reteve a lista atual, mas não executou a manipulação; Helena sabia da promessa como símbolo e planejava memorial/expansão em linguagem institucional; Marta via pessoas reais sendo apagadas. Usar dicas em progressão: pergunta pública, direto versus indireto, pessoa/objeto/registro, motivo/meio/oportunidade e síntese quase-gabarito."
+  "observacoes_producao": "Guia do facilitador pós-playtest: solução em 5 frases — Otto pede apuração porque Helena saiu antes do brinde de reabertura; no E1, a melhor resposta parcial é que a saída se liga ao brinde/Aurora e não a uma retirada social espontânea; no E2, surgem a ficha administrativa com lista retida da ala antiga e a ocupação atual que mudam o sentido da pasta; Marta, guardiã informal da ala, usa chave, sala de memória e objeto associado a Helena para interromper o brinde sem escândalo imediato; Lívia, Caio, Renato e Isadora parecem plausíveis, mas caem por janela, meio ou qualidade do testemunho. Linha do tempo aparente: Helena se irrita, deixa a mesa, é associada ao terraço por tecido vinho e atrasa o brinde. Linha do tempo real: Helena confere uma folha dobrada ligada ao brinde/Aurora, segue para a sala de memória, Marta mantém o molho de chaves e manipula echarpe/broche enquanto os demais interpretam sinais indiretos. Abrir E2 quando o grupo formular que a pergunta do E1 é por que Helena saiu antes do brinde e que a resposta parcial envolve brinde/Aurora mais sinais indiretos de presença. Resposta esperada do E2: o omitido era a lista atual da ala antiga; a informação concreta mostra moradores e vínculos vivos; Marta tinha motivo atual para provocar a saída; a interrupção do brinde impediu que a memória fosse convertida em homenagem vazia. Caio preservou a imagem do evento e reteve a lista atual, mas não executou a manipulação; Helena sabia da promessa como símbolo e planejava memorial/expansão em linguagem institucional; Marta via pessoas reais sendo apagadas. Usar dicas em progressão: pergunta pública, direto versus indireto, pessoa/objeto/registro, motivo/meio/oportunidade e síntese quase-gabarito.",
+  "printable_cards": [
+    {
+      "id": "pc-helena-valenca",
+      "tipo": "personagem",
+      "titulo": "Helena Valença",
+      "subtitulo": "Anfitriã da reabertura",
+      "descricao_curta": "Herdeira majoritária e figura pública do evento de retomada do Hotel Aurora.",
+      "codigo_visual": "P-01",
+      "tags_visuais": [
+        "família",
+        "evento"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-marta-salgado",
+      "tipo": "personagem",
+      "titulo": "Marta Salgado",
+      "subtitulo": "Governanta antiga",
+      "descricao_curta": "Funcionária de longa data, associada à memória operacional e social do hotel.",
+      "codigo_visual": "P-02",
+      "tags_visuais": [
+        "hotel",
+        "rotina"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-caio-fontes",
+      "tipo": "personagem",
+      "titulo": "Caio Fontes",
+      "subtitulo": "Gerente geral",
+      "descricao_curta": "Administra a equipe, a reabertura e a operação de recepção durante o evento.",
+      "codigo_visual": "P-03",
+      "tags_visuais": [
+        "gestão",
+        "recepção"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-otto-almeida",
+      "tipo": "personagem",
+      "titulo": "Otto Almeida",
+      "subtitulo": "Investidor convidado",
+      "descricao_curta": "Convidado do evento e solicitante da apuração inicial após a interrupção da noite.",
+      "codigo_visual": "P-04",
+      "tags_visuais": [
+        "investidor",
+        "relato"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-renato-viana",
+      "tipo": "personagem",
+      "titulo": "Renato Viana",
+      "subtitulo": "Chef do jantar",
+      "descricao_curta": "Responsável pelo serviço gastronômico e pela rotina de cozinha na noite da reabertura.",
+      "codigo_visual": "P-05",
+      "tags_visuais": [
+        "cozinha",
+        "serviço"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-livia-isadora",
+      "tipo": "personagem",
+      "titulo": "Lívia / Isadora",
+      "subtitulo": "Sócia e convidada da imprensa",
+      "descricao_curta": "Referências sociais importantes para organizar versões, interesses públicos e bastidores.",
+      "codigo_visual": "P-06",
+      "tags_visuais": [
+        "família",
+        "imprensa"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "lc-salao-aurora",
+      "tipo": "local",
+      "titulo": "Salão Aurora",
+      "subtitulo": "Área social do brinde",
+      "descricao_curta": "Ambiente principal da recepção e do jantar de reabertura do hotel.",
+      "codigo_visual": "L-01",
+      "tags_visuais": [
+        "salão",
+        "evento"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "lc-terraco",
+      "tipo": "local",
+      "titulo": "Terraço",
+      "subtitulo": "Área externa social",
+      "descricao_curta": "Espaço de circulação social associado a conversas, pausas e deslocamentos do evento.",
+      "codigo_visual": "L-02",
+      "tags_visuais": [
+        "externo",
+        "circulação"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "lc-ala-aurora",
+      "tipo": "local",
+      "titulo": "Ala Aurora",
+      "subtitulo": "Área de hospedagem",
+      "descricao_curta": "Trecho do hotel usado como referência de quartos, serviço e movimentação de hóspedes.",
+      "codigo_visual": "L-03",
+      "tags_visuais": [
+        "hospedagem",
+        "serviço"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "lc-recepcao-operacional",
+      "tipo": "local",
+      "titulo": "Recepção / Operação",
+      "subtitulo": "Frente administrativa",
+      "descricao_curta": "Ponto de contato entre convidados, equipe e registros de funcionamento do hotel.",
+      "codigo_visual": "L-04",
+      "tags_visuais": [
+        "recepção",
+        "equipe"
+      ],
+      "envelope_recomendado": "E1"
+    }
+  ]
 }

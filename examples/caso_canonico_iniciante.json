@@ -2576,5 +2576,98 @@
     "status": "rascunho_pre_playtest",
     "rodadas": 0,
     "observacoes": []
-  }
+  },
+  "printable_cards": [
+    {
+      "id": "pc-ines-laranjeira",
+      "tipo": "personagem",
+      "titulo": "Inês Laranjeira",
+      "subtitulo": "Curadora-chefe",
+      "descricao_curta": "Responsável editorial pelo acervo Mirante e pela agenda de exposição.",
+      "codigo_visual": "P-01",
+      "tags_visuais": [
+        "acervo",
+        "curadoria"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-marina-vale",
+      "tipo": "personagem",
+      "titulo": "Marina Vale",
+      "subtitulo": "Coordenação de operações",
+      "descricao_curta": "Organiza rotinas, equipes terceirizadas e fluxos internos da Casa de Acervo.",
+      "codigo_visual": "P-02",
+      "tags_visuais": [
+        "operações",
+        "agenda"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-tadeu-nobre",
+      "tipo": "personagem",
+      "titulo": "Tadeu Nobre",
+      "subtitulo": "Supervisor noturno",
+      "descricao_curta": "Acompanha turnos de vigilância, portaria e movimentação fora do horário público.",
+      "codigo_visual": "P-03",
+      "tags_visuais": [
+        "turno",
+        "segurança"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-otavio-salles",
+      "tipo": "personagem",
+      "titulo": "Otávio Salles",
+      "subtitulo": "Gerência financeira",
+      "descricao_curta": "Cuida de pagamentos, contratos administrativos e registros financeiros do Mirante.",
+      "codigo_visual": "P-04",
+      "tags_visuais": [
+        "financeiro",
+        "administração"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "lc-galeria-vitrine",
+      "tipo": "local",
+      "titulo": "Galeria / Vitrine",
+      "subtitulo": "Área pública interna",
+      "descricao_curta": "Espaço de exposição visto a partir do corredor principal durante a rotina do acervo.",
+      "codigo_visual": "L-01",
+      "tags_visuais": [
+        "exposição",
+        "corredor"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "lc-reserva-tecnica-b",
+      "tipo": "local",
+      "titulo": "Reserva Técnica B",
+      "subtitulo": "Sala de guarda restrita",
+      "descricao_curta": "Ambiente de guarda técnica mencionado na rotina de conferência patrimonial.",
+      "codigo_visual": "L-02",
+      "tags_visuais": [
+        "reserva",
+        "acervo"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "oc-peca-reserva-mirante",
+      "tipo": "objeto",
+      "titulo": "Peça da Reserva Mirante",
+      "subtitulo": "Item de acervo",
+      "descricao_curta": "Objeto catalogado como parte da Reserva Mirante e tratado por registros administrativos.",
+      "codigo_visual": "O-01",
+      "tags_visuais": [
+        "acervo",
+        "catalogação"
+      ],
+      "envelope_recomendado": "E1"
+    }
+  ]
 }
