@@ -162,6 +162,13 @@ class EstiloAssinatura(str, Enum):
     CURTA = "curta"
     RUBRICA = "rubrica"
     LEVE = "leve"
+    FLUIDA = "fluida"
+    ANGULAR = "angular"
+    COMPACTA = "compacta"
+    TREMIDA = "tremida"
+    APRESSADA = "apressada"
+    ORNAMENTAL = "ornamental"
+    MINIMALISTA = "minimalista"
 
 
 class RubricaEstilo(str, Enum):
@@ -182,11 +189,17 @@ class OrnamentoAssinatura(str, Enum):
     BAIXO = "baixo"
     MEDIO = "medio"
     ALTO = "alto"
+    NENHUMA = "nenhuma"
+    SUBLINHADO = "sublinhado"
+    LACO = "laco"
+    INICIAL_DESTACADA = "inicial_destacada"
+    CORTE_HORIZONTAL = "corte_horizontal"
 
 
 class InclinacaoAssinatura(str, Enum):
     ESQUERDA = "esquerda"
     RETA = "reta"
+    NEUTRA = "neutra"
     DIREITA = "direita"
 
 
@@ -202,6 +215,18 @@ class FluidezAssinatura(str, Enum):
     ALTA = "alta"
 
 
+class AmplitudeAssinatura(str, Enum):
+    CURTA = "curta"
+    MEDIA = "media"
+    LONGA = "longa"
+
+
+class VariacaoAssinatura(str, Enum):
+    BAIXA = "baixa"
+    MEDIA = "media"
+    ALTA = "alta"
+
+
 class PerfilAssinatura(BaseModel):
     """Características editoriais de assinatura/rubrica de um personagem."""
 
@@ -209,12 +234,17 @@ class PerfilAssinatura(BaseModel):
     rubrica_estilo: Optional[RubricaEstilo] = None
     legibilidade: Optional[LegibilidadeAssinatura] = None
     ornamento: Optional[OrnamentoAssinatura] = None
+    ornamentacao: Optional[OrnamentoAssinatura] = None
     inclinacao: Optional[InclinacaoAssinatura] = None
     pressao: Optional[PressaoAssinatura] = None
     fluidez: Optional[FluidezAssinatura] = None
-    variacao: Optional[int] = None
+    amplitude: Optional[AmplitudeAssinatura] = None
+    variacao: Optional[int | VariacaoAssinatura] = None
+    seed: Optional[str] = None
     override_assinatura_svg: Optional[str] = None
     override_rubrica_svg: Optional[str] = None
+    assinatura_svg_override: Optional[str] = None
+    rubrica_svg_override: Optional[str] = None
 
 
 class Personagem(BaseModel):
@@ -231,6 +261,10 @@ class Personagem(BaseModel):
     assinatura: Optional[PerfilAssinatura] = Field(
         default=None,
         description="Perfil editorial opcional para assinatura completa e rubrica do personagem.",
+    )
+    assinatura_visual: Optional[PerfilAssinatura] = Field(
+        default=None,
+        description="Alias P3 opcional para perfil visual de assinatura, rubrica e manuscrito curto.",
     )
 
 

@@ -129,16 +129,17 @@ A base inclui `@media print` para:
 
 Antes de playtest, revisar pelo menos um PDF consolidado em P&B ou escala de cinza.
 
-## Assinaturas e rubricas
+## Assinaturas, rubricas e manuscritos P3
 
-A infraestrutura atual usa perfis de personagem no blueprint, SVG inline procedural e override SVG manual. O P0 mantém esse contrato e adiciona CSS para:
+A infraestrutura atual usa perfis de personagem no blueprint, SVG inline procedural e override SVG manual. O P3 consolida essa camada em `generator/signature_renderer.py` para:
 
 - preservar SVG inline offline;
-- diferenciar áreas de assinatura e rubrica;
+- diferenciar assinatura completa, rubrica e manuscrito curto;
 - evitar quebra de página no bloco de assinatura;
-- manter leitura em P&B.
+- manter leitura em P&B;
+- gerar traços por caminhos SVG, sem fonte decorativa aplicada a blocos longos.
 
-Não usar fonte externa, imagem gerada por IA ou assinatura textual simples como substituto do perfil editorial.
+Não usar fonte externa, imagem gerada por IA ou assinatura textual simples como substituto do perfil editorial. Detalhes de campos, estilos, limites e checklist estão em `docs/SIGNATURES_AND_HANDWRITING.md`.
 
 ## Jogador vs. facilitador
 

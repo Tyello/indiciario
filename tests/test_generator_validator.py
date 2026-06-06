@@ -763,3 +763,32 @@ def test_exemplos_de_demonstracao_nao_usam_progressao_generica_ou_truncada():
         for value in data["conflito_central"].values():
             assert value == value.strip(), path
             assert value.endswith(".") or value.endswith("?") or value.endswith("!"), path
+
+
+def test_validator_avisa_manuscrito_longo_demais() -> None:
+    data = json.loads(blueprint_valido().model_dump_json())
+    data["documentos"][0]["conteudo"]["ANOTACAO"] = "x" * 121
+    data["documentos"][0]["conteudo"]["ANOTACAO_PERSONAGEM_ID"] = data["personagens"][0]["id"]
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert any(erro.codigo == "HAND_001" for erro in resultado.avisos)
+
+
+def test_validator_bloqueia_manuscrito_com_linguagem_de_solucao() -> None:
+    data = json.loads(blueprint_valido().model_dump_json())
+    data["documentos"][0]["conteudo"]["ANOTACAO"] = "culpado confirmado no gabarito"
+    data["documentos"][0]["conteudo"]["ANOTACAO_PERSONAGEM_ID"] = data["personagens"][0]["id"]
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert any(erro.codigo == "HAND_003" for erro in resultado.criticos)
+
+
+def test_validator_assinatura_e_rubrica_procedurais_nao_sao_identicas() -> None:
+    data = json.loads(blueprint_valido().model_dump_json())
+    data["personagens"][0]["assinatura"] = {"estilo": "fluida", "seed": "sig-test"}
+
+    resultado = BlueprintValidator(Blueprint(**data)).validar()
+
+    assert not any(erro.codigo == "SIG_001" for erro in resultado.erros)
