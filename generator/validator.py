@@ -44,6 +44,21 @@ except ImportError:  # Execução direta: python generator/validator.py
     from schema_loader import get_schema_for_type, load_all_schemas  # type: ignore[no-redef]
 
 try:  # Execução como pacote: python -m generator.validator
+    from .signature_renderer import (
+        HANDWRITING_MAX_CHARS,
+        build_handwritten_note_svg,
+        build_signature_svg,
+        is_svg_like,
+    )
+except ImportError:  # Execução direta: python generator/validator.py
+    from signature_renderer import (  # type: ignore[no-redef]
+        HANDWRITING_MAX_CHARS,
+        build_handwritten_note_svg,
+        build_signature_svg,
+        is_svg_like,
+    )
+
+try:  # Execução como pacote: python -m generator.validator
     from .clue_graph import analyze_clue_graph, build_clue_graph
     from .playtest_metrics import analyze_playtest
 except ImportError:  # Execução direta: python generator/validator.py
@@ -337,6 +352,7 @@ class BlueprintValidator:
         self._verificar_autossuficiencia()
         self._verificar_playtest_metrics()
         self._verificar_conteudo_schema()
+        self._verificar_manuscritos()
         self._verificar_obviedade()
         self._calcular_risco()
         self._gerar_resumo()
@@ -586,13 +602,29 @@ class BlueprintValidator:
                         mensagem=f"Documento de ancoragem '{codigo}' não existe.",
                     ))
             self._verificar_overrides_assinatura(personagem)
+        self._verificar_assinaturas_procedurais()
+
+    def _perfil_assinatura_personagem(self, personagem: Any) -> Any:
+        return getattr(personagem, "assinatura_visual", None) or getattr(personagem, "assinatura", None)
 
     def _verificar_overrides_assinatura(self, personagem: Any) -> None:
-        perfil = getattr(personagem, "assinatura", None)
+        perfil = self._perfil_assinatura_personagem(personagem)
         if perfil is None:
             return
-        for campo in ("override_assinatura_svg", "override_rubrica_svg"):
+        for campo in (
+            "override_assinatura_svg",
+            "override_rubrica_svg",
+            "assinatura_svg_override",
+            "rubrica_svg_override",
+        ):
             valor = getattr(perfil, campo, None)
+            if valor == "":
+                self.resultado.adicionar(Erro(
+                    codigo="SIG_003",
+                    severidade=Severidade.AVISO,
+                    mensagem=f"Override SVG de '{personagem.nome}' está vazio e será ignorado.",
+                ))
+                continue
             if not valor:
                 continue
             caminho = Path(str(valor))
@@ -619,6 +651,28 @@ class BlueprintValidator:
                     severidade=Severidade.CRITICO,
                     mensagem=f"Override de assinatura de '{personagem.nome}' não existe: {valor}.",
                 ))
+
+    def _verificar_assinaturas_procedurais(self) -> None:
+        assinaturas: dict[str, str] = {}
+        for personagem in self.bp.personagens:
+            assinatura = build_signature_svg(personagem, modo="assinatura")
+            rubrica = build_signature_svg(personagem, modo="rubrica")
+            if assinatura == rubrica:
+                self.resultado.adicionar(Erro(
+                    codigo="SIG_001",
+                    severidade=Severidade.CRITICO,
+                    mensagem=f"Assinatura e rubrica geradas são idênticas para '{personagem.nome}'.",
+                ))
+            if assinatura in assinaturas:
+                self.resultado.adicionar(Erro(
+                    codigo="SIG_002",
+                    severidade=Severidade.CRITICO,
+                    mensagem=(
+                        "Personagens diferentes receberam assinatura procedural idêntica: "
+                        f"'{assinaturas[assinatura]}' e '{personagem.nome}'."
+                    ),
+                ))
+            assinaturas[assinatura] = personagem.nome
 
     def _verificar_documentos(self) -> None:
         codigos_vistos: set[str] = set()
@@ -1444,6 +1498,65 @@ class BlueprintValidator:
                             f"'{doc.codigo}' — '{campo_html}' não contém HTML mínimo "
                             "(<p>, <table>, <ul>, <ol>, <div> ou <br>)."
                         ),
+                        documento=doc.codigo,
+                    ))
+
+    def _verificar_manuscritos(self) -> None:
+        campos_manuscritos = {"ANOTACAO", "NOTA_MANUSCRITA"}
+        termos_solucao = (
+            "gabarito",
+            "culpado",
+            "executor",
+            "planejador",
+            "beneficiário",
+            "beneficiario",
+            "solução",
+            "solucao",
+            "compare com",
+            "prova que",
+        )
+        for doc in self.bp.documentos:
+            conteudo = doc.conteudo if isinstance(doc.conteudo, dict) else {}
+            for campo in campos_manuscritos:
+                texto = conteudo.get(campo)
+                if not isinstance(texto, str) or not texto.strip():
+                    continue
+                personagem_id = conteudo.get(f"{campo}_PERSONAGEM_ID")
+                assinatura_id = conteudo.get("ASSINATURA_CURSIVA_PERSONAGEM_ID") or conteudo.get("ASSINATURA_RESPONSAVEL_PERSONAGEM_ID")
+                if not personagem_id and not assinatura_id:
+                    self.resultado.adicionar(Erro(
+                        codigo="HAND_002",
+                        severidade=Severidade.AVISO,
+                        mensagem=f"'{doc.codigo}' usa manuscrito em {campo} sem personagem associado.",
+                        documento=doc.codigo,
+                    ))
+                if len(texto) > HANDWRITING_MAX_CHARS:
+                    self.resultado.adicionar(Erro(
+                        codigo="HAND_001",
+                        severidade=Severidade.AVISO,
+                        mensagem=(
+                            f"'{doc.codigo}' tem anotação manuscrita longa demais em {campo} "
+                            f"({len(texto)} caracteres; limite recomendado {HANDWRITING_MAX_CHARS})."
+                        ),
+                        documento=doc.codigo,
+                    ))
+                normalizado = _normalizar_progressao_texto(texto)
+                if any(_normalizar_progressao_texto(termo) in normalizado for termo in termos_solucao):
+                    self.resultado.adicionar(Erro(
+                        codigo="HAND_003",
+                        severidade=Severidade.CRITICO,
+                        mensagem=f"'{doc.codigo}' contém linguagem de solução em manuscrito ({campo}).",
+                        documento=doc.codigo,
+                    ))
+                personagem = next(
+                    (p for p in self.bp.personagens if p.id == personagem_id or p.id == assinatura_id),
+                    None,
+                )
+                if personagem is not None and not is_svg_like(build_handwritten_note_svg(texto, personagem)):
+                    self.resultado.adicionar(Erro(
+                        codigo="HAND_004",
+                        severidade=Severidade.CRITICO,
+                        mensagem=f"Falha ao gerar SVG de manuscrito para '{doc.codigo}'.",
                         documento=doc.codigo,
                     ))
 

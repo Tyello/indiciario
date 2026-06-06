@@ -39,7 +39,8 @@
     }
   ],
   "hidden_allowed": [
-    "ASSINATURA_CURSIVA_PERSONAGEM_ID"
+    "ASSINATURA_CURSIVA_PERSONAGEM_ID",
+    "ANOTACAO_PERSONAGEM_ID"
   ],
   "lists": {},
   "html_fields": [

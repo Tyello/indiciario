@@ -54,7 +54,7 @@ Funcionalidades já existentes no repositório incluem:
 - Playwright como renderizador oficial;
 - merge PDF com `pikepdf`;
 - mapa procedural canônico;
-- suporte a assinatura/rubrica por perfil de personagem no blueprint;
+- suporte P3 a assinatura, rubrica e manuscrito curto por perfil de personagem no blueprint;
 - possibilidade de override SVG para assinatura/rubrica.
 - sistema visual documental v1 com tokens CSS globais, cabeçalho/rodapé documental, classes por tipo e família, tabelas P&B first e carimbos burocráticos opcionais;
 - printables apartados P1 para cartões recortáveis de personagem, local e objeto, registrados no manifest e no guia de impressão como apoio de mesa.
@@ -157,11 +157,12 @@ Assinatura/rubrica passou a ser característica editorial do personagem no bluep
 
 Direção atual:
 
-- cada personagem pode ter perfil de assinatura/rubrica;
-- o renderer deve gerar SVG com base nesse perfil;
+- cada personagem pode ter perfil de assinatura/rubrica/manuscrito curto;
+- o renderer gera SVG com base nesse perfil em `generator/signature_renderer.py`;
 - override SVG manual é permitido;
 - fallback procedural continua disponível para compatibilidade;
-- assinatura/rubrica não deve ser apenas nome digitado nem “iniciais + risco” genérico.
+- assinatura/rubrica não deve ser apenas nome digitado nem “iniciais + risco” genérico;
+- manuscrito deve ficar restrito a intervenções curtas, com limite recomendado de 120 caracteres.
 
 ### Mapa
 

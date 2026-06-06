@@ -145,9 +145,12 @@
         "inclinacao": "direita",
         "pressao": "media",
         "fluidez": "alta",
-        "variacao": 1,
+        "variacao": "media",
         "override_assinatura_svg": null,
-        "override_rubrica_svg": null
+        "override_rubrica_svg": null,
+        "ornamentacao": "sublinhado",
+        "amplitude": "longa",
+        "seed": "mirante-ines"
       }
     },
     {
@@ -163,16 +166,19 @@
         "E2-06"
       ],
       "assinatura": {
-        "estilo": "curta",
+        "estilo": "apressada",
         "rubrica_estilo": "curta",
         "legibilidade": "media",
         "ornamento": "baixo",
         "inclinacao": "direita",
         "pressao": "media",
         "fluidez": "media",
-        "variacao": 2,
+        "variacao": "alta",
         "override_assinatura_svg": null,
-        "override_rubrica_svg": null
+        "override_rubrica_svg": null,
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "mirante-marina"
       }
     },
     {
@@ -187,16 +193,19 @@
         "E1-05"
       ],
       "assinatura": {
-        "estilo": "rubrica",
+        "estilo": "angular",
         "rubrica_estilo": "seca",
         "legibilidade": "baixa",
         "ornamento": "baixo",
-        "inclinacao": "esquerda",
+        "inclinacao": "neutra",
         "pressao": "forte",
         "fluidez": "baixa",
-        "variacao": 3,
+        "variacao": "media",
         "override_assinatura_svg": null,
-        "override_rubrica_svg": null
+        "override_rubrica_svg": null,
+        "ornamentacao": "nenhuma",
+        "amplitude": "curta",
+        "seed": "mirante-tadeu"
       }
     },
     {
@@ -211,16 +220,19 @@
         "E2-04"
       ],
       "assinatura": {
-        "estilo": "administrativa",
+        "estilo": "compacta",
         "rubrica_estilo": "monograma",
-        "legibilidade": "alta",
+        "legibilidade": "media",
         "ornamento": "baixo",
-        "inclinacao": "reta",
+        "inclinacao": "esquerda",
         "pressao": "media",
         "fluidez": "media",
-        "variacao": 4,
+        "variacao": "baixa",
         "override_assinatura_svg": null,
-        "override_rubrica_svg": null
+        "override_rubrica_svg": null,
+        "ornamentacao": "sublinhado",
+        "amplitude": "curta",
+        "seed": "mirante-otavio"
       }
     },
     {
@@ -235,16 +247,19 @@
         "E2-04"
       ],
       "assinatura": {
-        "estilo": "comercial",
+        "estilo": "ornamental",
         "rubrica_estilo": "fluida",
-        "legibilidade": "media",
+        "legibilidade": "alta",
         "ornamento": "medio",
         "inclinacao": "direita",
-        "pressao": "media",
+        "pressao": "leve",
         "fluidez": "alta",
-        "variacao": 5,
+        "variacao": "alta",
         "override_assinatura_svg": null,
-        "override_rubrica_svg": null
+        "override_rubrica_svg": null,
+        "ornamentacao": "laco",
+        "amplitude": "longa",
+        "seed": "mirante-celina"
       }
     },
     {
@@ -259,16 +274,19 @@
         "E2-07"
       ],
       "assinatura": {
-        "estilo": "leve",
+        "estilo": "fluida",
         "rubrica_estilo": "curta",
         "legibilidade": "alta",
         "ornamento": "baixo",
         "inclinacao": "direita",
-        "pressao": "leve",
-        "fluidez": "media",
-        "variacao": 6,
+        "pressao": "media",
+        "fluidez": "alta",
+        "variacao": "media",
         "override_assinatura_svg": null,
-        "override_rubrica_svg": null
+        "override_rubrica_svg": null,
+        "ornamentacao": "inicial_destacada",
+        "amplitude": "longa",
+        "seed": "mirante-lia"
       }
     },
     {
@@ -284,16 +302,19 @@
         "E1-08"
       ],
       "assinatura": {
-        "estilo": "administrativa",
+        "estilo": "minimalista",
         "rubrica_estilo": "seca",
         "legibilidade": "baixa",
         "ornamento": "baixo",
-        "inclinacao": "reta",
-        "pressao": "media",
-        "fluidez": "baixa",
-        "variacao": 7,
+        "inclinacao": "neutra",
+        "pressao": "forte",
+        "fluidez": "media",
+        "variacao": "baixa",
         "override_assinatura_svg": null,
-        "override_rubrica_svg": null
+        "override_rubrica_svg": null,
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "curta",
+        "seed": "mirante-vera"
       }
     }
   ],

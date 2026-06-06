@@ -531,3 +531,25 @@ def test_template_orcamento_esta_compacto_para_e2_03() -> None:
     assert "@page { size: A4; margin: 8mm; }" in template
     assert "padding: 0;" in template
     assert "min-height: 28px" in template
+
+
+def test_renderer_injeta_manuscrito_visual_sem_residuo_tecnico() -> None:
+    renderer = _import_renderer_module()
+    html = renderer.renderizar_html(
+        "{{#ANOTACAO}}<div>{{ANOTACAO_VISUAL}}</div>{{/ANOTACAO}}",
+        {
+            "ANOTACAO": "conferir lacre azul",
+            "ANOTACAO_PERSONAGEM_ID": "P1",
+        },
+        personagens=[
+            {
+                "id": "P1",
+                "nome": "Iara Nunes",
+                "assinatura": {"estilo": "fluida", "seed": "iara"},
+            }
+        ],
+    )
+
+    assert "handwritten-note-svg" in html
+    assert "{{" not in html
+    assert "font-family" not in html

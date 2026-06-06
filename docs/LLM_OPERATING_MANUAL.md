@@ -376,9 +376,9 @@ Ao revisar ou alterar mapa:
 
 Se uma versão analítica do mapa for útil, ela pertence ao guia do facilitador, não ao envelope do jogador.
 
-## Como revisar assinaturas e rubricas
+## Como revisar assinaturas, rubricas e manuscritos
 
-Assinatura/rubrica pertence ao personagem.
+Assinatura/rubrica/manuscrito curto pertence ao personagem.
 
 Ao mexer nisso:
 
@@ -389,6 +389,7 @@ Ao mexer nisso:
 5. Não volte a usar nome digitado como assinatura.
 6. Assinatura completa e rubrica devem ser diferentes.
 7. Personagens diferentes devem ter assinaturas visualmente diferentes.
+8. Manuscrito deve ser curto (até 120 caracteres), associado a personagem e nunca virar bloco longo ou dica de solução.
 
 ## Como revisar dificuldade
 

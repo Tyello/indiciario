@@ -146,7 +146,10 @@
         "inclinacao": "direita",
         "pressao": "media",
         "fluidez": "alta",
-        "variacao": 11
+        "variacao": "media",
+        "ornamentacao": "inicial_destacada",
+        "amplitude": "longa",
+        "seed": "aurora-helena"
       }
     },
     {
@@ -162,14 +165,17 @@
         "E2-07"
       ],
       "assinatura": {
-        "estilo": "administrativa",
+        "estilo": "tremida",
         "rubrica_estilo": "seca",
         "legibilidade": "media",
         "ornamento": "baixo",
-        "inclinacao": "reta",
+        "inclinacao": "esquerda",
         "pressao": "forte",
-        "fluidez": "media",
-        "variacao": 4
+        "fluidez": "baixa",
+        "variacao": "alta",
+        "ornamentacao": "sublinhado",
+        "amplitude": "media",
+        "seed": "aurora-marta"
       }
     },
     {
@@ -185,14 +191,17 @@
         "E2-06"
       ],
       "assinatura": {
-        "estilo": "leve",
+        "estilo": "ornamental",
         "rubrica_estilo": "monograma",
-        "legibilidade": "media",
+        "legibilidade": "alta",
         "ornamento": "alto",
         "inclinacao": "direita",
         "pressao": "leve",
         "fluidez": "alta",
-        "variacao": 8
+        "variacao": "media",
+        "ornamentacao": "laco",
+        "amplitude": "longa",
+        "seed": "aurora-livia"
       }
     },
     {
@@ -208,14 +217,17 @@
         "E2-06"
       ],
       "assinatura": {
-        "estilo": "administrativa",
+        "estilo": "angular",
         "rubrica_estilo": "administrativa",
-        "legibilidade": "alta",
+        "legibilidade": "baixa",
         "ornamento": "baixo",
-        "inclinacao": "reta",
+        "inclinacao": "neutra",
         "pressao": "media",
         "fluidez": "baixa",
-        "variacao": 6
+        "variacao": "alta",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "curta",
+        "seed": "aurora-caio"
       }
     },
     {
@@ -231,14 +243,17 @@
         "E2-01"
       ],
       "assinatura": {
-        "estilo": "curta",
+        "estilo": "compacta",
         "rubrica_estilo": "curta",
         "legibilidade": "media",
         "ornamento": "medio",
         "inclinacao": "esquerda",
         "pressao": "media",
         "fluidez": "media",
-        "variacao": 13
+        "variacao": "baixa",
+        "ornamentacao": "nenhuma",
+        "amplitude": "curta",
+        "seed": "aurora-isadora"
       }
     },
     {
@@ -254,14 +269,17 @@
         "E2-06"
       ],
       "assinatura": {
-        "estilo": "comercial",
+        "estilo": "fluida",
         "rubrica_estilo": "fluida",
-        "legibilidade": "baixa",
+        "legibilidade": "media",
         "ornamento": "medio",
         "inclinacao": "direita",
         "pressao": "forte",
         "fluidez": "alta",
-        "variacao": 2
+        "variacao": "media",
+        "ornamentacao": "sublinhado",
+        "amplitude": "longa",
+        "seed": "aurora-renato"
       }
     },
     {
@@ -276,14 +294,17 @@
         "E1-02"
       ],
       "assinatura": {
-        "estilo": "formal",
+        "estilo": "minimalista",
         "rubrica_estilo": "seca",
-        "legibilidade": "alta",
+        "legibilidade": "baixa",
         "ornamento": "baixo",
-        "inclinacao": "reta",
-        "pressao": "media",
+        "inclinacao": "neutra",
+        "pressao": "leve",
         "fluidez": "media",
-        "variacao": 9
+        "variacao": "baixa",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "curta",
+        "seed": "aurora-otto"
       }
     }
   ],
@@ -888,7 +909,7 @@
         "LOCAL_DATA": "Bela Vista, 17 de maio de 2026",
         "SAUDACAO": "Rascunho impresso — mesa de apoio",
         "ASSUNTO": "AUR-BRINDE-17 — Versão anotada",
-        "CORPO_CARTA": "<p><strong>Brinde de reabertura — versão de salão</strong></p><p>Boa noite. O Aurora reabre não como peça de museu, mas como casa capaz de receber outra vez quem chega à cidade procurando abrigo, trabalho e permanência.</p><p>Depois do jantar, teremos um tour completo pelo hotel restaurado: salão, terraço, suítes históricas e a antiga ala Aurora, que passa a integrar a próxima etapa do projeto como área histórica de expansão e memória.</p><p>Quero homenagear os funcionários antigos, suas famílias e todos que mantiveram luz acesa quando este prédio parecia fora do tempo. O memorial previsto para a ala antiga será apresentado com cuidado, preservando nomes, objetos e histórias que pertencem ao Aurora.</p><p><em>Anotação manuscrita à margem:</em> “não prometer prazo hoje; falar em visita acompanhada e projeto completo”.</p>",
+        "CORPO_CARTA": "<p><strong>Brinde de reabertura — versão de salão</strong></p><p>Boa noite. O Aurora reabre não como peça de museu, mas como casa capaz de receber outra vez quem chega à cidade procurando abrigo, trabalho e permanência.</p><p>Depois do jantar, teremos um tour completo pelo hotel restaurado: salão, terraço, suítes históricas e a antiga ala Aurora, que passa a integrar a próxima etapa do projeto como área histórica de expansão e memória.</p><p>Quero homenagear os funcionários antigos, suas famílias e todos que mantiveram luz acesa quando este prédio parecia fora do tempo. O memorial previsto para a ala antiga será apresentado com cuidado, preservando nomes, objetos e histórias que pertencem ao Aurora.</p>",
         "FORMULA_ENCERRAMENTO": "Cópia impressa recolhida no arquivo da administração.",
         "ASSINATURA_CURSIVA": "Helena Valença",
         "NOME_ASSINANTE": "Helena Valença",
@@ -897,7 +918,9 @@
         "PROTOCOLO": "Rascunho de brinde",
         "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
         "ASSINATURA_CURSIVA_PERSONAGEM_ID": "01",
-        "ENDERECO_LINHA2": "Bela Vista — circulação interna"
+        "ENDERECO_LINHA2": "Bela Vista — circulação interna",
+        "ANOTACAO": "não prometer prazo hoje; falar em visita acompanhada e projeto completo",
+        "ANOTACAO_PERSONAGEM_ID": "01"
       }
     },
     {

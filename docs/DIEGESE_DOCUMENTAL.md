@@ -217,3 +217,8 @@ Essas decisões devem guiar próximos casos sempre que houver risco de documento
 ## Nota visual P0
 
 A aparência documental deve reforçar a diegese sem explicar a investigação. Cabeçalhos, rodapés, carimbos, tabelas e marcas de cópia podem indicar origem burocrática, controle interno ou exportação operacional, mas não podem orientar cruzamentos, confirmar suspeitos ou funcionar como dica visual de solução. Use `docs/VISUAL_SYSTEM.md` como checklist visual antes de gerar material de playtest.
+
+
+## Manuscrito curto
+
+Anotação manuscrita em documento de jogador é evidência bruta: uma intervenção breve do mundo da história. Use apenas para frases curtas, palavras soltas ou ressalvas marginais associadas a personagem. Não use manuscrito para orientar comparação, confirmar solução, expor gabarito ou transformar um documento em dica.
