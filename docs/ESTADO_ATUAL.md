@@ -56,6 +56,7 @@ Funcionalidades já existentes no repositório incluem:
 - mapa procedural canônico;
 - suporte a assinatura/rubrica por perfil de personagem no blueprint;
 - possibilidade de override SVG para assinatura/rubrica.
+- sistema visual documental v1 com tokens CSS globais, cabeçalho/rodapé documental, classes por tipo, tabelas P&B first e carimbos burocráticos opcionais.
 
 Problemas já tratados e que não devem ser reabertos sem evidência nova:
 
@@ -354,3 +355,9 @@ Instalação do browser Playwright, se necessário:
 ```bash
 python -m playwright install chromium
 ```
+
+## Sistema visual documental v1
+
+Foi criada a base P0 do sistema visual documental em `templates/styles/document_system.css`, injetada automaticamente pelo renderer nos HTMLs finais. A camada adiciona tokens tipográficos, escala de cinzas, espaçamentos, bordas, cabeçalho/rodapé documental para documentos de jogador, classes por tipo documental, padrões de tabela, carimbos opcionais e regras de impressão P&B.
+
+Essa mudança é sistêmica e não altera narrativa, solução, dificuldade, mapas nem cartões apartados dos canônicos. O objetivo é aumentar a credibilidade material dos PDFs antes de novas rodadas de playtest, mantendo evidência bruta nos documentos de jogador e separação visual do material confidencial do facilitador.

@@ -212,3 +212,8 @@ No caso canônico Intermediário, a revisão pós-playtest consolidou estas deci
 - remover nota administrativa da lista social de lugares.
 
 Essas decisões devem guiar próximos casos sempre que houver risco de documento parecer pista fabricada.
+
+
+## Nota visual P0
+
+A aparência documental deve reforçar a diegese sem explicar a investigação. Cabeçalhos, rodapés, carimbos, tabelas e marcas de cópia podem indicar origem burocrática, controle interno ou exportação operacional, mas não podem orientar cruzamentos, confirmar suspeitos ou funcionar como dica visual de solução. Use `docs/VISUAL_SYSTEM.md` como checklist visual antes de gerar material de playtest.

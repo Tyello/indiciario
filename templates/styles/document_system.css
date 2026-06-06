@@ -1,0 +1,194 @@
+/* Indiciário — Sistema Visual Documental v1 (P0)
+   Base offline, P&B first, sem fontes externas ou imagens remotas. */
+:root {
+  --ind-font-institutional: Arial, Helvetica, "Segoe UI", sans-serif;
+  --ind-font-technical: "Courier New", Courier, "Lucida Console", monospace;
+  --ind-font-system: "Courier New", Courier, "Lucida Console", monospace;
+  --ind-font-letter: Georgia, "Times New Roman", Times, serif;
+  --ind-font-signature: "Segoe Script", "Lucida Handwriting", "Brush Script MT", cursive;
+  --ind-size-xs: 8.5pt;
+  --ind-size-sm: 9.5pt;
+  --ind-size-md: 11pt;
+  --ind-size-lg: 14pt;
+  --ind-size-xl: 18pt;
+  --ind-space-1: 2mm;
+  --ind-space-2: 4mm;
+  --ind-space-3: 6mm;
+  --ind-space-4: 9mm;
+  --ind-space-5: 14mm;
+  --ind-line-hair: .25mm solid #d8d3ca;
+  --ind-line: .35mm solid #b9b2a6;
+  --ind-line-strong: .55mm solid #56524b;
+  --ind-stamp-width: .55mm;
+  --ind-ink: #1f1f1d;
+  --ind-muted: #68645d;
+  --ind-paper: #fffdf8;
+  --ind-paper-warm: #f7f2e8;
+  --ind-paper-cool: #f8f9fb;
+  --ind-gray-05: #fafafa;
+  --ind-gray-10: #f2f2f2;
+  --ind-gray-20: #e3e3e3;
+  --ind-gray-35: #c7c7c7;
+  --ind-gray-55: #858585;
+  --ind-gray-75: #4d4d4d;
+  --ind-stamp-ink: #5d2b2b;
+  --ind-control-footer: #77736a;
+  --ind-copy-mark: rgba(30, 30, 30, .065);
+}
+
+html { color-adjust: exact; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+body { color: var(--ind-ink); }
+
+.ind-doc-meta-header,
+.ind-doc-meta-footer {
+  font-family: var(--ind-font-technical);
+  color: var(--ind-muted);
+  letter-spacing: .02em;
+}
+
+.ind-doc-meta-header {
+  margin: 0 auto 4mm;
+  max-width: 188mm;
+  border: var(--ind-line);
+  border-left: var(--ind-line-strong);
+  background: rgba(255,255,255,.78);
+  padding: 2.4mm 3.2mm;
+  display: grid;
+  grid-template-columns: 1.2fr auto;
+  gap: 3mm;
+  font-size: var(--ind-size-sm);
+}
+
+.ind-doc-meta-kicker,
+.ind-doc-meta-ref,
+.ind-doc-meta-code,
+.ind-doc-meta-status,
+.ind-doc-meta-case,
+.ind-doc-meta-control {
+  text-transform: uppercase;
+}
+
+.ind-doc-meta-code {
+  color: var(--ind-ink);
+  font-weight: 700;
+  font-size: 12pt;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ind-doc-meta-type { margin-top: 1mm; color: var(--ind-gray-75); }
+.ind-doc-meta-status { font-weight: 700; text-align: right; color: var(--ind-gray-75); }
+.ind-doc-meta-footer {
+  max-width: 188mm;
+  margin: 4mm auto 0;
+  padding-top: 2mm;
+  border-top: var(--ind-line);
+  font-size: var(--ind-size-xs);
+  display: flex;
+  justify-content: space-between;
+  gap: 8mm;
+}
+
+.ind-doc-stamp,
+.stamp,
+.carimbo,
+.confidential-stamp {
+  border: var(--ind-stamp-width) solid currentColor;
+  color: var(--ind-stamp-ink);
+  display: inline-block;
+  font-family: var(--ind-font-technical);
+  font-weight: 700;
+  letter-spacing: .10em;
+  line-height: 1.15;
+  padding: 2mm 3mm;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+  background: rgba(255,255,255,.45);
+  mix-blend-mode: multiply;
+}
+.ind-doc-stamp--triage::before { content: "TRIAGEM INICIAL"; }
+.ind-doc-stamp--remessa::before { content: "REMESSA COMPLEMENTAR"; }
+.ind-doc-stamp--copia::before { content: "CÓPIA DE TRABALHO"; }
+.ind-doc-stamp--facilitador::before { content: "CONFIDENCIAL — FACILITADOR"; }
+.ind-doc-stamp--interno::before { content: "ARQUIVO INTERNO"; }
+.ind-doc-stamp--exportacao::before { content: "EXPORTAÇÃO OPERACIONAL"; }
+
+.doc-type-carta .page,
+.doc-type-protocolo .page,
+.doc-type-glossario .page,
+.doc-type-folha_cruzamento .page,
+.doc-type-manual .page,
+.doc-type-outro .page {
+  font-family: var(--ind-font-letter);
+  background-color: var(--ind-paper);
+  border: var(--ind-line);
+}
+.doc-type-carta .body-text { letter-spacing: .004em; }
+.doc-type-email .email-container { border: var(--ind-line); border-radius: 2mm; box-shadow: 0 1mm 4mm rgba(0,0,0,.08); }
+.doc-type-email .app-logo span { color: #444 !important; }
+.doc-type-chat .page { background: var(--ind-paper-cool); }
+.doc-type-chat .conversation::before { content: "EXPORTAÇÃO OPERACIONAL"; display: block; margin: 0 0 3mm; font: 700 var(--ind-size-xs)/1 var(--ind-font-technical); letter-spacing: .12em; color: var(--ind-gray-75); }
+body.doc-type-log_acesso,
+body.doc-type-log_sistema,
+body.doc-type-escala { font-family: var(--ind-font-system); }
+.doc-type-boletim .page,
+.doc-type-depoimento .page { background: var(--ind-paper-cool); border: var(--ind-line-strong); }
+.doc-type-contrato .page,
+.doc-type-orcamento .page,
+.doc-type-recibo .page { background: var(--ind-paper); border: var(--ind-line); }
+.doc-type-extrato .page { border: var(--ind-line); }
+body.facilitator-doc,
+.facilitator-doc,
+.doc-type-facilitator { background: #efefef !important; }
+.facilitator-doc .cover,
+.facilitator-doc .page-section { border: 1mm solid #111 !important; }
+.facilitator-doc .warning::before { content: "CONFIDENCIAL — FACILITADOR · "; }
+
+.table-log,
+.log-table,
+table.log,
+.event-table,
+.access-table { font-family: var(--ind-font-system); font-size: 9pt; table-layout: fixed; }
+.table-finance,
+table.stmt,
+table.financial { font-variant-numeric: tabular-nums; }
+.table-inventory,
+.inventory-table,
+table.items { table-layout: fixed; }
+.table-comparison { table-layout: fixed; }
+.table-admin,
+.admin-table,
+.fields-table { table-layout: fixed; }
+
+table { border-collapse: collapse; max-width: 100%; }
+th { font-family: var(--ind-font-institutional); text-transform: uppercase; letter-spacing: .06em; }
+th, td { overflow-wrap: anywhere; }
+tbody tr:nth-child(even) { background-color: rgba(0,0,0,.025); }
+td.right, th.right, .numeric, .money, .td-value, .td-balance, .value { text-align: right; font-variant-numeric: tabular-nums; }
+.td-date, .date, .time, .mono, code, .code { font-family: var(--ind-font-technical); font-variant-numeric: tabular-nums; }
+.debit, .negative { color: #111 !important; font-weight: 700; border-left: .7mm solid #555; }
+.credit, .positive { color: #111 !important; font-weight: 700; border-left: .7mm double #555; }
+
+.signature-svg { max-width: 100%; height: auto; vertical-align: middle; }
+.signature-block, .signature-line, .signature-area { break-inside: avoid; page-break-inside: avoid; }
+.signature-script, .signature-text { font-family: var(--ind-font-signature); }
+.signature-rubrica { max-width: 42mm; }
+.signature-assinatura { max-width: 70mm; }
+
+.bw-only { color: #111 !important; background: #fff !important; border-color: #333 !important; }
+.copy-mark { position: relative; }
+.copy-mark::after { content: "CÓPIA DE TRABALHO"; position: absolute; inset: 35% auto auto 12%; transform: rotate(-18deg); font: 700 28pt/1 var(--ind-font-technical); color: var(--ind-copy-mark); letter-spacing: .16em; pointer-events: none; }
+
+@media print {
+  body { background: #fff !important; color: #111 !important; }
+  .page, .email-container, .marvel-device, .screen, .chat, .cover, .page-section { box-shadow: none !important; }
+  .ind-doc-meta-header, .ind-doc-meta-footer { max-width: 100%; background: #fff !important; color: #444 !important; }
+  .bank-header, .period-bar, .app-bar, .doc-type-bar, table.items thead tr { background: #f2f2f2 !important; color: #111 !important; }
+  .system-icon, .avatar, .bank-logo-box { background: #e7e7e7 !important; color: #111 !important; border: 1px solid #777; }
+  .conversation, .conversation-container { background: #fff !important; }
+  .message, .bubble { break-inside: avoid; page-break-inside: avoid; }
+  table, tr, td, th { break-inside: avoid; page-break-inside: avoid; }
+  th { background: #eee !important; color: #111 !important; }
+  .stamp, .carimbo, .ind-doc-stamp, .confidential-stamp { color: #111 !important; background: #fff !important; }
+  a { color: #111 !important; text-decoration: none; }
+}

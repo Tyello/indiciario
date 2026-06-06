@@ -338,6 +338,44 @@ def test_renderizar_documento_salva_html_debug_pos_template(tmp_path, monkeypatc
     assert debug_path.read_text(encoding="utf-8") == "<html>Documento final</html>"
 
 
+def test_renderizar_documento_injeta_sistema_visual_em_documento_de_jogador(tmp_path, monkeypatch):
+    renderer = _import_renderer_module()
+    template_dir = tmp_path / "templates"
+    template_dir.mkdir()
+    (template_dir / "05_carta.html").write_text(
+        "<html><head></head><body><main>{{CORPO}}</main></body></html>",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
+
+    async def fake_pdf(html, output_path, landscape=False):
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
+
+    monkeypatch.setattr(renderer, "_html_para_pdf", fake_pdf)
+    debug_path = tmp_path / "html_debug" / "E1-01.html"
+
+    renderer.renderizar_documento(
+        "05_carta.html",
+        {
+            "CORPO": "final",
+            "CODIGO_DOCUMENTO": "E1-01",
+            "NOME_CASO": "Caso da Biblioteca",
+            "ENVELOPE": "E1",
+            "TIPO_DOCUMENTAL_SLUG": "carta",
+        },
+        tmp_path / "E1-01.pdf",
+        strict=True,
+        html_debug_path=debug_path,
+    )
+
+    html = debug_path.read_text(encoding="utf-8")
+    assert "data-indiciario-visual-system" in html
+    assert "doc-system doc-type-carta doc-player" in html
+    assert "ind-doc-meta-header" in html
+    assert "E1-01" in html
+
+
 def test_renderizar_caso_preenche_html_debug_para_documentos(tmp_path, monkeypatch):
     renderer = _import_renderer_module()
     template_dir = tmp_path / "templates"

@@ -30,8 +30,155 @@ TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
 ASSETS_DIR = Path(__file__).parent.parent / "assets"
 SIGNATURES_DIR = ASSETS_DIR / "signatures"
+DOCUMENT_SYSTEM_CSS_PATH = TEMPLATES_DIR / "styles" / "document_system.css"
+
 
 logger = logging.getLogger(__name__)
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Sistema visual documental v1
+# ──────────────────────────────────────────────────────────────────────────────
+
+DOCUMENT_PLAYER_TEMPLATES = {
+    "01_email.html",
+    "02_whatsapp.html",
+    "04_boletim.html",
+    "05_carta.html",
+    "06_log_acesso.html",
+    "07_recibo.html",
+    "08_orcamento.html",
+    "09_extrato.html",
+}
+
+TEMPLATE_DOCUMENT_CLASS = {
+    "01_email.html": "email",
+    "02_whatsapp.html": "chat",
+    "04_boletim.html": "depoimento",
+    "05_carta.html": "carta",
+    "06_log_acesso.html": "log_sistema",
+    "07_recibo.html": "recibo",
+    "08_orcamento.html": "orcamento",
+    "09_extrato.html": "extrato",
+    "facilitator_guide.html": "facilitator",
+    "dicas_contextuais.html": "facilitator",
+    "print_guide.html": "facilitator",
+}
+
+
+def _document_system_css() -> str:
+    if not DOCUMENT_SYSTEM_CSS_PATH.is_file():
+        return ""
+    css = DOCUMENT_SYSTEM_CSS_PATH.read_text(encoding="utf-8")
+    return f"\n<style data-indiciario-visual-system>\n{css}\n</style>\n"
+
+
+def _injetar_css_documental(html: str) -> str:
+    css = _document_system_css()
+    if not css:
+        return html
+    if "</head>" in html:
+        return html.replace("</head>", f"{css}</head>", 1)
+    return html
+
+
+def _classe_tipo_documental(template_nome: str, dados: dict[str, Any]) -> str:
+    tipo = str(dados.get("TIPO_DOCUMENTAL_SLUG") or "").strip()
+    if not tipo:
+        tipo = TEMPLATE_DOCUMENT_CLASS.get(template_nome, "documento")
+    tipo = re.sub(r"[^a-z0-9_-]+", "_", tipo.lower()).strip("_") or "documento"
+    return tipo
+
+
+def _injetar_classes_body(html: str, template_nome: str, dados: dict[str, Any]) -> str:
+    tipo = _classe_tipo_documental(template_nome, dados)
+    classes = ["doc-system", f"doc-type-{tipo}"]
+    if template_nome in DOCUMENT_PLAYER_TEMPLATES:
+        classes.append("doc-player")
+    if tipo == "facilitator":
+        classes.append("facilitator-doc")
+
+    def sub(match: re.Match) -> str:
+        attrs = match.group(1) or ""
+        class_match = re.search(r'class=["\']([^"\']*)["\']', attrs)
+        if class_match:
+            existentes = class_match.group(1).split()
+            combinadas = " ".join(dict.fromkeys([*existentes, *classes]))
+            attrs_novo = (
+                attrs[: class_match.start(1)]
+                + combinadas
+                + attrs[class_match.end(1) :]
+            )
+        else:
+            attrs_novo = f'{attrs} class="{" ".join(classes)}"'
+        return f"<body{attrs_novo}>"
+
+    return re.sub(r"<body([^>]*)>", sub, html, count=1, flags=re.IGNORECASE)
+
+
+def _documento_stamped_header_footer(dados: dict[str, Any]) -> str:
+    return """
+  <aside class="ind-doc-meta-header" aria-label="Controle documental">
+    <div>
+      <div class="ind-doc-meta-kicker">{{DOC_EMISSOR}}</div>
+      <div class="ind-doc-meta-type">{{DOC_TIPO_LABEL}} · {{DOC_REFERENCIA}}</div>
+    </div>
+    <div>
+      <div class="ind-doc-meta-code">{{CODIGO_DOCUMENTO}}</div>
+      <div class="ind-doc-meta-status">{{DOC_STATUS}}</div>
+    </div>
+    {{#DOC_STAMP_LABEL}}<div class="ind-doc-stamp">{{DOC_STAMP_LABEL}}</div>{{/DOC_STAMP_LABEL}}
+  </aside>
+"""
+
+
+def _documento_footer() -> str:
+    return """
+  <footer class="ind-doc-meta-footer">
+    <span class="ind-doc-meta-case">{{NOME_CASO}}</span>
+    <span class="ind-doc-meta-control">{{ENVELOPE}} · {{CODIGO_DOCUMENTO}} · {{DOC_CONTROLE}}</span>
+  </footer>
+"""
+
+
+def _injetar_cabecalho_rodape_documental(
+    html: str, template_nome: str, dados: dict[str, Any]
+) -> str:
+    if template_nome not in DOCUMENT_PLAYER_TEMPLATES:
+        return html
+    if '<aside class="ind-doc-meta-header"' not in html:
+        html = re.sub(
+            r"<body([^>]*)>",
+            lambda match: f"<body{match.group(1)}>" + _documento_stamped_header_footer(dados),
+            html,
+            count=1,
+            flags=re.IGNORECASE,
+        )
+    if '<footer class="ind-doc-meta-footer"' not in html:
+        html = html.replace("</body>", _documento_footer() + "\n</body>", 1)
+    return html
+
+
+def _preparar_dados_documentais(
+    template_nome: str, dados: dict[str, Any]
+) -> dict[str, Any]:
+    preparados = dict(dados)
+    tipo_slug = _classe_tipo_documental(template_nome, preparados)
+    tipo_label = str(
+        preparados.get("TIPO_DOCUMENTO")
+        or preparados.get("TIPO_DOCUMENTAL_LABEL")
+        or tipo_slug.replace("_", " ").title()
+    )
+    preparados.setdefault("TIPO_DOCUMENTAL_SLUG", tipo_slug)
+    preparados.setdefault("DOC_TIPO_LABEL", tipo_label)
+    preparados.setdefault("DOC_EMISSOR", preparados.get("EMISSOR") or preparados.get("NOME_EMPRESA") or preparados.get("NOME_SISTEMA") or "Arquivo documental")
+    preparados.setdefault("DOC_REFERENCIA", preparados.get("DATA") or preparados.get("DATA_HORA") or preparados.get("PERIODO") or preparados.get("DATA_EMISSAO") or "Referência interna")
+    preparados.setdefault("DOC_STATUS", preparados.get("STATUS_DOCUMENTAL") or "registro")
+    preparados.setdefault("DOC_CONTROLE", preparados.get("CONTROLE_DOCUMENTAL") or "controle de dossiê")
+    preparados.setdefault("DOC_STAMP_LABEL", preparados.get("CARIMBO_DOCUMENTAL") or "")
+    preparados.setdefault("CODIGO_DOCUMENTO", preparados.get("CODIGO_DOCUMENTO") or "DOC-S/C")
+    preparados.setdefault("NOME_CASO", preparados.get("NOME_CASO") or "Indiciário")
+    preparados.setdefault("ENVELOPE", preparados.get("ENVELOPE") or "Envelope")
+    return preparados
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -576,8 +723,12 @@ def renderizar_documento(
     if not template_path.exists():
         raise FileNotFoundError(f"Template não encontrado: {template_path}")
 
+    dados = _preparar_dados_documentais(template_nome, dados)
     personagens_contexto = personagens or dados.get("__PERSONAGENS_ASSINATURA")
     html_raw = template_path.read_text(encoding="utf-8")
+    html_raw = _injetar_css_documental(html_raw)
+    html_raw = _injetar_classes_body(html_raw, template_nome, dados)
+    html_raw = _injetar_cabecalho_rodape_documental(html_raw, template_nome, dados)
     html_final = renderizar_html(html_raw, dados, personagens=personagens_contexto)
 
     if html_debug_path is not None:
@@ -800,6 +951,8 @@ def renderizar_caso(
             "CODIGO_DOCUMENTO": codigo,
             "NOME_CASO": blueprint["titulo"],
             "ENVELOPE": envelope,
+            "TIPO_DOCUMENTAL_SLUG": tipo,
+            "TIPO_DOCUMENTAL_LABEL": tipo.replace("_", " ").title(),
             **conteudo,
         }
 
