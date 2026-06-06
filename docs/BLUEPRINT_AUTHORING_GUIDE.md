@@ -2,9 +2,22 @@
 
 Este guia define o contrato editorial mínimo para escrever blueprints de casos no Indiciário.
 
-Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md`, `docs/DIRETRIZES_EDITORIAIS.md`, `docs/ANTI_OBVIEDADE.md` e `docs/LLM_OPERATING_MANUAL.md`. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
+Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md` para o processo de criação, `docs/DIRETRIZES_EDITORIAIS.md` para a fonte editorial, `docs/ANTI_OBVIEDADE.md` para o guardrail automático de obviedade e `docs/LLM_OPERATING_MANUAL.md` para operação de agentes. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
 
 Nota de schema: `conflito_central`, `objetivos_por_envelope` e `guia_operacional` agora são campos estruturados e schema-enforced do `Blueprint`. Eles continuam podendo ser refletidos em `premissa`, documentos, `contratos_evidencia` e `dicas_contextuais`, mas a fonte de verdade para progressão e condução é o blueprint estruturado.
+
+## Hierarquia documental
+
+Este documento participa da hierarquia documental oficial do projeto:
+
+1. `docs/DIRETRIZES_EDITORIAIS.md` — fonte da verdade editorial.
+2. `docs/ANTI_OBVIEDADE.md` — regras automáticas de obviedade.
+3. `docs/BLUEPRINT_AUTHORING_GUIDE.md` — contrato do blueprint.
+4. `docs/CASE_DESIGN_PIPELINE.md` — processo de criação.
+5. `docs/LLM_OPERATING_MANUAL.md` — operação de agentes.
+6. `docs/ESTADO_ATUAL.md` — snapshot do estado atual.
+
+Em conflito editorial, `docs/DIRETRIZES_EDITORIAIS.md` prevalece. Em conflito sobre implementação ou estado do projeto, `docs/ESTADO_ATUAL.md` prevalece.
 
 ## Objetivo do guia
 

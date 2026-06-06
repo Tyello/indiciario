@@ -4,6 +4,19 @@ Este documento define o processo editorial para criar casos investigativos no In
 
 A principal lição do primeiro playtest é clara: o framework já consegue produzir documentos visualmente interessantes, mas isso não garante que o mistério seja intrigante. O próximo salto é fazer a história nascer forte antes dos documentos.
 
+## Hierarquia documental
+
+Este documento participa da hierarquia documental oficial do projeto:
+
+1. `docs/DIRETRIZES_EDITORIAIS.md` — fonte da verdade editorial.
+2. `docs/ANTI_OBVIEDADE.md` — regras automáticas de obviedade.
+3. `docs/BLUEPRINT_AUTHORING_GUIDE.md` — contrato do blueprint.
+4. `docs/CASE_DESIGN_PIPELINE.md` — processo de criação.
+5. `docs/LLM_OPERATING_MANUAL.md` — operação de agentes.
+6. `docs/ESTADO_ATUAL.md` — snapshot do estado atual.
+
+Em conflito editorial, `docs/DIRETRIZES_EDITORIAIS.md` prevalece. Em conflito sobre implementação ou estado do projeto, `docs/ESTADO_ATUAL.md` prevalece.
+
 ## Princípio central
 
 Um bom caso não é aquele que esconde a resposta.
@@ -470,7 +483,7 @@ O guia pode explicar cruzamentos, citar códigos de documentos e usar linguagem 
 
 ## Etapa 13 — Riscos de obviedade
 
-Antes do blueprint final, listar riscos de caso fácil demais.
+Antes do blueprint final, listar riscos de caso fácil demais. Use `docs/ANTI_OBVIEDADE.md` como régua oficial e antecipe os achados que `generator/obviousness_checker.py` reportaria no validator (`OBV_001` a `OBV_012`).
 
 ```json
 "riscos_de_obviedade": [

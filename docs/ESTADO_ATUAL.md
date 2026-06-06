@@ -1,6 +1,19 @@
 # Estado atual do Indiciário
 
-Este documento registra a situação atual do projeto após os playtests reais, consolidação das réguas canônicas e hardening editorial, técnico e visual até o P2 de plantas baixas.
+Este documento registra a situação atual do projeto após os playtests reais, consolidação das réguas canônicas e hardening editorial, técnico e visual até o P3 de assinaturas, rubricas e manuscritos.
+
+## Hierarquia documental
+
+Este documento participa da hierarquia documental oficial do projeto:
+
+1. `docs/DIRETRIZES_EDITORIAIS.md` — fonte da verdade editorial.
+2. `docs/ANTI_OBVIEDADE.md` — regras automáticas de obviedade.
+3. `docs/BLUEPRINT_AUTHORING_GUIDE.md` — contrato do blueprint.
+4. `docs/CASE_DESIGN_PIPELINE.md` — processo de criação.
+5. `docs/LLM_OPERATING_MANUAL.md` — operação de agentes.
+6. `docs/ESTADO_ATUAL.md` — snapshot do estado atual.
+
+Em conflito editorial, `docs/DIRETRIZES_EDITORIAIS.md` prevalece. Em conflito sobre implementação ou estado do projeto, `docs/ESTADO_ATUAL.md` prevalece.
 
 ## Visão do produto
 
