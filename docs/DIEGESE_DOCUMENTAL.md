@@ -222,3 +222,7 @@ A aparência documental deve reforçar a diegese sem explicar a investigação. 
 ## Manuscrito curto
 
 Anotação manuscrita em documento de jogador é evidência bruta: uma intervenção breve do mundo da história. Use apenas para frases curtas, palavras soltas ou ressalvas marginais associadas a personagem. Não use manuscrito para orientar comparação, confirmar solução, expor gabarito ou transformar um documento em dica.
+
+## Plantas baixas como documento diegético
+
+Plantas baixas são documentos operacionais simplificados. Elas podem mostrar ambientes, códigos de portas, janelas e câmeras neutras, mas não devem explicar investigação, sequência de movimento, falha de vigilância ou importância de uma área. Quando uma interpretação espacial for necessária, registre no guia do facilitador, não no PDF de jogador.

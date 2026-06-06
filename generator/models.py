@@ -447,6 +447,33 @@ class ConexaoMapa(BaseModel):
     observacao: str = ""
 
 
+class PortaMapa(BaseModel):
+    id: str
+    area_a: str
+    area_b: Optional[str] = None
+    exterior: bool = False
+    parede: str
+    posicao: float
+    largura: float
+    controle_acesso: Optional[str] = None
+
+
+class JanelaMapa(BaseModel):
+    id: str
+    area: str
+    parede: str
+    posicao: float
+    largura: float
+
+
+class CameraMapa(BaseModel):
+    id: str
+    area: str
+    parede: str
+    posicao: Optional[float] = None
+    orientacao: Optional[str] = None
+
+
 class MarcadorMapa(BaseModel):
     id: str
     label: str
@@ -471,8 +498,13 @@ class MapaProcedural(BaseModel):
     altura: float
     areas: list[AreaMapa] = Field(default_factory=list)
     conexoes: list[ConexaoMapa] = Field(default_factory=list)
+    portas: list[PortaMapa] = Field(default_factory=list)
+    janelas: list[JanelaMapa] = Field(default_factory=list)
+    cameras: list[CameraMapa] = Field(default_factory=list)
     marcadores: list[MarcadorMapa] = Field(default_factory=list)
     legenda: list[ItemLegenda] = Field(default_factory=list)
+    incluir_no_envelope: bool = True
+    categoria: str = "documento_jogador"
 
     @field_validator("fase", mode="before")
     @classmethod

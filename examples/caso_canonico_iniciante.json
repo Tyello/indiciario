@@ -2430,6 +2430,158 @@
             "simbolo": "P-08",
             "descricao": "Sala de Segurança"
           }
+        ],
+        "categoria": "documento_jogador",
+        "incluir_no_envelope": true,
+        "portas": [
+          {
+            "id": "P-01",
+            "area_a": "guarita",
+            "area_b": "patio",
+            "parede": "sul",
+            "posicao": 44,
+            "largura": 32,
+            "controle_acesso": "P-01"
+          },
+          {
+            "id": "P-02",
+            "area_a": "corredor_tecnico",
+            "area_b": "guarita",
+            "parede": "oeste",
+            "posicao": 28,
+            "largura": 28,
+            "controle_acesso": "P-02"
+          },
+          {
+            "id": "P-03",
+            "area_a": "administracao",
+            "area_b": "corredor_tecnico",
+            "parede": "sul",
+            "posicao": 70,
+            "largura": 30,
+            "controle_acesso": "P-03"
+          },
+          {
+            "id": "P-04",
+            "area_a": "doca_servico",
+            "area_b": "patio",
+            "parede": "oeste",
+            "posicao": 34,
+            "largura": 34,
+            "controle_acesso": "P-04"
+          },
+          {
+            "id": "P-05",
+            "area_a": "doca_servico",
+            "area_b": "deposito",
+            "parede": "leste",
+            "posicao": 34,
+            "largura": 30,
+            "controle_acesso": "P-05"
+          },
+          {
+            "id": "P-06",
+            "area_a": "reserva_b",
+            "area_b": "corredor_tecnico",
+            "parede": "oeste",
+            "posicao": 44,
+            "largura": 30,
+            "controle_acesso": "P-06"
+          },
+          {
+            "id": "P-07",
+            "area_a": "reserva_a",
+            "area_b": "corredor_tecnico",
+            "parede": "oeste",
+            "posicao": 48,
+            "largura": 30,
+            "controle_acesso": "P-07"
+          },
+          {
+            "id": "P-08",
+            "area_a": "sala_seguranca",
+            "area_b": "corredor_tecnico",
+            "parede": "sul",
+            "posicao": 52,
+            "largura": 28,
+            "controle_acesso": "P-08"
+          },
+          {
+            "id": "P-09",
+            "area_a": "vitrine",
+            "area_b": "corredor_tecnico",
+            "parede": "norte",
+            "posicao": 74,
+            "largura": 32,
+            "controle_acesso": "P-09"
+          }
+        ],
+        "janelas": [
+          {
+            "id": "J-01",
+            "area": "administracao",
+            "parede": "norte",
+            "posicao": 35,
+            "largura": 58
+          },
+          {
+            "id": "J-02",
+            "area": "sala_seguranca",
+            "parede": "norte",
+            "posicao": 38,
+            "largura": 52
+          },
+          {
+            "id": "J-03",
+            "area": "reserva_a",
+            "parede": "norte",
+            "posicao": 54,
+            "largura": 58
+          },
+          {
+            "id": "J-04",
+            "area": "vitrine",
+            "parede": "sul",
+            "posicao": 48,
+            "largura": 84
+          },
+          {
+            "id": "J-05",
+            "area": "guarita",
+            "parede": "oeste",
+            "posicao": 20,
+            "largura": 36
+          }
+        ],
+        "cameras": [
+          {
+            "id": "C-01",
+            "area": "guarita",
+            "parede": "norte",
+            "posicao": 18,
+            "orientacao": "sul"
+          },
+          {
+            "id": "C-02",
+            "area": "corredor_tecnico",
+            "parede": "norte",
+            "posicao": 120,
+            "orientacao": "sul"
+          },
+          {
+            "id": "C-03",
+            "area": "sala_seguranca",
+            "parede": "leste",
+            "posicao": 18,
+            "orientacao": "oeste"
+          },
+          {
+            "id": "C-04",
+            "area": "vitrine",
+            "parede": "leste",
+            "posicao": 30,
+            "orientacao": "oeste"
+          }
         ]
       }
     ],

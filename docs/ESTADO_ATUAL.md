@@ -370,3 +370,9 @@ Essa mudança é sistêmica e não altera narrativa, solução, dificuldade nem 
 O pacote agora pode gerar cartões recortáveis de personagem, local e objeto como apoio de mesa separado dos envelopes. Os canônicos Iniciante e Intermediário receberam cartões públicos e não interpretativos; os cartões não alteram solução, dificuldade ou cadeia de evidência.
 
 Os PDFs são gravados em `printables/`, aparecem no `manifest.json` e no `print_manifest.json`, e o guia de impressão informa recorte, papel recomendado e separação em relação a envelopes, dicas e material confidencial do facilitador.
+
+## Atualização P2 visual — plantas baixas
+
+Foi adicionada uma camada P2 para mapas procedurais: `generator/floorplan_renderer.py`, template `templates/floorplan.html` e validações `MAP_*` no validator. O canônico Iniciante mantém seu mapa como documento de jogador do E1, agora com portas, janelas e câmeras modeladas explicitamente. O canônico Intermediário/Hotel Aurora permanece sem mapa.
+
+O padrão está documentado em `docs/FLOORPLANS.md` e reforça A4 paisagem, P&B first, ausência de rotas/destaques de solução e separação correta no package builder/manifest.

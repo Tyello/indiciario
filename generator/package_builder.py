@@ -199,6 +199,9 @@ def _build_documents_manifest(
             "visual_procedural",
             envelope,
         )
+        documents[-1]["orientation"] = mapa.orientacao
+        documents[-1]["map_category"] = mapa.categoria
+        documents[-1]["print_instructions"] = "Imprimir em A4 paisagem; P&B suficiente."
 
     return documents
 
