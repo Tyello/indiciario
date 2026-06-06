@@ -1976,15 +1976,28 @@
       "envelope_recomendado": "E1"
     },
     {
-      "id": "pc-livia-isadora",
+      "id": "pc-livia-valenca",
       "tipo": "personagem",
-      "titulo": "Lívia / Isadora",
-      "subtitulo": "Sócia e convidada da imprensa",
-      "descricao_curta": "Referências sociais importantes para organizar versões, interesses públicos e bastidores.",
+      "titulo": "Lívia Valença",
+      "subtitulo": "Prima e sócia minoritária",
+      "descricao_curta": "Integrante da família Valença e participante das decisões societárias da reabertura.",
       "codigo_visual": "P-06",
       "tags_visuais": [
         "família",
-        "imprensa"
+        "sociedade"
+      ],
+      "envelope_recomendado": "E1"
+    },
+    {
+      "id": "pc-isadora-nunes",
+      "tipo": "personagem",
+      "titulo": "Isadora Nunes",
+      "subtitulo": "Jornalista convidada",
+      "descricao_curta": "Convidada de imprensa interessada na retomada pública e nos bastidores do hotel.",
+      "codigo_visual": "P-07",
+      "tags_visuais": [
+        "imprensa",
+        "evento"
       ],
       "envelope_recomendado": "E1"
     },
