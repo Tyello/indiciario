@@ -453,23 +453,26 @@ def test_log_template_permite_quebra_na_coluna_evento():
     assert "width: 16%" in template
 
 
-def test_templates_problematicos_usam_pagina_a4_compacta():
+def test_templates_problematicos_usam_pagina_a4_compacta_ou_landscape_tabular():
     carta = Path("templates/05_carta.html").read_text(encoding="utf-8")
     extrato = Path("templates/09_extrato.html").read_text(encoding="utf-8")
     email = Path("templates/01_email.html").read_text(encoding="utf-8")
 
     assert "@page { size: A4; margin: 12mm; }" in carta
     assert "min-height: auto" in carta
-    assert "@page { size: A4; margin: 10mm; }" in extrato
+    assert "@page { size: A4 landscape; margin: 10mm; }" in extrato
     assert "@page { size: A4; margin: 12mm; }" in email
 
 
-def test_templates_de_logs_usam_landscape_no_renderer(tmp_path, monkeypatch):
+def test_templates_tabulares_usam_landscape_no_renderer(tmp_path, monkeypatch):
     renderer = _import_renderer_module()
     template_dir = tmp_path / "templates"
     template_dir.mkdir()
     (template_dir / "06_log_acesso.html").write_text(
         "<html>{{NOME_SISTEMA}}</html>", encoding="utf-8"
+    )
+    (template_dir / "09_extrato.html").write_text(
+        "<html>{{NOME_BANCO}}</html>", encoding="utf-8"
     )
     monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
     blueprint_path = tmp_path / "blueprint.json"
@@ -490,6 +493,12 @@ def test_templates_de_logs_usam_landscape_no_renderer(tmp_path, monkeypatch):
                         "envelope": "E1",
                         "conteudo": {"NOME_SISTEMA": "Escala"},
                     },
+                    {
+                        "codigo": "E1-06",
+                        "tipo": "extrato",
+                        "envelope": "E1",
+                        "conteudo": {"NOME_BANCO": "Banco"},
+                    },
                 ],
                 "dicas": [],
             }
@@ -507,8 +516,9 @@ def test_templates_de_logs_usam_landscape_no_renderer(tmp_path, monkeypatch):
 
     renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=True)
 
-    assert chamadas == [("E1-04.pdf", True), ("E1-05.pdf", True)]
+    assert chamadas == [("E1-04.pdf", True), ("E1-05.pdf", True), ("E1-06.pdf", True)]
     assert renderer.template_usa_landscape("06_log_acesso.html") is True
+    assert renderer.template_usa_landscape("09_extrato.html") is True
 
 
 def test_caso_canonico_e1_08_nao_tem_texto_meta() -> None:

@@ -114,8 +114,8 @@ def _profile(personagem: Any) -> dict[str, str]:
 
 
 def _pressure_width(pressure: str, mode: str) -> float:
-    base = {"leve": 0.9, "media": 1.25, "forte": 1.65}.get(pressure, 1.25)
-    return base - (0.15 if mode == "rubrica" else 0.0)
+    base = {"leve": 0.62, "media": 0.88, "forte": 1.18}.get(pressure, 0.88)
+    return max(0.48, base - (0.16 if mode == "rubrica" else 0.0))
 
 
 def _slant_degrees(slant: str, rng: Random, variation: str) -> float:
@@ -175,29 +175,61 @@ def _path_from_points(points: list[tuple[float, float]], style: str, rng: Random
 
 
 def _letter_gestures(profile: dict[str, str], mode: str, width: int, height: int) -> list[str]:
+    """Gera gestos parcialmente legíveis derivados do nome, sem usar texto/fontes."""
     if profile["legibilidade"] == "baixa" and mode == "rubrica":
         return []
-    rng = _rng("letters", profile["seed"], profile["nome"], mode)
-    initials = _initials(profile["nome"])
-    count = 1 if mode == "rubrica" else {"baixa": 1, "media": min(2, len(initials)), "alta": min(3, len(initials))}[profile["legibilidade"]]
+    name_parts = [part for part in re.split(r"\s+", profile["nome"].strip()) if part]
+    readable = "".join(part[:1].upper() + part[1:4].lower() for part in name_parts[:2])
+    if not readable:
+        readable = _initials(profile["nome"])
+    if mode == "rubrica":
+        readable = _initials(profile["nome"])[:3]
+    elif profile["legibilidade"] == "media":
+        readable = readable[: max(4, min(7, len(readable)))]
+    elif profile["legibilidade"] == "baixa":
+        readable = readable[: max(3, min(5, len(readable)))]
+
     paths: list[str] = []
-    x = 18 if mode == "assinatura" else 14
-    base = height * 0.56
-    for idx, _char in enumerate(initials[:count]):
-        h = rng.uniform(18, 30) if mode == "assinatura" else rng.uniform(14, 22)
-        w = rng.uniform(8, 16)
-        if idx == 0 and profile["ornamentacao"] == "inicial_destacada":
-            h *= 1.25
-            w *= 1.15
+    base = height * (0.58 if mode == "assinatura" else 0.55)
+    x = 18.0 if mode == "assinatura" else 13.0
+    spacing = (width - 34) / max(4, len(readable) + (2 if mode == "assinatura" else 1))
+    for idx, char in enumerate(readable):
+        token = _stable_int(f"{profile['seed']}:{mode}:{idx}:{char}")
+        local = _rng("letter", token)
+        h = local.uniform(15, 27) if mode == "assinatura" else local.uniform(11, 18)
+        w = min(spacing * local.uniform(0.55, 0.9), local.uniform(8, 16))
+        left = x + idx * spacing + local.uniform(-1.8, 1.8)
         top = base - h
-        left = x + idx * (w + 9)
-        if profile["estilo"] == "angular":
-            d = f"M {left:g} {base:g} L {left + w * .45:g} {top:g} L {left + w:g} {base - rng.uniform(3, 9):g} M {left + w*.25:g} {base-h*.45:g} L {left+w*.85:g} {base-h*.55:g}"
+        low = base + local.uniform(-2.8, 3.0)
+        c = char.lower()
+        if c in "aceosç":
+            d = (
+                f"M {left+w:g} {top+h*.35:g} "
+                f"C {left-w*.15:g} {top+h*.10:g}, {left-w*.20:g} {low:g}, {left+w*.55:g} {low:g} "
+                f"C {left+w*1.08:g} {low:g}, {left+w*1.06:g} {top+h*.45:g}, {left+w*.45:g} {top+h*.48:g}"
+            )
+        elif c in "bdhlklt":
+            d = (
+                f"M {left:g} {low:g} C {left+w*.12:g} {top+h*.55:g}, {left+w*.12:g} {top:g}, {left+w*.28:g} {top:g} "
+                f"C {left+w*.68:g} {top+1:g}, {left+w*.5:g} {low:g}, {left+w*1.05:g} {low-1:g}"
+            )
+        elif c in "mnruv":
+            d = (
+                f"M {left:g} {low:g} c {w*.18:g} {-h*.55:g}, {w*.34:g} {-h*.55:g}, {w*.48:g} 0 "
+                f"c {w*.14:g} {-h*.48:g}, {w*.34:g} {-h*.5:g}, {w*.54:g} {local.uniform(-1,2):g}"
+            )
+        elif c in "gjpqy":
+            d = (
+                f"M {left:g} {top+h*.45:g} C {left+w*.7:g} {top:g}, {left+w*1.05:g} {low:g}, {left+w*.45:g} {low+6:g} "
+                f"C {left+w*.12:g} {low+10:g}, {left+w*1.12:g} {low+10:g}, {left+w*1.18:g} {low+2:g}"
+            )
         else:
-            d = f"M {left:g} {base:g} C {left-3:g} {top+h*.25:g}, {left+w*.2:g} {top:g}, {left+w*.55:g} {top+2:g} C {left+w*1.25:g} {top+5:g}, {left+w*.8:g} {base-3:g}, {left+w*1.15:g} {base-rng.uniform(2, 8):g}"
+            d = (
+                f"M {left:g} {low:g} C {left+w*.18:g} {top+h*.22:g}, {left+w*.46:g} {top:g}, {left+w*.7:g} {top+h*.32:g} "
+                f"C {left+w*1.02:g} {top+h*.72:g}, {left+w*.75:g} {low-1:g}, {left+w*1.18:g} {low:g}"
+            )
         paths.append(d)
     return paths
-
 
 def _ornament_paths(profile: dict[str, str], mode: str, width: int, height: int) -> list[str]:
     rng = _rng("orn", profile["seed"], mode, profile["ornamentacao"])
@@ -244,11 +276,11 @@ def build_signature_svg(personagem: Any, modo: str = "assinatura") -> str:
     points = _signature_points(width, height, profile, mode)
     main = _path_from_points(points, profile["estilo"], rng)
     stroke = _pressure_width(profile["pressao"], mode)
-    paths: list[tuple[str, float, float]] = [(main, stroke, 0.86)]
+    paths: list[tuple[str, float, float]] = [(main, stroke, 0.74)]
     for d in _letter_gestures(profile, mode, width, height):
-        paths.append((d, max(0.8, stroke - 0.1), 0.76))
+        paths.append((d, max(0.45, stroke - 0.16), 0.68))
     for d in _ornament_paths(profile, mode, width, height):
-        paths.append((d, max(0.65, stroke - 0.35), 0.58))
+        paths.append((d, max(0.38, stroke - 0.28), 0.50))
     if mode == "rubrica":
         # Rubrica recebe um gesto final próprio para nunca ser só assinatura reduzida.
         y = height * 0.48 + rng.uniform(-4, 4)

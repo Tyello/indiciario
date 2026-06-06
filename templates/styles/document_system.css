@@ -42,21 +42,27 @@ body { color: var(--ind-ink); }
 .ind-doc-meta-header,
 .ind-doc-meta-footer {
   font-family: var(--ind-font-technical);
-  color: var(--ind-muted);
-  letter-spacing: .02em;
+  color: #aaa49a;
+  letter-spacing: .01em;
+  opacity: .62;
+  pointer-events: none;
 }
 
 .ind-doc-meta-header {
-  margin: 0 auto 4mm;
-  max-width: 188mm;
-  border: var(--ind-line);
-  border-left: var(--ind-line-strong);
-  background: rgba(255,255,255,.78);
-  padding: 2.4mm 3.2mm;
+  position: fixed;
+  top: 3.2mm;
+  right: 4.5mm;
+  z-index: 5;
+  max-width: 52mm;
+  border: 0;
+  background: transparent;
+  padding: 0;
   display: grid;
-  grid-template-columns: 1.2fr auto;
-  gap: 3mm;
-  font-size: var(--ind-size-sm);
+  grid-template-columns: 1fr;
+  gap: .6mm;
+  font-size: 6.8pt;
+  line-height: 1.15;
+  text-align: right;
 }
 
 .ind-doc-meta-kicker,
@@ -68,26 +74,36 @@ body { color: var(--ind-ink); }
   text-transform: uppercase;
 }
 
+.ind-doc-meta-kicker,
+.ind-doc-meta-type,
+.ind-doc-meta-status { display: none; }
+
 .ind-doc-meta-code {
-  color: var(--ind-ink);
-  font-weight: 700;
-  font-size: 12pt;
+  color: #8f887d;
+  font-weight: 400;
+  font-size: 6.8pt;
   text-align: right;
   white-space: nowrap;
 }
 
-.ind-doc-meta-type { margin-top: 1mm; color: var(--ind-gray-75); }
-.ind-doc-meta-status { font-weight: 700; text-align: right; color: var(--ind-gray-75); }
 .ind-doc-meta-footer {
-  max-width: 188mm;
-  margin: 4mm auto 0;
-  padding-top: 2mm;
-  border-top: var(--ind-line);
-  font-size: var(--ind-size-xs);
+  position: fixed;
+  right: 4.5mm;
+  bottom: 3.2mm;
+  z-index: 5;
+  max-width: 76mm;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  font-size: 6.6pt;
+  line-height: 1.15;
   display: flex;
-  justify-content: space-between;
-  gap: 8mm;
+  justify-content: flex-end;
+  gap: 2mm;
+  text-align: right;
 }
+.ind-doc-meta-case { display: none; }
+.ind-doc-meta-control { color: #aaa49a; }
 
 .ind-doc-stamp,
 .stamp,
@@ -98,14 +114,23 @@ body { color: var(--ind-ink); }
   display: inline-block;
   font-family: var(--ind-font-technical);
   font-weight: 700;
-  letter-spacing: .10em;
+  letter-spacing: .11em;
   line-height: 1.15;
-  padding: 2mm 3mm;
+  padding: 1.6mm 2.6mm;
   text-transform: uppercase;
   transform: rotate(-4deg);
-  background: rgba(255,255,255,.45);
+  background: rgba(93,43,43,.035);
+  opacity: .72;
   mix-blend-mode: multiply;
 }
+.ind-doc-meta-header .ind-doc-stamp {
+  justify-self: end;
+  margin-top: .8mm;
+  font-size: 7.2pt;
+  color: #6b1f1f;
+  border-color: #6b1f1f;
+}
+
 .ind-doc-stamp--triage::before { content: "TRIAGEM INICIAL"; }
 .ind-doc-stamp--remessa::before { content: "REMESSA COMPLEMENTAR"; }
 .ind-doc-stamp--copia::before { content: "CÓPIA DE TRABALHO"; }
@@ -152,7 +177,7 @@ table.items { table-layout: fixed; }
 
 table { border-collapse: collapse; max-width: 100%; }
 th { font-family: var(--ind-font-institutional); text-transform: uppercase; letter-spacing: .06em; }
-th, td { overflow-wrap: anywhere; }
+th, td { overflow-wrap: anywhere; hyphens: auto; }
 tbody tr:nth-child(even) { background-color: rgba(0,0,0,.025); }
 td.right, th.right, .numeric, .money, .td-value, .td-balance, .value { text-align: right; font-variant-numeric: tabular-nums; }
 .td-date, .date, .time, .mono, code, .code { font-family: var(--ind-font-technical); font-variant-numeric: tabular-nums; }
@@ -160,6 +185,7 @@ td.right, th.right, .numeric, .money, .td-value, .td-balance, .value { text-alig
 .credit, .positive { color: #111 !important; font-weight: 700; border-left: .7mm double #555; }
 
 .signature-svg { max-width: 100%; height: auto; vertical-align: middle; }
+.signature-svg path { vector-effect: non-scaling-stroke; }
 .signature-block, .signature-line, .signature-area { break-inside: avoid; page-break-inside: avoid; }
 .signature-script, .signature-text { font-family: var(--ind-font-signature); }
 .signature-rubrica { max-width: 42mm; }
@@ -172,13 +198,13 @@ td.right, th.right, .numeric, .money, .td-value, .td-balance, .value { text-alig
 @media print {
   body { background: #fff !important; color: #111 !important; }
   .page, .email-container, .marvel-device, .screen, .chat, .cover, .page-section { box-shadow: none !important; }
-  .ind-doc-meta-header, .ind-doc-meta-footer { max-width: 100%; background: #fff !important; color: #444 !important; }
+  .ind-doc-meta-header, .ind-doc-meta-footer { max-width: 100%; background: transparent !important; color: #aaa49a !important; opacity: .62 !important; }
   .bank-header, .period-bar, .app-bar, .doc-type-bar, table.items thead tr { background: #f2f2f2 !important; color: #111 !important; }
   .system-icon, .avatar, .bank-logo-box { background: #e7e7e7 !important; color: #111 !important; border: 1px solid #777; }
   .conversation, .conversation-container { background: #fff !important; }
   .message, .bubble { break-inside: avoid; page-break-inside: avoid; }
   table, tr, td, th { break-inside: avoid; page-break-inside: avoid; }
   th { background: #eee !important; color: #111 !important; }
-  .stamp, .carimbo, .ind-doc-stamp, .confidential-stamp { color: #111 !important; background: #fff !important; }
+  .stamp, .carimbo, .ind-doc-stamp, .confidential-stamp { color: #6b1f1f !important; border-color: #6b1f1f !important; background: rgba(93,43,43,.025) !important; opacity: .72 !important; }
   a { color: #111 !important; text-decoration: none; }
 }

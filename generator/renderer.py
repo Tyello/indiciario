@@ -480,6 +480,25 @@ def preparar_manuscritos_visuais(
 # ──────────────────────────────────────────────────────────────────────────────
 
 
+
+def _normalizar_horario_visual(valor: Any) -> Any:
+    """Padroniza horários HHhmm em escalares renderizados para HH:mm."""
+    if not isinstance(valor, str):
+        return valor
+
+    def sub(match: re.Match) -> str:
+        hora = int(match.group(1))
+        minuto = match.group(2)
+        segundo = match.group(3)
+        if hora > 23 or int(minuto) > 59:
+            return match.group(0)
+        if segundo is not None and int(segundo) > 59:
+            return match.group(0)
+        return f"{hora:02d}:{minuto}" + (f":{segundo}" if segundo is not None else "")
+
+    return re.sub(r"(?<![\w:])(\d{1,2})h(\d{2})(?::(\d{2}))?(?![\w:])", sub, valor)
+
+
 def _injetar_escalares(html: str, dados: dict[str, Any]) -> str:
     """Substitui {{VARIAVEL}} simples por valor escalar."""
 
@@ -489,6 +508,7 @@ def _injetar_escalares(html: str, dados: dict[str, Any]) -> str:
         # Listas e dicts não são injetados como escalares — deixa o placeholder
         if isinstance(valor, (list, dict)):
             return match.group(0)
+        valor = _normalizar_horario_visual(valor)
         return str(valor) if valor is not None else ""
 
     return re.sub(r"\{\{([^#/\^].*?)\}\}", sub, html)
@@ -696,7 +716,7 @@ def renderizar_documento(
 # Mapeamento tipo → template
 # ──────────────────────────────────────────────────────────────────────────────
 
-LANDSCAPE_TEMPLATES: set[str] = {"06_log_acesso.html"}
+LANDSCAPE_TEMPLATES: set[str] = {"06_log_acesso.html", "09_extrato.html"}
 
 
 def template_usa_landscape(template_nome: str) -> bool:

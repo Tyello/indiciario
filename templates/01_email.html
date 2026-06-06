@@ -61,17 +61,42 @@
   }
 
   .email-header {
-    padding: 18px 24px 12px;
-    border-bottom: 1px solid #f1f3f4;
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid #e6e9ef;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
   }
 
   .email-subject {
-    font-size: 22px;
-    font-weight: 400;
+    font-size: 21px;
+    font-weight: 600;
     color: #202124;
-    margin-bottom: 16px;
-    letter-spacing: -0.3px;
+    margin-bottom: 14px;
+    letter-spacing: -0.2px;
   }
+
+  .email-field-grid {
+    border: 1px solid #e6e9ef;
+    border-radius: 6px;
+    background: #f8fafd;
+    padding: 8px 10px;
+    margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: 22mm 1fr;
+    row-gap: 4px;
+    column-gap: 8px;
+    font-size: 12.5px;
+  }
+
+  .email-field-label {
+    color: #5f6368;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-size: 10px;
+  }
+
+  .email-field-value { color: #202124; font-weight: 500; }
+  .email-field-value.subject { font-weight: 700; }
 
   .sender-row {
     display: flex;
@@ -181,7 +206,7 @@
 
   .attachment-icon {
     width: 24px;
-    height-: 24px;
+    height: 24px;
     color: #EA4335;
     font-size: 18px;
   }
@@ -211,6 +236,11 @@
 
 <div class="email-container">
   <div class="email-header">
+    <div class="email-field-grid">
+      <div class="email-field-label">De</div><div class="email-field-value">{{REMETENTE_NOME}} &lt;{{REMETENTE_EMAIL}}&gt;</div>
+      <div class="email-field-label">Para</div><div class="email-field-value">{{DESTINATARIO_EMAIL}}</div>
+      <div class="email-field-label">Assunto</div><div class="email-field-value subject">{{ASSUNTO}}</div>
+    </div>
     <div class="email-subject">{{ASSUNTO}}</div>
     <div class="sender-row">
       <div class="avatar">{{AVATAR_INICIAL}}</div>
