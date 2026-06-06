@@ -6,6 +6,19 @@ O objetivo não é apenas produzir JSON válido. O objetivo é produzir mistéri
 
 Após os playtests dos canônicos Iniciante e Intermediário, uma regra ficou explícita: bons documentos não bastam. A LLM deve exigir progressão jogável antes de gerar PDFs: pergunta pública, objetivo por envelope, critério de avanço, motivação com consequência atual e guia do facilitador operacional.
 
+## Hierarquia documental
+
+Este documento participa da hierarquia documental oficial do projeto:
+
+1. `docs/DIRETRIZES_EDITORIAIS.md` — fonte da verdade editorial.
+2. `docs/ANTI_OBVIEDADE.md` — regras automáticas de obviedade.
+3. `docs/BLUEPRINT_AUTHORING_GUIDE.md` — contrato do blueprint.
+4. `docs/CASE_DESIGN_PIPELINE.md` — processo de criação.
+5. `docs/LLM_OPERATING_MANUAL.md` — operação de agentes.
+6. `docs/ESTADO_ATUAL.md` — snapshot do estado atual.
+
+Em conflito editorial, `docs/DIRETRIZES_EDITORIAIS.md` prevalece. Em conflito sobre implementação ou estado do projeto, `docs/ESTADO_ATUAL.md` prevalece.
+
 ## Leitura obrigatória antes de qualquer tarefa
 
 Antes de alterar qualquer arquivo, leia nesta ordem:
@@ -241,7 +254,7 @@ Local provável:
 
 - `generator/validator.py`;
 - testes em `tests/`;
-- checker específico, se houver.
+- `generator/obviousness_checker.py`, quando a regra envolver obviedade editorial (`OBV_001` a `OBV_012`).
 
 ### Problema de documentação
 

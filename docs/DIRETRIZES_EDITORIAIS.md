@@ -2,6 +2,19 @@
 
 Este documento consolida decisões editoriais usadas para criar e revisar casos investigativos no Indiciário.
 
+## Hierarquia documental
+
+Este documento participa da hierarquia documental oficial do projeto:
+
+1. `docs/DIRETRIZES_EDITORIAIS.md` — fonte da verdade editorial.
+2. `docs/ANTI_OBVIEDADE.md` — regras automáticas de obviedade.
+3. `docs/BLUEPRINT_AUTHORING_GUIDE.md` — contrato do blueprint.
+4. `docs/CASE_DESIGN_PIPELINE.md` — processo de criação.
+5. `docs/LLM_OPERATING_MANUAL.md` — operação de agentes.
+6. `docs/ESTADO_ATUAL.md` — snapshot do estado atual.
+
+Em conflito editorial, `docs/DIRETRIZES_EDITORIAIS.md` prevalece. Em conflito sobre implementação ou estado do projeto, `docs/ESTADO_ATUAL.md` prevalece.
+
 ## Regra principal
 
 Documento de jogador deve conter evidência bruta, não interpretação do autor.
@@ -348,27 +361,26 @@ Ele deve conter:
 
 O guia pode explicar cruzamentos, citar códigos de documentos e usar linguagem analítica. Essa linguagem não deve aparecer em documentos de jogador.
 
-## Futuro guardrail automático
+## Guardrail automático implementado
 
-Ainda não implementado, mas recomendado.
+O guardrail anti-obviedade está implementado em `generator/obviousness_checker.py` e documentado em `docs/ANTI_OBVIEDADE.md`.
 
-Objetivo futuro:
+O checker é integrado ao validator strict e emite achados editoriais com códigos `OBV_001` a `OBV_012`. Esses códigos cobrem as regras oficiais de obviedade para documentos de jogador, incluindo:
 
-- criar um validador de conteúdo voltado ao jogador;
-- bloquear “handholding” óbvio;
-- detectar voz do autor;
-- detectar checklist de solução;
-- gerar erros/warnings como `HAND_001`, `HAND_002`, etc.
+- uso de nomes em logs, sistemas ou escalas de casos Intermediário+ quando códigos operacionais seriam mais adequados;
+- nome de culpado junto de verbo incriminador e contexto crítico;
+- confissões em primeira pessoa;
+- `objetivo_narrativo` com culpado e ação incriminadora;
+- E1 antecipando solução, gabarito, confissão ou culpado revelado;
+- linguagem conclusiva em conteúdo de jogador;
+- chat confessional ou explicativo demais;
+- depoimento onisciente sobre autoria, intenção ou plano de terceiros;
+- documento único resolvendo quem, como, por quê e benefício;
+- vazamento de campos internos ou rótulos de gabarito em `conteudo`;
+- referência instrucional a códigos de documentos em conteúdo diegético;
+- linguagem de facilitador/designer em documento de jogador.
 
-Possíveis regras:
-
-- bloquear referência a documentos por código em conteúdo diegético;
-- bloquear listas do tipo “recibo, extrato e conversa interna”;
-- bloquear “compare/cruze/confira com” em documentos de jogador;
-- bloquear “não prova sozinho”, “preço isolado não decide”, “confirma que”;
-- gerar score de vazamento quando pessoa + ação + motivo + horário aparecem na mesma frase.
-
-Esse guardrail deve fazer parte do `--strict` no futuro, mas ainda não é prioridade imediata antes do playtest.
+Não invente novos códigos neste documento. Para severidades, exemplos e critérios detalhados, use `docs/ANTI_OBVIEDADE.md` como documentação oficial do guardrail.
 
 ## Checklist editorial antes de gerar PDF
 
