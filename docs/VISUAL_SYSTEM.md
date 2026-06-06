@@ -1,18 +1,19 @@
 # Sistema visual documental v1
 
-Este documento define a camada visual base do Indiciário para que os PDFs deixem de parecer apenas “HTML bonito” e passem a sustentar a sensação de dossiê físico investigativo crível.
+Este documento define a camada visual do Indiciário para que os PDFs deixem de parecer apenas “HTML bonito” e sustentem a sensação de dossiê físico investigativo crível.
 
 ## Objetivo
 
-O sistema visual documental v1 centraliza tokens, classes e padrões mínimos para documentos de jogador, guias operacionais e materiais impressos. A intenção é melhorar a aparência sistêmica sem alterar solução narrativa, dificuldade, mapas ou cartões apartados.
+O sistema visual centraliza tokens, classes e padrões mínimos para documentos de jogador, guias operacionais, printables, assinaturas/manuscritos e plantas baixas. A intenção é melhorar a aparência sistêmica sem alterar solução narrativa ou dificuldade dos casos canônicos.
 
 ## Princípios
 
-- **Dossiê físico crível:** documentos devem parecer artefatos burocráticos, administrativos, comerciais, financeiros ou pessoais plausíveis.
+- **Dossiê físico crível:** documentos devem parecer artefatos burocráticos, administrativos, comerciais, financeiros, operacionais ou pessoais plausíveis.
 - **Evidência bruta:** documento de jogador mostra fatos do mundo da história; interpretação, dica e gabarito ficam fora.
 - **P&B first:** todo sentido visual deve sobreviver em impressão preto e branco.
 - **Offline first:** usar apenas CSS, SVG inline e fontes de sistema; sem CDN, imagem externa, fonte binária ou API.
-- **Sistêmico antes de pontual:** preferir tokens e classes reutilizáveis a ajustes específicos de caso.
+- **Sistêmico antes de pontual:** preferir tokens, renderers e classes reutilizáveis a ajustes específicos de caso.
+- **Separação física:** documentos de jogador, material do facilitador, dicas e printables devem continuar distinguíveis no pacote.
 
 ## Onde vive a base visual
 
@@ -129,28 +130,9 @@ A base inclui `@media print` para:
 
 Antes de playtest, revisar pelo menos um PDF consolidado em P&B ou escala de cinza.
 
-## Assinaturas, rubricas e manuscritos P3
-
-A infraestrutura atual usa perfis de personagem no blueprint, SVG inline procedural e override SVG manual. O P3 consolida essa camada em `generator/signature_renderer.py` para:
-
-- preservar SVG inline offline;
-- diferenciar assinatura completa, rubrica e manuscrito curto;
-- evitar quebra de página no bloco de assinatura;
-- manter leitura em P&B;
-- gerar traços por caminhos SVG, sem fonte decorativa aplicada a blocos longos.
-
-Não usar fonte externa, imagem gerada por IA ou assinatura textual simples como substituto do perfil editorial. Detalhes de campos, estilos, limites e checklist estão em `docs/SIGNATURES_AND_HANDWRITING.md`.
-
-## Jogador vs. facilitador
-
-- Material do jogador: evidência bruta, cabeçalho/rodapé documental, sem linguagem de solução.
-- Guia do facilitador: pode conter interpretação, confirmação, contrato lógico, dicas e gabarito, mas deve ser visualmente confidencial.
-- Dicas contextuais: sempre separadas fisicamente dos envelopes dos jogadores.
-
-
 ## P1 — Printables apartados
 
-O P1 adiciona cartões recortáveis de apoio de mesa em `templates/printable_cards.html`, usando o mesmo princípio P&B first do sistema documental v1. Os cartões são gerados como printables separados em `printables/`, registrados no `manifest.json` e no `print_manifest.json`, e não entram automaticamente nos envelopes de investigação.
+O P1 adiciona cartões recortáveis de apoio de mesa em `templates/printable_cards.html`, usando o mesmo princípio P&B first do sistema documental. Os cartões são gerados como printables separados em `printables/`, registrados no `manifest.json` e no `print_manifest.json`, e não entram automaticamente nos envelopes de investigação.
 
 Classes principais:
 
@@ -172,6 +154,37 @@ Regras editoriais:
 
 Ver também `docs/PRINTABLES.md`.
 
+## P2 — Plantas baixas profissionais procedurais
+
+Mapas seguem o contrato em `docs/FLOORPLANS.md`: A4 landscape, P&B first, fundo branco, paredes fechadas, portas com gap real, janelas paralelas na parede e câmeras presas em parede/canto.
+
+O renderer dedicado `generator/floorplan_renderer.py` gera SVG inline sem imagem externa e o template `templates/floorplan.html` preserva uma página paisagem.
+
+A planta baixa não pode virar pista visual interpretativa. Rotas, áreas críticas, câmera offline, campo de visão, suspeitos, solução e instruções de cruzamento pertencem ao facilitador/dicas/gabarito, nunca ao mapa de jogador.
+
+Regra visual importante:
+
+- se uma porta conecta duas áreas adjacentes, a abertura precisa aparecer como gap real na parede compartilhada, não apenas como ícone de porta desenhado sobre uma parede contínua.
+
+## P3 — Assinaturas, rubricas e manuscritos
+
+A infraestrutura atual usa perfis de personagem no blueprint, SVG inline procedural e override SVG manual. O P3 consolida essa camada em `generator/signature_renderer.py` para:
+
+- preservar SVG inline offline;
+- diferenciar assinatura completa, rubrica e manuscrito curto;
+- evitar quebra de página no bloco de assinatura;
+- manter leitura em P&B;
+- gerar traços por caminhos SVG, sem fonte decorativa aplicada a blocos longos.
+
+Não usar fonte externa, imagem gerada por IA ou assinatura textual simples como substituto do perfil editorial. Detalhes de campos, estilos, limites e checklist estão em `docs/SIGNATURES_AND_HANDWRITING.md`.
+
+## Jogador vs. facilitador
+
+- Material do jogador: evidência bruta, cabeçalho/rodapé documental, sem linguagem de solução.
+- Guia do facilitador: pode conter interpretação, confirmação, contrato lógico, dicas e gabarito, mas deve ser visualmente confidencial.
+- Dicas contextuais: sempre separadas fisicamente dos envelopes dos jogadores.
+- Printables: apoio de mesa, separados dos envelopes e sem função de prova.
+
 ## Checklist visual antes de playtest
 
 1. Os documentos parecem artefatos reais, não cards explicativos?
@@ -180,13 +193,10 @@ Ver também `docs/PRINTABLES.md`.
 4. Débitos, créditos, datas, horários e códigos estão alinhados?
 5. Carimbos são burocráticos e neutros?
 6. Assinaturas/rubricas aparecem como SVG offline e não quebram página?
-7. Guia do facilitador está claramente separado do material do jogador?
-8. A impressão P&B continua legível?
-9. Não há CDN, imagem externa ou fonte binária?
-10. Não houve alteração narrativa acidental nos canônicos?
-
-## P2 — plantas baixas profissionais procedurais
-
-Mapas agora seguem o contrato em `docs/FLOORPLANS.md`: A4 landscape, P&B first, fundo branco, paredes fechadas, portas com gap real, janelas paralelas na parede e câmeras presas em parede/canto. O renderer dedicado `generator/floorplan_renderer.py` gera SVG inline sem imagem externa e o template `templates/floorplan.html` preserva uma página paisagem.
-
-A planta baixa não pode virar pista visual interpretativa. Rotas, áreas críticas, câmera offline, campo de visão, suspeitos, solução e instruções de cruzamento pertencem ao facilitador/dicas/gabarito, nunca ao mapa de jogador.
+7. Manuscritos são curtos e parecem intervenção humana, não bloco decorativo?
+8. Guia do facilitador está claramente separado do material do jogador?
+9. Printables estão separados e marcados como apoio de mesa?
+10. Mapas estão em paisagem, P&B, com portas/janelas/câmeras coerentes e sem solução visual?
+11. A impressão P&B continua legível?
+12. Não há CDN, imagem externa ou fonte binária?
+13. Não houve alteração narrativa acidental nos canônicos?
