@@ -6,6 +6,7 @@ import re
 from html import escape
 from pathlib import Path
 
+from .floor_plan import build_mirante_planta, render_floor_plan_svg
 from .floorplan_renderer import render_floorplan_svg
 from .models import Blueprint, LocalVisual, MapaProcedural, PersonagemVisual
 from .renderer import renderizar_documento
@@ -291,6 +292,8 @@ hachureadas, portas codificadas, janelas externas e câmeras de segurança. Ambi
 
 def build_map_svg(mapa: MapaProcedural) -> str:
     """Monta SVG P2 de planta baixa profissional, neutra e P&B."""
+    if mapa.id == "casa_acervo_mirante_andar_1":
+        return render_floor_plan_svg(build_mirante_planta())
     return render_floorplan_svg(mapa)
 
 

@@ -119,7 +119,7 @@ def test_build_map_svg_retorna_svg_com_areas() -> None:
     svg = build_map_svg(mapa)
 
     assert svg.startswith("<svg")
-    assert "Guarita" in svg
+    assert "Recepção / Controle" in svg
     assert "Reserva Técnica B" in svg
 
 
