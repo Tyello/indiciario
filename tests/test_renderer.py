@@ -372,8 +372,8 @@ def test_renderizar_documento_injeta_sistema_visual_em_documento_de_jogador(tmp_
     html = debug_path.read_text(encoding="utf-8")
     assert "data-indiciario-visual-system" in html
     assert "doc-system doc-type-carta doc-family-letter doc-player" in html
-    assert "ind-doc-meta-header" in html
-    assert "E1-01" in html
+    assert '<aside class="ind-doc-meta-header"' not in html
+    assert '<footer class="ind-doc-meta-footer"' not in html
 
 
 def test_renderizar_documento_usa_familia_visual_e_emissor_de_email(tmp_path, monkeypatch):
@@ -411,7 +411,7 @@ def test_renderizar_documento_usa_familia_visual_e_emissor_de_email(tmp_path, mo
     html = debug_path.read_text(encoding="utf-8")
     assert "doc-type-email_institucional" in html
     assert "doc-family-email" in html
-    assert "Arquivo Central" in html
+    assert '<aside class="ind-doc-meta-header"' not in html
     assert "Arquivo documental" not in html
 
 
@@ -474,6 +474,9 @@ def test_templates_tabulares_usam_landscape_no_renderer(tmp_path, monkeypatch):
     (template_dir / "09_extrato.html").write_text(
         "<html>{{NOME_BANCO}}</html>", encoding="utf-8"
     )
+    (template_dir / "05_carta.html").write_text(
+        "<html>{{CORPO_CARTA}}</html>", encoding="utf-8"
+    )
     monkeypatch.setattr(renderer, "TEMPLATES_DIR", template_dir)
     blueprint_path = tmp_path / "blueprint.json"
     blueprint_path.write_text(
@@ -499,6 +502,24 @@ def test_templates_tabulares_usam_landscape_no_renderer(tmp_path, monkeypatch):
                         "envelope": "E1",
                         "conteudo": {"NOME_BANCO": "Banco"},
                     },
+                    {
+                        "codigo": "E1-07",
+                        "tipo": "folha_cruzamento",
+                        "envelope": "E1",
+                        "conteudo": {"CORPO_CARTA": "<table><tr><td>Registro</td></tr></table>"},
+                    },
+                    {
+                        "codigo": "E1-08",
+                        "tipo": "manual",
+                        "envelope": "E1",
+                        "conteudo": {"CORPO_CARTA": "<table><tr><td>Código</td></tr></table>"},
+                    },
+                    {
+                        "codigo": "E1-09",
+                        "tipo": "manual",
+                        "envelope": "E1",
+                        "conteudo": {"CORPO_CARTA": "<p>Manual narrativo.</p>"},
+                    },
                 ],
                 "dicas": [],
             }
@@ -516,7 +537,14 @@ def test_templates_tabulares_usam_landscape_no_renderer(tmp_path, monkeypatch):
 
     renderer.renderizar_caso(blueprint_path, tmp_path / "out", strict=True)
 
-    assert chamadas == [("E1-04.pdf", True), ("E1-05.pdf", True), ("E1-06.pdf", True)]
+    assert chamadas == [
+        ("E1-04.pdf", True),
+        ("E1-05.pdf", True),
+        ("E1-06.pdf", True),
+        ("E1-07.pdf", True),
+        ("E1-08.pdf", True),
+        ("E1-09.pdf", False),
+    ]
     assert renderer.template_usa_landscape("06_log_acesso.html") is True
     assert renderer.template_usa_landscape("09_extrato.html") is True
 

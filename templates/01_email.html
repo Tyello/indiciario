@@ -63,7 +63,7 @@
   .email-header {
     padding: 18px 24px 14px;
     border-bottom: 1px solid #e6e9ef;
-    background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+    background: linear-gradient(180deg, #fbfcff 0%, #ffffff 100%);
   }
 
   .email-subject {
@@ -74,29 +74,10 @@
     letter-spacing: -0.2px;
   }
 
-  .email-field-grid {
-    border: 1px solid #e6e9ef;
-    border-radius: 6px;
-    background: #f8fafd;
-    padding: 8px 10px;
-    margin-bottom: 14px;
-    display: grid;
-    grid-template-columns: 22mm 1fr;
-    row-gap: 4px;
-    column-gap: 8px;
-    font-size: 12.5px;
+  .email-header-strip {
+    height: 4px;
+    background: linear-gradient(90deg, #d8e2f3, #eef3fb 45%, #f5f7fb);
   }
-
-  .email-field-label {
-    color: #5f6368;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    font-size: 10px;
-  }
-
-  .email-field-value { color: #202124; font-weight: 500; }
-  .email-field-value.subject { font-weight: 700; }
 
   .sender-row {
     display: flex;
@@ -141,11 +122,14 @@
   .sender-meta {
     font-size: 12px;
     color: #5f6368;
-    margin-top: 2px;
+    margin-top: 4px;
     display: flex;
     align-items: center;
     gap: 4px;
+    flex-wrap: wrap;
   }
+
+  .sender-meta strong { color: #3c4043; }
 
   .date-right {
     font-size: 12px;
@@ -235,12 +219,8 @@
 </div>
 
 <div class="email-container">
+  <div class="email-header-strip"></div>
   <div class="email-header">
-    <div class="email-field-grid">
-      <div class="email-field-label">De</div><div class="email-field-value">{{REMETENTE_NOME}} &lt;{{REMETENTE_EMAIL}}&gt;</div>
-      <div class="email-field-label">Para</div><div class="email-field-value">{{DESTINATARIO_EMAIL}}</div>
-      <div class="email-field-label">Assunto</div><div class="email-field-value subject">{{ASSUNTO}}</div>
-    </div>
     <div class="email-subject">{{ASSUNTO}}</div>
     <div class="sender-row">
       <div class="avatar">{{AVATAR_INICIAL}}</div>

@@ -147,7 +147,11 @@ body { color: var(--ind-ink); }
 .doc-family-email .email-container { border: var(--ind-line); border-radius: 2mm; box-shadow: 0 1mm 4mm rgba(0,0,0,.08); }
 .doc-family-email .app-logo span { color: #444 !important; }
 .doc-family-chat .page { background: var(--ind-paper-cool); }
-.doc-family-chat .conversation::before { content: "EXPORTAÇÃO OPERACIONAL"; display: block; margin: 0 0 3mm; font: 700 var(--ind-size-xs)/1 var(--ind-font-technical); letter-spacing: .12em; color: var(--ind-gray-75); }
+
+.doc-player .ind-doc-meta-header,
+.doc-player .ind-doc-meta-footer {
+  display: none !important;
+}
 body.doc-family-log { font-family: var(--ind-font-system); }
 .doc-family-admin .page { background: var(--ind-paper-cool); border: var(--ind-line-strong); }
 .doc-family-commercial .page { background: var(--ind-paper); border: var(--ind-line); }
@@ -198,7 +202,6 @@ td.right, th.right, .numeric, .money, .td-value, .td-balance, .value { text-alig
 @media print {
   body { background: #fff !important; color: #111 !important; }
   .page, .email-container, .marvel-device, .screen, .chat, .cover, .page-section { box-shadow: none !important; }
-  .ind-doc-meta-header, .ind-doc-meta-footer { max-width: 100%; background: transparent !important; color: #aaa49a !important; opacity: .62 !important; }
   .bank-header, .period-bar, .app-bar, .doc-type-bar, table.items thead tr { background: #f2f2f2 !important; color: #111 !important; }
   .system-icon, .avatar, .bank-logo-box { background: #e7e7e7 !important; color: #111 !important; border: 1px solid #777; }
   .conversation, .conversation-container { background: #fff !important; }
