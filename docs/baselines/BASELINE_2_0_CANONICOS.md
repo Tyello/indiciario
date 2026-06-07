@@ -207,3 +207,164 @@
 - Nenhum arquivo canônico foi alterado.
 - Nenhuma narrativa, solução, dificuldade, documento de jogador, mapa, template, renderer, validator, Case Kernel, Case Review ou package builder foi alterado.
 - Esta PR registra o estado real encontrado no fluxo Indiciário 2.0 no ambiente disponível.
+
+---
+
+# Tentativa de baseline visual real — 2026-06-07
+
+## Escopo desta atualização
+
+- Objetivo: gerar os pacotes reais dos dois canônicos com Playwright/Chromium e registrar a revisão visual pós-consolidação do fluxo Indiciário 2.0.
+- Natureza da PR: documental/de baseline.
+- Nenhuma correção visual, alteração narrativa, alteração de template, renderer, validator, package builder, mapa ou blueprint foi feita nesta atualização.
+- Casos mantidos no escopo:
+  - `examples/caso_canonico_iniciante.json` — **O Desvio da Reserva Mirante**, régua canônica **Iniciante**.
+  - `examples/caso_canonico_intermediario.json` — **O Último Brinde do Hotel Aurora**, régua canônica **Intermediária**.
+- Decisões editoriais confirmadas:
+  - Mirante continua sendo a régua Iniciante.
+  - Mirante continua associado à planta estruturada v2 gerada por `build_mirante_planta()`.
+  - Hotel Aurora continua sendo a régua Intermediária.
+  - Hotel Aurora continua **sem mapa**.
+
+## Ambiente e referência
+
+- Data da execução: 2026-06-07.
+- Branch usada na execução: `work`.
+- Commit base usado antes do registro documental: `3b3e6a1f86716cb2a7d1c406a60893fe83b95ac2` (`3b3e6a1`).
+- Resultado geral: **baseline visual real não pôde ser concluído neste ambiente**, porque o browser do Playwright/Chromium continuou indisponível e as tentativas de instalação foram bloqueadas por HTTP 403.
+- Não houve build fake e não houve revisão visual substitutiva baseada em HTML ou artefato parcial.
+
+## Comandos executados nesta atualização
+
+| Comando | Resultado |
+|---|---|
+| `pytest tests/ -q` | Passou: 314 testes passaram e 1 teste foi pulado. |
+| `ruff check generator/` | Passou: `All checks passed!`. |
+| `python generator/validator.py examples/caso_canonico_iniciante.json --strict` | Passou: risco baixo, pode gerar, 0 críticos, 0 moderados, 12 avisos. |
+| `python generator/validator.py examples/caso_canonico_intermediario.json --strict` | Passou: risco baixo, pode gerar, 0 críticos, 0 moderados, 7 avisos. |
+| `python -m scripts.case_review examples/caso_canonico_iniciante.json --format markdown` | Passou: relatório gerado em Markdown; status `READY_FOR_BASELINE`; 0 críticos; 2 warnings. |
+| `python -m scripts.case_review examples/caso_canonico_intermediario.json --format markdown` | Passou: relatório gerado em Markdown; status `READY_FOR_PLAYTEST`; 0 críticos; 0 warnings. |
+| `python -m scripts.build_package examples/caso_canonico_iniciante.json --output output/iniciante --strict` | Falhou por limitação de ambiente: executável `chromium_headless_shell-1223` ausente no cache local do Playwright. |
+| `python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict` | Falhou por limitação de ambiente: executável `chromium_headless_shell-1223` ausente no cache local do Playwright. |
+| `python -m playwright install chromium` | Falhou por limitação de ambiente/rede: download do Chrome for Testing `148.0.7778.96` retornou HTTP 403 em todas as tentativas. |
+| `apt-get update && apt-get install -y chromium` | Falhou por limitação de ambiente/rede: repositórios Ubuntu e fontes externas retornaram HTTP 403 via proxy; Chromium de sistema não pôde ser instalado. |
+| `command -v chromium \|\| command -v chromium-browser \|\| command -v google-chrome \|\| true` | Nenhum Chrome/Chromium de sistema encontrado. |
+
+## Resultado dos controles técnicos
+
+- Testes automatizados: **aprovados**.
+- Lint do código Python em `generator/`: **aprovado**.
+- Validators strict dos dois canônicos: **aprovados**.
+- Case Review dos dois canônicos: **aprovado como relatório heurístico pré-pacote**.
+- Build package real dos dois canônicos: **tentado, mas bloqueado por ausência de Chromium/Playwright funcional**.
+- PDFs finais: **não gerados**.
+- `manifest.json`: **não gerado** nesta tentativa.
+- `print_manifest.json`: **não gerado** nesta tentativa.
+- Revisão visual real dos PDFs: **não executada**, porque não houve PDFs finais.
+
+## Validator strict — resultado confirmado
+
+### Iniciante — O Desvio da Reserva Mirante
+
+- Resultado: **passou**.
+- Risco: **Baixo**.
+- Pode gerar: **SIM**.
+- Críticos: **0**.
+- Moderados: **0**.
+- Avisos: **12**.
+- Decisão desta atualização: manter o Mirante como régua canônica Iniciante e não alterar blueprint, dificuldade, documentos ou mapa nesta PR documental.
+
+### Intermediário — O Último Brinde do Hotel Aurora
+
+- Resultado: **passou**.
+- Risco: **Baixo**.
+- Pode gerar: **SIM**.
+- Críticos: **0**.
+- Moderados: **0**.
+- Avisos: **7**.
+- Decisão desta atualização: manter o Hotel Aurora como régua canônica Intermediária e confirmar que ele continua sem mapa.
+
+## Case Review — resultado confirmado
+
+### Iniciante — O Desvio da Reserva Mirante
+
+- Status: `READY_FOR_BASELINE`.
+- Findings críticos: **0**.
+- Warnings: **2**.
+- Dificuldade declarada: `iniciante`.
+- Dificuldade estimada: `avancado`.
+- Documentos: 20.
+- Contratos obrigatórios: 5.
+- Carga cognitiva: `high`.
+- Decisão desta atualização: warnings permanecem registrados como atenção heurística; não houve ajuste de régua ou conteúdo nesta PR.
+
+### Intermediário — O Último Brinde do Hotel Aurora
+
+- Status: `READY_FOR_PLAYTEST`.
+- Findings críticos: **0**.
+- Warnings: **0**.
+- Dificuldade declarada: `intermediario`.
+- Dificuldade estimada: `intermediario`.
+- Documentos: 17.
+- Contratos obrigatórios: 5.
+- Carga cognitiva: `medium`.
+- Decisão desta atualização: caso permanece apto a seguir para baseline visual real quando houver Chromium funcional e, depois, para novo playtest com pessoas novas.
+
+## Build Package — resultado detalhado
+
+### Iniciante — O Desvio da Reserva Mirante
+
+- Comando: `python -m scripts.build_package examples/caso_canonico_iniciante.json --output output/iniciante --strict`.
+- Resultado: **falhou por limitação de ambiente**.
+- Falha observada: `BrowserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1223/chrome-headless-shell-linux64/chrome-headless-shell`.
+- Etapa alcançada antes da falha: o package builder iniciou validação, renderização de documentos, envelopes, manifest, guia de impressão, QA e grafo de pistas, mas interrompeu ao tentar renderizar PDF com o browser inexistente.
+- Artefatos finais confiáveis para baseline visual: **nenhum**.
+
+### Intermediário — O Último Brinde do Hotel Aurora
+
+- Comando: `python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict`.
+- Resultado: **falhou por limitação de ambiente**.
+- Falha observada: `BrowserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1223/chrome-headless-shell-linux64/chrome-headless-shell`.
+- Etapa alcançada antes da falha: o package builder iniciou validação, renderização de documentos, envelopes, manifest, guia de impressão, QA e grafo de pistas, mas interrompeu ao tentar renderizar PDF com o browser inexistente.
+- Artefatos finais confiáveis para baseline visual: **nenhum**.
+
+## Revisão visual real
+
+### Iniciante — O Desvio da Reserva Mirante
+
+- Status: **não concluída**.
+- Motivo: pacote real não foi gerado por ausência de Chromium/Playwright funcional.
+- Itens que continuam pendentes de revisão em ambiente com browser funcional:
+  - PDFs individuais de capa, envelopes e documentos;
+  - PDF consolidado do dossiê;
+  - guia do facilitador;
+  - dicas;
+  - guia de impressão;
+  - cartões/apoios de mesa;
+  - `manifest.json`;
+  - `print_manifest.json`;
+  - planta v2 do Mirante produzida por `build_mirante_planta()`.
+
+### Intermediário — O Último Brinde do Hotel Aurora
+
+- Status: **não concluída**.
+- Motivo: pacote real não foi gerado por ausência de Chromium/Playwright funcional.
+- Itens que continuam pendentes de revisão em ambiente com browser funcional:
+  - PDFs individuais de capa, envelopes e documentos;
+  - PDF consolidado do dossiê;
+  - guia do facilitador;
+  - dicas;
+  - guia de impressão;
+  - cartões/apoios de mesa;
+  - `manifest.json`;
+  - `print_manifest.json`;
+  - confirmação visual de que o pacote permanece sem mapa.
+
+## Pendências para PR separada ou nova execução de baseline
+
+1. Reexecutar `python -m playwright install chromium` ou provisionar Chrome/Chromium de sistema em ambiente sem bloqueio HTTP 403.
+2. Reexecutar `python -m scripts.build_package examples/caso_canonico_iniciante.json --output output/iniciante --strict`.
+3. Reexecutar `python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict`.
+4. Revisar os PDFs finais, `manifest.json` e `print_manifest.json` dos dois pacotes.
+5. Registrar o baseline visual real somente depois da geração efetiva dos PDFs por Playwright/Chromium.
+6. Se a revisão visual revelar problema, abrir PR separada para correção, sem misturar correção visual com registro de baseline.
