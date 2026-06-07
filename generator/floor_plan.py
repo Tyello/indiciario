@@ -21,6 +21,7 @@ TERMOS_PROIBIDOS_JOGADOR = (
     "caminho",
 )
 EPSILON = 0.01
+SITE_PADDING = 24
 
 
 @dataclass(frozen=True)
@@ -159,7 +160,7 @@ def build_mirante_planta() -> PlantaBaixa:
         CameraPlanta("CAM-04", "galeria_vitrine", 510, 220, "NO"),
     )
     portoes = (
-        PortaoPlanta("G-01", 842, 488, 56, "H"),
+        PortaoPlanta("G-01", 944, 464, 56, "V"),
     )
     return PlantaBaixa(
         id="casa_acervo_mirante_v2",
@@ -186,6 +187,57 @@ def _area_by_id(planta: PlantaBaixa) -> dict[str, AreaPlanta]:
 def _inside(area: AreaPlanta, planta: PlantaBaixa) -> bool:
     return area.x >= 0 and area.y >= 0 and area.w > 0 and area.h > 0 and area.x + area.w <= planta.largura and area.y + area.h <= planta.altura
 
+
+
+def _site_bounds(planta: PlantaBaixa, padding: float = SITE_PADDING) -> tuple[float, float, float, float]:
+    """Calcula o perímetro controlado do terreno/lote da planta."""
+    elementos = [*planta.areas, *planta.areas_externas]
+    if not elementos:
+        return 0, 0, planta.largura, planta.altura
+
+    min_x = min(area.x for area in elementos)
+    min_y = min(area.y for area in elementos)
+    max_x = max(area.x + area.w for area in elementos)
+    max_y = max(area.y + area.h for area in elementos)
+    safe_padding = min(padding, min_x, min_y, planta.largura - max_x, planta.altura - max_y)
+    safe_padding = max(0.0, safe_padding)
+    return (
+        min_x - safe_padding,
+        min_y - safe_padding,
+        (max_x - min_x) + safe_padding * 2,
+        (max_y - min_y) + safe_padding * 2,
+    )
+
+
+def _site_perimeter_svg(planta: PlantaBaixa) -> str:
+    """Renderiza o muro externo do terreno com rupturas nos portões."""
+    x, y, w, h = _site_bounds(planta)
+    right = x + w
+    bottom = y + h
+    segments = {
+        ("H", y): [[x, right]],
+        ("H", bottom): [[x, right]],
+        ("V", x): [[y, bottom]],
+        ("V", right): [[y, bottom]],
+    }
+    gaps: dict[tuple[str, float], list[tuple[float, float]]] = {}
+    for portao in planta.portoes:
+        line_coord = portao.y if portao.orientacao == "H" else portao.x
+        start = portao.x if portao.orientacao == "H" else portao.y
+        end = start + portao.largura
+        for key in segments:
+            if key[0] == portao.orientacao and isclose(key[1], line_coord, abs_tol=EPSILON):
+                gaps.setdefault(key, []).append((start, end))
+
+    parts = [f'<rect class="site-fill" x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}"/>']
+    for (orientacao, coord), intervalos in segments.items():
+        for inicio, fim in intervalos:
+            for part_start, part_end in _cut_segment(inicio, fim, gaps.get((orientacao, coord), [])):
+                if orientacao == "H":
+                    parts.append(f'<line x1="{part_start:g}" y1="{coord:g}" x2="{part_end:g}" y2="{coord:g}"/>')
+                else:
+                    parts.append(f'<line x1="{coord:g}" y1="{part_start:g}" x2="{coord:g}" y2="{part_end:g}"/>')
+    return '<g class="site-perimeter">' + ''.join(parts) + '</g>'
 
 def _building_bounds(planta: PlantaBaixa, padding: float = 20) -> tuple[float, float, float, float]:
     """Calcula a massa externa da edificação a partir das áreas da planta."""
@@ -462,7 +514,7 @@ def render_floor_plan_svg(planta: PlantaBaixa, versao: str = "jogador") -> str:
     if versao != "jogador":
         versao = "jogador"
     style = (
-        'text{font-family:Arial,Helvetica,sans-serif}.room-code{font-family:"Courier New",monospace;font-size:12px;font-weight:700;fill:#111;text-anchor:middle}.room-name{font-size:9px;fill:#333;text-anchor:middle}.outer line{stroke:#111;stroke-width:7;stroke-linecap:square}.inner line{stroke:#222;stroke-width:3.2;stroke-linecap:square}.door line{stroke:#333;stroke-width:1.35;stroke-linecap:square}.door .threshold{stroke:#777;stroke-width:1;stroke-opacity:.55}.door text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.card-reader rect{fill:#fff;stroke:#111;stroke-width:1}.card-reader line{stroke:#111;stroke-width:.75}.window line{stroke:#111;stroke-width:1.4}.camera rect{fill:#fff;stroke:#111;stroke-width:1.3}.camera circle{fill:#111}.camera text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.external-yard rect{fill:#f8f8f8;stroke:#555;stroke-width:1.2;stroke-opacity:.8}.external-yard path{fill:none;stroke:#777;stroke-width:1.2;stroke-opacity:.55}.external-yard line{stroke:#777;stroke-width:1}.external-control rect{fill:#fff;stroke:#111;stroke-width:1.5}.external-code{font-family:"Courier New",monospace;font-size:10px;font-weight:700;fill:#111;text-anchor:middle}.external-name{font-size:8.5px;fill:#333;text-anchor:middle}.gate line,.gate path{fill:none;stroke:#111;stroke-width:1.7;stroke-linecap:square}.gate text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.stamp{font-size:9px;fill:#444}.hatch{stroke:#ddd;stroke-width:1}'
+        'text{font-family:Arial,Helvetica,sans-serif}.room-code{font-family:"Courier New",monospace;font-size:12px;font-weight:700;fill:#111;text-anchor:middle}.room-name{font-size:9px;fill:#333;text-anchor:middle}.outer line{stroke:#111;stroke-width:7;stroke-linecap:square}.inner line{stroke:#222;stroke-width:3.2;stroke-linecap:square}.door line{stroke:#333;stroke-width:1.35;stroke-linecap:square}.door .threshold{stroke:#777;stroke-width:1;stroke-opacity:.55}.door text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.card-reader rect{fill:#fff;stroke:#111;stroke-width:1}.card-reader line{stroke:#111;stroke-width:.75}.window line{stroke:#111;stroke-width:1.4}.camera rect{fill:#fff;stroke:#111;stroke-width:1.3}.camera circle{fill:#111}.camera text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.site-perimeter .site-fill{fill:none;stroke:none}.site-perimeter line{stroke:#111;stroke-width:2.4;stroke-linecap:square}.external-yard rect{fill:#f8f8f8;stroke:#555;stroke-width:1.2;stroke-opacity:.8}.external-yard path{fill:none;stroke:#777;stroke-width:1.2;stroke-opacity:.55}.external-yard line{stroke:#777;stroke-width:1}.external-control rect{fill:#fff;stroke:#111;stroke-width:1.5}.external-code{font-family:"Courier New",monospace;font-size:10px;font-weight:700;fill:#111;text-anchor:middle}.external-name{font-size:8.5px;fill:#333;text-anchor:middle}.gate line,.gate path{fill:none;stroke:#111;stroke-width:1.7;stroke-linecap:square}.gate text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.stamp{font-size:9px;fill:#444}.hatch{stroke:#ddd;stroke-width:1}'
     )
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {planta.largura:g} {planta.altura:g}" role="img" aria-label="{escape(planta.titulo)}">',
@@ -470,6 +522,7 @@ def render_floor_plan_svg(planta: PlantaBaixa, versao: str = "jogador") -> str:
         '<rect x="0" y="0" width="100%" height="100%" fill="#fff"/>',
     ]
     bx, by, bw, bh = _building_bounds(planta)
+    parts.append(_site_perimeter_svg(planta))
     parts.extend(_area_externa_svg(area) for area in planta.areas_externas)
     parts.extend(_portao_svg(portao) for portao in planta.portoes)
     parts.append(f'<rect x="{bx:g}" y="{by:g}" width="{bw:g}" height="{bh:g}" fill="url(#wall-hatch)" opacity="0.28"/>')
@@ -493,7 +546,6 @@ def render_floor_plan_svg(planta: PlantaBaixa, versao: str = "jogador") -> str:
         parts.append(f'<text class="room-name" x="{cx:g}" y="{cy + 10:g}">{escape(area.nome)}</text>')
     parts.append('<g transform="translate(42 548)"><path d="M0 26 L8 0 L16 26 Z" fill="#111"/><text x="8" y="40" class="stamp" text-anchor="middle">N</text></g>')
     parts.append('<g transform="translate(760 564)"><line x1="0" y1="0" x2="120" y2="0" stroke="#111" stroke-width="2"/><line x1="0" y1="-4" x2="0" y2="4" stroke="#111"/><line x1="60" y1="-3" x2="60" y2="3" stroke="#111"/><line x1="120" y1="-4" x2="120" y2="4" stroke="#111"/><text x="60" y="16" class="stamp" text-anchor="middle">escala esquemática</text></g>')
-    parts.append(f'<text x="70" y="590" class="stamp">{escape(planta.titulo)} · Planta operacional simplificada · P&B · A4 paisagem</text>')
     parts.append('</svg>')
     svg = ''.join(parts)
     if versao == "jogador" and any(termo in svg.lower() for termo in TERMOS_PROIBIDOS_JOGADOR):

@@ -372,7 +372,7 @@ def build_visual_documents(
         output_path = visual_document_path("map", mapa.id, output_dir)
         dados = {
             "TITULO": mapa.titulo,
-            "SUBTITULO": "Planta operacional simplificada",
+            "SUBTITULO": "",
             "SVG": svg,
         }
         render_kwargs = {"strict": strict, "landscape": True}

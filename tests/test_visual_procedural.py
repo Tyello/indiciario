@@ -264,10 +264,11 @@ def test_mapa_canonico_tem_planta_p2_neutra_com_elementos_tecnicos() -> None:
     assert 'class="door"' in svg
     assert 'class="window"' in svg
     assert 'class="camera"' in svg
-    assert "Planta operacional simplificada" in svg
-    assert "P&B" in svg
+    assert 'class="site-perimeter"' in svg
+    assert "Planta operacional simplificada" not in svg
+    assert "P&B" not in svg
     assert "rota provável" not in svg
     assert "área crítica" not in svg
     assert "offline" not in svg
-    assert "stroke="#1d4ed8"" not in svg
+    assert 'stroke="#1d4ed8"' not in svg
     assert "stroke-dasharray" not in svg

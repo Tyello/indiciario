@@ -6,6 +6,7 @@ from generator.floor_plan import (
     AreaPlanta,
     PlantaBaixa,
     _building_bounds,
+    _site_bounds,
     build_mirante_planta,
     render_floor_plan_svg,
     validar_planta,
@@ -114,7 +115,28 @@ def test_mirante_v2_modela_area_externa_e_posto_sem_guarita_grande() -> None:
     assert {"patio_operacional", "posto_controle"} <= external_ids
     assert monitoramento.w * monitoramento.h < 160 * 135
     assert planta.portoes[0].id == "G-01"
+    assert planta.portoes[0].orientacao == "V"
 
+
+
+def test_mirante_v2_renderiza_perimetro_do_terreno_com_gap_no_portao() -> None:
+    planta = build_mirante_planta()
+    sx, sy, sw, sh = _site_bounds(planta)
+    svg = render_floor_plan_svg(planta)
+
+    assert 'class="site-perimeter"' in svg
+    assert f'<rect class="site-fill" x="{sx:g}" y="{sy:g}" width="{sw:g}" height="{sh:g}"' in svg
+    assert '<line x1="944" y1="56" x2="944" y2="464"/>' in svg
+    assert '<line x1="944" y1="520" x2="944" y2="548"/>' in svg
+    assert '<line x1="944" y1="464" x2="944" y2="520"/>' not in svg
+
+
+def test_svg_mirante_v2_nao_exibe_rotulos_tecnicos_de_renderizacao() -> None:
+    svg = render_floor_plan_svg(build_mirante_planta())
+
+    assert "Planta operacional simplificada" not in svg
+    assert "P&B" not in svg
+    assert "A4 paisagem" not in svg
 
 def test_elementos_mirante_v2_referenciam_areas_existentes() -> None:
     planta = build_mirante_planta()
