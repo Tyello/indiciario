@@ -1,6 +1,6 @@
 # Estado atual do Indiciário
 
-Este documento registra a situação atual do projeto após os playtests reais, consolidação das réguas canônicas e hardening editorial, técnico e visual até o P3 de assinaturas, rubricas e manuscritos.
+Este documento registra a situação atual do projeto após os playtests reais, consolidação das réguas canônicas, hardening editorial/técnico/visual até P3 e entrega inicial do fluxo operacional Indiciário 2.0.
 
 ## Hierarquia documental
 
@@ -52,6 +52,8 @@ Funcionalidades já existentes no repositório incluem:
 - bloqueio de placeholders residuais;
 - QA Report;
 - Graph Report;
+- Case Kernel (`generator/case_kernel.py`) para extrair o DNA investigativo do blueprint;
+- Case Review Report (`generator/case_review.py` e `scripts/case_review.py`) para revisar o núcleo antes do pacote;
 - contratos de evidência;
 - grafo de pistas;
 - feedback para LLM;
@@ -71,7 +73,8 @@ Funcionalidades já existentes no repositório incluem:
 - printables apartados P1 para cartões recortáveis de personagem, local e objeto, registrados no manifest e no guia de impressão como apoio de mesa;
 - plantas baixas P2 com renderer dedicado, A4 paisagem, P&B first, portas, janelas, câmeras e validações `MAP_*`;
 - suporte P3 a assinatura, rubrica e manuscrito curto por perfil de personagem no blueprint;
-- possibilidade de override SVG para assinatura/rubrica.
+- possibilidade de override SVG para assinatura/rubrica;
+- Visual Library 2.0 mínima (`generator/floor_plan_library.py`) com plantas-base estruturadas genéricas, ainda sem integração automática aos canônicos.
 
 Problemas já tratados e que não devem ser reabertos sem evidência nova:
 
@@ -162,6 +165,34 @@ Interpretação de produto:
 - bons documentos não bastam se faltar pergunta pública, objetivo por envelope, critério de avanço, motivação atual e guia do facilitador operacional;
 - o pipeline de design de caso deve usar Mirante como régua Iniciante e Hotel Aurora como régua Intermediária validada.
 
+## Fluxo operacional oficial — Indiciário 2.0 inicial
+
+A entrega inicial do Indiciário 2.0 consolida o seguinte fluxo como referência operacional para criar, revisar e entregar casos:
+
+```text
+Blueprint
+→ Case Kernel
+→ Case Review
+→ Visual Library / templates
+→ Build Package
+→ Baseline visual real
+→ Playtest
+→ Ajustes finos
+```
+
+Papel de cada etapa:
+
+1. **Blueprint**: fonte estruturada do caso, com pergunta pública, objetivos por envelope, evidências, documentos, dicas, guia operacional e metadados internos.
+2. **Case Kernel**: extração conservadora do DNA investigativo a partir do blueprint, sem inventar narrativa e sem alterar o contrato JSON dos canônicos.
+3. **Case Review**: relatório editorial automático para detectar riscos de progressão, motivação, envelope, evidência obrigatória e obviedade antes de mexer em PDF ou visual.
+4. **Visual Library / templates**: materialização visual offline first, P&B first e procedural, usando templates documentais e plantas-base quando houver necessidade real de apoio visual.
+5. **Build Package**: geração do pacote jogável com Playwright/Chromium, manifests, guia do facilitador, dicas, printables e PDFs finais.
+6. **Baseline visual real**: revisão dos PDFs gerados de fato; não substituir por build fake quando o objetivo for validar visual.
+7. **Playtest**: validação com pessoas reais, registrando travamentos, hipóteses, uso de dicas/cartões, tempo e diversão.
+8. **Ajustes finos**: correções pequenas baseadas em evidência de relatório, PDF real ou playtest, sem reabrir narrativa por preferência teórica.
+
+Esse fluxo não cria feature nova nem substitui o validator strict. Ele define a ordem de operação: primeiro provar que o núcleo investigativo funciona, depois materializar visualmente, gerar pacote real, revisar baseline e só então ajustar com evidência.
+
 ## Decisões recentes relevantes
 
 ### Réguas canônicas
@@ -208,6 +239,16 @@ Regra central:
 
 Documentos de jogador precisam existir naturalmente no mundo da história. Se uma informação só está ali para ajudar o jogador a resolver, provavelmente está no documento errado.
 
+### Case Kernel e Case Review
+
+A entrega inicial do Indiciário 2.0 adicionou duas camadas operacionais antes do pacote:
+
+- `generator/case_kernel.py`, documentado em `docs/CASE_KERNEL.md`, extrai o DNA investigativo a partir do blueprint;
+- `generator/case_review.py` e `scripts/case_review.py`, documentados em `docs/CASE_REVIEW.md`, geram relatório editorial pré-pacote;
+- `tests/test_case_kernel.py` e `tests/test_case_review.py` cobrem o comportamento mínimo dessas camadas.
+
+Essas camadas não substituem o validator strict, não alteram automaticamente os canônicos e não inventam narrativa. Elas existem para impedir que o projeto pule de blueprint para PDF sem revisar progressão, hipótese de E1, recontextualização de E2, motivação atual, evidências obrigatórias e falsos caminhos.
+
 ### Sistema visual P0
 
 Foi criada a base P0 do sistema visual documental em `templates/styles/document_system.css`, injetada automaticamente pelo renderer nos HTMLs finais.
@@ -246,6 +287,19 @@ Padrão atual:
 
 O padrão está documentado em `docs/FLOORPLANS.md`.
 
+### Visual Library 2.0 mínima
+
+A entrega inicial da Visual Library 2.0 adicionou `generator/floor_plan_library.py`, documentado em `docs/VISUAL_LIBRARY_2_0.md`, com plantas-base estruturadas genéricas para hotel e escritório.
+
+Direção atual:
+
+- biblioteca offline first, P&B first e procedural;
+- reutiliza `PlantaBaixa` e o renderer estruturado de `generator/floor_plan.py`;
+- não usa imagem externa, QR code, fonte externa ou IA;
+- não integra automaticamente nenhum canônico;
+- o Mirante continua com sua planta v2 própria;
+- o Hotel Aurora continua sem mapa por decisão validada de playtest.
+
 ### Assinaturas, rubricas e manuscritos P3
 
 Assinatura/rubrica passou a ser característica editorial do personagem no blueprint.
@@ -265,11 +319,12 @@ O roadmap detalhado está em `docs/ROADMAP.md`.
 
 Resumo da ordem recomendada:
 
-1. gerar baseline real dos PDFs dos canônicos com Playwright local;
-2. revisar visualmente Iniciante e Intermediário após P0/P1/P2/P3;
-3. corrigir apenas problemas comprovados de layout, renderização ou clareza operacional;
-4. executar novo playtest do Intermediário com pessoas novas;
-5. só depois planejar o canônico Avançado.
+1. operar pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package;
+2. gerar baseline real dos PDFs dos canônicos com Playwright local;
+3. revisar visualmente Iniciante e Intermediário após Indiciário 2.0 inicial/P0/P1/P2/P3;
+4. corrigir apenas problemas comprovados de layout, renderização ou clareza operacional;
+5. executar novo playtest do Intermediário com pessoas novas;
+6. só depois planejar o canônico Avançado.
 
 ## O que não priorizar agora
 

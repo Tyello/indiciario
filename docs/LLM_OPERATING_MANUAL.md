@@ -6,6 +6,19 @@ O objetivo não é apenas produzir JSON válido. O objetivo é produzir mistéri
 
 Após os playtests dos canônicos Iniciante e Intermediário, uma regra ficou explícita: bons documentos não bastam. A LLM deve exigir progressão jogável antes de gerar PDFs: pergunta pública, objetivo por envelope, critério de avanço, motivação com consequência atual e guia do facilitador operacional.
 
+Fluxo operacional oficial do Indiciário 2.0 inicial:
+
+```text
+Blueprint
+→ Case Kernel
+→ Case Review
+→ Visual Library / templates
+→ Build Package
+→ Baseline visual real
+→ Playtest
+→ Ajustes finos
+```
+
 ## Hierarquia documental
 
 Este documento participa da hierarquia documental oficial do projeto:
@@ -50,11 +63,12 @@ Réguas canônicas atuais:
 
 Prioridade atual do projeto:
 
-1. gerar baseline real dos PDFs dos dois canônicos com Playwright/Chromium local;
-2. revisar visualmente os pacotes pós-P0/P1/P2/P3;
-3. corrigir apenas falhas comprovadas de layout/renderização/pacote;
-4. realizar novo playtest do Intermediário com pessoas novas;
-5. só depois planejar o canônico Avançado.
+1. operar pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package;
+2. gerar baseline real dos PDFs dos dois canônicos com Playwright/Chromium local;
+3. revisar visualmente os pacotes pós-Indiciário 2.0 inicial/P0/P1/P2/P3;
+4. corrigir apenas falhas comprovadas de layout/renderização/pacote;
+5. realizar novo playtest do Intermediário com pessoas novas;
+6. só depois planejar o canônico Avançado.
 
 Não crie novo caso Avançado, marketplace, dashboard, bot comercial, banco de dados, editor visual, app ou automação de venda sem pedido explícito.
 
@@ -417,7 +431,8 @@ Ao alterar `examples/caso_canonico_intermediario.json`:
 
 Não iniciar novo canônico Avançado sem:
 
-1. baseline real dos PDFs Iniciante e Intermediário com Playwright;
-2. revisão visual pós-P0/P1/P2/P3;
-3. novo playtest do Intermediário ou decisão explícita de pular essa etapa;
-4. plano Markdown do Avançado aprovado antes do JSON.
+1. execução do fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package;
+2. baseline real dos PDFs Iniciante e Intermediário com Playwright;
+3. revisão visual pós-Indiciário 2.0 inicial/P0/P1/P2/P3;
+4. novo playtest do Intermediário ou decisão explícita de pular essa etapa;
+5. plano Markdown do Avançado aprovado antes do JSON.
