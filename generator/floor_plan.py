@@ -93,15 +93,15 @@ def build_mirante_planta() -> PlantaBaixa:
     de solução no mapa do jogador.
     """
     areas = (
-        AreaPlanta("recepcao_controle", "Recepção / Controle", 80, 80, 180, 140, "controle", "P-01"),
-        AreaPlanta("galeria_vitrine", "Galeria / Vitrine", 260, 80, 250, 140, "exposicao", "P-02"),
-        AreaPlanta("reserva_a", "Reserva Técnica A", 510, 80, 170, 140, "reserva", "P-07"),
-        AreaPlanta("reserva_b", "Reserva Técnica B", 680, 80, 160, 140, "reserva", "P-06"),
-        AreaPlanta("corredor_tecnico", "Corredor Técnico", 80, 220, 840, 95, "circulacao", "P-03"),
-        AreaPlanta("administracao", "Administração", 80, 315, 180, 135, "administrativo", "P-08"),
-        AreaPlanta("seguranca", "Segurança", 260, 315, 160, 135, "controle", "P-09"),
-        AreaPlanta("apoio", "Apoio / Arquivo", 420, 315, 170, 135, "apoio", "P-05"),
-        AreaPlanta("doca_servico", "Doca / Serviço", 590, 315, 250, 135, "servico", "P-04"),
+        AreaPlanta("recepcao_controle", "Recepção / Controle", 80, 80, 180, 140, "controle", "A-01"),
+        AreaPlanta("galeria_vitrine", "Galeria / Vitrine", 260, 80, 250, 140, "exposicao", "A-02"),
+        AreaPlanta("reserva_a", "Reserva Técnica A", 510, 80, 170, 140, "reserva", "A-03"),
+        AreaPlanta("reserva_b", "Reserva Técnica B", 680, 80, 160, 140, "reserva", "A-04"),
+        AreaPlanta("corredor_tecnico", "Corredor Técnico", 80, 220, 840, 95, "circulacao", "A-05"),
+        AreaPlanta("administracao", "Administração", 80, 315, 180, 135, "administrativo", "A-06"),
+        AreaPlanta("seguranca", "Segurança", 260, 315, 160, 135, "controle", "A-07"),
+        AreaPlanta("apoio", "Apoio / Arquivo", 420, 315, 170, 135, "apoio", "A-08"),
+        AreaPlanta("doca_servico", "Doca / Serviço", 590, 315, 250, 135, "servico", "A-09"),
     )
     portas = (
         PortaPlanta("P-01", ("recepcao_controle", EXTERIOR), "H", 142, 80, 34),
@@ -152,6 +152,25 @@ def _area_by_id(planta: PlantaBaixa) -> dict[str, AreaPlanta]:
 
 def _inside(area: AreaPlanta, planta: PlantaBaixa) -> bool:
     return area.x >= 0 and area.y >= 0 and area.w > 0 and area.h > 0 and area.x + area.w <= planta.largura and area.y + area.h <= planta.altura
+
+
+def _building_bounds(planta: PlantaBaixa, padding: float = 20) -> tuple[float, float, float, float]:
+    """Calcula a massa externa da edificação a partir das áreas da planta."""
+    if not planta.areas:
+        return 0, 0, planta.largura, planta.altura
+
+    min_x = min(area.x for area in planta.areas)
+    min_y = min(area.y for area in planta.areas)
+    max_x = max(area.x + area.w for area in planta.areas)
+    max_y = max(area.y + area.h for area in planta.areas)
+    safe_padding = min(padding, min_x, min_y, planta.largura - max_x, planta.altura - max_y)
+    safe_padding = max(0.0, safe_padding)
+    return (
+        min_x - safe_padding,
+        min_y - safe_padding,
+        (max_x - min_x) + safe_padding * 2,
+        (max_y - min_y) + safe_padding * 2,
+    )
 
 
 def _interval_overlap(a_start: float, a_end: float, b_start: float, b_end: float) -> float:
@@ -345,8 +364,9 @@ def render_floor_plan_svg(planta: PlantaBaixa, versao: str = "jogador") -> str:
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {planta.largura:g} {planta.altura:g}" role="img" aria-label="{escape(planta.titulo)}">',
         f'<defs><style>{style}</style><pattern id="wall-hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path class="hatch" d="M0 8 L8 0"/></pattern></defs>',
         '<rect x="0" y="0" width="100%" height="100%" fill="#fff"/>',
-        '<rect x="60" y="60" width="880" height="410" fill="url(#wall-hatch)" opacity="0.28"/>',
     ]
+    bx, by, bw, bh = _building_bounds(planta)
+    parts.append(f'<rect x="{bx:g}" y="{by:g}" width="{bw:g}" height="{bh:g}" fill="url(#wall-hatch)" opacity="0.28"/>')
     for area in planta.areas:
         parts.append(f'<rect x="{area.x:g}" y="{area.y:g}" width="{area.w:g}" height="{area.h:g}" fill="#fff" stroke="none"/>')
     for external in (True, False):
