@@ -117,37 +117,6 @@ def _door_symbol(area: AreaMapa, porta: PortaMapa) -> str:
     return f'<g class="door"><path d="{d}"/><text x="{midx:g}" y="{midy - 5:g}">{label}</text></g>'
 
 
-
-def _clamp(value: float, low: float, high: float) -> float:
-    return max(low, min(high, value))
-
-
-def _nearest_point_on_area(area: AreaMapa, x: float, y: float) -> tuple[float, float]:
-    """Retorna ponto na borda da área mais próximo do ponto informado."""
-    left = abs(x - area.x)
-    right = abs(x - (area.x + area.w))
-    top = abs(y - area.y)
-    bottom = abs(y - (area.y + area.h))
-    side = min((left, "oeste"), (right, "leste"), (top, "norte"), (bottom, "sul"))[1]
-    if side == "oeste":
-        return area.x, _clamp(y, area.y + 12, area.y + area.h - 12)
-    if side == "leste":
-        return area.x + area.w, _clamp(y, area.y + 12, area.y + area.h - 12)
-    if side == "norte":
-        return _clamp(x, area.x + 12, area.x + area.w - 12), area.y
-    return _clamp(x, area.x + 12, area.x + area.w - 12), area.y + area.h
-
-
-def _corridor_connector(area_a: AreaMapa, area_b: AreaMapa, porta: PortaMapa) -> str:
-    """Desenha circulação técnica neutra entre salas não adjacentes."""
-    x1, y1 = _point_on_wall(area_a, porta.parede, porta.posicao + porta.largura / 2)
-    x2, y2 = _nearest_point_on_area(area_b, x1, y1)
-    if abs(x1 - x2) < EPSILON and abs(y1 - y2) < EPSILON:
-        return ""
-    midx = (x1 + x2) / 2
-    d = f"M {x1:g} {y1:g} L {midx:g} {y1:g} L {midx:g} {y2:g} L {x2:g} {y2:g}"
-    return f'<path class="circulation-link" d="{d}"/>'
-
 def _window_symbol(area: AreaMapa, janela: JanelaMapa) -> str:
     start = janela.posicao
     end = janela.posicao + janela.largura
@@ -191,19 +160,12 @@ def render_floorplan_svg(mapa: MapaProcedural) -> str:
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura:g} {altura:g}" role="img" aria-label="{escape(mapa.titulo)}">',
-        '<defs><style>text{font-family:Arial,Helvetica,sans-serif}.room-label{font-family:"Courier New",monospace;font-size:13px;font-weight:700;fill:#111;text-anchor:middle;dominant-baseline:middle}.room-name{font-size:10px;fill:#333;text-anchor:middle}.circulation-link{fill:none;stroke:#d8d3ca;stroke-width:22;stroke-linecap:square;stroke-linejoin:miter}.wall line{stroke:#111;stroke-width:4.4;stroke-linecap:square}.partition line{stroke:#222;stroke-width:2.8;stroke-linecap:square}.door path{fill:none;stroke:#333;stroke-width:1.6}.door text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.window line{stroke:#111;stroke-width:1.4}.camera rect,.camera polygon{fill:#111}.camera text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.stamp{font-size:9px;fill:#444}.north{stroke:#111;fill:#111}</style></defs>',
+        '<defs><style>text{font-family:Arial,Helvetica,sans-serif}.room-label{font-family:"Courier New",monospace;font-size:13px;font-weight:700;fill:#111;text-anchor:middle;dominant-baseline:middle}.room-name{font-size:10px;fill:#333;text-anchor:middle}.wall line{stroke:#111;stroke-width:5;stroke-linecap:square}.partition line{stroke:#222;stroke-width:3;stroke-linecap:square}.door path{fill:none;stroke:#333;stroke-width:1.6}.door text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.window line{stroke:#111;stroke-width:1.4}.camera rect,.camera polygon{fill:#111}.camera text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.stamp{font-size:9px;fill:#444}.north{stroke:#111;fill:#111}</style></defs>',
         '<rect x="0" y="0" width="100%" height="100%" fill="#fff"/>',
         f'<rect x="10" y="10" width="{max(largura - 20, 1):g}" height="{max(altura - 20, 1):g}" fill="none" stroke="#111" stroke-width="1"/>',
     ]
     for area in mapa.areas:
         parts.append(f'<rect x="{area.x:g}" y="{area.y:g}" width="{area.w:g}" height="{area.h:g}" fill="#fff" stroke="none"/>')
-    for porta in mapa.portas:
-        area_a = areas.get(porta.area_a)
-        area_b = areas.get(porta.area_b or "")
-        if area_a is not None and area_b is not None and porta.parede in WALLS:
-            connector = _corridor_connector(area_a, area_b, porta)
-            if connector:
-                parts.append(connector)
     for area in mapa.areas:
         css = "wall" if area.tipo in {"externo", "area_externa"} else "partition"
         parts.append(f'<g class="{css}" id="walls-{escape(area.id)}">')

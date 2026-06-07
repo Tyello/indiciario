@@ -244,6 +244,9 @@
     min-height: 0;
     overflow: hidden;
     padding: 12px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .date-separator {
@@ -262,39 +265,35 @@
   }
 
   .message {
-    clear: both;
-    max-width: 80%;
-    margin: 5px 0;
+    max-width: 82%;
+    margin: 2px 0;
     padding: 7px 8px 5px 10px;
-    border-radius: 7.5px;
+    border-radius: 8px;
     color: var(--msg-text);
     font-size: 13.6px;
     line-height: 1.36;
     position: relative;
     word-wrap: break-word;
-    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(0, 0, 0, 0.07);
   }
 
   .message.in,
   .message.received {
-    float: left;
+    align-self: flex-start;
     background: var(--msg-received);
     border-top-left-radius: 0;
   }
 
   .message.out,
   .message.sent {
-    float: right;
+    align-self: flex-end;
     background: var(--msg-sent);
     border-top-right-radius: 0;
   }
 
   .message.gap {
-    margin-top: 14px;
-  }
-
-  .message + .message {
-    border-top: 1px solid rgba(0,0,0,.025);
+    margin-top: 12px;
   }
 
   .message.gap.in::before,

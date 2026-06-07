@@ -152,49 +152,14 @@ def _injetar_classes_body(html: str, template_nome: str, dados: dict[str, Any]) 
     return re.sub(r"<body([^>]*)>", sub, html, count=1, flags=re.IGNORECASE)
 
 
-def _documento_stamped_header_footer(dados: dict[str, Any]) -> str:
-    return """
-  <aside class="ind-doc-meta-header" aria-label="Controle documental">
-    <div>
-      <div class="ind-doc-meta-kicker">{{DOC_EMISSOR}}</div>
-      <div class="ind-doc-meta-type">{{DOC_TIPO_LABEL}} · {{DOC_REFERENCIA}}</div>
-    </div>
-    <div>
-      <div class="ind-doc-meta-code">{{CODIGO_DOCUMENTO}}</div>
-      <div class="ind-doc-meta-status">{{DOC_STATUS}}</div>
-    </div>
-    {{#DOC_STAMP_LABEL}}<div class="ind-doc-stamp">{{DOC_STAMP_LABEL}}</div>{{/DOC_STAMP_LABEL}}
-  </aside>
-"""
-
-
-def _documento_footer() -> str:
-    return """
-  <footer class="ind-doc-meta-footer">
-    <span class="ind-doc-meta-case">{{NOME_CASO}}</span>
-    <span class="ind-doc-meta-control">{{ENVELOPE}} · {{CODIGO_DOCUMENTO}} · {{DOC_CONTROLE}}</span>
-  </footer>
-"""
-
-
 def _injetar_cabecalho_rodape_documental(
     html: str, template_nome: str, dados: dict[str, Any]
 ) -> str:
-    if template_nome not in DOCUMENT_PLAYER_TEMPLATES:
+    # Documentos diegéticos do jogador não exibem códigos, envelope, paginação
+    # ou controle técnico. A rastreabilidade permanece em manifests, guia e
+    # HTML de debug gerado fora da área visível.
+    if template_nome in DOCUMENT_PLAYER_TEMPLATES:
         return html
-    if '<aside class="ind-doc-meta-header"' not in html:
-        html = re.sub(
-            r"<body([^>]*)>",
-            lambda match: (
-                f"<body{match.group(1)}>"
-                + _documento_stamped_header_footer(dados)
-            ),
-            html,
-            count=1,
-            flags=re.IGNORECASE,
-        )
-    if '<footer class="ind-doc-meta-footer"' not in html:
-        html = html.replace("</body>", _documento_footer() + "\n</body>", 1)
     return html
 
 
@@ -717,11 +682,22 @@ def renderizar_documento(
 # ──────────────────────────────────────────────────────────────────────────────
 
 LANDSCAPE_TEMPLATES: set[str] = {"06_log_acesso.html", "09_extrato.html"}
+LANDSCAPE_DOCUMENT_TYPES: set[str] = {"folha_cruzamento"}
 
 
 def template_usa_landscape(template_nome: str) -> bool:
     """Indica se um template deve ser renderizado em A4 landscape."""
     return template_nome in LANDSCAPE_TEMPLATES
+
+
+def documento_usa_landscape(
+    template_nome: str, tipo: str, conteudo: dict[str, Any]
+) -> bool:
+    """Decide orientação A4 landscape para registros tabulares de jogador."""
+    if template_usa_landscape(template_nome) or tipo in LANDSCAPE_DOCUMENT_TYPES:
+        return True
+    corpo_carta = str(conteudo.get("CORPO_CARTA") or "").lower()
+    return tipo == "manual" and "<table" in corpo_carta
 
 
 TIPO_PARA_TEMPLATE: dict[str, str] = {
@@ -922,7 +898,7 @@ def renderizar_caso(
         pdf_path = output_dir / f"{codigo}.pdf"
         try:
             render_kwargs: dict[str, Any] = {"strict": strict}
-            if template_usa_landscape(template):
+            if documento_usa_landscape(template, tipo, conteudo):
                 render_kwargs["landscape"] = True
             if html_debug_dir is not None:
                 render_kwargs["html_debug_path"] = html_debug_dir / f"{codigo}.html"
