@@ -2,7 +2,7 @@
 
 Este guia define o contrato editorial mínimo para escrever blueprints de casos no Indiciário.
 
-Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md` para o processo de criação, `docs/DIRETRIZES_EDITORIAIS.md` para a fonte editorial, `docs/ANTI_OBVIEDADE.md` para o guardrail automático de obviedade e `docs/LLM_OPERATING_MANUAL.md` para operação de agentes. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
+Use este documento junto com `docs/CASE_DESIGN_PIPELINE.md` para o processo de criação, `docs/CASE_KERNEL.md` para a extração do DNA investigativo, `docs/CASE_REVIEW.md` para revisão editorial pré-pacote, `docs/DIRETRIZES_EDITORIAIS.md` para a fonte editorial, `docs/ANTI_OBVIEDADE.md` para o guardrail automático de obviedade e `docs/LLM_OPERATING_MANUAL.md` para operação de agentes. Ele não substitui o schema técnico: ele descreve o que o blueprint precisa conter para gerar uma experiência jogável, com progressão clara e sem documentos de jogador explicando a solução.
 
 Nota de schema: `conflito_central`, `objetivos_por_envelope` e `guia_operacional` agora são campos estruturados e schema-enforced do `Blueprint`. Eles continuam podendo ser refletidos em `premissa`, documentos, `contratos_evidencia` e `dicas_contextuais`, mas a fonte de verdade para progressão e condução é o blueprint estruturado.
 
@@ -18,6 +18,23 @@ Este documento participa da hierarquia documental oficial do projeto:
 6. `docs/ESTADO_ATUAL.md` — snapshot do estado atual.
 
 Em conflito editorial, `docs/DIRETRIZES_EDITORIAIS.md` prevalece. Em conflito sobre implementação ou estado do projeto, `docs/ESTADO_ATUAL.md` prevalece.
+
+## Posição no fluxo Indiciário 2.0
+
+O blueprint é a primeira fonte estruturada do caso dentro do fluxo operacional oficial:
+
+```text
+Blueprint
+→ Case Kernel
+→ Case Review
+→ Visual Library / templates
+→ Build Package
+→ Baseline visual real
+→ Playtest
+→ Ajustes finos
+```
+
+Consequência prática: escreva o blueprint para que o Case Kernel consiga extrair o núcleo sem inventar narrativa e para que o Case Review consiga apontar riscos editoriais antes de pacote, PDF, mapa ou template. Lacunas apontadas pelo Kernel/Review devem ser corrigidas no contrato do caso, não mascaradas com documento de jogador explicativo.
 
 ## Objetivo do guia
 

@@ -8,21 +8,36 @@ Slogan atual:
 
 ## Estado atual
 
-O framework está tecnicamente funcional e o foco atual é validar a experiência real de jogo.
+O framework está tecnicamente funcional, possui duas réguas canônicas e consolidou a entrega inicial do fluxo operacional Indiciário 2.0.
 
-O caso canônico atual é **“O Desvio da Reserva Mirante”**, reclassificado editorialmente como **Iniciante**.
+Casos canônicos atuais:
 
-Arquivo principal:
+- **O Desvio da Reserva Mirante** — `examples/caso_canonico_iniciante.json` — régua **Iniciante**.
+- **O Último Brinde do Hotel Aurora** — `examples/caso_canonico_intermediario.json` — régua **Intermediária** validada após playtest e refinamento.
 
-- `examples/caso_canonico_iniciante.json`
+Fluxo operacional oficial:
 
-Use este arquivo como referência principal em testes, scripts, validações canônicas e geração de pacote.
+```text
+Blueprint
+→ Case Kernel
+→ Case Review
+→ Visual Library / templates
+→ Build Package
+→ Baseline visual real
+→ Playtest
+→ Ajustes finos
+```
+
+Use os dois arquivos canônicos como referência em testes, scripts, validações canônicas e geração de pacote.
 
 ## Documentação principal
 
 - [`docs/ESTADO_ATUAL.md`](docs/ESTADO_ATUAL.md): visão atual do produto, stack, decisões recentes, caso canônico e próximos passos.
 - [`docs/DIRETRIZES_EDITORIAIS.md`](docs/DIRETRIZES_EDITORIAIS.md): regras editoriais para evitar documentos com dicas óbvias, voz do autor ou gabarito disfarçado.
 - [`docs/CASE_DESIGN_PIPELINE.md`](docs/CASE_DESIGN_PIPELINE.md): pipeline para planejar pergunta pública, progressão por envelope, motivação e risco antes do blueprint.
+- [`docs/CASE_KERNEL.md`](docs/CASE_KERNEL.md): camada de extração do DNA investigativo a partir do blueprint.
+- [`docs/CASE_REVIEW.md`](docs/CASE_REVIEW.md): relatório editorial automático para revisar o núcleo antes do pacote.
+- [`docs/VISUAL_LIBRARY_2_0.md`](docs/VISUAL_LIBRARY_2_0.md): biblioteca visual procedural mínima para plantas-base estruturadas.
 - [`docs/BLUEPRINT_AUTHORING_GUIDE.md`](docs/BLUEPRINT_AUTHORING_GUIDE.md): contrato mínimo de autoria para blueprints jogáveis, com critérios de avanço, dicas e guia do facilitador operacional.
 - [`docs/LLM_OPERATING_MANUAL.md`](docs/LLM_OPERATING_MANUAL.md): manual para LLMs criarem, revisarem e corrigirem casos sem repetir falhas editoriais.
 
@@ -32,6 +47,7 @@ Validação estrutural e editorial do blueprint:
 
 ```bash
 python generator/validator.py examples/caso_canonico_iniciante.json --strict
+python generator/validator.py examples/caso_canonico_intermediario.json --strict
 ```
 
 Testes automatizados:
@@ -43,7 +59,8 @@ pytest tests/ -q
 Geração do pacote jogável:
 
 ```bash
-python -m scripts.build_package examples/caso_canonico_iniciante.json --output output --strict
+python -m scripts.build_package examples/caso_canonico_iniciante.json --output output/iniciante --strict
+python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
 ```
 
 Se o ambiente ainda não tiver browser instalado, instale o Chromium usado pelo Playwright:
@@ -56,8 +73,9 @@ python -m playwright install chromium
 
 A prioridade do projeto não é criar novas features nem novo caso imediatamente. O foco é:
 
-1. gerar o pacote atualizado do caso canônico iniciante;
-2. revisar visualmente o PDF final;
-3. realizar o primeiro playtest real;
-4. registrar travamentos, hipóteses erradas, tempo real e pontos de diversão;
-5. só depois decidir ajustes estruturais ou criação de novo caso canônico intermediário.
+1. operar casos pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package;
+2. gerar baseline visual real dos dois canônicos com Playwright/Chromium;
+3. revisar visualmente PDFs finais, manifests e print manifests;
+4. realizar novo playtest do Intermediário com pessoas novas;
+5. registrar travamentos, hipóteses erradas, tempo real, uso de dicas/cartões e diversão percebida;
+6. só depois decidir ajustes finos ou planejar o canônico Avançado.

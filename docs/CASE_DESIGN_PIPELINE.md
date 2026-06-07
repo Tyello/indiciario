@@ -23,7 +23,7 @@ Um bom caso não é aquele que esconde a resposta.
 
 Um bom caso é aquele que faz o grupo acreditar em uma resposta plausível antes de perceber a solução correta.
 
-O pipeline de geração deve seguir esta ordem:
+O pipeline de design editorial deve seguir esta ordem antes do JSON:
 
 ```text
 história forte
@@ -35,10 +35,22 @@ história forte
 → plano de envelopes
 → plano documental
 → blueprint JSON
-→ PDFs
 ```
 
-Não iniciar um caso criando documentos finais.
+Depois que o blueprint existir, o fluxo operacional oficial do Indiciário 2.0 inicial passa a ser:
+
+```text
+Blueprint
+→ Case Kernel
+→ Case Review
+→ Visual Library / templates
+→ Build Package
+→ Baseline visual real
+→ Playtest
+→ Ajustes finos
+```
+
+Não iniciar um caso criando documentos finais nem pular direto do plano para PDFs. O Case Kernel e o Case Review devem tornar visível se a pergunta pública, a hipótese de E1, a recontextualização de E2, a motivação atual, as evidências obrigatórias e os falsos caminhos sustentam uma investigação jogável antes de qualquer polimento visual.
 
 ## Antiobjetivo
 

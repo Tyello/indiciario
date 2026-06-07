@@ -24,7 +24,7 @@ Slogan atual:
 
 ## Estado atual do projeto
 
-O framework está tecnicamente funcional e já possui duas réguas canônicas validadas. A prioridade atual é gerar baseline visual real dos PDFs com Playwright/Chromium, revisar os pacotes canônicos e corrigir apenas falhas comprovadas de layout/renderização antes de novo playtest.
+O framework está tecnicamente funcional, já possui duas réguas canônicas validadas e consolidou a entrega inicial do Indiciário 2.0. A prioridade atual é operar pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package → baseline visual real → playtest → ajustes finos, gerando baseline visual real dos PDFs com Playwright/Chromium e corrigindo apenas falhas comprovadas de layout/renderização antes de novo playtest.
 
 Casos canônicos atuais:
 
@@ -83,8 +83,11 @@ Use esta separação antes de mexer em qualquer coisa:
 | Conteúdo do caso intermediário, personagens, documentos, pistas | `examples/caso_canonico_intermediario.json` |
 | Estrutura de dados | `generator/models.py` |
 | Validação narrativa/estrutural | `generator/validator.py` |
+| Extração do DNA investigativo | `generator/case_kernel.py`, `docs/CASE_KERNEL.md` |
+| Revisão editorial pré-pacote | `generator/case_review.py`, `scripts/case_review.py`, `docs/CASE_REVIEW.md` |
 | Renderização de dados em HTML/PDF | `generator/renderer.py` |
 | Mapas e visuais procedurais | `generator/visual_procedural.py`, `generator/floor_plan.py`, `generator/floorplan_renderer.py` |
+| Visual Library 2.0 mínima | `generator/floor_plan_library.py`, `docs/VISUAL_LIBRARY_2_0.md` |
 | Planta v2 do Mirante | `generator/floor_plan.py` (`build_mirante_planta`, `render_floor_plan_svg`) |
 | Printables/cartões de apoio | `generator/printable_cards.py`, `templates/printable_cards.html` |
 | Assinaturas/rubricas/manuscritos | `generator/signature_renderer.py` |
@@ -93,6 +96,31 @@ Use esta separação antes de mexer em qualquer coisa:
 | Estado e diretrizes do produto | `docs/ESTADO_ATUAL.md`, `docs/ROADMAP.md`, `docs/DIRETRIZES_EDITORIAIS.md` |
 
 Se a tarefa é editorial, prefira mudar o blueprint e/ou documentação. Não refatore código sem necessidade.
+
+## Fluxo operacional oficial do Indiciário 2.0 inicial
+
+Use este fluxo como referência oficial para tarefas de criação, revisão e entrega de caso:
+
+```text
+Blueprint
+→ Case Kernel
+→ Case Review
+→ Visual Library / templates
+→ Build Package
+→ Baseline visual real
+→ Playtest
+→ Ajustes finos
+```
+
+Regras práticas:
+
+- comece pelo blueprint e pelo núcleo investigativo;
+- use Case Kernel para enxergar pergunta pública, hipótese E1, recontextualização E2, motivação atual, evidências obrigatórias, falsos caminhos e riscos;
+- use Case Review para revisar progressão antes de polir documento, template, mapa ou pacote;
+- trate Visual Library/templates como materialização visual, não como solução para núcleo fraco;
+- só considere baseline visual real quando o pacote for gerado com Playwright/Chromium;
+- playtest e evidência de PDF real guiam ajustes finos;
+- não implemente feature nova para esta etapa sem instrução explícita.
 
 ## Regra editorial central
 
@@ -199,12 +227,13 @@ Não reabra estes temas sem evidência concreta em PDF/teste/playtest:
 
 Prioridade máxima:
 
-1. gerar baseline visual real dos dois canônicos com Playwright/Chromium;
-2. revisar visualmente os PDFs finais, manifests e print manifests;
-3. corrigir somente falhas comprovadas de layout/renderização;
-4. realizar novo playtest do Intermediário com pessoas novas;
-5. registrar travamentos, hipóteses erradas, tempo real, uso de dicas/cartões e diversão percebida;
-6. só depois decidir ajustes finos ou planejar o canônico Avançado.
+1. operar pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package;
+2. gerar baseline visual real dos dois canônicos com Playwright/Chromium;
+3. revisar visualmente os PDFs finais, manifests e print manifests;
+4. corrigir somente falhas comprovadas de layout/renderização;
+5. realizar novo playtest do Intermediário com pessoas novas;
+6. registrar travamentos, hipóteses erradas, tempo real, uso de dicas/cartões e diversão percebida;
+7. só depois decidir ajustes finos ou planejar o canônico Avançado.
 
 Não priorizar agora:
 

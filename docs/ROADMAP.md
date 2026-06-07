@@ -1,6 +1,6 @@
 # Roadmap do Indiciário
 
-Este roadmap registra a direção atual do projeto depois dos playtests reais e dos hardenings editorial, técnico e visual até P3, incluindo a nova planta baixa estruturada v2 do canônico Iniciante.
+Este roadmap registra a direção atual do projeto depois dos playtests reais, dos hardenings editorial/técnico/visual até P3 e da entrega inicial do fluxo operacional Indiciário 2.0.
 
 ## Estado atual
 
@@ -14,7 +14,9 @@ O Indiciário já possui:
 - printables apartados P1;
 - plantas baixas P2, incluindo `floor_plan.py` como arquitetura estruturada v2 para o Mirante;
 - assinaturas/rubricas/manuscritos P3;
-- início da Visual Library 2.0 mínima com plantas-base estruturadas genéricas.
+- Case Kernel como camada de extração do DNA investigativo;
+- Case Review Report como revisão editorial automática pré-pacote;
+- Visual Library 2.0 mínima com plantas-base estruturadas genéricas.
 
 O projeto está em fase de **validação de baseline real e playtest adicional**, não em fase de plataforma comercial.
 
@@ -61,6 +63,41 @@ Concluído:
 Objetivo alcançado:
 
 > impedir que a LLM gere documentos bonitos antes de existir uma investigação jogável.
+
+## Fase concluída — Indiciário 2.0 inicial: núcleo e revisão
+
+Status: **concluída como fluxo operacional inicial**.
+
+Entregou:
+
+- `generator/case_kernel.py`;
+- `docs/CASE_KERNEL.md`;
+- `tests/test_case_kernel.py`;
+- `generator/case_review.py`;
+- `scripts/case_review.py`;
+- `docs/CASE_REVIEW.md`;
+- `tests/test_case_review.py`.
+
+Fluxo oficial consolidado:
+
+```text
+Blueprint
+→ Case Kernel
+→ Case Review
+→ Visual Library / templates
+→ Build Package
+→ Baseline visual real
+→ Playtest
+→ Ajustes finos
+```
+
+Contrato operacional:
+
+- o Case Kernel organiza o núcleo investigativo derivado do blueprint;
+- o Case Review aponta riscos editoriais antes de investir em PDF, mapa, template ou polimento visual;
+- findings `CK_*` e `CR_*` são insumo de revisão, não substituem validator strict nem playtest;
+- não inventar narrativa para preencher lacunas apontadas pelo relatório;
+- corrigir primeiro progressão, motivação e evidência obrigatória, só depois materialização visual e pacote.
 
 ## Fase concluída — Sistema visual base P0
 
@@ -128,9 +165,9 @@ Estado específico:
 - O mapa do Mirante inclui pátio operacional, posto de controle externo, portão de acesso e doca/serviço.
 - O canônico Intermediário **O Último Brinde do Hotel Aurora** permanece sem mapa por decisão de playtest.
 
-## Fase inicial — Visual Library 2.0 mínima
+## Fase concluída — Visual Library 2.0 mínima
 
-Status: **iniciada, sem integração automática aos canônicos**.
+Status: **concluída como base mínima, sem integração automática aos canônicos**.
 
 Entregou:
 
@@ -173,13 +210,13 @@ Regra consolidada:
 
 > assinatura, rubrica e manuscrito são características editoriais do personagem, não decoração genérica.
 
-## Próxima fase — Baseline real pós-P0/P1/P2/P3
+## Próxima fase — Baseline real pós-Indiciário 2.0 inicial/P0/P1/P2/P3
 
 Status: **próximo passo recomendado**.
 
 Objetivo:
 
-Gerar os pacotes reais dos dois canônicos com Playwright/Chromium e revisar visualmente página por página.
+Gerar os pacotes reais dos dois canônicos com Playwright/Chromium e revisar visualmente página por página, depois de passar pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package.
 
 Comandos:
 
@@ -235,7 +272,7 @@ Status: **pendente**.
 
 Objetivo:
 
-Testar o Hotel Aurora com pessoas novas, usando o pacote pós-P0/P1/P2/P3.
+Testar o Hotel Aurora com pessoas novas, usando o pacote pós-Indiciário 2.0 inicial/P0/P1/P2/P3.
 
 Avaliar:
 
