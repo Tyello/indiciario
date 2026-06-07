@@ -63,3 +63,100 @@ def test_hotel_aurora_continua_sem_mapa() -> None:
     assert blueprint.visual_procedural is not None
     assert blueprint.visual_procedural.mapas == []
     assert not {code for code in codes(data) if code.startswith("MAP_")}
+
+
+def _areas_by_id(data: dict) -> dict:
+    return {area["id"]: area for area in data["visual_procedural"]["mapas"][0]["areas"]}
+
+
+def _wall_coordinate(area: dict, wall: str) -> float:
+    if wall == "norte":
+        return area["y"]
+    if wall == "sul":
+        return area["y"] + area["h"]
+    if wall == "oeste":
+        return area["x"]
+    return area["x"] + area["w"]
+
+
+def _wall_axis_start(area: dict, wall: str) -> float:
+    return area["x"] if wall in {"norte", "sul"} else area["y"]
+
+
+def _wall_length(area: dict, wall: str) -> float:
+    return area["w"] if wall in {"norte", "sul"} else area["h"]
+
+
+def _door_is_on_shared_wall(porta: dict, areas: dict) -> bool:
+    opposite = {"norte": "sul", "sul": "norte", "leste": "oeste", "oeste": "leste"}
+    area_a = areas[porta["area_a"]]
+    area_b = areas[porta["area_b"]]
+    wall_a = porta["parede"]
+    wall_b = opposite[wall_a]
+    if abs(_wall_coordinate(area_a, wall_a) - _wall_coordinate(area_b, wall_b)) > 0.01:
+        return False
+
+    door_start = _wall_axis_start(area_a, wall_a) + porta["posicao"]
+    door_end = door_start + porta["largura"]
+    wall_start = _wall_axis_start(area_b, wall_b)
+    wall_end = wall_start + _wall_length(area_b, wall_b)
+    return wall_start - 0.01 <= door_start and door_end <= wall_end + 0.01
+
+
+def test_mapa_iniciante_renderiza_com_geometria_compartilhada() -> None:
+    from generator.models import Blueprint
+    from generator.visual_procedural import build_map_svg
+
+    data = load_data()
+    blueprint = Blueprint(**data)
+    mapa = blueprint.visual_procedural.mapas[0]  # type: ignore[union-attr]
+    svg = build_map_svg(mapa)
+    areas = _areas_by_id(data)
+
+    assert svg.startswith("<svg")
+    assert 'class="door"' in svg
+    assert 'class="window"' in svg
+    assert 'class="camera"' in svg
+    assert {porta["area_a"] for porta in data["visual_procedural"]["mapas"][0]["portas"]} <= set(areas)
+    assert {porta["area_b"] for porta in data["visual_procedural"]["mapas"][0]["portas"] if porta.get("area_b")} <= set(areas)
+    assert all(
+        _door_is_on_shared_wall(porta, areas)
+        for porta in data["visual_procedural"]["mapas"][0]["portas"]
+        if porta.get("area_b")
+    )
+
+
+def test_mapa_iniciante_tem_adjacencias_principais_sem_conectores() -> None:
+    from generator.models import Blueprint
+    from generator.visual_procedural import build_map_svg
+
+    data = load_data()
+    areas = _areas_by_id(data)
+    portas = data["visual_procedural"]["mapas"][0]["portas"]
+    pares = {frozenset((porta["area_a"], porta["area_b"])) for porta in portas if porta.get("area_b")}
+
+    assert frozenset(("corredor_tecnico", "guarita")) in pares
+    assert frozenset(("corredor_tecnico", "administracao")) in pares
+    assert frozenset(("corredor_tecnico", "sala_seguranca")) in pares
+    assert frozenset(("corredor_tecnico", "reserva_a")) in pares
+    assert frozenset(("corredor_tecnico", "reserva_b")) in pares
+    assert frozenset(("corredor_tecnico", "vitrine")) in pares
+    assert all(_door_is_on_shared_wall(porta, areas) for porta in portas if porta.get("area_b"))
+
+    blueprint = Blueprint(**data)
+    mapa = blueprint.visual_procedural.mapas[0]  # type: ignore[union-attr]
+    svg = build_map_svg(mapa).lower()
+    forbidden = [
+        "rota provável",
+        ">rota",
+        "solução",
+        "solucao",
+        "caminho",
+        "área crítica",
+        "area critica",
+        "conector",
+        "connector",
+        "stroke-dasharray",
+        "#1d4ed8",
+    ]
+    assert not any(term in svg for term in forbidden)

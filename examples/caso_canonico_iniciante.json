@@ -2224,25 +2224,25 @@
         "titulo": "Casa de Acervo Mirante — planta logística térrea",
         "fase": "E1",
         "orientacao": "landscape",
-        "largura": 960,
-        "altura": 540,
+        "largura": 1180,
+        "altura": 660,
         "areas": [
           {
             "id": "guarita",
             "nome": "Guarita",
-            "x": 40,
-            "y": 60,
-            "w": 120,
-            "h": 80,
+            "x": 50,
+            "y": 250,
+            "w": 140,
+            "h": 90,
             "tipo": "controle_acesso",
             "observacao": "P-01"
           },
           {
             "id": "patio",
             "nome": "Área externa / pátio",
-            "x": 40,
-            "y": 190,
-            "w": 160,
+            "x": 50,
+            "y": 340,
+            "w": 140,
             "h": 150,
             "tipo": "externo",
             "observacao": "carga e espera"
@@ -2250,80 +2250,80 @@
           {
             "id": "corredor_tecnico",
             "nome": "Corredor técnico",
-            "x": 230,
-            "y": 180,
-            "w": 250,
-            "h": 85,
+            "x": 190,
+            "y": 250,
+            "w": 720,
+            "h": 90,
             "tipo": "circulacao",
             "observacao": "P-02"
           },
           {
             "id": "administracao",
             "nome": "Administração",
-            "x": 230,
-            "y": 60,
+            "x": 190,
+            "y": 70,
             "w": 180,
-            "h": 105,
+            "h": 180,
             "tipo": "administrativo",
             "observacao": "P-03"
           },
           {
             "id": "sala_seguranca",
             "nome": "Sala de Segurança",
-            "x": 430,
-            "y": 60,
-            "w": 140,
-            "h": 105,
+            "x": 370,
+            "y": 70,
+            "w": 160,
+            "h": 180,
             "tipo": "controle_acesso",
             "observacao": "P-08"
           },
           {
             "id": "doca_servico",
             "nome": "Doca de Serviço",
-            "x": 230,
-            "y": 300,
-            "w": 160,
-            "h": 100,
+            "x": 190,
+            "y": 340,
+            "w": 180,
+            "h": 170,
             "tipo": "carga",
             "observacao": "P-04"
           },
           {
             "id": "deposito",
             "nome": "Depósito",
-            "x": 410,
-            "y": 300,
-            "w": 140,
-            "h": 100,
+            "x": 370,
+            "y": 340,
+            "w": 160,
+            "h": 170,
             "tipo": "carga",
             "observacao": "P-05"
           },
           {
             "id": "reserva_a",
             "nome": "Reserva Técnica A",
-            "x": 610,
-            "y": 60,
-            "w": 180,
-            "h": 130,
+            "x": 530,
+            "y": 70,
+            "w": 190,
+            "h": 180,
             "tipo": "reserva",
             "observacao": "P-07"
           },
           {
             "id": "reserva_b",
             "nome": "Reserva Técnica B",
-            "x": 610,
-            "y": 220,
-            "w": 180,
-            "h": 130,
+            "x": 530,
+            "y": 340,
+            "w": 190,
+            "h": 170,
             "tipo": "reserva",
             "observacao": "P-06"
           },
           {
             "id": "vitrine",
             "nome": "Galeria / Vitrine interna",
-            "x": 610,
-            "y": 380,
-            "w": 180,
-            "h": 90,
+            "x": 720,
+            "y": 340,
+            "w": 190,
+            "h": 170,
             "tipo": "exposicao",
             "observacao": "acesso público"
           }
@@ -2439,7 +2439,7 @@
             "area_a": "guarita",
             "area_b": "patio",
             "parede": "sul",
-            "posicao": 44,
+            "posicao": 54,
             "largura": 32,
             "controle_acesso": "P-01"
           },
@@ -2448,7 +2448,7 @@
             "area_a": "corredor_tecnico",
             "area_b": "guarita",
             "parede": "oeste",
-            "posicao": 28,
+            "posicao": 32,
             "largura": 28,
             "controle_acesso": "P-02"
           },
@@ -2457,7 +2457,7 @@
             "area_a": "administracao",
             "area_b": "corredor_tecnico",
             "parede": "sul",
-            "posicao": 70,
+            "posicao": 75,
             "largura": 30,
             "controle_acesso": "P-03"
           },
@@ -2466,7 +2466,7 @@
             "area_a": "doca_servico",
             "area_b": "patio",
             "parede": "oeste",
-            "posicao": 34,
+            "posicao": 60,
             "largura": 34,
             "controle_acesso": "P-04"
           },
@@ -2475,7 +2475,7 @@
             "area_a": "doca_servico",
             "area_b": "deposito",
             "parede": "leste",
-            "posicao": 34,
+            "posicao": 70,
             "largura": 30,
             "controle_acesso": "P-05"
           },
@@ -2483,8 +2483,8 @@
             "id": "P-06",
             "area_a": "reserva_b",
             "area_b": "corredor_tecnico",
-            "parede": "oeste",
-            "posicao": 44,
+            "parede": "norte",
+            "posicao": 80,
             "largura": 30,
             "controle_acesso": "P-06"
           },
@@ -2492,8 +2492,8 @@
             "id": "P-07",
             "area_a": "reserva_a",
             "area_b": "corredor_tecnico",
-            "parede": "oeste",
-            "posicao": 48,
+            "parede": "sul",
+            "posicao": 80,
             "largura": 30,
             "controle_acesso": "P-07"
           },
@@ -2502,7 +2502,7 @@
             "area_a": "sala_seguranca",
             "area_b": "corredor_tecnico",
             "parede": "sul",
-            "posicao": 52,
+            "posicao": 66,
             "largura": 28,
             "controle_acesso": "P-08"
           },
@@ -2514,6 +2514,15 @@
             "posicao": 74,
             "largura": 32,
             "controle_acesso": "P-09"
+          },
+          {
+            "id": "PV-01",
+            "area_a": "reserva_b",
+            "area_b": "vitrine",
+            "parede": "leste",
+            "posicao": 62,
+            "largura": 32,
+            "controle_acesso": "PV-01"
           }
         ],
         "janelas": [
@@ -2521,36 +2530,36 @@
             "id": "J-01",
             "area": "administracao",
             "parede": "norte",
-            "posicao": 35,
-            "largura": 58
+            "posicao": 45,
+            "largura": 70
           },
           {
             "id": "J-02",
             "area": "sala_seguranca",
             "parede": "norte",
-            "posicao": 38,
-            "largura": 52
+            "posicao": 45,
+            "largura": 60
           },
           {
             "id": "J-03",
             "area": "reserva_a",
             "parede": "norte",
-            "posicao": 54,
-            "largura": 58
+            "posicao": 60,
+            "largura": 70
           },
           {
             "id": "J-04",
             "area": "vitrine",
             "parede": "sul",
-            "posicao": 48,
+            "posicao": 54,
             "largura": 84
           },
           {
             "id": "J-05",
             "area": "guarita",
             "parede": "oeste",
-            "posicao": 20,
-            "largura": 36
+            "posicao": 24,
+            "largura": 38
           }
         ],
         "cameras": [
@@ -2558,28 +2567,28 @@
             "id": "C-01",
             "area": "guarita",
             "parede": "norte",
-            "posicao": 18,
+            "posicao": 22,
             "orientacao": "sul"
           },
           {
             "id": "C-02",
             "area": "corredor_tecnico",
             "parede": "norte",
-            "posicao": 120,
+            "posicao": 355,
             "orientacao": "sul"
           },
           {
             "id": "C-03",
             "area": "sala_seguranca",
             "parede": "leste",
-            "posicao": 18,
+            "posicao": 26,
             "orientacao": "oeste"
           },
           {
             "id": "C-04",
             "area": "vitrine",
             "parede": "leste",
-            "posicao": 30,
+            "posicao": 42,
             "orientacao": "oeste"
           }
         ]
