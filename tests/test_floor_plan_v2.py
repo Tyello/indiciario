@@ -45,7 +45,9 @@ def test_render_floor_plan_svg_mirante_v2_gera_svg_com_ambientes() -> None:
     assert "Corredor Técnico" in svg
     assert "Reserva Técnica A" in svg
     assert "Reserva Técnica B" in svg
-    assert "Segurança" in svg
+    assert "Monitoramento" in svg
+    assert "Posto de Controle" in svg
+    assert "Pátio Operacional" in svg
     assert "Doca / Serviço" in svg
     assert "Administração" in svg
 
@@ -93,6 +95,27 @@ def test_svg_jogador_mirante_v2_nao_contem_linguagem_de_solucao() -> None:
         assert termo not in svg
 
 
+def test_svg_mirante_v2_simplifica_portas_e_indica_cartao() -> None:
+    svg = render_floor_plan_svg(build_mirante_planta())
+
+    assert 'class="threshold"' in svg
+    assert 'class="card-reader"' in svg
+    assert '<g class="door"><line' in svg
+    assert '<g class="door"><path' not in svg
+
+
+def test_mirante_v2_modela_area_externa_e_posto_sem_guarita_grande() -> None:
+    planta = build_mirante_planta()
+    area_ids = {area.id for area in planta.areas}
+    external_ids = {area.id for area in planta.areas_externas}
+    monitoramento = next(area for area in planta.areas if area.id == "monitoramento")
+
+    assert "guarita" not in area_ids
+    assert {"patio_operacional", "posto_controle"} <= external_ids
+    assert monitoramento.w * monitoramento.h < 160 * 135
+    assert planta.portoes[0].id == "G-01"
+
+
 def test_elementos_mirante_v2_referenciam_areas_existentes() -> None:
     planta = build_mirante_planta()
     area_ids = {area.id for area in planta.areas}
@@ -125,4 +148,7 @@ def test_pipeline_atual_renderiza_documento_visual_do_mirante_com_planta_v2() ->
     assert "P-01" in svg
     assert "Recepção / Controle" in svg
     assert "Guarita" not in svg
+    assert "Posto de Controle" in svg
+    assert "Pátio Operacional" in svg
+    assert "G-01" in svg
     assert "Doca / Serviço" in svg
