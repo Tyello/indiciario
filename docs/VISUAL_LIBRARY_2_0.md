@@ -33,7 +33,7 @@ O módulo reaproveita as dataclasses e o renderer de `generator/floor_plan.py`, 
 
 Builders disponíveis:
 
-- `build_hotel_planta_base()` — térreo operacional genérico de hotel, sem vínculo com o Hotel Aurora canônico;
+- `build_hotel_planta_base()` — térreo operacional genérico de hotel, com quartos simples conectados ao corredor e sem vínculo com o Hotel Aurora canônico;
 - `build_escritorio_planta_base()` — escritório administrativo genérico para casos futuros.
 
 ## Não integração automática

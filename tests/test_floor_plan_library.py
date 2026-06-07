@@ -34,6 +34,7 @@ def test_build_hotel_planta_base_is_valid_structured_floor_plan() -> None:
     assert "Aurora" not in planta.titulo
     assert planta.areas_externas
     assert planta.portoes
+    assert any("quarto" in area.nome.lower() or "hóspede" in area.nome.lower() for area in planta.areas)
     assert any(porta.controle_acesso for porta in planta.portas)
 
 
