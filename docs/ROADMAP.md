@@ -13,7 +13,8 @@ O Indiciário já possui:
 - sistema visual P0;
 - printables apartados P1;
 - plantas baixas P2, incluindo `floor_plan.py` como arquitetura estruturada v2 para o Mirante;
-- assinaturas/rubricas/manuscritos P3.
+- assinaturas/rubricas/manuscritos P3;
+- início da Visual Library 2.0 mínima com plantas-base estruturadas genéricas.
 
 O projeto está em fase de **validação de baseline real e playtest adicional**, não em fase de plataforma comercial.
 
@@ -126,6 +127,32 @@ Estado específico:
 - O canônico Iniciante **O Desvio da Reserva Mirante** usa a planta estruturada v2.
 - O mapa do Mirante inclui pátio operacional, posto de controle externo, portão de acesso e doca/serviço.
 - O canônico Intermediário **O Último Brinde do Hotel Aurora** permanece sem mapa por decisão de playtest.
+
+## Fase inicial — Visual Library 2.0 mínima
+
+Status: **iniciada, sem integração automática aos canônicos**.
+
+Entregou:
+
+- `docs/VISUAL_LIBRARY_2_0.md`;
+- `generator/floor_plan_library.py`;
+- `build_hotel_planta_base()` para um térreo operacional genérico de hotel;
+- `build_escritorio_planta_base()` para um escritório administrativo genérico;
+- testes unitários em `tests/test_floor_plan_library.py`.
+
+Contrato visual:
+
+- offline first;
+- P&B first;
+- SVG/CSS procedural;
+- sem imagem externa, QR code, fonte externa ou IA;
+- reutilização do modelo `PlantaBaixa` e do renderer de `generator/floor_plan.py`;
+- nenhum caso canônico alterado ou integrado automaticamente.
+
+Estado específico:
+
+- O Mirante continua usando sua planta estruturada v2 própria.
+- O Hotel Aurora continua sem mapa por decisão validada de playtest.
 
 ## Fase concluída — Assinaturas, rubricas e manuscritos P3
 

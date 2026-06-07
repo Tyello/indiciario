@@ -162,6 +162,7 @@ Mapas seguem o contrato em `docs/FLOORPLANS.md`: A4 landscape, P&B first, planta
 Arquitetura atual:
 
 - `generator/floor_plan.py` é a direção atual para mapas canônicos novos e para o Mirante v2.
+- `generator/floor_plan_library.py` inicia a Visual Library 2.0 com plantas-base genéricas, sem alterar canônicos.
 - `generator/floorplan_renderer.py` permanece como renderer legado/compatibilidade.
 - `templates/floorplan.html` preserva uma página paisagem.
 - `generator/visual_procedural.py` integra o mapa do Mirante chamando `render_floor_plan_svg(build_mirante_planta())`.

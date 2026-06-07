@@ -53,7 +53,7 @@ Nunca use a planta para dizer o que comparar, quem é suspeito, qual rota ocorre
 
 ## Modelagem v2 recomendada
 
-Para novos mapas canônicos, usar `generator/floor_plan.py`.
+Para novos mapas canônicos, usar `generator/floor_plan.py`. Para bases reutilizáveis de casos futuros, consultar `generator/floor_plan_library.py` e `docs/VISUAL_LIBRARY_2_0.md` sem integração automática aos canônicos.
 
 Modelo atual:
 
