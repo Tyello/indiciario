@@ -31,7 +31,8 @@ Casos canônicos atuais:
 1. **O Desvio da Reserva Mirante**
    - arquivo: `examples/caso_canonico_iniciante.json`;
    - dificuldade editorial: **Iniciante**;
-   - função: régua canônica iniciante, referência narrativa/técnica e fixture de integração.
+   - função: régua canônica iniciante, referência narrativa/técnica e fixture de integração;
+   - mapa: usa a planta baixa estruturada v2 em `generator/floor_plan.py`.
 
 2. **O Último Brinde do Hotel Aurora**
    - arquivo: `examples/caso_canonico_intermediario.json`;
@@ -83,7 +84,8 @@ Use esta separação antes de mexer em qualquer coisa:
 | Estrutura de dados | `generator/models.py` |
 | Validação narrativa/estrutural | `generator/validator.py` |
 | Renderização de dados em HTML/PDF | `generator/renderer.py` |
-| Mapas e visuais procedurais | `generator/visual_procedural.py`, `generator/floorplan_renderer.py` |
+| Mapas e visuais procedurais | `generator/visual_procedural.py`, `generator/floor_plan.py`, `generator/floorplan_renderer.py` |
+| Planta v2 do Mirante | `generator/floor_plan.py` (`build_mirante_planta`, `render_floor_plan_svg`) |
 | Printables/cartões de apoio | `generator/printable_cards.py`, `templates/printable_cards.html` |
 | Assinaturas/rubricas/manuscritos | `generator/signature_renderer.py` |
 | Templates de documentos | `templates/*.html` |
@@ -118,17 +120,25 @@ Essas expressões podem existir em guia do facilitador, dicas, QA, graph report,
 
 ## Mapa
 
-Mapa do jogador deve ser uma planta baixa neutra.
+Mapa do jogador deve ser uma planta baixa neutra e operacional.
+
+Direção atual:
+
+- Para o Mirante, usar a planta estruturada v2 em `generator/floor_plan.py`.
+- `generator/floorplan_renderer.py` fica como renderer legado/compatibilidade.
+- Novos mapas canônicos devem preferir modelo estruturado, não SVG hardcoded nem diagrama de caixas soltas.
 
 Deve conter:
 
 - ambientes;
-- paredes;
-- portas;
+- paredes compartilhadas por adjacência;
+- portas com vão/gap real;
 - janelas;
 - câmeras neutras;
 - nomes de ambientes;
-- códigos de portas;
+- códigos de ambientes e portas sem ambiguidade (`A-xx` para áreas, `P-xx` para portas);
+- portões quando houver acesso externo/serviço;
+- indicador discreto de cartão quando houver controle de acesso;
 - norte e escala, se discretos.
 
 Não deve conter:
@@ -181,6 +191,7 @@ Não reabra estes temas sem evidência concreta em PDF/teste/playtest:
 - Hotel Aurora sem mapa;
 - remoção de quadros comparativos que funcionem como dica/gabarito para jogador;
 - mapa sem rota/área crítica/câmera offline;
+- planta v2 do Mirante como direção atual para mapa canônico Iniciante;
 - assinatura/rubrica como atributo de personagem;
 - cartões como apoio de mesa, não evidência principal.
 
