@@ -1,6 +1,6 @@
 # Roadmap do Indiciário
 
-Este roadmap registra a direção atual do projeto depois dos playtests reais e dos hardenings editorial, técnico e visual até P2.
+Este roadmap registra a direção atual do projeto depois dos playtests reais e dos hardenings editorial, técnico e visual até P3, incluindo a nova planta baixa estruturada v2 do canônico Iniciante.
 
 ## Estado atual
 
@@ -12,7 +12,7 @@ O Indiciário já possui:
 - package builder com manifest, print manifest, guia de impressão, guia do facilitador, dicas, QA e grafo de pistas;
 - sistema visual P0;
 - printables apartados P1;
-- plantas baixas P2;
+- plantas baixas P2, incluindo `floor_plan.py` como arquitetura estruturada v2 para o Mirante;
 - assinaturas/rubricas/manuscritos P3.
 
 O projeto está em fase de **validação de baseline real e playtest adicional**, não em fase de plataforma comercial.
@@ -95,28 +95,37 @@ Regra consolidada:
 
 ## Fase concluída — Plantas baixas P2
 
-Status: **concluída**.
+Status: **concluída como base, com revisão visual real ainda necessária**.
 
 Entregou:
 
-- `generator/floorplan_renderer.py`;
-- `templates/floorplan.html`;
-- campos estruturais de mapa: portas, janelas, câmeras, categoria e inclusão por envelope;
-- validações `MAP_*`;
+- `generator/floorplan_renderer.py` como renderer legado/compatibilidade;
+- `generator/floor_plan.py` como arquitetura estruturada v2 para mapas canônicos;
+- `build_mirante_planta()` e `render_floor_plan_svg()` para o mapa v2 do Mirante;
+- `templates/floorplan.html` como embalagem HTML/PDF landscape;
+- campos estruturais de mapa no blueprint legado: portas, janelas, câmeras, categoria e inclusão por envelope;
+- validações `MAP_*` no validator;
+- validações geométricas específicas da planta v2 via `validar_planta()`;
 - documentação `docs/FLOORPLANS.md`.
 
 Contrato visual:
 
 - A4 paisagem;
 - P&B first;
-- paredes fechadas;
-- portas com gap real;
-- portas entre áreas adjacentes abrem gap na parede compartilhada quando há coincidência real;
+- planta como espaço arquitetônico, não diagrama de caixas;
+- paredes compartilhadas por adjacência;
+- portas com gap real e representação simplificada;
+- portas com cartão podem receber indicador discreto de acesso;
+- portão externo quando houver pátio/doca/serviço;
 - janelas em paredes;
 - câmeras em parede/canto;
 - sem rota, solução, área crítica, câmera offline, campo de visão ou linguagem interpretativa.
 
-Hotel Aurora permanece sem mapa por decisão de playtest.
+Estado específico:
+
+- O canônico Iniciante **O Desvio da Reserva Mirante** usa a planta estruturada v2.
+- O mapa do Mirante inclui pátio operacional, posto de controle externo, portão de acesso e doca/serviço.
+- O canônico Intermediário **O Último Brinde do Hotel Aurora** permanece sem mapa por decisão de playtest.
 
 ## Fase concluída — Assinaturas, rubricas e manuscritos P3
 
@@ -163,7 +172,7 @@ Revisar:
 - cartões apartados;
 - assinaturas/rubricas;
 - manuscritos curtos;
-- mapa do Iniciante;
+- mapa v2 do Iniciante;
 - P&B/escala de cinza.
 
 Critério de conclusão:
@@ -171,7 +180,8 @@ Critério de conclusão:
 - os dois pacotes geram sem erro real de Playwright;
 - não há resíduos técnicos;
 - não há quebra visual grave;
-- o mapa do Iniciante parece planta operacional, não pista visual;
+- o mapa do Iniciante parece planta operacional, não pista visual nem diagrama de caixas;
+- pátio, portão, posto de controle, doca, portas com cartão, janelas e câmeras ficam legíveis no PDF real;
 - Hotel Aurora continua sem mapa;
 - material de jogador, facilitador, dicas e printables estão fisicamente separados.
 
@@ -185,7 +195,8 @@ Só corrigir problemas comprovados, como:
 - assinatura mal posicionada;
 - manuscrito ilegível;
 - cartão cortando texto;
-- mapa com porta/janela/câmera mal posicionada;
+- ajuste fino de geometria do `build_mirante_planta()` se o PDF real indicar problema;
+- mapa com porta/janela/câmera/portão mal posicionado;
 - guia de impressão ambíguo;
 - separação de arquivos incorreta.
 
@@ -258,29 +269,3 @@ Cada canônico deve testar uma mecânica investigativa diferente, não apenas um
 ## Fase futura — Inteligência editorial
 
 Status: **futuro, após vários casos e playtests**.
-
-Ideias:
-
-- benchmark report;
-- comparador de casos;
-- calibragem automática de dificuldade;
-- análise de progressão;
-- análise de red herrings;
-- detecção de documento que resolve demais;
-- sugestões de dicas baseadas em travamentos reais.
-
-## Não priorizar agora
-
-Não priorizar neste momento:
-
-- marketplace;
-- dashboard web;
-- banco de dados;
-- editor visual;
-- multiusuário;
-- Telegram comercial;
-- agentes autônomos;
-- IA gerando imagens;
-- automação de venda.
-
-Essas frentes só fazem sentido depois de provar que o framework gera mistérios consistentemente bons, jogáveis e desejáveis.
