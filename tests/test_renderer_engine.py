@@ -182,6 +182,71 @@ def test_email_canonico_e1_02_renderiza_sem_copia_residual():
     assert "coord.reservas@acervomirante.local" in html
 
 
+
+def test_whatsapp_template_preserva_celular_e_tela_interna() -> None:
+    root = Path(__file__).parent.parent
+    template = (root / "templates" / "02_whatsapp.html").read_text(encoding="utf-8")
+    dados = {
+        "HORA_TELA": "16:42",
+        "NOME_GRUPO": "Operação teste",
+        "MEMBROS_LISTA": "Ana, Beto",
+        "DATA_CONVERSA": "12 de maio",
+        "MENSAGENS": [
+            {
+                "DIRECAO": "in",
+                "CLASSE_GAP": "gap",
+                "MOSTRAR_NOME": True,
+                "COR_REMETENTE": "color-1",
+                "NOME_REMETENTE": "Ana",
+                "TEXTO_MENSAGEM": "Cheguei pela recepção.",
+                "HORARIO": "16:40",
+                "DIRECAO_OUT": False,
+                "TICKS": "",
+            },
+            {
+                "DIRECAO": "out",
+                "CLASSE_GAP": "gap",
+                "MOSTRAR_NOME": False,
+                "COR_REMETENTE": "",
+                "NOME_REMETENTE": "",
+                "TEXTO_MENSAGEM": "Confere a doca também.",
+                "HORARIO": "16:41",
+                "DIRECAO_OUT": True,
+                "TICKS": "✓✓",
+            },
+        ],
+    }
+
+    html = renderizar_html(template, dados)
+
+    assert 'class="phone-shell marvel-device nexus5"' in html
+    assert 'class="phone-screen screen"' in html
+    assert 'class="user-bar"' in html
+    assert 'class="conversation-container"' in html
+    assert 'class="message in gap"' in html
+    assert 'class="message out gap"' in html
+    assert 'class="bubble"' in html
+    assert 'EXPORTAÇÃO OPERACIONAL' not in _conversation_markup(html)
+
+
+def test_whatsapp_template_nao_depende_de_assets_externos() -> None:
+    template = (
+        Path(__file__).parent.parent / "templates" / "02_whatsapp.html"
+    ).read_text(encoding="utf-8")
+    lowered = template.lower()
+
+    assert "<script" not in lowered
+    assert "@import" not in lowered
+    assert "http://" not in lowered
+    assert "https://" not in lowered
+    assert "url(" not in lowered
+
+
+def _conversation_markup(html: str) -> str:
+    start = html.index('<div class="conversation">')
+    end = html.index('<div class="conversation-compose">', start)
+    return html[start:end]
+
 def test_caso_canonico_templates_usados_renderizam_sem_placeholders_residuais():
     root = Path(__file__).parent.parent
     blueprint_path = root / "examples" / "caso_canonico_iniciante.json"
