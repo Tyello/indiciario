@@ -129,6 +129,7 @@ def build_mirante_planta() -> PlantaBaixa:
         AreaPlanta("doca_servico", "Doca / Serviço", 590, 315, 250, 135, "servico", "A-09"),
     )
     areas_externas = (
+        AreaExternaPlanta("acesso_publico", "Calçada / Acesso Público", 82, 24, 170, 42, "publico", "EXT-02"),
         AreaExternaPlanta("patio_operacional", "Pátio Operacional", 570, 452, 310, 72, "servico", "EXT-01"),
         AreaExternaPlanta("posto_controle", "Posto de Controle", 858, 395, 62, 48, "controle", "PC-01"),
     )
@@ -161,6 +162,7 @@ def build_mirante_planta() -> PlantaBaixa:
     )
     portoes = (
         PortaoPlanta("G-01", 944, 464, 56, "V"),
+        PortaoPlanta("G-02", 130, 0, 74, "H"),
     )
     return PlantaBaixa(
         id="casa_acervo_mirante_v2",
@@ -470,6 +472,13 @@ def _area_externa_svg(area: AreaExternaPlanta) -> str:
             f'<text class="external-code" x="{cx:g}" y="{cy - 5:g}">{codigo}</text>'
             f'<text class="external-name" x="{cx:g}" y="{cy + 10:g}">{nome}</text></g>'
         )
+    if area.tipo == "publico":
+        return (
+            f'<g class="external-public"><rect x="{area.x:g}" y="{area.y:g}" width="{area.w:g}" height="{area.h:g}" rx="2"/>'
+            f'<line x1="{area.x + 18:g}" y1="{cy:g}" x2="{area.x + area.w - 18:g}" y2="{cy:g}"/>'
+            f'<text class="external-code" x="{cx:g}" y="{area.y + 16:g}">{codigo}</text>'
+            f'<text class="external-name" x="{cx:g}" y="{area.y + 31:g}">{nome}</text></g>'
+        )
     return (
         f'<g class="external-yard"><rect x="{area.x:g}" y="{area.y:g}" width="{area.w:g}" height="{area.h:g}"/>'
         f'<path d="M{area.x + 34:g},{area.y + 14:g} h106 v38 h-106 z"/>'
@@ -514,7 +523,7 @@ def render_floor_plan_svg(planta: PlantaBaixa, versao: str = "jogador") -> str:
     if versao != "jogador":
         versao = "jogador"
     style = (
-        'text{font-family:Arial,Helvetica,sans-serif}.room-code{font-family:"Courier New",monospace;font-size:12px;font-weight:700;fill:#111;text-anchor:middle}.room-name{font-size:9px;fill:#333;text-anchor:middle}.outer line{stroke:#111;stroke-width:7;stroke-linecap:square}.inner line{stroke:#222;stroke-width:3.2;stroke-linecap:square}.door line{stroke:#333;stroke-width:1.35;stroke-linecap:square}.door .threshold{stroke:#777;stroke-width:1;stroke-opacity:.55}.door text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.card-reader rect{fill:#fff;stroke:#111;stroke-width:1}.card-reader line{stroke:#111;stroke-width:.75}.window line{stroke:#111;stroke-width:1.4}.camera rect{fill:#fff;stroke:#111;stroke-width:1.3}.camera circle{fill:#111}.camera text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.site-perimeter .site-fill{fill:none;stroke:none}.site-perimeter line{stroke:#111;stroke-width:2.4;stroke-linecap:square}.external-yard rect{fill:#f8f8f8;stroke:#555;stroke-width:1.2;stroke-opacity:.8}.external-yard path{fill:none;stroke:#777;stroke-width:1.2;stroke-opacity:.55}.external-yard line{stroke:#777;stroke-width:1}.external-control rect{fill:#fff;stroke:#111;stroke-width:1.5}.external-code{font-family:"Courier New",monospace;font-size:10px;font-weight:700;fill:#111;text-anchor:middle}.external-name{font-size:8.5px;fill:#333;text-anchor:middle}.gate line,.gate path{fill:none;stroke:#111;stroke-width:1.7;stroke-linecap:square}.gate text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.stamp{font-size:9px;fill:#444}.hatch{stroke:#ddd;stroke-width:1}'
+        'text{font-family:Arial,Helvetica,sans-serif}.room-code{font-family:"Courier New",monospace;font-size:12px;font-weight:700;fill:#111;text-anchor:middle}.room-name{font-size:9px;fill:#333;text-anchor:middle}.outer line{stroke:#111;stroke-width:7;stroke-linecap:square}.inner line{stroke:#222;stroke-width:3.2;stroke-linecap:square}.door line{stroke:#333;stroke-width:1.35;stroke-linecap:square}.door .threshold{stroke:#777;stroke-width:1;stroke-opacity:.55}.door text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.card-reader rect{fill:#fff;stroke:#111;stroke-width:1}.card-reader line{stroke:#111;stroke-width:.75}.window line{stroke:#111;stroke-width:1.4}.camera rect{fill:#fff;stroke:#111;stroke-width:1.3}.camera circle{fill:#111}.camera text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.site-perimeter .site-fill{fill:none;stroke:none}.site-perimeter line{stroke:#111;stroke-width:2.4;stroke-linecap:square}.external-yard rect{fill:#f8f8f8;stroke:#555;stroke-width:1.2;stroke-opacity:.8}.external-yard path{fill:none;stroke:#777;stroke-width:1.2;stroke-opacity:.55}.external-yard line{stroke:#777;stroke-width:1}.external-public rect{fill:#fff;stroke:#666;stroke-width:1.1;stroke-opacity:.75}.external-public line{stroke:#777;stroke-width:1}.external-control rect{fill:#fff;stroke:#111;stroke-width:1.5}.external-code{font-family:"Courier New",monospace;font-size:10px;font-weight:700;fill:#111;text-anchor:middle}.external-name{font-size:8.5px;fill:#333;text-anchor:middle}.gate line,.gate path{fill:none;stroke:#111;stroke-width:1.7;stroke-linecap:square}.gate text{font-family:"Courier New",monospace;font-size:8px;fill:#111;text-anchor:middle}.stamp{font-size:9px;fill:#444}.hatch{stroke:#ddd;stroke-width:1}'
     )
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {planta.largura:g} {planta.altura:g}" role="img" aria-label="{escape(planta.titulo)}">',

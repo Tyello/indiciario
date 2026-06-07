@@ -9,25 +9,27 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --page-bg: #f2eee8;
+    --page-bg: #f3f1ed;
     --device-bg: #1f1f1f;
-    --device-edge: #151515;
-    --screen-bg: #e5ddd5;
-    --status-bg: #054d44;
-    --header-bg: #075e54;
+    --device-edge: #121212;
+    --screen-bg: #ece8e0;
+    --status-bg: #2f2f2f;
+    --header-bg: #3a3a3a;
     --header-text: #ffffff;
-    --header-muted: rgba(255, 255, 255, 0.76);
-    --msg-sent: #dcf8c6;
+    --header-muted: rgba(255, 255, 255, 0.78);
+    --msg-sent: #f0f0f0;
     --msg-received: #ffffff;
-    --msg-text: #262626;
-    --meta: #8c8c8c;
-    --tick: #4fc3f7;
+    --msg-text: #202020;
+    --meta: #727272;
+    --tick: #4f4f4f;
     --composer-bg: #efefef;
-    --composer-icon: #7d8489;
-    --send-bg: #00897b;
-    --date-bg: rgba(225, 245, 254, 0.92);
-    --date-text: #54656f;
+    --composer-icon: #696969;
+    --send-bg: #333333;
+    --date-bg: rgba(255, 255, 255, 0.88);
+    --date-text: #555555;
   }
+
+  @page { size: A4; margin: 10mm; }
 
   body {
     min-height: 100vh;
@@ -37,7 +39,7 @@
     font-size: 14px;
     display: flex;
     justify-content: center;
-    padding: 24px 0;
+    padding: 8mm 0;
   }
 
   .page {
@@ -47,13 +49,16 @@
     align-items: flex-start;
   }
 
+  .phone-shell,
   .marvel-device.nexus5 {
     width: 360px;
     background: var(--device-bg);
     border-radius: 30px;
     padding: 52px 12px 58px;
     position: relative;
-    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.58);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .top-bar,
@@ -99,10 +104,12 @@
     border: 2px solid #2a2a2a;
   }
 
+  .phone-screen,
   .screen {
     height: 610px;
     overflow: hidden;
     background: var(--screen-bg);
+    border: 1px solid #111;
     border-radius: 3px;
   }
 
@@ -182,8 +189,8 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #d5e8e6;
-    color: #075e54;
+    background: #eeeeee;
+    color: #333333;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -261,7 +268,8 @@
     font-size: 12px;
     padding: 5px 12px;
     border-radius: 7px;
-    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.10);
   }
 
   .message {
@@ -274,8 +282,10 @@
     line-height: 1.36;
     position: relative;
     word-wrap: break-word;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
-    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.10);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .message.in,
@@ -323,7 +333,7 @@
   }
 
   .sender-name-label {
-    color: #039be5;
+    color: #333333;
     display: block;
     font-size: 12.6px;
     font-weight: 700;
@@ -375,12 +385,12 @@
     fill: currentColor;
   }
 
-  .color-1 { color: #039be5; }
-  .color-2 { color: #e91e63; }
-  .color-3 { color: #f57c00; }
-  .color-4 { color: #43a047; }
-  .color-5 { color: #8e24aa; }
-  .color-6 { color: #00897b; }
+  .color-1 { color: #222222; }
+  .color-2 { color: #333333; }
+  .color-3 { color: #444444; }
+  .color-4 { color: #555555; }
+  .color-5 { color: #666666; }
+  .color-6 { color: #2f2f2f; }
 
   .conversation-compose {
     min-height: 52px;
@@ -449,16 +459,35 @@
     align-items: center;
     justify-content: center;
   }
+
+  @media print {
+    body {
+      min-height: auto;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    .page {
+      min-height: 277mm;
+      align-items: center;
+    }
+
+    .phone-shell,
+    .marvel-device.nexus5 {
+      box-shadow: none;
+      border: 1px solid #111;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="page">
-  <div class="marvel-device nexus5">
+  <div class="phone-shell marvel-device nexus5">
     <div class="top-bar"></div>
     <div class="sleep"></div>
     <div class="volume"></div>
     <div class="camera"></div>
-    <div class="screen">
+    <div class="phone-screen screen">
       <div class="screen-container">
         <div class="status-bar">
           <div class="status-time">{{HORA_TELA}}</div>
