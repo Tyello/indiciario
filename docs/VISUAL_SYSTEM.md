@@ -42,16 +42,17 @@ A base define tokens CSS para:
 
 ## Cabeçalho e rodapé documental
 
-Documentos de jogador renderizados pelos templates principais recebem um controle documental reutilizável com:
+O sistema visual possui classes reutilizáveis para controle documental, mas documentos diegéticos de jogador não devem exibir metadados técnicos visíveis como envelope, código interno ou “controle de dossiê” quando isso quebrar imersão.
 
-- emissor, setor ou sistema;
-- tipo documental;
-- data, período ou referência;
-- código documental;
-- status documental discreto;
-- caso, envelope e controle de dossiê no rodapé.
+A rastreabilidade deve ficar em:
 
-Esse bloco não deve conter interpretação, dica, gabarito, checklist de cruzamento ou linguagem de facilitador.
+- `manifest.json`;
+- `print_manifest.json`;
+- guia do facilitador;
+- relatórios internos/debug;
+- nomes de arquivos.
+
+Esse bloco nunca deve conter interpretação, dica, gabarito, checklist de cruzamento ou linguagem de facilitador.
 
 ## Classes por tipo documental
 
@@ -77,7 +78,7 @@ Famílias visuais cobertas no P0:
 
 - **Carta / carta antiga:** serifada, espaçada, sóbria, com envelhecimento sutil.
 - **E-mail institucional:** cabeçalho corporativo limpo, metadados legíveis, sem depender de visual de app real.
-- **Chat / exportação operacional:** balões discretos e indicação de exportação; evitar aparência colorida demais.
+- **Chat / exportação operacional:** balões discretos e indicação de exportação fora do fluxo das mensagens; evitar aparência colorida demais.
 - **Log / sistema:** monoespaçado, frio, orientado a código, com tabelas densas e legíveis.
 - **Depoimento / declaração:** formulário administrativo, campos claros e assinatura/rubrica no fim.
 - **Contrato / orçamento / recibo:** burocrático/comercial, valores alinhados e carimbos opcionais.
@@ -154,17 +155,34 @@ Regras editoriais:
 
 Ver também `docs/PRINTABLES.md`.
 
-## P2 — Plantas baixas profissionais procedurais
+## P2 — Plantas baixas estruturadas
 
-Mapas seguem o contrato em `docs/FLOORPLANS.md`: A4 landscape, P&B first, fundo branco, paredes fechadas, portas com gap real, janelas paralelas na parede e câmeras presas em parede/canto.
+Mapas seguem o contrato em `docs/FLOORPLANS.md`: A4 landscape, P&B first, planta como espaço arquitetônico, paredes compartilhadas, portas com gap real, janelas em parede, câmeras em parede/canto e ausência total de rota/solução visual.
 
-O renderer dedicado `generator/floorplan_renderer.py` gera SVG inline sem imagem externa e o template `templates/floorplan.html` preserva uma página paisagem.
+Arquitetura atual:
+
+- `generator/floor_plan.py` é a direção atual para mapas canônicos novos e para o Mirante v2.
+- `generator/floorplan_renderer.py` permanece como renderer legado/compatibilidade.
+- `templates/floorplan.html` preserva uma página paisagem.
+- `generator/visual_procedural.py` integra o mapa do Mirante chamando `render_floor_plan_svg(build_mirante_planta())`.
+
+O mapa v2 do Mirante usa:
+
+- ambientes com códigos `A-xx`;
+- portas com códigos `P-xx`;
+- portão externo `G-xx`;
+- câmeras `CAM-xx`;
+- posto de controle externo;
+- pátio operacional;
+- doca/serviço;
+- indicador discreto de controle por cartão.
 
 A planta baixa não pode virar pista visual interpretativa. Rotas, áreas críticas, câmera offline, campo de visão, suspeitos, solução e instruções de cruzamento pertencem ao facilitador/dicas/gabarito, nunca ao mapa de jogador.
 
 Regra visual importante:
 
-- se uma porta conecta duas áreas adjacentes, a abertura precisa aparecer como gap real na parede compartilhada, não apenas como ícone de porta desenhado sobre uma parede contínua.
+- o renderer deve comunicar passagem por gap/vão claro; arco realista de giro da porta é opcional e não deve poluir a leitura.
+- se a geometria estiver ruim, corrigir o builder da planta; não “colar” salas com conectores artificiais.
 
 ## P3 — Assinaturas, rubricas e manuscritos
 
@@ -177,26 +195,3 @@ A infraestrutura atual usa perfis de personagem no blueprint, SVG inline procedu
 - gerar traços por caminhos SVG, sem fonte decorativa aplicada a blocos longos.
 
 Não usar fonte externa, imagem gerada por IA ou assinatura textual simples como substituto do perfil editorial. Detalhes de campos, estilos, limites e checklist estão em `docs/SIGNATURES_AND_HANDWRITING.md`.
-
-## Jogador vs. facilitador
-
-- Material do jogador: evidência bruta, cabeçalho/rodapé documental, sem linguagem de solução.
-- Guia do facilitador: pode conter interpretação, confirmação, contrato lógico, dicas e gabarito, mas deve ser visualmente confidencial.
-- Dicas contextuais: sempre separadas fisicamente dos envelopes dos jogadores.
-- Printables: apoio de mesa, separados dos envelopes e sem função de prova.
-
-## Checklist visual antes de playtest
-
-1. Os documentos parecem artefatos reais, não cards explicativos?
-2. O cabeçalho/rodapé informa controle documental sem entregar interpretação?
-3. Alguma tabela depende só de cor para sentido?
-4. Débitos, créditos, datas, horários e códigos estão alinhados?
-5. Carimbos são burocráticos e neutros?
-6. Assinaturas/rubricas aparecem como SVG offline e não quebram página?
-7. Manuscritos são curtos e parecem intervenção humana, não bloco decorativo?
-8. Guia do facilitador está claramente separado do material do jogador?
-9. Printables estão separados e marcados como apoio de mesa?
-10. Mapas estão em paisagem, P&B, com portas/janelas/câmeras coerentes e sem solução visual?
-11. A impressão P&B continua legível?
-12. Não há CDN, imagem externa ou fonte binária?
-13. Não houve alteração narrativa acidental nos canônicos?
