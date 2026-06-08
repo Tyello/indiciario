@@ -80,6 +80,30 @@ A saída em Markdown contém:
 - `CR_DIFF_002`: dificuldade declarada pode estar superestimada.
 - `CR_DIFF_003`: volume documental incompatível com dificuldade.
 
+
+## Riscos narrativos futuros
+
+Os códigos abaixo são diretrizes conceituais para evolução futura do Case Review. Eles não são validações implementadas ainda, salvo se um código passar a existir explicitamente no relatório ou no código em versão posterior. Nesta PR, servem para orientar revisão humana, playtest e priorização de futuras heurísticas.
+
+- `CR_NARR_001` — conclusão depende de ausência sem ferramenta de comparação.
+- `CR_NARR_002` — mecanismo causal sem âncora documental.
+- `CR_NARR_003` — relação necessária entre personagens não documentada.
+- `CR_NARR_004` — evidência indireta tratada como evidência direta.
+- `CR_NARR_005` — E1 exige abstração alta demais para a ferramenta oferecida.
+- `CR_NARR_006` — objeto associado prova presença sem confirmação independente.
+- `CR_NARR_007` — registro de sistema usado como prova humana direta sem ressalva.
+- `CR_NARR_008` — E2 precisa desfazer convicção errada em vez de recontextualizar descoberta parcial.
+
+Ao revisar manualmente um relatório, trate esses riscos como perguntas editoriais:
+
+- a ausência fica visível sem ser explicada em documento de jogador?
+- cada envelope entrega ferramenta investigativa prática, não só intenção autoral?
+- motivo, oportunidade e mecanismo aparecem como três camadas distintas da solução?
+- ações baseadas em confiança, autoridade ou hábito têm âncora documental anterior à revelação?
+- evidências diretas, indiretas/por objeto e sistêmicas estão separadas no plano?
+
+Exemplo de risco narrativo: a solução diz que Marta atraiu Helena para a sala de memória, mas nenhum documento mostra como Helena recebeu esse chamado ou por que responderia a ele. Nesse caso, o problema não é apenas falta de motivo; é mecanismo causal sem âncora documental.
+
 ## Status de prontidão
 
 - `READY_FOR_BASELINE`: pronto para gerar ou revisar baseline, com warnings aceitáveis.

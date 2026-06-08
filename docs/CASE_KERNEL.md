@@ -135,6 +135,34 @@ O E2 deve recontextualizar o E1, por exemplo:
 
 Um risco editorial aparece quando o primeiro envelope já exige solução final ou quando um falso caminho não tem descarte justo. O Kernel deve tornar esse risco visível antes de criar mais documentos explicativos para o jogador.
 
+
+## Evolução desejada do Kernel
+
+O Kernel deve passar a observar, inicialmente por derivação editorial e sem exigir novos campos obrigatórios no blueprint, conceitos que reduzem travamento narrativo em playtest:
+
+- `mecanismo_causal`: como a ação central aconteceu, não apenas por que e quando;
+- `tipo_evidencia_por_contrato`: separação entre evidência direta, indireta/por objeto e sistêmica;
+- `relacoes_necessarias`: confiança, autoridade, hábito, obediência ou relação prévia indispensável para uma ação ser crível;
+- `ausencias_relevantes`: ausências que precisam ser percebidas para uma conclusão parcial;
+- `ferramentas_por_envelope`: estrutura concreta que permite ao jogador chegar à conclusão esperada;
+- `pistas_por_ausencia`: pistas cuja força vem de algo que não foi visto, registrado ou confirmado.
+
+Esses conceitos podem ser derivados a partir de `objetivos_por_envelope`, `contratos_evidencia`, `guia_operacional`, documentos e notas editoriais. Eles não precisam virar campos obrigatórios agora. O objetivo é melhorar a revisão editorial e a criação de novos casos antes de qualquer automação rígida.
+
+Regras de referência:
+
+- Quando a conclusão parcial depender de ausência, o caso precisa fornecer uma ferramenta de comparação. Ausência sem estrutura vira invisibilidade, não pista.
+- A solução final precisa ter mecanismo causal documentado. Motivo explica por quê. Oportunidade explica quando. Mecanismo explica como.
+- Se a solução depende de confiança, autoridade, hábito, obediência ou relação prévia, essa relação precisa ter pelo menos uma âncora documental antes da revelação final.
+
+Perguntas úteis para extração futura:
+
+- Qual ferramenta cada envelope oferece ao grupo para chegar à conclusão esperada?
+- Alguma evidência indireta ou sistêmica está sendo tratada como evidência direta?
+- A ausência importante fica visível em tabela, matriz, linha do tempo, registro comparativo ou estrutura equivalente?
+- O grupo consegue inferir como a pessoa foi atraída, como o objeto foi movido, como o registro foi manipulado ou como o falso sinal foi criado?
+- Qual documento ancora a relação necessária entre personagens quando a ação depende de confiança ou autoridade?
+
 ## O que não deve entrar no Kernel
 
 O Case Kernel não deve conter:
