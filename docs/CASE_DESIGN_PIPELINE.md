@@ -279,6 +279,8 @@ Exemplos:
 
 A mecânica deve ser definida antes dos documentos.
 
+Se a mecânica envolver presença, ausência, álibi ou deslocamento, registre o peso probatório das evidências: direta, indireta/por objeto ou sistêmica. Use `docs/DIRETRIZES_EDITORIAIS.md` como fonte da verdade para essas categorias. Um objeto associado ou log de sistema pode sustentar suspeita, mas não deve ser planejado como prova humana direta sem confirmação independente.
+
 ```json
 "mecanica_investigativa_principal": {
   "tipo": "depoimentos_contraditorios_e_cronologia",
@@ -350,6 +352,29 @@ Todo envelope precisa ter:
 
 `objetivos_por_envelope` é campo schema-enforced do `Blueprint`. Reflita esses objetivos em `contratos_evidencia`, documentos e `dicas_contextuais`; `guia_operacional.resposta_esperada_por_envelope` deve espelhar os mesmos envelopes e respostas para validar a condução do facilitador.
 
+Todo envelope precisa oferecer ao grupo uma ferramenta prática para chegar à conclusão esperada. Objetivo por envelope sem ferramenta investigativa vira intenção do autor, não experiência de jogador.
+
+Para cada envelope, responda:
+
+- qual pergunta o envelope levanta?
+- qual conclusão parcial ele permite?
+- qual ferramenta o jogador tem para chegar nela?
+- essa ferramenta está nos documentos, nos printables, em uma folha de apoio ou na própria estrutura do envelope?
+- a ferramenta organiza a investigação sem entregar a resposta?
+
+Exemplo conceitual:
+
+```text
+Pergunta E1:
+A pessoa realmente esteve no local após determinado horário?
+
+Conclusão parcial:
+Há sinais indiretos de presença, mas nenhum avistamento direto confiável.
+
+Ferramenta:
+folha de cruzamento de presença por tipo de evidência.
+```
+
 ### Regra do E1
 
 O E1 não deve pedir a solução final.
@@ -385,6 +410,30 @@ O avanço deve existir dentro do mundo da história. Exemplos:
 - uma testemunha decide entregar material quando percebe risco concreto.
 
 Evitar avanço artificial do tipo “agora abra o E2 porque o jogo precisa continuar” sem justificativa diegética.
+
+## Testes antes do plano documental
+
+Antes de escrever documentos finais, faça três testes editoriais. Eles devem consultar as regras de `docs/DIRETRIZES_EDITORIAIS.md` e não substituem o Case Kernel nem o Case Review.
+
+### Teste de ausência visível
+
+- Existe alguma conclusão que depende do que não aparece?
+- O grupo tem uma tabela, matriz, linha do tempo ou estrutura para perceber isso?
+- O vazio fica visível sem ser explicado?
+
+### Teste de ferramenta por envelope
+
+- Qual ferramenta o envelope entrega ao jogador?
+- A ferramenta ajuda a investigar ou entrega a resposta?
+- O grupo consegue saber o que fazer sem uma dica externa?
+
+### Teste de causalidade
+
+- O mecanismo do crime/ação está documentado?
+- O chamado, deslocamento, manipulação ou criação de falso sinal tem âncora?
+- O grupo consegue reconstruir o “como”, não só o “por quê”?
+
+A solução final precisa ter mecanismo causal documentado: motivo explica por quê, oportunidade explica quando e mecanismo explica como. Risco típico: “Marta atraiu Helena para a sala de memória”, mas nenhum documento mostra como Helena recebeu esse chamado ou por que responderia a ele.
 
 ## Etapa 9 — Plano documental
 

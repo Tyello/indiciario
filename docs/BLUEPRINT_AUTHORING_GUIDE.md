@@ -105,6 +105,10 @@ Formato obrigatório no schema atual:
 
 Além de declarar esses objetivos, reflita-os em `contratos_evidencia`, na distribuição dos documentos por envelope e nas `dicas_contextuais`. `guia_operacional.resposta_esperada_por_envelope` deve espelhar os mesmos envelopes e respostas esperadas para permitir validação de consistência.
 
+Todo envelope também precisa oferecer ao grupo uma ferramenta prática para chegar à conclusão esperada: documento comparativo neutro, estrutura do próprio envelope, printable de apoio, linha do tempo, matriz, checklist em branco ou outra forma de organizar observações sem entregar resposta. Objetivo por envelope sem ferramenta investigativa vira intenção do autor, não experiência de jogador.
+
+Para cada envelope, explicite em campo existente ou nota editorial: pergunta levantada, conclusão parcial permitida, ferramenta disponível ao jogador e risco de a ferramenta virar dica explícita.
+
 ### Regra do E1
 
 O E1 não deve pedir a solução final.
@@ -267,19 +271,40 @@ Não permitido em documento de jogador:
 
 A interpretação pertence ao guia do facilitador, às dicas contextuais, ao gabarito e aos metadados internos.
 
+
+## Anotações narrativas recomendadas para futuros blueprints
+
+Esta orientação não altera schema e não torna novos campos obrigatórios nesta PR. Em futuros casos, explicite quando possível em campos existentes como `guia_operacional`, `contratos_evidencia`, `objetivos_por_envelope` ou notas editoriais:
+
+- tipo de evidência dominante por contrato: direta, indireta/por objeto ou sistêmica;
+- ausências relevantes que o grupo precisa perceber;
+- ferramenta investigativa por envelope;
+- mecanismo causal da solução;
+- relações necessárias entre personagens;
+- distinção entre evidência direta, indireta e sistêmica.
+
+Use `docs/DIRETRIZES_EDITORIAIS.md` como fonte da verdade para pistas por ausência, peso probatório, causalidade documentada e relação prévia. A classificação pode ficar em metadados internos; documento de jogador continua mostrando evidência bruta.
+
+Quando uma conclusão depender de ausência, presença, álibi ou deslocamento, não basta listar documentos. O blueprint deve mostrar onde o jogador perceberá a lacuna: folha de cruzamento, quadro de presença, linha do tempo incompleta, matriz de testemunhos, registro comparativo neutro, checklist em branco ou tabela de observações por categoria.
+
 ## Checklist antes de aprovar um blueprint
 
 Antes de gerar PDF, confirme:
 
 1. Existe pergunta pública com solicitante, motivo, impacto e justificativa do dossiê?
 2. Cada envelope tem pergunta diegética, resposta esperada, critério de avanço e forma diegética de avanço?
-3. O E1 gera hipótese parcial, tensão ou recontextualização inicial sem pedir solução final?
-4. O E2 recontextualiza algo do E1 e não apenas confirma?
-5. Toda motivação histórica tem consequência atual concreta?
-6. Recados posteriores trazem informação nova para quem os recebe?
-7. Cada dica contextual tem condição de uso, intensidade, ação mental esperada e desbloqueio?
-8. O guia do facilitador explica progressão, linhas do tempo, red herrings, motivação e síntese da solução?
-9. Documentos de jogador mostram evidência bruta sem voz do autor?
-10. O caso pode ser conduzido por um facilitador que não participou da escrita?
+3. Cada envelope oferece ferramenta investigativa prática para chegar à conclusão esperada?
+4. O E1 gera hipótese parcial, tensão ou recontextualização inicial sem pedir solução final?
+5. O E2 recontextualiza algo do E1 e não apenas confirma?
+6. Ausências relevantes ficam visíveis sem serem explicadas ao jogador?
+7. Evidências diretas, indiretas e sistêmicas estão separadas em metadados/editorial?
+8. A solução tem mecanismo causal ancorado em documentos?
+9. Relações necessárias de confiança, autoridade ou hábito têm âncora documental?
+10. Toda motivação histórica tem consequência atual concreta?
+11. Recados posteriores trazem informação nova para quem os recebe?
+12. Cada dica contextual tem condição de uso, intensidade, ação mental esperada e desbloqueio?
+13. O guia do facilitador explica progressão, linhas do tempo, red herrings, motivação e síntese da solução?
+14. Documentos de jogador mostram evidência bruta sem voz do autor?
+15. O caso pode ser conduzido por um facilitador que não participou da escrita?
 
 Se qualquer item falhar, corrija o plano antes de ajustar templates, renderer ou validator.

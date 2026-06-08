@@ -306,6 +306,8 @@ A interpretação deve ficar em:
 - metadados internos;
 - QA/Graph/LLM feedback.
 
+Não confunda sofisticação narrativa com obscuridade operacional. Uma conclusão sofisticada exige uma ferramenta simples: se o grupo precisa perceber uma ausência, forneça uma estrutura neutra onde o vazio possa aparecer.
+
 ## Exemplos de reescrita
 
 ### Ruim
@@ -389,6 +391,10 @@ Todo envelope precisa declarar:
 - critério de avanço;
 - forma diegética de apresentar esse avanço.
 
+Todo envelope precisa também oferecer uma ferramenta prática para chegar à conclusão esperada. Pergunte onde essa ferramenta existe: documentos, printables, folha de apoio ou própria estrutura do envelope. Ela deve organizar a investigação sem entregar a resposta.
+
+Exemplo: se a pergunta do E1 é se uma pessoa realmente esteve no local após determinado horário, a conclusão parcial pode ser “há sinais indiretos de presença, mas nenhum avistamento direto confiável”, e a ferramenta pode ser uma folha de cruzamento de presença por tipo de evidência.
+
 O E1 não deve pedir a solução final. Ele deve gerar hipótese parcial, tensão ou recontextualização inicial.
 
 O E2 deve recontextualizar algo do E1. Ele não deve apenas confirmar uma conclusão que o E1 já entregou.
@@ -408,6 +414,22 @@ Cada dica deve informar condição de uso, intensidade, ação mental esperada e
 ### Guia do facilitador
 
 Todo guia precisa conter pergunta pública, resposta esperada por envelope, quando liberar o próximo envelope, linha do tempo aparente, linha do tempo real, red herrings e descartes, explicação da motivação e solução em síntese.
+
+
+### Checklist antes de escrever documentos
+
+Antes de escrever conteúdo final de documentos, responda:
+
+- O jogador tem ferramenta para chegar à conclusão do envelope?
+- A ausência importante fica visível?
+- O mecanismo causal está documentado?
+- Evidências diretas, indiretas e sistêmicas estão separadas?
+- O documento mostra evidência bruta ou já interpreta?
+- A relação necessária entre personagens está ancorada?
+- O E1 pede uma hipótese parcial ou solução final?
+- O E2 recontextualiza algo que o grupo pôde perceber no E1?
+
+Se qualquer resposta falhar, volte ao blueprint, aos contratos de evidência ou ao guia operacional antes de polir texto, template ou PDF.
 
 ## Como alterar casos canônicos
 
