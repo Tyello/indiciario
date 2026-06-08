@@ -49,6 +49,7 @@ def test_render_floor_plan_svg_mirante_v2_gera_svg_com_ambientes() -> None:
     assert "Monitoramento" in svg
     assert "Posto de Controle" in svg
     assert "Pátio Operacional" in svg
+    assert "Calçada / Acesso Público" in svg
     assert "Doca / Serviço" in svg
     assert "Administração" in svg
 
@@ -112,11 +113,40 @@ def test_mirante_v2_modela_area_externa_e_posto_sem_guarita_grande() -> None:
     monitoramento = next(area for area in planta.areas if area.id == "monitoramento")
 
     assert "guarita" not in area_ids
-    assert {"patio_operacional", "posto_controle"} <= external_ids
+    assert {"patio_operacional", "posto_controle", "acesso_publico"} <= external_ids
     assert monitoramento.w * monitoramento.h < 160 * 135
     assert planta.portoes[0].id == "G-01"
     assert planta.portoes[0].orientacao == "V"
 
+
+def test_mirante_v2_tem_acessos_externos_distintos_para_publico_e_servico() -> None:
+    planta = build_mirante_planta()
+    portas_externas = [porta for porta in planta.portas if "exterior" in porta.entre]
+    portoes = {portao.id: portao for portao in planta.portoes}
+    area_externa_por_id = {area.id: area for area in planta.areas_externas}
+
+    assert validar_planta(planta) == []
+    assert {"P-01", "P-10"} <= {porta.id for porta in portas_externas}
+    assert portas_externas[0].entre != portas_externas[1].entre
+    assert "acesso_publico" in area_externa_por_id
+    assert area_externa_por_id["acesso_publico"].tipo == "publico"
+    assert "Público" in area_externa_por_id["acesso_publico"].nome
+    assert "patio_operacional" in area_externa_por_id
+    assert area_externa_por_id["patio_operacional"].tipo == "servico"
+    assert {"G-01", "G-02"} <= set(portoes)
+    assert portoes["G-01"].orientacao == "V"
+    assert portoes["G-02"].orientacao == "H"
+
+
+def test_svg_mirante_v2_exibe_acesso_publico_e_acesso_de_servico() -> None:
+    svg = render_floor_plan_svg(build_mirante_planta())
+
+    assert "Calçada / Acesso Público" in svg
+    assert "EXT-02" in svg
+    assert "G-02" in svg
+    assert "Pátio Operacional" in svg
+    assert "EXT-01" in svg
+    assert "G-01" in svg
 
 
 def test_mirante_v2_renderiza_perimetro_do_terreno_com_gap_no_portao() -> None:
@@ -126,9 +156,12 @@ def test_mirante_v2_renderiza_perimetro_do_terreno_com_gap_no_portao() -> None:
 
     assert 'class="site-perimeter"' in svg
     assert f'<rect class="site-fill" x="{sx:g}" y="{sy:g}" width="{sw:g}" height="{sh:g}"' in svg
-    assert '<line x1="944" y1="56" x2="944" y2="464"/>' in svg
+    assert '<line x1="944" y1="0" x2="944" y2="464"/>' in svg
     assert '<line x1="944" y1="520" x2="944" y2="548"/>' in svg
     assert '<line x1="944" y1="464" x2="944" y2="520"/>' not in svg
+    assert '<line x1="56" y1="0" x2="130" y2="0"/>' in svg
+    assert '<line x1="204" y1="0" x2="944" y2="0"/>' in svg
+    assert '<line x1="130" y1="0" x2="204" y2="0"/>' not in svg
 
 
 def test_svg_mirante_v2_nao_exibe_rotulos_tecnicos_de_renderizacao() -> None:
@@ -172,5 +205,7 @@ def test_pipeline_atual_renderiza_documento_visual_do_mirante_com_planta_v2() ->
     assert "Guarita" not in svg
     assert "Posto de Controle" in svg
     assert "Pátio Operacional" in svg
+    assert "Calçada / Acesso Público" in svg
     assert "G-01" in svg
+    assert "G-02" in svg
     assert "Doca / Serviço" in svg
