@@ -77,3 +77,18 @@ O template `templates/printable_cards.html` é P&B first:
 - Seleção automática de cartões a partir de playtest/blueprint.
 - Cartões com verso, dobra ou componentes modulares.
 - Refinamento de ícones procedurais por família de caso.
+
+## Folhas de apoio preenchíveis
+
+Folha de apoio é ferramenta neutra de mesa, não gabarito. Ela pode organizar horários, nomes, salas ou hipóteses de trabalho, mas não deve instruir a solução nem conter campos que exponham metadados técnicos.
+
+Regras práticas:
+
+- Deve haver espaço real para anotação manual ou digital.
+- Tabelas de apoio/preenchimento devem oferecer pelo menos 4 linhas em branco reais.
+- Evitar 5+ colunas em A4; quando inevitável, justificar visualmente e validar em PDF real.
+- Usar campos neutros e diegéticos, como “Horário”, “Fonte”, “Documento” e “Anotação do grupo”.
+- Não usar campos artificiais como “persona”, “Registro interno/persona”, `TODO`, placeholder ou qualquer rótulo técnico de autoria.
+- Não pode virar gabarito, checklist de cruzamento ou instrução como “compare este documento”.
+
+Antes do playtest, rode o sanity check visual no blueprint e, se houver PDF renderizado, também no PDF da folha de apoio.

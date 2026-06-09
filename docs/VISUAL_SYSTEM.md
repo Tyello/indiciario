@@ -196,3 +196,33 @@ A infraestrutura atual usa perfis de personagem no blueprint, SVG inline procedu
 - gerar traços por caminhos SVG, sem fonte decorativa aplicada a blocos longos.
 
 Não usar fonte externa, imagem gerada por IA ou assinatura textual simples como substituto do perfil editorial. Detalhes de campos, estilos, limites e checklist estão em `docs/SIGNATURES_AND_HANDWRITING.md`.
+
+## Sanity check visual antes do playtest
+
+O pacote agora possui uma camada automática de triagem visual/editorial em `scripts/visual_sanity_check.py`. Ela deve rodar antes do playtest para detectar sintomas conhecidos de regressão em blueprint e, quando houver PDF real, no texto extraído do PDF renderizado.
+
+Comando básico:
+
+```bash
+python -m scripts.visual_sanity_check examples/caso_canonico_iniciante_b.json
+```
+
+Com PDF renderizado disponível:
+
+```bash
+python -m scripts.visual_sanity_check examples/caso_canonico_iniciante_b.json --pdf output/iniciante_b/01_envelope_1.pdf
+```
+
+A saída usa status `OK`, `WARNING` ou `ERROR` e códigos estáveis como `VIS_TABLE_001`, `VIS_TEXT_001`, `VIS_TEXT_002` e `VIS_META_001`. Warnings indicam revisão visual obrigatória; errors bloqueiam material do jogador com termos artificiais.
+
+### Regra de tabela
+
+- Até 4 colunas: tabela permitida quando legível e diegética.
+- 5+ colunas: preferir lista, blocos, cartões ou decomposição em mais de uma tabela. Exceções precisam de classe especial de tabela larga e teste visual em PDF.
+- `table-admin`, `table-comparison` e `table-support` devem declarar `colgroup` para estabilizar larguras no PDF.
+- Cabeçalhos longos em colunas estreitas devem ser encurtados ou movidos para legenda/bloco de apoio.
+- Observação longa deve virar bloco fora da tabela ou coluna explícita de nota, com largura pensada para A4.
+
+### Regra de baseline visual
+
+Baseline visual só existe com PDF real renderizado, `manifest.json`, `print_manifest.json` e revisão visual. HTML parcial ou inspeção do blueprint não substitui PDF gerado por Playwright/Chromium.
