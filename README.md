@@ -40,6 +40,7 @@ Use os dois arquivos canônicos como referência em testes, scripts, validaçõe
 - [`docs/VISUAL_LIBRARY_2_0.md`](docs/VISUAL_LIBRARY_2_0.md): biblioteca visual procedural mínima para plantas-base estruturadas.
 - [`docs/BLUEPRINT_AUTHORING_GUIDE.md`](docs/BLUEPRINT_AUTHORING_GUIDE.md): contrato mínimo de autoria para blueprints jogáveis, com critérios de avanço, dicas e guia do facilitador operacional.
 - [`docs/LLM_OPERATING_MANUAL.md`](docs/LLM_OPERATING_MANUAL.md): manual para LLMs criarem, revisarem e corrigirem casos sem repetir falhas editoriais.
+- [`docs/AGENT_SKILLS.md`](docs/AGENT_SKILLS.md): playbook de skills para agentes/Codex, adaptado ao fluxo do Indiciário.
 
 ## Comandos principais
 
