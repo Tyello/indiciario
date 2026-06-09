@@ -381,3 +381,13 @@ Instalação do browser Playwright, se necessário:
 ```bash
 python -m playwright install chromium
 ```
+
+
+## Automação em GitHub Actions
+
+A automação atual separa validação rápida de build visual real:
+
+- `CI` (`.github/workflows/ci.yml`) roda em pull requests e em push para `main`, sem Chromium e sem geração de PDF. Ele cobre lint com `ruff`, testes com `pytest`, validators strict dos três blueprints canônicos/operacionais, Case Review em Markdown e sanity check visual do Iniciante B diretamente sobre o blueprint.
+- `Visual Build` (`.github/workflows/visual-build.yml`) roda manualmente por `workflow_dispatch` e em PRs que alterem exemplos, templates, geradores, scripts, baselines visuais ou dependências. Ele instala Playwright/Chromium, gera o pacote real do Iniciante B e publica o artifact `iniciante-b-visual-package` com `output/iniciante_b/**`.
+
+O build visual automatizado ajuda a preservar evidência de PDF real em PRs, mas baseline visual continua exigindo download do artifact, revisão humana dos PDFs, leitura de manifests/relatórios e, quando aplicável, playtest. GitHub Actions não substitui a etapa de playtest.

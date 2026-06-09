@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Fast validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest ruff
+
+      - name: Lint
+        run: ruff check generator/ scripts/ tests/
+
+      - name: Tests
+        run: pytest tests/ -q
+
+      - name: Strict validators
+        run: |
+          python generator/validator.py examples/caso_canonico_iniciante.json --strict
+          python generator/validator.py examples/caso_canonico_intermediario.json --strict
+          python generator/validator.py examples/caso_canonico_iniciante_b.json --strict
+
+      - name: Case Review
+        run: |
+          python -m scripts.case_review examples/caso_canonico_iniciante.json --format markdown
+          python -m scripts.case_review examples/caso_canonico_intermediario.json --format markdown
+          python -m scripts.case_review examples/caso_canonico_iniciante_b.json --format markdown
+
+      - name: Visual sanity check
+        run: python -m scripts.visual_sanity_check examples/caso_canonico_iniciante_b.json

@@ -226,3 +226,9 @@ A saída usa status `OK`, `WARNING` ou `ERROR` e códigos estáveis como `VIS_TA
 ### Regra de baseline visual
 
 Baseline visual só existe com PDF real renderizado, `manifest.json`, `print_manifest.json` e revisão visual. HTML parcial ou inspeção do blueprint não substitui PDF gerado por Playwright/Chromium.
+
+### Visual Build no GitHub Actions
+
+O workflow `Visual Build` (`.github/workflows/visual-build.yml`) materializa essa regra em CI pesado: instala Chromium via Playwright, executa `scripts.build_package` para `examples/caso_canonico_iniciante_b.json`, roda `visual_sanity_check` contra o PDF `01_envelope_1.pdf` localizado no pacote gerado e publica o artifact `iniciante-b-visual-package`.
+
+Use esse artifact como fonte para revisão visual de PR: baixe `output/iniciante_b/**`, confira PDFs, `manifest.json`, `print_manifest.json`, relatórios e HTML debug quando existirem. A execução automatizada confirma geração e triagem; a aprovação de baseline visual ainda depende de inspeção humana do PDF real e não substitui playtest.
