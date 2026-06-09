@@ -645,8 +645,9 @@ class BlueprintValidator:
                 continue
             if not valor:
                 continue
-            caminho = Path(str(valor))
-            if caminho.is_absolute() or ".." in caminho.parts:
+            valor_texto = str(valor)
+            caminho = Path(valor_texto)
+            if caminho.is_absolute() or valor_texto.startswith(("/", "\\")) or ".." in caminho.parts:
                 self.resultado.adicionar(Erro(
                     codigo="ASSINATURA_001",
                     severidade=Severidade.CRITICO,
