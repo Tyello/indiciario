@@ -27,11 +27,12 @@
       "forma_diegetica_de_avanco": "O facilitador confere a hipótese final com os contratos de evidência e apresenta o fechamento operacional da biblioteca.",
       "documentos_minimos": [
         "E1-02",
+        "E1-03",
         "E1-04",
         "E1-05",
         "E1-06",
-        "E1-08",
-        "E1-09"
+        "E1-07",
+        "E1-08"
       ]
     }
   ],
@@ -47,11 +48,12 @@
         "forma_diegetica_de_avanco": "O facilitador confere a hipótese final com os contratos de evidência e apresenta o fechamento operacional da biblioteca.",
         "documentos_minimos": [
           "E1-02",
+          "E1-03",
           "E1-04",
           "E1-05",
           "E1-06",
-          "E1-08",
-          "E1-09"
+          "E1-07",
+          "E1-08"
         ]
       }
     ],
@@ -59,14 +61,14 @@
       "Nara saiu da Sala de Leitura porque recebeu um recado curto com linguagem de balcão e dados que pareciam compatíveis com a rotina de eventos.",
       "O texto do recado reaproveitava uma versão preliminar sobre a Sala Multiuso e o horário de 16h20, informação válida para outra atividade da tarde.",
       "A versão oficial corrigida manteve a roda de Nara às 15h30 na Sala de Leitura, então o recado entregue às 15h18 tornou-se enganoso naquele contexto.",
-      "Celso tinha acesso prático ao bloco de recados, ao mural e à lista, e foi visto mexendo em papel no quadro pouco antes de Nara sair.",
+      "Celso tinha acesso prático ao bloco de recados, ao mural e à lista, e um relato coloca alguém do balcão mexendo em papel no quadro pouco antes de Nara sair.",
       "A ausência de Nara permitiu que a votação favorecesse a oficina previamente divulgada por Celso, sem a defesa da proposta alternativa que ela apresentaria."
     ],
     "linha_tempo_aparente_resumo": "A tarde parece marcada por ajuste comum de sala: rascunho, aviso corrigido, recado de balcão, roda iniciada e votação administrativa.",
     "linha_tempo_real_resumo": "A versão preliminar foi corrigida antes da abertura, mas Celso reaproveitou seus dados às 15h18, deslocou Nara, manteve a roda sem mediação completa e deixou a votação ocorrer sem contraponto.",
     "red_herrings_e_descartes": [
       "Iara parece suspeita porque o aviso tem formato institucional, mas a mensagem interna e os relatos a colocam corrigindo o aviso e conduzindo recepção em outro ponto da biblioteca.",
-      "Tomás se beneficia da votação, mas a lista e as declarações reduzem sua oportunidade prática no balcão e no mural durante a janela de entrega.",
+      "Tomás se beneficia da votação, mas a lista e os relatos reduzem sua oportunidade prática no balcão e no mural durante a janela de entrega.",
       "A confusão de agenda é real, mas explica a origem do texto e não a entrega do recado direcionado a Nara no horário da roda."
     ],
     "quando_usar_dicas": [
@@ -100,9 +102,9 @@
       "suspeita_aparente": "Sua ausência pode parecer desistência ou falha de comunicação da própria mediação.",
       "verdade": "Foi a pessoa afastada pelo recado e confiou na rotina de avisos do balcão.",
       "documento_ancoragem": [
-        "E1-04",
-        "E1-06",
-        "E1-09"
+        "E1-03",
+        "E1-05",
+        "E1-08"
       ],
       "assinatura": {
         "estilo": "fluida",
@@ -123,9 +125,9 @@
       "suspeita_aparente": "Tinha acesso prático ao balcão, aos blocos de recado e ao mural, mas isso faz parte da função dele.",
       "verdade": "Reaproveitou a versão preliminar para afastar Nara no horário da votação.",
       "documento_ancoragem": [
+        "E1-05",
         "E1-06",
-        "E1-07",
-        "E1-08"
+        "E1-07"
       ],
       "assinatura": {
         "estilo": "compacta",
@@ -148,7 +150,7 @@
       "documento_ancoragem": [
         "E1-01",
         "E1-02",
-        "E1-08"
+        "E1-07"
       ],
       "assinatura": {
         "estilo": "administrativa",
@@ -170,8 +172,8 @@
       "verdade": "Tinha interesse no resultado, mas estava preparando material fora do balcão durante a janela crítica.",
       "documento_ancoragem": [
         "E1-02",
-        "E1-07",
-        "E1-09"
+        "E1-06",
+        "E1-08"
       ],
       "assinatura": {
         "estilo": "angular",
@@ -199,7 +201,7 @@
       ],
       "confirma": [],
       "confirmado_por": [
-        "E1-09"
+        "E1-08"
       ],
       "red_herring_potencial": "Iara pode parecer envolvida por iniciar e assinar a apuração.",
       "risco_ambiguidade": "baixo",
@@ -242,7 +244,7 @@
       ],
       "confirma": [],
       "confirmado_por": [
-        "E1-09"
+        "E1-08"
       ],
       "red_herring_potencial": "A agenda cheia pode sugerir confusão comum de evento.",
       "risco_ambiguidade": "baixo",
@@ -272,7 +274,7 @@
       }
     },
     {
-      "codigo": "E1-04",
+      "codigo": "E1-03",
       "titulo": "Recado entregue a Nara",
       "envelope": "E1",
       "tipo": "manual",
@@ -284,8 +286,8 @@
       ],
       "confirma": [],
       "confirmado_por": [
-        "E1-05",
-        "E1-07"
+        "E1-04",
+        "E1-06"
       ],
       "red_herring_potencial": "O recado pode parecer apenas erro sem intenção.",
       "risco_ambiguidade": "medio_baixo",
@@ -314,7 +316,7 @@
       }
     },
     {
-      "codigo": "E1-05",
+      "codigo": "E1-04",
       "titulo": "Rascunho preliminar de aviso",
       "envelope": "E1",
       "tipo": "manual",
@@ -325,10 +327,10 @@
         "O rascunho se refere à oficina de Tomás, não à roda de Nara."
       ],
       "confirma": [
-        "E1-04"
+        "E1-03"
       ],
       "confirmado_por": [
-        "E1-08"
+        "E1-07"
       ],
       "red_herring_potencial": "A existência de rascunho pode parecer erro exclusivo de coordenação.",
       "risco_ambiguidade": "medio_baixo",
@@ -358,7 +360,7 @@
       }
     },
     {
-      "codigo": "E1-06",
+      "codigo": "E1-05",
       "titulo": "Lista de presença da roda de leitura",
       "envelope": "E1",
       "tipo": "folha_cruzamento",
@@ -369,10 +371,10 @@
         "A anotação de balcão registra saída antes da votação."
       ],
       "confirma": [
-        "E1-09"
+        "E1-08"
       ],
       "confirmado_por": [
-        "E1-07"
+        "E1-06"
       ],
       "red_herring_potencial": "A anotação administrativa não identifica sozinha quem escreveu o recado.",
       "risco_ambiguidade": "baixo",
@@ -403,23 +405,23 @@
       }
     },
     {
-      "codigo": "E1-07",
+      "codigo": "E1-06",
       "titulo": "Relatos breves de balcão e sala",
       "envelope": "E1",
       "tipo": "depoimento",
       "emocao_esperada": "aproximação humana",
       "objetivo_narrativo": "Fornecer confirmações diretas parciais sobre o mural, o balcão e as posições dos suspeitos.",
       "pistas_contidas": [
-        "Uma participante viu Celso prender papel pequeno no mural às 15h16.",
+        "Uma participante viu alguém do balcão prender papel pequeno no mural às 15h16.",
         "Tomás estava separando cartazes no pátio lateral durante parte da janela crítica.",
         "Iara conduzia recepção no auditório enquanto a roda começava."
       ],
       "confirma": [
-        "E1-04",
-        "E1-06"
+        "E1-03",
+        "E1-05"
       ],
       "confirmado_por": [
-        "E1-08"
+        "E1-07"
       ],
       "red_herring_potencial": "Relatos de memória podem parecer menos fortes que documentos impressos.",
       "risco_ambiguidade": "medio_baixo",
@@ -438,7 +440,7 @@
         "DATA": "14/09/2026",
         "LOCALIZACAO": "Balcão, mural de avisos e salas de atividade",
         "HORA_OCORRENCIA": "15h00 a 17h10",
-        "DESCRICAO_OCORRENCIA": "<p>Marta Leal relatou que, por volta de 15h16, viu Celso Diniz sair do balcão com um papel pequeno e prender algo na lateral do mural, perto das fichas da roda.</p><p>Rui Azevedo relatou que Iara Mendonça ficou na porta do auditório entre 15h10 e 15h35, recebendo o grupo de contação de histórias.</p><p>Beatriz Campos relatou que Tomás Vieira estava no pátio lateral separando cartazes quando ela chegou às 15h18. Ele entrou na Sala de Leitura depois das 15h28, com uma caixa de material.</p>",
+        "DESCRICAO_OCORRENCIA": "<p>Marta Leal relatou que, por volta de 15h16, viu uma pessoa do balcão sair com um papel pequeno e prender algo na lateral do mural, perto das fichas da roda. Ela não viu assinatura no papel e não afirmou reconhecer a intenção do gesto.</p><p>Rui Azevedo relatou que Iara Mendonça ficou na porta do auditório entre 15h10 e 15h35, recebendo o grupo de contação de histórias.</p><p>Beatriz Campos relatou que Tomás Vieira estava no pátio lateral separando cartazes quando ela chegou às 15h18. Ele entrou na Sala de Leitura depois das 15h28, com uma caixa de material.</p>",
         "NOME_RESPONSAVEL": "Iara Mendonça",
         "ASSINATURA_RESPONSAVEL": "Iara Mendonça",
         "ASSINATURA_GLIFO": "I. M.",
@@ -453,7 +455,7 @@
       }
     },
     {
-      "codigo": "E1-08",
+      "codigo": "E1-07",
       "titulo": "Orientação interna sobre recados de evento",
       "envelope": "E1",
       "tipo": "email_institucional",
@@ -465,10 +467,10 @@
       ],
       "confirma": [
         "E1-02",
-        "E1-05"
+        "E1-04"
       ],
       "confirmado_por": [
-        "E1-07"
+        "E1-06"
       ],
       "red_herring_potencial": "A rotina institucional amplia o acesso sem apontar uma pessoa isolada.",
       "risco_ambiguidade": "baixo",
@@ -493,7 +495,7 @@
       }
     },
     {
-      "codigo": "E1-09",
+      "codigo": "E1-08",
       "titulo": "Ata curta da votação de programação",
       "envelope": "E1",
       "tipo": "boletim",
@@ -505,7 +507,7 @@
       ],
       "confirma": [
         "E1-01",
-        "E1-06"
+        "E1-05"
       ],
       "confirmado_por": [
         "E1-02"
@@ -539,8 +541,8 @@
       }
     },
     {
-      "codigo": "E1-10",
-      "titulo": "Folha de comparação de recados e horários",
+      "codigo": "E1-09",
+      "titulo": "Folha de apoio da apuração — registro de horários e avisos",
       "envelope": "E1",
       "tipo": "folha_cruzamento",
       "emocao_esperada": "organização de mesa",
@@ -562,14 +564,13 @@
         "CNPJ": "18.742.510/0001-33",
         "COR_TOPO": "#4F5F46",
         "LOCAL_DATA": "Porto Claro, 14 de setembro de 2026",
-        "SAUDACAO": "Folha de mesa",
-        "ASSUNTO": "Folha de comparação de recados e horários",
-        "CORPO_CARTA": "<p>Use esta folha como apoio de anotação da mesa.</p><table class='table-comparison'><thead><tr><th>Horário</th><th>Sala indicada</th><th>Origem do aviso</th><th>Onde apareceu</th><th>Quem viu</th><th>Quem recebeu</th><th>Observação</th></tr></thead><tbody><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table><p><strong>Linha do tempo de apoio</strong></p><table class='table-admin'><tbody><tr><td>Abertura da biblioteca</td><td>14h00</td></tr><tr><td>Aviso no mural</td><td>&nbsp;</td></tr><tr><td>Início da roda</td><td>&nbsp;</td></tr><tr><td>Votação</td><td>&nbsp;</td></tr></tbody></table>",
+        "SAUDACAO": "Registro de apoio",
+        "ASSUNTO": "Folha de apoio da apuração — registro de horários e avisos",
+        "CORPO_CARTA": "<p>Registro auxiliar para horários, avisos de sala e circulação de recados durante a tarde cultural.</p><table class='table-comparison'><thead><tr><th>Horário</th><th>Sala indicada</th><th>Origem do aviso</th><th>Onde apareceu</th><th>Quem viu</th><th>Quem recebeu</th><th>Observação</th></tr></thead><tbody><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table><p><strong>Linha do tempo de apoio</strong></p><table class='table-admin'><tbody><tr><td>Abertura da biblioteca</td><td>14h00</td></tr><tr><td>Aviso no mural</td><td>&nbsp;</td></tr><tr><td>Início da roda</td><td>&nbsp;</td></tr><tr><td>Votação</td><td>&nbsp;</td></tr></tbody></table>",
         "FORMULA_ENCERRAMENTO": "Atenciosamente,",
-        "ASSINATURA_CURSIVA": "Equipe de atendimento",
-        "NOME_ASSINANTE": "Equipe de atendimento",
-        "CARGO_ASSINANTE": "Material de apoio",
-        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "02",
+        "ASSINATURA_CURSIVA": "Coordenação de Programação Cultural",
+        "NOME_ASSINANTE": "Coordenação de Programação Cultural",
+        "CARGO_ASSINANTE": "Material institucional de apoio",
         "ENDERECO_LINHA2": "Setor de mediação e eventos",
         "ESTILO_LINHAS": "linhas-discretas"
       }
@@ -580,8 +581,8 @@
       "data_hora": "2026-09-14 13:42",
       "evento": "Iara orienta a equipe a usar somente avisos finais no mural e retirar rascunhos da bandeja.",
       "personagem_id": "03",
-      "documento_prova": "E1-08",
-      "confirmacao_independente": "E1-05"
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-04"
     },
     {
       "data_hora": "2026-09-14 14:20",
@@ -594,29 +595,29 @@
       "data_hora": "2026-09-14 15:12",
       "evento": "Celso leva fichas e bloco de recados para a Sala de Leitura.",
       "personagem_id": "02",
-      "documento_prova": "E1-06",
-      "confirmacao_independente": "E1-08"
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-07"
     },
     {
       "data_hora": "2026-09-14 15:16",
-      "evento": "Celso prende um papel pequeno na lateral do mural próximo às fichas da roda.",
+      "evento": "Uma pessoa do balcão prende um papel pequeno na lateral do mural próximo às fichas da roda.",
       "personagem_id": "02",
-      "documento_prova": "E1-07",
-      "confirmacao_independente": "E1-06"
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E1-05"
     },
     {
       "data_hora": "2026-09-14 15:18",
       "evento": "Nara recebe o recado de balcão com Sala Multiuso e 16h20.",
       "personagem_id": "01",
-      "documento_prova": "E1-04",
-      "confirmacao_independente": "E1-06"
+      "documento_prova": "E1-03",
+      "confirmacao_independente": "E1-05"
     },
     {
       "data_hora": "2026-09-14 16:10",
       "evento": "A votação de programação ocorre sem fala de Nara.",
       "personagem_id": "01",
-      "documento_prova": "E1-09",
-      "confirmacao_independente": "E1-06"
+      "documento_prova": "E1-08",
+      "confirmacao_independente": "E1-05"
     }
   ],
   "linha_tempo_percebida": [
@@ -624,14 +625,14 @@
       "data_hora": "2026-09-14 15:18",
       "evento": "A mediadora teria recebido uma orientação comum de mudança de sala.",
       "personagem_id": "01",
-      "documento_prova": "E1-04",
-      "confirmacao_independente": "E1-08"
+      "documento_prova": "E1-03",
+      "confirmacao_independente": "E1-07"
     },
     {
       "data_hora": "2026-09-14 16:10",
       "evento": "A votação teria ocorrido apesar de uma confusão normal de agenda.",
       "personagem_id": "03",
-      "documento_prova": "E1-09",
+      "documento_prova": "E1-08",
       "confirmacao_independente": "E1-02"
     }
   ],
@@ -640,8 +641,8 @@
       "data_hora": "2026-09-14 13:42",
       "evento": "Orientação interna sobre recados e rascunhos.",
       "personagem_id": "03",
-      "documento_prova": "E1-08",
-      "confirmacao_independente": "E1-05"
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-04"
     },
     {
       "data_hora": "2026-09-14 14:20",
@@ -654,40 +655,40 @@
       "data_hora": "2026-09-14 15:31",
       "evento": "Lista registra Nara chamada para Sala Multiuso.",
       "personagem_id": "01",
-      "documento_prova": "E1-06",
-      "confirmacao_independente": "E1-04"
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-03"
     },
     {
       "data_hora": "2026-09-14 16:18",
       "evento": "Ata registra resultado da votação.",
       "personagem_id": "03",
-      "documento_prova": "E1-09",
+      "documento_prova": "E1-08",
       "confirmacao_independente": "E1-02"
     }
   ],
   "pilares_validacao": [
     {
       "nome": "origem textual do recado",
-      "documento_principal": "E1-05",
-      "confirmacao": "E1-04",
+      "documento_principal": "E1-04",
+      "confirmacao": "E1-03",
       "personagem_id": "02"
     },
     {
       "nome": "acesso prático ao balcão e mural",
-      "documento_principal": "E1-06",
-      "confirmacao": "E1-07",
+      "documento_principal": "E1-05",
+      "confirmacao": "E1-06",
       "personagem_id": "02"
     },
     {
       "nome": "janela de entrega",
-      "documento_principal": "E1-07",
-      "confirmacao": "E1-04",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-03",
       "personagem_id": "02"
     },
     {
       "nome": "consequência da ausência",
-      "documento_principal": "E1-09",
-      "confirmacao": "E1-06",
+      "documento_principal": "E1-08",
+      "confirmacao": "E1-05",
       "personagem_id": "02"
     }
   ],
@@ -696,16 +697,16 @@
   "matriz_pistas": [
     {
       "descricao": "O recado usa Sala Multiuso e 16h20.",
-      "documento": "E1-04",
+      "documento": "E1-03",
       "o_que_sugere": "O texto aponta para uma mudança de sala/horário.",
       "o_que_prova": "O conteúdo recebido por Nara, sem autoria completa.",
-      "confirmacao": "E1-05",
+      "confirmacao": "E1-04",
       "risco_ambiguidade": "medio_baixo",
       "emocao_esperada": "estranhamento"
     },
     {
       "descricao": "O rascunho antigo contém os mesmos dados para a oficina posterior.",
-      "documento": "E1-05",
+      "documento": "E1-04",
       "o_que_sugere": "A informação tinha contexto legítimo anterior.",
       "o_que_prova": "A origem documental provável dos dados do recado.",
       "confirmacao": "E1-02",
@@ -714,34 +715,34 @@
     },
     {
       "descricao": "Nara aparece antes da roda e não tem fala registrada na votação.",
-      "documento": "E1-06",
+      "documento": "E1-05",
       "o_que_sugere": "A ausência alterou a dinâmica da reunião.",
       "o_que_prova": "A presença esperada e o afastamento na janela da votação.",
-      "confirmacao": "E1-09",
+      "confirmacao": "E1-08",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "percepção"
     },
     {
-      "descricao": "Relato coloca Celso mexendo em papel no mural às 15h16.",
-      "documento": "E1-07",
-      "o_que_sugere": "Celso teve oportunidade material na janela crítica.",
-      "o_que_prova": "Interação observada com papel e mural, não intenção isolada.",
-      "confirmacao": "E1-06",
+      "descricao": "Relato coloca alguém do balcão mexendo em papel no mural às 15h16.",
+      "documento": "E1-06",
+      "o_que_sugere": "A pessoa que circulava pelo balcão teve oportunidade material na janela crítica.",
+      "o_que_prova": "Interação observada com papel e mural, sem identificar intenção isolada.",
+      "confirmacao": "E1-05",
       "risco_ambiguidade": "medio_baixo",
       "emocao_esperada": "suspeita justa"
     },
     {
       "descricao": "E-mail ancora a confiança em recados de balcão.",
-      "documento": "E1-08",
+      "documento": "E1-07",
       "o_que_sugere": "Nara tinha motivo cotidiano para seguir a orientação.",
       "o_que_prova": "A rotina institucional que torna o recado plausível.",
-      "confirmacao": "E1-04",
+      "confirmacao": "E1-03",
       "risco_ambiguidade": "baixo",
       "emocao_esperada": "contexto"
     },
     {
       "descricao": "A ata registra votação apertada em favor da oficina já divulgada.",
-      "documento": "E1-09",
+      "documento": "E1-08",
       "o_que_sugere": "Houve consequência concreta e benefício de programação.",
       "o_que_prova": "Resultado e ausência de fala de Nara no momento decisivo.",
       "confirmacao": "E1-02",
@@ -754,21 +755,21 @@
       "personagem_id": "03",
       "motivo_aparente": "O formato institucional dos avisos e o rascunho vêm da coordenação.",
       "como_descartar": "A orientação interna e os relatos mostram correção prévia e atividade de recepção durante a janela crítica.",
-      "documento_descarte": "E1-08",
+      "documento_descarte": "E1-07",
       "categoria": "formato_sem_entrega"
     },
     {
       "personagem_id": "04",
       "motivo_aparente": "A oficina dele foi favorecida pela votação sem Nara.",
       "como_descartar": "O relato de Beatriz e a lista reduzem sua oportunidade prática no balcão e no mural no horário do recado.",
-      "documento_descarte": "E1-07",
+      "documento_descarte": "E1-06",
       "categoria": "motivo_sem_acesso"
     },
     {
       "personagem_id": "01",
       "motivo_aparente": "A ausência poderia parecer desistência de última hora ou descuido da própria mediação.",
       "como_descartar": "O recado e a lista registram que ela estava prevista e recebeu orientação externa antes de sair.",
-      "documento_descarte": "E1-04",
+      "documento_descarte": "E1-03",
       "categoria": "ausencia_explicada"
     }
   ],
@@ -830,11 +831,11 @@
       "conclusao": "O recado deriva de uma versão preliminar e não de texto inventado do zero.",
       "fase": "E1",
       "tipo": "indireta_por_objeto",
-      "prova_principal": "E1-05",
-      "confirmacao_independente": "E1-04",
+      "prova_principal": "E1-04",
+      "confirmacao_independente": "E1-03",
       "descarta_alternativas": [
         "E1-02",
-        "E1-10"
+        "E1-09"
       ],
       "personagens_afetados": [
         "01",
@@ -851,9 +852,9 @@
       "fase": "E1",
       "tipo": "sistemica_documental",
       "prova_principal": "E1-02",
-      "confirmacao_independente": "E1-05",
+      "confirmacao_independente": "E1-04",
       "descarta_alternativas": [
-        "E1-05"
+        "E1-03"
       ],
       "personagens_afetados": [
         "01",
@@ -868,8 +869,8 @@
       "conclusao": "O recado tornou-se enganoso quando foi entregue a Nara antes da roda de 15h30.",
       "fase": "E1",
       "tipo": "direta",
-      "prova_principal": "E1-04",
-      "confirmacao_independente": "E1-06",
+      "prova_principal": "E1-03",
+      "confirmacao_independente": "E1-05",
       "descarta_alternativas": [
         "E1-02"
       ],
@@ -882,18 +883,18 @@
     },
     {
       "id": "C-E1-ACESSO-OPORTUNIDADE",
-      "conclusao": "Celso tinha acesso prático ao balcão, aos recados e ao mural durante a janela crítica.",
+      "conclusao": "A janela crítica envolve alguém do balcão, e Celso era o apoio registrado para fichas e recados naquele intervalo.",
       "fase": "E1",
       "tipo": "direta",
-      "prova_principal": "E1-07",
-      "confirmacao_independente": "E1-06",
+      "prova_principal": "E1-06",
+      "confirmacao_independente": "E1-05",
       "descarta_alternativas": [
-        "E1-08"
+        "E1-07"
       ],
       "personagens_afetados": [
         "02"
       ],
-      "acao_esperada_jogador": "Diferenciar acesso cotidiano de intenção e combinar relato com lista.",
+      "acao_esperada_jogador": "Combinar relato de alguém do balcão no mural com a lista que registra Celso no apoio de fichas e recados.",
       "risco_ambiguidade": "medio_baixo",
       "obrigatoria_para_avanco": false
     },
@@ -902,8 +903,8 @@
       "conclusao": "A ausência de Nara afetou uma votação apertada de programação.",
       "fase": "E1",
       "tipo": "sistemica_documental",
-      "prova_principal": "E1-09",
-      "confirmacao_independente": "E1-06",
+      "prova_principal": "E1-08",
+      "confirmacao_independente": "E1-05",
       "descarta_alternativas": [
         "E1-01"
       ],
@@ -920,8 +921,8 @@
       "conclusao": "Iara gerou a versão oficial e corrigiu o mural, mas não é a entrega material do recado.",
       "fase": "E1",
       "tipo": "descarte",
-      "prova_principal": "E1-08",
-      "confirmacao_independente": "E1-07",
+      "prova_principal": "E1-07",
+      "confirmacao_independente": "E1-06",
       "descarta_alternativas": [
         "E1-02"
       ],
@@ -937,10 +938,10 @@
       "conclusao": "Tomás tinha benefício aparente, mas a oportunidade material fica fraca na janela do recado.",
       "fase": "E1",
       "tipo": "descarte",
-      "prova_principal": "E1-07",
-      "confirmacao_independente": "E1-06",
+      "prova_principal": "E1-06",
+      "confirmacao_independente": "E1-05",
       "descarta_alternativas": [
-        "E1-09"
+        "E1-08"
       ],
       "personagens_afetados": [
         "04"
@@ -951,18 +952,18 @@
     },
     {
       "id": "C-FINAL-RECONSTRUCAO-RECADO",
-      "conclusao": "A resposta final liga recado reaproveitado, contexto errado, acesso de Celso e votação sem Nara.",
+      "conclusao": "A resposta final liga recado reaproveitado, contexto errado, balcão/apoio de Celso e votação sem Nara.",
       "fase": "final",
       "tipo": "solucao_final",
-      "prova_principal": "E1-07",
-      "confirmacao_independente": "E1-09",
+      "prova_principal": "E1-06",
+      "confirmacao_independente": "E1-08",
       "descarta_alternativas": [
         "E1-02",
+        "E1-03",
         "E1-04",
         "E1-05",
-        "E1-06",
-        "E1-08",
-        "E1-10"
+        "E1-07",
+        "E1-09"
       ],
       "personagens_afetados": [
         "01",
@@ -990,8 +991,8 @@
       ],
       "documentos_relacionados": [
         "E1-02",
-        "E1-04",
-        "E1-09"
+        "E1-03",
+        "E1-08"
       ]
     },
     {
@@ -1006,8 +1007,8 @@
         "C-E1-ORIGEM-RECADO"
       ],
       "documentos_relacionados": [
-        "E1-04",
-        "E1-05"
+        "E1-03",
+        "E1-04"
       ]
     },
     {
@@ -1016,15 +1017,15 @@
       "fase": "E1",
       "titulo": "Acesso material",
       "condicao_uso": "Mesa fica presa em quem tinha motivo maior.",
-      "texto": "Pergunte quem podia tocar nos papéis do balcão sem chamar atenção naquela tarde.",
+      "texto": "Pergunte quem estava registrado como apoio do balcão quando uma pessoa do balcão circulou com papel no mural.",
       "nivel": "media",
       "contratos_relacionados": [
         "C-E1-ACESSO-OPORTUNIDADE"
       ],
       "documentos_relacionados": [
+        "E1-05",
         "E1-06",
-        "E1-07",
-        "E1-08"
+        "E1-07"
       ]
     },
     {
@@ -1039,8 +1040,8 @@
         "C-E1-CONSEQUENCIA-AUSENCIA"
       ],
       "documentos_relacionados": [
-        "E1-06",
-        "E1-09"
+        "E1-05",
+        "E1-08"
       ]
     },
     {
@@ -1049,7 +1050,7 @@
       "fase": "final",
       "titulo": "Fechamento",
       "condicao_uso": "Mesa precisa verbalizar resposta final sem nova pista.",
-      "texto": "A resposta suficiente liga quatro elementos: texto reaproveitado, horário errado, acesso ao balcão/mural e votação sem Nara.",
+      "texto": "A resposta suficiente liga quatro elementos: texto reaproveitado, horário errado, balcão/apoio registrado e votação sem Nara.",
       "nivel": "quase_gabarito",
       "contratos_relacionados": [
         "C-E1-ORIGEM-RECADO",
@@ -1058,10 +1059,10 @@
         "C-FINAL-RECONSTRUCAO-RECADO"
       ],
       "documentos_relacionados": [
+        "E1-03",
         "E1-04",
-        "E1-05",
-        "E1-07",
-        "E1-09"
+        "E1-06",
+        "E1-08"
       ]
     }
   ],
@@ -1118,7 +1119,7 @@
         "descricao": "Espaço da roda Vozes do Bairro e da votação de programação.",
         "documentos_relacionados": [
           "E1-02",
-          "E1-09"
+          "E1-08"
         ]
       },
       {
@@ -1128,9 +1129,9 @@
         "icone": "mural",
         "descricao": "Ponto de recados curtos, fichas de presença e avisos da tarde.",
         "documentos_relacionados": [
-          "E1-04",
-          "E1-06",
-          "E1-08"
+          "E1-03",
+          "E1-05",
+          "E1-07"
         ]
       },
       {
@@ -1141,7 +1142,7 @@
         "descricao": "Sala prevista para a oficina Caderno de Cena no fim da tarde.",
         "documentos_relacionados": [
           "E1-02",
-          "E1-05"
+          "E1-04"
         ]
       }
     ]
@@ -1262,5 +1263,5 @@
     }
   ],
   "versao": "0.1",
-  "observacoes_producao": "Canônico Iniciante B em blueprint inicial. Complementa o Mirante por trocar investigação espacial e acervo por cronologia curta, recado fora de contexto e comparação de versões. Não usa mapa, QR code, internet, app ou links externos. A folha de comparação é documento de apoio do envelope, com campos neutros e sem gabarito. O caso deve seguir para Case Review/build visual posterior antes de playtest real."
+  "observacoes_producao": "Canônico Iniciante B em blueprint inicial. Complementa o Mirante por trocar investigação espacial e acervo por cronologia curta, recado fora de contexto e comparação de versões. Não usa mapa, QR code, internet, app ou links externos. A folha de comparação é documento de apoio do envelope, com campos neutros e sem gabarito. O caso deve seguir para Case Review/build visual posterior antes de playtest real. Documentos numerados continuamente para evitar aparência de lacuna no pacote de playtest."
 }
