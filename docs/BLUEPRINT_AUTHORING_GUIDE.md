@@ -308,3 +308,23 @@ Antes de gerar PDF, confirme:
 15. O caso pode ser conduzido por um facilitador que não participou da escrita?
 
 Se qualquer item falhar, corrija o plano antes de ajustar templates, renderer ou validator.
+
+## Guardrails visuais de autoria
+
+Além do validator estrutural e do Case Review, blueprints devem passar pelo sanity check visual/editorial quando criarem ou alterarem documentos com HTML, tabelas ou folhas de apoio.
+
+```bash
+python -m scripts.visual_sanity_check caminho/do/blueprint.json
+```
+
+O checker inspeciona documentos de jogador e procura:
+
+- tabelas `table-admin`, `table-comparison` e `table-support` sem `colgroup`;
+- tabelas com mais de 4 colunas sem justificativa/classe especial;
+- folhas de apoio com menos de 4 linhas em branco;
+- cabeçalhos longos demais para colunas estreitas;
+- observações longas presas em tabela sem coluna/classe apropriada;
+- termos artificiais proibidos em material de jogador, como `persona`, `Registro interno/persona`, `placeholder`, `COPIA`, `TODO` e `Lorem ipsum`;
+- linguagem de metajogo em documentos de jogador, como “culpado”, “gabarito”, “compare este documento”, “dica”, “solução”, “versão usada no golpe” ou “recado falso”.
+
+Warnings pedem revisão e justificativa; errors devem ser corrigidos antes de pacote/playtest. O objetivo é evitar que sintomas de layout quebrado ou campos de autoria cheguem ao PDF final sem alterar a solução narrativa do caso.
