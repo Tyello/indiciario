@@ -1,105 +1,81 @@
 # AGENTS.md — Guia operacional para agentes de IA
 
-Este arquivo orienta agentes de IA, como Codex, Claude Code, Copilot Workspace e similares, sobre como trabalhar neste repositório sem quebrar a direção editorial do Indiciário.
+Este arquivo é obrigatório para qualquer agente que trabalhe no repositório Indiciário.
 
-Leia este arquivo antes de executar qualquer tarefa.
+## Protocolo automático obrigatório
 
-## O que é o Indiciário
+Antes de executar qualquer tarefa, o agente deve seguir esta ordem:
 
-Indiciário é um framework para geração de mistérios investigativos jogáveis em grupo, em formato de dossiê com envelopes, documentos, pistas, dicas, guia do facilitador e PDFs finais.
+1. Ler `AGENTS.md`.
+2. Ler `docs/LLM_CONTEXT.md`.
+3. Identificar a skill adequada para a tarefa.
+4. Carregar a skill correspondente em `.ai/skills/`.
+5. Executar seguindo o procedimento da skill carregada.
+6. Informar na resposta final qual skill foi usada e por quê.
 
-Princípios do produto:
+Nenhuma tarefa deve ser executada sem seleção explícita de skill.
 
-- offline first;
+## Mapa de skills
+
+| Situação | Skill | Arquivo |
+|---|---|---|
+| Bug, regressão, erro de build, PDF quebrado, validator falhando ou causa desconhecida | `diagnose` | `.ai/skills/diagnose.md` |
+| Mudança em código, validator, schema, renderer, package builder ou regra automatizável | `tdd` | `.ai/skills/tdd.md` |
+| Mudança editorial, progressão, envelopes, dificuldade, dicas, mapas ou guia do facilitador | `grill-with-docs` | `.ai/skills/grill-with-docs.md` |
+| Tarefa grande demais para uma PR pequena | `to-prd` | `.ai/skills/to-prd.md` |
+| Quebrar PRD, roadmap, auditoria ou playtest em tarefas pequenas | `to-issues` | `.ai/skills/to-issues.md` |
+| Encerrar rodada e registrar contexto para outro agente | `handoff` | `.ai/skills/handoff.md` |
+| Contexto confuso ou risco de alterar o lugar errado | `zoom-out` | `.ai/skills/zoom-out.md` |
+| Revisão arquitetural explícita e incremental | `improve-codebase-architecture` | `.ai/skills/improve-codebase-architecture.md` |
+
+## Regra de desempate
+
+- Causa desconhecida: use `diagnose`.
+- Regra nova testável: use `tdd`.
+- Decisão editorial ou experiência do jogador: use `grill-with-docs`.
+- Escopo grande ou nebuloso: use `zoom-out` antes de implementar.
+- Iniciativa de produto ou roadmap: use `to-prd` antes de implementar.
+
+## Contexto obrigatório
+
+Depois deste arquivo, carregue sempre:
+
+- `docs/LLM_CONTEXT.md`;
+- `.ai/skills/README.md`;
+- a skill selecionada em `.ai/skills/`.
+
+Consulte também, conforme a tarefa:
+
+- `README.md`;
+- `docs/ESTADO_ATUAL.md`;
+- `docs/ROADMAP.md`;
+- `docs/DIRETRIZES_EDITORIAIS.md`;
+- `docs/LLM_OPERATING_MANUAL.md`;
+- `docs/CASE_DESIGN_PIPELINE.md`;
+- `docs/BLUEPRINT_AUTHORING_GUIDE.md`;
+- `docs/VISUAL_SYSTEM.md`;
+- `docs/FLOORPLANS.md`;
+- `docs/PRINTABLES.md`;
+- `docs/SIGNATURES_AND_HANDWRITING.md`.
+
+## Princípios do Indiciário
+
+Indiciário é um framework para mistérios investigativos jogáveis em grupo, em formato de dossiê com envelopes, documentos, pistas, dicas, guia do facilitador e PDFs finais.
+
+Princípios:
+
+- offline-first;
 - sem QR code obrigatório;
 - sem internet obrigatória;
-- sem aplicativos externos;
+- sem aplicativo externo obrigatório;
 - sem links externos como parte da solução;
-- jogável em mesa, notebook, tablet ou impressão;
-- foco em dedução, investigação e experiência de grupo.
+- foco em dedução, investigação, impressão e experiência de grupo.
 
-Slogan atual:
+Slogan:
 
 > Todo caso deixa sinais.
 
-## Estado atual do projeto
-
-O framework está tecnicamente funcional, já possui duas réguas canônicas validadas e consolidou a entrega inicial do Indiciário 2.0. A prioridade atual é operar pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package → baseline visual real → playtest → ajustes finos, gerando baseline visual real dos PDFs com Playwright/Chromium e corrigindo apenas falhas comprovadas de layout/renderização antes de novo playtest.
-
-Casos canônicos atuais:
-
-1. **O Desvio da Reserva Mirante**
-   - arquivo: `examples/caso_canonico_iniciante.json`;
-   - dificuldade editorial: **Iniciante**;
-   - função: régua canônica iniciante, referência narrativa/técnica e fixture de integração;
-   - mapa: usa a planta baixa estruturada v2 em `generator/floor_plan.py`.
-
-2. **O Último Brinde do Hotel Aurora**
-   - arquivo: `examples/caso_canonico_intermediario.json`;
-   - dificuldade editorial: **Intermediário**;
-   - função: régua canônica intermediária validada após playtest e refinamentos;
-   - decisão importante: **Hotel Aurora deve continuar sem mapa**, salvo evidência nova de playtest ou instrução explícita.
-
-Não rebaixe, ignore ou recrie o Hotel Aurora como se fosse arquivo legado. Ele faz parte do estado atual do projeto.
-
-## Documentação obrigatória antes de alterar o projeto
-
-Antes de alterar conteúdo, blueprint, templates, renderer, validator ou package builder, leia:
-
-1. `README.md`
-2. `docs/ESTADO_ATUAL.md`
-3. `docs/ROADMAP.md`
-4. `docs/DIRETRIZES_EDITORIAIS.md`
-5. `docs/LLM_OPERATING_MANUAL.md`, se existir
-6. `docs/VISUAL_SYSTEM.md`, quando a tarefa tocar visual/renderização
-7. `docs/PRINTABLES.md`, quando a tarefa tocar cartões/apoios de mesa
-8. `docs/FLOORPLANS.md`, quando a tarefa tocar mapas/planta baixa
-9. `docs/SIGNATURES_AND_HANDWRITING.md`, quando a tarefa tocar assinaturas/rubricas/manuscritos
-10. `examples/caso_canonico_iniciante.json`, quando a tarefa tocar o canônico Iniciante
-11. `examples/caso_canonico_intermediario.json`, quando a tarefa tocar o canônico Intermediário ou baseline visual completo
-
-## Stack atual
-
-- Python;
-- Blueprint JSON;
-- Schemas YAML;
-- templates HTML/CSS;
-- Playwright/Chromium para renderização;
-- Playwright PDF;
-- `pikepdf` como backend oficial de merge;
-- `pypdf` apenas fallback;
-- pytest para testes;
-- ruff para lint.
-
-Não assuma que Telegram, Mercado Pago, dashboard, banco de dados ou multiusuário fazem parte da prioridade atual. Esses temas não devem ser implementados sem instrução explícita.
-
-## Arquivos e responsabilidades
-
-Use esta separação antes de mexer em qualquer coisa:
-
-| Problema | Local provável |
-|---|---|
-| Conteúdo do caso iniciante, personagens, documentos, pistas | `examples/caso_canonico_iniciante.json` |
-| Conteúdo do caso intermediário, personagens, documentos, pistas | `examples/caso_canonico_intermediario.json` |
-| Estrutura de dados | `generator/models.py` |
-| Validação narrativa/estrutural | `generator/validator.py` |
-| Extração do DNA investigativo | `generator/case_kernel.py`, `docs/CASE_KERNEL.md` |
-| Revisão editorial pré-pacote | `generator/case_review.py`, `scripts/case_review.py`, `docs/CASE_REVIEW.md` |
-| Renderização de dados em HTML/PDF | `generator/renderer.py` |
-| Mapas e visuais procedurais | `generator/visual_procedural.py`, `generator/floor_plan.py`, `generator/floorplan_renderer.py` |
-| Visual Library 2.0 mínima | `generator/floor_plan_library.py`, `docs/VISUAL_LIBRARY_2_0.md` |
-| Planta v2 do Mirante | `generator/floor_plan.py` (`build_mirante_planta`, `render_floor_plan_svg`) |
-| Printables/cartões de apoio | `generator/printable_cards.py`, `templates/printable_cards.html` |
-| Assinaturas/rubricas/manuscritos | `generator/signature_renderer.py` |
-| Templates de documentos | `templates/*.html` |
-| Montagem de pacote final | `scripts.build_package` e módulos relacionados |
-| Estado e diretrizes do produto | `docs/ESTADO_ATUAL.md`, `docs/ROADMAP.md`, `docs/DIRETRIZES_EDITORIAIS.md` |
-
-Se a tarefa é editorial, prefira mudar o blueprint e/ou documentação. Não refatore código sem necessidade.
-
-## Fluxo operacional oficial do Indiciário 2.0 inicial
-
-Use este fluxo como referência oficial para tarefas de criação, revisão e entrega de caso:
+## Fluxo oficial
 
 ```text
 Blueprint
@@ -112,130 +88,38 @@ Blueprint
 → Ajustes finos
 ```
 
-Regras práticas:
+## Regras editoriais centrais
 
-- comece pelo blueprint e pelo núcleo investigativo;
-- use Case Kernel para enxergar pergunta pública, hipótese E1, recontextualização E2, motivação atual, evidências obrigatórias, falsos caminhos e riscos;
-- use Case Review para revisar progressão antes de polir documento, template, mapa ou pacote;
-- trate Visual Library/templates como materialização visual, não como solução para núcleo fraco;
-- só considere baseline visual real quando o pacote for gerado com Playwright/Chromium;
-- playtest e evidência de PDF real guiam ajustes finos;
-- não implemente feature nova para esta etapa sem instrução explícita.
+1. Documento de jogador contém evidência bruta, não interpretação do autor.
+2. Guia do facilitador, dicas e relatórios podem explicar; documentos diegéticos não.
+3. Mapas são plantas operacionais neutras, não solução visual.
+4. Documento comercial deve parecer documento real, não síntese do puzzle.
+5. Dicas destravam grupos; não substituem investigação.
+6. Baseline visual real exige Playwright/Chromium. PDF fake não prova qualidade visual.
 
-## Regra editorial central
+## Casos canônicos
 
-Documento de jogador deve conter evidência bruta, não interpretação do autor.
+1. **O Desvio da Reserva Mirante**
+   - `examples/caso_canonico_iniciante.json`;
+   - régua Iniciante.
 
-Separação de papéis:
-
-- documento do jogador mostra fatos do mundo da história;
-- guia do facilitador explica significado;
-- dica contextual destrava grupos;
-- gabarito resolve;
-- metadados internos podem usar linguagem analítica, mas não devem vazar para PDFs de jogador.
-
-Nunca coloque em documento de jogador frases como:
-
-- “compare com...”;
-- “a confirmação depende de...”;
-- “não prova sozinho...”;
-- “o preço isolado não decide...”;
-- “recibo, extrato e conversa interna...” como checklist;
-- “red herring”, “ruído controlado”, “hipótese”, “gabarito”;
-- referências a códigos de documentos como `E1-04` ou `E2-02` dentro de conteúdo diegético.
-
-Essas expressões podem existir em guia do facilitador, dicas, QA, graph report, testes e metadados internos, mas não nos documentos de jogador.
-
-## Mapa
-
-Mapa do jogador deve ser uma planta baixa neutra e operacional.
-
-Direção atual:
-
-- Para o Mirante, usar a planta estruturada v2 em `generator/floor_plan.py`.
-- `generator/floorplan_renderer.py` fica como renderer legado/compatibilidade.
-- Novos mapas canônicos devem preferir modelo estruturado, não SVG hardcoded nem diagrama de caixas soltas.
-
-Deve conter:
-
-- ambientes;
-- paredes compartilhadas por adjacência;
-- portas com vão/gap real;
-- janelas;
-- câmeras neutras;
-- nomes de ambientes;
-- códigos de ambientes e portas sem ambiguidade (`A-xx` para áreas, `P-xx` para portas);
-- portões quando houver acesso externo/serviço;
-- indicador discreto de cartão quando houver controle de acesso;
-- norte e escala, se discretos.
-
-Não deve conter:
-
-- rota da peça;
-- seta de solução;
-- área crítica destacada;
-- câmera offline;
-- campo de visão;
-- legenda que explique a investigação;
-- cores fortes que apontem suspeita;
-- texto explicando por que ninguém viu.
-
-Mapas são plantas operacionais, não pistas visuais comentadas.
-
-Para o canônico Intermediário **O Último Brinde do Hotel Aurora**, mantenha a decisão validada: **sem mapa**.
-
-## Assinaturas e rubricas
-
-Assinatura/rubrica é característica editorial do personagem no blueprint.
-
-Direção atual:
-
-- cada personagem pode ter perfil de assinatura/rubrica;
-- o renderer gera SVG com base nesse perfil;
-- override SVG manual é permitido;
-- fallback procedural existe para compatibilidade.
-
-Não volte para assinatura como simples texto cursivo ou “iniciais + risco” igual para todos.
-
-## E2 e documentos comerciais
-
-Para casos com documentos comerciais, financeiros, logísticos ou administrativos:
-
-- não usar quadro comparativo como documento de jogador quando ele funcionar como síntese do puzzle;
-- manter propostas, orçamentos, recibos, contratos, extratos, e-mails e chats como evidências separadas quando isso aumentar a investigação;
-- o jogador deve comparar porque está investigando, não porque um documento instrui a comparação.
-
-Documento comercial deve parecer documento real de uma empresa, não síntese do puzzle.
-
-## O que não reabrir sem evidência nova
-
-Não reabra estes temas sem evidência concreta em PDF/teste/playtest:
-
-- placeholders residuais como `COPIA`;
-- PDFs consolidados em branco;
-- merge oficial com `pikepdf`;
-- Playwright como renderizador oficial;
-- existência dos dois canônicos atuais: Iniciante/Mirante e Intermediário/Aurora;
-- Hotel Aurora sem mapa;
-- remoção de quadros comparativos que funcionem como dica/gabarito para jogador;
-- mapa sem rota/área crítica/câmera offline;
-- planta v2 do Mirante como direção atual para mapa canônico Iniciante;
-- assinatura/rubrica como atributo de personagem;
-- cartões como apoio de mesa, não evidência principal.
+2. **O Último Brinde do Hotel Aurora**
+   - `examples/caso_canonico_intermediario.json`;
+   - régua Intermediária;
+   - deve permanecer sem mapa, salvo evidência nova ou instrução explícita.
 
 ## Prioridade atual
 
-Prioridade máxima:
+1. Operar pelo fluxo oficial.
+2. Gerar baseline visual real dos canônicos com Playwright/Chromium.
+3. Revisar PDFs, manifests e print manifests.
+4. Realizar novo playtest do Intermediário.
+5. Registrar travamentos, hipóteses erradas, tempo real, uso de dicas/cartões e diversão percebida.
+6. Só depois decidir ajustes finos ou planejar canônico Avançado.
 
-1. operar pelo fluxo Blueprint → Case Kernel → Case Review → Visual Library/templates → Build Package;
-2. gerar baseline visual real dos dois canônicos com Playwright/Chromium;
-3. revisar visualmente os PDFs finais, manifests e print manifests;
-4. corrigir somente falhas comprovadas de layout/renderização;
-5. realizar novo playtest do Intermediário com pessoas novas;
-6. registrar travamentos, hipóteses erradas, tempo real, uso de dicas/cartões e diversão percebida;
-7. só depois decidir ajustes finos ou planejar o canônico Avançado.
+## Fora de prioridade sem instrução explícita
 
-Não priorizar agora:
+Não implementar por iniciativa própria:
 
 - marketplace;
 - dashboard web;
@@ -243,11 +127,10 @@ Não priorizar agora:
 - editor visual;
 - multiusuário;
 - Telegram comercial;
-- agentes autônomos;
 - geração em massa;
 - pagamento;
 - IA gerando imagens;
-- canônico Avançado antes do baseline visual e novo playtest.
+- canônico Avançado antes de baseline visual e novo playtest.
 
 ## Comandos obrigatórios
 
@@ -257,20 +140,20 @@ Testes:
 pytest tests/ -q
 ```
 
-Lint:
+Lint quando tocar Python:
 
 ```bash
 ruff check generator/
 ```
 
-Validator strict dos canônicos:
+Validator strict dos canônicos quando tocar blueprint, schema, validator, documentação de estado ou pacote:
 
 ```bash
 python generator/validator.py examples/caso_canonico_iniciante.json --strict
 python generator/validator.py examples/caso_canonico_intermediario.json --strict
 ```
 
-Build dos pacotes canônicos:
+Build real quando tocar renderização ou pacote:
 
 ```bash
 python -m scripts.build_package examples/caso_canonico_iniciante.json --output output/iniciante --strict
@@ -283,42 +166,16 @@ Se Playwright/Chromium não estiver instalado:
 python -m playwright install chromium
 ```
 
-Se o build falhar apenas por ausência de Chromium no ambiente, registre isso explicitamente no relatório da PR. Não use build fake como prova de baseline visual real.
+Se o build real não for possível por limitação de ambiente, registre isso explicitamente. Não use PDF fake como prova de baseline visual real.
 
 ## Critério de tarefa concluída
 
 Uma tarefa só está concluída quando:
 
-- `pytest tests/ -q` passa, ou a falha é explicada como limitação de ambiente;
-- `ruff check generator/` passa quando a tarefa toca em Python;
-- validators strict dos canônicos passam quando a tarefa toca em blueprint, documentação de estado, baseline ou pacote;
-- se a tarefa altera pacote/renderização, o build real é tentado;
-- se o build real não for possível por limitação de ambiente, isso fica explícito na PR;
+- a skill usada foi informada;
+- o motivo da escolha foi informado;
+- os arquivos alterados foram listados;
+- os comandos executados foram listados;
+- os resultados ou limitações foram explicitados;
 - mudanças editoriais não vazam gabarito para documentos de jogador;
-- a PR explica claramente o que mudou, por que mudou e quais comandos foram executados.
-
-## Como abrir PRs
-
-Mantenha PRs pequenas e focadas.
-
-Bons escopos:
-
-- “corrigir linguagem de E2”;
-- “ajustar mapa do canônico iniciante”;
-- “manter Hotel Aurora sem mapa e atualizar docs”;
-- “adicionar perfil de assinatura por personagem”;
-- “atualizar documentação”;
-- “registrar baseline visual”.
-
-Escopos ruins:
-
-- “melhorar tudo”;
-- “refatorar framework inteiro”;
-- “criar novo caso e mudar renderer e validator ao mesmo tempo”;
-- “criar canônico Avançado antes do baseline visual”.
-
-## Quando parar
-
-Se a tarefa tocar narrativa, dificuldade ou solução dos canônicos e a mudança não for necessária por evidência de PDF/teste/playtest, prefira registrar como próximo passo em documentação, não implementar agora.
-
-Baseline visual real e playtest valem mais que várias PRs teóricas.
+- a PR ou resposta explica claramente o que mudou, por que mudou e como foi validado.
