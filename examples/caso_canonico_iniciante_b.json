@@ -1,0 +1,1266 @@
+{
+  "titulo": "O Recado da Sala de Leitura",
+  "subtitulo": "Uma tarde de biblioteca, um aviso fora de hora e uma votação sem a mediadora principal",
+  "genero": "mistério institucional leve",
+  "tom": "leve, cotidiano e investigativo",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "iniciante",
+  "tempo_estimado_min": 45,
+  "numero_jogadores": "2-5",
+  "formato_envelopes": 1,
+  "premissa": "Na Biblioteca Municipal Lygia Duarte, a mediadora Nara Bittencourt recebeu um recado de balcão informando mudança de sala e horário da roda de leitura. Ela seguiu a orientação, a roda começou sem sua mediação e a programação cultural do mês foi votada sem a defesa da proposta que ela preparava.",
+  "conflito_central": {
+    "pergunta_publica": "Quem fez Nara sair da Sala de Leitura, por que o recado parecia legítimo e qual intenção havia por trás da mudança?",
+    "quem_pede_apuracao": "Iara Mendonça, coordenadora de programação cultural da biblioteca.",
+    "motivo_da_apuracao": "A votação da programação mensal foi concluída com a mediadora principal ausente e com duas versões de aviso circulando no mesmo dia.",
+    "risco_concreto": "A agenda cultural pode registrar uma decisão feita com presença incompleta, prejudicando uma roda/oficina já anunciada ao público.",
+    "verdade_aparente": "Parece ter ocorrido uma confusão honesta de agenda em uma tarde com mudanças de sala e muitos recados no balcão.",
+    "verdade_real_resumida": "Celso Diniz usou texto verdadeiro de um rascunho antigo para entregar a Nara um recado fora de contexto e evitar que ela defendesse uma proposta concorrente na votação."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "O recado que tirou Nara da Sala de Leitura correspondia a qual aviso e em que horário deixou de servir para a roda?",
+      "resposta_esperada": "O grupo deve sustentar que o texto do recado aproveitou dados de uma versão preliminar sobre outra atividade, mas foi usado às 15h18 para afastar Nara da roda e da votação das 16h10.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a mesa explicar origem textual, contexto correto, janela de entrega, oportunidade prática e consequência da ausência com documentos mínimos do envelope.",
+      "forma_diegetica_de_avanco": "O facilitador confere a hipótese final com os contratos de evidência e apresenta o fechamento operacional da biblioteca.",
+      "documentos_minimos": [
+        "E1-02",
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-08",
+        "E1-09"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Quem fez Nara sair da Sala de Leitura, por que o recado parecia legítimo e qual intenção havia por trás da mudança?",
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "O recado que tirou Nara da Sala de Leitura correspondia a qual aviso e em que horário deixou de servir para a roda?",
+        "resposta_esperada": "O grupo deve sustentar que o texto do recado aproveitou dados de uma versão preliminar sobre outra atividade, mas foi usado às 15h18 para afastar Nara da roda e da votação das 16h10.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a mesa explicar origem textual, contexto correto, janela de entrega, oportunidade prática e consequência da ausência com documentos mínimos do envelope.",
+        "forma_diegetica_de_avanco": "O facilitador confere a hipótese final com os contratos de evidência e apresenta o fechamento operacional da biblioteca.",
+        "documentos_minimos": [
+          "E1-02",
+          "E1-04",
+          "E1-05",
+          "E1-06",
+          "E1-08",
+          "E1-09"
+        ]
+      }
+    ],
+    "solucao_em_5_frases": [
+      "Nara saiu da Sala de Leitura porque recebeu um recado curto com linguagem de balcão e dados que pareciam compatíveis com a rotina de eventos.",
+      "O texto do recado reaproveitava uma versão preliminar sobre a Sala Multiuso e o horário de 16h20, informação válida para outra atividade da tarde.",
+      "A versão oficial corrigida manteve a roda de Nara às 15h30 na Sala de Leitura, então o recado entregue às 15h18 tornou-se enganoso naquele contexto.",
+      "Celso tinha acesso prático ao bloco de recados, ao mural e à lista, e foi visto mexendo em papel no quadro pouco antes de Nara sair.",
+      "A ausência de Nara permitiu que a votação favorecesse a oficina previamente divulgada por Celso, sem a defesa da proposta alternativa que ela apresentaria."
+    ],
+    "linha_tempo_aparente_resumo": "A tarde parece marcada por ajuste comum de sala: rascunho, aviso corrigido, recado de balcão, roda iniciada e votação administrativa.",
+    "linha_tempo_real_resumo": "A versão preliminar foi corrigida antes da abertura, mas Celso reaproveitou seus dados às 15h18, deslocou Nara, manteve a roda sem mediação completa e deixou a votação ocorrer sem contraponto.",
+    "red_herrings_e_descartes": [
+      "Iara parece suspeita porque o aviso tem formato institucional, mas a mensagem interna e os relatos a colocam corrigindo o aviso e conduzindo recepção em outro ponto da biblioteca.",
+      "Tomás se beneficia da votação, mas a lista e as declarações reduzem sua oportunidade prática no balcão e no mural durante a janela de entrega.",
+      "A confusão de agenda é real, mas explica a origem do texto e não a entrega do recado direcionado a Nara no horário da roda."
+    ],
+    "quando_usar_dicas": [
+      "Use uma dica leve se o grupo tratar o recado como totalmente inventado e ignorar a versão preliminar.",
+      "Use uma dica média se a mesa não perceber que 16h20 serve para outra atividade, não para a roda de 15h30.",
+      "Use uma dica forte se o grupo acusar apenas quem assinou o aviso oficial e deixar de procurar quem tinha acesso material ao balcão.",
+      "Use quase-gabarito só se a mesa não articular origem, janela, oportunidade e consequência após organizar a folha de horários."
+    ]
+  },
+  "verdade_real": "Celso Diniz, auxiliar de balcão, retirou da bandeja de impressão uma versão preliminar que ainda mencionava Sala Multiuso e chegada às 16h20. Depois que Iara corrigiu o aviso oficial, Celso escreveu um recado curto para Nara em papel do bloco do balcão e o entregou como se fosse ajuste comum da tarde. O texto era verdadeiro para a oficina de Tomás em outro horário, mas falso para a roda de leitura das 15h30. Celso fez isso porque havia divulgado antecipadamente a oficina de Tomás e temia perder credibilidade se Nara defendesse uma proposta concorrente para o mesmo espaço de sábado. Com Nara ausente, a votação ocorreu sem a mediadora principal e a programação do mês foi definida de modo incompleto.",
+  "executor_id": "02",
+  "planejador_id": "02",
+  "beneficiario_id": "02",
+  "motivacao": "Celso queria evitar constrangimento por ter prometido apoio à oficina de Tomás antes da votação e preservar o espaço de programação que já anunciara no balcão.",
+  "metodo_ocultacao": "Usou linguagem e papel comuns da biblioteca, reaproveitou dados verdadeiros de um rascunho e contou com a confiança institucional em recados do balcão.",
+  "erro_que_permite_descobrir": "O horário e a sala do recado coincidem com a versão preliminar de outra atividade, enquanto a lista, a ata e os relatos colocam Celso no balcão e Nara fora da votação.",
+  "cadeia_causal": [
+    "A coordenação preparou uma versão preliminar com Sala Multiuso e 16h20 para outra atividade.",
+    "A versão oficial foi corrigida antes da abertura ao público.",
+    "Celso manteve acesso ao bloco de recados e à bandeja do balcão.",
+    "Às 15h18, Nara recebeu um recado que reaproveitava o texto antigo.",
+    "Nara saiu da Sala de Leitura e aguardou na Sala Multiuso.",
+    "A votação da programação aconteceu sem a fala prevista de Nara."
+  ],
+  "personagens": [
+    {
+      "id": "01",
+      "nome": "Nara Bittencourt",
+      "funcao": "Mediadora convidada da roda de leitura",
+      "papel": "narrador",
+      "suspeita_aparente": "Sua ausência pode parecer desistência ou falha de comunicação da própria mediação.",
+      "verdade": "Foi a pessoa afastada pelo recado e confiou na rotina de avisos do balcão.",
+      "documento_ancoragem": [
+        "E1-04",
+        "E1-06",
+        "E1-09"
+      ],
+      "assinatura": {
+        "estilo": "fluida",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "alta",
+        "amplitude": "media",
+        "seed": "nara-leitura"
+      }
+    },
+    {
+      "id": "02",
+      "nome": "Celso Diniz",
+      "funcao": "Auxiliar de balcão",
+      "papel": "executor",
+      "suspeita_aparente": "Tinha acesso prático ao balcão, aos blocos de recado e ao mural, mas isso faz parte da função dele.",
+      "verdade": "Reaproveitou a versão preliminar para afastar Nara no horário da votação.",
+      "documento_ancoragem": [
+        "E1-06",
+        "E1-07",
+        "E1-08"
+      ],
+      "assinatura": {
+        "estilo": "compacta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "fluidez": "media",
+        "amplitude": "curta",
+        "seed": "celso-balcao"
+      }
+    },
+    {
+      "id": "03",
+      "nome": "Iara Mendonça",
+      "funcao": "Coordenadora de programação",
+      "papel": "red_herring",
+      "suspeita_aparente": "O formato do aviso corrigido e do rascunho remete à coordenação que ela chefia.",
+      "verdade": "Corrigiu o aviso oficial antes da abertura e pediu apuração quando percebeu a votação incompleta.",
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-02",
+        "E1-08"
+      ],
+      "assinatura": {
+        "estilo": "administrativa",
+        "legibilidade": "alta",
+        "ornamento": "nenhuma",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "fluidez": "media",
+        "amplitude": "media",
+        "seed": "iara-coord"
+      }
+    },
+    {
+      "id": "04",
+      "nome": "Tomás Vieira",
+      "funcao": "Oficineiro convidado",
+      "papel": "red_herring",
+      "suspeita_aparente": "Sua oficina ganhou espaço na programação depois da ausência de Nara.",
+      "verdade": "Tinha interesse no resultado, mas estava preparando material fora do balcão durante a janela crítica.",
+      "documento_ancoragem": [
+        "E1-02",
+        "E1-07",
+        "E1-09"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "esquerda",
+        "pressao": "media",
+        "fluidez": "baixa",
+        "amplitude": "media",
+        "seed": "tomas-oficina"
+      }
+    }
+  ],
+  "documentos": [
+    {
+      "codigo": "E1-01",
+      "titulo": "Abertura de apuração interna",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "curiosidade leve",
+      "objetivo_narrativo": "Apresentar a pergunta pública, o contexto institucional e a consequência controlada.",
+      "pistas_contidas": [
+        "A votação ocorreu sem a mediadora principal.",
+        "Há duas versões de aviso circulando na tarde."
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-09"
+      ],
+      "red_herring_potencial": "Iara pode parecer envolvida por iniciar e assinar a apuração.",
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "03"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Biblioteca Municipal Lygia Duarte",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Programação Cultural",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 184 — Centro",
+        "CONTATO": "programacao@bibliotecalygia.local",
+        "CNPJ": "18.742.510/0001-33",
+        "COR_TOPO": "#4F5F46",
+        "LOCAL_DATA": "Porto Claro, 14 de setembro de 2026",
+        "SAUDACAO": "À equipe de apuração,",
+        "ASSUNTO": "Apuração de recado de sala",
+        "CORPO_CARTA": "<p>Solicito registro dos documentos da tarde de 14 de setembro, quando a roda de leitura <strong>Vozes do Bairro</strong> começou sem a mediadora Nara Bittencourt.</p><p>A decisão sobre a programação do mês foi registrada às 16h15. Depois da reunião, Nara informou que havia seguido um recado de balcão indicando Sala Multiuso e chegada às 16h20.</p><p>Preservem agenda pública, versões de aviso, lista de presença, relatos de balcão e ata da votação para revisão da programação.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Iara Mendonça",
+        "NOME_ASSINANTE": "Iara Mendonça",
+        "CARGO_ASSINANTE": "Coordenadora de programação",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "03",
+        "ENDERECO_LINHA2": "Setor de mediação e eventos",
+        "ESTILO_LINHAS": "linhas-discretas"
+      }
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "Agenda pública e aviso corrigido do mural",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "orientação",
+      "objetivo_narrativo": "Fixar a cronologia pública, as salas esperadas e a versão oficial exposta ao público sem usar mapa.",
+      "pistas_contidas": [
+        "A roda de Nara estava anunciada para 15h30 na Sala de Leitura.",
+        "A oficina de Tomás tinha horário posterior na Sala Multiuso.",
+        "A versão oficial separa a roda de leitura da preparação da oficina."
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-09"
+      ],
+      "red_herring_potencial": "A agenda cheia pode sugerir confusão comum de evento.",
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Biblioteca Municipal Lygia Duarte",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Programação Cultural",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 184 — Centro",
+        "CONTATO": "programacao@bibliotecalygia.local",
+        "CNPJ": "18.742.510/0001-33",
+        "COR_TOPO": "#4F5F46",
+        "LOCAL_DATA": "Porto Claro, 14 de setembro de 2026",
+        "SAUDACAO": "Programação pública",
+        "ASSUNTO": "Agenda de atividades — 14/09",
+        "CORPO_CARTA": "<table class='table-admin'><thead><tr><th>Horário</th><th>Atividade</th><th>Responsável</th><th>Sala</th></tr></thead><tbody><tr><td>14h00</td><td>Abertura do balcão cultural</td><td>Equipe da biblioteca</td><td>Entrada e mural</td></tr><tr><td>15h30</td><td>Roda de leitura Vozes do Bairro</td><td>Nara Bittencourt</td><td>Sala de Leitura</td></tr><tr><td>16h10</td><td>Escolha da programação de sábado</td><td>Participantes da roda</td><td>Sala de Leitura</td></tr><tr><td>16h30</td><td>Oficina Caderno de Cena</td><td>Tomás Vieira</td><td>Sala Multiuso</td></tr><tr><td>17h15</td><td>Fechamento e inscrições</td><td>Balcão cultural</td><td>Balcão</td></tr></tbody></table><p><strong>Aviso corrigido fixado no mural às 14h20</strong></p><table class='table-admin'><thead><tr><th>Atividade</th><th>Horário</th><th>Entrada ou preparação</th><th>Sala</th></tr></thead><tbody><tr><td>Roda de leitura Vozes do Bairro</td><td>15h30</td><td>Participantes a partir de 15h20</td><td>Sala de Leitura</td></tr><tr><td>Oficina Caderno de Cena</td><td>16h30</td><td>Responsável a partir de 16h20</td><td>Sala Multiuso</td></tr></tbody></table><p>Recados rápidos podem ser retirados no balcão cultural durante a tarde.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Iara Mendonça",
+        "NOME_ASSINANTE": "Iara Mendonça",
+        "CARGO_ASSINANTE": "Coordenadora de programação",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "03",
+        "ENDERECO_LINHA2": "Setor de mediação e eventos",
+        "ESTILO_LINHAS": "linhas-discretas"
+      }
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Recado entregue a Nara",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "estranhamento",
+      "objetivo_narrativo": "Apresentar o recado curto que deslocou a mediadora sem explicar sua origem.",
+      "pistas_contidas": [
+        "O recado usa Sala Multiuso e 16h20.",
+        "O papel menciona balcão cultural, não uma assinatura completa."
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-05",
+        "E1-07"
+      ],
+      "red_herring_potencial": "O recado pode parecer apenas erro sem intenção.",
+      "risco_ambiguidade": "medio_baixo",
+      "ids_citados": [
+        "01"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Biblioteca Municipal Lygia Duarte",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Programação Cultural",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 184 — Centro",
+        "CONTATO": "programacao@bibliotecalygia.local",
+        "CNPJ": "18.742.510/0001-33",
+        "COR_TOPO": "#4F5F46",
+        "LOCAL_DATA": "Porto Claro, 14 de setembro de 2026",
+        "SAUDACAO": "Recado avulso",
+        "ASSUNTO": "Recado de balcão",
+        "CORPO_CARTA": "<p style='font-size:1.25em; line-height:1.6'><em>Nara, ajuste da tarde: seguir para a Sala Multiuso e aguardar 16h20 para a atividade. Recado deixado no balcão cultural.</em></p><p>Papel pautado pequeno, destacado de bloco de atendimento. Grampeado ao verso da ficha de inscrição de convidados.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Balcão cultural",
+        "NOME_ASSINANTE": "Balcão cultural",
+        "CARGO_ASSINANTE": "Atendimento da tarde",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "02",
+        "ENDERECO_LINHA2": "Setor de mediação e eventos",
+        "ESTILO_LINHAS": "linhas-discretas"
+      }
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Rascunho preliminar de aviso",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "recontextualização simples",
+      "objetivo_narrativo": "Mostrar que o texto do recado vinha de uma informação verdadeira em outro contexto.",
+      "pistas_contidas": [
+        "Sala Multiuso e 16h20 aparecem em versão anterior.",
+        "O rascunho se refere à oficina de Tomás, não à roda de Nara."
+      ],
+      "confirma": [
+        "E1-04"
+      ],
+      "confirmado_por": [
+        "E1-08"
+      ],
+      "red_herring_potencial": "A existência de rascunho pode parecer erro exclusivo de coordenação.",
+      "risco_ambiguidade": "medio_baixo",
+      "ids_citados": [
+        "03",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Biblioteca Municipal Lygia Duarte",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Programação Cultural",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 184 — Centro",
+        "CONTATO": "programacao@bibliotecalygia.local",
+        "CNPJ": "18.742.510/0001-33",
+        "COR_TOPO": "#4F5F46",
+        "LOCAL_DATA": "Porto Claro, 14 de setembro de 2026",
+        "SAUDACAO": "Rascunho interno",
+        "ASSUNTO": "Rascunho de aviso — bandeja de impressão",
+        "CORPO_CARTA": "<p><strong>Versão preliminar — não fixar no mural</strong></p><table class='table-admin'><thead><tr><th>Atividade</th><th>Horário</th><th>Entrada ou preparação</th><th>Sala</th></tr></thead><tbody><tr><td>Oficina Caderno de Cena</td><td>16h30</td><td>Responsável a partir de 16h20</td><td>Sala Multiuso</td></tr><tr><td>Roda de leitura Vozes do Bairro</td><td>15h30</td><td>Participantes a partir de 15h20</td><td>a confirmar</td></tr></tbody></table><p>Anotação na margem: “trocar ordem das linhas e publicar somente versão final”.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Iara Mendonça",
+        "NOME_ASSINANTE": "Iara Mendonça",
+        "CARGO_ASSINANTE": "Coordenadora de programação",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "03",
+        "ENDERECO_LINHA2": "Setor de mediação e eventos",
+        "ESTILO_LINHAS": "linhas-discretas"
+      }
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Lista de presença da roda de leitura",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "organização",
+      "objetivo_narrativo": "Tornar visível a presença esperada de Nara e sua ausência no momento de decisão.",
+      "pistas_contidas": [
+        "Nara aparece como mediadora prevista e chegou antes da roda.",
+        "A anotação de balcão registra saída antes da votação."
+      ],
+      "confirma": [
+        "E1-09"
+      ],
+      "confirmado_por": [
+        "E1-07"
+      ],
+      "red_herring_potencial": "A anotação administrativa não identifica sozinha quem escreveu o recado.",
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "02",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Biblioteca Municipal Lygia Duarte",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Programação Cultural",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 184 — Centro",
+        "CONTATO": "programacao@bibliotecalygia.local",
+        "CNPJ": "18.742.510/0001-33",
+        "COR_TOPO": "#4F5F46",
+        "LOCAL_DATA": "Porto Claro, 14 de setembro de 2026",
+        "SAUDACAO": "Lista de mesa",
+        "ASSUNTO": "Lista de presença — Vozes do Bairro",
+        "CORPO_CARTA": "<table class='table-comparison'><thead><tr><th>Horário</th><th>Nome</th><th>Função</th><th>Assinatura/observação</th></tr></thead><tbody><tr><td>15h05</td><td>Nara Bittencourt</td><td>Mediadora</td><td>retirou material de leitura</td></tr><tr><td>15h12</td><td>Celso Diniz</td><td>Apoio de balcão</td><td>trouxe fichas e bloco de recados</td></tr><tr><td>15h22</td><td>Lúcia Falcão</td><td>Participante</td><td>aguardou início</td></tr><tr><td>15h28</td><td>Tomás Vieira</td><td>Convidado da oficina</td><td>passou para deixar caixa de cartazes</td></tr><tr><td>15h31</td><td>Nara Bittencourt</td><td>Mediadora</td><td>anotação do balcão: chamada para Sala Multiuso</td></tr><tr><td>16h10</td><td>Grupo presente</td><td>Votação</td><td>sem registro de fala de mediação</td></tr></tbody></table>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Equipe de atendimento",
+        "NOME_ASSINANTE": "Equipe de atendimento",
+        "CARGO_ASSINANTE": "Balcão cultural",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "02",
+        "ENDERECO_LINHA2": "Setor de mediação e eventos",
+        "ESTILO_LINHAS": "linhas-discretas"
+      }
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Relatos breves de balcão e sala",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "aproximação humana",
+      "objetivo_narrativo": "Fornecer confirmações diretas parciais sobre o mural, o balcão e as posições dos suspeitos.",
+      "pistas_contidas": [
+        "Uma participante viu Celso prender papel pequeno no mural às 15h16.",
+        "Tomás estava separando cartazes no pátio lateral durante parte da janela crítica.",
+        "Iara conduzia recepção no auditório enquanto a roda começava."
+      ],
+      "confirma": [
+        "E1-04",
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E1-08"
+      ],
+      "red_herring_potencial": "Relatos de memória podem parecer menos fortes que documentos impressos.",
+      "risco_ambiguidade": "medio_baixo",
+      "ids_citados": [
+        "02",
+        "03",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Biblioteca Municipal Lygia Duarte",
+        "ORGAO_SUBTITULO": "Registro de relatos do evento",
+        "NUMERO_CASO": "BMLD-PC-0926-04",
+        "TIPO_DOCUMENTO": "Termo administrativo",
+        "TIPO_OCORRENCIA": "Declaração breve",
+        "DATA": "14/09/2026",
+        "LOCALIZACAO": "Balcão, mural de avisos e salas de atividade",
+        "HORA_OCORRENCIA": "15h00 a 17h10",
+        "DESCRICAO_OCORRENCIA": "<p>Marta Leal relatou que, por volta de 15h16, viu Celso Diniz sair do balcão com um papel pequeno e prender algo na lateral do mural, perto das fichas da roda.</p><p>Rui Azevedo relatou que Iara Mendonça ficou na porta do auditório entre 15h10 e 15h35, recebendo o grupo de contação de histórias.</p><p>Beatriz Campos relatou que Tomás Vieira estava no pátio lateral separando cartazes quando ela chegou às 15h18. Ele entrou na Sala de Leitura depois das 15h28, com uma caixa de material.</p>",
+        "NOME_RESPONSAVEL": "Iara Mendonça",
+        "ASSINATURA_RESPONSAVEL": "Iara Mendonça",
+        "ASSINATURA_GLIFO": "I. M.",
+        "DATA_HORA_ASSINATURA": "14/09/2026 17h40",
+        "CAMPO_NOME": true,
+        "NOME_ENVOLVIDO": "Marta Leal, Rui Azevedo e Beatriz Campos",
+        "DATA_NASC": "não informado",
+        "CONDICAO": "Frequentadores e voluntária",
+        "DOCUMENTO_PESSOAL": "Registro interno/persona 10031",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "03",
+        "ASSINATURA_GLIFO_PERSONAGEM_ID": "03"
+      }
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Orientação interna sobre recados de evento",
+      "envelope": "E1",
+      "tipo": "email_institucional",
+      "emocao_esperada": "contexto institucional",
+      "objetivo_narrativo": "Ancorar por que Nara confiaria em recados do balcão e como rascunhos deveriam ser tratados.",
+      "pistas_contidas": [
+        "Recados de sala são rotina do balcão cultural.",
+        "Rascunhos devem sair da bandeja antes da abertura ao público."
+      ],
+      "confirma": [
+        "E1-02",
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E1-07"
+      ],
+      "red_herring_potencial": "A rotina institucional amplia o acesso sem apontar uma pessoa isolada.",
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "02",
+        "03"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Iara Mendonça",
+        "REMETENTE_EMAIL": "iara.mendonca@bibliotecalygia.local",
+        "DESTINATARIO_EMAIL": "balcao.cultural@bibliotecalygia.local",
+        "COPIA": "mediacao@bibliotecalygia.local",
+        "DESTINATARIO_LABEL": "Equipe de sábado",
+        "DATA_HORA": "14/09/2026 13h42",
+        "ASSUNTO": "Rotina de avisos — tarde cultural",
+        "AVATAR_INICIAL": "I",
+        "AVATAR_COR": "#4F5F46",
+        "CORPO_EMAIL": "<p>Boa tarde. Para evitar ruído na entrada, deixem no mural apenas a versão final dos avisos de sala.</p><p>Recados individuais podem ficar no balcão cultural quando forem curtos e referentes a chegada, preparação ou troca de ambiente. Nara já conhece essa rotina dos encontros anteriores.</p><p>Rascunhos da bandeja de impressão devem ir para a pasta cinza antes da abertura ao público. Celso, por favor, revise o balcão antes das 14h30.</p>",
+        "NOTA_RODAPE": "Mensagem arquivada no espelho interno da Biblioteca Municipal Lygia Duarte.",
+        "ANEXOS": false
+      }
+    },
+    {
+      "codigo": "E1-09",
+      "titulo": "Ata curta da votação de programação",
+      "envelope": "E1",
+      "tipo": "boletim",
+      "emocao_esperada": "consequência concreta",
+      "objetivo_narrativo": "Registrar a decisão tomada sem a fala da mediadora e o benefício prático criado pela ausência.",
+      "pistas_contidas": [
+        "A votação ocorreu às 16h10 sem fala de Nara.",
+        "A proposta de Tomás foi aprovada por diferença pequena."
+      ],
+      "confirma": [
+        "E1-01",
+        "E1-06"
+      ],
+      "confirmado_por": [
+        "E1-02"
+      ],
+      "red_herring_potencial": "Tomás se beneficia da ata, mas a ata não mostra autoria do recado.",
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "03",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Biblioteca Municipal Lygia Duarte",
+        "ORGAO_SUBTITULO": "Registro de deliberação cultural",
+        "NUMERO_CASO": "BMLD-PC-0926-04",
+        "TIPO_DOCUMENTO": "Ata curta",
+        "TIPO_OCORRENCIA": "Escolha de programação mensal",
+        "DATA": "14/09/2026",
+        "LOCALIZACAO": "Sala de Leitura",
+        "HORA_OCORRENCIA": "16h10 a 16h18",
+        "DESCRICAO_OCORRENCIA": "<p>Presentes deliberaram sobre o sábado aberto de outubro. Foram apresentadas duas propostas: continuidade da roda Vozes do Bairro com oficina de mediação comunitária e oficina Caderno de Cena.</p><p>Resultado registrado: Caderno de Cena, 6 votos; mediação comunitária, 4 votos; abstenções, 1. Não houve fala inicial de Nara Bittencourt no momento da votação.</p><p>Encaminhamento: programação divulgada em mural interno após conferência da coordenação.</p>",
+        "NOME_RESPONSAVEL": "Iara Mendonça",
+        "ASSINATURA_RESPONSAVEL": "Iara Mendonça",
+        "ASSINATURA_GLIFO": "I. M.",
+        "DATA_HORA_ASSINATURA": "14/09/2026 17h05",
+        "MOSTRAR_CARIMBO": true,
+        "TEXTO_CARIMBO": "ARQUIVO INTERNO",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "03",
+        "ASSINATURA_GLIFO_PERSONAGEM_ID": "03"
+      }
+    },
+    {
+      "codigo": "E1-10",
+      "titulo": "Folha de comparação de recados e horários",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "organização de mesa",
+      "objetivo_narrativo": "Oferecer ferramenta neutra para organizar horários, salas, origens e circulação dos avisos.",
+      "pistas_contidas": [
+        "Campos neutros para horários, salas, origem, local de aparição e pessoas envolvidas."
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Biblioteca Municipal Lygia Duarte",
+        "SUBTITULO_ORGANIZACAO": "Coordenação de Programação Cultural",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 184 — Centro",
+        "CONTATO": "programacao@bibliotecalygia.local",
+        "CNPJ": "18.742.510/0001-33",
+        "COR_TOPO": "#4F5F46",
+        "LOCAL_DATA": "Porto Claro, 14 de setembro de 2026",
+        "SAUDACAO": "Folha de mesa",
+        "ASSUNTO": "Folha de comparação de recados e horários",
+        "CORPO_CARTA": "<p>Use esta folha como apoio de anotação da mesa.</p><table class='table-comparison'><thead><tr><th>Horário</th><th>Sala indicada</th><th>Origem do aviso</th><th>Onde apareceu</th><th>Quem viu</th><th>Quem recebeu</th><th>Observação</th></tr></thead><tbody><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table><p><strong>Linha do tempo de apoio</strong></p><table class='table-admin'><tbody><tr><td>Abertura da biblioteca</td><td>14h00</td></tr><tr><td>Aviso no mural</td><td>&nbsp;</td></tr><tr><td>Início da roda</td><td>&nbsp;</td></tr><tr><td>Votação</td><td>&nbsp;</td></tr></tbody></table>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Equipe de atendimento",
+        "NOME_ASSINANTE": "Equipe de atendimento",
+        "CARGO_ASSINANTE": "Material de apoio",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "02",
+        "ENDERECO_LINHA2": "Setor de mediação e eventos",
+        "ESTILO_LINHAS": "linhas-discretas"
+      }
+    }
+  ],
+  "linha_tempo_real": [
+    {
+      "data_hora": "2026-09-14 13:42",
+      "evento": "Iara orienta a equipe a usar somente avisos finais no mural e retirar rascunhos da bandeja.",
+      "personagem_id": "03",
+      "documento_prova": "E1-08",
+      "confirmacao_independente": "E1-05"
+    },
+    {
+      "data_hora": "2026-09-14 14:20",
+      "evento": "A versão oficial corrigida fica disponível para o mural com a roda às 15h30 na Sala de Leitura.",
+      "personagem_id": "03",
+      "documento_prova": "E1-02",
+      "confirmacao_independente": "E1-02"
+    },
+    {
+      "data_hora": "2026-09-14 15:12",
+      "evento": "Celso leva fichas e bloco de recados para a Sala de Leitura.",
+      "personagem_id": "02",
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E1-08"
+    },
+    {
+      "data_hora": "2026-09-14 15:16",
+      "evento": "Celso prende um papel pequeno na lateral do mural próximo às fichas da roda.",
+      "personagem_id": "02",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-06"
+    },
+    {
+      "data_hora": "2026-09-14 15:18",
+      "evento": "Nara recebe o recado de balcão com Sala Multiuso e 16h20.",
+      "personagem_id": "01",
+      "documento_prova": "E1-04",
+      "confirmacao_independente": "E1-06"
+    },
+    {
+      "data_hora": "2026-09-14 16:10",
+      "evento": "A votação de programação ocorre sem fala de Nara.",
+      "personagem_id": "01",
+      "documento_prova": "E1-09",
+      "confirmacao_independente": "E1-06"
+    }
+  ],
+  "linha_tempo_percebida": [
+    {
+      "data_hora": "2026-09-14 15:18",
+      "evento": "A mediadora teria recebido uma orientação comum de mudança de sala.",
+      "personagem_id": "01",
+      "documento_prova": "E1-04",
+      "confirmacao_independente": "E1-08"
+    },
+    {
+      "data_hora": "2026-09-14 16:10",
+      "evento": "A votação teria ocorrido apesar de uma confusão normal de agenda.",
+      "personagem_id": "03",
+      "documento_prova": "E1-09",
+      "confirmacao_independente": "E1-02"
+    }
+  ],
+  "linha_tempo_documental": [
+    {
+      "data_hora": "2026-09-14 13:42",
+      "evento": "Orientação interna sobre recados e rascunhos.",
+      "personagem_id": "03",
+      "documento_prova": "E1-08",
+      "confirmacao_independente": "E1-05"
+    },
+    {
+      "data_hora": "2026-09-14 14:20",
+      "evento": "Aviso oficial corrigido com salas e horários.",
+      "personagem_id": "03",
+      "documento_prova": "E1-02",
+      "confirmacao_independente": "E1-02"
+    },
+    {
+      "data_hora": "2026-09-14 15:31",
+      "evento": "Lista registra Nara chamada para Sala Multiuso.",
+      "personagem_id": "01",
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E1-04"
+    },
+    {
+      "data_hora": "2026-09-14 16:18",
+      "evento": "Ata registra resultado da votação.",
+      "personagem_id": "03",
+      "documento_prova": "E1-09",
+      "confirmacao_independente": "E1-02"
+    }
+  ],
+  "pilares_validacao": [
+    {
+      "nome": "origem textual do recado",
+      "documento_principal": "E1-05",
+      "confirmacao": "E1-04",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "acesso prático ao balcão e mural",
+      "documento_principal": "E1-06",
+      "confirmacao": "E1-07",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "janela de entrega",
+      "documento_principal": "E1-07",
+      "confirmacao": "E1-04",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "consequência da ausência",
+      "documento_principal": "E1-09",
+      "confirmacao": "E1-06",
+      "personagem_id": "02"
+    }
+  ],
+  "intervalo_critico_inicio": "2026-09-14 15:12",
+  "intervalo_critico_fim": "2026-09-14 16:18",
+  "matriz_pistas": [
+    {
+      "descricao": "O recado usa Sala Multiuso e 16h20.",
+      "documento": "E1-04",
+      "o_que_sugere": "O texto aponta para uma mudança de sala/horário.",
+      "o_que_prova": "O conteúdo recebido por Nara, sem autoria completa.",
+      "confirmacao": "E1-05",
+      "risco_ambiguidade": "medio_baixo",
+      "emocao_esperada": "estranhamento"
+    },
+    {
+      "descricao": "O rascunho antigo contém os mesmos dados para a oficina posterior.",
+      "documento": "E1-05",
+      "o_que_sugere": "A informação tinha contexto legítimo anterior.",
+      "o_que_prova": "A origem documental provável dos dados do recado.",
+      "confirmacao": "E1-02",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "recontextualização"
+    },
+    {
+      "descricao": "Nara aparece antes da roda e não tem fala registrada na votação.",
+      "documento": "E1-06",
+      "o_que_sugere": "A ausência alterou a dinâmica da reunião.",
+      "o_que_prova": "A presença esperada e o afastamento na janela da votação.",
+      "confirmacao": "E1-09",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "percepção"
+    },
+    {
+      "descricao": "Relato coloca Celso mexendo em papel no mural às 15h16.",
+      "documento": "E1-07",
+      "o_que_sugere": "Celso teve oportunidade material na janela crítica.",
+      "o_que_prova": "Interação observada com papel e mural, não intenção isolada.",
+      "confirmacao": "E1-06",
+      "risco_ambiguidade": "medio_baixo",
+      "emocao_esperada": "suspeita justa"
+    },
+    {
+      "descricao": "E-mail ancora a confiança em recados de balcão.",
+      "documento": "E1-08",
+      "o_que_sugere": "Nara tinha motivo cotidiano para seguir a orientação.",
+      "o_que_prova": "A rotina institucional que torna o recado plausível.",
+      "confirmacao": "E1-04",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "contexto"
+    },
+    {
+      "descricao": "A ata registra votação apertada em favor da oficina já divulgada.",
+      "documento": "E1-09",
+      "o_que_sugere": "Houve consequência concreta e benefício de programação.",
+      "o_que_prova": "Resultado e ausência de fala de Nara no momento decisivo.",
+      "confirmacao": "E1-02",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "fechamento"
+    }
+  ],
+  "red_herrings": [
+    {
+      "personagem_id": "03",
+      "motivo_aparente": "O formato institucional dos avisos e o rascunho vêm da coordenação.",
+      "como_descartar": "A orientação interna e os relatos mostram correção prévia e atividade de recepção durante a janela crítica.",
+      "documento_descarte": "E1-08",
+      "categoria": "formato_sem_entrega"
+    },
+    {
+      "personagem_id": "04",
+      "motivo_aparente": "A oficina dele foi favorecida pela votação sem Nara.",
+      "como_descartar": "O relato de Beatriz e a lista reduzem sua oportunidade prática no balcão e no mural no horário do recado.",
+      "documento_descarte": "E1-07",
+      "categoria": "motivo_sem_acesso"
+    },
+    {
+      "personagem_id": "01",
+      "motivo_aparente": "A ausência poderia parecer desistência de última hora ou descuido da própria mediação.",
+      "como_descartar": "O recado e a lista registram que ela estava prevista e recebeu orientação externa antes de sair.",
+      "documento_descarte": "E1-04",
+      "categoria": "ausencia_explicada"
+    }
+  ],
+  "cadeia_financeira": [],
+  "codigos": [],
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo trata a tarde como simples desorganização.",
+      "texto": "Separem cada horário citado e anotem a sala correspondente.",
+      "o_que_desbloqueia": "Organização básica da cronologia."
+    },
+    {
+      "numero": 2,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo procura falsificação gráfica no papel.",
+      "texto": "Nem toda informação enganosa precisa ser inventada; às vezes ela só aparece no momento errado.",
+      "o_que_desbloqueia": "Leitura contextual do recado."
+    },
+    {
+      "numero": 3,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo não relaciona rascunho e recado.",
+      "texto": "Procurem onde Sala Multiuso e 16h20 aparecem antes do recado individual.",
+      "o_que_desbloqueia": "Origem textual do recado."
+    },
+    {
+      "numero": 4,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo acusa apenas a coordenação.",
+      "texto": "Assinar a versão oficial e colocar um recado avulso em circulação são ações diferentes.",
+      "o_que_desbloqueia": "Separação entre formato institucional e entrega material."
+    },
+    {
+      "numero": 5,
+      "intensidade": "forte",
+      "envelope": "E1",
+      "condicao_uso": "Grupo não percebe a consequência da ausência.",
+      "texto": "Verifiquem quem era esperado antes da roda e quem aparece no registro da votação.",
+      "o_que_desbloqueia": "Pista por ausência simples."
+    },
+    {
+      "numero": 6,
+      "intensidade": "quase_gabarito",
+      "envelope": "E1",
+      "condicao_uso": "Grupo organizou horários, mas não fecha oportunidade.",
+      "texto": "A hipótese mais completa deve ligar o rascunho antigo, o recado das 15h18, o acesso ao balcão/mural e o resultado da votação.",
+      "o_que_desbloqueia": "Síntese final do envelope."
+    }
+  ],
+  "contratos_evidencia": [
+    {
+      "id": "C-E1-ORIGEM-RECADO",
+      "conclusao": "O recado deriva de uma versão preliminar e não de texto inventado do zero.",
+      "fase": "E1",
+      "tipo": "indireta_por_objeto",
+      "prova_principal": "E1-05",
+      "confirmacao_independente": "E1-04",
+      "descarta_alternativas": [
+        "E1-02",
+        "E1-10"
+      ],
+      "personagens_afetados": [
+        "01",
+        "02",
+        "03"
+      ],
+      "acao_esperada_jogador": "Associar texto, horário e sala do recado ao rascunho preliminar.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E1-CONTEXTO-CORRETO",
+      "conclusao": "Sala Multiuso e 16h20 eram dados corretos para a oficina posterior, não para a roda de leitura.",
+      "fase": "E1",
+      "tipo": "sistemica_documental",
+      "prova_principal": "E1-02",
+      "confirmacao_independente": "E1-05",
+      "descarta_alternativas": [
+        "E1-05"
+      ],
+      "personagens_afetados": [
+        "01",
+        "04"
+      ],
+      "acao_esperada_jogador": "Separar atividade, horário e sala em uma cronologia curta.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-E1-MOMENTO-ENGANOSO",
+      "conclusao": "O recado tornou-se enganoso quando foi entregue a Nara antes da roda de 15h30.",
+      "fase": "E1",
+      "tipo": "direta",
+      "prova_principal": "E1-04",
+      "confirmacao_independente": "E1-06",
+      "descarta_alternativas": [
+        "E1-02"
+      ],
+      "personagens_afetados": [
+        "01"
+      ],
+      "acao_esperada_jogador": "Posicionar o recebimento do recado antes do início da roda e da votação.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-E1-ACESSO-OPORTUNIDADE",
+      "conclusao": "Celso tinha acesso prático ao balcão, aos recados e ao mural durante a janela crítica.",
+      "fase": "E1",
+      "tipo": "direta",
+      "prova_principal": "E1-07",
+      "confirmacao_independente": "E1-06",
+      "descarta_alternativas": [
+        "E1-08"
+      ],
+      "personagens_afetados": [
+        "02"
+      ],
+      "acao_esperada_jogador": "Diferenciar acesso cotidiano de intenção e combinar relato com lista.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-E1-CONSEQUENCIA-AUSENCIA",
+      "conclusao": "A ausência de Nara afetou uma votação apertada de programação.",
+      "fase": "E1",
+      "tipo": "sistemica_documental",
+      "prova_principal": "E1-09",
+      "confirmacao_independente": "E1-06",
+      "descarta_alternativas": [
+        "E1-01"
+      ],
+      "personagens_afetados": [
+        "01",
+        "04"
+      ],
+      "acao_esperada_jogador": "Observar presença esperada, falta de fala na ata e resultado da decisão.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-E1-DESCARTE-IARA",
+      "conclusao": "Iara gerou a versão oficial e corrigiu o mural, mas não é a entrega material do recado.",
+      "fase": "E1",
+      "tipo": "descarte",
+      "prova_principal": "E1-08",
+      "confirmacao_independente": "E1-07",
+      "descarta_alternativas": [
+        "E1-02"
+      ],
+      "personagens_afetados": [
+        "03"
+      ],
+      "acao_esperada_jogador": "Separar autoria administrativa do aviso e circulação do recado avulso.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-E1-DESCARTE-TOMAS",
+      "conclusao": "Tomás tinha benefício aparente, mas a oportunidade material fica fraca na janela do recado.",
+      "fase": "E1",
+      "tipo": "descarte",
+      "prova_principal": "E1-07",
+      "confirmacao_independente": "E1-06",
+      "descarta_alternativas": [
+        "E1-09"
+      ],
+      "personagens_afetados": [
+        "04"
+      ],
+      "acao_esperada_jogador": "Separar benefício de acesso prático ao balcão e ao mural.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-FINAL-RECONSTRUCAO-RECADO",
+      "conclusao": "A resposta final liga recado reaproveitado, contexto errado, acesso de Celso e votação sem Nara.",
+      "fase": "final",
+      "tipo": "solucao_final",
+      "prova_principal": "E1-07",
+      "confirmacao_independente": "E1-09",
+      "descarta_alternativas": [
+        "E1-02",
+        "E1-04",
+        "E1-05",
+        "E1-06",
+        "E1-08",
+        "E1-10"
+      ],
+      "personagens_afetados": [
+        "01",
+        "02",
+        "03",
+        "04"
+      ],
+      "acao_esperada_jogador": "Apresentar a sequência completa com origem textual, momento de entrega, acesso/oportunidade e consequência.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": true
+    }
+  ],
+  "dicas_contextuais": [
+    {
+      "id": "DC-E1-CRONOLOGIA",
+      "categoria": "cronologia",
+      "fase": "E1",
+      "titulo": "Organizar horários",
+      "condicao_uso": "Mesa mistura 15h30, 16h10 e 16h20.",
+      "texto": "Peça que coloquem em ordem: início da roda, recebimento do recado, preparação da oficina e votação.",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E1-CONTEXTO-CORRETO",
+        "C-E1-MOMENTO-ENGANOSO"
+      ],
+      "documentos_relacionados": [
+        "E1-02",
+        "E1-04",
+        "E1-09"
+      ]
+    },
+    {
+      "id": "DC-E1-VERSAO",
+      "categoria": "documento",
+      "fase": "E1",
+      "titulo": "Origem do texto",
+      "condicao_uso": "Mesa chama o recado de falso e abandona o rascunho.",
+      "texto": "Indique que uma frase pode ser fiel a um papel antigo e ainda assim ruim para o momento em que foi usada.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E1-ORIGEM-RECADO"
+      ],
+      "documentos_relacionados": [
+        "E1-04",
+        "E1-05"
+      ]
+    },
+    {
+      "id": "DC-E1-ACESSO",
+      "categoria": "personagem",
+      "fase": "E1",
+      "titulo": "Acesso material",
+      "condicao_uso": "Mesa fica presa em quem tinha motivo maior.",
+      "texto": "Pergunte quem podia tocar nos papéis do balcão sem chamar atenção naquela tarde.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E1-ACESSO-OPORTUNIDADE"
+      ],
+      "documentos_relacionados": [
+        "E1-06",
+        "E1-07",
+        "E1-08"
+      ]
+    },
+    {
+      "id": "DC-E1-AUSENCIA",
+      "categoria": "cronologia",
+      "fase": "E1",
+      "titulo": "Ausência visível",
+      "condicao_uso": "Mesa não vê por que a ausência importou.",
+      "texto": "Peça que marquem quem era esperado no começo e quem teve fala registrada na decisão.",
+      "nivel": "forte",
+      "contratos_relacionados": [
+        "C-E1-CONSEQUENCIA-AUSENCIA"
+      ],
+      "documentos_relacionados": [
+        "E1-06",
+        "E1-09"
+      ]
+    },
+    {
+      "id": "DC-FINAL-SINTESE",
+      "categoria": "solucao",
+      "fase": "final",
+      "titulo": "Fechamento",
+      "condicao_uso": "Mesa precisa verbalizar resposta final sem nova pista.",
+      "texto": "A resposta suficiente liga quatro elementos: texto reaproveitado, horário errado, acesso ao balcão/mural e votação sem Nara.",
+      "nivel": "quase_gabarito",
+      "contratos_relacionados": [
+        "C-E1-ORIGEM-RECADO",
+        "C-E1-ACESSO-OPORTUNIDADE",
+        "C-E1-CONSEQUENCIA-AUSENCIA",
+        "C-FINAL-RECONSTRUCAO-RECADO"
+      ],
+      "documentos_relacionados": [
+        "E1-04",
+        "E1-05",
+        "E1-07",
+        "E1-09"
+      ]
+    }
+  ],
+  "visual_procedural": {
+    "mapas": [],
+    "personagens": [
+      {
+        "personagem_id": "01",
+        "silhueta": "mediadora",
+        "icone": "livro-aberto",
+        "cor": "#6B5B4E",
+        "detalhes": [
+          "pasta de leitura",
+          "óculos redondos"
+        ]
+      },
+      {
+        "personagem_id": "02",
+        "silhueta": "atendente",
+        "icone": "balcao",
+        "cor": "#556B5A",
+        "detalhes": [
+          "crachá de balcão",
+          "bloco de notas"
+        ]
+      },
+      {
+        "personagem_id": "03",
+        "silhueta": "coordenadora",
+        "icone": "prancheta",
+        "cor": "#4F5F46",
+        "detalhes": [
+          "agenda",
+          "caneta administrativa"
+        ]
+      },
+      {
+        "personagem_id": "04",
+        "silhueta": "oficineiro",
+        "icone": "cartaz",
+        "cor": "#6A5A72",
+        "detalhes": [
+          "tubo de cartazes",
+          "caixa de material"
+        ]
+      }
+    ],
+    "locais": [
+      {
+        "id": "LOC-SALA-LEITURA",
+        "nome": "Sala de Leitura",
+        "tipo": "sala",
+        "icone": "livro",
+        "descricao": "Espaço da roda Vozes do Bairro e da votação de programação.",
+        "documentos_relacionados": [
+          "E1-02",
+          "E1-09"
+        ]
+      },
+      {
+        "id": "LOC-BALCAO-MURAL",
+        "nome": "Balcão cultural e mural",
+        "tipo": "atendimento",
+        "icone": "mural",
+        "descricao": "Ponto de recados curtos, fichas de presença e avisos da tarde.",
+        "documentos_relacionados": [
+          "E1-04",
+          "E1-06",
+          "E1-08"
+        ]
+      },
+      {
+        "id": "LOC-SALA-MULTIUSO",
+        "nome": "Sala Multiuso",
+        "tipo": "sala",
+        "icone": "cadeiras",
+        "descricao": "Sala prevista para a oficina Caderno de Cena no fim da tarde.",
+        "documentos_relacionados": [
+          "E1-02",
+          "E1-05"
+        ]
+      }
+    ]
+  },
+  "playtest": {
+    "status": "planejado",
+    "rodadas": 0,
+    "observacoes": [
+      "Blueprint inicial criado a partir do plano editorial do Canônico Iniciante B.",
+      "Caso sem mapa e com envelope único para teste de cronologia e comparação de versões."
+    ]
+  },
+  "printable_cards": [
+    {
+      "id": "CARD-P01",
+      "tipo": "personagem",
+      "titulo": "Nara Bittencourt",
+      "subtitulo": "Mediadora convidada",
+      "descricao_curta": "Conduz a roda Vozes do Bairro.",
+      "codigo_visual": "P01",
+      "tags_visuais": [
+        "mediação",
+        "leitura"
+      ],
+      "envelope_recomendado": "E1",
+      "entregar_apartado": true,
+      "observacao_publica": "Referência de mesa."
+    },
+    {
+      "id": "CARD-P02",
+      "tipo": "personagem",
+      "titulo": "Celso Diniz",
+      "subtitulo": "Auxiliar de balcão",
+      "descricao_curta": "Apoia fichas, recados e atendimento da tarde.",
+      "codigo_visual": "P02",
+      "tags_visuais": [
+        "balcão",
+        "recados"
+      ],
+      "envelope_recomendado": "E1",
+      "entregar_apartado": true,
+      "observacao_publica": "Referência de mesa."
+    },
+    {
+      "id": "CARD-P03",
+      "tipo": "personagem",
+      "titulo": "Iara Mendonça",
+      "subtitulo": "Coordenadora de programação",
+      "descricao_curta": "Organiza avisos e programação cultural.",
+      "codigo_visual": "P03",
+      "tags_visuais": [
+        "coordenação",
+        "agenda"
+      ],
+      "envelope_recomendado": "E1",
+      "entregar_apartado": true,
+      "observacao_publica": "Referência de mesa."
+    },
+    {
+      "id": "CARD-P04",
+      "tipo": "personagem",
+      "titulo": "Tomás Vieira",
+      "subtitulo": "Oficineiro convidado",
+      "descricao_curta": "Conduz a oficina Caderno de Cena.",
+      "codigo_visual": "P04",
+      "tags_visuais": [
+        "oficina",
+        "cartazes"
+      ],
+      "envelope_recomendado": "E1",
+      "entregar_apartado": true,
+      "observacao_publica": "Referência de mesa."
+    },
+    {
+      "id": "CARD-L01",
+      "tipo": "local",
+      "titulo": "Sala de Leitura",
+      "subtitulo": "Roda e votação",
+      "descricao_curta": "Ambiente indicado na programação pública para a roda Vozes do Bairro.",
+      "codigo_visual": "L01",
+      "tags_visuais": [
+        "sala",
+        "leitura"
+      ],
+      "envelope_recomendado": "E1",
+      "entregar_apartado": true,
+      "observacao_publica": "Apoio espacial sem mapa."
+    },
+    {
+      "id": "CARD-L02",
+      "tipo": "local",
+      "titulo": "Balcão cultural e mural",
+      "subtitulo": "Atendimento da tarde",
+      "descricao_curta": "Ponto de avisos, fichas de presença e recados rápidos.",
+      "codigo_visual": "L02",
+      "tags_visuais": [
+        "balcão",
+        "mural"
+      ],
+      "envelope_recomendado": "E1",
+      "entregar_apartado": true,
+      "observacao_publica": "Apoio espacial sem mapa."
+    },
+    {
+      "id": "CARD-L03",
+      "tipo": "local",
+      "titulo": "Sala Multiuso",
+      "subtitulo": "Oficina posterior",
+      "descricao_curta": "Sala de preparação da oficina Caderno de Cena no fim da tarde.",
+      "codigo_visual": "L03",
+      "tags_visuais": [
+        "sala",
+        "oficina"
+      ],
+      "envelope_recomendado": "E1",
+      "entregar_apartado": true,
+      "observacao_publica": "Apoio espacial sem mapa."
+    }
+  ],
+  "versao": "0.1",
+  "observacoes_producao": "Canônico Iniciante B em blueprint inicial. Complementa o Mirante por trocar investigação espacial e acervo por cronologia curta, recado fora de contexto e comparação de versões. Não usa mapa, QR code, internet, app ou links externos. A folha de comparação é documento de apoio do envelope, com campos neutros e sem gabarito. O caso deve seguir para Case Review/build visual posterior antes de playtest real."
+}
