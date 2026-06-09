@@ -174,15 +174,120 @@ table.financial { font-variant-numeric: tabular-nums; }
 .table-inventory,
 .inventory-table,
 table.items { table-layout: fixed; }
-.table-comparison { table-layout: fixed; }
+.table-comparison { table-layout: auto; }
 .table-admin,
 .admin-table,
-.fields-table { table-layout: fixed; }
+.fields-table { table-layout: auto; }
 
 table { border-collapse: collapse; max-width: 100%; }
 th { font-family: var(--ind-font-institutional); text-transform: uppercase; letter-spacing: .06em; }
 th, td { overflow-wrap: anywhere; hyphens: auto; }
+.doc-family-letter table,
+.table-admin,
+.admin-table,
+.fields-table,
+.table-comparison,
+.table-support {
+  width: 100%;
+  margin: var(--ind-space-3) 0;
+  font-size: 10.2pt;
+  line-height: 1.35;
+}
+.doc-family-letter th,
+.table-admin th,
+.admin-table th,
+.fields-table th,
+.table-comparison th,
+.table-support th {
+  letter-spacing: .045em;
+}
+.doc-family-letter th,
+.doc-family-letter td,
+.table-admin th,
+.table-admin td,
+.admin-table th,
+.admin-table td,
+.fields-table th,
+.fields-table td,
+.table-comparison th,
+.table-comparison td,
+.table-support th,
+.table-support td {
+  border: var(--ind-line-hair);
+  padding: 2.2mm 2.8mm;
+  vertical-align: top;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: manual;
+}
+.doc-family-letter th,
+.table-admin th,
+.admin-table th,
+.fields-table th,
+.table-comparison th,
+.table-support th { background: var(--ind-gray-10); }
+.doc-family-letter thead th,
+.table-admin thead th,
+.admin-table thead th,
+.fields-table thead th,
+.table-comparison thead th,
+.table-support thead th { border-bottom: var(--ind-line); }
 tbody tr:nth-child(even) { background-color: rgba(0,0,0,.025); }
+.table-admin th,
+.table-admin td,
+.table-comparison th,
+.table-comparison td { min-width: 19mm; }
+.table-admin .col-time,
+.table-comparison .col-time {
+  width: 18mm;
+  min-width: 18mm;
+  white-space: nowrap;
+}
+.table-admin .col-room,
+.table-comparison .col-room { min-width: 25mm; }
+.table-admin .col-note,
+.table-comparison .col-note { min-width: 42mm; }
+.table-support {
+  table-layout: fixed;
+  font-size: 9.6pt;
+}
+.table-support th,
+.table-support td {
+  padding: 2.8mm 3.2mm;
+}
+.table-support .blank-row td {
+  height: 15mm;
+}
+.timeline-support {
+  margin-top: var(--ind-space-4);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.timeline-support h3 {
+  margin: 0 0 var(--ind-space-2);
+  font-family: var(--ind-font-institutional);
+  font-size: 11pt;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.timeline-lines {
+  display: grid;
+  gap: 2.4mm;
+}
+.timeline-line {
+  display: grid;
+  grid-template-columns: 46mm 1fr;
+  gap: 5mm;
+  align-items: end;
+}
+.timeline-line .label {
+  font-family: var(--ind-font-institutional);
+  font-size: 9.6pt;
+}
+.timeline-line .fill {
+  min-height: 9mm;
+  border-bottom: var(--ind-line);
+}
 td.right, th.right, .numeric, .money, .td-value, .td-balance, .value { text-align: right; font-variant-numeric: tabular-nums; }
 .td-date, .date, .time, .mono, code, .code { font-family: var(--ind-font-technical); font-variant-numeric: tabular-nums; }
 .debit, .negative { color: #111 !important; font-weight: 700; border-left: .7mm solid #555; }
