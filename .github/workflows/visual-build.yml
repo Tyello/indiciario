@@ -1,0 +1,60 @@
+name: Visual Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "examples/**"
+      - "templates/**"
+      - "generator/**"
+      - "scripts/**"
+      - "docs/baselines/**"
+      - "requirements.txt"
+      - ".github/workflows/visual-build.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-iniciante-b:
+    name: Build Iniciante B visual package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest ruff
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Build Iniciante B package
+        run: python -m scripts.build_package examples/caso_canonico_iniciante_b.json --output output/iniciante_b --strict
+
+      - name: Visual sanity check on rendered PDF
+        run: |
+          PDF_PATH="$(find output/iniciante_b -path '*/01_envelope_1.pdf' -print -quit)"
+          if [ -z "$PDF_PATH" ]; then
+            echo "01_envelope_1.pdf não encontrado em output/iniciante_b" >&2
+            find output/iniciante_b -type f -name '*.pdf' -print >&2
+            exit 1
+          fi
+          python -m scripts.visual_sanity_check examples/caso_canonico_iniciante_b.json --pdf "$PDF_PATH"
+
+      - name: Upload visual package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: iniciante-b-visual-package
+          path: output/iniciante_b/**
+          if-no-files-found: error

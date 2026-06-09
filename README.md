@@ -69,6 +69,16 @@ Se o ambiente ainda não tiver browser instalado, instale o Chromium usado pelo 
 python -m playwright install chromium
 ```
 
+
+## Automação de CI
+
+O repositório possui dois workflows em `.github/workflows/`:
+
+- **CI** (`ci.yml`): validação rápida em `pull_request` e em `push` para `main`. Instala dependências Python, executa `ruff check generator/ scripts/ tests/`, `pytest tests/ -q`, validators strict dos canônicos Iniciante, Intermediário e Iniciante B, Case Review em Markdown para os três casos e `visual_sanity_check` do Iniciante B sem instalar Chromium nem gerar PDFs.
+- **Visual Build** (`visual-build.yml`): workflow mais pesado para `workflow_dispatch` e para PRs que alterem exemplos, templates, geradores, scripts, baselines visuais ou `requirements.txt`. Instala Playwright/Chromium, gera o pacote real do Iniciante B e publica o artifact `iniciante-b-visual-package` com PDFs, manifests, relatórios e HTML debug existentes em `output/iniciante_b/**`.
+
+Para rodar manualmente o build visual, abra a aba **Actions** no GitHub, escolha **Visual Build** e use **Run workflow**. Quando o job passar, baixe o artifact na página da execução. Esse artifact apoia a revisão de baseline visual, mas não substitui inspeção humana dos PDFs nem playtest.
+
 ## Prioridade atual
 
 A prioridade do projeto não é criar novas features nem novo caso imediatamente. O foco é:
