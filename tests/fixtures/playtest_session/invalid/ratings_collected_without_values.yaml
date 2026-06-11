@@ -1,0 +1,54 @@
+case_id: case_ficticio_teste
+case_version: test-commit-abc123
+created_at: '2026-01-10T15:10:00-03:00'
+created_by: FAC01
+duration_minutes: 45
+events:
+- description: O grupo recebeu os materiais fictícios e iniciou a leitura.
+  event_id: EV01
+  occurred_at: '2026-01-10T14:00:00-03:00'
+  sequence: 1
+  type: session_started
+finished_at: '2026-01-10T14:45:00-03:00'
+outcome:
+  completion_without_facilitator_override: true
+  ending_reached: true
+  final_answer_submitted: true
+  session_status: completed
+  solution_correctness: partially_correct
+participants:
+- age_group: '25_34'
+  mystery_experience: occasional
+  participant_id: P01
+  relationship_to_project: external
+privacy:
+  anonymized: true
+  consent_to_record_observations: true
+  consent_to_use_anonymized_quotes: false
+  contains_personal_data: false
+ratings:
+  scale_min: 1
+  scale_max: 5
+  collected_from: group_consensus
+record_quality:
+  confidence: medium
+  missing_information: []
+  observer_bias_risks: []
+  reconstructed_after_session: false
+  recorded_live: true
+schema_version: '1.0'
+session_context:
+  facilitator_present: false
+  location_type: home
+  material_format:
+  - printed
+  mode: in_person
+session_id: S004
+source_type: live_observation
+stages:
+- completion_status: completed
+  label: Abertura fictícia
+  opened_at: '2026-01-10T14:02:00-03:00'
+  sequence: 1
+  stage_id: STAGE01
+started_at: '2026-01-10T14:00:00-03:00'

@@ -152,6 +152,7 @@ $defs:
   timestamp:
     type: string
     format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'
   positive_integer:
     type: integer
     minimum: 1
@@ -407,7 +408,13 @@ $defs:
   ratings:
     type: object
     additionalProperties: false
-    required: [scale_min, scale_max, collected_from, fun, surprise, fairness, clarity, difficulty_perceived, immersion]
+    required: [scale_min, scale_max, collected_from]
+    if:
+      properties:
+        collected_from:
+          const: not_collected
+    else:
+      required: [fun, surprise, fairness, clarity, difficulty_perceived, immersion]
     properties:
       scale_min:
         const: 1
