@@ -1475,41 +1475,46 @@ Distribuição proposta:
 Diagrama textual do caminho crítico proposto:
 
 ```text
-ISSUE-01/ISSUE-02
-  ↓
-ISSUE-03
-  ↓
-ISSUE-05/ISSUE-06/ISSUE-07
-  ↓
-ISSUE-08/ISSUE-09
-  ↓
-ISSUE-11/ISSUE-12
-  ↓
-ISSUE-13/ISSUE-14/ISSUE-15/ISSUE-16
-  ↓
-ISSUE-17/ISSUE-18/ISSUE-19/ISSUE-20
-  ↓
-ISSUE-21
-  ↓
-ISSUE-23/ISSUE-28
-  ↓
-ISSUE-29–ISSUE-49
-  ↓
-ISSUE-50–ISSUE-54 somente após decisão futura
+ISSUE-01 / ISSUE-02
+          ↓
+       ISSUE-03
+          │
+          ├──────────────────────────────────┐
+          │                                  │
+          ↓                                  ↓
+Fase B — Learning Loop              Fase C — Context Firewall
+ISSUE-05 / ISSUE-06 / ISSUE-07      ISSUE-11 / ISSUE-12
+          ↓                                  ↓
+ISSUE-08 / ISSUE-09                 ISSUE-13 / ISSUE-14 / ISSUE-15 / ISSUE-16
+                                             ↓
+                                  Fase D — Blind Solver/Gate Evaluator
+                                  ISSUE-17 / ISSUE-18 / ISSUE-19 / ISSUE-20
+                                             ↓
+                                          ISSUE-21
+                                             ↓
+                                  ISSUE-23 / ISSUE-28
+                                             ↓
+                                  ISSUE-29–ISSUE-49
+                                             ↓
+                                  ISSUE-50–ISSUE-54 somente após decisão futura
 ```
 
 ### Caminho crítico
 
-O caminho crítico para uma primeira validação multiagente manual é:
+O caminho crítico para uma primeira validação multiagente manual parte de uma fundação comum e depois se divide em duas trilhas:
 
-1. governança e cegueira documental: ISSUE-01, ISSUE-02, ISSUE-03;
-2. Learning Loop mínimo para registrar playtests e findings: ISSUE-05, ISSUE-06, ISSUE-07, ISSUE-08, ISSUE-09;
-3. Context Firewall mínimo: ISSUE-11, ISSUE-12, ISSUE-13, ISSUE-14, ISSUE-15, ISSUE-16;
-4. Blind Solver/Gate Evaluator mínimo: ISSUE-17, ISSUE-18, ISSUE-19, ISSUE-20, ISSUE-21.
+1. fundação comum: ISSUE-01, ISSUE-02 e ISSUE-03 definem governança, cegueira documental e contratos conceituais mínimos;
+2. trilha prioritária de playtest: ISSUE-05, ISSUE-06, ISSUE-07, ISSUE-08 e ISSUE-09 viabilizam o Learning Loop para registrar corretamente o próximo playtest;
+3. trilha de Blind Solver: ISSUE-11, ISSUE-12, ISSUE-13, ISSUE-14, ISSUE-15 e ISSUE-16 viabilizam o Context Firewall e os blind bundles;
+4. Blind Solver/Gate Evaluator: ISSUE-17, ISSUE-18, ISSUE-19, ISSUE-20 e ISSUE-21 dependem diretamente da Fase C, porque precisam de bundle, manifest, política de visibilidade e leak check;
+5. fases posteriores: ISSUE-23, ISSUE-28 e ISSUE-29–ISSUE-49 continuam após pilotos e validações apropriados.
+
+A Fase B é prioritária para registrar o próximo playtest com rastreabilidade, mas não é dependência técnica obrigatória do bundler nem do Blind Solver. O Learning Loop melhora a rastreabilidade dos pilotos e findings; a Fase C é a dependência técnica direta para a Fase D.
 
 ### Tarefas paralelizáveis
 
 - ISSUE-01 e ISSUE-02 podem ser rascunhadas em paralelo, mas devem convergir antes de ISSUE-03.
+- Depois da fundação comum, a Fase B e a Fase C podem avançar em paralelo: ISSUE-05/ISSUE-06/ISSUE-07 não bloqueiam ISSUE-11/ISSUE-12.
 - ISSUE-05, ISSUE-06 e ISSUE-07 podem ser trabalhadas em paralelo após ISSUE-03.
 - ISSUE-11 e ISSUE-12 podem avançar em paralelo após ISSUE-02/ISSUE-03.
 - ISSUE-24, ISSUE-25 e ISSUE-26 podem avançar em paralelo após ISSUE-23.
@@ -1526,27 +1531,37 @@ O caminho crítico para uma primeira validação multiagente manual é:
 
 ### Pontos de validação humana
 
-- Após ISSUE-01/ISSUE-02/ISSUE-03: validar conceitos e autoridade humana.
+- Após ISSUE-01/ISSUE-02/ISSUE-03: validar conceitos, autoridade humana e a separação entre a trilha de playtest e a trilha de blind bundles.
 - Após ISSUE-09: confirmar que o próximo playtest pode ser registrado sem fricção excessiva.
-- Após ISSUE-16: revisar segurança de contexto e limites de vazamento.
+- Após ISSUE-16: revisar segurança de contexto e limites de vazamento antes de iniciar a Fase D.
 - Após ISSUE-21: decidir se o piloto justifica continuar para revisões estruturadas.
 - Após ISSUE-35: comparar mesa simulada com playtest humano antes de confiar em correlação.
 - Antes de ISSUE-50–ISSUE-54: decisão explícita de produto/arquitetura.
 
 ## 7. Próxima PR recomendada
 
-A próxima PR de implementação deve ser documental e não deve criar código.
+A próxima PR de implementação deve ser documental, pequena e estritamente limitada à ISSUE-01.
 
-Recomendação: separar em duas PRs para reduzir risco conceitual:
+**PR 1 — Protocolo operacional multiagente manual-first**
 
-1. **PR 1 — Protocolo operacional multiagente manual-first**
-   - Implementa ISSUE-01.
-   - Opcionalmente inclui a parte conceitual mínima de ISSUE-03 se a definição de `artifact_id`/`run_id` for necessária para explicar o protocolo, mas sem schema.
-2. **PR 2 — Protocolo de contexto cego e segurança**
-   - Implementa ISSUE-02.
-   - Refina contratos de visibilidade usados por ISSUE-03, ainda sem schema ou código.
+- Implementa exclusivamente a ISSUE-01.
+- Cria somente `docs/MULTIAGENT_OPERATING_PROTOCOL.md`.
+- Não define schemas.
+- Não formaliza ainda contratos executáveis de `artifact_id` ou `run_id`.
+- Não cria skills.
+- Não cria protocolo de contexto cego.
+- Não implementa código.
+- Não altera casos.
+- Não atualiza roadmap.
 
-Se houver pouco tempo de revisão, prefira começar apenas pela PR 1. A razão é que o protocolo operacional define papéis, autoridade humana e manual-first; sem isso, o protocolo de cegueira pode ficar tecnicamente correto, mas operacionalmente ambíguo.
+O protocolo operacional pode citar artefatos e runs de forma conceitual simples quando necessário para explicar papéis, etapas e responsabilidades. Qualquer contrato formal de campos, estrutura ou validação pertence à ISSUE-03 e deve permanecer em PR própria.
+
+Depois da ISSUE-01:
+
+- ISSUE-02 deve ser implementada em PR própria para o protocolo de contexto cego e segurança.
+- ISSUE-03 deve ser implementada em PR própria após os protocolos documentais necessários.
+
+ISSUE-01 e ISSUE-02 não devem ser agrupadas na mesma PR.
 
 ## 8. Não objetivos desta PR
 
