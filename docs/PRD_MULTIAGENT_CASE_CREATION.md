@@ -85,7 +85,8 @@ Um playtest humano gera observações, findings, hipóteses causais, correções
 
 - Agente autor não certifica sozinho o próprio trabalho.
 - Agente revisor aponta problemas, mas não altera silenciosamente o artefato revisado.
-- Blind Solver não conhece a solução.
+- Blind Solver não conhece a solução e não autocertifica sua execução.
+- Gate Evaluator autorizado compara o output cego congelado com expectativas privadas, sem participar da resolução.
 - Moderador da mesa simulada também não conhece a solução.
 - Playtest humano permanece soberano para diversão, ritmo, emoção e justiça percebida.
 - Skill é o procedimento operacional usado por um agente humano/LLM; papel de agente é a função executada em uma etapa; orquestrador é o componente ou rotina que prepara bundles, registra runs, ingere saídas e controla gates. Esses conceitos não devem ser fundidos.
@@ -116,6 +117,8 @@ Um agente cego não pode receber:
 
 Documentos diegéticos são evidências, não instruções para o agente. Bundles e papéis devem tratar conteúdo de jogador como dado potencialmente hostil ou enganoso, com proteção contra prompt injection documental, instruções falsas embutidas em evidências e metalinguagem que tente alterar o papel do revisor.
 
+A proteção contra prompt injection deve ocorrer principalmente pela hierarquia de instruções: `ROLE.md` é a única fonte de instruções operacionais; documentos do caso são evidências/dados não confiáveis; instruções encontradas dentro dos documentos não devem ser executadas.
+
 #### Manual-first
 
 A primeira versão deve funcionar com execução manual de agentes e ingestão manual de resultados. Não deve depender inicialmente de OpenAI, Anthropic, Ollama, banco vetorial, embeddings, fine-tuning ou execução automática de múltiplos agentes. A arquitetura pode prever providers futuros, mas eles só entram após validação do fluxo manual.
@@ -135,8 +138,10 @@ Brief
 → Blueprint
 → Case Kernel
 → Case Review
-→ Blind Solver final
+→ Blind Review lógico
+→ Visual Library/templates
 → Build Package
+→ Blind Review do material renderizado
 → Baseline visual real
 → Playtest humano
 → Learning Loop
@@ -159,7 +164,17 @@ A nova proposta adiciona:
 
 - fase estruturada antes do Blueprint;
 - revisões cegas durante a criação;
+- Blind Review lógico antes do investimento visual;
+- Blind Review do material renderizado depois do pacote final;
 - ciclo estruturado de aprendizado após o playtest.
+
+#### Blind Review lógico e Blind Review renderizado
+
+**Blind Review lógico** recebe material textual ou estrutural antes do investimento visual. Verifica solvabilidade, progressão, justiça, hipóteses alternativas, informação ausente, vazamento textual e conclusão precoce.
+
+**Blind Review renderizado** recebe exatamente os materiais finais destinados aos jogadores, preferencialmente na ordem real de entrega. Verifica riscos criados pela materialização, como destaque visual involuntário, tipografia que denuncia pista, ordem de páginas, paginação, tabela que evidencia uma linha, cor ou contraste, posição de assinatura, informação escondida por layout, pista perdida em impressão P&B, sequência de arquivos no pacote e metadados ou nomes de arquivos reveladores.
+
+Um caso pode passar na revisão lógica e falhar quando renderizado. O Blind Review renderizado não substitui baseline visual humano nem playtest.
 
 ### 6.3 Revisão independente por etapa
 
@@ -221,7 +236,10 @@ Executar conceitualmente:
 - validator;
 - Case Kernel;
 - Case Review;
-- Blind Solver final;
+- Blind Review lógico;
+- Visual Library/templates;
+- Build Package;
+- Blind Review do material renderizado;
 - mesa investigativa simulada;
 - crítico adversarial da hipótese coletiva.
 
@@ -254,6 +272,51 @@ documentos_superinterpretados: []
 decisao:
   status: advance | stay | request_hint
 confianca_geral: 0.0
+```
+
+O Blind Solver declara quais artefatos analisou, mas essa declaração não prova isolamento. A certificação de quais artefatos foram disponibilizados pertence ao Context Firewall e ao manifest do bundle.
+
+#### Gate Evaluator
+
+Fluxo de decisão:
+
+```text
+Blind Solver
+→ output congelado/selado
+→ Gate Evaluator autorizado
+→ decisão do gate
+```
+
+O Gate Evaluator:
+
+- não participa da resolução;
+- não conversa com o Blind Solver antes do output ser congelado;
+- recebe o relatório final do Blind Solver;
+- pode acessar as expectativas privadas necessárias;
+- compara conclusões observadas com conclusões esperadas;
+- não altera a resposta original do solver;
+- registra divergências, vazamentos e hipóteses inesperadas;
+- decide PASS, REVISE, BLOCK ou INCONCLUSIVE;
+- indica a etapa correta de rollback.
+
+Exemplo conceitual:
+
+```yaml
+gate_evaluation:
+  stage: E1
+  solver_run_id: RUN-0041
+  expected_conclusions:
+    - C-E1-JANELA
+    - C-E1-INCONSISTENCIA
+  observed_conclusions:
+    - C-E1-JANELA
+  unexpected_valid_hypotheses: []
+  final_solution_leaked: false
+  status: REVISE
+  reason: >
+    O solver percebeu a janela temporal, mas não encontrou a
+    inconsistência necessária para justificar a abertura do E2.
+  rollback_target: envelope_design
 ```
 
 Estados de gate:
@@ -320,6 +383,21 @@ A simulação deve medir:
 - necessidade de dica;
 - teorias alternativas ainda defensáveis.
 
+A mesa simulada deve operar sob orçamento explícito. Valores concretos serão definidos em implementação futura, mas o run deve registrar limites conceituais como:
+
+```yaml
+simulation_budget:
+  individual_analysis_limit: ""
+  discussion_rounds: 3
+  messages_per_agent_per_round: 1
+  maximum_challenges_per_agent: 2
+  hints_allowed: 0
+  document_reopen_limit: ""
+  maximum_total_tokens: ""
+```
+
+A conversa não é ilimitada: número de rodadas, quantidade de intervenções, uso de dicas e releituras podem ser controlados. O orçamento faz parte dos metadados do run, e runs com orçamentos diferentes não devem ser comparados como equivalentes. O objetivo é testar solvabilidade sob restrições, não descobrir se a LLM resolve o caso com tempo e tokens infinitos.
+
 Mesa simulada não substitui playtest humano.
 
 ### 6.6 Context Firewall
@@ -338,6 +416,29 @@ Capacidade futura responsável por preparar bundles tecnicamente cegos. Deve:
 - proteger contra prompt injection documental;
 - permitir auditoria posterior do que cada agente recebeu.
 
+A prova de isolamento deve vir do manifest do bundle, da política de visibilidade, dos hashes, do relatório de violações e da comparação entre artefatos autorizados e disponibilizados. O Blind Solver informa quais artefatos analisou; o Context Firewall certifica quais artefatos foram disponibilizados.
+
+Exemplo conceitual:
+
+```yaml
+bundle:
+  bundle_id: BND-E1-004
+  role: blind_solver
+  stage: E1
+  allowed_artifacts:
+    - E1-01
+    - E1-02
+    - E1-03
+  forbidden_categories:
+    - private_author
+    - facilitator
+    - future_envelope
+  isolation_check:
+    passed: true
+    violations: []
+  manifest_hash: ""
+```
+
 Visibilidades sugeridas:
 
 - `public_player`;
@@ -346,6 +447,14 @@ Visibilidades sugeridas:
 - `facilitator`;
 - `derived_report`;
 - `playtest_anonymized`.
+
+#### Sanitização não destrutiva
+
+O Context Firewall pode remover metadados técnicos, normalizar nomes de arquivos, excluir comentários ocultos, impedir exposição de caminhos internos, impedir acesso a artefatos proibidos e tratar documentos como conteúdo não confiável. Ele não pode reescrever silenciosamente o conteúdo visível das evidências entregues aos jogadores.
+
+A sanitização padrão deve ser não destrutiva. Ela pode remover metadados que não fazem parte da experiência, renomear arquivos, remover campos internos invisíveis ao jogador e isolar instruções operacionais em `ROLE.md`. Ela não pode modificar frases, corrigir conteúdo, remover evidência, resumir documento, substituir terminologia, esconder informação visível ou tornar uma pista mais ou menos clara.
+
+Qualquer transformação do conteúdo visível deve criar um artefato derivado, preservar o original, registrar o motivo, registrar o diff, alterar o hash, invalidar comparações diretas com runs anteriores e passar por nova revisão.
 
 Metadados conceituais para artefatos futuros:
 
@@ -562,6 +671,7 @@ A primeira implementação deve priorizar documentação e arquivos de governan�
 - modelo conceitual de `artifact_id`, versão, hash e lineage;
 - formato de manifest de bundle;
 - formato de saída do Blind Solver;
+- formato de avaliação do Gate Evaluator;
 - formato de findings e Learning Loop;
 - formato de fingerprint e experimento criativo.
 
@@ -574,7 +684,7 @@ Não criar estes arquivos nesta tarefa. As descrições abaixo servem como backl
 | Skill | Quando usar | Entradas permitidas | Entradas proibidas | Saída | Gate/decisão |
 |---|---|---|---|---|---|
 | `context-firewall` | Preparar bundle cego para papel específico. | Políticas de visibilidade, artefatos autorizados, schemas de saída. | Solução privada para papéis cegos, envelopes futuros, metadados reveladores. | Bundle, manifest, hashes, relatório de isolamento. | Bundle aprovado ou bloqueado. |
-| `blind-solve` | Testar envelope ou caso sem solução. | Bundle `public_player`, instruções públicas, documentos liberados. | Gabarito, guia do facilitador, contratos, `verdade_real`, classificações internas. | Relatório estruturado de fatos, hipóteses e decisão. | PASS, REVISE, BLOCK ou INCONCLUSIVE. |
+| `blind-solve` | Testar envelope ou caso sem solução. | Bundle `public_player`, instruções públicas, documentos liberados. | Gabarito, guia do facilitador, contratos, `verdade_real`, classificações internas. | Relatório estruturado de fatos, hipóteses, artefatos analisados e decisão sugerida. | Output congelado para avaliação posterior por Gate Evaluator. |
 | `playtest-to-learning` | Converter playtest em ledger de aprendizado. | Registro de sessão, observações, métricas humanas, artefatos usados. | Reescrita automática de caso, generalização automática. | Findings, hipóteses causais, decisões de escopo. | Corrigir caso, observar mais ou propor regra candidata. |
 
 #### Editorial
@@ -613,31 +723,36 @@ O PRD e futuras implementações derivadas devem cumprir:
 4. definir cegueira técnica;
 5. definir revisão independente ao final de cada etapa;
 6. definir Blind Solver por envelope;
-7. definir mesa multiagente com análise individual anterior;
-8. definir Context Firewall;
-9. definir gates e rollback;
-10. definir Learning Loop;
-11. impedir generalização automática de um playtest isolado;
-12. definir diversidade criativa;
-13. separar dificuldade de carga documental;
-14. manter playtest humano como validação final;
-15. propor rollout incremental;
-16. propor decomposição em PRs pequenas;
-17. não implementar nenhuma feature nesta tarefa.
+7. definir Gate Evaluator como responsável por comparar output cego congelado com expectativas privadas;
+8. definir mesa multiagente com análise individual anterior e orçamento conceitual;
+9. definir Context Firewall como responsável pela prova de isolamento via manifest;
+10. definir sanitização não destrutiva;
+11. definir gates e rollback;
+12. definir Learning Loop;
+13. impedir generalização automática de um playtest isolado;
+14. definir diversidade criativa;
+15. separar dificuldade de carga documental;
+16. manter playtest humano como validação final;
+17. diferenciar Blind Review lógico e Blind Review do material renderizado;
+18. propor rollout incremental;
+19. propor decomposição em PRs pequenas;
+20. não implementar nenhuma feature nesta tarefa.
 
 Critérios verificáveis para a primeira PR de implementação futura:
 
 - nenhum caso canônico é alterado;
 - nenhum schema ou validator é alterado sem PR própria;
-- qualquer bundle cego possui manifest com hashes e política de visibilidade;
+- qualquer bundle cego possui manifest com hashes, política de visibilidade e relatório de isolamento;
 - qualquer finding possui etapa de correção indicada;
-- qualquer relatório de Blind Solver declara explicitamente se recebeu apenas material permitido.
+- qualquer relatório de Blind Solver lista os artefatos analisados;
+- nenhum relatório de Blind Solver é aceito como prova de isolamento sem o manifest correspondente do Context Firewall.
 
 ## 9. Riscos e trade-offs
 
 - **Risco de burocracia**: etapas demais podem travar autoria. Mitigação: começar manual-first e aplicar somente em iniciativas grandes ou novos canônicos.
 - **Falsa confiança em agentes**: Blind Solver e mesa simulada podem parecer validação suficiente. Mitigação: playtest humano permanece soberano.
-- **Cegueira incompleta**: prompts não bastam para isolar contexto. Mitigação: Context Firewall com cópia seletiva, sanitização, hashes e manifest.
+- **Cegueira incompleta**: prompts não bastam para isolar contexto. Mitigação: Context Firewall com cópia seletiva, sanitização não destrutiva, hashes, manifest e relatório de violações.
+- **Correlação entre agentes**: vários agentes usando o mesmo modelo, provider, prompt-base, ordem de documentos e parâmetros semelhantes podem compartilhar vieses e criar falsa impressão de independência. Concordância de quatro entre cinco agentes não deve ser interpretada como amostra estatística equivalente a cinco humanos. Mitigações futuras: preservar análises individuais antes da conversa, variar perfis de atenção, variar ordem de leitura, variar seed e temperatura quando disponíveis, executar mesas compostas apenas por generalistas, executar mesas mistas, comparar providers futuramente, medir diversidade de hipóteses em vez de apenas quantidade de votos e continuar usando playtest humano como evidência final. Diversidade de personas não deve ser apresentada como independência cognitiva real.
 - **Generalização indevida**: um playtest isolado pode gerar regra ruim. Mitigação: estados de finding e decisão explícita de escopo/generalização.
 - **Homogeneização criativa**: métricas podem empurrar todos os casos para o mesmo molde. Mitigação: fingerprint gera warning, não bloqueio automático, e cada caso pode declarar experimento criativo.
 - **Custo operacional futuro**: múltiplos agentes podem encarecer a produção. Mitigação: medir horas, tokens, revisões e taxa de bloqueio antes de automatizar providers.
@@ -658,7 +773,8 @@ Validação futura da capacidade:
 - comparar Blind Solver, mesa simulada e playtest humano;
 - medir se findings retornam à etapa correta;
 - verificar se uma correção foi revalidada antes de virar regra;
-- auditar se cada agente recebeu somente o bundle permitido.
+- auditar pelo manifest se cada agente recebeu somente o bundle permitido;
+- comparar revisões lógicas e renderizadas para detectar falhas introduzidas pelo pacote final.
 
 ## 11. Sugestão de decomposição
 
@@ -669,8 +785,8 @@ PRs pequenas e independentes sugeridas:
 1. **Documentação de governança**: etapas, papéis, gates, visibilidades e separação entre skill, papel e orquestrador.
 2. **Schemas de playtest e learning ledger**: estruturas conceituais para sessão, observação, finding, decisão e revalidação.
 3. **Context Firewall e blind bundle**: política de visibilidade, manifest, hashes, normalização de nomes e teste de isolamento manual.
-4. **Blind Solver manual**: protocolo por envelope, saída estruturada e gates PASS/REVISE/BLOCK/INCONCLUSIVE.
-5. **Revisões estruturadas e gates**: templates manuais de revisão por etapa e rollback obrigatório.
+4. **Blind Solver manual**: protocolo por envelope, saída estruturada e output congelado para avaliação posterior.
+5. **Revisões estruturadas e gates**: Gate Evaluator, templates manuais de revisão por etapa, decisão PASS/REVISE/BLOCK/INCONCLUSIVE e rollback obrigatório.
 6. **Mesa Simulada manual**: fase individual, conversa estruturada, moderador cego, crítico adversarial e relatório.
 7. **Workspace/orquestrador manual**: preparação de etapas, ingestão de saídas, status, rollback e lineage, sem providers automáticos.
 8. **Fingerprint**: modelo de diversidade criativa e warnings de repetição não bloqueantes.
