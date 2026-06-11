@@ -308,6 +308,36 @@ A interpretação deve ficar em:
 
 Não confunda sofisticação narrativa com obscuridade operacional. Uma conclusão sofisticada exige uma ferramenta simples: se o grupo precisa perceber uma ausência, forneça uma estrutura neutra onde o vazio possa aparecer.
 
+
+## Preflight narrativo antes de gerar documentos
+
+Antes de escrever documentos de jogador, a LLM deve responder explicitamente:
+
+```text
+Quem executou?
+Como executou?
+Quando teve oportunidade?
+Por que agiu?
+Como o jogador infere cada resposta?
+```
+
+Depois, deve auditar a cadeia probatória:
+
+```text
+Quais são os pilares independentes?
+Qual fonte produz cada pilar?
+Qual falso suspeito ainda conserva janela possível?
+Quem sabia a informação necessária?
+Qual pista depende de leitura visual?
+Existe outro caminho para a mesma conclusão?
+```
+
+Não avance para redação de documentos finais se autoria, mecanismo, oportunidade ou motivo só puderem ser respondidos pelo gabarito. Use `docs/DIRETRIZES_EDITORIAIS.md` como fonte da verdade para completude da solução, triangulação, álibi como intervalo e distinção entre acesso físico, operacional e informacional.
+
+> Não confunda quantidade de pistas com independência probatória.
+
+> Não confunda solução lógica com revelação satisfatória.
+
 ## Exemplos de reescrita
 
 ### Ruim
@@ -401,7 +431,7 @@ O E2 deve recontextualizar algo do E1. Ele não deve apenas confirmar uma conclu
 
 ### Motivação atual
 
-Motivação histórica precisa pressionar o presente. Não basta existir “carta de 1968”, segredo antigo ou mágoa familiar. Deve haver consequência atual: moradia, expulsão, dívida moral, herança, reputação, demissão, perda concreta ou risco público.
+Motivação histórica precisa pressionar o presente. Não basta existir “carta de 1968”, segredo antigo ou mágoa familiar. Deve haver consequência atual: moradia, expulsão, dívida moral, herança, reputação, demissão, perda concreta ou risco público. O motivo pode ser interno ao personagem no gabarito, mas o jogador precisa de pelo menos uma âncora neutra em documento natural para inferi-lo.
 
 ### Informação nova em recados
 
@@ -421,6 +451,13 @@ Todo guia precisa conter pergunta pública, resposta esperada por envelope, quan
 Antes de escrever conteúdo final de documentos, responda:
 
 - O jogador tem ferramenta para chegar à conclusão do envelope?
+- A ferramenta corresponde à operação mental esperada?
+- A solução fecha quem, como, quando e por quê?
+- O motivo é inferível por âncora documental natural?
+- Os pilares são independentes ou apenas muitas pistas da mesma fonte?
+- Algum falso suspeito ainda conserva janela temporal possível?
+- O caso diferencia saber a informação, poder agir e estar presente?
+- Alguma conclusão essencial depende só de leitura visual?
 - A ausência importante fica visível?
 - O mecanismo causal está documentado?
 - Evidências diretas, indiretas e sistêmicas estão separadas?

@@ -68,6 +68,15 @@ A origem histórica sozinha raramente sustenta ação presente.
 
 A consequência atual transforma lore em urgência investigativa.
 
+
+## Motivo inferível no documento certo
+
+A pista de motivo deve existir em um documento que naturalmente conteria aquela informação. O objetivo é permitir inferência humana sem transformar documento de jogador em confissão, comentário de autor ou gabarito disfarçado.
+
+Boas âncoras de motivo são contextos observáveis: vínculo, preferência, perda concreta, benefício, ameaça, consequência atual, pedido administrativo, participação regular ou responsabilidade institucional. Elas não precisam dizer “este é o motivo”; precisam permitir que o grupo entenda por que a ação faria sentido para aquela pessoa.
+
+Evite criar um e-mail, depoimento ou bilhete cuja única função seja explicar intenção. Se a informação existe apenas porque o jogador precisa dela, realoque para um documento mais natural ou divida em origem histórica e pressão atual. A fonte normativa para completude da solução e motivo inferível é `docs/DIRETRIZES_EDITORIAIS.md`.
+
 ## Recados, bilhetes e materiais vistos de relance
 
 Recado ou bilhete não deve virar letreiro da solução.
@@ -197,7 +206,8 @@ Antes de aprovar um documento de jogador, revise:
 7. Chats indicam origem e justificativa de exportação?
 8. Horários não estão duplicados em mensagens?
 9. Recados são parciais o bastante para não virar seta gigante?
-10. A interpretação ficou fora do documento do jogador?
+10. A pista de motivo aparece em documento que naturalmente conteria aquela informação?
+11. A interpretação ficou fora do documento do jogador?
 
 ## Aplicação ao Hotel Aurora
 

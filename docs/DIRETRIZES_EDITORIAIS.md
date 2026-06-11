@@ -90,6 +90,90 @@ Quando o caso depender de presença, ausência, álibi ou deslocamento, o bluepr
 
 Documento de jogador pode mostrar esses registros de forma bruta. A classificação analítica deve ficar em contratos de evidência, guia, Case Kernel, Case Review ou notas editoriais, não em artefato diegético.
 
+
+## Completude da solução: quem, como, quando e por quê
+
+Uma solução satisfatória fecha quatro perguntas: quem, como, quando e por quê.
+
+- **quem:** autoria ou responsabilidade pela ação investigada;
+- **como:** mecanismo executado, incluindo manipulação, deslocamento, substituição, omissão ou falso sinal;
+- **quando:** oportunidade e janela temporal em que a ação poderia acontecer;
+- **por quê:** motivo ou interesse humano inferível pelos jogadores.
+
+Autoria pode estar provada sem o motivo estar demonstrado. Isso pode bastar para solvabilidade mecânica, mas normalmente não basta para uma revelação narrativa satisfatória. O motivo não precisa aparecer como confissão, prova jurídica ou declaração explícita de intenção; precisa existir pelo menos uma âncora neutra que permita ao grupo inferi-lo a partir de contexto, vínculo, perda, preferência, ameaça, consequência ou benefício observável.
+
+> O autor pode conhecer o motivo; o jogador precisa conseguir inferi-lo.
+
+> Motivo não precisa ser confessado, mas não pode existir apenas no gabarito.
+
+Ao revisar uma conclusão principal, pergunte separadamente: quem executou, como executou, quando teve oportunidade e por que essa pessoa teria interesse humano atual na ação. Se uma dessas respostas só existe no gabarito, o caso pode estar logicamente montado para o autor, mas incompleto para a mesa.
+
+## Triangulação de evidências independentes
+
+Uma conclusão principal deve preferencialmente resultar do cruzamento de dois ou três pilares independentes. Exemplos de pilares:
+
+- oportunidade temporal;
+- acesso físico;
+- acesso operacional;
+- acesso à informação;
+- vestígio material;
+- testemunho;
+- registro documental;
+- comportamento operacional;
+- benefício ou motivo.
+
+Independência não é quantidade de pistas. Pistas derivadas do mesmo documento não são plenamente independentes; dois documentos produzidos pela mesma pessoa podem compartilhar a mesma origem; log e resumo do próprio log não são dois pilares; depoimento e ata escrita pelo mesmo depoente não formam confirmação independente. Confirmação forte deve vir de origens, pessoas, sistemas ou naturezas probatórias diferentes.
+
+> Três pistas da mesma fonte continuam sendo uma única fonte.
+
+Nenhum pilar isolado deve resolver o caso quando a proposta exige cruzamento. Se um único documento fecha autoria e mecanismo, o restante vira decoração; se três documentos repetem a mesma fonte, o caso parece robusto no papel e frágil na mesa.
+
+## Álibi e descarte como intervalo temporal
+
+Álibi é uma cobertura de intervalo, não um horário isolado.
+
+Para descartar um suspeito por tempo/local, confirme:
+
+- início da janela crítica;
+- fim da janela crítica;
+- tempo necessário de deslocamento;
+- permanência ou observação contínua;
+- independência da fonte;
+- possibilidade de o suspeito ter executado a ação antes ou depois do registro citado.
+
+Exemplo fraco:
+
+```text
+A pessoa foi vista às 15:18.
+```
+
+Isso não descarta necessariamente uma ação às 15:16.
+
+Exemplo forte:
+
+```text
+A testemunha chegou às 15:14, encontrou a pessoa no local e permaneceu com ela até 15:22.
+```
+
+Não torne depoimentos artificialmente perfeitos. A precisão deve ser plausível dentro do tipo documental, da memória da testemunha e do modo como o registro foi produzido.
+
+> Um ponto no tempo cria presença; um intervalo bem sustentado cria álibi.
+
+## Acesso físico, operacional, informacional e oportunidade
+
+Acesso ao local não é igual a capacidade de executar o plano. Diferencie quatro camadas:
+
+- **acesso físico:** podia chegar ao local;
+- **acesso operacional:** podia usar sistema, objeto, chave, documento ou procedimento;
+- **acesso à informação:** sabia o conteúdo necessário para executar o plano;
+- **oportunidade temporal:** estava livre na janela crítica.
+
+Uma solução forte deve explicar quais acessos eram necessários. Uma pessoa pode ter acesso ao quadro de avisos, mas não saber que havia uma versão preliminar de sala. Outra pessoa pode conhecer o rascunho, mas não ter oportunidade de afixá-lo.
+
+> Saber o que fazer e poder fazer são pilares diferentes.
+
+Planeje essa distinção nos suspeitos, nos contratos de evidência, no guia operacional e nas dicas contextuais. Em documentos de jogador, mostre registros brutos que permitam inferir essas camadas sem nomeá-las como categorias analíticas.
+
 ## Causalidade, relação prévia e credibilidade de ação
 
 A solução final precisa ter mecanismo causal documentado. Motivo explica por quê. Oportunidade explica quando. Mecanismo explica como.
@@ -132,6 +216,33 @@ Não basta existir carta antiga, trauma herdado ou segredo familiar. A motivaç�
 - risco público.
 
 Sem consequência atual, a motivação vira lore e não objetivo investigativo.
+
+Diferencie duas camadas:
+
+### Motivação interna do autor
+
+Explica por que o personagem agiu no plano, no gabarito e no guia do facilitador. Pode conter subjetividade, vergonha, medo, cálculo, vínculo ou racionalização pessoal.
+
+### Motivação inferível pelo jogador
+
+Existe nos documentos por meio de contexto, interesse, vínculo, perda, preferência, ameaça ou benefício observável. A inferência pode ser sutil, mas precisa estar ancorada em material que o grupo recebe antes da revelação final.
+
+Exemplos neutros de âncoras de motivo:
+
+- personagem participa regularmente da atividade beneficiada;
+- pediu para permanecer em determinado posto;
+- perderia espaço, contrato ou reconhecimento;
+- tem vínculo conhecido com uma proposta concorrente;
+- tenta proteger alguém ou preservar uma instituição;
+- sofre consequência concreta se o evento ocorrer.
+
+Evite:
+
+- e-mail dizendo explicitamente “quero impedir a votação”;
+- depoimento confessando intenção;
+- documento criado apenas para explicar o motivo ao jogador.
+
+A pista de motivo deve existir em um documento que naturalmente conteria aquela informação. Use `docs/DIEGESE_DOCUMENTAL.md` para decidir onde a âncora deve aparecer sem virar voz do autor.
 
 ## Informação nova em recados e bilhetes
 
@@ -447,23 +558,30 @@ Antes de considerar um caso pronto para playtest, revisar:
 1. Existe pergunta pública clara com solicitante, motivo, impacto e justificativa do dossiê?
 2. Cada envelope tem pergunta diegética, resposta esperada, critério de avanço e forma diegética de avanço?
 3. Cada envelope oferece ferramenta investigativa prática para chegar à conclusão esperada?
-4. Ausências relevantes ficam visíveis sem serem explicadas em documento de jogador?
-5. Evidências diretas, indiretas e sistêmicas estão separadas no plano editorial?
-6. A solução tem mecanismo causal ancorado em documentos?
-7. Relações necessárias de confiança, autoridade ou hábito têm âncora documental?
-8. O E1 evita pedir a solução final?
-9. O E2 recontextualiza algo do E1?
-10. Toda motivação histórica tem consequência atual concreta?
-11. Recados posteriores trazem informação nova?
-12. Cada dica contextual tem condição de uso, intensidade, ação mental esperada e desbloqueio?
-13. O guia do facilitador explica progressão, linhas do tempo, descartes, motivação e solução?
-14. Algum documento de jogador manda comparar documentos?
-15. Algum documento cita `E1-XX` ou `E2-XX` dentro da diegese?
-16. Algum documento explica a conclusão?
-17. Algum mapa mostra rota, área crítica ou câmera offline?
-18. Algum chat parece confissão?
-19. Algum orçamento funciona como quadro comparativo de solução?
-20. Alguma assinatura parece só nome digitado?
-21. Alguma dica aparece dentro de documento que deveria ser evidência?
-22. O guia do facilitador está separado dos documentos de jogador?
-23. O gabarito não vazou para envelope, mapa, chat ou proposta?
+4. A solução fecha quem, como, quando e por quê?
+5. O motivo é inferível em documentos, não apenas no gabarito?
+6. A conclusão principal cruza pilares independentes e não apenas várias pistas da mesma fonte?
+7. Nenhum documento único resolve autoria e mecanismo sozinho quando a proposta exige cruzamento?
+8. Falsos suspeitos têm descarte com janela temporal realmente fechada?
+9. Acesso físico, acesso operacional, acesso à informação e oportunidade temporal estão diferenciados no plano?
+10. Ausências relevantes ficam visíveis sem serem explicadas em documento de jogador?
+11. Evidências diretas, indiretas e sistêmicas estão separadas no plano editorial?
+12. A solução tem mecanismo causal ancorado em documentos?
+13. Relações necessárias de confiança, autoridade ou hábito têm âncora documental?
+14. O E1 evita pedir a solução final?
+15. O E2 recontextualiza algo do E1?
+16. Toda motivação histórica tem consequência atual concreta?
+17. Recados posteriores trazem informação nova?
+18. Cada dica contextual tem condição de uso, intensidade, ação mental esperada e desbloqueio?
+19. O guia do facilitador explica progressão, linhas do tempo, descartes, motivação e solução?
+20. Alguma conclusão obrigatória depende apenas de pista visual, cor, assinatura ou detalhe gráfico?
+21. Algum documento de jogador manda comparar documentos?
+22. Algum documento cita `E1-XX` ou `E2-XX` dentro da diegese?
+23. Algum documento explica a conclusão?
+24. Algum mapa mostra rota, área crítica ou câmera offline?
+25. Algum chat parece confissão?
+26. Algum orçamento funciona como quadro comparativo de solução?
+27. Alguma assinatura parece só nome digitado?
+28. Alguma dica aparece dentro de documento que deveria ser evidência?
+29. O guia do facilitador está separado dos documentos de jogador?
+30. O gabarito não vazou para envelope, mapa, chat ou proposta?

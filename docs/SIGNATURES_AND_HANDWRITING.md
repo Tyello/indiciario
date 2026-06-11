@@ -61,6 +61,28 @@ Overrides manuais continuam com prioridade sobre geração procedural:
 
 O caminho deve ser relativo ao repositório, apontar para `.svg` existente e não usar `..` nem caminho absoluto.
 
+
+## Pistas visuais como evidência
+
+Assinaturas, rubricas, grafia, carimbos, marcas e padrões visuais podem participar de uma cadeia investigativa, mas precisam ser intencionais.
+
+Regras:
+
+- semelhança gráfica precisa ser planejada no blueprint;
+- personagens diferentes não podem compartilhar grafismo por acidente;
+- impressão P&B deve preservar a distinção;
+- detalhe não pode ser pequeno demais;
+- a pista visual deve sobreviver a impressão doméstica e visualização em celular/tablet;
+- pista visual essencial precisa de pelo menos uma confirmação não visual;
+- cor isolada não deve ser caminho obrigatório;
+- o guia do facilitador deve explicar o que a pista visual permite inferir.
+
+> Pista visual pode acelerar a descoberta, mas não deve ser o único caminho para uma conclusão essencial.
+
+> Consistência visual é parte da cadeia de evidência quando o caso decide tratá-la como evidência; fora disso, é apenas identidade documental.
+
+Quando o caso usar grafismo como evidência, registre a intenção em campos editoriais existentes do blueprint e confirme no PDF real. Fora desse uso, assinatura, rubrica e manuscrito servem para identidade documental, imersão e diferenciação de personagem, não para resolver sozinhos autoria ou mecanismo.
+
 ## Checklist visual
 
 1. A assinatura completa e a rubrica do mesmo personagem são diferentes?
@@ -70,3 +92,6 @@ O caminho deve ser relativo ao repositório, apontar para `.svg` existente e nã
 5. A anotação manuscrita é curta e diegética?
 6. A anotação não entrega solução, interpretação do autor ou checklist de cruzamento?
 7. Override manual, quando usado, é SVG local válido?
+8. Se uma semelhança gráfica for pista, ela foi planejada e documentada?
+9. A pista visual essencial tem confirmação não visual?
+10. Cor, detalhe pequeno ou legibilidade fina não são o único caminho para uma conclusão obrigatória?

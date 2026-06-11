@@ -257,10 +257,24 @@ Um falso suspeito forte precisa ter:
 
 1. motivo aparente;
 2. oportunidade aparente;
-3. comportamento estranho;
-4. evidência concreta que o descarta.
+3. comportamento estranho plausível;
+4. evidência concreta que o descarta;
+5. janela temporal realmente fechada quando o descarte depender de tempo/local;
+6. descarte que não dependa apenas da palavra do próprio suspeito;
+7. explicação natural para o comportamento estranho.
 
-Se não tiver os quatro, é só ruído.
+> Falso suspeito não termina quando parece menos culpado; termina quando a hipótese contra ele perde sustentação documental.
+
+Evite descartes baseados em:
+
+- “ele não faria isso”;
+- reputação;
+- caráter;
+- opinião de colega;
+- ausência de motivo presumida;
+- depoimento do próprio suspeito sem confirmação.
+
+Se não houver suspeita plausível e descarte documental independente, é só ruído. Use `docs/DIRETRIZES_EDITORIAIS.md` para álibi como intervalo, independência probatória e distinção entre acesso físico, operacional e informacional.
 
 ## Etapa 6 — Mecânica investigativa principal
 
@@ -354,12 +368,29 @@ Todo envelope precisa ter:
 
 Todo envelope precisa oferecer ao grupo uma ferramenta prática para chegar à conclusão esperada. Objetivo por envelope sem ferramenta investigativa vira intenção do autor, não experiência de jogador.
 
+A ferramenta precisa representar a operação mental real esperada. Exemplos:
+
+- caso de cronologia → linha do tempo;
+- presença/ausência → matriz de presença;
+- versões divergentes → quadro comparativo neutro;
+- cadeia financeira → fluxo de contrato, recibo e pagamento;
+- deslocamento → mapa ou tabela de localização;
+- acesso à informação → quadro de pessoas, documentos e versões conhecidas.
+
+> Ferramenta bonita que organiza os campos errados não ajuda a investigação.
+
 Para cada envelope, responda:
 
 - qual pergunta o envelope levanta?
 - qual conclusão parcial ele permite?
 - qual ferramenta o jogador tem para chegar nela?
 - essa ferramenta está nos documentos, nos printables, em uma folha de apoio ou na própria estrutura do envelope?
+- quais colunas, linhas ou espaços o jogador realmente precisa preencher?
+- a ferramenta torna a contradição visível?
+- exige conhecimento que ainda não foi entregue?
+- entrega a conclusão pelo nome das colunas?
+- possui espaço real para uso?
+- continua útil sem o facilitador explicar previamente como preenchê-la?
 - a ferramenta organiza a investigação sem entregar a resposta?
 
 Exemplo conceitual:
@@ -413,7 +444,41 @@ Evitar avanço artificial do tipo “agora abra o E2 porque o jogo precisa conti
 
 ## Testes antes do plano documental
 
-Antes de escrever documentos finais, faça três testes editoriais. Eles devem consultar as regras de `docs/DIRETRIZES_EDITORIAIS.md` e não substituem o Case Kernel nem o Case Review.
+Antes de escrever documentos finais, faça testes editoriais. Eles devem consultar as regras de `docs/DIRETRIZES_EDITORIAIS.md` e não substituem o Case Kernel nem o Case Review.
+
+
+### Teste de triangulação
+
+- Quantos pilares sustentam a conclusão?
+- Eles vêm de origens realmente independentes?
+- Algum documento sozinho resolve?
+- Existe confirmação cruzada entre natureza temporal, material, testemunhal ou sistêmica?
+
+### Teste de motivo inferível
+
+- O autor sabe por que o responsável agiu?
+- O jogador encontra pelo menos uma âncora para inferir esse motivo?
+- A âncora aparece naturalmente no documento?
+- A solução continua satisfatória sem leitura do gabarito?
+
+### Teste de descarte temporal
+
+- Qual é a janela crítica?
+- Cada falso suspeito descartado está coberto durante toda a janela?
+- O tempo de deslocamento foi considerado?
+- A confirmação vem de fonte independente?
+
+### Teste de acesso à informação
+
+- Quem conhecia a versão, rotina, senha, rascunho ou detalhe usado?
+- Como essa pessoa obteve o conhecimento?
+- O caso diferencia saber, poder e estar presente?
+
+### Teste de redundância visual
+
+- Alguma conclusão obrigatória depende apenas de assinatura, cor ou detalhe gráfico?
+- A pista continua legível em P&B?
+- Existe confirmação não visual?
 
 ### Teste de ausência visível
 
