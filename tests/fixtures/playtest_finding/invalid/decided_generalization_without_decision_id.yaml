@@ -1,0 +1,61 @@
+schema_version: '1.0'
+finding_id: FINDING_005
+case_id: CASE_MIRANTE
+case_version: CASE_VERSION_001
+source_session_ids:
+- SESSION_001
+observation:
+  summary: Grupo hesitou na transicao do envelope inicial.
+  observed_by:
+  - OBSERVER_01
+  frequency:
+    occurrences: 1
+    sessions_observed: 1
+evidence:
+- evidence_id: EVIDENCE_001
+  type: facilitator_observation
+  description: Facilitador registrou pausa prolongada antes da proxima acao.
+  source_session_id: SESSION_001
+  strength: moderate
+causal_hypothesis:
+  statement: A instrucao de transicao pode ter ficado ambigua para o grupo.
+  confidence: medium
+  needs_more_evidence: true
+category: progression
+severity: medium
+finding_scope:
+  level: stage
+  stage_ids:
+  - STAGE_01
+impact:
+  player_effects:
+  - Pausa perceptivel e pedido de confirmacao ao facilitador.
+  case_effects: []
+  affected_participant_count: 3
+  affected_session_count: 1
+  blocks_progression: false
+  compromises_fairness: false
+  compromises_solvability: false
+  compromises_immersion: true
+  technical_only: false
+rollback:
+  required: true
+  target: envelope_planning
+  reason: Ajustar a menor etapa que define a transicao entre envelopes.
+status: RESOLVED
+gate_effect:
+  blocks_gate: false
+  suggested_gate_state: REVISE
+  reason: Revisao localizada recomendada antes de nova rodada.
+generalization_status: decided
+created_at: '2026-06-11T10:00:00Z'
+created_by: AUTHOR_01
+assigned_to: AUTHOR_01
+resolution:
+  resolved_by: AUTHOR_01
+  resolved_at: '2026-06-12T09:00:00Z'
+  corrected_artifact_version_ids:
+  - ARTIFACT_VERSION_002
+  validation_evidence:
+  - Nova revisao documental confirmou instrucao mais objetiva.
+  validation_result: confirmed

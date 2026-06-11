@@ -1,0 +1,627 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/playtest_finding/1.0
+title: Indiciário Playtest Finding
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - finding_id
+  - case_id
+  - case_version
+  - source_session_ids
+  - observation
+  - evidence
+  - causal_hypothesis
+  - category
+  - severity
+  - finding_scope
+  - impact
+  - rollback
+  - status
+  - gate_effect
+  - generalization_status
+  - created_at
+  - created_by
+x-semantic-limitations-deferred-to-issue-08:
+  - source_session_ids_exist
+  - event_ids_exist_in_source_sessions
+  - stage_ids_exist
+  - artifact_version_ids_exist
+  - finding_id_uniqueness_across_files
+  - evidence_id_uniqueness_by_property
+  - status_transition_validity
+  - resolved_status_requires_previous_accepted_state
+  - duplicate_of_not_self
+  - supersedes_not_self
+  - rollback_target_is_correct_for_cause
+  - severity_matches_impact
+  - gate_effect_consistency
+  - generalization_decision_exists
+  - created_at_before_updated_at
+  - resolved_at_after_created_at
+  - revalidation_session_ids_exist
+properties:
+  schema_version:
+    const: '1.0'
+  finding_id:
+    $ref: '#/$defs/neutral_id'
+  case_id:
+    $ref: '#/$defs/non_empty_string'
+  case_version:
+    $ref: '#/$defs/non_empty_string'
+  source_session_ids:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  source_run_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  observation:
+    $ref: '#/$defs/observation'
+  evidence:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/evidence_item'
+  causal_hypothesis:
+    $ref: '#/$defs/causal_hypothesis'
+  category:
+    enum:
+      - narrative
+      - mystery_logic
+      - evidence
+      - progression
+      - difficulty
+      - hint
+      - document_content
+      - diegesis
+      - visual
+      - rendering
+      - package
+      - accessibility
+      - technical
+      - facilitation
+      - player_experience
+      - privacy
+      - other
+  category_notes:
+    $ref: '#/$defs/long_text'
+  severity:
+    enum: [informational, low, medium, high, critical]
+  finding_scope:
+    $ref: '#/$defs/finding_scope'
+  impact:
+    $ref: '#/$defs/impact'
+  rollback:
+    $ref: '#/$defs/rollback'
+  status:
+    enum: [ACCEPTED, REJECTED, DEFERRED, NOT_APPLICABLE, RESOLVED]
+  action_expected:
+    $ref: '#/$defs/action_expected'
+  rejection:
+    $ref: '#/$defs/rejection'
+  deferral:
+    $ref: '#/$defs/deferral'
+  not_applicable:
+    $ref: '#/$defs/not_applicable'
+  resolution:
+    $ref: '#/$defs/resolution'
+  gate_effect:
+    $ref: '#/$defs/gate_effect'
+  related_gate_decision_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  assigned_to:
+    $ref: '#/$defs/neutral_id'
+  blocks_gate:
+    type: boolean
+  owner_role:
+    enum: [author, reviewer, facilitator, visual_designer, technical, human_operator, other]
+  owner_role_notes:
+    $ref: '#/$defs/long_text'
+  decision_maker:
+    $ref: '#/$defs/neutral_id'
+  generalization_status:
+    enum: [pending, not_applicable, decided]
+  generalization_notes:
+    $ref: '#/$defs/long_text'
+  learning_decision_id:
+    $ref: '#/$defs/neutral_id'
+  revalidation:
+    $ref: '#/$defs/revalidation'
+  related_finding_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  supersedes_finding_id:
+    $ref: '#/$defs/neutral_id'
+  duplicate_of_finding_id:
+    $ref: '#/$defs/neutral_id'
+  parent_finding_id:
+    $ref: '#/$defs/neutral_id'
+  related_artifact_version_ids:
+    $ref: '#/$defs/artifact_version_ids'
+  related_stage_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  tags:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/non_empty_string'
+  notes:
+    $ref: '#/$defs/long_text'
+  created_at:
+    $ref: '#/$defs/timestamp'
+  created_by:
+    $ref: '#/$defs/neutral_id'
+  updated_at:
+    $ref: '#/$defs/timestamp'
+  updated_by:
+    $ref: '#/$defs/neutral_id'
+allOf:
+  - if:
+      properties:
+        category:
+          const: other
+      required: [category]
+    then:
+      required: [category_notes]
+  - if:
+      properties:
+        status:
+          const: ACCEPTED
+      required: [status]
+    then:
+      required: [action_expected, assigned_to, blocks_gate]
+  - if:
+      properties:
+        status:
+          const: REJECTED
+      required: [status]
+    then:
+      required: [rejection]
+  - if:
+      properties:
+        status:
+          const: DEFERRED
+      required: [status]
+    then:
+      required: [deferral]
+  - if:
+      properties:
+        status:
+          const: NOT_APPLICABLE
+      required: [status]
+    then:
+      required: [not_applicable]
+  - if:
+      properties:
+        status:
+          const: RESOLVED
+      required: [status]
+    then:
+      required: [resolution]
+  - if:
+      properties:
+        generalization_status:
+          const: decided
+      required: [generalization_status]
+    then:
+      required: [learning_decision_id]
+  - if:
+      properties:
+        generalization_status:
+          const: not_applicable
+      required: [generalization_status]
+    then:
+      required: [generalization_notes]
+  - if:
+      properties:
+        generalization_status:
+          const: pending
+      required: [generalization_status]
+    then:
+      not:
+        required: [learning_decision_id]
+  - if:
+      properties:
+        owner_role:
+          const: other
+      required: [owner_role]
+    then:
+      required: [owner_role_notes]
+$defs:
+  non_empty_string:
+    type: string
+    minLength: 1
+    maxLength: 160
+  neutral_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Z0-9][A-Z0-9_-]{1,63}$'
+  short_text:
+    type: string
+    minLength: 1
+    maxLength: 240
+  long_text:
+    type: string
+    minLength: 1
+    maxLength: 4000
+  timestamp:
+    type: string
+    format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'
+  positive_integer:
+    type: integer
+    minimum: 1
+  non_negative_integer:
+    type: integer
+    minimum: 0
+  neutral_id_array:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  artifact_version_ids:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  text_array:
+    type: array
+    items:
+      $ref: '#/$defs/long_text'
+  observation:
+    type: object
+    additionalProperties: false
+    required: [summary, frequency]
+    properties:
+      summary:
+        $ref: '#/$defs/short_text'
+      details:
+        $ref: '#/$defs/long_text'
+      observed_at_stage:
+        $ref: '#/$defs/neutral_id'
+      observed_at_event_ids:
+        $ref: '#/$defs/neutral_id_array'
+      observed_by:
+        $ref: '#/$defs/neutral_id_array'
+      frequency:
+        type: object
+        additionalProperties: false
+        required: [occurrences, sessions_observed]
+        properties:
+          occurrences:
+            $ref: '#/$defs/positive_integer'
+          sessions_observed:
+            $ref: '#/$defs/positive_integer'
+  evidence_item:
+    type: object
+    additionalProperties: false
+    required: [evidence_id, type, description, source_session_id, strength]
+    properties:
+      evidence_id:
+        $ref: '#/$defs/neutral_id'
+      type:
+        enum:
+          - event_reference
+          - facilitator_observation
+          - participant_behavior
+          - anonymized_quote
+          - timing
+          - hint_usage
+          - outcome
+          - rating
+          - artifact_reference
+          - technical_log
+          - other
+      description:
+        $ref: '#/$defs/long_text'
+      source_session_id:
+        $ref: '#/$defs/neutral_id'
+      event_id:
+        $ref: '#/$defs/neutral_id'
+      stage_id:
+        $ref: '#/$defs/neutral_id'
+      participant_ids:
+        $ref: '#/$defs/neutral_id_array'
+      artifact_version_ids:
+        $ref: '#/$defs/artifact_version_ids'
+      quote:
+        $ref: '#/$defs/long_text'
+      elapsed_minutes:
+        $ref: '#/$defs/non_negative_integer'
+      strength:
+        enum: [weak, moderate, strong]
+      notes:
+        $ref: '#/$defs/long_text'
+  causal_hypothesis:
+    type: object
+    additionalProperties: false
+    required: [statement, confidence, needs_more_evidence]
+    properties:
+      statement:
+        $ref: '#/$defs/long_text'
+      confidence:
+        enum: [low, medium, high]
+      alternative_explanations:
+        $ref: '#/$defs/text_array'
+      assumptions:
+        $ref: '#/$defs/text_array'
+      disconfirming_evidence:
+        $ref: '#/$defs/text_array'
+      needs_more_evidence:
+        type: boolean
+  finding_scope:
+    type: object
+    additionalProperties: false
+    required: [level]
+    properties:
+      level:
+        enum: [session, stage, artifact, case, technical_system, visual_system, facilitation_process, other]
+      stage_ids:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/neutral_id'
+      artifact_version_ids:
+        $ref: '#/$defs/artifact_version_ids'
+      description:
+        $ref: '#/$defs/long_text'
+    allOf:
+      - if:
+          properties:
+            level:
+              const: stage
+          required: [level]
+        then:
+          required: [stage_ids]
+      - if:
+          properties:
+            level:
+              const: artifact
+          required: [level]
+        then:
+          required: [artifact_version_ids]
+      - if:
+          properties:
+            level:
+              const: other
+          required: [level]
+        then:
+          required: [description]
+  impact:
+    type: object
+    additionalProperties: false
+    required:
+      - player_effects
+      - case_effects
+      - affected_participant_count
+      - affected_session_count
+      - blocks_progression
+      - compromises_fairness
+      - compromises_solvability
+      - compromises_immersion
+      - technical_only
+    properties:
+      player_effects:
+        $ref: '#/$defs/text_array'
+      case_effects:
+        $ref: '#/$defs/text_array'
+      affected_participant_count:
+        $ref: '#/$defs/non_negative_integer'
+      affected_session_count:
+        $ref: '#/$defs/non_negative_integer'
+      blocks_progression:
+        type: boolean
+      compromises_fairness:
+        type: boolean
+      compromises_solvability:
+        type: boolean
+      compromises_immersion:
+        type: boolean
+      technical_only:
+        type: boolean
+    anyOf:
+      - properties:
+          player_effects:
+            minItems: 1
+      - properties:
+          case_effects:
+            minItems: 1
+  rollback:
+    type: object
+    additionalProperties: false
+    required: [required, target]
+    properties:
+      required:
+        type: boolean
+      target:
+        enum:
+          - premise_lab
+          - narrative_bible
+          - mystery_architecture
+          - envelope_planning
+          - document_planning
+          - document_production
+          - blueprint
+          - case_kernel
+          - case_review
+          - visual_templates
+          - build_package
+          - playtest_process
+          - learning_loop
+          - none
+          - other
+      reason:
+        $ref: '#/$defs/long_text'
+      target_notes:
+        $ref: '#/$defs/long_text'
+      alternative_targets:
+        type: array
+        uniqueItems: true
+        items:
+          enum:
+            - premise_lab
+            - narrative_bible
+            - mystery_architecture
+            - envelope_planning
+            - document_planning
+            - document_production
+            - blueprint
+            - case_kernel
+            - case_review
+            - visual_templates
+            - build_package
+            - playtest_process
+            - learning_loop
+            - none
+            - other
+    allOf:
+      - if:
+          properties:
+            required:
+              const: true
+          required: [required]
+        then:
+          required: [reason]
+      - if:
+          properties:
+            required:
+              const: false
+          required: [required]
+        then:
+          properties:
+            target:
+              const: none
+      - if:
+          properties:
+            target:
+              const: other
+          required: [target]
+        then:
+          required: [target_notes]
+  action_expected:
+    type: object
+    additionalProperties: false
+    required: [type, description]
+    properties:
+      type:
+        enum: [correction, mitigation, rollback, investigation, regression_test, other]
+      description:
+        $ref: '#/$defs/long_text'
+      type_notes:
+        $ref: '#/$defs/long_text'
+  rejection:
+    type: object
+    additionalProperties: false
+    required: [reason, decided_by, evidence_considered, rejection_risk]
+    properties:
+      reason:
+        $ref: '#/$defs/long_text'
+      decided_by:
+        $ref: '#/$defs/neutral_id'
+      evidence_considered:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/neutral_id'
+      rejection_risk:
+        $ref: '#/$defs/long_text'
+  deferral:
+    type: object
+    additionalProperties: false
+    required: [reason, decided_by, residual_risk, review_condition, blocks_current_gate]
+    properties:
+      reason:
+        $ref: '#/$defs/long_text'
+      decided_by:
+        $ref: '#/$defs/neutral_id'
+      residual_risk:
+        $ref: '#/$defs/long_text'
+      review_condition:
+        $ref: '#/$defs/long_text'
+      blocks_current_gate:
+        type: boolean
+      review_after:
+        $ref: '#/$defs/timestamp'
+      target_milestone:
+        $ref: '#/$defs/non_empty_string'
+  not_applicable:
+    type: object
+    additionalProperties: false
+    required: [reason, decided_by]
+    properties:
+      reason:
+        $ref: '#/$defs/long_text'
+      decided_by:
+        $ref: '#/$defs/neutral_id'
+  resolution:
+    type: object
+    additionalProperties: false
+    required: [resolved_by, resolved_at, corrected_artifact_version_ids, validation_evidence, validation_result]
+    properties:
+      resolved_by:
+        $ref: '#/$defs/neutral_id'
+      resolved_at:
+        $ref: '#/$defs/timestamp'
+      corrected_artifact_version_ids:
+        $ref: '#/$defs/artifact_version_ids'
+      validation_evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/long_text'
+      validation_result:
+        enum: [confirmed, partially_confirmed]
+  gate_effect:
+    type: object
+    additionalProperties: false
+    required: [blocks_gate, suggested_gate_state]
+    properties:
+      blocks_gate:
+        type: boolean
+      suggested_gate_state:
+        enum: [PASS, REVISE, BLOCK, INCONCLUSIVE, none]
+      reason:
+        $ref: '#/$defs/long_text'
+    allOf:
+      - if:
+          properties:
+            suggested_gate_state:
+              not:
+                const: none
+          required: [suggested_gate_state]
+        then:
+          required: [reason]
+  revalidation:
+    type: object
+    additionalProperties: false
+    required: [required]
+    properties:
+      required:
+        type: boolean
+      method:
+        enum: [new_playtest, regression_test, visual_review, case_review, technical_test, document_review, other]
+      target_session_count:
+        $ref: '#/$defs/non_negative_integer'
+      completed_session_ids:
+        $ref: '#/$defs/neutral_id_array'
+      result:
+        enum: [pending, passed, failed, inconclusive, not_required]
+      notes:
+        $ref: '#/$defs/long_text'
