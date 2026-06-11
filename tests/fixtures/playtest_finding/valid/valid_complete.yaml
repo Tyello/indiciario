@@ -1,0 +1,112 @@
+schema_version: '1.0'
+finding_id: FINDING_006
+case_id: CASE_MIRANTE
+case_version: CASE_VERSION_001
+source_session_ids:
+- SESSION_001
+- SESSION_002
+observation:
+  summary: Grupo hesitou na transicao do envelope inicial.
+  observed_by:
+  - OBSERVER_01
+  frequency:
+    occurrences: 2
+    sessions_observed: 2
+  details: Dois grupos pararam no mesmo ponto e verbalizaram duvida sobre qual documento
+    consultar.
+  observed_at_stage: STAGE_02
+  observed_at_event_ids:
+  - EVENT_010
+  - EVENT_022
+evidence:
+- evidence_id: EVIDENCE_001
+  type: facilitator_observation
+  description: Facilitador registrou pausa prolongada antes da proxima acao.
+  source_session_id: SESSION_001
+  strength: moderate
+- evidence_id: EVIDENCE_002
+  type: anonymized_quote
+  description: Participante indicou duvida sem identificar pessoa real.
+  source_session_id: SESSION_002
+  event_id: EVENT_022
+  stage_id: STAGE_02
+  participant_ids:
+  - PARTICIPANT_02
+  artifact_version_ids:
+  - ARTIFACT_VERSION_001
+  quote: Nao ficou claro qual pista conecta estes documentos.
+  elapsed_minutes: 42
+  strength: strong
+  notes: Quote anonima registrada pelo facilitador.
+causal_hypothesis:
+  statement: A instrucao de transicao pode ter ficado ambigua para o grupo.
+  confidence: medium
+  needs_more_evidence: false
+  alternative_explanations:
+  - Cansaco apos pausa longa.
+  assumptions:
+  - Os documentos estavam impressos na ordem correta.
+  disconfirming_evidence:
+  - Um grupo resolveu sem dica.
+category: progression
+severity: medium
+finding_scope:
+  level: artifact
+  artifact_version_ids:
+  - ARTIFACT_VERSION_001
+  description: Documento de transicao entre dois envelopes.
+impact:
+  player_effects:
+  - Pausa perceptivel e pedido de confirmacao ao facilitador.
+  case_effects: []
+  affected_participant_count: 3
+  affected_session_count: 1
+  blocks_progression: false
+  compromises_fairness: false
+  compromises_solvability: false
+  compromises_immersion: true
+  technical_only: false
+rollback:
+  required: true
+  target: envelope_planning
+  reason: Ajustar a menor etapa que define a transicao entre envelopes.
+  alternative_targets:
+  - document_planning
+status: ACCEPTED
+gate_effect:
+  blocks_gate: false
+  suggested_gate_state: REVISE
+  reason: Revisao localizada recomendada antes de nova rodada.
+generalization_status: pending
+created_at: '2026-06-11T10:00:00Z'
+created_by: AUTHOR_01
+action_expected:
+  type: correction
+  description: Reescrever a instrucao de transicao e revalidar em revisao documental.
+assigned_to: AUTHOR_01
+source_run_ids:
+- RUN_001
+related_finding_ids:
+- FINDING_003
+related_artifact_version_ids:
+- ARTIFACT_VERSION_001
+related_stage_ids:
+- STAGE_02
+supersedes_finding_id: FINDING_000
+owner_role: author
+decision_maker: REVIEWER_01
+related_gate_decision_ids:
+- GATE_DECISION_001
+revalidation:
+  required: true
+  method: document_review
+  target_session_count: 1
+  completed_session_ids: []
+  result: pending
+  notes: Revisao documental antes do novo playtest.
+tags:
+- progression
+- envelope-transition
+notes: Finding sintetiza recorrencia em duas sessoes.
+updated_at: '2026-06-11T11:00:00Z'
+updated_by: AUTHOR_01
