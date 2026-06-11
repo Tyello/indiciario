@@ -10,6 +10,8 @@ from jsonschema.exceptions import ValidationError
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "schemas" / "learning_decision.schema.yaml"
+FINDING_SCHEMA_PATH = ROOT / "schemas" / "playtest_finding.schema.yaml"
+SESSION_SCHEMA_PATH = ROOT / "schemas" / "playtest_session.schema.yaml"
 FIXTURES_DIR = ROOT / "tests" / "fixtures" / "learning_decision"
 
 SCOPE_LEVELS = {
@@ -145,6 +147,9 @@ def test_all_expected_valid_fixtures_exist():
         "valid_regression_test",
         "valid_global_editorial_with_exception",
         "valid_verified_decision",
+        "valid_implemented_decision",
+        "valid_superseded_after_verification",
+        "valid_global_editorial_repeated_pattern",
         "valid_complete",
     }
     found = {path.stem for path in (FIXTURES_DIR / "valid").glob("*.yaml")}
@@ -171,6 +176,7 @@ def test_all_expected_invalid_fixtures_exist():
         "unexpected_property",
         "global_editorial_without_applicability_conditions",
         "global_editorial_single_session_without_exception",
+        "global_editorial_no_repeated_pattern_without_exception",
         "no_generalization_without_payload",
         "no_generalization_without_reason",
         "example_only_without_example",
@@ -199,9 +205,49 @@ def test_all_expected_invalid_fixtures_exist():
         "validation_target_other_without_notes",
         "test_level_other_without_notes",
         "global_scope_without_global_evidence_basis",
+        "lowercase_learning_decision_id",
+        "learning_decision_id_with_colon",
+        "learning_decision_id_with_dot",
+        "one_character_learning_decision_id",
+        "learning_decision_id_too_long",
+        "lowercase_related_finding_id",
+        "not_planned_with_verification_payload",
+        "proposed_with_implementation_payload",
+        "proposed_with_rejection_payload",
+        "approved_with_verification_payload",
+        "implemented_without_reference",
+        "implemented_without_implemented_at",
+        "implemented_without_implemented_by",
+        "implemented_with_verification_payload",
+        "verified_without_implementation_reference",
+        "verified_without_implemented_at",
+        "verified_without_implemented_by",
+        "verified_with_rejection_payload",
+        "rejected_after_review_with_implementation_payload",
+        "rejected_after_review_with_verification_payload",
+        "not_superseded_with_superseded_by",
     }
     found = {path.stem for path in (FIXTURES_DIR / "invalid").glob("*.yaml")}
     assert expected <= found
+
+
+
+def test_neutral_id_matches_session_and_finding_schemas():
+    decision = load_schema()["$defs"]["neutral_id"]
+    finding = load_yaml(FINDING_SCHEMA_PATH)["$defs"]["neutral_id"]
+    session = load_yaml(SESSION_SCHEMA_PATH)["$defs"]["neutral_id"]
+    keys = {"type", "minLength", "maxLength", "pattern"}
+    assert {key: decision.get(key) for key in keys} == {key: finding.get(key) for key in keys}
+    assert {key: decision.get(key) for key in keys} == {key: session.get(key) for key in keys}
+
+
+def test_global_exception_justification_has_single_source_of_truth():
+    schema = load_schema()
+    scope_properties = schema["$defs"]["scope"]["properties"]
+    global_basis_properties = schema["$defs"]["global_evidence_basis"]["properties"]
+    assert "explicit_exception_justification" not in scope_properties
+    assert "exception_justification" not in scope_properties
+    assert "exception_justification" in global_basis_properties
 
 
 def test_scope_and_result_enums_are_exact():
@@ -241,6 +287,7 @@ def test_incompatible_payloads_are_rejected(fixture_name: str):
     [
         ("global_editorial_without_applicability_conditions", ["scope", "applicability_conditions"]),
         ("global_editorial_single_session_without_exception", ["global_evidence_basis"]),
+        ("global_editorial_no_repeated_pattern_without_exception", ["global_evidence_basis"]),
         ("global_scope_without_global_evidence_basis", ["$"]),
     ],
 )
@@ -278,6 +325,63 @@ def test_revalidation_conditionals(fixture_name: str, expected_field: str):
     errors = validation_errors(FIXTURES_DIR / "invalid" / f"{fixture_name}.yaml")
     assert errors, f"{fixture_name} should be invalid"
     assert any(expected_field in error.message or expected_field in str(error.schema_path) for error in errors), format_errors(errors)
+
+
+
+def test_global_editorial_repeated_pattern_does_not_require_exception():
+    fixture = FIXTURES_DIR / "valid" / "valid_global_editorial_repeated_pattern.yaml"
+    instance = load_yaml(fixture)
+    assert instance["scope"]["level"] == "global_editorial"
+    assert instance["global_evidence_basis"]["multiple_sessions"] is True
+    assert instance["global_evidence_basis"]["repeated_pattern"] is True
+    assert "exception_justification" not in instance["global_evidence_basis"]
+    assert validation_errors(fixture) == []
+
+
+@pytest.mark.parametrize(
+    "fixture_name",
+    [
+        "not_planned_with_verification_payload",
+        "proposed_with_implementation_payload",
+        "proposed_with_rejection_payload",
+        "approved_with_verification_payload",
+        "implemented_with_verification_payload",
+        "verified_with_rejection_payload",
+        "rejected_after_review_with_implementation_payload",
+        "rejected_after_review_with_verification_payload",
+        "not_superseded_with_superseded_by",
+    ],
+)
+def test_implementation_status_rejects_incompatible_payloads(fixture_name: str):
+    errors = validation_errors(FIXTURES_DIR / "invalid" / f"{fixture_name}.yaml")
+    assert errors, f"{fixture_name} should reject incompatible implementation_status payloads"
+
+
+@pytest.mark.parametrize(
+    "fixture_name,expected_field",
+    [
+        ("implemented_without_reference", "implementation_reference"),
+        ("implemented_without_implemented_at", "implemented_at"),
+        ("implemented_without_implemented_by", "implemented_by"),
+        ("verified_without_implementation_reference", "implementation_reference"),
+        ("verified_without_implemented_at", "implemented_at"),
+        ("verified_without_implemented_by", "implemented_by"),
+    ],
+)
+def test_implementation_status_requires_own_payload_fields(fixture_name: str, expected_field: str):
+    errors = validation_errors(FIXTURES_DIR / "invalid" / f"{fixture_name}.yaml")
+    assert errors, f"{fixture_name} should be invalid"
+    assert any(expected_field in error.message for error in errors), format_errors(errors)
+
+
+def test_superseded_can_preserve_implementation_and_verification_history():
+    fixture = FIXTURES_DIR / "valid" / "valid_superseded_after_verification.yaml"
+    instance = load_yaml(fixture)
+    assert instance["implementation_status"] == "superseded"
+    assert "superseded_by_decision_id" in instance
+    assert {"implementation_reference", "implemented_at", "implemented_by"} <= instance.keys()
+    assert {"implementation_evidence", "verified_at", "verified_by"} <= instance.keys()
+    assert validation_errors(fixture) == []
 
 
 def test_timestamp_without_timezone_is_rejected_by_format_checked_validator():

@@ -169,11 +169,13 @@ $defs:
     minLength: 1
   neutral_id:
     type: string
-    minLength: 1
-    pattern: ^[A-Za-z0-9][A-Za-z0-9_.:-]*$
+    minLength: 2
+    maxLength: 64
+    pattern: ^[A-Z0-9][A-Z0-9_-]{1,63}$
   timestamp:
     type: string
     format: date-time
+    pattern: ^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$
   string_array:
     type: array
     items:
@@ -214,8 +216,6 @@ $defs:
         items:
           $ref: '#/$defs/non_empty_string'
       evidence_threshold:
-        $ref: '#/$defs/non_empty_string'
-      explicit_exception_justification:
         $ref: '#/$defs/non_empty_string'
     allOf:
     - if:
@@ -1064,26 +1064,118 @@ allOf:
     - global_evidence_basis
 - if:
     properties:
-      scope:
-        properties:
-          level:
-            const: global_editorial
-        required:
-        - level
-      evidence_summary:
-        properties:
-          session_count:
-            maximum: 1
-        required:
-        - session_count
+      implementation_status:
+        const: not_planned
     required:
-    - scope
-    - evidence_summary
+    - implementation_status
   then:
+    not:
+      anyOf:
+      - required:
+        - implementation_reference
+      - required:
+        - implemented_at
+      - required:
+        - implemented_by
+      - required:
+        - implementation_evidence
+      - required:
+        - verified_at
+      - required:
+        - verified_by
+      - required:
+        - rejection_reason
+      - required:
+        - reviewed_by
+      - required:
+        - reviewed_at
+      - required:
+        - superseded_by_decision_id
+- if:
     properties:
-      scope:
-        required:
-        - explicit_exception_justification
+      implementation_status:
+        const: proposed
+    required:
+    - implementation_status
+  then:
+    not:
+      anyOf:
+      - required:
+        - implementation_reference
+      - required:
+        - implemented_at
+      - required:
+        - implemented_by
+      - required:
+        - implementation_evidence
+      - required:
+        - verified_at
+      - required:
+        - verified_by
+      - required:
+        - rejection_reason
+      - required:
+        - reviewed_by
+      - required:
+        - reviewed_at
+      - required:
+        - superseded_by_decision_id
+- if:
+    properties:
+      implementation_status:
+        const: approved_for_implementation
+    required:
+    - implementation_status
+  then:
+    not:
+      anyOf:
+      - required:
+        - implementation_reference
+      - required:
+        - implemented_at
+      - required:
+        - implemented_by
+      - required:
+        - implementation_evidence
+      - required:
+        - verified_at
+      - required:
+        - verified_by
+      - required:
+        - rejection_reason
+      - required:
+        - reviewed_by
+      - required:
+        - reviewed_at
+      - required:
+        - superseded_by_decision_id
+- if:
+    properties:
+      implementation_status:
+        const: implemented
+    required:
+    - implementation_status
+  then:
+    required:
+    - implementation_reference
+    - implemented_at
+    - implemented_by
+    not:
+      anyOf:
+      - required:
+        - implementation_evidence
+      - required:
+        - verified_at
+      - required:
+        - verified_by
+      - required:
+        - rejection_reason
+      - required:
+        - reviewed_by
+      - required:
+        - reviewed_at
+      - required:
+        - superseded_by_decision_id
 - if:
     properties:
       implementation_status:
@@ -1092,9 +1184,22 @@ allOf:
     - implementation_status
   then:
     required:
+    - implementation_reference
+    - implemented_at
+    - implemented_by
     - implementation_evidence
     - verified_at
     - verified_by
+    not:
+      anyOf:
+      - required:
+        - rejection_reason
+      - required:
+        - reviewed_by
+      - required:
+        - reviewed_at
+      - required:
+        - superseded_by_decision_id
 - if:
     properties:
       implementation_status:
@@ -1106,6 +1211,22 @@ allOf:
     - rejection_reason
     - reviewed_by
     - reviewed_at
+    not:
+      anyOf:
+      - required:
+        - implementation_reference
+      - required:
+        - implemented_at
+      - required:
+        - implemented_by
+      - required:
+        - implementation_evidence
+      - required:
+        - verified_at
+      - required:
+        - verified_by
+      - required:
+        - superseded_by_decision_id
 - if:
     properties:
       implementation_status:
@@ -1115,14 +1236,11 @@ allOf:
   then:
     required:
     - superseded_by_decision_id
-- if:
-    properties:
-      implementation_status:
-        not:
-          const: superseded
-    required:
-    - implementation_status
-  then:
     not:
-      required:
-      - superseded_by_decision_id
+      anyOf:
+      - required:
+        - rejection_reason
+      - required:
+        - reviewed_by
+      - required:
+        - reviewed_at

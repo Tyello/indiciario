@@ -57,3 +57,6 @@ no_generalization:
   reconsideration_condition: Reavaliar apos nova sessao.
 verified_at: '2026-06-12T12:00:00Z'
 verified_by: REVIEWER_01
+implementation_reference: PR-IMPLEMENTATION-001
+implemented_at: '2026-06-12T10:00:00Z'
+implemented_by: TECH_OWNER_01

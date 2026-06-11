@@ -1,15 +1,16 @@
 schema_version: '1.0'
-learning_decision_id: LEARNING_DECISION_008
+learning_decision_id: LEARNING_DECISION_001
 case_id: CASE_MIRANTE
 case_version: CASE_VERSION_001
 related_finding_ids:
 - FINDING_001
 scope:
-  level: global_editorial
-  description: Revisao editorial aplicavel a transicoes essenciais.
+  level: case_only
+  target_ids:
+  - CASE_MIRANTE
+  description: Aplicar somente ao caso analisado.
   applicability_conditions: []
-  evidence_threshold: Padrao observado em uma sessao com justificativa explicita.
-result: example_only
+result: no_generalization
 rationale:
   summary: Decisao humana registrada apos revisar observacoes do playtest.
   evidence_reviewed:
@@ -22,7 +23,7 @@ rationale:
   - Registrar como exemplo futuro.
   counter_evidence: []
   limitations:
-  - Escopo global com uma sessao exige excecao registrada.
+  - Uma unica sessao revisada.
 evidence_summary:
   session_count: 1
   finding_count: 1
@@ -30,7 +31,7 @@ evidence_summary:
   independent_groups: false
   evidence_strength: weak
   notes: Amostra inicial.
-implementation_status: not_planned
+implementation_status: verified
 decision_risk:
   overgeneralization_risk: high
   undergeneralization_risk: low
@@ -49,14 +50,14 @@ decision_authority:
   approved_by: []
   dissenting_views: []
   decision_notes: Decisao revisada manualmente.
-global_evidence_basis:
-  multiple_sessions: false
-  multiple_cases: false
-  repeated_pattern: false
-  exception_justification: Apenas uma sessao; usar como candidato de revisao, nao
-    regra implementada.
-  counterexamples_reviewed: []
-example:
-  summary: Exemplo global editorial com excecao registrada.
-  example_reference: future-docs/examples/global-transition-caution
-  caution: Nao aplicar automaticamente; evidencia limitada.
+no_generalization:
+  reason: Evidencia insuficiente para aprendizado alem do caso.
+  disposition: insufficient_evidence
+  residual_risk: Pode haver recorrencia ainda nao observada.
+  reconsideration_condition: Reavaliar apos nova sessao.
+implemented_at: '2026-06-12T10:00:00Z'
+implemented_by: TECH_OWNER_01
+implementation_evidence:
+- Evidencia indevida.
+verified_at: '2026-06-12T12:00:00Z'
+verified_by: REVIEWER_01

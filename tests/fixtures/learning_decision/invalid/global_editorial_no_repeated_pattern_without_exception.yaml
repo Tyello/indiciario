@@ -1,5 +1,5 @@
 schema_version: '1.0'
-learning_decision_id: LEARNING_DECISION_008
+learning_decision_id: LEARNING_DECISION_015
 case_id: CASE_MIRANTE
 case_version: CASE_VERSION_001
 related_finding_ids:
@@ -7,7 +7,8 @@ related_finding_ids:
 scope:
   level: global_editorial
   description: Revisao editorial aplicavel a transicoes essenciais.
-  applicability_conditions: []
+  applicability_conditions:
+  - Quando a etapa analisada define transicao critica.
   evidence_threshold: Padrao observado em uma sessao com justificativa explicita.
 result: example_only
 rationale:
@@ -50,11 +51,9 @@ decision_authority:
   dissenting_views: []
   decision_notes: Decisao revisada manualmente.
 global_evidence_basis:
-  multiple_sessions: false
+  multiple_sessions: true
   multiple_cases: false
   repeated_pattern: false
-  exception_justification: Apenas uma sessao; usar como candidato de revisao, nao
-    regra implementada.
   counterexamples_reviewed: []
 example:
   summary: Exemplo global editorial com excecao registrada.

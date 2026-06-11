@@ -58,3 +58,6 @@ no_generalization:
 implementation_evidence:
 - PR futura revisada manualmente
 verified_at: '2026-06-12T12:00:00Z'
+implementation_reference: PR-IMPLEMENTATION-001
+implemented_at: '2026-06-12T10:00:00Z'
+implemented_by: TECH_OWNER_01

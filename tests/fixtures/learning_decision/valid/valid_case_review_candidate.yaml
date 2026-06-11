@@ -10,8 +10,6 @@ scope:
   applicability_conditions:
   - Quando a etapa analisada define transicao critica.
   evidence_threshold: Padrao observado em uma sessao com justificativa explicita.
-  explicit_exception_justification: Produto ainda esta em validacao inicial; registrar
-    limitacao antes de aplicar globalmente.
 result: case_review_candidate
 rationale:
   summary: Decisao humana registrada apos revisar observacoes do playtest.
