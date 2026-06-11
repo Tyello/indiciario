@@ -1,0 +1,63 @@
+schema_version: '1.0'
+learning_decision_id: LEARNING_DECISION_009
+case_id: CASE_MIRANTE
+case_version: CASE_VERSION_001
+related_finding_ids:
+- FINDING_001
+scope:
+  level: case_only
+  target_ids:
+  - CASE_MIRANTE
+  description: Aplicar somente ao caso analisado.
+  applicability_conditions: []
+result: no_generalization
+rationale:
+  summary: Decisao humana registrada apos revisar observacoes do playtest.
+  evidence_reviewed:
+  - FINDING_001
+  - SESSION_001_NOTE_001
+  why_this_scope: A evidencia veio de uma unica mesa e nao justifica generalizacao.
+  why_this_result: O comportamento observado ainda pode ser preferencia isolada.
+  confidence: low
+  alternatives_considered:
+  - Registrar como exemplo futuro.
+  counter_evidence: []
+  limitations:
+  - Uma unica sessao revisada.
+evidence_summary:
+  session_count: 1
+  finding_count: 1
+  repeated_pattern: false
+  independent_groups: false
+  evidence_strength: weak
+  notes: Amostra inicial.
+implementation_status: verified
+decision_risk:
+  overgeneralization_risk: high
+  undergeneralization_risk: low
+  notes: Evita transformar uma ocorrencia isolada em regra.
+revalidation:
+  required: true
+  method: new_playtest
+  success_criteria:
+  - Observar se o padrao se repete em nova sessao.
+  minimum_sessions: 1
+  status: pending
+decided_at: '2026-06-11T12:00:00Z'
+decided_by: EDITOR_01
+decision_authority:
+  role: editor
+  approved_by: []
+  dissenting_views: []
+  decision_notes: Decisao revisada manualmente.
+no_generalization:
+  reason: Evidencia insuficiente para aprendizado alem do caso.
+  disposition: insufficient_evidence
+  residual_risk: Pode haver recorrencia ainda nao observada.
+  reconsideration_condition: Reavaliar apos nova sessao.
+implementation_evidence:
+- PR futura revisada manualmente
+verified_at: '2026-06-12T12:00:00Z'
+implementation_reference: PR-IMPLEMENTATION-001
+implemented_at: '2026-06-12T10:00:00Z'
+implemented_by: TECH_OWNER_01
