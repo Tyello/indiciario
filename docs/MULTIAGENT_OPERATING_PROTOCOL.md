@@ -31,6 +31,16 @@ Blueprint
 
 A camada multiagente descrita aqui existe para melhorar rastreabilidade editorial, revisão independente, cegueira operacional e aprendizado estruturado. Ela não autoriza alterar os canônicos, schemas, validator, renderer, package builder, templates, PDFs ou CI sem tarefa específica.
 
+### Convenções normativas
+
+Neste documento:
+
+- **deve** indica regra obrigatória para uma rodada que declare seguir este protocolo;
+- **não deve** indica prática proibida, salvo exceção registrada conforme o procedimento de desvios;
+- **pode** indica possibilidade operacional permitida, mas não exigida;
+- **recomendado** indica prática preferencial quando não houver restrição de escopo, segurança de contexto ou custo;
+- regras deste protocolo são normativas para o processo manual-first, mas não criam validação automática, schema executável ou obrigação para builds existentes.
+
 ## 2. Princípios fundamentais
 
 ### Manual-first
@@ -197,6 +207,42 @@ Regras de autoridade:
 - Quem avalia com expectativa privada não participa da rodada cega avaliada.
 - O operador humano pode encerrar, repetir, dividir ou reverter uma etapa quando houver risco de vazamento, confusão de papel ou perda de rastreabilidade.
 
+### Responsabilidades consolidadas do operador humano
+
+O operador humano deve:
+
+- selecionar a etapa, o objetivo e a skill operacional antes da rodada;
+- definir papéis e confirmar quem pode conhecer material privado;
+- preparar ou revisar o conjunto de materiais autorizado para cada papel;
+- preservar outputs congelados e registrar a decisão de gate;
+- decidir avanço, retorno, pausa, repetição ou encerramento;
+- impedir que um agente automatizado acumule autoria, revisão, resolução cega e aprovação;
+- registrar exceções, desvios, limitações e riscos residuais;
+- manter o fluxo alinhado ao pipeline oficial e às prioridades atuais do projeto.
+
+O operador humano pode delegar execução e análise, mas não deve delegar a responsabilidade final de governança editorial da rodada.
+
+### Ciclo autor–revisor
+
+O ciclo mínimo recomendado para qualquer artefato novo ou corrigido é:
+
+```text
+Autor produz versão
+→ output é congelado para revisão
+→ Revisor registra findings sem editar o artefato
+→ Operador humano decide gate
+→ Autor cria nova versão quando houver retorno
+→ revisão é repetida somente no escopo necessário
+```
+
+Regras do ciclo:
+
+- o autor deve responder a findings por nova versão, nota de mitigação ou justificativa de não alteração;
+- o revisor deve apontar problema, evidência e impacto, evitando reescrever silenciosamente o material;
+- o operador humano deve separar findings críticos, recomendações e preferências editoriais;
+- uma nova versão não apaga o output revisado anteriormente;
+- ciclos sucessivos devem buscar a menor correção coerente, não expansão automática de escopo.
+
 ## 5. Pipeline operacional
 
 A camada multiagente futura deve ser entendida como expansão incremental antes, durante e depois do fluxo oficial, não como substituição imediata:
@@ -221,6 +267,22 @@ Brief
 → Learning Loop
 ```
 
+### Unidade operacional de etapa
+
+Cada etapa manual-first deve ser tratada como uma unidade operacional pequena o suficiente para revisão independente. Antes de iniciar, o operador humano deve conseguir declarar:
+
+- objetivo da etapa;
+- entradas autorizadas;
+- papel executor;
+- papel avaliador ou gate esperado;
+- saída esperada;
+- critérios de avanço;
+- critérios de retorno;
+- restrições de cegueira, se houver;
+- riscos conhecidos e decisão humana necessária.
+
+Uma etapa não deve misturar, na mesma execução sem registro, criação de conteúdo, revisão crítica, resolução cega e aprovação de gate. Se isso acontecer por necessidade operacional, a rodada deve ser marcada como desvio e não deve ser usada como evidência cega.
+
 ### 5.1 Brief
 
 Define intenção, público, régua de dificuldade, restrições offline-first, formato esperado, tema, limites editoriais e promessa de experiência. Avança quando o operador humano consegue explicar por que o caso deve existir e qual experiência pretende entregar.
@@ -243,7 +305,7 @@ Avança quando a verdade do caso é coerente e consegue sustentar documentos die
 
 Define pergunta investigativa, solução, hipóteses plausíveis, evidências necessárias, falsos caminhos justos e dependências entre pistas. Avança quando a solução pode ser inferida por cruzamento de evidências, não por gabarito disfarçado.
 
-Retorna quando há caminho único frágil, pista indispensável escondida demais, red herring injusto, dedução baseada em conhecimento externo ou ausência de alternativa plausível.
+Retorna quando há caminho único frágil, pista indispensável escondida demais, red herring injusto ou dedução baseada em conhecimento externo. Hipóteses alternativas plausíveis são desejáveis para sustentar investigação, mas devem ser refutáveis por evidência disponível; o problema ocorre quando a alternativa errada fica tão ou mais sustentada que a solução correta, ou quando não há caminho evidencial para distingui-las.
 
 ### 5.5 Planejamento de envelopes
 
@@ -326,6 +388,19 @@ Avança quando há decisão explícita sobre o que corrigir agora, o que registr
 ## 6. Gates e critérios de avanço
 
 Um gate é aprovado quando há evidência suficiente de que a etapa cumpriu seu objetivo sem violar princípios do Indiciário. Em modo manual-first, o gate pode ser uma decisão registrada em Markdown, issue, comentário de PR ou relatório, desde que seja compreensível e rastreável.
+
+### Estados formais de gate
+
+Todo gate deve terminar em um destes estados:
+
+- **aprovado**: a etapa pode avançar; findings críticos estão resolvidos, mitigados ou aceitos conscientemente;
+- **aprovado com ressalvas**: a etapa pode avançar, mas há risco residual registrado e dono humano para acompanhar;
+- **retorna**: a etapa deve voltar para correção no ponto indicado;
+- **pausado**: falta informação, contexto, revisão ou decisão humana;
+- **rejeitado**: o artefato ou direção não deve seguir sem reformulação substancial;
+- **inválido por vazamento**: uma rodada cega foi comprometida por acesso indevido a contexto e não deve contar como evidência de solvabilidade.
+
+Um gate não deve ficar implícito. Se a rodada avançar sem registro, o operador humano deve registrar posteriormente que houve desvio de processo e qual risco foi aceito.
 
 Critérios mínimos para avançar:
 
@@ -412,7 +487,51 @@ Permanecem humanas:
 
 Agentes podem recomendar, sintetizar, criticar e comparar. Eles não devem substituir a responsabilidade editorial humana.
 
-## 11. Compatibilidade com o repositório atual
+## 11. Exceções e desvios
+
+Exceções são permitidas apenas quando tornam a rodada mais segura, mais simples ou mais fiel ao estado real do projeto. Um desvio deve ser registrado quando qualquer regra operacional não puder ser seguida.
+
+Procedimento mínimo:
+
+1. declarar qual regra não será seguida;
+2. explicar o motivo do desvio;
+3. registrar quem aprovou a exceção;
+4. indicar risco editorial, risco de cegueira ou risco de rastreabilidade;
+5. definir se o output ainda pode ser usado como evidência, recomendação ou apenas nota exploratória;
+6. planejar revalidação quando o desvio afetar solvabilidade, gate ou playtest.
+
+Uma exceção não deve virar precedente automático. Para virar prática recorrente, precisa passar pelo Learning Loop ou por atualização documental explícita.
+
+## 12. Critérios para adoção futura
+
+Uma etapa, skill, automação, schema, CLI ou orquestrador futuro só deve ser adotado quando:
+
+- preservar o pipeline oficial e a operação offline-first;
+- reduzir risco real de erro editorial, vazamento, retrabalho ou perda de rastreabilidade;
+- manter separação entre autoria, revisão, resolução cega e aprovação;
+- produzir benefício observável em piloto, revisão ou playtest;
+- não transformar playtest humano em etapa opcional;
+- permitir rollback para o fluxo manual quando falhar;
+- tiver escopo próprio, revisão própria e documentação própria.
+
+Adoção futura deve ser incremental: primeiro procedimento manual claro, depois contrato conceitual, depois implementação pequena, depois piloto, e só então ampliação.
+
+## 13. Limitações explícitas
+
+Este protocolo tem limites deliberados:
+
+- não prova que um caso é divertido;
+- não garante solvabilidade sem playtest e revisão humana;
+- não impede vazamento se o operador humano preparar contexto errado;
+- não substitui o validator, o Case Kernel, o Case Review, o build real ou a baseline visual;
+- não define segurança técnica do Context Firewall;
+- não define formato de manifest, identificador, diretório, schema ou output automatizado;
+- não resolve priorização de produto nem autoriza iniciar canônico Avançado;
+- não transforma mesa simulada em evidência equivalente a pessoas reais jogando.
+
+Essas limitações são parte da segurança do desenho manual-first: o protocolo orienta governança, mas não finge maturidade técnica ou validação editorial que ainda não existem.
+
+## 14. Compatibilidade com o repositório atual
 
 Este protocolo é deliberadamente documental. Ele não cria contratos executáveis, não define schemas, não exige diretórios novos de outputs e não muda comandos existentes.
 
@@ -424,7 +543,7 @@ Compatibilidades obrigatórias:
 - o validator, os scripts, o renderer e os casos canônicos não são alterados por este protocolo;
 - qualquer implementação futura de Context Firewall, manifests, IDs, schemas, bundles técnicos, CLIs ou orquestrador deve ser tratada em issues próprias.
 
-## 12. Anti-regras
+## 15. Anti-regras
 
 Este protocolo não autoriza:
 
@@ -438,7 +557,7 @@ Este protocolo não autoriza:
 - criar dependência de internet, app, dashboard, banco de dados ou QR code obrigatório;
 - conceder aprovação editorial final a agente automatizado.
 
-## 13. Checklist manual-first por rodada
+## 16. Checklist manual-first por rodada
 
 Antes da rodada:
 
