@@ -156,7 +156,7 @@ Conjunto preparado de materiais entregues a um agente para uma etapa. Em context
 
 ### Gate
 
-Ponto de decisão em que uma etapa é aprovada, retorna para correção, é pausada ou é rejeitada. Um gate deve considerar evidência, findings, risco editorial e julgamento humano quando aplicável.
+Ponto de decisão em que uma etapa recebe um dos quatro estados canônicos: `PASS`, `REVISE`, `BLOCK` ou `INCONCLUSIVE`. Um gate deve considerar evidência, findings, risco editorial, julgamento humano e etapa correta de rollback quando aplicável.
 
 ### Finding
 
@@ -222,6 +222,15 @@ O operador humano deve:
 
 O operador humano pode delegar execução e análise, mas não deve delegar a responsabilidade final de governança editorial da rodada.
 
+O operador humano não deve:
+
+- aprovar sozinho um artefato quando também atuou como autor principal;
+- reclassificar uma rodada contaminada como revisão cega válida;
+- transformar recomendação de agente em decisão editorial automática;
+- ocultar findings críticos para permitir avanço;
+- usar exceção de processo para contornar playtest humano, baseline visual real ou revisão obrigatória;
+- iniciar adoção técnica futura sem escopo próprio e evidência mínima de benefício.
+
 ### Ciclo autor–revisor
 
 O ciclo mínimo recomendado para qualquer artefato novo ou corrigido é:
@@ -242,6 +251,18 @@ Regras do ciclo:
 - o operador humano deve separar findings críticos, recomendações e preferências editoriais;
 - uma nova versão não apaga o output revisado anteriormente;
 - ciclos sucessivos devem buscar a menor correção coerente, não expansão automática de escopo.
+
+Estados manuais de finding no ciclo autor–revisor:
+
+- **aberto**: finding registrado e ainda sem resposta do autor;
+- **em correção**: autor aceitou o finding e está produzindo nova versão;
+- **resolvido**: nova versão removeu o problema e o revisor ou operador confirmou;
+- **mitigado**: risco permanece, mas foi reduzido e aceito conscientemente no gate;
+- **não aplicável**: revisão concluiu que o finding não se aplica ao escopo ou artefato;
+- **adiado**: finding real foi postergado com responsável, motivo e etapa futura de revalidação;
+- **bloqueador**: finding impede `PASS` enquanto não houver correção ou rollback.
+
+Esses estados são vocabulário operacional manual, não schema executável. Finding bloqueador deve levar o gate a `REVISE` ou `BLOCK`, conforme severidade e etapa de origem.
 
 ## 5. Pipeline operacional
 
@@ -273,15 +294,19 @@ Cada etapa manual-first deve ser tratada como uma unidade operacional pequena o 
 
 - objetivo da etapa;
 - entradas autorizadas;
+- materiais privados proibidos para papéis cegos;
+- visibilidade da rodada: pública, privada, cega ou híbrida;
 - papel executor;
-- papel avaliador ou gate esperado;
+- papel revisor, avaliador ou gate esperado;
 - saída esperada;
+- formato livre esperado da saída, quando necessário, sem impor schema executável;
 - critérios de avanço;
-- critérios de retorno;
+- critérios de retorno e etapa provável de rollback;
 - restrições de cegueira, se houver;
+- estado de gate esperado ao final: `PASS`, `REVISE`, `BLOCK` ou `INCONCLUSIVE`;
 - riscos conhecidos e decisão humana necessária.
 
-Uma etapa não deve misturar, na mesma execução sem registro, criação de conteúdo, revisão crítica, resolução cega e aprovação de gate. Se isso acontecer por necessidade operacional, a rodada deve ser marcada como desvio e não deve ser usada como evidência cega.
+Ao encerrar, a etapa deve produzir uma decisão explícita, mesmo que seja `INCONCLUSIVE`. Uma etapa não deve misturar, na mesma execução sem registro, criação de conteúdo, revisão crítica, resolução cega e aprovação de gate. Se isso acontecer por necessidade operacional, a rodada deve ser marcada como desvio e não deve ser usada como evidência cega.
 
 ### 5.1 Brief
 
@@ -387,20 +412,18 @@ Avança quando há decisão explícita sobre o que corrigir agora, o que registr
 
 ## 6. Gates e critérios de avanço
 
-Um gate é aprovado quando há evidência suficiente de que a etapa cumpriu seu objetivo sem violar princípios do Indiciário. Em modo manual-first, o gate pode ser uma decisão registrada em Markdown, issue, comentário de PR ou relatório, desde que seja compreensível e rastreável.
+Um gate é avaliado quando há evidência suficiente para decidir se a etapa cumpriu seu objetivo sem violar princípios do Indiciário. Em modo manual-first, o gate pode ser uma decisão registrada em Markdown, issue, comentário de PR ou relatório, desde que seja compreensível e rastreável.
 
 ### Estados formais de gate
 
-Todo gate deve terminar em um destes estados:
+Todo gate deve terminar em um dos quatro estados canônicos do PRD:
 
-- **aprovado**: a etapa pode avançar; findings críticos estão resolvidos, mitigados ou aceitos conscientemente;
-- **aprovado com ressalvas**: a etapa pode avançar, mas há risco residual registrado e dono humano para acompanhar;
-- **retorna**: a etapa deve voltar para correção no ponto indicado;
-- **pausado**: falta informação, contexto, revisão ou decisão humana;
-- **rejeitado**: o artefato ou direção não deve seguir sem reformulação substancial;
-- **inválido por vazamento**: uma rodada cega foi comprometida por acesso indevido a contexto e não deve contar como evidência de solvabilidade.
+- **PASS**: a etapa pode avançar; findings críticos estão resolvidos, mitigados ou aceitos conscientemente, e o avanço não depende de inferência inexistente nem de vazamento;
+- **REVISE**: há problema corrigível na etapa atual ou em etapa anterior; o gate deve indicar finding, responsável e etapa de rollback;
+- **BLOCK**: há falha que impede avanço justo, compromete a integridade do mistério ou torna inválida a evidência produzida;
+- **INCONCLUSIVE**: a execução não permite decisão confiável; requer nova rodada, contexto corrigido, revisor adequado, solver novo ou evidência adicional.
 
-Um gate não deve ficar implícito. Se a rodada avançar sem registro, o operador humano deve registrar posteriormente que houve desvio de processo e qual risco foi aceito.
+`PASS` pode registrar ressalvas, mas essas ressalvas não são um quinto estado. Vazamento de contexto deve resultar em `BLOCK` quando comprometer a integridade da rodada, ou `INCONCLUSIVE` quando apenas impedir decisão confiável. Um gate não deve ficar implícito. Se a rodada avançar sem registro, o operador humano deve registrar posteriormente que houve desvio de processo e qual risco foi aceito.
 
 Critérios mínimos para avançar:
 
@@ -489,7 +512,7 @@ Agentes podem recomendar, sintetizar, criticar e comparar. Eles não devem subst
 
 ## 11. Exceções e desvios
 
-Exceções são permitidas apenas quando tornam a rodada mais segura, mais simples ou mais fiel ao estado real do projeto. Um desvio deve ser registrado quando qualquer regra operacional não puder ser seguida.
+Exceções são permitidas apenas quando tornam a rodada mais segura, mais simples ou mais fiel ao estado real do projeto. Um desvio deve ser registrado quando qualquer regra operacional não puder ser seguida. Exceção não pode converter `BLOCK` em `PASS`, transformar vazamento em evidência cega válida nem dispensar decisão humana final.
 
 Procedimento mínimo:
 
@@ -498,7 +521,8 @@ Procedimento mínimo:
 3. registrar quem aprovou a exceção;
 4. indicar risco editorial, risco de cegueira ou risco de rastreabilidade;
 5. definir se o output ainda pode ser usado como evidência, recomendação ou apenas nota exploratória;
-6. planejar revalidação quando o desvio afetar solvabilidade, gate ou playtest.
+6. registrar o estado de gate compatível com o desvio;
+7. planejar revalidação quando o desvio afetar solvabilidade, gate ou playtest.
 
 Uma exceção não deve virar precedente automático. Para virar prática recorrente, precisa passar pelo Learning Loop ou por atualização documental explícita.
 
@@ -511,7 +535,10 @@ Uma etapa, skill, automação, schema, CLI ou orquestrador futuro só deve ser a
 - manter separação entre autoria, revisão, resolução cega e aprovação;
 - produzir benefício observável em piloto, revisão ou playtest;
 - não transformar playtest humano em etapa opcional;
+- não iniciar itens P3, providers, RAG, ML, dashboard, banco de dados ou geração massiva sem decisão futura explícita;
 - permitir rollback para o fluxo manual quando falhar;
+- usar `PASS`, `REVISE`, `BLOCK` e `INCONCLUSIVE` como estados de gate;
+- preservar outputs originais e findings rastreáveis;
 - tiver escopo próprio, revisão própria e documentação própria.
 
 Adoção futura deve ser incremental: primeiro procedimento manual claro, depois contrato conceitual, depois implementação pequena, depois piloto, e só então ampliação.
