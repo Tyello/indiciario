@@ -1,0 +1,226 @@
+schema_version: '1.0'
+session_id: S002
+case_id: case_ficticio_teste
+case_version: test-commit-abc123
+started_at: '2026-01-10T14:00:00-03:00'
+finished_at: '2026-01-10T14:45:00-03:00'
+duration_minutes: 45
+session_context:
+  mode: hybrid
+  material_format:
+  - printed
+  - desktop
+  location_type: event
+  facilitator_present: true
+  build_reference: build-test-2026-01-10
+  package_reference: pkg-test-v1
+  language: pt-BR
+  difficulty_declared: intermediario
+  notes: Materiais fictícios usados apenas para fixture.
+participants:
+- participant_id: P01
+  age_group: '18_24'
+  mystery_experience: first_time
+  relationship_to_project: external
+  notes: Preferiu ler documentos em voz alta.
+- participant_id: P02
+  age_group: '35_44'
+  mystery_experience: experienced
+  relationship_to_project: previous_playtester
+  accessibility_needs: Fonte ampliada solicitada sem detalhe médico.
+stages:
+- stage_id: STAGE01
+  label: Envelope inicial fictício
+  sequence: 1
+  opened_at: '2026-01-10T14:02:00-03:00'
+  completed_at: '2026-01-10T14:25:00-03:00'
+  completion_status: completed
+  advance_reason: Consenso do grupo sobre a próxima etapa.
+- stage_id: STAGE02
+  label: Etapa final fictícia
+  sequence: 2
+  opened_at: '2026-01-10T14:26:00-03:00'
+  completed_at: '2026-01-10T14:50:00-03:00'
+  completion_status: completed_with_hint
+  notes: A etapa foi concluída após uma dica oficial.
+- stage_id: STAGE03
+  label: Material extra não alcançado
+  sequence: 3
+  opened_at: '2026-01-10T14:55:00-03:00'
+  completion_status: not_reached
+events:
+- event_id: EV01
+  sequence: 1
+  occurred_at: '2026-01-10T14:00:00-03:00'
+  type: session_started
+  description: Sessão fictícia iniciada com leitura conjunta.
+- event_id: EV02
+  sequence: 2
+  elapsed_minutes: 12
+  type: hypothesis_proposed
+  stage_id: STAGE01
+  participants:
+  - P01
+  - P02
+  description: O grupo propôs uma hipótese sobre a ordem dos documentos.
+- event_id: EV03
+  sequence: 3
+  elapsed_minutes: 28
+  type: stalled
+  stage_id: STAGE02
+  participants:
+  - P01
+  - P02
+  description: O grupo releu os mesmos dois documentos por vários minutos sem nova
+    ação.
+- event_id: EV04
+  sequence: 4
+  elapsed_minutes: 35
+  type: hint_delivered
+  stage_id: STAGE02
+  description: O facilitador entregou uma dica oficial de nível baixo.
+- event_id: EV05
+  sequence: 5
+  elapsed_minutes: 50
+  type: final_answer_submitted
+  stage_id: STAGE02
+  participants:
+  - P01
+  - P02
+  description: O grupo apresentou uma resposta final parcial.
+outcome:
+  session_status: partial
+  final_answer_submitted: true
+  solution_correctness: partially_correct
+  completion_without_facilitator_override: true
+  ending_reached: true
+  identified_who: true
+  identified_how: false
+  identified_when: true
+  identified_why: false
+  identified_evidence_chain: partial
+  notes: Resultado registrado sem expor gabarito completo.
+ratings:
+  scale_min: 1
+  scale_max: 5
+  collected_from: mixed
+  fun: 5
+  surprise: 4
+  fairness: 4
+  clarity: 3
+  difficulty_perceived: 4
+  immersion: 5
+  willingness_to_recommend: 4
+  participant_ratings:
+  - participant_id: P01
+    fun: 5
+    surprise: 4
+    fairness: 4
+    clarity: 3
+    difficulty_perceived: 4
+    immersion: 5
+  - participant_id: P02
+    fun: 4
+    surprise: 4
+    fairness: 5
+    clarity: 4
+    difficulty_perceived: 3
+    immersion: 4
+    willingness_to_recommend: 4
+record_quality:
+  recorded_live: true
+  reconstructed_after_session: false
+  missing_information:
+  - Tempo exato de uma releitura não foi cronometrado.
+  observer_bias_risks:
+  - Facilitador também observou parte da sessão.
+  confidence: high
+  notes: Registro fictício para validar schema.
+privacy:
+  anonymized: true
+  consent_to_record_observations: true
+  consent_to_use_anonymized_quotes: true
+  contains_personal_data: false
+created_at: '2026-01-10T15:10:00-03:00'
+created_by: FAC01
+source_type: live_observation
+case_title: Caso fictício de teste neutro
+scheduled_duration_minutes: 60
+setup_duration_minutes: 10
+pause_duration_minutes: 5
+facilitator:
+  actor_id: FAC01
+  relationship_to_project: internal_team
+observers:
+- observer_id: OBS01
+  role: timekeeper
+  notes: Registrou apenas tempos e falas anonimizadas.
+hypotheses:
+- hypothesis_id: HYP01
+  proposed_at_event: EV02
+  stage_id: STAGE01
+  proposed_by:
+  - P01
+  - P02
+  summary: O grupo acreditou que dois registros fictícios apontavam para a mesma sequência
+    temporal.
+  confidence: 3
+  status: revised
+  supporting_artifacts:
+  - DOC-FICT-01
+  contradicting_artifacts:
+  - DOC-FICT-02
+- hypothesis_id: HYP02
+  proposed_at_event: EV05
+  stage_id: STAGE02
+  proposed_by:
+  - P02
+  summary: A resposta final usou parte da hipótese revisada sem registrar gabarito
+    completo.
+  status: final_answer_component
+  changed_from: HYP01
+stalls:
+- stall_id: STALL01
+  detected_at_event: EV03
+  stage_id: STAGE02
+  duration_minutes: 7
+  observed_behavior: Jogadores repetiram a leitura sem formular nova hipótese observável.
+  suspected_reason: 'Hipótese do observador: o grupo não notou uma data no material
+    fictício.'
+  resolution: resolved_by_hint
+  resolved_by_hint_id: HINT01
+hints:
+- hint_id: HINT01
+  delivered_at_event: EV04
+  stage_id: STAGE02
+  source: official_card
+  level: 1
+  content_reference: hint-card-ficticia-01
+  requested_by:
+  - P01
+  effect: resumed_progress
+positive_moments:
+- observation_id: OBSERV01
+  occurred_at_event: EV02
+  text: O grupo comemorou ao conectar dois documentos fictícios.
+  observer_id: OBS01
+  tags:
+  - engagement
+confusion_points:
+- observation_id: OBSERV02
+  occurred_at_event: EV03
+  text: Houve confusão sobre a ordem de leitura de uma pista fictícia.
+  observer_id: OBS01
+memorable_quotes:
+- observation_id: QUOTE01
+  occurred_at_event: EV04
+  text: Participante P01 disse que a dica fez voltar ao documento certo.
+  observer_id: OBS01
+facilitator_observations:
+- observation_id: FACOBS01
+  text: A intervenção foi limitada à entrega de dica oficial.
+technical_issues:
+- observation_id: TECH01
+  text: Uma impressão fictícia estava levemente desalinhada, sem impedir leitura.
+updated_at: '2026-01-10T16:00:00-03:00'
+notes: Fixture completa fictícia e neutra.

@@ -1,0 +1,516 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/playtest_session/1.0
+title: Indiciário Playtest Session
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - session_id
+  - case_id
+  - case_version
+  - started_at
+  - finished_at
+  - duration_minutes
+  - session_context
+  - participants
+  - stages
+  - events
+  - outcome
+  - ratings
+  - record_quality
+  - privacy
+  - created_at
+  - created_by
+  - source_type
+x-semantic-limitations-deferred-to-issue-08:
+  - finished_at_after_started_at
+  - event_sequence_uniqueness
+  - event_sequence_strictly_increasing
+  - event_sequence_gaplessness
+  - participant_id_uniqueness
+  - event_id_references
+  - stage_id_references
+  - participant_id_references
+  - hint_id_references
+  - duration_timestamp_consistency
+  - outcome_event_consistency
+  - temporal_transitions
+properties:
+  schema_version:
+    const: '1.0'
+  session_id:
+    $ref: '#/$defs/neutral_id'
+  case_id:
+    $ref: '#/$defs/non_empty_string'
+  case_version:
+    $ref: '#/$defs/non_empty_string'
+  case_title:
+    $ref: '#/$defs/short_text'
+  started_at:
+    $ref: '#/$defs/timestamp'
+  finished_at:
+    $ref: '#/$defs/timestamp'
+  duration_minutes:
+    $ref: '#/$defs/positive_integer'
+  scheduled_duration_minutes:
+    $ref: '#/$defs/non_negative_integer'
+  setup_duration_minutes:
+    $ref: '#/$defs/non_negative_integer'
+  pause_duration_minutes:
+    $ref: '#/$defs/non_negative_integer'
+  session_context:
+    $ref: '#/$defs/session_context'
+  participants:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/participant'
+  facilitator:
+    $ref: '#/$defs/facilitator'
+  observers:
+    type: array
+    items:
+      $ref: '#/$defs/observer'
+  stages:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/stage'
+  events:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/event'
+  hypotheses:
+    type: array
+    items:
+      $ref: '#/$defs/hypothesis'
+  stalls:
+    type: array
+    items:
+      $ref: '#/$defs/stall'
+  hints:
+    type: array
+    items:
+      $ref: '#/$defs/hint'
+  outcome:
+    $ref: '#/$defs/outcome'
+  ratings:
+    $ref: '#/$defs/ratings'
+  positive_moments:
+    type: array
+    items:
+      $ref: '#/$defs/observation'
+  confusion_points:
+    type: array
+    items:
+      $ref: '#/$defs/observation'
+  memorable_quotes:
+    type: array
+    items:
+      $ref: '#/$defs/observation'
+  facilitator_observations:
+    type: array
+    items:
+      $ref: '#/$defs/observation'
+  technical_issues:
+    type: array
+    items:
+      $ref: '#/$defs/observation'
+  record_quality:
+    $ref: '#/$defs/record_quality'
+  privacy:
+    $ref: '#/$defs/privacy'
+  created_at:
+    $ref: '#/$defs/timestamp'
+  created_by:
+    $ref: '#/$defs/neutral_id'
+  updated_at:
+    $ref: '#/$defs/timestamp'
+  source_type:
+    enum: [live_observation, facilitator_report, participant_form, reconstructed_notes, mixed]
+  notes:
+    $ref: '#/$defs/long_text'
+$defs:
+  non_empty_string:
+    type: string
+    minLength: 1
+    maxLength: 160
+  neutral_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Z0-9][A-Z0-9_-]{1,63}$'
+  short_text:
+    type: string
+    minLength: 1
+    maxLength: 240
+  long_text:
+    type: string
+    minLength: 1
+    maxLength: 4000
+  timestamp:
+    type: string
+    format: date-time
+  positive_integer:
+    type: integer
+    minimum: 1
+  non_negative_integer:
+    type: integer
+    minimum: 0
+  rating_value:
+    type: integer
+    minimum: 1
+    maximum: 5
+  artifact_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/non_empty_string'
+  participant_ids:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  session_context:
+    type: object
+    additionalProperties: false
+    required: [mode, material_format, location_type, facilitator_present]
+    properties:
+      mode:
+        enum: [in_person, remote, hybrid]
+      material_format:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          enum: [printed, mobile, tablet, desktop]
+      location_type:
+        enum: [home, office, event, school, other]
+      facilitator_present:
+        type: boolean
+      build_reference:
+        $ref: '#/$defs/non_empty_string'
+      package_reference:
+        $ref: '#/$defs/non_empty_string'
+      language:
+        $ref: '#/$defs/non_empty_string'
+      difficulty_declared:
+        enum: [iniciante, intermediario, avancado, custom, not_declared]
+      notes:
+        $ref: '#/$defs/long_text'
+  participant:
+    type: object
+    additionalProperties: false
+    required: [participant_id, age_group, mystery_experience, relationship_to_project]
+    properties:
+      participant_id:
+        $ref: '#/$defs/neutral_id'
+      age_group:
+        enum: [under_13, '13_17', '18_24', '25_34', '35_44', '45_54', '55_64', 65_plus, not_informed]
+      mystery_experience:
+        enum: [first_time, occasional, experienced, expert, not_informed]
+      relationship_to_project:
+        enum: [external, friend_or_family, internal_team, author, previous_playtester, not_informed]
+      accessibility_needs:
+        $ref: '#/$defs/long_text'
+      notes:
+        $ref: '#/$defs/long_text'
+  facilitator:
+    type: object
+    additionalProperties: false
+    required: [actor_id, relationship_to_project]
+    properties:
+      actor_id:
+        $ref: '#/$defs/neutral_id'
+      relationship_to_project:
+        enum: [external, friend_or_family, internal_team, author, previous_playtester, not_informed]
+      notes:
+        $ref: '#/$defs/long_text'
+  observer:
+    type: object
+    additionalProperties: false
+    required: [observer_id, role]
+    properties:
+      observer_id:
+        $ref: '#/$defs/neutral_id'
+      role:
+        $ref: '#/$defs/non_empty_string'
+      notes:
+        $ref: '#/$defs/long_text'
+  stage:
+    type: object
+    additionalProperties: false
+    anyOf:
+      - required: [opened_at]
+      - required: [started_at]
+    required: [stage_id, label, sequence, completion_status]
+    properties:
+      stage_id:
+        $ref: '#/$defs/neutral_id'
+      label:
+        $ref: '#/$defs/short_text'
+      sequence:
+        $ref: '#/$defs/positive_integer'
+      opened_at:
+        $ref: '#/$defs/timestamp'
+      started_at:
+        $ref: '#/$defs/timestamp'
+      completed_at:
+        $ref: '#/$defs/timestamp'
+      completion_status:
+        enum: [completed, completed_with_hint, stopped, skipped, not_reached]
+      advance_reason:
+        $ref: '#/$defs/long_text'
+      notes:
+        $ref: '#/$defs/long_text'
+  event:
+    type: object
+    additionalProperties: false
+    anyOf:
+      - required: [occurred_at]
+      - required: [elapsed_minutes]
+    required: [event_id, sequence, type, description]
+    properties:
+      event_id:
+        $ref: '#/$defs/neutral_id'
+      sequence:
+        $ref: '#/$defs/positive_integer'
+      occurred_at:
+        $ref: '#/$defs/timestamp'
+      elapsed_minutes:
+        $ref: '#/$defs/non_negative_integer'
+      type:
+        enum: [session_started, stage_opened, document_opened, clue_noticed, hypothesis_proposed, hypothesis_changed, contradiction_found, group_disagreement, group_consensus, stalled, hint_requested, hint_delivered, stage_completed, final_answer_submitted, session_stopped, session_completed, technical_issue, other]
+      stage_id:
+        $ref: '#/$defs/neutral_id'
+      participants:
+        $ref: '#/$defs/participant_ids'
+      description:
+        $ref: '#/$defs/long_text'
+      observer_notes:
+        $ref: '#/$defs/long_text'
+  hypothesis:
+    type: object
+    additionalProperties: false
+    required: [hypothesis_id, proposed_at_event, stage_id, proposed_by, summary, status]
+    properties:
+      hypothesis_id:
+        $ref: '#/$defs/neutral_id'
+      proposed_at_event:
+        $ref: '#/$defs/neutral_id'
+      stage_id:
+        $ref: '#/$defs/neutral_id'
+      proposed_by:
+        $ref: '#/$defs/participant_ids'
+      summary:
+        $ref: '#/$defs/long_text'
+      confidence:
+        $ref: '#/$defs/rating_value'
+      status:
+        enum: [active, revised, abandoned, confirmed_by_group, rejected_by_group, final_answer_component]
+      supporting_artifacts:
+        $ref: '#/$defs/artifact_ids'
+      contradicting_artifacts:
+        $ref: '#/$defs/artifact_ids'
+      changed_from:
+        $ref: '#/$defs/neutral_id'
+      notes:
+        $ref: '#/$defs/long_text'
+  stall:
+    type: object
+    additionalProperties: false
+    required: [stall_id, detected_at_event, stage_id, observed_behavior, resolution]
+    properties:
+      stall_id:
+        $ref: '#/$defs/neutral_id'
+      detected_at_event:
+        $ref: '#/$defs/neutral_id'
+      stage_id:
+        $ref: '#/$defs/neutral_id'
+      duration_minutes:
+        $ref: '#/$defs/non_negative_integer'
+      observed_behavior:
+        $ref: '#/$defs/long_text'
+      suspected_reason:
+        $ref: '#/$defs/long_text'
+      resolution:
+        enum: [self_resolved, resolved_by_discussion, resolved_by_rereading, resolved_by_hint, facilitator_intervention, unresolved, session_stopped, other]
+      resolved_by_hint_id:
+        $ref: '#/$defs/neutral_id'
+      notes:
+        $ref: '#/$defs/long_text'
+  hint:
+    type: object
+    additionalProperties: false
+    allOf:
+      - anyOf:
+          - required: [requested_at_event]
+          - required: [delivered_at_event]
+      - anyOf:
+          - required: [content_reference]
+          - required: [summary]
+    required: [hint_id, stage_id, source, effect]
+    properties:
+      hint_id:
+        $ref: '#/$defs/neutral_id'
+      requested_at_event:
+        $ref: '#/$defs/neutral_id'
+      delivered_at_event:
+        $ref: '#/$defs/neutral_id'
+      stage_id:
+        $ref: '#/$defs/neutral_id'
+      source:
+        enum: [official_card, facilitator, player_request, technical_support, other]
+      level:
+        $ref: '#/$defs/non_negative_integer'
+      content_reference:
+        $ref: '#/$defs/non_empty_string'
+      summary:
+        $ref: '#/$defs/long_text'
+      requested_by:
+        $ref: '#/$defs/participant_ids'
+      effect:
+        enum: [no_effect, resumed_progress, solved_local_block, exposed_too_much, caused_confusion, not_observed, other]
+      notes:
+        $ref: '#/$defs/long_text'
+  outcome:
+    type: object
+    additionalProperties: false
+    required: [session_status, final_answer_submitted, solution_correctness, completion_without_facilitator_override, ending_reached]
+    properties:
+      session_status:
+        enum: [completed, stopped_by_players, stopped_by_facilitator, interrupted_external, technical_failure, partial, other]
+      final_answer_submitted:
+        type: boolean
+      solution_correctness:
+        enum: [correct, partially_correct, incorrect, not_submitted, not_applicable]
+      completion_without_facilitator_override:
+        type: boolean
+      ending_reached:
+        type: boolean
+      identified_who:
+        type: boolean
+      identified_how:
+        type: boolean
+      identified_when:
+        type: boolean
+      identified_why:
+        type: boolean
+      identified_evidence_chain:
+        enum: [complete, partial, absent, not_applicable]
+      facilitator_override_reason:
+        $ref: '#/$defs/long_text'
+      notes:
+        $ref: '#/$defs/long_text'
+  ratings:
+    type: object
+    additionalProperties: false
+    required: [scale_min, scale_max, collected_from, fun, surprise, fairness, clarity, difficulty_perceived, immersion]
+    properties:
+      scale_min:
+        const: 1
+      scale_max:
+        const: 5
+      collected_from:
+        enum: [individual, group_consensus, facilitator_estimate, mixed, not_collected]
+      fun:
+        $ref: '#/$defs/rating_value'
+      surprise:
+        $ref: '#/$defs/rating_value'
+      fairness:
+        $ref: '#/$defs/rating_value'
+      clarity:
+        $ref: '#/$defs/rating_value'
+      difficulty_perceived:
+        $ref: '#/$defs/rating_value'
+      immersion:
+        $ref: '#/$defs/rating_value'
+      willingness_to_recommend:
+        $ref: '#/$defs/rating_value'
+      participant_ratings:
+        type: array
+        items:
+          $ref: '#/$defs/participant_rating'
+      notes:
+        $ref: '#/$defs/long_text'
+  participant_rating:
+    type: object
+    additionalProperties: false
+    required: [participant_id, fun, surprise, fairness, clarity, difficulty_perceived, immersion]
+    properties:
+      participant_id:
+        $ref: '#/$defs/neutral_id'
+      fun:
+        $ref: '#/$defs/rating_value'
+      surprise:
+        $ref: '#/$defs/rating_value'
+      fairness:
+        $ref: '#/$defs/rating_value'
+      clarity:
+        $ref: '#/$defs/rating_value'
+      difficulty_perceived:
+        $ref: '#/$defs/rating_value'
+      immersion:
+        $ref: '#/$defs/rating_value'
+      willingness_to_recommend:
+        $ref: '#/$defs/rating_value'
+      notes:
+        $ref: '#/$defs/long_text'
+  observation:
+    type: object
+    additionalProperties: false
+    required: [observation_id, text]
+    properties:
+      observation_id:
+        $ref: '#/$defs/neutral_id'
+      occurred_at_event:
+        $ref: '#/$defs/neutral_id'
+      text:
+        $ref: '#/$defs/long_text'
+      observer_id:
+        $ref: '#/$defs/neutral_id'
+      tags:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/non_empty_string'
+  record_quality:
+    type: object
+    additionalProperties: false
+    required: [recorded_live, reconstructed_after_session, missing_information, observer_bias_risks, confidence]
+    properties:
+      recorded_live:
+        type: boolean
+      reconstructed_after_session:
+        type: boolean
+      reconstruction_delay_minutes:
+        $ref: '#/$defs/non_negative_integer'
+      missing_information:
+        type: array
+        items:
+          $ref: '#/$defs/long_text'
+      observer_bias_risks:
+        type: array
+        items:
+          $ref: '#/$defs/long_text'
+      confidence:
+        enum: [high, medium, low]
+      notes:
+        $ref: '#/$defs/long_text'
+  privacy:
+    type: object
+    additionalProperties: false
+    required: [anonymized, consent_to_record_observations, consent_to_use_anonymized_quotes, contains_personal_data]
+    properties:
+      anonymized:
+        type: boolean
+      consent_to_record_observations:
+        type: boolean
+      consent_to_use_anonymized_quotes:
+        type: boolean
+      contains_personal_data:
+        type: boolean
+      notes:
+        $ref: '#/$defs/long_text'
