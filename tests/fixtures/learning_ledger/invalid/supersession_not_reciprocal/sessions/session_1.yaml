@@ -1,0 +1,137 @@
+schema_version: '1.0'
+session_id: SESSION_001
+case_id: CASE_MIRANTE
+case_version: CASE_VERSION_001
+started_at: '2026-06-11T10:00:00Z'
+finished_at: '2026-06-11T11:00:00Z'
+duration_minutes: 60
+session_context:
+  mode: in_person
+  material_format:
+  - printed
+  location_type: home
+  facilitator_present: true
+participants:
+- participant_id: P01
+  age_group: '18_24'
+  mystery_experience: first_time
+  relationship_to_project: external
+- participant_id: P02
+  age_group: '25_34'
+  mystery_experience: experienced
+  relationship_to_project: external
+stages:
+- stage_id: STAGE_01
+  label: Envelope inicial
+  sequence: 1
+  opened_at: '2026-06-11T10:01:00Z'
+  completed_at: '2026-06-11T10:30:00Z'
+  completion_status: completed
+- stage_id: STAGE_02
+  label: Envelope final
+  sequence: 2
+  opened_at: '2026-06-11T10:31:00Z'
+  completed_at: '2026-06-11T10:55:00Z'
+  completion_status: completed_with_hint
+events:
+- event_id: EVENT_01
+  sequence: 1
+  occurred_at: '2026-06-11T10:05:00Z'
+  type: session_started
+  stage_id: STAGE_01
+  participants:
+  - P01
+  - P02
+  description: Grupo iniciou leitura.
+- event_id: EVENT_02
+  sequence: 2
+  elapsed_minutes: 20
+  type: hypothesis_proposed
+  stage_id: STAGE_01
+  participants:
+  - P01
+  description: Hipótese inicial.
+- event_id: EVENT_03
+  sequence: 3
+  elapsed_minutes: 35
+  type: stalled
+  stage_id: STAGE_02
+  participants:
+  - P02
+  description: Travamento observado.
+- event_id: EVENT_04
+  sequence: 4
+  elapsed_minutes: 40
+  type: hint_delivered
+  stage_id: STAGE_02
+  participants:
+  - P01
+  - P02
+  description: Dica entregue.
+hypotheses:
+- hypothesis_id: HYP_01
+  proposed_at_event: EVENT_02
+  stage_id: STAGE_01
+  proposed_by:
+  - P01
+  summary: Hipótese textual neutra.
+  status: active
+stalls:
+- stall_id: STALL_01
+  detected_at_event: EVENT_03
+  stage_id: STAGE_02
+  observed_behavior: Releitura sem avanço.
+  resolution: resolved_by_hint
+  resolved_by_hint_id: HINT_01
+hints:
+- hint_id: HINT_01
+  delivered_at_event: EVENT_04
+  stage_id: STAGE_02
+  source: official_card
+  effect: resumed_progress
+  requested_by:
+  - P01
+outcome:
+  session_status: completed
+  final_answer_submitted: true
+  solution_correctness: correct
+  completion_without_facilitator_override: true
+  ending_reached: true
+  identified_who: true
+  identified_how: true
+  identified_when: true
+  identified_why: true
+  identified_evidence_chain: complete
+ratings:
+  scale_min: 1
+  scale_max: 5
+  collected_from: mixed
+  fun: 4
+  surprise: 4
+  fairness: 4
+  clarity: 4
+  difficulty_perceived: 3
+  immersion: 4
+  willingness_to_recommend: 4
+  participant_ratings:
+  - participant_id: P01
+    fun: 4
+  - participant_id: P02
+    fun: 5
+positive_moments:
+- observation_id: OBS_01
+  occurred_at_event: EVENT_02
+  text: Momento positivo.
+record_quality:
+  recorded_live: true
+  reconstructed_after_session: false
+  confidence: high
+privacy:
+  anonymized: true
+  consent_to_record_observations: true
+  consent_to_use_anonymized_quotes: true
+  contains_personal_data: false
+created_at: '2026-06-11T09:50:00Z'
+created_by: AUTHOR_01
+updated_at: '2026-06-11T11:10:00Z'
+source_type: live_observation

@@ -1,0 +1,69 @@
+schema_version: '1.0'
+finding_id: FINDING_001
+case_id: CASE_MIRANTE
+case_version: CASE_VERSION_001
+source_session_ids:
+- SESSION_001
+observation:
+  summary: Grupo travou em transição.
+  observed_at_stage: STAGE_02
+  observed_at_event_ids:
+  - EVENT_03
+  observed_by:
+  - OBS_01
+  frequency:
+    occurrences: 1
+    sessions_observed: 1
+evidence:
+- evidence_id: EVIDENCE_001
+  type: event_reference
+  description: Evento de travamento registrado.
+  source_session_id: SESSION_999
+  event_id: EVENT_03
+  stage_id: STAGE_02
+  participant_ids:
+  - P02
+  strength: moderate
+causal_hypothesis:
+  statement: A transição pode ter ficado ambígua.
+  confidence: medium
+  needs_more_evidence: true
+category: progression
+severity: medium
+finding_scope:
+  level: stage
+  stage_ids:
+  - STAGE_02
+impact:
+  player_effects:
+  - Pausa perceptível.
+  case_effects: []
+  affected_participant_count: 1
+  affected_session_count: 1
+  blocks_progression: false
+  compromises_fairness: false
+  compromises_solvability: false
+  compromises_immersion: true
+  technical_only: false
+rollback:
+  required: true
+  target: envelope_planning
+  reason: Ajustar transição.
+status: RESOLVED
+resolution:
+  resolved_by: AUTHOR_01
+  resolved_at: '2026-06-12T10:00:00Z'
+  corrected_artifact_version_ids:
+  - ARTIFACT_VERSION_002
+  validation_evidence:
+  - Revisão confirmou correção.
+  validation_result: confirmed
+gate_effect:
+  blocks_gate: false
+  suggested_gate_state: REVISE
+  reason: Revisão localizada.
+generalization_status: decided
+created_at: '2026-06-11T12:00:00Z'
+created_by: AUTHOR_01
+updated_at: '2026-06-12T10:30:00Z'
+learning_decision_id: DECISION_001
