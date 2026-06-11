@@ -11,6 +11,7 @@ O sistema visual centraliza tokens, classes e padrões mínimos para documentos 
 - **Dossiê físico crível:** documentos devem parecer artefatos burocráticos, administrativos, comerciais, financeiros, operacionais ou pessoais plausíveis.
 - **Evidência bruta:** documento de jogador mostra fatos do mundo da história; interpretação, dica e gabarito ficam fora.
 - **P&B first:** todo sentido visual deve sobreviver em impressão preto e branco.
+- **Redundância probatória:** pista visual crítica pode reforçar uma conclusão, mas não deve ser o único caminho para uma conclusão essencial; use `docs/SIGNATURES_AND_HANDWRITING.md` para regras de assinaturas, grafismos e confirmação não visual.
 - **Offline first:** usar apenas CSS, SVG inline e fontes de sistema; sem CDN, imagem externa, fonte binária ou API.
 - **Sistêmico antes de pontual:** preferir tokens, renderers e classes reutilizáveis a ajustes específicos de caso.
 - **Separação física:** documentos de jogador, material do facilitador, dicas e printables devem continuar distinguíveis no pacote.

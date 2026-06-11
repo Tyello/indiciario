@@ -93,14 +93,28 @@ Os códigos abaixo são diretrizes conceituais para evolução futura do Case Re
 - `CR_NARR_006` — objeto associado prova presença sem confirmação independente.
 - `CR_NARR_007` — registro de sistema usado como prova humana direta sem ressalva.
 - `CR_NARR_008` — E2 precisa desfazer convicção errada em vez de recontextualizar descoberta parcial.
+- `CR_NARR_009` — autoria demonstrada, mas motivo não inferível pelos jogadores.
+- `CR_NARR_010` — falso suspeito descartado por ponto temporal que não cobre toda a janela crítica.
+- `CR_NARR_011` — pilares aparentemente independentes derivam da mesma fonte.
+- `CR_NARR_012` — conclusão essencial depende exclusivamente de pista visual.
+- `CR_NARR_013` — responsável possui oportunidade, mas acesso à informação necessária não está documentado.
+- `CR_NARR_014` — ferramenta investigativa não corresponde à operação mental esperada.
+- `CR_NARR_015` — solução fecha autoria e mecanismo, mas deixa a revelação narrativamente incompleta.
+
+Esses itens `CR_NARR_*` são diretrizes de revisão humana e evolução futura, não findings implementados automaticamente. Não trate sua presença nesta documentação como promessa de saída atual do `scripts.case_review`.
 
 Ao revisar manualmente um relatório, trate esses riscos como perguntas editoriais:
 
 - a ausência fica visível sem ser explicada em documento de jogador?
 - cada envelope entrega ferramenta investigativa prática, não só intenção autoral?
-- motivo, oportunidade e mecanismo aparecem como três camadas distintas da solução?
+- motivo, oportunidade e mecanismo aparecem como camadas distintas da solução, junto da autoria?
+- o motivo é inferível por âncora documental natural, e não apenas pelo gabarito?
+- falsos suspeitos descartados por tempo/local estão cobertos por intervalo sustentado?
+- os pilares de evidência vêm de fontes realmente independentes?
 - ações baseadas em confiança, autoridade ou hábito têm âncora documental anterior à revelação?
 - evidências diretas, indiretas/por objeto e sistêmicas estão separadas no plano?
+- acesso físico, operacional, informacional e oportunidade temporal estão diferenciados?
+- alguma conclusão essencial depende só de assinatura, cor ou detalhe visual?
 
 Exemplo de risco narrativo: a solução diz que Marta atraiu Helena para a sala de memória, mas nenhum documento mostra como Helena recebeu esse chamado ou por que responderia a ele. Nesse caso, o problema não é apenas falta de motivo; é mecanismo causal sem âncora documental.
 

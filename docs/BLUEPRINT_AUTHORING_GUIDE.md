@@ -281,9 +281,16 @@ Esta orientação não altera schema e não torna novos campos obrigatórios nes
 - ferramenta investigativa por envelope;
 - mecanismo causal da solução;
 - relações necessárias entre personagens;
-- distinção entre evidência direta, indireta e sistêmica.
+- distinção entre evidência direta, indireta e sistêmica;
+- fechamento da solução em quem, como, quando e por quê;
+- pilares independentes de cada conclusão principal;
+- separação entre acesso físico, acesso operacional, acesso à informação e oportunidade temporal;
+- janela temporal de descarte de falsos suspeitos;
+- redundância não visual para pista visual essencial.
 
-Use `docs/DIRETRIZES_EDITORIAIS.md` como fonte da verdade para pistas por ausência, peso probatório, causalidade documentada e relação prévia. A classificação pode ficar em metadados internos; documento de jogador continua mostrando evidência bruta.
+Use campos existentes como `contratos_evidencia`, `guia_operacional`, `objetivos_por_envelope`, `red_herrings` e `observacoes_producao` para registrar essas decisões sem criar campos obrigatórios novos.
+
+Use `docs/DIRETRIZES_EDITORIAIS.md` como fonte da verdade para pistas por ausência, peso probatório, causalidade documentada, relação prévia, triangulação de evidências, motivo inferível, álibi como intervalo e camadas de acesso. A classificação pode ficar em metadados internos; documento de jogador continua mostrando evidência bruta.
 
 Quando uma conclusão depender de ausência, presença, álibi ou deslocamento, não basta listar documentos. O blueprint deve mostrar onde o jogador perceberá a lacuna: folha de cruzamento, quadro de presença, linha do tempo incompleta, matriz de testemunhos, registro comparativo neutro, checklist em branco ou tabela de observações por categoria.
 
@@ -294,18 +301,26 @@ Antes de gerar PDF, confirme:
 1. Existe pergunta pública com solicitante, motivo, impacto e justificativa do dossiê?
 2. Cada envelope tem pergunta diegética, resposta esperada, critério de avanço e forma diegética de avanço?
 3. Cada envelope oferece ferramenta investigativa prática para chegar à conclusão esperada?
-4. O E1 gera hipótese parcial, tensão ou recontextualização inicial sem pedir solução final?
-5. O E2 recontextualiza algo do E1 e não apenas confirma?
-6. Ausências relevantes ficam visíveis sem serem explicadas ao jogador?
-7. Evidências diretas, indiretas e sistêmicas estão separadas em metadados/editorial?
-8. A solução tem mecanismo causal ancorado em documentos?
-9. Relações necessárias de confiança, autoridade ou hábito têm âncora documental?
-10. Toda motivação histórica tem consequência atual concreta?
-11. Recados posteriores trazem informação nova para quem os recebe?
-12. Cada dica contextual tem condição de uso, intensidade, ação mental esperada e desbloqueio?
-13. O guia do facilitador explica progressão, linhas do tempo, red herrings, motivação e síntese da solução?
-14. Documentos de jogador mostram evidência bruta sem voz do autor?
-15. O caso pode ser conduzido por um facilitador que não participou da escrita?
+4. A ferramenta por envelope representa o raciocínio esperado, e não apenas um layout bonito?
+5. A solução fecha quem, como, quando e por quê?
+6. O motivo é inferível nos documentos, não apenas no gabarito?
+7. Os pilares principais são independentes quanto a fonte, pessoa, sistema ou natureza probatória?
+8. Nenhum documento único resolve autoria e mecanismo sozinho quando o caso exige cruzamento?
+9. Falsos suspeitos têm janela temporal realmente fechada e descarte não baseado só na própria palavra?
+10. Acesso físico, operacional e informacional estão diferenciados da oportunidade temporal?
+11. Pistas visuais essenciais têm redundância não visual e sobrevivem a P&B?
+12. O E1 gera hipótese parcial, tensão ou recontextualização inicial sem pedir solução final?
+13. O E2 recontextualiza algo do E1 e não apenas confirma?
+14. Ausências relevantes ficam visíveis sem serem explicadas ao jogador?
+15. Evidências diretas, indiretas e sistêmicas estão separadas em metadados/editorial?
+16. A solução tem mecanismo causal ancorado em documentos?
+17. Relações necessárias de confiança, autoridade ou hábito têm âncora documental?
+18. Toda motivação histórica tem consequência atual concreta?
+19. Recados posteriores trazem informação nova para quem os recebe?
+20. Cada dica contextual tem condição de uso, intensidade, ação mental esperada e desbloqueio?
+21. O guia do facilitador explica progressão, linhas do tempo, red herrings, motivação e síntese da solução?
+22. Documentos de jogador mostram evidência bruta sem voz do autor?
+23. O caso pode ser conduzido por um facilitador que não participou da escrita?
 
 Se qualquer item falhar, corrija o plano antes de ajustar templates, renderer ou validator.
 
