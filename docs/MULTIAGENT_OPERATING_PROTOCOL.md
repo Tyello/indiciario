@@ -75,7 +75,7 @@ Neste documento:
 - Outputs originais são preservados como referência de revisão.
 - Correções geram nova versão, novo patch ou novo artefato derivado, conforme o fluxo manual definido para a rodada.
 - Findings devem ser rastreáveis até o artefato e a etapa onde foram observados.
-- Uma aprovação não apaga findings anteriores: ela apenas registra que eles foram aceitos como resolvidos, mitigados, não aplicáveis ou conscientemente adiados.
+- Uma aprovação não apaga findings anteriores: ela apenas registra a classificação conceitual aplicada, como `ACCEPTED`, `REJECTED`, `DEFERRED`, `NOT_APPLICABLE` ou `RESOLVED`, com justificativa e evidência quando exigidas.
 
 ### Playtest humano soberano
 
@@ -220,15 +220,27 @@ O operador humano deve:
 - registrar exceções, desvios, limitações e riscos residuais;
 - manter o fluxo alinhado ao pipeline oficial e às prioridades atuais do projeto.
 
-O operador humano pode delegar execução e análise, mas não deve delegar a responsabilidade final de governança editorial da rodada.
+O operador humano pode delegar execução e análise, mas não deve delegar a responsabilidade final de governança editorial da rodada. Operador humano é uma função de governança e pode ser exercida por pessoas diferentes em etapas diferentes, desde que responsabilidades e decisões permaneçam rastreáveis.
 
 O operador humano não deve:
 
 - aprovar sozinho um artefato quando também atuou como autor principal;
+- editar silenciosamente output original;
+- apagar finding sem justificativa;
+- promover finding isolado a regra global;
+- liberar solução ou contexto privado para agente cego;
+- permitir autocertificação;
 - reclassificar uma rodada contaminada como revisão cega válida;
+- reclassificar `BLOCK` como `PASS` sem nova evidência ou nova execução;
 - transformar recomendação de agente em decisão editorial automática;
 - ocultar findings críticos para permitir avanço;
+- ocultar falha operacional para preservar `PASS`;
+- tratar consenso de agentes como prova definitiva;
+- tratar múltiplos agentes, personas ou execuções do mesmo modelo como amostra estatística independente;
 - usar exceção de processo para contornar playtest humano, baseline visual real ou revisão obrigatória;
+- usar exceção para eliminar playtest humano;
+- alterar retroativamente o contexto recebido por um agente;
+- reutilizar rodada contaminada como evidência cega válida;
 - iniciar adoção técnica futura sem escopo próprio e evidência mínima de benefício.
 
 ### Ciclo autor–revisor
@@ -236,33 +248,51 @@ O operador humano não deve:
 O ciclo mínimo recomendado para qualquer artefato novo ou corrigido é:
 
 ```text
-Autor produz versão
-→ output é congelado para revisão
-→ Revisor registra findings sem editar o artefato
-→ Operador humano decide gate
-→ Autor cria nova versão quando houver retorno
-→ revisão é repetida somente no escopo necessário
+Autor produz artefato
+→ artefato é congelado
+→ revisor registra findings
+→ findings são classificados
+→ autor recebe findings ACCEPTED
+→ autor cria nova versão
+→ revisão verifica a correção
+→ finding vira RESOLVED ou retorna ao estado adequado
 ```
 
 Regras do ciclo:
 
 - o autor deve responder a findings por nova versão, nota de mitigação ou justificativa de não alteração;
 - o revisor deve apontar problema, evidência e impacto, evitando reescrever silenciosamente o material;
-- o operador humano deve separar findings críticos, recomendações e preferências editoriais;
+- o operador humano deve separar estado conceitual, severidade, impacto no gate, recomendações e preferências editoriais;
 - uma nova versão não apaga o output revisado anteriormente;
 - ciclos sucessivos devem buscar a menor correção coerente, não expansão automática de escopo.
 
-Estados manuais de finding no ciclo autor–revisor:
+Estados conceituais de finding no ciclo autor–revisor:
 
-- **aberto**: finding registrado e ainda sem resposta do autor;
-- **em correção**: autor aceitou o finding e está produzindo nova versão;
-- **resolvido**: nova versão removeu o problema e o revisor ou operador confirmou;
-- **mitigado**: risco permanece, mas foi reduzido e aceito conscientemente no gate;
-- **não aplicável**: revisão concluiu que o finding não se aplica ao escopo ou artefato;
-- **adiado**: finding real foi postergado com responsável, motivo e etapa futura de revalidação;
-- **bloqueador**: finding impede `PASS` enquanto não houver correção ou rollback.
+- **ACCEPTED**: o finding foi considerado válido e deve orientar correção, mitigação, rollback ou bloqueio do gate. Deve registrar responsável, impacto, ação esperada e se bloqueia o gate.
+- **REJECTED**: o finding foi rejeitado. Deve registrar justificativa, responsável, evidência considerada e risco associado à rejeição. O finding não deve ser apagado.
+- **DEFERRED**: o finding é válido, mas foi adiado. Deve registrar motivo, risco residual, responsável, momento ou condição de reavaliação e se bloqueia ou não o gate atual.
+- **NOT_APPLICABLE**: o finding não se aplica ao artefato, etapa ou contexto. Deve registrar justificativa.
+- **RESOLVED**: existe nova evidência de que o problema foi corrigido ou mitigado. Deve apontar finding original, versão ou artefato corrigido, forma de revalidação e resultado da nova revisão.
 
-Esses estados são vocabulário operacional manual, não schema executável. Finding bloqueador deve levar o gate a `REVISE` ou `BLOCK`, conforme severidade e etapa de origem.
+Regras obrigatórias para findings:
+
+- finding `REJECTED` deve manter justificativa;
+- finding `DEFERRED` deve registrar risco residual;
+- nova versão deve indicar quais findings `ACCEPTED` pretende resolver;
+- finding não deve virar `RESOLVED` apenas porque houve alteração;
+- autor não deve reclassificar sozinho um finding;
+- revisor não deve apagar finding;
+- intenção do autor não deve substituir evidência disponível ao jogador;
+- operador humano decide a classificação final quando houver conflito.
+
+Separação entre estado, severidade e condição operacional:
+
+- “bloqueador” é severidade ou impacto no gate, não estado de finding;
+- “em correção” pode ser condição operacional interna, não estado canônico;
+- “aberto” pode ser condição temporária antes da classificação, não estado final;
+- “mitigado” pode ser resultado registrado dentro de `RESOLVED` ou risco residual associado a `PASS`, não estado canônico independente.
+
+Esses estados são vocabulário operacional manual, não schema executável. Finding com impacto bloqueador deve levar o gate a `REVISE` ou `BLOCK`, conforme severidade e etapa de origem.
 
 ## 5. Pipeline operacional
 
@@ -292,19 +322,49 @@ Brief
 
 Cada etapa manual-first deve ser tratada como uma unidade operacional pequena o suficiente para revisão independente. Antes de iniciar, o operador humano deve conseguir declarar:
 
+- nome;
 - objetivo da etapa;
+- papel autor ou executor;
+- papéis revisores;
 - entradas autorizadas;
-- materiais privados proibidos para papéis cegos;
+- entradas proibidas, incluindo materiais privados proibidos para papéis cegos;
 - visibilidade da rodada: pública, privada, cega ou híbrida;
-- papel executor;
-- papel revisor, avaliador ou gate esperado;
-- saída esperada;
+- saídas esperadas;
 - formato livre esperado da saída, quando necessário, sem impor schema executável;
+- responsável pelo gate;
+- estados possíveis do gate: `PASS`, `REVISE`, `BLOCK` ou `INCONCLUSIVE`;
 - critérios de avanço;
-- critérios de retorno e etapa provável de rollback;
-- restrições de cegueira, se houver;
-- estado de gate esperado ao final: `PASS`, `REVISE`, `BLOCK` ou `INCONCLUSIVE`;
-- riscos conhecidos e decisão humana necessária.
+- critérios de retorno e alvos de rollback;
+- operador humano responsável;
+- riscos conhecidos;
+- modo de cegueira, se houver;
+- evidência necessária para encerramento.
+
+Exemplo conceitual:
+
+```yaml
+stage:
+  name: ""
+  objective: ""
+  author_role: ""
+  reviewer_roles: []
+  allowed_inputs: []
+  forbidden_inputs: []
+  expected_outputs: []
+  gate_owner: ""
+  possible_gate_states:
+    - PASS
+    - REVISE
+    - BLOCK
+    - INCONCLUSIVE
+  rollback_targets: []
+  human_operator: ""
+  known_risks: []
+  blindness_mode: blind | non_blind | hybrid
+  closure_evidence: []
+```
+
+Este bloco é um modelo operacional não executável. Definição formal de campos, obrigatoriedade, validação e schemas pertence à ISSUE-03.
 
 Ao encerrar, a etapa deve produzir uma decisão explícita, mesmo que seja `INCONCLUSIVE`. Uma etapa não deve misturar, na mesma execução sem registro, criação de conteúdo, revisão crítica, resolução cega e aprovação de gate. Se isso acontecer por necessidade operacional, a rodada deve ser marcada como desvio e não deve ser usada como evidência cega.
 
@@ -364,7 +424,7 @@ Retorna quando o Kernel revela lacunas que pertencem a arquitetura, envelope ou 
 
 ### 5.10 Case Review
 
-Aplica revisão estruturada sobre solvabilidade, progressão, clareza, dicas, documentos e riscos. Avança quando findings críticos foram resolvidos, aceitos conscientemente ou encaminhados para teste humano.
+Aplica revisão estruturada sobre solvabilidade, progressão, clareza, dicas, documentos e riscos. Avança quando findings críticos foram classificados como `RESOLVED` ou quando riscos residuais de findings `DEFERRED` foram aceitos conscientemente para teste humano.
 
 Retorna quando há quebra de dedução, vazamento de gabarito em documento de jogador, dica que substitui investigação ou contradição não mitigada.
 
@@ -418,7 +478,7 @@ Um gate é avaliado quando há evidência suficiente para decidir se a etapa cum
 
 Todo gate deve terminar em um dos quatro estados canônicos do PRD:
 
-- **PASS**: a etapa pode avançar; findings críticos estão resolvidos, mitigados ou aceitos conscientemente, e o avanço não depende de inferência inexistente nem de vazamento;
+- **PASS**: a etapa pode avançar; findings críticos estão `RESOLVED` ou possuem risco residual conscientemente registrado, e o avanço não depende de inferência inexistente nem de vazamento;
 - **REVISE**: há problema corrigível na etapa atual ou em etapa anterior; o gate deve indicar finding, responsável e etapa de rollback;
 - **BLOCK**: há falha que impede avanço justo, compromete a integridade do mistério ou torna inválida a evidência produzida;
 - **INCONCLUSIVE**: a execução não permite decisão confiável; requer nova rodada, contexto corrigido, revisor adequado, solver novo ou evidência adicional.
@@ -429,7 +489,7 @@ Critérios mínimos para avançar:
 
 - a saída da etapa existe e está preservada;
 - o papel executor e o papel avaliador estão identificados;
-- findings críticos foram resolvidos, mitigados ou aceitos conscientemente;
+- findings críticos foram classificados e não há finding com impacto bloqueador sem decisão;
 - não houve vazamento de solução para agente cego;
 - documentos de jogador preservam evidência bruta e não voz do autor;
 - o fluxo continua offline-first e jogável sem app, internet ou QR code obrigatório;
@@ -543,6 +603,22 @@ Uma etapa, skill, automação, schema, CLI ou orquestrador futuro só deve ser a
 
 Adoção futura deve ser incremental: primeiro procedimento manual claro, depois contrato conceitual, depois implementação pequena, depois piloto, e só então ampliação.
 
+O protocolo só poderá se tornar obrigatório para novos casos quando houver evidência de que:
+
+- o Context Firewall foi implementado e validado;
+- o Blind Solver foi executado em piloto controlado;
+- o Gate Evaluator foi validado com separação real de responsabilidades;
+- o Learning Loop está funcional;
+- findings e outputs são rastreáveis;
+- custo humano por etapa foi medido;
+- o processo não bloqueia nem degrada o pipeline atual;
+- houve ganho real de qualidade, justiça, redução de retrabalho ou rastreabilidade;
+- o fluxo foi testado em mais de um caso ou cenário;
+- limitações e falsos positivos foram documentados;
+- governança humana aprovou formalmente a adoção.
+
+Até que esses critérios sejam atendidos, o protocolo permanece referência operacional em implantação incremental e não deve ser imposto automaticamente a novos casos ou builds existentes.
+
 ## 13. Limitações explícitas
 
 Este protocolo tem limites deliberados:
@@ -607,7 +683,7 @@ Depois da rodada:
 
 - congelar output relevante;
 - avaliar gate com papel apropriado;
-- decidir avançar, retornar, pausar ou rejeitar;
+- registrar `PASS`, `REVISE`, `BLOCK` ou `INCONCLUSIVE`;
 - registrar motivo da decisão;
 - criar nova versão quando houver correção;
 - encaminhar aprendizados de playtest para o Learning Loop, sem generalização automática.
