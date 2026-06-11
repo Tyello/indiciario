@@ -28,6 +28,28 @@ Nenhuma tarefa deve ser executada sem seleção explícita de skill.
 | Contexto confuso ou risco de alterar o lugar errado | `zoom-out` | `.ai/skills/zoom-out.md` |
 | Revisão arquitetural explícita e incremental | `improve-codebase-architecture` | `.ai/skills/improve-codebase-architecture.md` |
 
+
+## Skills multiagente futuras
+
+As skills listadas no mapa acima são as únicas disponíveis para seleção operacional hoje. O roadmap multiagente registra três skills futuras — `context-firewall`, `blind-solve` e `playtest-to-learning` — mas elas estão **PLANNED — NOT IMPLEMENTED** e não existem como arquivos em `.ai/skills/`. Consulte `docs/AGENT_SKILLS.md` para o mapa detalhado e a distinção entre skill, papel, protocolo e capacidade técnica.
+
+Referências normativas para esse roadmap:
+
+- `docs/MULTIAGENT_OPERATING_PROTOCOL.md`;
+- `docs/BLIND_CONTEXT_PROTOCOL.md`;
+- `docs/MULTIAGENT_ARTIFACT_RUN_CONTRACTS.md`;
+- `docs/IMPLEMENTATION_PLAN_MULTIAGENT_PIPELINE.md`.
+
+Regra operacional:
+
+- se a skill existe em `.ai/skills/`, ela pode ser usada conforme sua documentação;
+- se uma skill está marcada como futura ou planejada, o agente **não deve invocá-la, simulá-la ou tratá-la como capacidade existente**;
+- até a implementação formal, use a skill existente mais adequada: `grill-with-docs` para revisão documental/segurança de contexto, `to-prd` para arquitetura ou escopo amplo, `to-issues` para decomposição aprovada, `diagnose` para depuração e `tdd` para implementação com testes;
+- tarefas arquiteturais ou documentais continuam seguindo `to-prd`, `to-issues` ou `grill-with-docs`, conforme o caso;
+- tarefas de implementação devem seguir a decomposição aprovada e não prometer bundling, isolamento, hashing, validação, orquestração, Gate Evaluator ou Learning Loop antes das issues correspondentes.
+
+A existência de um protocolo ou de uma entrada no roadmap não significa que a skill ou a capacidade técnica já exista.
+
 ## Regra de desempate
 
 - Causa desconhecida: use `diagnose`.
