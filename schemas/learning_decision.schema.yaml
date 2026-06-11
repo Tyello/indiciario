@@ -1,0 +1,1128 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/learning_decision/1.0
+title: Indiciario Learning Decision
+type: object
+additionalProperties: false
+required:
+- schema_version
+- learning_decision_id
+- case_id
+- case_version
+- related_finding_ids
+- scope
+- result
+- rationale
+- evidence_summary
+- implementation_status
+- decision_risk
+- revalidation
+- decided_at
+- decided_by
+x-semantic-limitations-deferred-to-issue-08:
+- related_finding_ids_exist
+- related_session_ids_exist
+- primary_finding_id_is_related
+- learning_decision_id_unique
+- supersedes_decision_exists
+- supersedes_not_self
+- superseded_by_not_self
+- decision_chain_has_no_cycle
+- case_version_matches_findings
+- session_count_matches_references
+- finding_count_matches_references
+- global_evidence_matches_sessions
+- implementation_reference_exists
+- intended_targets_exist
+- implementation_status_transition_validity
+- verified_requires_previous_implemented_state
+- decided_at_before_verified_at
+- created_at_before_updated_at
+- result_scope_semantic_consistency
+- evidence_strength_matches_findings
+- revalidation_references_exist
+- finding_generalization_status_matches_decision
+properties:
+  schema_version:
+    const: '1.0'
+  learning_decision_id:
+    $ref: '#/$defs/neutral_id'
+  case_id:
+    $ref: '#/$defs/non_empty_string'
+  case_version:
+    $ref: '#/$defs/non_empty_string'
+  related_finding_ids:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  primary_finding_id:
+    $ref: '#/$defs/neutral_id'
+  related_session_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  related_run_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  supersedes_decision_id:
+    $ref: '#/$defs/neutral_id'
+  superseded_by_decision_id:
+    $ref: '#/$defs/neutral_id'
+  related_artifact_version_ids:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  scope:
+    $ref: '#/$defs/scope'
+  result:
+    enum:
+    - no_generalization
+    - example_only
+    - heuristic
+    - guardrail
+    - validator_candidate
+    - case_review_candidate
+    - regression_test
+  rationale:
+    $ref: '#/$defs/rationale'
+  evidence_summary:
+    $ref: '#/$defs/evidence_summary'
+  global_evidence_basis:
+    $ref: '#/$defs/global_evidence_basis'
+  implementation_status:
+    enum:
+    - not_planned
+    - proposed
+    - approved_for_implementation
+    - implemented
+    - verified
+    - rejected_after_review
+    - superseded
+  implementation_evidence:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/non_empty_string'
+  verified_at:
+    $ref: '#/$defs/timestamp'
+  verified_by:
+    $ref: '#/$defs/neutral_id'
+  rejection_reason:
+    $ref: '#/$defs/long_text'
+  reviewed_by:
+    $ref: '#/$defs/neutral_id'
+  reviewed_at:
+    $ref: '#/$defs/timestamp'
+  implementation_reference:
+    $ref: '#/$defs/non_empty_string'
+  implemented_at:
+    $ref: '#/$defs/timestamp'
+  implemented_by:
+    $ref: '#/$defs/neutral_id'
+  decision_risk:
+    $ref: '#/$defs/decision_risk'
+  revalidation:
+    $ref: '#/$defs/revalidation'
+  intended_targets:
+    type: array
+    items:
+      $ref: '#/$defs/intended_target'
+  decision_authority:
+    $ref: '#/$defs/decision_authority'
+  no_generalization:
+    $ref: '#/$defs/no_generalization'
+  example:
+    $ref: '#/$defs/example'
+  heuristic:
+    $ref: '#/$defs/heuristic'
+  guardrail:
+    $ref: '#/$defs/guardrail'
+  validator_candidate:
+    $ref: '#/$defs/validator_candidate'
+  case_review_candidate:
+    $ref: '#/$defs/case_review_candidate'
+  regression_test:
+    $ref: '#/$defs/regression_test'
+  decided_at:
+    $ref: '#/$defs/timestamp'
+  decided_by:
+    $ref: '#/$defs/neutral_id'
+  created_at:
+    $ref: '#/$defs/timestamp'
+  created_by:
+    $ref: '#/$defs/neutral_id'
+  updated_at:
+    $ref: '#/$defs/timestamp'
+  updated_by:
+    $ref: '#/$defs/neutral_id'
+$defs:
+  non_empty_string:
+    type: string
+    minLength: 1
+  long_text:
+    type: string
+    minLength: 1
+  neutral_id:
+    type: string
+    minLength: 1
+    pattern: ^[A-Za-z0-9][A-Za-z0-9_.:-]*$
+  timestamp:
+    type: string
+    format: date-time
+  string_array:
+    type: array
+    items:
+      $ref: '#/$defs/non_empty_string'
+    minItems: 0
+  non_empty_string_array:
+    type: array
+    items:
+      $ref: '#/$defs/non_empty_string'
+    minItems: 1
+  scope:
+    type: object
+    additionalProperties: false
+    required:
+    - level
+    properties:
+      level:
+        enum:
+        - case_only
+        - mechanic_family
+        - difficulty_level
+        - global_editorial
+        - technical
+        - visual
+      target_ids:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/non_empty_string'
+      description:
+        $ref: '#/$defs/non_empty_string'
+      applicability_conditions:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      exclusions:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      evidence_threshold:
+        $ref: '#/$defs/non_empty_string'
+      explicit_exception_justification:
+        $ref: '#/$defs/non_empty_string'
+    allOf:
+    - if:
+        properties:
+          level:
+            const: mechanic_family
+        required:
+        - level
+      then:
+        required:
+        - applicability_conditions
+        properties:
+          applicability_conditions:
+            type: array
+            minItems: 1
+            items:
+              $ref: '#/$defs/non_empty_string'
+        anyOf:
+        - required:
+          - description
+          properties:
+            description:
+              $ref: '#/$defs/non_empty_string'
+        - required:
+          - target_ids
+          properties:
+            target_ids:
+              type: array
+              minItems: 1
+              uniqueItems: true
+              items:
+                $ref: '#/$defs/non_empty_string'
+    - if:
+        properties:
+          level:
+            const: difficulty_level
+        required:
+        - level
+      then:
+        required:
+        - target_ids
+        - applicability_conditions
+        properties:
+          target_ids:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items:
+              $ref: '#/$defs/non_empty_string'
+          applicability_conditions:
+            type: array
+            minItems: 1
+            items:
+              $ref: '#/$defs/non_empty_string'
+    - if:
+        properties:
+          level:
+            const: global_editorial
+        required:
+        - level
+      then:
+        required:
+        - description
+        - applicability_conditions
+        - evidence_threshold
+        properties:
+          description:
+            $ref: '#/$defs/non_empty_string'
+          applicability_conditions:
+            type: array
+            minItems: 1
+            items:
+              $ref: '#/$defs/non_empty_string'
+          evidence_threshold:
+            $ref: '#/$defs/non_empty_string'
+    - if:
+        properties:
+          level:
+            const: technical
+        required:
+        - level
+      then:
+        anyOf:
+        - required:
+          - description
+          properties:
+            description:
+              $ref: '#/$defs/non_empty_string'
+        - required:
+          - target_ids
+          properties:
+            target_ids:
+              type: array
+              minItems: 1
+              uniqueItems: true
+              items:
+                $ref: '#/$defs/non_empty_string'
+    - if:
+        properties:
+          level:
+            const: visual
+        required:
+        - level
+      then:
+        anyOf:
+        - required:
+          - description
+          properties:
+            description:
+              $ref: '#/$defs/non_empty_string'
+        - required:
+          - target_ids
+          properties:
+            target_ids:
+              type: array
+              minItems: 1
+              uniqueItems: true
+              items:
+                $ref: '#/$defs/non_empty_string'
+  rationale:
+    type: object
+    additionalProperties: false
+    required:
+    - summary
+    - evidence_reviewed
+    - why_this_scope
+    - why_this_result
+    - confidence
+    properties:
+      summary:
+        $ref: '#/$defs/long_text'
+      evidence_reviewed:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/non_empty_string'
+      why_this_scope:
+        $ref: '#/$defs/long_text'
+      why_this_result:
+        $ref: '#/$defs/long_text'
+      alternatives_considered:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      counter_evidence:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      confidence:
+        enum:
+        - low
+        - medium
+        - high
+      limitations:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+  evidence_summary:
+    type: object
+    additionalProperties: false
+    required:
+    - session_count
+    - finding_count
+    - repeated_pattern
+    - independent_groups
+    - evidence_strength
+    properties:
+      session_count:
+        type: integer
+        minimum: 1
+      finding_count:
+        type: integer
+        minimum: 1
+      repeated_pattern:
+        type: boolean
+      independent_groups:
+        type: boolean
+      evidence_strength:
+        enum:
+        - weak
+        - moderate
+        - strong
+      notes:
+        $ref: '#/$defs/long_text'
+  global_evidence_basis:
+    type: object
+    additionalProperties: false
+    required:
+    - multiple_sessions
+    - multiple_cases
+    - repeated_pattern
+    - counterexamples_reviewed
+    properties:
+      multiple_sessions:
+        type: boolean
+      multiple_cases:
+        type: boolean
+      repeated_pattern:
+        type: boolean
+      exception_justification:
+        $ref: '#/$defs/long_text'
+      counterexamples_reviewed:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+    allOf:
+    - if:
+        properties:
+          multiple_sessions:
+            const: false
+        required:
+        - multiple_sessions
+      then:
+        required:
+        - exception_justification
+    - if:
+        properties:
+          repeated_pattern:
+            const: false
+        required:
+        - repeated_pattern
+      then:
+        required:
+        - exception_justification
+  no_generalization:
+    type: object
+    additionalProperties: false
+    required:
+    - reason
+    - disposition
+    - residual_risk
+    properties:
+      reason:
+        $ref: '#/$defs/long_text'
+      disposition:
+        enum:
+        - keep_case_only
+        - insufficient_evidence
+        - contradictory_evidence
+        - isolated_preference
+        - technical_noise
+        - already_covered
+        - other
+      disposition_notes:
+        $ref: '#/$defs/long_text'
+      residual_risk:
+        $ref: '#/$defs/long_text'
+      reconsideration_condition:
+        $ref: '#/$defs/long_text'
+    allOf:
+    - if:
+        properties:
+          disposition:
+            const: other
+        required:
+        - disposition
+      then:
+        required:
+        - disposition_notes
+  example:
+    type: object
+    additionalProperties: false
+    required:
+    - summary
+    - example_reference
+    - caution
+    properties:
+      summary:
+        $ref: '#/$defs/long_text'
+      target_documentation:
+        $ref: '#/$defs/non_empty_string'
+      example_reference:
+        $ref: '#/$defs/non_empty_string'
+      caution:
+        $ref: '#/$defs/long_text'
+  heuristic:
+    type: object
+    additionalProperties: false
+    required:
+    - statement
+    - rationale
+    - applicability_conditions
+    - strength
+    - validation_plan
+    properties:
+      statement:
+        $ref: '#/$defs/long_text'
+      rationale:
+        $ref: '#/$defs/long_text'
+      applicability_conditions:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/non_empty_string'
+      exceptions:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      strength:
+        enum:
+        - tentative
+        - supported
+        - strong
+      validation_plan:
+        $ref: '#/$defs/long_text'
+  guardrail:
+    type: object
+    additionalProperties: false
+    required:
+    - normative_rule
+    - prohibited_failure
+    - applicability_conditions
+    - severity_if_violated
+    - enforcement_target
+    - validation_plan
+    properties:
+      normative_rule:
+        $ref: '#/$defs/long_text'
+      prohibited_failure:
+        $ref: '#/$defs/long_text'
+      applicability_conditions:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/non_empty_string'
+      exceptions:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      severity_if_violated:
+        enum:
+        - low
+        - medium
+        - high
+        - critical
+      enforcement_target:
+        enum:
+        - documentation
+        - validator
+        - case_review
+        - generator
+        - renderer
+        - manual_process
+        - other
+      enforcement_target_notes:
+        $ref: '#/$defs/long_text'
+      validation_plan:
+        $ref: '#/$defs/long_text'
+    allOf:
+    - if:
+        properties:
+          enforcement_target:
+            const: other
+        required:
+        - enforcement_target
+      then:
+        required:
+        - enforcement_target_notes
+  validator_candidate:
+    type: object
+    additionalProperties: false
+    required:
+    - rule_summary
+    - validation_target
+    - detectable_deterministically
+    - required_inputs
+    - false_positive_risks
+    - test_strategy
+    properties:
+      rule_summary:
+        $ref: '#/$defs/long_text'
+      failure_code_suggestion:
+        $ref: '#/$defs/non_empty_string'
+      validation_target:
+        enum:
+        - blueprint
+        - case_kernel
+        - case_review
+        - package
+        - rendering
+        - learning_ledger
+        - other
+      validation_target_notes:
+        $ref: '#/$defs/long_text'
+      detectable_deterministically:
+        type: boolean
+      required_inputs:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/non_empty_string'
+      false_positive_risks:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      false_negative_risks:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      implementation_notes:
+        $ref: '#/$defs/long_text'
+      test_strategy:
+        $ref: '#/$defs/long_text'
+    allOf:
+    - if:
+        properties:
+          validation_target:
+            const: other
+        required:
+        - validation_target
+      then:
+        required:
+        - validation_target_notes
+  case_review_candidate:
+    type: object
+    additionalProperties: false
+    required:
+    - review_area
+    - question_or_check
+    - target_section
+    - applicability_conditions
+    - reviewer_role
+    - validation_plan
+    properties:
+      review_area:
+        $ref: '#/$defs/non_empty_string'
+      question_or_check:
+        $ref: '#/$defs/long_text'
+      target_section:
+        $ref: '#/$defs/non_empty_string'
+      applicability_conditions:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/non_empty_string'
+      reviewer_role:
+        $ref: '#/$defs/non_empty_string'
+      examples_needed:
+        type: boolean
+      validation_plan:
+        $ref: '#/$defs/long_text'
+  regression_test:
+    type: object
+    additionalProperties: false
+    required:
+    - scenario
+    - failure_prevented
+    - test_level
+    - fixture_strategy
+    - expected_behavior
+    - validation_command
+    properties:
+      scenario:
+        $ref: '#/$defs/long_text'
+      failure_prevented:
+        $ref: '#/$defs/long_text'
+      test_level:
+        enum:
+        - schema
+        - unit
+        - integration
+        - visual
+        - canonical_case
+        - manual
+        - other
+      test_level_notes:
+        $ref: '#/$defs/long_text'
+      fixture_strategy:
+        $ref: '#/$defs/long_text'
+      expected_behavior:
+        $ref: '#/$defs/long_text'
+      target_files:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      validation_command:
+        $ref: '#/$defs/non_empty_string'
+    allOf:
+    - if:
+        properties:
+          test_level:
+            const: other
+        required:
+        - test_level
+      then:
+        required:
+        - test_level_notes
+  decision_risk:
+    type: object
+    additionalProperties: false
+    required:
+    - overgeneralization_risk
+    - undergeneralization_risk
+    properties:
+      overgeneralization_risk:
+        enum:
+        - low
+        - medium
+        - high
+      undergeneralization_risk:
+        enum:
+        - low
+        - medium
+        - high
+      false_positive_risk:
+        enum:
+        - low
+        - medium
+        - high
+      player_experience_risk:
+        enum:
+        - low
+        - medium
+        - high
+      technical_risk:
+        enum:
+        - low
+        - medium
+        - high
+      notes:
+        $ref: '#/$defs/long_text'
+  revalidation:
+    type: object
+    additionalProperties: false
+    required:
+    - required
+    - status
+    properties:
+      required:
+        type: boolean
+      method:
+        enum:
+        - new_playtest
+        - regression_test
+        - case_review
+        - visual_review
+        - technical_test
+        - document_review
+        - other
+      method_notes:
+        $ref: '#/$defs/long_text'
+      success_criteria:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/non_empty_string'
+      minimum_sessions:
+        type: integer
+        minimum: 1
+      target_case_ids:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/neutral_id'
+      due_condition:
+        $ref: '#/$defs/non_empty_string'
+      status:
+        enum:
+        - pending
+        - passed
+        - failed
+        - inconclusive
+        - not_required
+    allOf:
+    - if:
+        properties:
+          required:
+            const: true
+        required:
+        - required
+      then:
+        required:
+        - method
+        - success_criteria
+    - if:
+        properties:
+          required:
+            const: false
+        required:
+        - required
+      then:
+        properties:
+          status:
+            const: not_required
+    - if:
+        properties:
+          method:
+            const: other
+        required:
+        - method
+      then:
+        required:
+        - method_notes
+  intended_target:
+    type: object
+    additionalProperties: false
+    required:
+    - target_type
+    - target_reference
+    - action
+    properties:
+      target_type:
+        enum:
+        - documentation
+        - validator
+        - case_review
+        - generator
+        - renderer
+        - schema
+        - regression_suite
+        - case
+        - other
+      target_type_notes:
+        $ref: '#/$defs/non_empty_string'
+      target_reference:
+        $ref: '#/$defs/non_empty_string'
+      action:
+        enum:
+        - add
+        - update
+        - remove
+        - investigate
+      notes:
+        $ref: '#/$defs/long_text'
+    allOf:
+    - if:
+        properties:
+          target_type:
+            const: other
+        required:
+        - target_type
+      then:
+        required:
+        - target_type_notes
+  decision_authority:
+    type: object
+    additionalProperties: false
+    required:
+    - role
+    properties:
+      role:
+        enum:
+        - human_operator
+        - editor
+        - author
+        - reviewer
+        - technical_owner
+        - other
+      role_notes:
+        $ref: '#/$defs/non_empty_string'
+      approved_by:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/neutral_id'
+      dissenting_views:
+        type: array
+        items:
+          $ref: '#/$defs/non_empty_string'
+      decision_notes:
+        $ref: '#/$defs/long_text'
+    allOf:
+    - if:
+        properties:
+          role:
+            const: other
+        required:
+        - role
+      then:
+        required:
+        - role_notes
+allOf:
+- if:
+    properties:
+      result:
+        const: no_generalization
+    required:
+    - result
+  then:
+    required:
+    - no_generalization
+    not:
+      anyOf:
+      - required:
+        - example
+      - required:
+        - heuristic
+      - required:
+        - guardrail
+      - required:
+        - validator_candidate
+      - required:
+        - case_review_candidate
+      - required:
+        - regression_test
+- if:
+    properties:
+      result:
+        const: example_only
+    required:
+    - result
+  then:
+    required:
+    - example
+    not:
+      anyOf:
+      - required:
+        - no_generalization
+      - required:
+        - heuristic
+      - required:
+        - guardrail
+      - required:
+        - validator_candidate
+      - required:
+        - case_review_candidate
+      - required:
+        - regression_test
+- if:
+    properties:
+      result:
+        const: heuristic
+    required:
+    - result
+  then:
+    required:
+    - heuristic
+    not:
+      anyOf:
+      - required:
+        - no_generalization
+      - required:
+        - example
+      - required:
+        - guardrail
+      - required:
+        - validator_candidate
+      - required:
+        - case_review_candidate
+      - required:
+        - regression_test
+- if:
+    properties:
+      result:
+        const: guardrail
+    required:
+    - result
+  then:
+    required:
+    - guardrail
+    not:
+      anyOf:
+      - required:
+        - no_generalization
+      - required:
+        - example
+      - required:
+        - heuristic
+      - required:
+        - validator_candidate
+      - required:
+        - case_review_candidate
+      - required:
+        - regression_test
+- if:
+    properties:
+      result:
+        const: validator_candidate
+    required:
+    - result
+  then:
+    required:
+    - validator_candidate
+    not:
+      anyOf:
+      - required:
+        - no_generalization
+      - required:
+        - example
+      - required:
+        - heuristic
+      - required:
+        - guardrail
+      - required:
+        - case_review_candidate
+      - required:
+        - regression_test
+- if:
+    properties:
+      result:
+        const: case_review_candidate
+    required:
+    - result
+  then:
+    required:
+    - case_review_candidate
+    not:
+      anyOf:
+      - required:
+        - no_generalization
+      - required:
+        - example
+      - required:
+        - heuristic
+      - required:
+        - guardrail
+      - required:
+        - validator_candidate
+      - required:
+        - regression_test
+- if:
+    properties:
+      result:
+        const: regression_test
+    required:
+    - result
+  then:
+    required:
+    - regression_test
+    not:
+      anyOf:
+      - required:
+        - no_generalization
+      - required:
+        - example
+      - required:
+        - heuristic
+      - required:
+        - guardrail
+      - required:
+        - validator_candidate
+      - required:
+        - case_review_candidate
+- if:
+    properties:
+      scope:
+        properties:
+          level:
+            const: global_editorial
+        required:
+        - level
+    required:
+    - scope
+  then:
+    required:
+    - global_evidence_basis
+- if:
+    properties:
+      scope:
+        properties:
+          level:
+            const: global_editorial
+        required:
+        - level
+      evidence_summary:
+        properties:
+          session_count:
+            maximum: 1
+        required:
+        - session_count
+    required:
+    - scope
+    - evidence_summary
+  then:
+    properties:
+      scope:
+        required:
+        - explicit_exception_justification
+- if:
+    properties:
+      implementation_status:
+        const: verified
+    required:
+    - implementation_status
+  then:
+    required:
+    - implementation_evidence
+    - verified_at
+    - verified_by
+- if:
+    properties:
+      implementation_status:
+        const: rejected_after_review
+    required:
+    - implementation_status
+  then:
+    required:
+    - rejection_reason
+    - reviewed_by
+    - reviewed_at
+- if:
+    properties:
+      implementation_status:
+        const: superseded
+    required:
+    - implementation_status
+  then:
+    required:
+    - superseded_by_decision_id
+- if:
+    properties:
+      implementation_status:
+        not:
+          const: superseded
+    required:
+    - implementation_status
+  then:
+    not:
+      required:
+      - superseded_by_decision_id
