@@ -53,4 +53,3 @@ created_by: AUTHOR_01
 action_expected:
   type: correction
   description: Reescrever a instrucao de transicao e revalidar em revisao documental.
-blocks_gate: false

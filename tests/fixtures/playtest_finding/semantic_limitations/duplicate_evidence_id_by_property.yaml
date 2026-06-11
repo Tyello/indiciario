@@ -59,4 +59,3 @@ action_expected:
   type: correction
   description: Reescrever a instrucao de transicao e revalidar em revisao documental.
 assigned_to: AUTHOR_01
-blocks_gate: false

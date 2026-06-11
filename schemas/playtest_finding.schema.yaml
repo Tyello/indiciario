@@ -119,8 +119,6 @@ properties:
       $ref: '#/$defs/neutral_id'
   assigned_to:
     $ref: '#/$defs/neutral_id'
-  blocks_gate:
-    type: boolean
   owner_role:
     enum: [author, reviewer, facilitator, visual_designer, technical, human_operator, other]
   owner_role_notes:
@@ -182,7 +180,13 @@ allOf:
           const: ACCEPTED
       required: [status]
     then:
-      required: [action_expected, assigned_to, blocks_gate]
+      required: [action_expected, assigned_to]
+      not:
+        anyOf:
+          - required: [rejection]
+          - required: [deferral]
+          - required: [not_applicable]
+          - required: [resolution]
   - if:
       properties:
         status:
@@ -190,6 +194,12 @@ allOf:
       required: [status]
     then:
       required: [rejection]
+      not:
+        anyOf:
+          - required: [action_expected]
+          - required: [deferral]
+          - required: [not_applicable]
+          - required: [resolution]
   - if:
       properties:
         status:
@@ -197,6 +207,12 @@ allOf:
       required: [status]
     then:
       required: [deferral]
+      not:
+        anyOf:
+          - required: [action_expected]
+          - required: [rejection]
+          - required: [not_applicable]
+          - required: [resolution]
   - if:
       properties:
         status:
@@ -204,6 +220,12 @@ allOf:
       required: [status]
     then:
       required: [not_applicable]
+      not:
+        anyOf:
+          - required: [action_expected]
+          - required: [rejection]
+          - required: [deferral]
+          - required: [resolution]
   - if:
       properties:
         status:
@@ -211,6 +233,12 @@ allOf:
       required: [status]
     then:
       required: [resolution]
+      not:
+        anyOf:
+          - required: [action_expected]
+          - required: [rejection]
+          - required: [deferral]
+          - required: [not_applicable]
   - if:
       properties:
         generalization_status:

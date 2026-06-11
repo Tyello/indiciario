@@ -25,6 +25,8 @@ category: progression
 severity: medium
 finding_scope:
   level: stage
+  stage_ids:
+  - STAGE_01
 impact:
   player_effects:
   - Pausa perceptivel e pedido de confirmacao ao facilitador.
@@ -52,3 +54,11 @@ action_expected:
   type: correction
   description: Reescrever a instrucao de transicao e revalidar em revisao documental.
 assigned_to: AUTHOR_01
+resolution:
+  resolved_by: AUTHOR_01
+  resolved_at: '2026-06-12T09:00:00Z'
+  corrected_artifact_version_ids:
+  - ARTIFACT_VERSION_002
+  validation_evidence:
+  - Nova revisao documental confirmou instrucao mais objetiva.
+  validation_result: confirmed

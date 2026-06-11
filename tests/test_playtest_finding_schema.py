@@ -102,6 +102,48 @@ def test_invalid_playtest_finding_fixtures(fixture: Path):
     assert errors, f"{fixture.name} should be rejected by playtest_finding schema"
 
 
+def test_schema_uses_gate_effect_blocks_gate_as_single_source_of_truth():
+    schema = load_schema()
+    assert "blocks_gate" not in schema["properties"]
+    assert "blocks_gate" not in schema["required"]
+    gate_effect_ref = schema["properties"]["gate_effect"]["$ref"]
+    gate_effect_def = schema["$defs"][gate_effect_ref.removeprefix("#/$defs/")]
+    assert "blocks_gate" in gate_effect_def["required"]
+
+
+@pytest.mark.parametrize(
+    "fixture_name,status,incompatible_payload",
+    [
+        ("accepted_with_rejection", "ACCEPTED", "rejection"),
+        ("accepted_with_resolution", "ACCEPTED", "resolution"),
+        ("rejected_with_action_expected", "REJECTED", "action_expected"),
+        ("rejected_with_resolution", "REJECTED", "resolution"),
+        ("deferred_with_rejection", "DEFERRED", "rejection"),
+        ("not_applicable_with_deferral", "NOT_APPLICABLE", "deferral"),
+        ("resolved_with_deferral", "RESOLVED", "deferral"),
+        ("resolved_with_action_expected", "RESOLVED", "action_expected"),
+    ],
+)
+def test_status_payloads_are_mutually_exclusive(
+    fixture_name: str, status: str, incompatible_payload: str
+):
+    fixture = FIXTURES_DIR / "invalid" / f"{fixture_name}.yaml"
+    instance = load_yaml(fixture)
+    assert instance["status"] == status
+    assert incompatible_payload in instance
+
+    errors = validation_errors(fixture)
+    assert errors, (
+        f"{fixture_name} should reject {incompatible_payload} for {status}:\n"
+        f"{format_errors(errors)}"
+    )
+    assert any(
+        incompatible_payload in error.message
+        or incompatible_payload in ".".join(str(part) for part in error.schema_path)
+        for error in errors
+    ), format_errors(errors)
+
+
 def test_validator_uses_format_checker():
     assert build_validator().format_checker is not None
 
@@ -135,6 +177,15 @@ def test_all_expected_invalid_fixtures_exist():
         "invalid_status",
         "accepted_without_action_expected",
         "accepted_without_assigned_to",
+        "accepted_without_gate_effect_blocks_gate",
+        "accepted_with_rejection",
+        "accepted_with_resolution",
+        "rejected_with_action_expected",
+        "rejected_with_resolution",
+        "deferred_with_rejection",
+        "not_applicable_with_deferral",
+        "resolved_with_deferral",
+        "resolved_with_action_expected",
         "rejected_without_reason",
         "rejected_without_rejection_risk",
         "deferred_without_residual_risk",
@@ -164,12 +215,16 @@ def test_all_expected_invalid_fixtures_exist():
     [
         ("accepted_without_action_expected", ["action_expected"]),
         ("accepted_without_assigned_to", ["assigned_to"]),
+        ("accepted_without_gate_effect_blocks_gate", ["gate_effect", "blocks_gate"]),
         ("rejected_without_reason", ["rejection"]),
         ("rejected_without_rejection_risk", ["rejection"]),
         ("deferred_without_residual_risk", ["deferral"]),
         ("deferred_without_review_condition", ["deferral"]),
         ("not_applicable_without_reason", ["not_applicable"]),
-        ("resolved_without_corrected_artifacts", ["resolution", "corrected_artifact_version_ids"]),
+        (
+            "resolved_without_corrected_artifacts",
+            ["resolution", "corrected_artifact_version_ids"],
+        ),
         ("resolved_without_validation_evidence", ["resolution", "validation_evidence"]),
         ("resolved_with_failed_validation", ["resolution", "validation_result"]),
     ],

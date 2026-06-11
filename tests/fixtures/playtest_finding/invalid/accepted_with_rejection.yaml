@@ -25,6 +25,8 @@ category: progression
 severity: medium
 finding_scope:
   level: stage
+  stage_ids:
+  - STAGE_01
 impact:
   player_effects:
   - Pausa perceptivel e pedido de confirmacao ao facilitador.
@@ -52,3 +54,9 @@ action_expected:
   type: correction
   description: Reescrever a instrucao de transicao e revalidar em revisao documental.
 assigned_to: AUTHOR_01
+rejection:
+  reason: Evidencia insuficiente para alterar o caso.
+  decided_by: REVIEWER_01
+  evidence_considered:
+  - EVIDENCE_001
+  rejection_risk: O grupo pode repetir a hesitacao se a observacao estava correta.
