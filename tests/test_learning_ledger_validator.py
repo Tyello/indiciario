@@ -7,6 +7,7 @@ import pytest
 from jsonschema import Draft202012Validator
 
 from generator.learning_ledger_validator import (
+    LearningLedgerValidator,
     LedgerIssue,
     LedgerValidationReport,
     validate_learning_ledger,
@@ -95,6 +96,8 @@ def test_schema_validators_are_loaded_and_checked():
         ("evidence_missing_session", "LEDGER_SESSION_NOT_FOUND"),
         ("evidence_session_not_declared_by_finding", "LEDGER_SESSION_NOT_FOUND"),
         ("decision_missing_finding", "LEDGER_FINDING_NOT_FOUND"),
+        ("decision_with_extra_related_session", "LEDGER_DECISION_SESSION_LINK_MISMATCH"),
+        ("decision_missing_related_session", "LEDGER_DECISION_SESSION_LINK_MISMATCH"),
         ("primary_finding_not_related", "LEDGER_PRIMARY_FINDING_NOT_RELATED"),
         ("event_missing_stage", "LEDGER_STAGE_NOT_FOUND"),
         ("event_missing_participant", "LEDGER_PARTICIPANT_NOT_FOUND"),
@@ -140,6 +143,78 @@ def test_invalid_ledgers_return_expected_codes(fixture_name: str, expected_code:
     assert not report.valid
     assert expected_code in codes(report), report.to_dict()
 
+
+
+def test_valid_related_sessions_can_be_declared_in_different_order():
+    report = validate_learning_ledger(FIXTURES_DIR / "valid" / "valid_related_sessions_different_order")
+    assert report.valid is True
+    assert "LEDGER_DECISION_SESSION_LINK_MISMATCH" not in codes(report)
+
+
+@pytest.mark.parametrize(
+    "fixture_name,divergent_session_id",
+    [
+        ("decision_with_extra_related_session", "SESSION_002"),
+        ("decision_missing_related_session", "SESSION_002"),
+    ],
+)
+def test_decision_related_sessions_must_match_sessions_derived_from_findings(
+    fixture_name: str, divergent_session_id: str
+):
+    report = validate_learning_ledger(FIXTURES_DIR / "invalid" / fixture_name)
+    matching = [
+        issue
+        for issue in report.errors
+        if issue.code == "LEDGER_DECISION_SESSION_LINK_MISMATCH"
+    ]
+    assert report.valid is False
+    assert matching, report.to_dict()
+    assert {issue.entity_type for issue in matching} == {"decision"}
+    assert {issue.field_path for issue in matching} == {"related_session_ids"}
+    assert divergent_session_id in {issue.related_id for issue in matching}
+
+
+def test_decision_session_count_uses_derived_sessions_when_explicit_sessions_are_incoherent():
+    report = validate_learning_ledger(FIXTURES_DIR / "invalid" / "decision_with_extra_related_session")
+    assert "LEDGER_DECISION_SESSION_LINK_MISMATCH" in codes(report)
+    assert "LEDGER_SESSION_COUNT_MISMATCH" not in codes(report)
+
+
+def test_validator_instance_validate_is_idempotent_for_valid_ledger():
+    validator = LearningLedgerValidator(FIXTURES_DIR / "valid" / "valid_minimal")
+    first = validator.validate()
+    second = validator.validate()
+    assert first.to_dict() == second.to_dict()
+    assert first.processed_files == [
+        "decisions/decision_1.yaml",
+        "findings/finding_1.yaml",
+        "sessions/session_1.yaml",
+    ]
+    assert second.processed_files == first.processed_files
+    assert second.entity_counts == {"sessions": 1, "findings": 1, "decisions": 1}
+    assert second.errors == []
+    assert second.warnings == []
+
+
+def test_validator_instance_validate_is_idempotent_for_invalid_ledger():
+    validator = LearningLedgerValidator(FIXTURES_DIR / "invalid" / "multiple_errors")
+    first = validator.validate()
+    second = validator.validate()
+    assert first.to_dict() == second.to_dict()
+    assert len(second.errors) == len(first.errors)
+    assert [issue.code for issue in second.errors] == [issue.code for issue in first.errors]
+    assert second.semantic_invalid_entities == first.semantic_invalid_entities
+
+
+def test_validator_instance_validate_is_idempotent_for_warning_ledger():
+    validator = LearningLedgerValidator(FIXTURES_DIR / "invalid" / "warning_critical_nonblocking")
+    first = validator.validate()
+    second = validator.validate()
+    assert first.to_dict() == second.to_dict()
+    assert second.valid is True
+    assert len(first.warnings) == 1
+    assert len(second.warnings) == 1
+    assert second.warnings[0].code == "LEDGER_GATE_EFFECT_INCONSISTENT"
 
 def test_ids_can_be_reused_across_entity_namespaces():
     report = validate_learning_ledger(FIXTURES_DIR / "valid" / "valid_ids_reused_across_entity_types")
@@ -228,6 +303,7 @@ def test_all_expected_valid_fixtures_exist():
         "valid_no_generalization",
         "valid_supersession_chain",
         "valid_ids_reused_across_entity_types",
+        "valid_related_sessions_different_order",
     }
     found = {path.name for path in (FIXTURES_DIR / "valid").iterdir()}
     assert expected <= found
@@ -250,6 +326,8 @@ def test_all_expected_invalid_fixtures_exist():
         "evidence_missing_session",
         "evidence_session_not_declared_by_finding",
         "decision_missing_finding",
+        "decision_with_extra_related_session",
+        "decision_missing_related_session",
         "primary_finding_not_related",
         "event_missing_stage",
         "event_missing_participant",

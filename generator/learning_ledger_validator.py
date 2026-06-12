@@ -83,6 +83,10 @@ class LearningLedgerValidator:
 
     def __init__(self, ledger_path: Path | str):
         self.ledger_path = Path(ledger_path)
+        self._validators = self._load_schema_validators()
+        self._reset_run_state()
+
+    def _reset_run_state(self) -> None:
         self.errors: list[LedgerIssue] = []
         self.warnings: list[LedgerIssue] = []
         self.processed_files: list[str] = []
@@ -90,7 +94,6 @@ class LearningLedgerValidator:
         self.entities: dict[str, list[LoadedEntity]] = {"session": [], "finding": [], "decision": []}
         self.indexes: dict[str, dict[str, LoadedEntity]] = {"session": {}, "finding": {}, "decision": {}}
         self.duplicate_ids: dict[str, set[str]] = {"session": set(), "finding": set(), "decision": set()}
-        self._validators = self._load_schema_validators()
 
     def validate(self) -> LedgerValidationReport:
         if not self.ledger_path.exists():
@@ -98,6 +101,7 @@ class LearningLedgerValidator:
         if not self.ledger_path.is_dir():
             raise NotADirectoryError(f"Learning ledger path is not a directory: {self.ledger_path}")
 
+        self._reset_run_state()
         self._load_entities()
         self._index_entities()
         self._validate_sessions()
@@ -311,30 +315,39 @@ class LearningLedgerValidator:
                     continue
                 findings.append(finding)
                 self._case_match(entity, finding, "decision", f"related_finding_ids[{idx}]")
+            explicit_session_ids = set(data.get("related_session_ids", []))
+            existing_explicit_session_ids = set()
             for idx, sid in enumerate(data.get("related_session_ids", [])):
                 if sid not in self.indexes["session"]:
                     self._add_error("LEDGER_SESSION_NOT_FOUND", "Decisão referencia sessão inexistente", entity.file_path, "decision", entity.entity_id, f"related_session_ids[{idx}]", sid)
+                else:
+                    existing_explicit_session_ids.add(sid)
+            derived_session_ids = self._decision_derived_session_ids(findings)
+            if "related_session_ids" in data:
+                for sid in sorted(existing_explicit_session_ids - derived_session_ids):
+                    self._add_error("LEDGER_DECISION_SESSION_LINK_MISMATCH", "Decisão declara sessão não derivada dos findings relacionados", entity.file_path, "decision", entity.entity_id, "related_session_ids", sid)
+                for sid in sorted(derived_session_ids - explicit_session_ids):
+                    self._add_error("LEDGER_DECISION_SESSION_LINK_MISMATCH", "Decisão omite sessão derivada dos findings relacionados", entity.file_path, "decision", entity.entity_id, "related_session_ids", sid)
             summary = data.get("evidence_summary", {})
             if summary.get("finding_count") != len(set(related_finding_ids)):
                 self._add_error("LEDGER_FINDING_COUNT_MISMATCH", "finding_count diverge de related_finding_ids únicos", entity.file_path, "decision", entity.entity_id, "evidence_summary.finding_count")
-            explicit_sessions = data.get("related_session_ids")
-            if explicit_sessions is not None:
-                session_count = len(set(explicit_sessions))
-            else:
-                session_count = len({sid for finding in findings for sid in finding.data.get("source_session_ids", [])})
+            session_count = len(derived_session_ids)
             if summary.get("session_count") != session_count:
-                self._add_error("LEDGER_SESSION_COUNT_MISMATCH", "session_count diverge das sessões relacionadas", entity.file_path, "decision", entity.entity_id, "evidence_summary.session_count")
-            if summary.get("independent_groups") is True and summary.get("session_count", 0) < 2:
-                self._add_error("LEDGER_SESSION_COUNT_MISMATCH", "independent_groups true exige pelo menos duas sessões", entity.file_path, "decision", entity.entity_id, "evidence_summary.independent_groups")
+                self._add_error("LEDGER_SESSION_COUNT_MISMATCH", "session_count diverge das sessões derivadas dos findings", entity.file_path, "decision", entity.entity_id, "evidence_summary.session_count")
+            if summary.get("independent_groups") is True and session_count < 2:
+                self._add_error("LEDGER_SESSION_COUNT_MISMATCH", "independent_groups true exige pelo menos duas sessões derivadas", entity.file_path, "decision", entity.entity_id, "evidence_summary.independent_groups")
             basis = data.get("global_evidence_basis")
             if basis:
-                if basis.get("multiple_sessions") != (summary.get("session_count", 0) > 1):
-                    self._add_error("LEDGER_REVALIDATION_INCONSISTENT", "multiple_sessions diverge de session_count", entity.file_path, "decision", entity.entity_id, "global_evidence_basis.multiple_sessions")
+                if basis.get("multiple_sessions") != (session_count > 1):
+                    self._add_error("LEDGER_REVALIDATION_INCONSISTENT", "multiple_sessions diverge das sessões derivadas dos findings", entity.file_path, "decision", entity.entity_id, "global_evidence_basis.multiple_sessions")
                 if basis.get("multiple_cases") is True:
                     self._add_warning("LEDGER_REVALIDATION_INCONSISTENT", "multiple_cases não é comprovável sem catálogo de casos nesta versão", entity.file_path, "decision", entity.entity_id, "global_evidence_basis.multiple_cases")
             reval = data.get("revalidation", {})
             if reval.get("required") is True and reval.get("minimum_sessions") is not None and reval.get("minimum_sessions") < 1:
                 self._add_error("LEDGER_REVALIDATION_INCONSISTENT", "minimum_sessions deve ser positivo quando informado", entity.file_path, "decision", entity.entity_id, "revalidation.minimum_sessions")
+
+    def _decision_derived_session_ids(self, findings: list[LoadedEntity]) -> set[str]:
+        return {sid for finding in findings for sid in finding.data.get("source_session_ids", [])}
 
     def _validate_finding_decision_links(self) -> None:
         decisions_by_finding: dict[str, list[LoadedEntity]] = {}
