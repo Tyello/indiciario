@@ -19,9 +19,9 @@ ledgers:
   - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md
   validation_command: python -m scripts.learning_ledger validate --ledger examples/learning/retrospective/aurora-document-diegesis
 - id: LEDGER-RETRO-003
-  path: canonical-visual-build-blocked
-  case_id: CANONICAL-VISUAL-BASELINE-2-0
-  case_version: 3b3e6a1
+  path: aurora-hints-guidance
+  case_id: CASO-CANONICO-INTERMEDIARIO
+  case_version: RETRO-DOCUMENTED-STATE-HINTS-RODADA-01
   source_documents:
-  - docs/baselines/BASELINE_VISUAL_2_0_CANONICOS.md
-  validation_command: python -m scripts.learning_ledger validate --ledger examples/learning/retrospective/canonical-visual-build-blocked
+  - docs/playtests/INTERMEDIARIO_RODADA_01.md
+  validation_command: python -m scripts.learning_ledger validate --ledger examples/learning/retrospective/aurora-hints-guidance

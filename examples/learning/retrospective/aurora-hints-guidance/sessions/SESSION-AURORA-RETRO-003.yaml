@@ -1,7 +1,7 @@
 schema_version: '1.0'
-session_id: SESSION-AURORA-RETRO-002
+session_id: SESSION-AURORA-RETRO-003
 case_id: CASO-CANONICO-INTERMEDIARIO
-case_version: RETRO-DOCUMENTED-STATE-DIEGETIC-REFINEMENT-01
+case_version: RETRO-DOCUMENTED-STATE-HINTS-RODADA-01
 case_title: O Último Brinde do Hotel Aurora
 started_at: '2026-06-05T00:00:00+00:00'
 finished_at: '2026-06-05T01:40:00+00:00'
@@ -36,7 +36,7 @@ participants:
     nome.
 stages:
 - stage_id: STAGE-RETRO-001
-  label: Refinamento diegético retrospectivo
+  label: Dicas contextuais retrospectivas
   sequence: 1
   opened_at: '2026-06-05T00:00:00+00:00'
   completed_at: '2026-06-05T01:40:00+00:00'
@@ -53,8 +53,8 @@ events:
   - PARTICIPANT-RETRO-01
   - PARTICIPANT-RETRO-02
   - PARTICIPANT-RETRO-03
-  description: Fonte documental registra que algumas informações corretas estavam
-    no documento errado, gerando sensação de pista artificial.
+  description: Fonte documental registra que as dicas quase não foram usadas e, quando
+    usadas, quase não deram direção.
   observer_notes: Evento sintético mínimo para conectar a observação documental ao
     schema; detalhes não documentados foram omitidos.
 outcome:
@@ -92,5 +92,5 @@ privacy:
 created_at: '2026-06-12T00:00:00+00:00'
 created_by: ACTOR-RETRO-MIGRATION
 updated_at: '2026-06-12T00:00:00+00:00'
-source_type: reconstructed_notes
-notes: Migração retrospectiva da ISSUE-10 baseada em docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md.
+source_type: facilitator_report
+notes: Migração retrospectiva da ISSUE-10 baseada em docs/playtests/INTERMEDIARIO_RODADA_01.md.

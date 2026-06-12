@@ -25,20 +25,21 @@ evidence:
   stage_id: STAGE-RETRO-001
   strength: moderate
   notes: 'Fonte: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md,
-    seções Problema principal identificado e Decisões editoriais consolidadas.'
+    seções Problema principal identificado, Decisões editoriais consolidadas e Status
+    final consolidado.'
 causal_hypothesis:
   statement: Quando o recipiente documental parece escolhido para orientar o jogador,
     a pista pode soar artificial; a causalidade exata precisa de nova revisão/playtest
-    para confirmação.
+    para generalização.
   confidence: medium
   alternative_explanations:
   - A documentação registra o efeito observado, mas não isola todas as variáveis de
-    mesa ou ambiente.
+    mesa.
   assumptions:
   - A fonte documental foi tratada como diagnóstico retrospectivo, não como observação
     ao vivo.
   disconfirming_evidence:
-  - Nenhuma revalidação nova foi adicionada nesta PR.
+  - Nenhuma nova sessão independente foi criada nesta PR.
   needs_more_evidence: true
 category: diegesis
 severity: medium
@@ -51,9 +52,9 @@ impact:
   - Jogadores podem perceber documento como pista plantada em vez de evidência bruta
     do mundo ficcional.
   case_effects:
-  - Documento de jogador pode perder naturalidade diegética mesmo quando a informação
-    em si é correta.
-  affected_participant_count: 0
+  - Documento de jogador perdeu naturalidade diegética no estado analisado, mas a
+    fonte declara refinamento consolidado.
+  affected_participant_count: 3
   affected_session_count: 1
   blocks_progression: false
   compromises_fairness: false
@@ -63,37 +64,40 @@ impact:
 rollback:
   required: true
   target: document_planning
-  reason: Menor rollback provável é revisar planejamento documental e recipiente antes
-    de reescrever solução.
-status: ACCEPTED
-action_expected:
-  type: investigation
-  description: Ação esperada conservadora para revisar o finding retrospectivo sem
-    presumir correção histórica.
-assigned_to: ACTOR-RETRO-MIGRATION
-owner_role: other
-owner_role_notes: Ator técnico de migração retrospectiva; não representa responsável
-  histórico.
+  reason: Menor rollback provável foi revisar planejamento documental e recipiente
+    antes de reescrever solução.
+status: RESOLVED
 gate_effect:
   blocks_gate: false
-  suggested_gate_state: REVISE
-  reason: Registro retrospectivo recomenda revisão, mas não bloqueia automaticamente
-    o gate atual sem nova evidência.
+  suggested_gate_state: PASS
+  reason: 'Registro histórico: a fonte documental declara incorporação/consolidação;
+    o finding não reabre gate atual.'
 generalization_status: decided
 learning_decision_id: DECISION-AURORA-RETRO-002
 revalidation:
-  required: true
-  method: case_review
-  target_session_count: 1
-  result: pending
-  notes: Revalidação futura necessária; esta migração apenas preserva a evidência
-    documental.
+  required: false
+  result: not_required
+  notes: Finding histórico resolvido para o caso documentado; promoção futura para
+    regra geral exigiria outra decisão.
 tags:
 - ISSUE-10
 - retrospective
-notes: Finding criado como exemplo retrospectivo do Learning Ledger; não corrige o
-  caso analisado.
+notes: Finding criado como exemplo retrospectivo do Learning Ledger; RESOLVED representa
+  a consolidação documentada, não uma nova correção nesta PR.
 created_at: '2026-06-12T00:00:00+00:00'
 created_by: ACTOR-RETRO-MIGRATION
 updated_at: '2026-06-12T00:00:00+00:00'
 updated_by: ACTOR-RETRO-MIGRATION
+resolution:
+  resolved_by: ACTOR-RETRO-MIGRATION
+  resolved_at: '2026-06-12T00:00:00+00:00'
+  corrected_artifact_version_ids:
+  - ARTIFACT-CASO-CANONICO-INTERMEDIARIO
+  validation_evidence:
+  - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md declara status
+    final consolidado e caso validado como régua canônica Intermediária.
+  - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md lista decisões
+    editoriais consolidadas sobre redistribuição das informações.
+  - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md registra checklist
+    específico de baseline para preservar a versão refinada.
+  validation_result: confirmed

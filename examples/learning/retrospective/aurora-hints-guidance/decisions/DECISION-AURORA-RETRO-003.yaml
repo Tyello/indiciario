@@ -1,25 +1,25 @@
 schema_version: '1.0'
-learning_decision_id: DECISION-AURORA-RETRO-001
+learning_decision_id: DECISION-AURORA-RETRO-003
 case_id: CASO-CANONICO-INTERMEDIARIO
-case_version: RETRO-DOCUMENTED-STATE-INTERMEDIARIO-RODADA-01
+case_version: RETRO-DOCUMENTED-STATE-HINTS-RODADA-01
 related_finding_ids:
-- FINDING-AURORA-RETRO-001
-primary_finding_id: FINDING-AURORA-RETRO-001
+- FINDING-AURORA-RETRO-003
+primary_finding_id: FINDING-AURORA-RETRO-003
 related_session_ids:
-- SESSION-AURORA-RETRO-001
+- SESSION-AURORA-RETRO-003
 scope:
   level: case_only
   description: Escopo conservador definido para não transformar observação retrospectiva
     em regra global.
 result: case_review_candidate
 rationale:
-  summary: Preservar como candidato de Case Review para progressão por envelopes do
-    Hotel Aurora sem reabrir problema já consolidado.
+  summary: Preservar como candidato de Case Review para qualidade operacional das
+    dicas, sem reabrir a correção histórica do Hotel Aurora.
   evidence_reviewed:
   - docs/playtests/INTERMEDIARIO_RODADA_01.md
   why_this_scope: O escopo fica limitado ao caso e à rodada documentada.
-  why_this_result: case_review_candidate permite reutilizar a observação como pergunta
-    de revisão sem promover regra global.
+  why_this_result: case_review_candidate permite revisar dicas futuras como apoio
+    operacional sem promover regra global automática.
   alternatives_considered:
   - Promover para regra global foi rejeitado por haver apenas evidência retrospectiva
     de uma rodada documentada.
@@ -37,6 +37,9 @@ evidence_summary:
   evidence_strength: moderate
   notes: Base documental única; não sustenta generalização automática.
 implementation_status: implemented
+implementation_reference: docs/playtests/INTERMEDIARIO_RODADA_01.md#7-dicas-foram-fracas
+implemented_at: '2026-06-12T00:00:00+00:00'
+implemented_by: ACTOR-RETRO-MIGRATION
 decision_risk:
   overgeneralization_risk: high
   undergeneralization_risk: low
@@ -50,7 +53,7 @@ revalidation:
   status: not_required
 intended_targets:
 - target_type: documentation
-  target_reference: docs/playtests/INTERMEDIARIO_RODADA_01.md#status-final-apos-refinamento
+  target_reference: docs/playtests/INTERMEDIARIO_RODADA_01.md#7-dicas-foram-fracas
   action: investigate
   notes: Usado como referência documental, não como alteração direta nesta PR.
 decision_authority:
@@ -62,9 +65,6 @@ created_at: '2026-06-12T00:00:00+00:00'
 created_by: ACTOR-RETRO-MIGRATION
 updated_at: '2026-06-12T00:00:00+00:00'
 updated_by: ACTOR-RETRO-MIGRATION
-implementation_reference: docs/playtests/INTERMEDIARIO_RODADA_01.md#status-final-apos-refinamento
-implemented_at: '2026-06-12T00:00:00+00:00'
-implemented_by: ACTOR-RETRO-MIGRATION
 case_review_candidate:
   review_area: progressão, dicas e facilitação
   question_or_check: Verificar se o material operacional ajuda o grupo a avançar sem

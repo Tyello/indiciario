@@ -14,16 +14,16 @@ scope:
 result: example_only
 rationale:
   summary: Preservar como exemplo retrospectivo de recipiente documental inadequado
-    sem transformar em regra global.
+    já refinado no Hotel Aurora, sem transformar em regra global.
   evidence_reviewed:
   - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md
   why_this_scope: O escopo permanece case_only porque a fonte trata um refinamento
     específico do Hotel Aurora.
-  why_this_result: 'example_only é conservador: demonstra problema real, mas não prova
-    recorrência ampla.'
+  why_this_result: 'example_only é conservador: demonstra problema real resolvido
+    no caso, mas não prova recorrência ampla.'
   alternatives_considered:
   - Promover para regra global foi rejeitado por haver apenas evidência retrospectiva
-    limitada.
+    de uma rodada documentada.
   counter_evidence:
   - Não há nova sessão independente nesta PR.
   confidence: medium
@@ -37,28 +37,21 @@ evidence_summary:
   independent_groups: false
   evidence_strength: moderate
   notes: Base documental única; não sustenta generalização automática.
-implementation_status: proposed
+implementation_status: implemented
 decision_risk:
   overgeneralization_risk: high
-  undergeneralization_risk: medium
+  undergeneralization_risk: low
   false_positive_risk: medium
-  player_experience_risk: medium
+  player_experience_risk: low
   technical_risk: low
-  notes: Risco principal é tratar um aprendizado retrospectivo como regra global sem
-    playtest adicional.
+  notes: Risco principal é transformar um aprendizado retrospectivo resolvido em regra
+    global sem evidência adicional.
 revalidation:
-  required: true
-  method: case_review
-  success_criteria:
-  - Revisar o ponto em material futuro sem introduzir gabarito em documento de jogador.
-  minimum_sessions: 1
-  target_case_ids:
-  - CASO-CANONICO-INTERMEDIARIO
-  due_condition: Antes de promover este aprendizado para regra reutilizável ou guardrail.
-  status: pending
+  required: false
+  status: not_required
 intended_targets:
 - target_type: documentation
-  target_reference: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md#problema-principal-identificado
+  target_reference: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md#status-final-consolidado
   action: investigate
   notes: Usado como referência documental, não como alteração direta nesta PR.
 decision_authority:
@@ -70,10 +63,13 @@ created_at: '2026-06-12T00:00:00+00:00'
 created_by: ACTOR-RETRO-MIGRATION
 updated_at: '2026-06-12T00:00:00+00:00'
 updated_by: ACTOR-RETRO-MIGRATION
+implementation_reference: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md#status-final-consolidado
+implemented_at: '2026-06-12T00:00:00+00:00'
+implemented_by: ACTOR-RETRO-MIGRATION
 example:
   summary: Preservar como exemplo retrospectivo de recipiente documental inadequado
-    sem transformar em regra global.
+    já refinado no Hotel Aurora, sem transformar em regra global.
   target_documentation: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md
-  example_reference: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md#problema-principal-identificado
-  caution: 'Exemplo retrospectivo: não prova recorrência nem autoriza regra global
-    sem novas evidências.'
+  example_reference: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md#status-final-consolidado
+  caution: Exemplo retrospectivo resolvido no caso documentado; não prova recorrência
+    nem autoriza regra global sem novas evidências.
