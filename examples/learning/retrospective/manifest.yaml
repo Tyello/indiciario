@@ -1,0 +1,27 @@
+nature: retrospective_learning_examples
+issue: ISSUE-10
+created_at: '2026-06-12T00:00:00+00:00'
+notes: Manifest simples de proveniência; os YAMLs do ledger continuam sendo a fonte
+  de verdade dos registros.
+ledgers:
+- id: LEDGER-RETRO-001
+  path: aurora-envelope-goals
+  case_id: CASO-CANONICO-INTERMEDIARIO
+  case_version: RETRO-DOCUMENTED-STATE-INTERMEDIARIO-RODADA-01
+  source_documents:
+  - docs/playtests/INTERMEDIARIO_RODADA_01.md
+  validation_command: python -m scripts.learning_ledger validate --ledger examples/learning/retrospective/aurora-envelope-goals
+- id: LEDGER-RETRO-002
+  path: aurora-document-diegesis
+  case_id: CASO-CANONICO-INTERMEDIARIO
+  case_version: RETRO-DOCUMENTED-STATE-DIEGETIC-REFINEMENT-01
+  source_documents:
+  - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md
+  validation_command: python -m scripts.learning_ledger validate --ledger examples/learning/retrospective/aurora-document-diegesis
+- id: LEDGER-RETRO-003
+  path: canonical-visual-build-blocked
+  case_id: CANONICAL-VISUAL-BASELINE-2-0
+  case_version: 3b3e6a1
+  source_documents:
+  - docs/baselines/BASELINE_VISUAL_2_0_CANONICOS.md
+  validation_command: python -m scripts.learning_ledger validate --ledger examples/learning/retrospective/canonical-visual-build-blocked

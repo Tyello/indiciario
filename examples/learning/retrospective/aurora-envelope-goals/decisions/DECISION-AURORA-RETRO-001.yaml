@@ -1,0 +1,82 @@
+schema_version: '1.0'
+learning_decision_id: DECISION-AURORA-RETRO-001
+case_id: CASO-CANONICO-INTERMEDIARIO
+case_version: RETRO-DOCUMENTED-STATE-INTERMEDIARIO-RODADA-01
+related_finding_ids:
+- FINDING-AURORA-RETRO-001
+primary_finding_id: FINDING-AURORA-RETRO-001
+related_session_ids:
+- SESSION-AURORA-RETRO-001
+scope:
+  level: case_only
+  description: Escopo conservador definido para não transformar observação retrospectiva
+    em regra global.
+result: case_review_candidate
+rationale:
+  summary: Preservar como candidato de Case Review para progressão por envelopes do
+    Hotel Aurora.
+  evidence_reviewed:
+  - docs/playtests/INTERMEDIARIO_RODADA_01.md
+  why_this_scope: O escopo fica limitado ao caso e à rodada documentada.
+  why_this_result: case_review_candidate permite reutilizar a observação como pergunta
+    de revisão sem promover regra global.
+  alternatives_considered:
+  - Promover para regra global foi rejeitado por haver apenas evidência retrospectiva
+    limitada.
+  counter_evidence:
+  - Não há nova sessão independente nesta PR.
+  confidence: medium
+  limitations:
+  - Registro reconstruído depois dos fatos; lacunas estão declaradas na sessão e no
+    README.
+evidence_summary:
+  session_count: 1
+  finding_count: 1
+  repeated_pattern: false
+  independent_groups: false
+  evidence_strength: moderate
+  notes: Base documental única; não sustenta generalização automática.
+implementation_status: proposed
+decision_risk:
+  overgeneralization_risk: high
+  undergeneralization_risk: medium
+  false_positive_risk: medium
+  player_experience_risk: medium
+  technical_risk: low
+  notes: Risco principal é tratar um aprendizado retrospectivo como regra global sem
+    playtest adicional.
+revalidation:
+  required: true
+  method: case_review
+  success_criteria:
+  - Revisar o ponto em material futuro sem introduzir gabarito em documento de jogador.
+  minimum_sessions: 1
+  target_case_ids:
+  - CASO-CANONICO-INTERMEDIARIO
+  due_condition: Antes de promover este aprendizado para regra reutilizável ou guardrail.
+  status: pending
+intended_targets:
+- target_type: documentation
+  target_reference: docs/playtests/INTERMEDIARIO_RODADA_01.md#problemas-encontrados
+  action: investigate
+  notes: Usado como referência documental, não como alteração direta nesta PR.
+decision_authority:
+  role: reviewer
+  decision_notes: Decisão técnica da migração ISSUE-10 baseada apenas em fontes versionadas.
+decided_at: '2026-06-12T00:00:00+00:00'
+decided_by: ACTOR-RETRO-MIGRATION
+created_at: '2026-06-12T00:00:00+00:00'
+created_by: ACTOR-RETRO-MIGRATION
+updated_at: '2026-06-12T00:00:00+00:00'
+updated_by: ACTOR-RETRO-MIGRATION
+case_review_candidate:
+  review_area: progressão e abertura de envelopes
+  question_or_check: Verificar se cada envelope declara objetivo operacional suficiente
+    sem pedir solução completa cedo demais.
+  target_section: objetivos_por_envelope / guia operacional
+  applicability_conditions:
+  - Caso com múltiplos envelopes e progressão por hipótese parcial.
+  reviewer_role: editorial reviewer
+  examples_needed: true
+  validation_plan: Aplicar em revisão documental futura e confirmar em playtest antes
+    de generalizar.
