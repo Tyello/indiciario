@@ -2,9 +2,9 @@ schema_version: '1.0'
 learning_decision_id: DECISION_002
 case_id: CASE_MIRANTE
 case_version: CASE_VERSION_001
-related_finding_ids: &id001
-- FINDING_001
-primary_finding_id: FINDING_001
+related_finding_ids:
+- FINDING_999
+primary_finding_id: FINDING_999
 scope:
   level: mechanic_family
   target_ids:
@@ -15,7 +15,8 @@ scope:
 result: heuristic
 rationale:
   summary: Decisão humana registrada.
-  evidence_reviewed: *id001
+  evidence_reviewed:
+  - FINDING_999
   why_this_scope: Escopo limitado pela evidência.
   why_this_result: Aprendizado útil mas tentativo.
   confidence: medium

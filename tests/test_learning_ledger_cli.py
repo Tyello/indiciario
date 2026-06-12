@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -114,6 +116,14 @@ def init_ledger(ledger: Path, capsys: pytest.CaptureFixture[str]) -> None:
     assert code == 0, err
 
 
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def assert_no_tmp_files(ledger: Path) -> None:
+    assert list(ledger.rglob("*.tmp")) == []
+
+
 def test_init_creates_missing_empty_and_is_idempotent_without_deleting_content(tmp_path: Path, capsys):
     ledger = tmp_path / "ledger"
     code, out, err = run_cli(["init", "--ledger", str(ledger)], capsys)
@@ -138,6 +148,72 @@ def test_init_rejects_file_where_subdirectory_should_exist(tmp_path: Path, capsy
     assert code == 1
     assert out == ""
     assert "sessions" in err
+
+
+def test_schema_loading_works_outside_repo_cwd_and_runs_check_schema(tmp_path: Path, capsys, monkeypatch):
+    import generator.learning_ledger_cli as cli
+
+    cli._schema.cache_clear()
+    cli._validator.cache_clear()
+    calls: list[str] = []
+    original = cli.Draft202012Validator.check_schema
+
+    def spy(schema):
+        calls.append(schema.get("$id", "schema"))
+        return original(schema)
+
+    monkeypatch.setattr(cli.Draft202012Validator, "check_schema", spy)
+    ledger = tmp_path / "ledger"
+    init_ledger(ledger, capsys)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    monkeypatch.chdir(outside)
+    code, _, err = run_cli(base_session_args(ledger), capsys)
+    assert code == 0, err
+    code, out, err = run_cli(["validate", "--ledger", str(ledger)], capsys)
+    assert code == 0
+    assert "Ledger válido" in out
+    assert err == ""
+    assert calls
+    cli._schema.cache_clear()
+    cli._validator.cache_clear()
+
+
+def test_entrypoint_help_works_outside_repo_root(tmp_path: Path):
+    repo = Path(__file__).resolve().parents[1]
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(repo)
+    result = subprocess.run(
+        [sys.executable, "-m", "scripts.learning_ledger", "--help"],
+        check=False,
+        text=True,
+        capture_output=True,
+        cwd=tmp_path,
+        env=env,
+    )
+    assert result.returncode == 0
+    assert "create-decision" in result.stdout
+    assert result.stderr == ""
+
+
+def test_init_rejects_root_and_subdirectory_symlinks(tmp_path: Path, capsys):
+    target = tmp_path / "target"
+    target.mkdir()
+    root_link = tmp_path / "ledger-link"
+    try:
+        root_link.symlink_to(target, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks not supported")
+    code, _, err = run_cli(["init", "--ledger", str(root_link)], capsys)
+    assert code == 1
+    assert "symlink" in err.lower()
+
+    ledger = tmp_path / "ledger"
+    ledger.mkdir()
+    (ledger / "sessions").symlink_to(target, target_is_directory=True)
+    code, _, err = run_cli(["init", "--ledger", str(ledger)], capsys)
+    assert code == 1
+    assert "symlink" in err.lower()
 
 
 def test_create_session_writes_valid_deterministic_yaml_and_validate_accepts(tmp_path: Path, capsys):
@@ -341,6 +417,88 @@ def test_create_decision_atomic_rollback_when_second_replace_fails(tmp_path: Pat
     assert not (ledger / "decisions" / "DECISION-001.yaml").exists()
     assert finding_path.read_text(encoding="utf-8") == before
     assert list(ledger.rglob("*.tmp")) == []
+
+
+def test_create_decision_staging_failure_does_not_touch_real_ledger(tmp_path: Path, capsys, monkeypatch):
+    ledger = tmp_path / "ledger"
+    init_ledger(ledger, capsys)
+    create_session(ledger, capsys)
+    create_finding(ledger, capsys)
+    finding_path = ledger / "findings" / "FINDING-001.yaml"
+    before = sha256(finding_path)
+    import generator.learning_ledger_cli as cli
+
+    def fail_stage(*args, **kwargs):
+        raise cli.LedgerCliError("forced staging failure")
+
+    monkeypatch.setattr(cli, "stage_future_ledger", fail_stage)
+    code, _, err = run_cli(base_decision_args(ledger), capsys)
+    assert code == 1
+    assert "forced staging failure" in err
+    assert not (ledger / "decisions" / "DECISION-001.yaml").exists()
+    assert sha256(finding_path) == before
+    assert validate_learning_ledger(ledger).valid is True
+    assert_no_tmp_files(ledger)
+
+
+def test_create_decision_first_replace_failure_leaves_original_state(tmp_path: Path, capsys, monkeypatch):
+    ledger = tmp_path / "ledger"
+    init_ledger(ledger, capsys)
+    create_session(ledger, capsys)
+    create_finding(ledger, capsys)
+    finding_path = ledger / "findings" / "FINDING-001.yaml"
+    before = sha256(finding_path)
+    import generator.learning_ledger_cli as cli
+
+    def fail_first(src, dst):
+        raise OSError("forced first replace failure")
+
+    monkeypatch.setattr(cli.os, "replace", fail_first)
+    code, _, err = run_cli(base_decision_args(ledger), capsys)
+    assert code == 1
+    assert "forced first replace failure" in err
+    assert not (ledger / "decisions" / "DECISION-001.yaml").exists()
+    assert sha256(finding_path) == before
+    assert validate_learning_ledger(ledger).valid is True
+    assert_no_tmp_files(ledger)
+
+
+def test_create_decision_post_commit_validation_failure_restores_with_replace(tmp_path: Path, capsys, monkeypatch):
+    ledger = tmp_path / "ledger"
+    init_ledger(ledger, capsys)
+    create_session(ledger, capsys)
+    create_finding(ledger, capsys)
+    finding_path = ledger / "findings" / "FINDING-001.yaml"
+    before = sha256(finding_path)
+    import generator.learning_ledger_cli as cli
+
+    real_validate = cli.validate_learning_ledger
+    real_replace = cli.os.replace
+    replace_targets: list[Path] = []
+    real_ledger_calls = {"n": 0}
+
+    def fake_validate(path):
+        if Path(path).resolve() == ledger.resolve():
+            real_ledger_calls["n"] += 1
+            if real_ledger_calls["n"] == 2:
+                issue = SimpleNamespace(code="FORCED_POST_COMMIT", file_path="ledger", message="forced")
+                return SimpleNamespace(valid=False, errors=[issue])
+        return real_validate(path)
+
+    def tracking_replace(src, dst):
+        replace_targets.append(Path(dst))
+        return real_replace(src, dst)
+
+    monkeypatch.setattr(cli, "validate_learning_ledger", fake_validate)
+    monkeypatch.setattr(cli.os, "replace", tracking_replace)
+    code, _, err = run_cli(base_decision_args(ledger), capsys)
+    assert code == 1
+    assert "FORCED_POST_COMMIT" in err
+    assert not (ledger / "decisions" / "DECISION-001.yaml").exists()
+    assert sha256(finding_path) == before
+    assert finding_path in replace_targets
+    assert validate_learning_ledger(ledger).valid is True
+    assert_no_tmp_files(ledger)
 
 
 def test_decision_preserves_unrelated_finding_fields(tmp_path: Path, capsys):

@@ -95,6 +95,7 @@ hints:
   effect: resumed_progress
   requested_by:
   - P01
+  summary: Dica registrada pela fixture.
 outcome:
   session_status: completed
   final_answer_submitted: true
@@ -120,8 +121,18 @@ ratings:
   participant_ratings:
   - participant_id: P01
     fun: 4
+    surprise: 4
+    fairness: 4
+    clarity: 4
+    difficulty_perceived: 4
+    immersion: 4
   - participant_id: P02
     fun: 5
+    surprise: 4
+    fairness: 4
+    clarity: 4
+    difficulty_perceived: 4
+    immersion: 4
 positive_moments:
 - observation_id: OBS_01
   occurred_at_event: EVENT_02
@@ -130,6 +141,8 @@ record_quality:
   recorded_live: true
   reconstructed_after_session: false
   confidence: high
+  missing_information: []
+  observer_bias_risks: []
 privacy:
   anonymized: true
   consent_to_record_observations: true

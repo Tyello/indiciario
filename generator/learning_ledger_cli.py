@@ -7,6 +7,7 @@ import copy
 import json
 import os
 import re
+import shutil
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -28,10 +29,11 @@ ENTITY_DIRS = {
     "finding": "findings",
     "decision": "decisions",
 }
+ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATHS = {
-    "session": Path("schemas/playtest_session.schema.yaml"),
-    "finding": Path("schemas/playtest_finding.schema.yaml"),
-    "decision": Path("schemas/learning_decision.schema.yaml"),
+    "session": ROOT / "schemas" / "playtest_session.schema.yaml",
+    "finding": ROOT / "schemas" / "playtest_finding.schema.yaml",
+    "decision": ROOT / "schemas" / "learning_decision.schema.yaml",
 }
 NEUTRAL_ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9_-]{1,63}$")
 
@@ -75,7 +77,11 @@ def load_yaml(path: Path) -> dict[str, Any]:
 def _schema(entity_type: str) -> dict[str, Any]:
     path = SCHEMA_PATHS[entity_type]
     with path.open(encoding="utf-8") as fh:
-        return yaml.safe_load(fh)
+        schema = yaml.safe_load(fh)
+    if not isinstance(schema, dict):
+        raise LedgerCliError(f"Schema inválido ou vazio: {path}")
+    Draft202012Validator.check_schema(schema)
+    return schema
 
 
 @lru_cache(maxsize=None)
@@ -121,7 +127,8 @@ def assert_timestamp(value: str, label: str) -> None:
 
 
 def ensure_structure(ledger: Path, *, create_root: bool) -> Path:
-    root = ledger.resolve()
+    if ledger.exists() and ledger.is_symlink():
+        raise LedgerCliError(f"--ledger não pode ser symlink: {ledger}")
     if not ledger.exists():
         if create_root:
             ledger.mkdir(parents=True)
@@ -129,8 +136,11 @@ def ensure_structure(ledger: Path, *, create_root: bool) -> Path:
             raise LedgerCliError(f"Ledger não existe: {ledger}")
     if not ledger.is_dir():
         raise LedgerCliError(f"--ledger deve apontar para diretório: {ledger}")
+    root = ledger.resolve()
     for child in ENTITY_DIRS.values():
         path = ledger / child
+        if path.exists() and path.is_symlink():
+            raise LedgerCliError(f"Subdiretório do ledger não pode ser symlink: {path}")
         if path.exists() and not path.is_dir():
             raise LedgerCliError(f"Conflito: {path} deveria ser diretório, mas é arquivo.")
         if create_root:
@@ -195,43 +205,98 @@ def rollback_new_file(path: Path) -> None:
         path.unlink()
 
 
-def replace_two_files_atomically(new_file: Path, new_payload: dict[str, Any], existing_file: Path, existing_payload: dict[str, Any]) -> None:
-    assert_new_file(new_file)
-    if existing_file.is_symlink():
-        raise LedgerCliError(f"Finding é symlink e não será alterado: {existing_file}")
-    original = existing_file.read_bytes()
-    tmp_paths: list[Path] = []
-    replaced_new = False
-    replaced_existing = False
+def _write_temp_bytes(parent: Path, prefix: str, data: bytes) -> Path:
+    tmp_name: str | None = None
     try:
-        for path, payload in [(new_file, new_payload), (existing_file, existing_payload)]:
-            with tempfile.NamedTemporaryFile(
-                "w",
-                encoding="utf-8",
-                dir=path.parent,
-                prefix=f".{path.name}.",
-                suffix=".tmp",
-                delete=False,
-            ) as fh:
-                tmp_paths.append(Path(fh.name))
-                fh.write(dump_yaml(payload))
-                fh.flush()
-                os.fsync(fh.fileno())
-        if new_file.exists() or new_file.is_symlink():
-            raise LedgerCliError(f"Arquivo de destino já existe: {new_file}")
-        os.replace(tmp_paths[0], new_file)
-        replaced_new = True
-        os.replace(tmp_paths[1], existing_file)
-        replaced_existing = True
+        with tempfile.NamedTemporaryFile(
+            "wb",
+            dir=parent,
+            prefix=prefix,
+            suffix=".tmp",
+            delete=False,
+        ) as fh:
+            tmp_name = fh.name
+            fh.write(data)
+            fh.flush()
+            os.fsync(fh.fileno())
+        tmp_path = Path(tmp_name)
+        tmp_name = None
+        return tmp_path
+    finally:
+        if tmp_name:
+            Path(tmp_name).unlink(missing_ok=True)
+
+
+def _atomic_restore_bytes(path: Path, original: bytes) -> None:
+    restore_tmp = _write_temp_bytes(path.parent, f".{path.name}.restore.", original)
+    os.replace(restore_tmp, path)
+
+
+def _copy_ledger_yaml_files(source: Path, target: Path) -> None:
+    for dirname in ENTITY_DIRS.values():
+        source_dir = source / dirname
+        target_dir = target / dirname
+        target_dir.mkdir(parents=True, exist_ok=True)
+        if not source_dir.exists():
+            continue
+        if source_dir.is_symlink():
+            raise LedgerCliError(f"Subdiretório do ledger não pode ser symlink: {source_dir}")
+        for item in sorted(source_dir.iterdir()):
+            if item.is_symlink():
+                raise LedgerCliError(f"Symlink não é permitido no ledger: {item}")
+            if item.is_file():
+                shutil.copy2(item, target_dir / item.name)
+
+
+def stage_future_ledger(ledger: Path, decision_path: Path, decision: dict[str, Any], finding_path: Path, updated_finding: dict[str, Any]) -> None:
+    with tempfile.TemporaryDirectory(prefix="learning-ledger-stage-", dir=ledger.resolve().parent) as tmp_dir:
+        staged = Path(tmp_dir) / "ledger"
+        _copy_ledger_yaml_files(ledger, staged)
+        staged_decision = staged / decision_path.relative_to(ledger)
+        staged_finding = staged / finding_path.relative_to(ledger)
+        write_yaml(staged_decision, decision)
+        write_yaml(staged_finding, updated_finding)
+        report = validate_learning_ledger(staged)
+        if not report.valid:
+            first = report.errors[0]
+            raise LedgerCliError(
+                f"Estado futuro inválido; ledger real não foi alterado. "
+                f"[{first.code}] {first.file_path} {first.message}"
+            )
+
+
+def commit_decision_transaction(decision_path: Path, decision: dict[str, Any], finding_path: Path, updated_finding: dict[str, Any]) -> bytes:
+    assert_new_file(decision_path)
+    if finding_path.is_symlink():
+        raise LedgerCliError(f"Finding é symlink e não será alterado: {finding_path}")
+    original = finding_path.read_bytes()
+    decision_tmp = _write_temp_bytes(decision_path.parent, f".{decision_path.name}.", dump_yaml(decision).encode("utf-8"))
+    finding_tmp = _write_temp_bytes(finding_path.parent, f".{finding_path.name}.", dump_yaml(updated_finding).encode("utf-8"))
+    backup_tmp = _write_temp_bytes(finding_path.parent, f".{finding_path.name}.backup.", original)
+    decision_replaced = False
+    finding_replaced = False
+    try:
+        if decision_path.exists() or decision_path.is_symlink():
+            raise LedgerCliError(f"Arquivo de destino já existe: {decision_path}")
+        os.replace(decision_tmp, decision_path)
+        decision_replaced = True
+        os.replace(finding_tmp, finding_path)
+        finding_replaced = True
+        backup_tmp.unlink(missing_ok=True)
+        return original
     except Exception:
-        if replaced_new and new_file.exists() and not new_file.is_symlink():
-            new_file.unlink()
-        if replaced_existing or existing_file.exists():
-            existing_file.write_bytes(original)
+        if finding_replaced:
+            os.replace(backup_tmp, finding_path)
+        elif backup_tmp.exists():
+            backup_tmp.unlink(missing_ok=True)
+        if decision_replaced and decision_path.exists() and not decision_path.is_symlink():
+            decision_path.unlink()
         raise
     finally:
-        for tmp in tmp_paths:
-            tmp.unlink(missing_ok=True)
+        decision_tmp.unlink(missing_ok=True)
+        finding_tmp.unlink(missing_ok=True)
+        backup_tmp.unlink(missing_ok=True)
+
 
 
 def build_session(args: argparse.Namespace) -> dict[str, Any]:
@@ -646,19 +711,20 @@ def cmd_create_decision(args: argparse.Namespace) -> int:
     for session_id in finding.get("source_session_ids", []):
         load_entity_by_id(args.ledger, "session", session_id)
     decision, updated_finding = build_decision(args, finding)
+    stage_future_ledger(args.ledger, decision_path, decision, finding_path, updated_finding)
     if args.dry_run:
         print("# decision")
         print(dump_yaml(decision), end="")
         print("# updated_finding")
         print(dump_yaml(updated_finding), end="")
         return EXIT_OK
-    replace_two_files_atomically(decision_path, decision, finding_path, updated_finding)
+    original_finding = commit_decision_transaction(decision_path, decision, finding_path, updated_finding)
     try:
         require_valid_ledger(args.ledger)
     except Exception:
         if decision_path.exists() and not decision_path.is_symlink():
             decision_path.unlink()
-        write_yaml(finding_path, finding)
+        _atomic_restore_bytes(finding_path, original_finding)
         raise
     print(f"Decisão criada: {decision_path}")
     print(f"Finding atualizado: {finding_path}")
