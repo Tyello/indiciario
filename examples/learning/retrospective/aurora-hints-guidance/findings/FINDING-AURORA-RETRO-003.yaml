@@ -1,0 +1,100 @@
+schema_version: '1.0'
+finding_id: FINDING-AURORA-RETRO-003
+case_id: CASO-CANONICO-INTERMEDIARIO
+case_version: RETRO-DOCUMENTED-STATE-HINTS-RODADA-01
+source_session_ids:
+- SESSION-AURORA-RETRO-003
+observation:
+  summary: Dicas foram fracas e pouco úteis.
+  details: A fonte registra que as dicas quase não foram usadas e, quando usadas,
+    quase não deram direção; recomenda reescrever dicas em camadas para ajudar grupos
+    a sair do travamento.
+  observed_at_stage: STAGE-RETRO-001
+  observed_at_event_ids:
+  - EVENT-RETRO-001
+  frequency:
+    occurrences: 1
+    sessions_observed: 1
+evidence:
+- evidence_id: EVIDENCE-RETRO-001
+  type: facilitator_observation
+  description: docs/playtests/INTERMEDIARIO_RODADA_01.md registra observação de dicas
+    fracas e inclui reescrita de dicas contextuais como P0 incorporado.
+  source_session_id: SESSION-AURORA-RETRO-003
+  event_id: EVENT-RETRO-001
+  stage_id: STAGE-RETRO-001
+  strength: moderate
+  notes: 'Fonte: docs/playtests/INTERMEDIARIO_RODADA_01.md, seções Resultado geral,
+    problema 7 e Decisões de correção recomendadas P0.'
+causal_hypothesis:
+  statement: As dicas provavelmente não forneciam orientação operacional suficiente;
+    a hipótese é cautelosa porque o registro não detalha cada pedido de dica.
+  confidence: medium
+  alternative_explanations:
+  - A documentação registra o efeito observado, mas não isola todas as variáveis de
+    mesa.
+  assumptions:
+  - A fonte documental foi tratada como diagnóstico retrospectivo, não como observação
+    ao vivo.
+  disconfirming_evidence:
+  - Nenhuma nova sessão independente foi criada nesta PR.
+  needs_more_evidence: true
+category: hint
+severity: medium
+finding_scope:
+  level: case
+  description: Escopo preservado como retrospectivo e limitado à fonte documental
+    indicada.
+impact:
+  player_effects:
+  - Grupo pode permanecer sem direção quando dicas repetem clima em vez de orientar
+    foco ou cruzamento.
+  case_effects:
+  - Sistema de dicas exigiu revisão em camadas para apoiar grupos sem substituir investigação.
+  affected_participant_count: 3
+  affected_session_count: 1
+  blocks_progression: false
+  compromises_fairness: false
+  compromises_solvability: true
+  compromises_immersion: true
+  technical_only: false
+rollback:
+  required: true
+  target: document_planning
+  reason: Menor rollback provável foi revisar dicas contextuais e guia operacional,
+    sem alterar solução central.
+status: RESOLVED
+resolution:
+  resolved_by: ACTOR-RETRO-MIGRATION
+  resolved_at: '2026-06-12T00:00:00+00:00'
+  corrected_artifact_version_ids:
+  - ARTIFACT-CASO-CANONICO-INTERMEDIARIO
+  validation_evidence:
+  - docs/playtests/INTERMEDIARIO_RODADA_01.md declara que problemas P0 foram incorporados
+    ao blueprint e ao guia operacional do Hotel Aurora.
+  - docs/playtests/INTERMEDIARIO_RODADA_01.md lista reescrever dicas contextuais para
+    serem mais úteis como P0.
+  - docs/playtests/INTERMEDIARIO_RODADA_01.md registra status validado como régua
+    canônica Intermediária após playtest e refinamentos.
+  validation_result: confirmed
+gate_effect:
+  blocks_gate: false
+  suggested_gate_state: PASS
+  reason: 'Registro histórico: a fonte documental declara incorporação/consolidação;
+    o finding não reabre gate atual.'
+generalization_status: decided
+learning_decision_id: DECISION-AURORA-RETRO-003
+revalidation:
+  required: false
+  result: not_required
+  notes: Finding histórico resolvido para o caso documentado; promoção futura para
+    regra geral exigiria outra decisão.
+tags:
+- ISSUE-10
+- retrospective
+notes: Finding criado como exemplo retrospectivo do Learning Ledger; RESOLVED representa
+  a consolidação documentada, não uma nova correção nesta PR.
+created_at: '2026-06-12T00:00:00+00:00'
+created_by: ACTOR-RETRO-MIGRATION
+updated_at: '2026-06-12T00:00:00+00:00'
+updated_by: ACTOR-RETRO-MIGRATION

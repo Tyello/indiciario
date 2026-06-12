@@ -1,0 +1,96 @@
+schema_version: '1.0'
+session_id: SESSION-AURORA-RETRO-001
+case_id: CASO-CANONICO-INTERMEDIARIO
+case_version: RETRO-DOCUMENTED-STATE-INTERMEDIARIO-RODADA-01
+case_title: O Último Brinde do Hotel Aurora
+started_at: '2026-06-05T00:00:00+00:00'
+finished_at: '2026-06-05T01:40:00+00:00'
+duration_minutes: 100
+session_context:
+  mode: in_person
+  material_format:
+  - printed
+  location_type: other
+  facilitator_present: true
+  language: pt-BR
+  difficulty_declared: intermediario
+  notes: Contexto reconstruído a partir de documentação versionada do playtest; não
+    é transcrição integral. Horários 00:00-01:40 UTC são janela técnica baseada na
+    data e duração documentadas.
+participants:
+- participant_id: PARTICIPANT-RETRO-01
+  age_group: '35_44'
+  mystery_experience: not_informed
+  relationship_to_project: not_informed
+  notes: Participante adulto anonimizado; idade exata e nome não reproduzidos.
+- participant_id: PARTICIPANT-RETRO-02
+  age_group: '35_44'
+  mystery_experience: not_informed
+  relationship_to_project: not_informed
+  notes: Participante adulto anonimizado; idade exata e nome não reproduzidos.
+- participant_id: PARTICIPANT-RETRO-03
+  age_group: under_13
+  mystery_experience: not_informed
+  relationship_to_project: not_informed
+  notes: Participante infantil anonimizado; fonte registra 11 anos, sem reproduzir
+    nome.
+stages:
+- stage_id: STAGE-RETRO-001
+  label: Envelope 1 retrospectivo
+  sequence: 1
+  opened_at: '2026-06-05T00:00:00+00:00'
+  completed_at: '2026-06-05T01:40:00+00:00'
+  completion_status: completed
+  notes: 'Janela temporal técnica: a fonte documenta data e duração total, não horário
+    real de mesa.'
+events:
+- event_id: EVENT-RETRO-001
+  sequence: 1
+  occurred_at: '2026-06-05T00:00:00+00:00'
+  type: other
+  stage_id: STAGE-RETRO-001
+  participants:
+  - PARTICIPANT-RETRO-01
+  - PARTICIPANT-RETRO-02
+  - PARTICIPANT-RETRO-03
+  description: Fonte documental registra que o Envelope 1 concentrou tempo demais
+    e que objetivos/critério de abertura não estavam claros.
+  observer_notes: Evento sintético mínimo para conectar a observação documental ao
+    schema; detalhes não documentados foram omitidos.
+outcome:
+  session_status: partial
+  final_answer_submitted: false
+  solution_correctness: not_applicable
+  completion_without_facilitator_override: false
+  ending_reached: false
+  identified_evidence_chain: not_applicable
+  notes: Resultado detalhado não reconstruído além do que consta nas fontes documentais.
+ratings:
+  scale_min: 1
+  scale_max: 5
+  collected_from: not_collected
+record_quality:
+  recorded_live: false
+  reconstructed_after_session: true
+  missing_information:
+  - Horário real de início e término não documentado; 00:00-01:40 UTC é placeholder
+    técnico derivado da data de registro e dos 100 minutos documentados.
+  - Sequência detalhada de eventos do grupo não documentada neste ledger.
+  - Ratings quantitativos não coletados.
+  observer_bias_risks:
+  - Registro histórico contém interpretação posterior e pode condensar diferentes
+    momentos da mesa.
+  confidence: medium
+  notes: Migração retrospectiva da ISSUE-10; os horários técnicos estão declarados
+    no README.
+privacy:
+  anonymized: true
+  consent_to_record_observations: false
+  consent_to_use_anonymized_quotes: false
+  contains_personal_data: false
+  notes: O ledger preserva cardinalidade conhecida e remove nomes reais.
+created_at: '2026-06-12T00:00:00+00:00'
+created_by: ACTOR-RETRO-MIGRATION
+updated_at: '2026-06-12T00:00:00+00:00'
+source_type: facilitator_report
+notes: Migração retrospectiva da ISSUE-10 baseada em docs/playtests/INTERMEDIARIO_RODADA_01.md.

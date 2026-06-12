@@ -1,0 +1,103 @@
+schema_version: '1.0'
+finding_id: FINDING-AURORA-RETRO-002
+case_id: CASO-CANONICO-INTERMEDIARIO
+case_version: RETRO-DOCUMENTED-STATE-DIEGETIC-REFINEMENT-01
+source_session_ids:
+- SESSION-AURORA-RETRO-002
+observation:
+  summary: Informações corretas estavam em recipientes documentais pouco naturais.
+  details: A fonte cita lista de convidados com nota administrativa, pista assinada
+    pelo próprio suspeito, anotação central demais, e-mail explicativo, carta antiga
+    misturada a consequência atual e origem pouco clara de chat.
+  observed_at_stage: STAGE-RETRO-001
+  observed_at_event_ids:
+  - EVENT-RETRO-001
+  frequency:
+    occurrences: 1
+    sessions_observed: 1
+evidence:
+- evidence_id: EVIDENCE-RETRO-001
+  type: facilitator_observation
+  description: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md identifica
+    o problema de recipiente documental e lista decisões editoriais consolidadas.
+  source_session_id: SESSION-AURORA-RETRO-002
+  event_id: EVENT-RETRO-001
+  stage_id: STAGE-RETRO-001
+  strength: moderate
+  notes: 'Fonte: docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md,
+    seções Problema principal identificado, Decisões editoriais consolidadas e Status
+    final consolidado.'
+causal_hypothesis:
+  statement: Quando o recipiente documental parece escolhido para orientar o jogador,
+    a pista pode soar artificial; a causalidade exata precisa de nova revisão/playtest
+    para generalização.
+  confidence: medium
+  alternative_explanations:
+  - A documentação registra o efeito observado, mas não isola todas as variáveis de
+    mesa.
+  assumptions:
+  - A fonte documental foi tratada como diagnóstico retrospectivo, não como observação
+    ao vivo.
+  disconfirming_evidence:
+  - Nenhuma nova sessão independente foi criada nesta PR.
+  needs_more_evidence: true
+category: diegesis
+severity: medium
+finding_scope:
+  level: case
+  description: Escopo preservado como retrospectivo e limitado à fonte documental
+    indicada.
+impact:
+  player_effects:
+  - Jogadores podem perceber documento como pista plantada em vez de evidência bruta
+    do mundo ficcional.
+  case_effects:
+  - Documento de jogador perdeu naturalidade diegética no estado analisado, mas a
+    fonte declara refinamento consolidado.
+  affected_participant_count: 3
+  affected_session_count: 1
+  blocks_progression: false
+  compromises_fairness: false
+  compromises_solvability: true
+  compromises_immersion: true
+  technical_only: false
+rollback:
+  required: true
+  target: document_planning
+  reason: Menor rollback provável foi revisar planejamento documental e recipiente
+    antes de reescrever solução.
+status: RESOLVED
+gate_effect:
+  blocks_gate: false
+  suggested_gate_state: PASS
+  reason: 'Registro histórico: a fonte documental declara incorporação/consolidação;
+    o finding não reabre gate atual.'
+generalization_status: decided
+learning_decision_id: DECISION-AURORA-RETRO-002
+revalidation:
+  required: false
+  result: not_required
+  notes: Finding histórico resolvido para o caso documentado; promoção futura para
+    regra geral exigiria outra decisão.
+tags:
+- ISSUE-10
+- retrospective
+notes: Finding criado como exemplo retrospectivo do Learning Ledger; RESOLVED representa
+  a consolidação documentada, não uma nova correção nesta PR.
+created_at: '2026-06-12T00:00:00+00:00'
+created_by: ACTOR-RETRO-MIGRATION
+updated_at: '2026-06-12T00:00:00+00:00'
+updated_by: ACTOR-RETRO-MIGRATION
+resolution:
+  resolved_by: ACTOR-RETRO-MIGRATION
+  resolved_at: '2026-06-12T00:00:00+00:00'
+  corrected_artifact_version_ids:
+  - ARTIFACT-CASO-CANONICO-INTERMEDIARIO
+  validation_evidence:
+  - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md declara status
+    final consolidado e caso validado como régua canônica Intermediária.
+  - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md lista decisões
+    editoriais consolidadas sobre redistribuição das informações.
+  - docs/playtests/INTERMEDIARIO_RODADA_01_REFINAMENTO_DIEGETICO.md registra checklist
+    específico de baseline para preservar a versão refinada.
+  validation_result: confirmed

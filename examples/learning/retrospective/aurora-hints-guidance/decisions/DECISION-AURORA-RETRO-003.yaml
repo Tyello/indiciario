@@ -1,0 +1,78 @@
+schema_version: '1.0'
+learning_decision_id: DECISION-AURORA-RETRO-003
+case_id: CASO-CANONICO-INTERMEDIARIO
+case_version: RETRO-DOCUMENTED-STATE-HINTS-RODADA-01
+related_finding_ids:
+- FINDING-AURORA-RETRO-003
+primary_finding_id: FINDING-AURORA-RETRO-003
+related_session_ids:
+- SESSION-AURORA-RETRO-003
+scope:
+  level: case_only
+  description: Escopo conservador definido para não transformar observação retrospectiva
+    em regra global.
+result: case_review_candidate
+rationale:
+  summary: Preservar como candidato de Case Review para qualidade operacional das
+    dicas, sem reabrir a correção histórica do Hotel Aurora.
+  evidence_reviewed:
+  - docs/playtests/INTERMEDIARIO_RODADA_01.md
+  why_this_scope: O escopo fica limitado ao caso e à rodada documentada.
+  why_this_result: case_review_candidate permite revisar dicas futuras como apoio
+    operacional sem promover regra global automática.
+  alternatives_considered:
+  - Promover para regra global foi rejeitado por haver apenas evidência retrospectiva
+    de uma rodada documentada.
+  counter_evidence:
+  - Não há nova sessão independente nesta PR.
+  confidence: medium
+  limitations:
+  - Registro reconstruído depois dos fatos; lacunas estão declaradas na sessão e no
+    README.
+evidence_summary:
+  session_count: 1
+  finding_count: 1
+  repeated_pattern: false
+  independent_groups: false
+  evidence_strength: moderate
+  notes: Base documental única; não sustenta generalização automática.
+implementation_status: implemented
+implementation_reference: docs/playtests/INTERMEDIARIO_RODADA_01.md#7-dicas-foram-fracas
+implemented_at: '2026-06-12T00:00:00+00:00'
+implemented_by: ACTOR-RETRO-MIGRATION
+decision_risk:
+  overgeneralization_risk: high
+  undergeneralization_risk: low
+  false_positive_risk: medium
+  player_experience_risk: low
+  technical_risk: low
+  notes: Risco principal é transformar um aprendizado retrospectivo resolvido em regra
+    global sem evidência adicional.
+revalidation:
+  required: false
+  status: not_required
+intended_targets:
+- target_type: documentation
+  target_reference: docs/playtests/INTERMEDIARIO_RODADA_01.md#7-dicas-foram-fracas
+  action: investigate
+  notes: Usado como referência documental, não como alteração direta nesta PR.
+decision_authority:
+  role: reviewer
+  decision_notes: Decisão técnica da migração ISSUE-10 baseada apenas em fontes versionadas.
+decided_at: '2026-06-12T00:00:00+00:00'
+decided_by: ACTOR-RETRO-MIGRATION
+created_at: '2026-06-12T00:00:00+00:00'
+created_by: ACTOR-RETRO-MIGRATION
+updated_at: '2026-06-12T00:00:00+00:00'
+updated_by: ACTOR-RETRO-MIGRATION
+case_review_candidate:
+  review_area: progressão, dicas e facilitação
+  question_or_check: Verificar se o material operacional ajuda o grupo a avançar sem
+    entregar solução em documento de jogador.
+  target_section: objetivos_por_envelope / dicas / guia operacional
+  applicability_conditions:
+  - Caso com envelopes, dicas contextuais ou condução por facilitador.
+  reviewer_role: editorial reviewer
+  examples_needed: true
+  validation_plan: Aplicar em revisão documental futura e confirmar em playtest antes
+    de generalizar.
