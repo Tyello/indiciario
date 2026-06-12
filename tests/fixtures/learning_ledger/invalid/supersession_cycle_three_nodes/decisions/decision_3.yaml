@@ -1,0 +1,51 @@
+schema_version: '1.0'
+learning_decision_id: DECISION_C
+case_id: CASE_MIRANTE
+case_version: CASE_VERSION_001
+related_finding_ids: &id001
+- FINDING_003
+primary_finding_id: FINDING_003
+scope:
+  level: mechanic_family
+  target_ids:
+  - documentary_transition
+  description: Transições documentais.
+  applicability_conditions:
+  - Quando pistas documentais guiam progressão.
+result: heuristic
+rationale:
+  summary: Decisão humana registrada.
+  evidence_reviewed: *id001
+  why_this_scope: Escopo limitado pela evidência.
+  why_this_result: Aprendizado útil mas tentativo.
+  confidence: medium
+evidence_summary:
+  session_count: 1
+  finding_count: 1
+  repeated_pattern: false
+  independent_groups: false
+  evidence_strength: moderate
+implementation_status: not_planned
+decision_risk:
+  overgeneralization_risk: medium
+  undergeneralization_risk: low
+revalidation:
+  required: true
+  method: new_playtest
+  success_criteria:
+  - Revalidar em nova sessão.
+  minimum_sessions: 1
+  status: pending
+decided_at: '2026-06-12T12:00:00Z'
+decided_by: EDITOR_01
+created_at: '2026-06-12T11:00:00Z'
+created_by: EDITOR_01
+updated_at: '2026-06-12T13:00:00Z'
+heuristic:
+  statement: Sinalizar transições documentais críticas.
+  rationale: Reduz travamento sem dar solução.
+  applicability_conditions:
+  - Transição depender de documento específico.
+  strength: tentative
+  validation_plan: Revisar no próximo playtest.
+supersedes_decision_id: DECISION_A
