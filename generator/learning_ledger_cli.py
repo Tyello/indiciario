@@ -229,7 +229,10 @@ def _write_temp_bytes(parent: Path, prefix: str, data: bytes) -> Path:
 
 def _atomic_restore_bytes(path: Path, original: bytes) -> None:
     restore_tmp = _write_temp_bytes(path.parent, f".{path.name}.restore.", original)
-    os.replace(restore_tmp, path)
+    try:
+        os.replace(restore_tmp, path)
+    finally:
+        restore_tmp.unlink(missing_ok=True)
 
 
 def _copy_ledger_yaml_files(source: Path, target: Path) -> None:
@@ -721,11 +724,17 @@ def cmd_create_decision(args: argparse.Namespace) -> int:
     original_finding = commit_decision_transaction(decision_path, decision, finding_path, updated_finding)
     try:
         require_valid_ledger(args.ledger)
-    except Exception:
+    except Exception as validation_error:
+        try:
+            _atomic_restore_bytes(finding_path, original_finding)
+        except Exception as restore_error:
+            raise LedgerCliError(
+                "falha ao restaurar finding após erro de validação pós-commit; "
+                "ledger permaneceu no estado pós-commit para evitar vínculo órfão."
+            ) from restore_error
         if decision_path.exists() and not decision_path.is_symlink():
             decision_path.unlink()
-        _atomic_restore_bytes(finding_path, original_finding)
-        raise
+        raise validation_error
     print(f"Decisão criada: {decision_path}")
     print(f"Finding atualizado: {finding_path}")
     return EXIT_OK

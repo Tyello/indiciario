@@ -469,12 +469,15 @@ def test_create_decision_post_commit_validation_failure_restores_with_replace(tm
     create_session(ledger, capsys)
     create_finding(ledger, capsys)
     finding_path = ledger / "findings" / "FINDING-001.yaml"
+    decision_path = ledger / "decisions" / "DECISION-001.yaml"
     before = sha256(finding_path)
     import generator.learning_ledger_cli as cli
 
     real_validate = cli.validate_learning_ledger
     real_replace = cli.os.replace
+    real_unlink = Path.unlink
     replace_targets: list[Path] = []
+    events: list[str] = []
     real_ledger_calls = {"n": 0}
 
     def fake_validate(path):
@@ -487,19 +490,76 @@ def test_create_decision_post_commit_validation_failure_restores_with_replace(tm
 
     def tracking_replace(src, dst):
         replace_targets.append(Path(dst))
+        if Path(dst) == finding_path and ".restore." in Path(src).name:
+            events.append("restore_finding")
         return real_replace(src, dst)
+
+    def tracking_unlink(self, *args, **kwargs):
+        if self == decision_path:
+            events.append("remove_decision")
+        return real_unlink(self, *args, **kwargs)
 
     monkeypatch.setattr(cli, "validate_learning_ledger", fake_validate)
     monkeypatch.setattr(cli.os, "replace", tracking_replace)
+    monkeypatch.setattr(Path, "unlink", tracking_unlink)
     code, _, err = run_cli(base_decision_args(ledger), capsys)
     assert code == 1
     assert "FORCED_POST_COMMIT" in err
     assert not (ledger / "decisions" / "DECISION-001.yaml").exists()
     assert sha256(finding_path) == before
     assert finding_path in replace_targets
+    assert events == ["restore_finding", "remove_decision"]
     assert validate_learning_ledger(ledger).valid is True
     assert_no_tmp_files(ledger)
 
+
+
+def test_create_decision_restore_failure_keeps_consistent_committed_state_and_cleans_temp(tmp_path: Path, capsys, monkeypatch):
+    ledger = tmp_path / "ledger"
+    init_ledger(ledger, capsys)
+    create_session(ledger, capsys)
+    create_finding(ledger, capsys)
+    finding_path = ledger / "findings" / "FINDING-001.yaml"
+    decision_path = ledger / "decisions" / "DECISION-001.yaml"
+    original_bytes = finding_path.read_bytes()
+    original_hash = sha256(finding_path)
+    import generator.learning_ledger_cli as cli
+
+    real_validate = cli.validate_learning_ledger
+    real_replace = cli.os.replace
+    real_ledger_calls = {"n": 0}
+
+    def fake_validate(path):
+        if Path(path).resolve() == ledger.resolve():
+            real_ledger_calls["n"] += 1
+            if real_ledger_calls["n"] == 2:
+                issue = SimpleNamespace(code="FORCED_POST_COMMIT", file_path="ledger", message="forced")
+                return SimpleNamespace(valid=False, errors=[issue])
+        return real_validate(path)
+
+    def fail_only_restore_replace(src, dst):
+        if Path(dst) == finding_path and ".restore." in Path(src).name:
+            raise OSError("forced restore replace failure")
+        return real_replace(src, dst)
+
+    monkeypatch.setattr(cli, "validate_learning_ledger", fake_validate)
+    monkeypatch.setattr(cli.os, "replace", fail_only_restore_replace)
+    code, _, err = run_cli(base_decision_args(ledger), capsys)
+    assert code == 1
+    assert "falha ao restaurar finding" in err
+    assert "ledger permaneceu no estado pós-commit" in err
+    assert decision_path.exists()
+    assert finding_path.exists()
+    assert finding_path.read_bytes() != original_bytes
+    assert sha256(finding_path) != original_hash
+    updated_finding = load_yaml(finding_path)
+    assert updated_finding["generalization_status"] == "decided"
+    assert updated_finding["learning_decision_id"] == "DECISION-001"
+    assert load_yaml(decision_path)["related_finding_ids"] == ["FINDING-001"]
+    assert validate_learning_ledger(ledger).valid is True
+    assert_no_tmp_files(ledger)
+    assert list(ledger.rglob("*.backup.*")) == []
+    assert list(ledger.rglob("*.restore.*")) == []
 
 def test_decision_preserves_unrelated_finding_fields(tmp_path: Path, capsys):
     ledger = tmp_path / "ledger"
