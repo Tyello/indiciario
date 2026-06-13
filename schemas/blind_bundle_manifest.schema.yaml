@@ -1,0 +1,689 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/blind_bundle_manifest/1.0
+title: Indiciário Blind Bundle Manifest
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - manifest_id
+  - run_id
+  - bundle_id
+  - case_id
+  - case_version
+  - created_at
+  - created_by
+  - role
+  - stage
+  - bundle_context
+  - visibility_policy
+  - included_artifacts
+  - excluded_artifacts
+  - transformations
+  - output_contract
+  - isolation_check
+  - integrity
+  - semantic_limitations_acknowledged
+x-semantic-limitations-deferred-to-issue-12-or-later:
+  - artifact_paths_exist
+  - artifact_hashes_match_file_content
+  - manifest_hash_matches_content
+  - role_visibility_matrix_complete
+  - allowed_and_prohibited_categories_do_not_overlap
+  - transformation_hash_chain_valid
+  - source_artifacts_exist
+  - target_artifacts_exist
+  - isolation_check_was_actually_run
+  - no_semantic_solution_leak
+  - no_filename_based_solution_leak
+  - no_metadata_leak
+  - no_future_envelope_semantic_leak
+  - output_contract_enforced_by_runner
+  - bundle_root_exists
+  - role_instructions_exist
+  - artifact_count_matches_lists
+  - transformations_are_non_destructive
+  - manifest_id_unique
+  - bundle_id_unique
+  - run_id_exists
+properties:
+  schema_version:
+    const: '1.0'
+  manifest_id:
+    $ref: '#/$defs/neutral_id'
+  run_id:
+    $ref: '#/$defs/neutral_id'
+  bundle_id:
+    $ref: '#/$defs/neutral_id'
+  case_id:
+    $ref: '#/$defs/neutral_id'
+  case_version:
+    $ref: '#/$defs/safe_identifier'
+  parent_manifest_id:
+    $ref: '#/$defs/neutral_id'
+  source_manifest_ids:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: '#/$defs/neutral_id'
+  created_at:
+    $ref: '#/$defs/timestamp'
+  created_by:
+    $ref: '#/$defs/neutral_id'
+  updated_at:
+    $ref: '#/$defs/timestamp'
+  updated_by:
+    $ref: '#/$defs/neutral_id'
+  role:
+    $ref: '#/$defs/role'
+  stage:
+    $ref: '#/$defs/stage'
+  bundle_context:
+    $ref: '#/$defs/bundle_context'
+  visibility_policy:
+    $ref: '#/$defs/visibility_policy'
+  included_artifacts:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/included_artifact'
+  excluded_artifacts:
+    type: array
+    items:
+      $ref: '#/$defs/excluded_artifact'
+  transformations:
+    type: array
+    items:
+      $ref: '#/$defs/transformation'
+  output_contract:
+    $ref: '#/$defs/output_contract'
+  isolation_check:
+    $ref: '#/$defs/isolation_check'
+  integrity:
+    $ref: '#/$defs/integrity'
+  semantic_limitations_acknowledged:
+    type: array
+    minItems: 21
+    uniqueItems: true
+    items:
+      enum:
+        - artifact_paths_exist
+        - artifact_hashes_match_file_content
+        - manifest_hash_matches_content
+        - role_visibility_matrix_complete
+        - allowed_and_prohibited_categories_do_not_overlap
+        - transformation_hash_chain_valid
+        - source_artifacts_exist
+        - target_artifacts_exist
+        - isolation_check_was_actually_run
+        - no_semantic_solution_leak
+        - no_filename_based_solution_leak
+        - no_metadata_leak
+        - no_future_envelope_semantic_leak
+        - output_contract_enforced_by_runner
+        - bundle_root_exists
+        - role_instructions_exist
+        - artifact_count_matches_lists
+        - transformations_are_non_destructive
+        - manifest_id_unique
+        - bundle_id_unique
+        - run_id_exists
+    allOf:
+      - contains:
+          const: artifact_paths_exist
+      - contains:
+          const: artifact_hashes_match_file_content
+      - contains:
+          const: manifest_hash_matches_content
+      - contains:
+          const: role_visibility_matrix_complete
+      - contains:
+          const: allowed_and_prohibited_categories_do_not_overlap
+      - contains:
+          const: transformation_hash_chain_valid
+      - contains:
+          const: source_artifacts_exist
+      - contains:
+          const: target_artifacts_exist
+      - contains:
+          const: isolation_check_was_actually_run
+      - contains:
+          const: no_semantic_solution_leak
+      - contains:
+          const: no_filename_based_solution_leak
+      - contains:
+          const: no_metadata_leak
+      - contains:
+          const: no_future_envelope_semantic_leak
+      - contains:
+          const: output_contract_enforced_by_runner
+      - contains:
+          const: bundle_root_exists
+      - contains:
+          const: role_instructions_exist
+      - contains:
+          const: artifact_count_matches_lists
+      - contains:
+          const: transformations_are_non_destructive
+      - contains:
+          const: manifest_id_unique
+      - contains:
+          const: bundle_id_unique
+      - contains:
+          const: run_id_exists
+  notes:
+    $ref: '#/$defs/long_text'
+allOf:
+  - if:
+      properties:
+        role:
+          const: blind_solver
+      required: [role]
+    then:
+      properties:
+        visibility_policy:
+          properties:
+            allow_solution:
+              const: false
+            allow_future_envelopes:
+              const: false
+            allow_private_notes:
+              const: false
+            allow_other_agents_outputs:
+              const: false
+            contains_solution:
+              const: false
+            contains_future_envelopes:
+              const: false
+            contains_private_author_notes:
+              const: false
+            contains_other_agents_outputs:
+              const: false
+        included_artifacts:
+          allOf:
+            - not:
+                contains:
+                  properties:
+                    artifact_type:
+                      enum: [solution, answer_key]
+                  required: [artifact_type]
+            - not:
+                contains:
+                  properties:
+                    envelope_scope:
+                      const: future_envelopes
+                  required: [envelope_scope]
+            - not:
+                contains:
+                  properties:
+                    visibility:
+                      enum: [private_author, facilitator]
+                  required: [visibility]
+        output_contract:
+          properties:
+            must_not_reveal:
+              allOf:
+                - contains:
+                    const: solution
+                - contains:
+                    const: future_envelopes
+        isolation_check:
+          properties:
+            status:
+              not:
+                const: not_run
+$defs:
+  neutral_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Z0-9][A-Z0-9_-]{1,63}$'
+  safe_identifier:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Za-z0-9][A-Za-z0-9._-]{1,63}$'
+  short_text:
+    type: string
+    minLength: 1
+    maxLength: 240
+  long_text:
+    type: string
+    minLength: 1
+    maxLength: 4000
+  timestamp:
+    type: string
+    format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'
+  safe_path:
+    type: string
+    minLength: 1
+    maxLength: 240
+    pattern: '^[A-Za-z0-9._/-]+$'
+    not:
+      anyOf:
+        - pattern: '^/'
+        - pattern: '(^|/)\.\.($|/)'
+        - pattern: '//'
+  sha256:
+    type: string
+    pattern: '^[a-f0-9]{64}$'
+  role:
+    enum:
+      - blind_solver
+      - logic_reviewer
+      - narrative_reviewer
+      - evidence_reviewer
+      - visual_reviewer
+      - accessibility_reviewer
+      - adversarial_reviewer
+      - gate_evaluator
+      - facilitator
+      - human_operator
+      - technical_reviewer
+  source_role:
+    enum:
+      - author
+      - blind_solver
+      - logic_reviewer
+      - narrative_reviewer
+      - evidence_reviewer
+      - visual_reviewer
+      - accessibility_reviewer
+      - adversarial_reviewer
+      - gate_evaluator
+      - facilitator
+      - human_operator
+      - technical_reviewer
+      - system
+      - unknown
+  stage:
+    enum:
+      - case_generation
+      - preflight_review
+      - blind_solve
+      - evidence_review
+      - narrative_review
+      - visual_review
+      - accessibility_review
+      - adversarial_review
+      - gate_evaluation
+      - playtest_analysis
+      - learning_review
+      - technical_validation
+  visibility_category:
+    enum:
+      - public_player
+      - private_author
+      - review_private
+      - facilitator
+      - derived_report
+      - playtest_anonymized
+      - technical_metadata
+  artifact_type:
+    enum:
+      - case_blueprint
+      - player_document
+      - facilitator_guide
+      - envelope_cover
+      - map
+      - clue
+      - answer_key
+      - solution
+      - review_report
+      - playtest_report
+      - learning_record
+      - schema
+      - template
+      - render_output
+      - manifest
+      - other
+  envelope_scope:
+    enum:
+      - none
+      - envelope_1
+      - envelope_2
+      - envelope_3
+      - current_envelope
+      - previous_envelopes
+      - future_envelopes
+      - all_envelopes
+      - unknown
+  forbidden_content_category:
+    enum:
+      - solution
+      - future_envelopes
+      - private_author_notes
+      - other_agents_outputs
+      - facilitator_only_material
+      - answer_key
+      - hidden_metadata
+      - personal_data
+      - unknown
+  bundle_context:
+    type: object
+    additionalProperties: false
+    required: [purpose, generation_mode, offline_safe]
+    properties:
+      purpose:
+        $ref: '#/$defs/short_text'
+      role_instructions_path:
+        $ref: '#/$defs/safe_path'
+      source_root:
+        $ref: '#/$defs/safe_path'
+      bundle_root:
+        $ref: '#/$defs/safe_path'
+      generated_by:
+        $ref: '#/$defs/neutral_id'
+      generated_at:
+        $ref: '#/$defs/timestamp'
+      generation_mode:
+        enum: [manual, scripted, mixed]
+      offline_safe:
+        type: boolean
+  visibility_policy:
+    type: object
+    additionalProperties: false
+    required:
+      - allowed_categories
+      - prohibited_categories
+      - allow_solution
+      - allow_future_envelopes
+      - allow_private_notes
+      - allow_other_agents_outputs
+      - rationale
+      - contains_solution
+      - contains_future_envelopes
+      - contains_private_author_notes
+      - contains_other_agents_outputs
+    properties:
+      allowed_categories:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/visibility_category'
+      prohibited_categories:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/visibility_category'
+      allow_solution:
+        type: boolean
+      allow_future_envelopes:
+        type: boolean
+      allow_private_notes:
+        type: boolean
+      allow_other_agents_outputs:
+        type: boolean
+      allow_source_metadata:
+        type: boolean
+      contains_solution:
+        type: boolean
+      contains_future_envelopes:
+        type: boolean
+      contains_private_author_notes:
+        type: boolean
+      contains_other_agents_outputs:
+        type: boolean
+      rationale:
+        $ref: '#/$defs/long_text'
+  included_artifact:
+    type: object
+    additionalProperties: false
+    required: [artifact_id, path, artifact_type, visibility, envelope_scope, hash, hash_algorithm, source_role, included_reason]
+    properties:
+      artifact_id:
+        $ref: '#/$defs/neutral_id'
+      path:
+        $ref: '#/$defs/safe_path'
+      artifact_type:
+        $ref: '#/$defs/artifact_type'
+      visibility:
+        $ref: '#/$defs/visibility_category'
+      envelope_scope:
+        $ref: '#/$defs/envelope_scope'
+      hash:
+        $ref: '#/$defs/sha256'
+      hash_algorithm:
+        const: sha256
+      source_role:
+        $ref: '#/$defs/source_role'
+      included_reason:
+        $ref: '#/$defs/long_text'
+  excluded_artifact:
+    type: object
+    additionalProperties: false
+    required: [path, artifact_type, visibility, exclusion_reason, exclusion_category]
+    properties:
+      path:
+        $ref: '#/$defs/safe_path'
+      artifact_type:
+        $ref: '#/$defs/artifact_type'
+      visibility:
+        $ref: '#/$defs/visibility_category'
+      exclusion_reason:
+        $ref: '#/$defs/long_text'
+      exclusion_category:
+        enum: [solution_leak, future_envelope, private_author, facilitator_only, other_agent_output, irrelevant, unsafe_metadata, out_of_scope, duplicate, other]
+      exclusion_notes:
+        $ref: '#/$defs/long_text'
+    allOf:
+      - if:
+          properties:
+            exclusion_category:
+              const: other
+          required: [exclusion_category]
+        then:
+          required: [exclusion_notes]
+  transformation:
+    type: object
+    additionalProperties: false
+    required: [transformation_id, type, source_path, target_path, description, preserves_player_visible_content, hash_before, hash_after]
+    properties:
+      transformation_id:
+        $ref: '#/$defs/neutral_id'
+      type:
+        enum: [copy, rename, redact_metadata, anonymize, excerpt, render, normalize_filename, remove_solution, remove_future_content, other]
+      source_path:
+        allOf:
+          - $ref: '#/$defs/safe_path'
+          - pattern: '^(source|input|original)/'
+      target_path:
+        allOf:
+          - $ref: '#/$defs/safe_path'
+          - pattern: '^(bundle|output|sanitized)/'
+      description:
+        $ref: '#/$defs/long_text'
+      preserves_player_visible_content:
+        type: boolean
+      hash_before:
+        $ref: '#/$defs/sha256'
+      hash_after:
+        $ref: '#/$defs/sha256'
+      type_notes:
+        $ref: '#/$defs/long_text'
+      content_change_rationale:
+        $ref: '#/$defs/long_text'
+    allOf:
+      - if:
+          properties:
+            type:
+              const: other
+          required: [type]
+        then:
+          required: [type_notes]
+      - if:
+          properties:
+            preserves_player_visible_content:
+              const: false
+          required: [preserves_player_visible_content]
+        then:
+          required: [content_change_rationale]
+  output_contract:
+    type: object
+    additionalProperties: false
+    required: [expected_output_type, required_sections, prohibited_content, output_visibility, must_not_reveal, instructions]
+    properties:
+      expected_output_type:
+        enum: [blind_solution, review_report, gate_decision, issue_list, annotated_manifest, other]
+      required_sections:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/short_text'
+      prohibited_content:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/forbidden_content_category'
+      output_visibility:
+        enum: [derived_report, review_private, facilitator]
+      must_not_reveal:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/forbidden_content_category'
+      schema_path:
+        $ref: '#/$defs/safe_path'
+      instructions:
+        $ref: '#/$defs/long_text'
+  isolation_check:
+    type: object
+    additionalProperties: false
+    required: [status, checks]
+    properties:
+      status:
+        enum: [passed, failed, passed_with_warnings, not_run]
+      checked_at:
+        $ref: '#/$defs/timestamp'
+      checked_by:
+        $ref: '#/$defs/neutral_id'
+      checks:
+        type: array
+        items:
+          $ref: '#/$defs/check'
+      issues:
+        type: array
+        items:
+          $ref: '#/$defs/issue'
+      warnings:
+        type: array
+        items:
+          $ref: '#/$defs/warning'
+      not_run_reason:
+        $ref: '#/$defs/long_text'
+    allOf:
+      - if:
+          properties:
+            status:
+              enum: [passed, failed, passed_with_warnings]
+          required: [status]
+        then:
+          properties:
+            checks:
+              minItems: 1
+      - if:
+          properties:
+            status:
+              const: failed
+          required: [status]
+        then:
+          required: [issues]
+          properties:
+            issues:
+              minItems: 1
+      - if:
+          properties:
+            status:
+              const: passed_with_warnings
+          required: [status]
+        then:
+          required: [warnings]
+          properties:
+            warnings:
+              minItems: 1
+      - if:
+          properties:
+            status:
+              const: not_run
+          required: [status]
+        then:
+          required: [not_run_reason]
+  check:
+    type: object
+    additionalProperties: false
+    required: [check_id, status, description, evidence]
+    properties:
+      check_id:
+        $ref: '#/$defs/neutral_id'
+      status:
+        enum: [passed, failed, warning, not_run]
+      description:
+        $ref: '#/$defs/long_text'
+      evidence:
+        $ref: '#/$defs/long_text'
+  issue:
+    type: object
+    additionalProperties: false
+    required: [issue_id, severity, category, description, affected_artifact_ids, recommended_action]
+    properties:
+      issue_id:
+        $ref: '#/$defs/neutral_id'
+      severity:
+        enum: [low, medium, high, critical]
+      category:
+        $ref: '#/$defs/short_text'
+      description:
+        $ref: '#/$defs/long_text'
+      affected_artifact_ids:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/neutral_id'
+      recommended_action:
+        $ref: '#/$defs/long_text'
+  warning:
+    type: object
+    additionalProperties: false
+    required: [warning_id, category, description, affected_artifact_ids, recommended_action]
+    properties:
+      warning_id:
+        $ref: '#/$defs/neutral_id'
+      category:
+        $ref: '#/$defs/short_text'
+      description:
+        $ref: '#/$defs/long_text'
+      affected_artifact_ids:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/neutral_id'
+      recommended_action:
+        $ref: '#/$defs/long_text'
+  integrity:
+    type: object
+    additionalProperties: false
+    required: [hash_algorithm, artifact_count, included_count, excluded_count, transformation_count]
+    properties:
+      manifest_hash:
+        $ref: '#/$defs/sha256'
+      hash_algorithm:
+        const: sha256
+      artifact_count:
+        type: integer
+        minimum: 0
+      included_count:
+        type: integer
+        minimum: 0
+      excluded_count:
+        type: integer
+        minimum: 0
+      transformation_count:
+        type: integer
+        minimum: 0

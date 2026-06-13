@@ -1,0 +1,99 @@
+schema_version: '1.0'
+manifest_id: MANIFEST_001
+run_id: RUN_001
+bundle_id: BUNDLE_001
+case_id: CASE_001
+case_version: V1
+created_at: '2026-06-12T10:00:00Z'
+created_by: AUTHOR_01
+role: blind_solver
+stage: blind_solve
+bundle_context:
+  purpose: Prepare bounded artifacts for role-specific review.
+  role_instructions_path: instructions/ROLE.md
+  source_root: source
+  bundle_root: bundle
+  generated_by: OPERATOR_01
+  generated_at: '2026-06-12T10:00:00Z'
+  generation_mode: manual
+  offline_safe: true
+visibility_policy:
+  allowed_categories:
+  - public_player
+  prohibited_categories:
+  - private_author
+  - facilitator
+  allow_solution: false
+  allow_future_envelopes: false
+  allow_private_notes: false
+  allow_other_agents_outputs: false
+  allow_source_metadata: false
+  contains_solution: false
+  contains_future_envelopes: false
+  contains_private_author_notes: false
+  contains_other_agents_outputs: false
+  rationale: Restricts the bundle to categories allowed for the selected role.
+included_artifacts:
+- artifact_id: ART1
+  path: public/envelope_1/depoimento.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Public player-facing document available to the blind role.
+excluded_artifacts: []
+transformations: []
+output_contract:
+  expected_output_type: blind_solution
+  required_sections: []
+  prohibited_content:
+  - solution
+  - future_envelopes
+  output_visibility: derived_report
+  must_not_reveal:
+  - solution
+  - future_envelopes
+  schema_path: schemas/output.yaml
+  instructions: Return only the requested structured report without revealing prohibited
+    material.
+isolation_check:
+  status: passed
+  checked_at: '2026-06-12T10:05:00Z'
+  checked_by: OPERATOR_01
+  checks:
+  - check_id: CHK1
+    status: passed
+    description: Manifest was inspected for structural isolation.
+    evidence: Manual checklist recorded no forbidden artifacts.
+  issues: []
+  warnings: []
+integrity:
+  hash_algorithm: sha256
+  artifact_count: 1
+  included_count: 1
+  excluded_count: 0
+  transformation_count: 0
+semantic_limitations_acknowledged:
+- artifact_paths_exist
+- artifact_hashes_match_file_content
+- manifest_hash_matches_content
+- role_visibility_matrix_complete
+- allowed_and_prohibited_categories_do_not_overlap
+- transformation_hash_chain_valid
+- source_artifacts_exist
+- target_artifacts_exist
+- isolation_check_was_actually_run
+- no_semantic_solution_leak
+- no_filename_based_solution_leak
+- no_metadata_leak
+- no_future_envelope_semantic_leak
+- output_contract_enforced_by_runner
+- bundle_root_exists
+- role_instructions_exist
+- artifact_count_matches_lists
+- transformations_are_non_destructive
+- manifest_id_unique
+- bundle_id_unique
+- run_id_exists
