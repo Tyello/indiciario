@@ -57,7 +57,110 @@ Se o arquivo necessário não estiver em `Contexto permitido`, não leia.
 
 ---
 
-## Regras obrigatórias
+## Regras obrigatórias por tipo
+
+### Type: reading
+
+Pode apenas ler arquivos permitidos e gerar execution report.
+
+Não pode:
+
+* alterar implementação;
+* criar testes;
+* rodar pytest;
+* criar schema;
+* criar harness.
+
+### Type: baseline
+
+Pode apenas rodar comandos de baseline permitidos e registrar resultado.
+
+Não pode:
+
+* alterar implementação;
+* criar testes;
+* corrigir falhas;
+* rodar comandos fora da lista.
+
+### Type: red
+
+Pode criar ou alterar somente testes/fixtures/schema-test permitidos pelo step.
+
+Deve produzir testes que falhem pelo comportamento ausente ou incompleto.
+
+Não pode:
+
+* criar implementação principal;
+* fazer GREEN no mesmo step;
+* alterar arquivos de produção, salvo se o step explicitamente permitir fixture/schema de teste;
+* mascarar falhas com skip/mock indevido.
+
+### Type: green
+
+Pode criar ou alterar implementação mínima para passar testes RED anteriores.
+
+Não pode:
+
+* criar novos testes de escopo relevante;
+* expandir escopo;
+* refatorar além do necessário;
+* alterar arquivos fora da allowlist.
+
+### Type: refactor
+
+Pode reorganizar código sem alterar comportamento.
+
+Não pode:
+
+* adicionar novo comportamento;
+* adicionar novos casos de teste de escopo relevante;
+* alterar API pública sem autorização.
+
+### Type: documentation
+
+Pode criar/alterar documentação permitida.
+
+Não pode:
+
+* alterar código;
+* alterar testes;
+* rodar suíte completa, salvo se explicitamente permitido.
+
+### Type: validation
+
+Pode rodar comandos de validação permitidos.
+
+Não pode:
+
+* corrigir falhas;
+* alterar código;
+* alterar testes;
+* alterar documentação, salvo relatório permitido.
+
+### Type: wrap-up
+
+Pode atualizar resumo final, issue e reports permitidos.
+
+Não pode:
+
+* alterar implementação;
+* rodar novos testes;
+* criar novos arquivos de produto.
+
+### Type: correction
+
+Leia o review source e corrija somente as divergências autorizadas.
+
+Não pode:
+
+* implementar melhorias adicionais;
+* resolver divergências não listadas;
+* avançar step;
+* aprovar a própria correção.
+
+---
+
+## Regras globais
 
 Você pode:
 
@@ -148,6 +251,7 @@ Formato obrigatório:
 # Execution Report — ISSUE-XX STEP-N
 
 STEP: STEP-N
+STEP_TYPE: reading | baseline | red | green | refactor | documentation | validation | wrap-up | correction
 EXECUTION_STATUS: completed | blocked
 EXECUTOR: qwen3.6-ctx16k:35b-a3b
 
@@ -172,6 +276,16 @@ EXECUTOR: qwen3.6-ctx16k:35b-a3b
 
 - [bullet objetivo]
 - [bullet objetivo]
+
+## Evidência de aderência ao tipo do step
+
+- Para reading: confirmar que só houve leitura/report.
+- Para baseline: listar comandos de baseline.
+- Para red: confirmar que não houve implementação GREEN.
+- Para green: confirmar que implementou apenas o mínimo.
+- Para refactor: confirmar que comportamento não mudou.
+- Para validation: listar validações executadas.
+- Para correction: listar DVG-* corrigidas.
 
 ## Divergências
 
@@ -219,13 +333,16 @@ Pare imediatamente se:
 
 * `NEXT_ACTION` não for `execute`;
 * `CURRENT_STEP` não existir;
+* o step não tiver `Type`;
+* o step usar `Type: Red-Green`;
 * o step não tiver `Contexto permitido`;
 * o step não tiver `Arquivos editáveis`;
 * o step não tiver `Comandos permitidos`;
 * precisar ler arquivo fora do contexto permitido;
 * precisar editar arquivo fora da allowlist;
 * precisar rodar comando fora da allowlist;
-* a spec longa for necessária mas não estiver permitida.
+* a spec longa for necessária mas não estiver permitida;
+* o step misturar RED e GREEN.
 
 Nesses casos, escreva execution report com `EXECUTION_STATUS: blocked` e explique o motivo.
 

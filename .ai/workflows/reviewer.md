@@ -18,7 +18,7 @@ Você não cria PR.
 
 Uma chamada = revisão de um único `CURRENT_STEP`.
 
-Você deve validar o que o executor fez contra o contrato do step, o execution report e o git diff.
+Você deve validar o que o executor fez contra o contrato do step, o tipo do step, o execution report e o git diff.
 
 A decisão deve ser formal:
 
@@ -78,18 +78,99 @@ Valide obrigatoriamente:
 
 1. O executor executou o `CURRENT_STEP`, não outro step.
 2. O execution report existe.
-3. Os arquivos lidos estão dentro de `Contexto permitido`.
-4. Os arquivos alterados estão dentro de `Arquivos editáveis`.
-5. Os comandos executados estão dentro de `Comandos permitidos`.
-6. O git diff está limitado ao escopo do step.
-7. Nenhum arquivo fora do escopo foi alterado.
-8. Nenhuma lógica fora do escopo foi implementada.
-9. O executor não avançou `CURRENT_STEP`.
-10. O executor não marcou aprovação.
-11. Os critérios de `Done quando` foram atendidos.
-12. Os critérios de `Revisão` foram atendidos.
-13. O executor não disse que testes passaram sem evidência.
-14. O estilo e padrões do projeto foram respeitados quando aplicável.
+3. O step tem `Type` válido.
+4. O step não usa `Type: Red-Green`.
+5. Os arquivos lidos estão dentro de `Contexto permitido`.
+6. Os arquivos alterados estão dentro de `Arquivos editáveis`.
+7. Os comandos executados estão dentro de `Comandos permitidos`.
+8. O git diff está limitado ao escopo do step.
+9. Nenhum arquivo fora do escopo foi alterado.
+10. Nenhuma lógica fora do escopo foi implementada.
+11. O executor não avançou `CURRENT_STEP`.
+12. O executor não marcou aprovação.
+13. Os critérios de `Done quando` foram atendidos.
+14. Os critérios de `Revisão` foram atendidos.
+15. O executor não disse que testes passaram sem evidência.
+16. O estilo e padrões do projeto foram respeitados quando aplicável.
+
+---
+
+## Verificações por tipo
+
+### Type: reading
+
+Aprove somente se:
+
+* nenhum arquivo de implementação foi alterado;
+* nenhum teste foi criado;
+* nenhum comando não permitido foi executado;
+* execution report lista arquivos lidos.
+
+### Type: baseline
+
+Aprove somente se:
+
+* somente comandos permitidos foram executados;
+* nenhuma implementação foi alterada;
+* resultados foram registrados.
+
+### Type: red
+
+Aprove somente se:
+
+* foram criados/alterados apenas testes, fixtures ou arquivos permitidos;
+* não houve implementação GREEN;
+* os testes representam comportamento ausente/incompleto;
+* se o step exigia falha RED, a falha foi registrada ou o comando permitido foi executado.
+
+Reprove como `major` se houver implementação junto com RED.
+
+### Type: green
+
+Aprove somente se:
+
+* implementação mínima foi feita;
+* não houve criação de novos testes de escopo relevante;
+* alterações ficaram dentro da allowlist;
+* comandos permitidos demonstram que o GREEN foi atingido, quando exigido.
+
+### Type: refactor
+
+Aprove somente se:
+
+* não houve comportamento novo;
+* não houve API nova;
+* testes permitidos continuam passando, quando exigido.
+
+### Type: documentation
+
+Aprove somente se:
+
+* só documentação permitida foi alterada;
+* não houve código/testes fora do escopo.
+
+### Type: validation
+
+Aprove somente se:
+
+* somente comandos de validação permitidos foram executados;
+* nenhuma correção foi feita;
+* resultados foram registrados.
+
+### Type: wrap-up
+
+Aprove somente se:
+
+* apenas resumo, issue ou reports permitidos foram atualizados;
+* não houve alteração de implementação.
+
+### Type: correction
+
+Aprove somente se:
+
+* todas as divergências DVG-* do review source foram endereçadas;
+* nenhum escopo novo foi introduzido;
+* alterações ficaram dentro da allowlist de correção.
 
 ---
 
@@ -109,6 +190,7 @@ Formato:
 # Review Report — ISSUE-XX STEP-N
 
 STEP: STEP-N
+STEP_TYPE: reading | baseline | red | green | refactor | documentation | validation | wrap-up | correction
 REVIEW_STATUS: approved
 SEVERITY: none
 REVIEWER: qwen3.6-ctx16k:35b-a3b
@@ -131,9 +213,11 @@ REVIEWER: qwen3.6-ctx16k:35b-a3b
 ## Verificações
 
 - [x] Execution report existe
+- [x] Type do step é válido
 - [x] Arquivos alterados dentro do escopo
 - [x] Comandos executados dentro do permitido
 - [x] Critérios de done atendidos
+- [x] Critérios específicos do tipo atendidos
 - [x] Nenhum escopo extra detectado
 
 ## Divergências
@@ -198,6 +282,7 @@ Formato obrigatório:
 # Review Report — ISSUE-XX STEP-N
 
 STEP: STEP-N
+STEP_TYPE: reading | baseline | red | green | refactor | documentation | validation | wrap-up | correction
 REVIEW_STATUS: rejected
 SEVERITY: minor | major | critical
 REVIEWER: qwen3.6-ctx16k:35b-a3b
@@ -222,6 +307,7 @@ REVIEWER: qwen3.6-ctx16k:35b-a3b
 - [x] Execution report existe
 - [ ] Arquivos alterados dentro do escopo
 - [ ] Critérios de done atendidos
+- [ ] Critérios específicos do tipo atendidos
 
 ## Divergências
 
@@ -299,6 +385,7 @@ Problemas de escopo corrigíveis, como:
 * critério de done não atendido;
 * comando não permitido executado sem dano;
 * implementação feita no step RED;
+* RED e GREEN misturados;
 * alteração maior que o permitido, mas reversível.
 
 ### critical
