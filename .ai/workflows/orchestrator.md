@@ -17,6 +17,16 @@ Sua responsabilidade é conduzir o loop completo de uma issue até `STATUS: done
 
 ---
 
+## Gestão de contexto
+
+Ao iniciar cada step, resuma o histórico anterior em no máximo 3 linhas
+e descarte o restante do histórico da conversa. Mantenha apenas:
+- O resumo do histórico
+- O arquivo .ai/issues/ISSUE-XX.md atualizado
+- O prompt do step atual
+
+---
+
 ## Princípio central
 
 Você conduz o loop autonomamente, invocando executor e revisor como subagentes via ferramenta `Task` do Claude Code, até a issue estar concluída ou bloqueada.
