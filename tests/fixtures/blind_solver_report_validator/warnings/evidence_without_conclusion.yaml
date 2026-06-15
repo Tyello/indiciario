@@ -1,0 +1,19 @@
+schema_version: '1.0'
+solver_run_id: SOLVER_RUN_RV_007
+solver_id: SOLVER_STUB_001
+bundle_id: BUNDLE_TEST_001
+manifest_id: MANIFEST_TEST_001
+created_at: '2026-06-14T00:00:00Z'
+conclusion: ''
+confidence: low
+reasoning_summary: A evidencia publica aponta um indicio do desvio, mas a hipotese ainda nao foi fechada e por isso nenhuma conclusao foi registrada.
+evidence_used:
+  - artifact_id: ART_PUBLIC_001
+    path: player/depoimento.md
+    quote_or_summary: Depoimento publico citando o desvio da reserva.
+    relevance: Indicio do desvio descrito pelo depoente.
+    confidence: medium
+open_questions:
+  - Falta confirmar quem assinou o recibo divergente.
+assumptions: []
+warnings: []
