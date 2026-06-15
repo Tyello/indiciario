@@ -1,0 +1,172 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/blind_solve_run_record/1.0
+title: Indiciário Blind Solve Run Record
+description: >-
+  Structural contract for a traceable blind solve run record. It links the
+  bundle, manifest and solver to the frozen BlindSolverReport produced, the
+  artifacts accessed during execution, the denied access attempts, the harness
+  warnings and the post-execution validation outcome. It never judges whether
+  the conclusion is correct (that is the Gate Evaluator) and forbids any extra
+  top-level field via additionalProperties:false.
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - run_id
+  - bundle_id
+  - manifest_id
+  - solver_id
+  - created_at
+  - created_by
+  - environment
+  - execution
+  - report
+  - accessed_artifacts
+  - denied_access_attempts
+  - harness_warnings
+  - validation
+properties:
+  schema_version:
+    const: '1.0'
+  run_id:
+    $ref: '#/$defs/neutral_id'
+  bundle_id:
+    $ref: '#/$defs/neutral_id'
+  manifest_id:
+    $ref: '#/$defs/neutral_id'
+  solver_id:
+    $ref: '#/$defs/neutral_id'
+  created_at:
+    $ref: '#/$defs/timestamp'
+  created_by:
+    type: string
+    minLength: 1
+  environment:
+    type: object
+    additionalProperties: false
+    required:
+      - offline
+      - llm_used
+      - internet_used
+    properties:
+      offline:
+        type: boolean
+      llm_used:
+        type: boolean
+      internet_used:
+        type: boolean
+  execution:
+    type: object
+    additionalProperties: false
+    required:
+      - started_at
+      - finished_at
+      - duration_seconds
+      - status
+      - failure_reason
+    properties:
+      started_at:
+        $ref: '#/$defs/timestamp'
+      finished_at:
+        $ref: '#/$defs/timestamp'
+      duration_seconds:
+        type: integer
+        minimum: 0
+      status:
+        enum:
+          - completed
+          - failed
+          - aborted
+      failure_reason:
+        type:
+          - string
+          - 'null'
+    if:
+      properties:
+        status:
+          const: completed
+    then:
+      properties:
+        failure_reason:
+          type: 'null'
+    else:
+      properties:
+        failure_reason:
+          type: string
+          minLength: 1
+  report:
+    type: object
+  accessed_artifacts:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - artifact_id
+        - path
+        - accessed_at
+      properties:
+        artifact_id:
+          $ref: '#/$defs/neutral_id'
+        path:
+          type: string
+          minLength: 1
+        accessed_at:
+          $ref: '#/$defs/timestamp'
+  denied_access_attempts:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - requested_path
+        - reason
+        - attempted_at
+      properties:
+        requested_path:
+          type: string
+          minLength: 1
+        reason:
+          type: string
+          minLength: 1
+        attempted_at:
+          $ref: '#/$defs/timestamp'
+  harness_warnings:
+    type: array
+    items:
+      type: string
+  validation:
+    type: object
+    additionalProperties: false
+    required:
+      - report_schema_valid
+      - report_semantic_valid
+      - semantic_errors
+      - semantic_warnings
+    properties:
+      report_schema_valid:
+        type: boolean
+      report_semantic_valid:
+        type: boolean
+      semantic_errors:
+        type: array
+      semantic_warnings:
+        type: array
+  gate_decision:
+    type:
+      - object
+      - 'null'
+  reviewer_findings:
+    type: array
+  notes:
+    type: string
+$defs:
+  neutral_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Z0-9][A-Z0-9_-]{1,63}$'
+  timestamp:
+    type: string
+    format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'

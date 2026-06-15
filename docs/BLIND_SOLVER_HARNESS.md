@@ -156,6 +156,61 @@ Placeholders vagos considerados em `RV_006` (substring, case-insensitive):
 O limiar de `RV_008` é 3 itens de evidência com `confidence: high`; com
 `confidence: medium` (ou menos de 3 evidências high) a condição não dispara.
 
+## Blind Solve Run Record (ISSUE-18)
+
+O **run record** é o registro rastreável de uma execução cega completa. Ele
+liga, em um único artefato auditável, o bundle usado, o manifest, o solver, o
+report produzido, os artefatos efetivamente acessados, as tentativas de acesso
+negadas, os warnings do harness e o resultado da validação semântica do report.
+Não chama LLM, não acessa a internet e **não muta** os inputs.
+
+### API pública
+
+`generator/blind_solve_run_record.py` expõe duas funções:
+
+```python
+def build_run_record(harness_result, request, validator_result,
+                     created_by=None, notes=None) -> dict: ...
+def validate_run_record(record) -> list[str]: ...
+```
+
+- `build_run_record` monta o dict do run record a partir do
+  `BlindSolverHarnessResult`, do `BlindSolverHarnessRequest` e do
+  `ReportValidationResult` (ISSUE-17). Não muta os inputs.
+- `validate_run_record` valida o record contra
+  `schemas/blind_solve_run_record.schema.yaml` e retorna uma lista de erros
+  (vazia quando o record é válido).
+
+### O que o run record liga
+
+- `bundle_id` / `manifest_id` — copiados do report embutido (batem com o
+  manifest do bundle).
+- `solver_id` e `run_id` — identidade do solver e da execução; `run_id` bate com
+  o `solver_run_id` do report.
+- `report` — o `BlindSolverReport` embutido na íntegra.
+- `accessed_artifacts` — artefatos efetivamente lidos pelo solver, refletindo os
+  acessos registrados pelo harness.
+- `denied_access_attempts` — tentativas de acesso bloqueadas pelo harness.
+- `harness_warnings` — warnings emitidos pelo harness durante a execução.
+- `validation` — resultado da validação do report: `report_schema_valid`,
+  `report_semantic_valid`, `semantic_errors`, `semantic_warnings`.
+- `environment` — defaults honestos da execução cega offline:
+  `offline=True`, `llm_used=False`, `internet_used=False`.
+- `execution` — `status` (`completed` por padrão), `duration_seconds` (inteiro
+  `>= 0`) e `failure_reason` (obrigatório quando `status != completed`).
+
+### Campos preenchidos por agentes posteriores
+
+- `gate_decision` — `null` por padrão. Será preenchido pelo **Gate Evaluator**
+  (Fase E, ISSUE-19+), que decide se o caso é justo dado o bundle cego.
+- `reviewer_findings` — lista vazia por padrão. Será preenchida pelos revisores
+  especializados (Fase F): narrative, evidence, visual, accessibility.
+
+O run record é, portanto, o ponto de junção entre a execução cega (ISSUE-16/17)
+e as decisões de avaliação posteriores: o harness produz o output cego, o run
+record o torna rastreável, e os agentes de gate/review anexam suas decisões sem
+reabrir a execução.
+
 ## Próximos passos
 
 - **ISSUE-17 — Blind Solver Report Validator**: validador dedicado que aprofunda
