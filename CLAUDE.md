@@ -5,6 +5,13 @@ Ele complementa `AGENTS.md` com contexto de produto, estado atual e roadmap prio
 
 ---
 
+## Modo de comunicação
+
+Use caveman mode em todas as respostas desta sessão.
+Drop articles, filler, pleasantries. Keep technical substance exact.
+
+---
+
 ## Protocolo obrigatório
 
 Antes de executar qualquer tarefa:

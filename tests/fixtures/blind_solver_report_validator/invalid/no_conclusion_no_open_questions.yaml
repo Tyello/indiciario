@@ -1,0 +1,13 @@
+schema_version: '1.0'
+solver_run_id: SOLVER_RUN_RV_005
+solver_id: SOLVER_STUB_001
+bundle_id: BUNDLE_TEST_001
+manifest_id: MANIFEST_TEST_001
+created_at: '2026-06-14T00:00:00Z'
+conclusion: ''
+confidence: low
+reasoning_summary: A analise nao chegou a uma conclusao e tambem nao registrou perguntas em aberto, deixando o report sem direcao.
+evidence_used: []
+open_questions: []
+assumptions: []
+warnings: []

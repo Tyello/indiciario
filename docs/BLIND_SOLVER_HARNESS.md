@@ -82,6 +82,80 @@ declarada (arquivo não declarado, `excluded_artifact`, path traversal, arquivo
 externo) é registrada como acesso negado e **falha** com `BlindSolverHarnessError`,
 porque acesso proibido é quebra do protocolo cego.
 
+## Validator standalone do report (ISSUE-17)
+
+`generator/blind_solver_report_validator.py` é um validador **standalone** que pode
+ser chamado independentemente do harness. Ele opera **somente sobre o dict do
+report**: não precisa de bundle, manifest nem context. Não chama LLM, não acessa a
+internet, não julga se a conclusão está *correta* e **não modifica** o report
+recebido. Sobre a validação estrutural já feita pelo schema, ele adiciona uma
+camada semântica (coerência interna) e uma camada de qualidade (warnings).
+
+### API pública
+
+```python
+def validate_report(report: Mapping[str, Any]) -> ReportValidationResult: ...
+```
+
+- Aceita `dict` ou qualquer `Mapping` (uma cópia rasa é passada ao schema
+  validator para suportar mappings somente-leitura sem mutar a entrada).
+- Retorna um `ReportValidationResult` imutável.
+
+```python
+class ReportValidationErrorKind(str, Enum):
+    STRUCTURAL = "structural"   # violação de schema
+    SEMANTIC   = "semantic"     # incoerência interna (blocante)
+    QUALITY    = "quality"      # report válido mas provavelmente inútil (warning)
+
+@dataclass(frozen=True)
+class ReportValidationError:
+    kind: ReportValidationErrorKind
+    code: str        # ex: "RV_001"
+    field: str       # campo afetado, ex: "reasoning_summary"
+    message: str     # mensagem legível
+
+@dataclass(frozen=True)
+class ReportValidationResult:
+    valid: bool
+    errors: tuple[ReportValidationError, ...]    # apenas blocantes
+    warnings: tuple[ReportValidationError, ...]  # apenas quality
+```
+
+`ReportValidationError` e `ReportValidationResult` são `frozen=True` (imutáveis).
+`valid` é `True` quando não há `errors` blocantes — `warnings` nunca tornam o
+report inválido.
+
+### Categorias structural / semantic / quality
+
+- **structural** — `RV_001`. Delega a
+  `validate_blind_solver_report` (do harness). Se há erro de schema, ele vira o
+  único finding (`valid=False`) e **curto-circuita** as checagens semânticas e de
+  qualidade, porque elas assumem um report estruturalmente válido.
+- **semantic** — `RV_002`–`RV_005` e `RV_008`. São **blocantes**: qualquer um
+  deles faz `valid=False`. Detectam incoerências internas do report.
+- **quality** — `RV_006` e `RV_007`. São **warnings**: vão para `warnings`, nunca
+  para `errors`, e **não** tornam `valid=False`.
+
+### Códigos RV_001–RV_008
+
+| Código | Categoria | Campo (`field`) | Condição | Efeito |
+|---|---|---|---|---|
+| `RV_001` | structural | `<schema>` | Schema inválido (delegado a `validate_blind_solver_report`). | `valid=False`; único finding; curto-circuita o resto. |
+| `RV_002` | semantic | `evidence_used` | `conclusion` não vazia e `evidence_used` vazio. | `valid=False` |
+| `RV_003` | semantic | `confidence` | `confidence == "high"` e `evidence_used` vazio. | `valid=False` |
+| `RV_004` | semantic | `open_questions` | `confidence == "high"` e `open_questions` não vazio. | `valid=False` |
+| `RV_005` | semantic | `conclusion` | `conclusion` vazia e `open_questions` vazio. | `valid=False` |
+| `RV_006` | quality | `reasoning_summary` | `reasoning_summary` contém apenas um placeholder vago (match de substring, case-insensitive). | warning; `valid` inalterado |
+| `RV_007` | quality | `conclusion` | `evidence_used` não vazio e `conclusion` vazia. | warning; `valid` inalterado |
+| `RV_008` | semantic | `confidence` | `confidence == "low"` e `evidence_used` tem 3+ itens com `confidence: high`. | `valid=False` |
+
+Placeholders vagos considerados em `RV_006` (substring, case-insensitive):
+`"inconclusivo"`, `"sem conclusão"`, `"não foi possível"`, `"insuficiente"`,
+`"n/a"`, `"pendente"`, `"a definir"`.
+
+O limiar de `RV_008` é 3 itens de evidência com `confidence: high`; com
+`confidence: medium` (ou menos de 3 evidências high) a condição não dispara.
+
 ## Próximos passos
 
 - **ISSUE-17 — Blind Solver Report Validator**: validador dedicado que aprofunda

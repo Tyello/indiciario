@@ -3,14 +3,14 @@
 ## Estado
 
 ```
-STATUS: waiting_review
-CURRENT_STEP: STEP-01
-NEXT_ACTION: review
-REVIEW_STATUS: pending
-LAST_COMPLETED_STEP: STEP-00
-LAST_EXECUTION_REPORT: .ai/runs/ISSUE-17/STEP-01_EXECUTION.md
-LAST_REVIEW_REPORT: none
-BLOCKER: none
+STATUS: done
+CURRENT_STEP: STEP-13
+NEXT_ACTION: human
+REVIEW_STATUS: approved
+LAST_COMPLETED_STEP: STEP-13
+LAST_EXECUTION_REPORT: .ai/runs/ISSUE-17/STEP-13_EXECUTION.md
+LAST_REVIEW_REPORT: .ai/runs/ISSUE-17/STEP-13_REVIEW.md
+BLOCKER: none (DVG-001 waived; CLAUDE.md mantido out-of-band, fora do commit da ISSUE-17)
 ```
 
 ## Contexto
@@ -558,8 +558,98 @@ Revisão:
 Dependências:
 - STEP-12
 
+### STEP-11_FIX-01 — Correção: registrar waiver de DVG-001 (CLAUDE.md)
+
+Status: pending
+Owner: executor
+Type: correction
+Review source: .ai/runs/ISSUE-17/STEP-11_REVIEW.md
+
+Objetivo:
+- Endereçar DVG-001 do STEP-11_REVIEW. Decisão humana (Marcelo, 2026-06-14): NÃO reverter CLAUDE.md; a edição "Modo de comunicação" será mantida intencionalmente, tratada como mudança out-of-band, e NÃO entrará no commit da ISSUE-17.
+- Registrar essa resolução no fix execution report. Confirmar que o deliverable do STEP-11 (seção do validator standalone em docs/BLIND_SOLVER_HARNESS.md) permanece intacto e correto (já aprovado isoladamente no review).
+- NÃO alterar CLAUDE.md, código, testes, fixtures ou a doc.
+
+Contexto permitido:
+- .ai/issues/ISSUE-17.md
+- .ai/runs/ISSUE-17/STEP-11_REVIEW.md
+- .ai/runs/ISSUE-17/STEP-11_EXECUTION.md
+
+Arquivos editáveis:
+- .ai/runs/ISSUE-17/STEP-11_FIX-01_EXECUTION.md (somente relatório)
+
+Comandos permitidos:
+- nenhum
+
+Proibido:
+- Reverter ou alterar CLAUDE.md.
+- Alterar código, testes, fixtures ou docs.
+
+Done quando:
+- O fix execution report registra a resolução de DVG-001 por waiver humano e confirma que o deliverable do STEP-11 está intacto.
+
+Revisão:
+- Confirmar que DVG-001 foi endereçada (waiver humano registrado), que nenhum arquivo além do fix report foi alterado, e que a doc do STEP-11 permanece correta.
+
+Dependências:
+- STEP-11
+
 ## Histórico
 
 - Issue criada; aguardando orquestração inicial.
 - STEP-00 orquestrado: spec quebrada em 13 steps pequenos (reading, baseline, 6 RED separados por grupo/fixtures, GREEN, refactor, documentation, validation, wrap-up); sem `Type: Red-Green`; RED e GREEN separados; validação e wrap-up isolados. Próximo passo é STEP-01.
 - STEP-01 executado pelo executor (reading); contrato/schema/fixtures mapeados; aguardando revisão.
+- STEP-01 aprovado pelo revisor (reading, severity none); orquestrador avançou para STEP-02.
+- STEP-02 executado (baseline); 910 passed, 3 skipped, 5 falhas conhecidas de symlink (Windows/admin); módulos-alvo verdes.
+- STEP-02 aprovado pelo revisor (baseline, severity none); orquestrador avançou para STEP-03.
+- STEP-03 executado (RED, 10 testes inline); falha por ModuleNotFoundError esperado.
+- STEP-03 aprovado pelo revisor (red, severity none); orquestrador avançou para STEP-04.
+- STEP-04 executado (RED, 8 testes novos); falha por ModuleNotFoundError esperado.
+- STEP-04 aprovado pelo revisor (red, severity none); orquestrador avançou para STEP-05.
+- STEP-05 executado (RED, 6 testes de contrato/imutabilidade); falha por ModuleNotFoundError esperado.
+- STEP-05 aprovado pelo revisor (red, severity none); orquestrador avançou para STEP-06.
+- STEP-06 executado (RED, 4 fixtures valid/warnings + testes); falha por ModuleNotFoundError esperado.
+- STEP-06 aprovado pelo revisor (red, fixtures verificadas contra schema, severity none); orquestrador avançou para STEP-07.
+- STEP-07 executado (RED, 3 fixtures invalid RV_002/003/004 + teste parametrizado); falha por ModuleNotFoundError esperado.
+- STEP-07 aprovado pelo revisor (red, validade estrutural verificada, severity none); orquestrador avançou para STEP-08.
+- STEP-08 executado (RED, 3 fixtures invalid RV_005/008/001 + teste estendido); falha por ModuleNotFoundError esperado.
+- STEP-08 aprovado pelo revisor (red, RV_001 confirmado contra schema, severity none); orquestrador avançou para STEP-09.
+- STEP-09 executado (GREEN, validator implementado); 34 passed, ruff limpo.
+- STEP-09 aprovado pelo revisor (green, reuso e imutabilidade confirmados, severity none); orquestrador avançou para STEP-10.
+- STEP-10 executado (REFACTOR, helpers/constantes internos); 34 passed, ruff limpo, comportamento preservado.
+- STEP-10 aprovado pelo revisor (refactor, API e comportamento preservados, severity none); orquestrador avançou para STEP-11.
+- STEP-01 aprovado pelo revisor; aguardando orquestrador.
+- STEP-02 executado pelo executor (baseline); módulos da issue verdes (28+25), suíte completa com apenas as 5 falhas de symlink conhecidas no Windows; aguardando revisão.
+- STEP-02 aprovado pelo revisor; aguardando orquestrador.
+- STEP-03 executado pelo executor (RED); 10 testes inline criados; falham por ModuleNotFoundError de generator.blind_solver_report_validator; aguardando revisão.
+- STEP-03 aprovado pelo revisor; aguardando orquestrador.
+- STEP-04 executado pelo executor (RED); 8 testes inline de warnings/múltiplos erros/negativos criados; falham por ModuleNotFoundError de generator.blind_solver_report_validator; aguardando revisão.
+- STEP-04 aprovado pelo revisor; aguardando orquestrador.
+- STEP-05 executado pelo executor (RED); 6 testes inline de contrato de API e imutabilidade criados; falham por ModuleNotFoundError de generator.blind_solver_report_validator; aguardando revisão.
+- STEP-05 aprovado pelo revisor; aguardando orquestrador.
+- STEP-06 executado pelo executor (RED); 4 fixtures (2 valid, 2 warnings) criadas em tests/fixtures/blind_solver_report_validator/ e 3 testes de carga adicionados; falham por ModuleNotFoundError de generator.blind_solver_report_validator; aguardando revisão.
+- STEP-06 aprovado pelo revisor; aguardando orquestrador.
+- STEP-07 executado pelo executor (RED); 3 fixtures invalid (RV_002/RV_003/RV_004) criadas em tests/fixtures/blind_solver_report_validator/invalid/ e teste parametrizado adicionado; falha por ModuleNotFoundError de generator.blind_solver_report_validator; aguardando revisão.
+- STEP-07 aprovado pelo revisor (red, severity none); fixtures estruturalmente válidas confirmadas via schema validator, teste usa membership (não exclusividade); aguardando orquestrador.
+- STEP-08 executado pelo executor (RED); 3 fixtures invalid (RV_005/RV_008/RV_001) criadas em tests/fixtures/blind_solver_report_validator/invalid/ e parametrização estendida; falha por ModuleNotFoundError de generator.blind_solver_report_validator; aguardando revisão.
+- STEP-08 aprovado pelo revisor (red, severity none); missing_required_field viola schema (RV_001 confirmado via validate_blind_solver_report), as outras duas estruturalmente válidas (RV_005/RV_008 semânticas), membership confirmada; aguardando orquestrador.
+- STEP-09 executado pelo executor (green); criado generator/blind_solver_report_validator.py com RV_001 (delegado/curto-circuito), RV_002–RV_005 e RV_008 blocantes, RV_006/RV_007 warnings quality; 34 passed, ruff limpo; aguardando revisão.
+- STEP-09 aprovado pelo revisor (green, severity none); reuso de validate_blind_solver_report confirmado, harness/schema intactos, warnings não invalidam, input não mutado, dataclasses frozen, 34/34 passam e ruff limpo; aguardando orquestrador.
+- STEP-10 executado pelo executor (refactor); extraídos helpers (_ReportFields, _extract_fields, _semantic, _quality), placeholders pré-casefold e mapa de códigos RV_* documentado; comportamento e API pública inalterados; 34 passed, ruff limpo; aguardando revisão.
+- STEP-10 aprovado pelo revisor (refactor, severity none); sem comportamento/API novos, novidades internas (prefixo _), mensagem RV_008 preservada, 34/34 passam e ruff limpo; aguardando orquestrador.
+- STEP-11 executado pelo executor (documentation); seção do validator standalone adicionada a docs/BLIND_SOLVER_HARNESS.md (API pública, RV_001–RV_008, distinção structural/semantic/quality); aguardando revisão.
+- STEP-11 reprovado pelo revisor (major); DVG-001: CLAUDE.md alterado fora do escopo (seção "Modo de comunicação"/caveman mode); doc do validator aprovada isoladamente.
+- Orquestrador: usuário (Marcelo) decidiu MANTER a edição de CLAUDE.md; DVG-001 waived e tratada como mudança out-of-band fora do commit da ISSUE-17. Criado STEP-11_FIX-01 (correction) para registrar a resolução sem reverter CLAUDE.md.
+- STEP-11_FIX-01 executado (correction); waiver de DVG-001 registrado, nenhum arquivo revertido, deliverable do STEP-11 intacto.
+- STEP-11_FIX-01 aprovado pelo revisor (correction, severity none); STEP-11 resolvido; orquestrador avançou para STEP-12.
+- STEP-12 executado (VALIDATION); validator 34/34, suíte 944 passed/3 skipped/5 symlink conhecidas, ruff limpo, escopo restrito (CLAUDE.md out-of-band aceito).
+- STEP-12 aprovado pelo revisor (validation, severity none); orquestrador avançou para STEP-13.
+- STEP-13 executado (WRAP-UP); relatório final cobrindo todos os itens da spec.
+- STEP-13 aprovado pelo revisor (wrap-up, severity none); todos os steps concluídos.
+- ISSUE-17 concluída (STATUS: done); próxima issue recomendada: ISSUE-18.
+- STEP-11_FIX-01 executado pelo executor (correction); DVG-001 resolvida por waiver humano (CLAUDE.md mantido, sem alteração de arquivos); deliverable do STEP-11 confirmado intacto; aguardando revisão.
+- STEP-11_FIX-01 aprovado pelo revisor (correction, severity none); DVG-001 endereçada via waiver humano, CLAUDE.md não revertido nem mais alterado, apenas fix report + campos da issue tocados, deliverable do STEP-11 intacto; aguardando orquestrador.
+- STEP-12 executado pelo executor (validation); ruff limpo, validator 100% verde (34/34), suíte completa 944 passed/3 skipped/5 failed (só as 5 falhas de symlink Windows conhecidas, sem regressões), diff restrito ao escopo com CLAUDE.md como única exceção out-of-band aceita; aguardando revisão.
+- STEP-12 aprovado pelo revisor (validation, severity none); apenas comandos de validação executados, sem alteração de código/teste/fixture/doc, todas as saídas registradas, validator 34/34, suíte 944/3/5 (só symlink Windows), ruff limpo, diff no escopo (CLAUDE.md waived); aguardando orquestrador.
+- STEP-13 executado pelo executor (wrap-up); relatório final da issue cobrindo skills, arquivos criados, API pública, RV_001–RV_008, warnings RV_006/RV_007, fixtures, 34 testes, comandos+resultados, suíte 944/3/5, não alteração de existentes (harness/schema intactos; CLAUDE.md out-of-band waived), ausência de LLM/Gate Evaluator/internet, próxima PR ISSUE-18; nenhum comando executado; aguardando revisão.
+- STEP-13 aprovado pelo revisor (wrap-up, severity none); todos os 12 itens da "Resposta final esperada do agente" cobertos, coerente com STEP-09 (34/34) e STEP-12 (944/3/5 symlink), escopo restrito ao relatório final + controle da issue (CLAUDE.md out-of-band waived, sem implementação); aguardando orquestrador.
