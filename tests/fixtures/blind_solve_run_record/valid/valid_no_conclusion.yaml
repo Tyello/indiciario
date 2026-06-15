@@ -1,0 +1,43 @@
+schema_version: '1.0'
+run_id: SOLVER_RUN_002
+bundle_id: BUNDLE_TEST_001
+manifest_id: MANIFEST_TEST_001
+solver_id: SOLVER_STUB_001
+created_at: '2026-06-14T00:10:00Z'
+created_by: orchestrator
+environment:
+  offline: true
+  llm_used: false
+  internet_used: false
+execution:
+  started_at: '2026-06-14T00:10:00Z'
+  finished_at: '2026-06-14T00:10:03Z'
+  duration_seconds: 3
+  status: completed
+  failure_reason: null
+report:
+  schema_version: '1.0'
+  solver_run_id: SOLVER_RUN_002
+  solver_id: SOLVER_STUB_001
+  bundle_id: BUNDLE_TEST_001
+  manifest_id: MANIFEST_TEST_001
+  created_at: '2026-06-14T00:10:00Z'
+  conclusion: ''
+  confidence: low
+  reasoning_summary: Material insuficiente para uma conclusao firme nesta etapa.
+  evidence_used: []
+  open_questions:
+    - Falta confirmar quem assinou o recibo divergente.
+  assumptions: []
+  warnings: []
+accessed_artifacts: []
+denied_access_attempts: []
+harness_warnings: []
+validation:
+  report_schema_valid: true
+  report_semantic_valid: true
+  semantic_errors: []
+  semantic_warnings: []
+gate_decision: null
+reviewer_findings: []
+notes: ''
