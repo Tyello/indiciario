@@ -1,0 +1,116 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/blind_solver_report/1.0
+title: Indiciário Blind Solver Report
+description: >-
+  Structural contract for the output of an offline blind solver run. The schema is
+  intentionally structural, not semantic: it never validates whether referenced
+  artifact ids/paths exist (the harness does that) and it forbids any private,
+  author-only, prompt, or chain-of-thought field via additionalProperties:false.
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - solver_run_id
+  - solver_id
+  - bundle_id
+  - manifest_id
+  - created_at
+  - conclusion
+  - confidence
+  - reasoning_summary
+  - evidence_used
+  - open_questions
+  - assumptions
+  - warnings
+x-structural-only-semantics-deferred-to-harness:
+  - evidence_artifact_ids_exist
+  - evidence_paths_match_included_artifacts
+  - bundle_id_matches_manifest
+  - manifest_id_matches_manifest
+  - solver_run_id_matches_request
+  - evidence_required_when_conclusion_present
+properties:
+  schema_version:
+    const: '1.0'
+  solver_run_id:
+    $ref: '#/$defs/neutral_id'
+  solver_id:
+    $ref: '#/$defs/neutral_id'
+  bundle_id:
+    $ref: '#/$defs/neutral_id'
+  manifest_id:
+    $ref: '#/$defs/neutral_id'
+  created_at:
+    $ref: '#/$defs/timestamp'
+  conclusion:
+    type: string
+    maxLength: 4000
+  confidence:
+    $ref: '#/$defs/confidence'
+  reasoning_summary:
+    type: string
+    minLength: 1
+    maxLength: 4000
+  evidence_used:
+    type: array
+    items:
+      $ref: '#/$defs/evidence_item'
+  open_questions:
+    $ref: '#/$defs/text_list'
+  assumptions:
+    $ref: '#/$defs/text_list'
+  warnings:
+    $ref: '#/$defs/text_list'
+$defs:
+  neutral_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Z0-9][A-Z0-9_-]{1,63}$'
+  timestamp:
+    type: string
+    format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'
+  safe_path:
+    type: string
+    minLength: 1
+    maxLength: 240
+    pattern: '^[A-Za-z0-9._/-]+$'
+    not:
+      anyOf:
+        - pattern: '^/'
+        - pattern: '(^|/)\.\.($|/)'
+        - pattern: '//'
+  confidence:
+    enum:
+      - low
+      - medium
+      - high
+  short_text:
+    type: string
+    minLength: 1
+    maxLength: 2000
+  text_list:
+    type: array
+    items:
+      $ref: '#/$defs/short_text'
+  evidence_item:
+    type: object
+    additionalProperties: false
+    required:
+      - artifact_id
+      - path
+      - quote_or_summary
+      - relevance
+      - confidence
+    properties:
+      artifact_id:
+        $ref: '#/$defs/neutral_id'
+      path:
+        $ref: '#/$defs/safe_path'
+      quote_or_summary:
+        $ref: '#/$defs/short_text'
+      relevance:
+        $ref: '#/$defs/short_text'
+      confidence:
+        $ref: '#/$defs/confidence'

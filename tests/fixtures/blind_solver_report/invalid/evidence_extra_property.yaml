@@ -1,0 +1,19 @@
+schema_version: '1.0'
+solver_run_id: SOLVER_RUN_001
+solver_id: SOLVER_STUB_001
+bundle_id: BUNDLE_TEST_001
+manifest_id: MANIFEST_TEST_001
+created_at: '2026-06-14T00:00:00Z'
+conclusion: Conclusao qualquer.
+confidence: low
+reasoning_summary: Resumo auditavel curto.
+evidence_used:
+  - artifact_id: ART_PUBLIC_001
+    path: player/depoimento.md
+    quote_or_summary: Trecho do depoimento.
+    relevance: Fonte da hipotese.
+    confidence: low
+    raw_excerpt_private: trecho privado nao permitido no item de evidencia
+open_questions: []
+assumptions: []
+warnings: []
