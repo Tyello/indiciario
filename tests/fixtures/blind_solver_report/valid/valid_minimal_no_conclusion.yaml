@@ -1,0 +1,13 @@
+schema_version: '1.0'
+solver_run_id: SOLVER_RUN_002
+solver_id: SOLVER_STUB_001
+bundle_id: BUNDLE_TEST_001
+manifest_id: MANIFEST_TEST_001
+created_at: '2026-06-14T00:00:00Z'
+conclusion: ''
+confidence: low
+reasoning_summary: Nao foi possivel concluir; o bundle nao traz evidencia suficiente.
+evidence_used: []
+open_questions: []
+assumptions: []
+warnings: []
