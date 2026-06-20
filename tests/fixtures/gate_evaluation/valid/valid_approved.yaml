@@ -1,0 +1,45 @@
+schema_version: "1.0"
+evaluation_id: "GE-AURORA-20260616-001"
+run_id: "RUN-AURORA-20260615-001"
+bundle_id: "BUNDLE-AURORA-V1"
+evaluator_id: "human-marcelo"
+created_at: "2026-06-16T14:00:00Z"
+created_by: "orchestrator"
+
+private_solution_ref: "examples/caso_canonico_intermediario.json"
+
+decision: "approved"
+
+justification: "Solver identificou culpado e mecanismo corretamente; nenhuma lacuna critica."
+
+expected_conclusions:
+  - id: "EC-01"
+    description: "Identificar Marta como culpada"
+    required: true
+    met: true
+    evidence: "conclusion contem 'Marta'"
+  - id: "EC-02"
+    description: "Identificar envenenamento como mecanismo"
+    required: true
+    met: true
+    evidence: "evidence_used contem laudo_medico"
+
+unexpected_valid_hypotheses: []
+
+gaps:
+  - id: "GAP-01"
+    description: "Solver nao identificou motivo financeiro"
+    required_conclusion_id: null
+    severity: "minor"
+    impact: "Nao bloqueia aprovacao neste caso"
+
+leak_detected: false
+
+rollback_target: null
+
+confidence_assessment:
+  solver_confidence: "medium"
+  evaluator_agreement: "agree"
+  notes: ""
+
+notes: ""

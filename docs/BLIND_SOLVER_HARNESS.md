@@ -211,6 +211,68 @@ e as decisões de avaliação posteriores: o harness produz o output cego, o run
 record o torna rastreável, e os agentes de gate/review anexam suas decisões sem
 reabrir a execução.
 
+## Gate Evaluator (ISSUE-19+20)
+
+O **Gate Evaluator** é o único ponto onde a **solução privada do autor** encontra
+o **output cego do solver**. Ele registra uma avaliação privada de um run
+congelado e decide se o caso é justo dado o bundle cego. Não chama LLM, não acessa
+a internet e **não muta** artefatos (run record, report, inputs).
+
+### API pública
+
+`generator/gate_evaluator.py` expõe:
+
+```python
+def validate_gate_evaluation(evaluation) -> list[str]: ...
+def validate_gate_evaluation_semantics(evaluation, run_record=None) -> GateEvaluationResult: ...
+def build_gate_evaluation(request, ...) -> dict: ...
+```
+
+- `validate_gate_evaluation` valida o dict da evaluation contra
+  `schemas/gate_evaluation.schema.yaml` e retorna lista de erros (vazia quando
+  válido).
+- `validate_gate_evaluation_semantics` aplica as regras semânticas GE_001–GE_008
+  e retorna um `GateEvaluationResult`. Com `run_record` fornecido, ativa também a
+  checagem de runtime GE_008.
+- `build_gate_evaluation` monta o dict da evaluation a partir de um
+  `GateEvaluationRequest` (ligando `evaluation_id`, `run_id`, `bundle_id` do
+  `request.run_record`, serializando `expected_conclusions`, `gaps`,
+  `confidence_assessment`, `decision`, `justification`, `rollback_target`). Não
+  muta inputs.
+
+### Dataclasses
+
+- `GateEvaluationRequest` — entrada do builder (run record + dados da avaliação).
+- `GateEvaluationResult` — resultado imutável da validação semântica.
+- `ExpectedConclusion` — conclusão esperada do autor (`id`, `met`, `required`).
+- `GapItem` — lacuna detectada (`severity`).
+- `ConfidenceAssessment` — `evaluator_agreement` e dados de confiança.
+
+### Enums
+
+| Campo | Valores |
+|---|---|
+| `decision` | `approved` \| `rejected` \| `rollback` |
+| `rollback_target` | `bundle_preparation` \| `blind_solve` \| `gate_evaluation` \| `null` |
+| `severity` | `critical` \| `major` \| `minor` |
+| `evaluator_agreement` | `agree` \| `disagree` \| `partial` |
+
+### Regras GE_001–GE_008
+
+| Código | Efeito | Condição |
+|---|---|---|
+| `GE_001` | error (blocante) | `decision: rollback` sem `rollback_target`. |
+| `GE_002` | error (blocante) | `decision: approved` com `rollback_target` preenchido. |
+| `GE_003` | error (blocante) | `leak_detected: true` com `decision: approved`. |
+| `GE_004` | error (blocante) | `decision: approved` com `expected_conclusion` `required=true` e `met=false`. |
+| `GE_005` | error (blocante) | `decision: approved` sem cobertura de conclusões requeridas. |
+| `GE_006` | error (blocante) | `decision: approved` com gap `severity: critical`. |
+| `GE_007` | warning | aviso de coerência; não torna a evaluation inválida. |
+| `GE_008` | error em runtime | inconsistência entre evaluation e `run_record` (só dispara com `run_record` fornecido). |
+
+GE_001–GE_006 são erros blocantes. GE_007 é warning. GE_008 só é avaliado em
+runtime quando `run_record` é passado.
+
 ## Próximos passos
 
 - **ISSUE-17 — Blind Solver Report Validator**: validador dedicado que aprofunda

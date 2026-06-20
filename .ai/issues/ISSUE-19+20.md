@@ -3,13 +3,13 @@
 ## Estado
 
 ```
-STATUS: ready
-CURRENT_STEP: STEP-01
-NEXT_ACTION: executor
-REVIEW_STATUS: pending
-LAST_COMPLETED_STEP: none
-LAST_EXECUTION_REPORT: none
-LAST_REVIEW_REPORT: none
+STATUS: done
+CURRENT_STEP: STEP-12
+NEXT_ACTION: human
+REVIEW_STATUS: approved
+LAST_COMPLETED_STEP: STEP-12
+LAST_EXECUTION_REPORT: .ai/runs/ISSUE-19/STEP-12_EXECUTION.md
+LAST_REVIEW_REPORT: .ai/runs/ISSUE-19/STEP-11_REVIEW.md
 BLOCKER: none
 ```
 
@@ -536,3 +536,28 @@ Revisão:
 
 - Issue criada por Claude Sonnet 4.6 a partir da handoff de junho/2026.
   Aguardando orquestração inicial.
+- STEP-01 executado; aguardando revisão.
+- STEP-01 auto-approved (low-risk reading); orquestrador avançou para STEP-02.
+- STEP-02 executado; baseline 982 passed / 3 skipped / 5 failed (5 falhas = limitação Windows symlink WinError 1314, sem regressão).
+- STEP-02 auto-approved (low-risk baseline); orquestrador avançou para STEP-03.
+- STEP-02 executado; aguardando revisão.
+- STEP-03 executado; aguardando revisão.
+- STEP-03 aprovado; aguardando orquestrador.
+- STEP-04 executado; aguardando revisão.
+- STEP-04 aprovado; aguardando orquestrador.
+- STEP-05 executado; aguardando revisão.
+- STEP-05 aprovado; aguardando orquestrador.
+- STEP-06 executado; aguardando revisão.
+- STEP-06 aprovado; aguardando orquestrador.
+- STEP-07 executado; aguardando revisão.
+- STEP-07 aprovado; aguardando orquestrador.
+- STEP-08 executado; aguardando revisão.
+- STEP-08 aprovado; aguardando orquestrador.
+- STEP-09 executado; aguardando revisão.
+- STEP-09 aprovado; aguardando orquestrador.
+- STEP-10 executado; aguardando revisão.
+- STEP-10 aprovado; aguardando orquestrador.
+- STEP-11 executado; suíte completa 1033 passed / 3 skipped / 5 failed (+51 vs baseline, sem regressão); aguardando revisão.
+- STEP-11 aprovado; aguardando orquestrador.
+- STEP-12 executado; aguardando revisão.
+- STEP-12 auto-approved (low-risk wrap-up); sem próximo step → STATUS: done.
