@@ -1,0 +1,37 @@
+# Case 16: rollback_target "unknown_stage" is not in the enum
+# bundle_preparation|blind_solve|gate_evaluation|null -> fails.
+schema_version: "1.0"
+evaluation_id: "GE-AURORA-20260616-016"
+run_id: "RUN-AURORA-20260615-001"
+bundle_id: "BUNDLE-AURORA-V1"
+evaluator_id: "human-marcelo"
+created_at: "2026-06-16T14:00:00Z"
+created_by: "orchestrator"
+
+private_solution_ref: "examples/caso_canonico_intermediario.json"
+
+decision: "rollback"
+
+justification: "rollback_target invalido para teste de schema."
+
+expected_conclusions:
+  - id: "EC-01"
+    description: "Identificar Marta como culpada"
+    required: true
+    met: false
+    evidence: "conclusion nao contem 'Marta'"
+
+unexpected_valid_hypotheses: []
+
+gaps: []
+
+leak_detected: false
+
+rollback_target: "unknown_stage"
+
+confidence_assessment:
+  solver_confidence: "low"
+  evaluator_agreement: "disagree"
+  notes: ""
+
+notes: ""
