@@ -1,0 +1,10 @@
+schema_version: "1.0"
+run_id: "AURORA-RUN-20260620-012"
+case_ref: "examples/caso_canonico_intermediario.json"
+created_at: "2026-06-20T10:00:00Z"
+created_by: "orchestrator"
+status: "in_progress"
+current_stage: "review"
+artifacts: []
+decisions: []
+notes: ""

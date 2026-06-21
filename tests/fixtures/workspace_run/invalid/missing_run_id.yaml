@@ -1,0 +1,9 @@
+schema_version: "1.0"
+case_ref: "examples/caso_canonico_intermediario.json"
+created_at: "2026-06-20T10:00:00Z"
+created_by: "orchestrator"
+status: "initialized"
+current_stage: "initialized"
+artifacts: []
+decisions: []
+notes: ""

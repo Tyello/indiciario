@@ -1,0 +1,148 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/workspace_run/1.0
+title: Indiciário Workspace Run
+description: >-
+  Structural contract for a multiagent workspace run: the single record that
+  organizes and tracks one offline case run without a database. It stores the
+  run identity (run_id, case_ref), the run status and current stage, the
+  ingested artifacts (with their hashes, stages and visibility), and the human
+  gate decisions (approve/reject/rollback). It never executes any agent, never
+  reads the filesystem and forbids any extra top-level field via
+  additionalProperties:false. Semantic rules WS_001-WS_008 are applied by the
+  workspace module, not by this schema.
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - run_id
+  - case_ref
+  - created_at
+  - created_by
+  - status
+  - current_stage
+  - artifacts
+  - decisions
+  - notes
+properties:
+  schema_version:
+    const: '1.0'
+  run_id:
+    $ref: '#/$defs/neutral_id'
+  case_ref:
+    type: string
+    minLength: 1
+  created_at:
+    $ref: '#/$defs/timestamp'
+  created_by:
+    type: string
+    minLength: 1
+  status:
+    enum:
+      - initialized
+      - in_progress
+      - gate_blocked
+      - done
+      - rolled_back
+  current_stage:
+    enum:
+      - initialized
+      - blind_solve
+      - gate_evaluation
+      - narrative_review
+      - evidence_review
+      - complete
+  artifacts:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - artifact_id
+        - artifact_type
+        - path
+        - sha256
+        - ingested_at
+        - stage
+        - visible_to
+      properties:
+        artifact_id:
+          $ref: '#/$defs/neutral_id'
+        artifact_type:
+          enum:
+            - blind_bundle
+            - blind_solver_report
+            - run_record
+            - gate_evaluation
+            - narrative_review
+            - evidence_review
+        path:
+          type: string
+          minLength: 1
+        sha256:
+          type: string
+          minLength: 1
+        ingested_at:
+          $ref: '#/$defs/timestamp'
+        stage:
+          enum:
+            - blind_solve
+            - gate_evaluation
+            - narrative_review
+            - evidence_review
+        visible_to:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+  decisions:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - decision_id
+        - stage
+        - outcome
+        - justification
+        - decided_at
+        - decided_by
+        - rollback_to_stage
+      properties:
+        decision_id:
+          $ref: '#/$defs/neutral_id'
+        stage:
+          enum:
+            - blind_solve
+            - gate_evaluation
+            - narrative_review
+            - evidence_review
+        outcome:
+          enum:
+            - approved
+            - rejected
+            - rollback
+        justification:
+          type: string
+          minLength: 1
+        decided_at:
+          $ref: '#/$defs/timestamp'
+        decided_by:
+          type: string
+          minLength: 1
+        rollback_to_stage:
+          type:
+            - string
+            - 'null'
+  notes:
+    type: string
+$defs:
+  neutral_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Z0-9][A-Z0-9_-]{1,63}$'
+  timestamp:
+    type: string
+    format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'
