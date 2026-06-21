@@ -338,6 +338,77 @@ operam sobre o **Blueprint** do autor, antes/independente da execução cega. O
 `reviewer_findings` do run record é o ponto de anexo). Como o harness e o Gate
 Evaluator, os revisores **não** chamam LLM/internet e **não** mutam o blueprint.
 
+## Workspace e Manual Orchestrator (ISSUE-25+26)
+
+O **Workspace** e o **Manual Orchestrator** organizam uma run multiagente local,
+sem LLM. O workspace é a estrutura de estado por run (status, stage, artefatos,
+decisões); o orchestrator conduz a run de forma manual e determinística,
+registrando ingestões de artefato, decisões e transições de stage. **Não** chamam
+LLM, **não** acessam a internet e **não** mutam o dict de entrada (`request.run`).
+
+### API pública — `generator/workspace.py`
+
+```python
+def validate_workspace_run(run) -> list[str]: ...
+def validate_workspace_semantics(run) -> WorkspaceSemanticResult: ...
+def build_workspace_run(...) -> dict: ...
+def run_to_dict(run) -> dict: ...
+```
+
+- `validate_workspace_run` valida o dict da run contra
+  `schemas/workspace_run.schema.yaml` e retorna lista de erros (vazia quando
+  válido).
+- `validate_workspace_semantics` aplica as regras WS_001–WS_008 e retorna um
+  `WorkspaceSemanticResult` (`valid: False` se qualquer erro; warnings sempre
+  registrados, mesmo com `valid: True`).
+- `build_workspace_run` monta o dict da run; `run_to_dict` serializa a dataclass.
+- Dataclasses: `WorkspaceArtifact`, `WorkspaceDecision`, `WorkspaceRun`,
+  `WorkspaceSemanticResult`. Constantes `SCHEMA_VERSION` / `VALID_*` (enums de
+  `status`, `current_stage`/`stage`, `artifact_type`, `outcome`).
+
+### API pública — `generator/manual_orchestrator.py`
+
+```python
+def ingest_artifact(request) -> OrchestratorResult: ...
+def record_decision(request) -> OrchestratorResult: ...
+def transition_stage(request) -> TransitionResult: ...
+def validate_orchestrator_transition(...) -> ...: ...
+```
+
+- `ingest_artifact` registra um artefato na run; `record_decision` registra uma
+  decisão; `transition_stage` move a run para o próximo stage.
+- `validate_orchestrator_transition` valida uma transição segundo as regras
+  OR_001–OR_008.
+- Dataclasses do orchestrator: `IngestRequest`, `TransitionRequest`,
+  `DecisionRequest`, `OrchestratorResult`, `TransitionResult`. As dataclasses de
+  estado (`WorkspaceArtifact`, `WorkspaceDecision`, `WorkspaceRun`,
+  `WorkspaceSemanticResult`) são **importadas** de `generator.workspace` (sem
+  duplicação).
+
+### Regras WS_001–WS_008 (semântica do workspace)
+
+Validam coerência interna da run: status × stage, presença e tipos de artefatos
+por stage, justificativa de decisões e consistência de outcome. WS_001–WS_008 são
+cobertas por teste nomeado em `tests/test_workspace.py` (casos 21–28). Erros
+tornam `valid: False`; warnings não.
+
+### Regras OR_001–OR_008 (transições do orchestrator)
+
+Governam quando uma ingestão, decisão ou transição de stage é admissível, sem
+duplicar a lógica WS_*. OR_001–OR_008 são cobertas por teste nomeado em
+`tests/test_manual_orchestrator.py` (casos 51–58). Nenhuma função do orchestrator
+muta o dict de entrada.
+
+### Relação com o Gate Evaluator
+
+O workspace e o orchestrator são a camada de **estado e condução** da run; o
+**Gate Evaluator** (Fase E, ISSUE-19+20) é a camada de **decisão** que confronta o
+output cego do solver com a solução privada do autor. O orchestrator registra
+ingestões e decisões e conduz os stages, mas não julga se o caso é justo — esse
+julgamento permanece com o Gate Evaluator. Como o harness, os revisores e o Gate
+Evaluator, nenhum dos dois módulos chama LLM/internet nem muta artefatos de
+entrada.
+
 ## Próximos passos
 
 - **ISSUE-17 — Blind Solver Report Validator**: validador dedicado que aprofunda
