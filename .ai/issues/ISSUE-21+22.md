@@ -3,13 +3,13 @@
 ## Estado
 
 ```
-STATUS: ready
-CURRENT_STEP: STEP-01
-NEXT_ACTION: executor
-REVIEW_STATUS: pending
-LAST_COMPLETED_STEP: none
-LAST_EXECUTION_REPORT: none
-LAST_REVIEW_REPORT: none
+STATUS: done
+CURRENT_STEP: STEP-12
+NEXT_ACTION: human
+REVIEW_STATUS: approved
+LAST_COMPLETED_STEP: STEP-12
+LAST_EXECUTION_REPORT: .ai/runs/ISSUE-21/STEP-12_EXECUTION.md
+LAST_REVIEW_REPORT: .ai/runs/ISSUE-21/STEP-11_REVIEW.md
 BLOCKER: none
 ```
 
@@ -536,3 +536,29 @@ Revisão:
 
 - Issue criada por Claude Sonnet 4.6 a partir da handoff de junho/2026.
   Aguardando orquestração inicial.
+- STEP-01 executado; aguardando revisão.
+- STEP-01 auto-approved (low-risk reading). DVG-EXEC-001/002/003 registradas para tratamento nos steps GREEN. Avançando STEP-02.
+- STEP-02 1ª tentativa: blocker falso (executor usou `python` do sistema sem jsonschema). Interpretador correto: `.venv/Scripts/python.exe -m pytest`. Estado resetado para re-executar STEP-02.
+- STEP-02 re-executado: 1033 passed, 3 skipped, 5 falhas symlink-Windows conhecidas. Baseline verde. Auto-approved (low-risk baseline). Avançando STEP-03.
+- STEP-02 executado; bloqueado por ambiente (jsonschema ausente, 17 erros de coleta, suite nao verde); aguardando revisão.
+- STEP-02 re-executado com `.venv/Scripts/python.exe -m pytest tests/ -q`: 1033 passed, 3 skipped, 5 failed (somente 5 symlink-Windows, WinError 1314, falhas-de-ambiente conhecidas). Suíte verde. Aguardando revisão.
+- STEP-03 executado; 4 fixtures válidas + casos 1–10 criados; RED confirmado (ModuleNotFoundError: generator.narrative_reviewer); aguardando revisão.
+- STEP-03 aprovado (red, SEVERITY none); só testes/fixtures, sem GREEN, RED correto; aguardando orquestrador.
+- STEP-04 executado; 6 fixtures invalid/ + casos 11–20 criados; RED confirmado (ModuleNotFoundError: generator.narrative_reviewer); aguardando revisão.
+- STEP-04 aprovado (red, SEVERITY none); só testes/fixtures invalid/, sem GREEN, valid/ intactas, RED correto; aguardando orquestrador.
+- STEP-05 executado; schema review_report + narrative_reviewer.py (dataclasses + validate_review_report + report_to_dict) criados; 21 passed, ruff limpo; aguardando revisão.
+- STEP-05 aprovado (green, SEVERITY none); só schema + narrative_reviewer.py, sem review_narrative, sem evidence_reviewer, escopo confirmado via git; aguardando orquestrador.
+- STEP-06 executado; casos 21–45 do Narrative Reviewer criados em tests/test_narrative_reviewer.py; RED confirmado (ImportError: cannot import name 'review_narrative'); aguardando revisão.
+- STEP-06 aprovado (red, SEVERITY none); só tests/test_narrative_reviewer.py, sem GREEN, narrative_reviewer.py sem review_narrative, nenhum campo de modelo inventado, RED por ImportError correto; aguardando orquestrador.
+- STEP-07 executado; review_narrative (NR_001/003/004/006/008 + status) em narrative_reviewer.py; 25 passed narrative, 21 passed schema, ruff limpo; aguardando revisão.
+- STEP-07 aprovado (green, SEVERITY none); só narrative_reviewer.py (impl), sem evidence_reviewer, regras com teste nomeado conferidas, status/ordenação corretos, sem código morto que quebre REFACTOR; aguardando orquestrador.
+- STEP-08 executado; casos 46–70 do Evidence Reviewer criados em tests/test_evidence_reviewer.py; RED confirmado (ModuleNotFoundError: generator.evidence_reviewer); DVG-EXEC-004 (ER_007 via ContratoEvidencia.obrigatoria_para_avanco, não Pista); aguardando revisão.
+- STEP-08 aprovado (red, SEVERITY none); só tests/test_evidence_reviewer.py, sem GREEN, evidence_reviewer.py inexistente, narrative/schema/fixtures intactos, 25 casos 46–70, nenhum campo de modelo inventado em Pista (ER_007 via ContratoEvidencia.obrigatoria_para_avanco, ER_003 via SimpleNamespace), RED por ModuleNotFoundError correto; aguardando orquestrador.
+- STEP-09 executado; generator/evidence_reviewer.py criado (review_evidence ER_001–ER_008, dataclasses/helpers importados de narrative_reviewer sem duplicar); 25 evidence + 25 narrative + 21 schema passed, ruff limpo; DVG-EXEC-004 honrada; aguardando revisão.
+- STEP-09 aprovado (green, SEVERITY none); só evidence_reviewer.py, zero @dataclass duplicada (contrato importado de narrative_reviewer), narrative/schema/fixtures intactos, ER_007 via ContratoEvidencia.obrigatoria_para_avanco, nenhum campo de modelo inventado, sem mutação/LLM; aguardando orquestrador.
+- STEP-10 executado; refactor: `_document_codes` duplicado consolidado em narrative_reviewer (canônico c/ _enum_value) e importado em evidence_reviewer; status logic já compartilhada (no-op); API pública inalterada; 25+25+21 verde, ruff limpo; aguardando revisão.
+- STEP-10 aprovado (refactor, SEVERITY none); só os 2 módulos tocados, zero teste/fixture/schema alterado, `_document_codes` single-source em narrative_reviewer e importado em evidence (def local removida), `_enum_value(str)==str` torna comportamento idêntico, API pública e regras NR_*/ER_* inalteradas; aguardando orquestrador.
+- STEP-11 executado; validação final: ruff limpo, suítes-alvo 21+25+25+30+22 verdes, suíte completa 1104 passed / 3 skipped / 5 failed (só as 5 symlink-Windows WinError 1314 conhecidas, sem regressão; baseline 1033 +71 novos); git status confirma só arquivos novos da issue + ISSUE-21+22.md modificado; nenhuma correção feita; aguardando revisão.
+- STEP-11 aprovado (validation, SEVERITY none); só comandos de validação, nenhuma correção, único editável STEP-11_EXECUTION.md + controle da issue; git confirma só arquivos NOVOS da issue (2 generator/, 1 schema, 3 testes, 10 fixtures, runs md) + ISSUE-21+22.md, zero arquivo existente alterado; 5 falhas = symlink-Windows conhecidas, sem regressão; aguardando orquestrador.
+- STEP-12 executado; seção "Revisores especializados (ISSUE-21+22)" adicionada a docs/BLIND_SOLVER_HARNESS.md (API, NR_*/ER_*, status, relação com Gate Evaluator); nenhum comando rodado; aguardando revisão.
+- STEP-12 auto-approved (low-risk wrap-up); só doc/relatório alterados. STATUS→done. ISSUE-21+22 concluída. Próxima: ISSUE-25+26.

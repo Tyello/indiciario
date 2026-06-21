@@ -273,6 +273,71 @@ def build_gate_evaluation(request, ...) -> dict: ...
 GE_001–GE_006 são erros blocantes. GE_007 é warning. GE_008 só é avaliado em
 runtime quando `run_record` é passado.
 
+## Revisores especializados (ISSUE-21+22)
+
+Os **revisores especializados** operam sobre o **Blueprint** (não sobre o bundle
+cego): leem o caso completo do autor e produzem um `ReviewReport` estruturado que
+alimenta a decisão editorial/gate. **Não** chamam LLM, **não** acessam a internet
+e **não** mutam o blueprint.
+
+### API pública
+
+- `review_narrative(blueprint, blueprint_ref, report_id, ...) -> ReviewReport`
+  (`generator/narrative_reviewer.py`) — avalia diegese, imersão, motivação, tom,
+  personagens.
+- `review_evidence(blueprint, blueprint_ref, report_id, ...) -> ReviewReport`
+  (`generator/evidence_reviewer.py`) — avalia cadeia de evidências, pistas órfãs,
+  cobertura de envelopes.
+- `validate_review_report(report) -> list[str]` — valida o report contra
+  `schemas/review_report.schema.yaml`; lista vazia quando válido.
+- `report_to_dict(report) -> dict` — serializa o `ReviewReport`.
+- Dataclasses `ReviewFinding` / `ReviewReport` definidas em
+  `generator/narrative_reviewer.py` e reusadas (sem duplicar) por
+  `generator/evidence_reviewer.py`.
+- Schema comum: `schemas/review_report.schema.yaml`.
+
+### Regras NR_001–NR_008 (narrativa/diegese)
+
+| Código | Descrição |
+|---|---|
+| `NR_001` | Personagem sem motivação clara. |
+| `NR_003` | Documento quebra diegese/imersão. |
+| `NR_004` | Tom inconsistente com a régua do caso. |
+| `NR_006` | Personagem referenciado mas ausente do elenco. |
+| `NR_008` | Objetivo de envelope sem gancho narrativo. |
+
+`NR_002`, `NR_005` e `NR_007` ficaram **fora desta entrega** (sem teste nomeado).
+
+### Regras ER_001–ER_008 (cadeia de evidências)
+
+| Código | Descrição |
+|---|---|
+| `ER_001` | Pista órfã (sem documento que a apresente). |
+| `ER_002` | Documento sem pista vinculada na matriz. |
+| `ER_003` | Pilar de validação sem evidência de suporte. |
+| `ER_004` | Red herring sem âncora/desmontagem. |
+| `ER_005` | Cadeia causal com elo faltante. |
+| `ER_006` | Envelope sem cobertura de pistas para seu objetivo. |
+| `ER_007` | Evidência obrigatória para avanço ausente (via `ContratoEvidencia.obrigatoria_para_avanco`). |
+| `ER_008` | Dica que não destrava a pista esperada. |
+
+### Lógica de status
+
+Idêntica nos dois revisores, derivada da maior severidade entre os findings:
+
+- `blocked` — qualquer finding `critical`.
+- `needs_revision` — qualquer finding `major` sem nenhum `critical`.
+- `approved` — só `minor`/`info`, ou sem findings.
+
+### Relação com o Gate Evaluator
+
+Os revisores e o Gate Evaluator são camadas distintas: o **Gate Evaluator** opera
+sobre o run cego (report do solver vs. solução privada do autor); os **revisores**
+operam sobre o **Blueprint** do autor, antes/independente da execução cega. O
+`ReviewReport` estruturado que produzem alimenta a decisão editorial/gate (o campo
+`reviewer_findings` do run record é o ponto de anexo). Como o harness e o Gate
+Evaluator, os revisores **não** chamam LLM/internet e **não** mutam o blueprint.
+
 ## Próximos passos
 
 - **ISSUE-17 — Blind Solver Report Validator**: validador dedicado que aprofunda

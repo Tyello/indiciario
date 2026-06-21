@@ -1,0 +1,11 @@
+schema_version: "1.0"
+report_id: "NR-aurora-20260620-013"
+reviewer_type: "narrative"
+blueprint_ref: "examples/caso_canonico_intermediario.json"
+created_at: "2026-06-20T10:00:00Z"
+created_by: "orchestrator"
+status: "pending"
+summary: "status fora do enum (approved/needs_revision/blocked) deve falhar."
+findings: []
+overall_confidence: "high"
+notes: ""
