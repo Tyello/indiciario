@@ -1,0 +1,34 @@
+schema_version: "1.0"
+manifest_id: "MANIFEST-AURORA-20260620-004"
+run_id: "RUN-AURORA-20260620-004"
+case_ref: "examples/caso_canonico_intermediario.json"
+generated_at: "2026-06-20T12:15:00Z"
+generated_by: "orchestrator"
+pipeline_status: "complete"
+stages_completed:
+  - "blind_solve"
+  - "gate_evaluation"
+  - "narrative_review"
+  - "evidence_review"
+artifacts_summary:
+  - artifact_id: "BUNDLE-AURORA-004"
+    artifact_type: "blind_bundle"
+    stage: "blind_solve"
+    sha256: "abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abcd"
+  - artifact_id: "GATE-AURORA-004"
+    artifact_type: "gate_evaluation"
+    stage: "gate_evaluation"
+    sha256: "111122223333444455556666777788889999aaaabbbbccccddddeeeeffff0000"
+  - artifact_id: "NR-AURORA-004"
+    artifact_type: "narrative_review"
+    stage: "narrative_review"
+    sha256: "aaaa1111bbbb2222cccc3333dddd4444eeee5555ffff66667777888899990000"
+  - artifact_id: "ER-AURORA-004"
+    artifact_type: "evidence_review"
+    stage: "evidence_review"
+    sha256: "0000999988887777666655554444333322221111ffffeeeeddddccccbbbbaaaa"
+decisions_summary: []
+findings: []
+gate_outcome: null
+next_steps: []
+notes: ""

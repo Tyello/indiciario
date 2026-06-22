@@ -1,0 +1,190 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/run_manifest/1.0
+title: Indiciário Run Manifest
+description: >-
+  Structural contract for an immutable run manifest: the consolidated output
+  document that captures everything that happened in a complete multiagent run.
+  It records the run identity (manifest_id, run_id, case_ref), the derived
+  pipeline_status, the stages completed, the summarized artifacts and decisions,
+  the consolidated review findings, the gate outcome (or null) and the
+  deterministically derived next_steps. It never executes any agent, never
+  modifies the workspace and forbids any extra top-level field via
+  additionalProperties:false. Semantic rules RM_001-RM_008 are applied by the
+  run_manifest module, not by this schema.
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - manifest_id
+  - run_id
+  - case_ref
+  - generated_at
+  - generated_by
+  - pipeline_status
+  - stages_completed
+  - artifacts_summary
+  - decisions_summary
+  - findings
+  - gate_outcome
+  - next_steps
+  - notes
+properties:
+  schema_version:
+    const: '1.0'
+  manifest_id:
+    $ref: '#/$defs/neutral_id'
+  run_id:
+    $ref: '#/$defs/neutral_id'
+  case_ref:
+    type: string
+    minLength: 1
+  generated_at:
+    $ref: '#/$defs/timestamp'
+  generated_by:
+    type: string
+    minLength: 1
+  pipeline_status:
+    enum:
+      - complete
+      - incomplete
+      - blocked
+      - rolled_back
+  stages_completed:
+    type: array
+    items:
+      enum:
+        - blind_solve
+        - gate_evaluation
+        - narrative_review
+        - evidence_review
+  artifacts_summary:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - artifact_id
+        - artifact_type
+        - stage
+        - sha256
+      properties:
+        artifact_id:
+          $ref: '#/$defs/neutral_id'
+        artifact_type:
+          enum:
+            - blind_bundle
+            - blind_solver_report
+            - run_record
+            - gate_evaluation
+            - narrative_review
+            - evidence_review
+        stage:
+          enum:
+            - blind_solve
+            - gate_evaluation
+            - narrative_review
+            - evidence_review
+        sha256:
+          type: string
+          minLength: 1
+  decisions_summary:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - decision_id
+        - stage
+        - outcome
+        - decided_by
+        - decided_at
+      properties:
+        decision_id:
+          $ref: '#/$defs/neutral_id'
+        stage:
+          enum:
+            - blind_solve
+            - gate_evaluation
+            - narrative_review
+            - evidence_review
+        outcome:
+          enum:
+            - approved
+            - rejected
+            - rollback
+        decided_by:
+          type: string
+          minLength: 1
+        decided_at:
+          $ref: '#/$defs/timestamp'
+  findings:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - source_artifact_id
+        - source_type
+        - code
+        - severity
+        - field
+        - message
+      properties:
+        source_artifact_id:
+          type: string
+          minLength: 1
+        source_type:
+          enum:
+            - narrative_review
+            - evidence_review
+        code:
+          type: string
+          minLength: 1
+        severity:
+          enum:
+            - critical
+            - major
+            - minor
+            - info
+        field:
+          type: string
+        message:
+          type: string
+          minLength: 1
+  gate_outcome:
+    type:
+      - object
+      - 'null'
+    additionalProperties: false
+    required:
+      - decision_id
+      - outcome
+      - justification
+    properties:
+      decision_id:
+        $ref: '#/$defs/neutral_id'
+      outcome:
+        enum:
+          - approved
+          - rejected
+          - rollback
+      justification:
+        type: string
+        minLength: 1
+  next_steps:
+    type: array
+    items:
+      type: string
+      minLength: 1
+  notes:
+    type: string
+$defs:
+  neutral_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+    pattern: '^[A-Z0-9][A-Z0-9_-]{1,63}$'
+  timestamp:
+    type: string
+    format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'

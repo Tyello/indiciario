@@ -1,0 +1,33 @@
+schema_version: "1.0"
+manifest_id: "MANIFEST-AURORA-20260620-003"
+run_id: "RUN-AURORA-20260620-003"
+case_ref: "examples/caso_canonico_intermediario.json"
+generated_at: "2026-06-20T12:10:00Z"
+generated_by: "orchestrator"
+pipeline_status: "blocked"
+stages_completed:
+  - "blind_solve"
+  - "gate_evaluation"
+artifacts_summary:
+  - artifact_id: "BUNDLE-AURORA-003"
+    artifact_type: "blind_bundle"
+    stage: "blind_solve"
+    sha256: "abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abcd"
+  - artifact_id: "GATE-AURORA-003"
+    artifact_type: "gate_evaluation"
+    stage: "gate_evaluation"
+    sha256: "111122223333444455556666777788889999aaaabbbbccccddddeeeeffff0000"
+decisions_summary:
+  - decision_id: "DEC-003"
+    stage: "gate_evaluation"
+    outcome: "rejected"
+    decided_by: "human"
+    decided_at: "2026-06-20T11:30:00Z"
+findings: []
+gate_outcome:
+  decision_id: "DEC-003"
+  outcome: "rejected"
+  justification: "Conclusao divergente do gabarito esperado."
+next_steps:
+  - "Gate bloqueado. Revisar gate_outcome e registrar decisao de rollback ou desbloqueio."
+notes: ""

@@ -1,0 +1,25 @@
+schema_version: "1.0"
+manifest_id: "MANIFEST-AURORA-20260620-001"
+run_id: "RUN-AURORA-20260620-001"
+case_ref: "examples/caso_canonico_intermediario.json"
+generated_at: "2026-06-20T12:00:00Z"
+generated_by: "orchestrator"
+pipeline_status: "incomplete"
+stages_completed:
+  - "narrative_review"
+artifacts_summary:
+  - artifact_id: "NR-AURORA-001"
+    artifact_type: "narrative_review"
+    stage: "narrative_review"
+    sha256: "aaaa1111bbbb2222cccc3333dddd4444eeee5555ffff66667777888899990000"
+decisions_summary: []
+findings:
+  - source_artifact_id: "NR-AURORA-001"
+    source_type: "narrative_review"
+    code: "NR_003"
+    severity: "warning"
+    field: "personagens"
+    message: "Nenhum personagem tem papel suspeito alem do executor."
+gate_outcome: null
+next_steps: []
+notes: ""
