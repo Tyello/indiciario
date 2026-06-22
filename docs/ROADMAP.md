@@ -428,13 +428,13 @@ Evidence avalia: cadeia de evidências, pistas órfãs, buracos lógicos, suport
 
 Avalia: renderização, legibilidade, densidade visual, mapas, manuscritos, aparência documental.
 
-**Nota:** depende de baseline visual consolidada. Não implementar antes da ISSUE-28.
+**Nota:** desbloqueada por ISSUE-28. Baseline visual ainda recomendada antes de implementação pesada.
 
 ### ISSUE-24 — Accessibility Reviewer
 
 Avalia: leitura mobile/tablet, contraste, fonte, sobrecarga cognitiva, impressão.
 
-**Nota:** mesma dependência que ISSUE-23. Não implementar antes da ISSUE-28.
+**Nota:** desbloqueada por ISSUE-28 (mesma dependência que ISSUE-23).
 
 ## Próxima fase — Orquestração de runs (Fase G)
 
@@ -454,13 +454,17 @@ Consolidar tudo que aconteceu em uma run: bundles, agentes, outputs, findings, d
 
 ## Próxima fase — Aplicação em casos reais (Fase H)
 
-Status: **pendente, após orquestração**.
+Status: **em andamento** — ISSUE-28 concluída; ISSUE-29/30 pendentes.
 
 Esta é a fase de maior valor — primeiro feedback real do sistema completo.
 
 ### ISSUE-28 — Rodar pipeline no caso Hotel Aurora
 
+Status: **concluída** (junho 2026).
+
 Objetivo: aplicar blind bundle → blind solver → gate evaluator → findings → comparar com playtest real.
+
+Entregável: `generator/pipeline_runner.py`, testes, `docs/AURORA_PIPELINE_RUN.md`.
 
 **Esta issue desbloqueia ISSUE-23 e ISSUE-24.**
 
