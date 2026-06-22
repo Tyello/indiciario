@@ -1,0 +1,20 @@
+schema_version: "1.0"
+manifest_id: "MANIFEST-AURORA-20260620-002"
+run_id: "RUN-AURORA-20260620-002"
+case_ref: "examples/caso_canonico_intermediario.json"
+generated_at: "2026-06-20T12:05:00Z"
+generated_by: "orchestrator"
+pipeline_status: "incomplete"
+stages_completed:
+  - "blind_solve"
+artifacts_summary:
+  - artifact_id: "BUNDLE-AURORA-002"
+    artifact_type: "blind_bundle"
+    stage: "blind_solve"
+    sha256: "abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abcd"
+decisions_summary: []
+findings: []
+gate_outcome: null
+next_steps:
+  - "Ingerir gate_evaluation para avancar para narrative_review."
+notes: ""
