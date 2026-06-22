@@ -3,12 +3,12 @@
 ## Estado
 
 ```
-STATUS: draft
-CURRENT_STEP: STEP-00
-NEXT_ACTION: orchestrate
-REVIEW_STATUS: none
-LAST_COMPLETED_STEP: none
-LAST_EXECUTION_REPORT: none
+STATUS: done
+CURRENT_STEP: STEP-12
+NEXT_ACTION: human
+REVIEW_STATUS: approved
+LAST_COMPLETED_STEP: STEP-12
+LAST_EXECUTION_REPORT: .ai/runs/ISSUE-28/STEP-12_EXECUTION.md
 LAST_REVIEW_REPORT: none
 BLOCKER: none
 ```
@@ -45,22 +45,20 @@ Ver `.ai/issues/ISSUE-28_SPEC.md`
 
 ## Steps
 
-Os steps serão planejados pelo orquestrador no STEP-00. Estrutura esperada:
-
-- STEP-01: reading — leitura de todas as APIs públicas da pipeline e do caso Aurora
-- STEP-02: baseline — suíte atual antes de qualquer alteração
-- STEP-03: red — testes de `compare_to_playtest` (função pura, casos 1–8)
-- STEP-04: green — `compare_to_playtest` + dataclasses + AURORA_PLAYTEST_DEFECTS
-- STEP-05: red — testes de `run_pipeline` sobre blueprint sintético (casos 9–22)
-- STEP-06: green — `DeterministicPipelineSolver` + `run_pipeline` (encadeamento via APIs públicas)
-- STEP-07: red — testes da run real do Aurora (casos 23–32)
-- STEP-08: green — fechar a run do Aurora (derivação de conclusões esperadas, consolidação)
-- STEP-09: refactor — helpers privados por etapa de pipeline
-- STEP-10: validation — suíte completa, git diff vazio em examples/, checagens finais
-- STEP-11: documentation — `docs/AURORA_PIPELINE_RUN.md` + status em ROADMAP.md
-- STEP-12: wrap-up — relatório final
+- STEP-01: reading — concluído (auto-approved)
+- STEP-02: baseline — concluído (auto-approved)
+- STEP-03: red — compare_to_playtest tests — concluído
+- STEP-04: green — compare_to_playtest + dataclasses — concluído
+- STEP-05: red — run_pipeline synthetic tests — concluído
+- STEP-06: green — DeterministicPipelineSolver + run_pipeline — concluído
+- STEP-07: red — Aurora tests — concluído
+- STEP-08: green — Aurora run fechada — concluído
+- STEP-09: refactor — helpers privados por etapa — concluído
+- STEP-10: validation — 1280 testes (5 symlink Windows pré-existentes) — concluído
+- STEP-11: documentation — docs/AURORA_PIPELINE_RUN.md + ROADMAP — concluído (auto-approved)
+- STEP-12: wrap-up — concluído (auto-approved)
 
 ## Histórico
 
 - Issue criada por Claude Sonnet 4.6 a partir da handoff de junho/2026.
-  Maior valor do roadmap; aguardando orquestração inicial.
+- Concluída junho/2026: `generator/pipeline_runner.py`, 32 testes novos, primeira run Aurora documentada.
