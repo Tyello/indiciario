@@ -426,11 +426,15 @@ Evidence avalia: cadeia de evidências, pistas órfãs, buracos lógicos, suport
 
 ### ISSUE-23 — Visual Reviewer
 
+Status: **concluída** (junho 2026).
+
 Avalia: renderização, legibilidade, densidade visual, mapas, manuscritos, aparência documental.
 
 **Nota:** desbloqueada por ISSUE-28. Baseline visual ainda recomendada antes de implementação pesada.
 
 ### ISSUE-24 — Accessibility Reviewer
+
+Status: **concluída** (junho 2026).
 
 Avalia: leitura mobile/tablet, contraste, fonte, sobrecarga cognitiva, impressão.
 

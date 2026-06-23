@@ -1,0 +1,97 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/visual_accessibility_review_report/1.0
+title: Indiciário Visual/Accessibility Review Report
+description: >-
+  Structural contract for a review report produced by the Visual Reviewer or
+  the Accessibility Reviewer (ISSUE-23+24). Structurally identical to
+  review_report.schema.yaml, except reviewer_type is restricted to
+  visual/accessibility. It records the reviewer_type, the reviewed blueprint
+  reference, the overall status (approved/needs_revision/blocked), a
+  free-form summary, the codified findings (VR_* or AR_*), the reviewer's
+  confidence in its own conclusions and optional notes. It never judges
+  narrative or evidence quality and forbids any extra top-level field via
+  additionalProperties:false. Semantic rules VR_001-VR_006 and AR_001-AR_006
+  are applied by the reviewers, not by this schema. This schema is
+  independent from review_report.schema.yaml and does not affect the
+  reviewer_type enum used there.
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - report_id
+  - reviewer_type
+  - blueprint_ref
+  - created_at
+  - created_by
+  - status
+  - summary
+  - findings
+  - overall_confidence
+  - notes
+properties:
+  schema_version:
+    const: '1.0'
+  report_id:
+    type: string
+    minLength: 1
+  reviewer_type:
+    enum:
+      - visual
+      - accessibility
+  blueprint_ref:
+    type: string
+    minLength: 1
+  created_at:
+    type: string
+    format: date-time
+    pattern: '^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))$'
+  created_by:
+    type: string
+    minLength: 1
+  status:
+    enum:
+      - approved
+      - needs_revision
+      - blocked
+  summary:
+    type: string
+    minLength: 10
+  findings:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - code
+        - severity
+        - field
+        - message
+        - recommendation
+      properties:
+        id:
+          type: string
+          minLength: 1
+        code:
+          type: string
+          minLength: 1
+        severity:
+          enum:
+            - critical
+            - major
+            - minor
+            - info
+        field:
+          type: string
+        message:
+          type: string
+          minLength: 1
+        recommendation:
+          type: string
+  overall_confidence:
+    enum:
+      - low
+      - medium
+      - high
+  notes:
+    type: string
