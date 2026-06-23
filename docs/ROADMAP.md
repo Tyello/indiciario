@@ -458,7 +458,7 @@ Consolidar tudo que aconteceu em uma run: bundles, agentes, outputs, findings, d
 
 ## Próxima fase — Aplicação em casos reais (Fase H)
 
-Status: **em andamento** — ISSUE-28 concluída; ISSUE-29/30 pendentes.
+Status: **concluída** — ISSUE-28/29/30 concluídas.
 
 Esta é a fase de maior valor — primeiro feedback real do sistema completo.
 
@@ -474,11 +474,19 @@ Entregável: `generator/pipeline_runner.py`, testes, `docs/AURORA_PIPELINE_RUN.m
 
 ### ISSUE-29 — Rodar pipeline no caso Fintech
 
+Status: **concluída** (junho 2026).
+
 Validar caso corporativo de dificuldade médio-alta com documentos mais densos.
+
+Entregável: `docs/FINTECH_PIPELINE_RUN.md`.
 
 ### ISSUE-30 — Relatório comparativo de qualidade
 
+Status: **concluída** (junho 2026).
+
 Medir evolução: antes/depois, clareza, dificuldade, vazamentos, visual, pacing.
+
+Entregável: `generator/quality_comparative_reviewer.py`, `docs/QUALITY_COMPARATIVE_REPORT.md`.
 
 ## Fase futura — Automação com LLM (Fase I)
 

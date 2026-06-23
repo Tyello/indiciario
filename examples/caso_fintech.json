@@ -1,0 +1,1651 @@
+{
+  "titulo": "Desvio de Fundos na Acelerada Pagamentos",
+  "subtitulo": "Transferências internacionais sem contrapartida antes do fechamento trimestral",
+  "genero": "fraude corporativa financeira",
+  "tom": "corporativo, tenso, técnico",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "avancado",
+  "tempo_estimado_min": 120,
+  "numero_jogadores": "4 a 6",
+  "formato_envelopes": 2,
+  "premissa": "A Acelerada Pagamentos, fintech de processamento de pagamentos B2B, fecha o trimestre com uma divergência de caixa de R$ 4,2 milhões associada a transferências internacionais para um parceiro de liquidação em Malta. O CEO Renato Aguilar pede uma apuração interna antes que o conselho e o auditor externo formalizem o achado, temendo que a divergência comprometa a rodada de investimento em andamento.",
+  "conflito_central": {
+    "pergunta_publica": "Por que a Acelerada Pagamentos enviou R$ 4,2 milhões à Solenne Capital Partners sem contrapartida registrada, e isso é erro operacional ou desvio deliberado?",
+    "quem_pede_apuracao": "Renato Aguilar, CEO, pressionado pelo conselho e pela due diligence da rodada de investimento.",
+    "motivo_da_apuracao": "O auditor externo identificou que as remessas à Solenne Capital não têm nota fiscal, contrato vigente ou serviço prestado correspondente.",
+    "risco_concreto": "Se a divergência não for explicada antes do fechamento trimestral, a rodada de investimento pode ser suspensa e a fintech pode perder a licença de instituição de pagamento por falha de controle.",
+    "verdade_aparente": "A divergência parece erro de reconciliação contábil ou atraso de compensação bancária internacional, sem intenção de desviar recursos.",
+    "verdade_real_resumida": "Beatriz Lacerda, CFO, estruturou as remessas à Solenne Capital como pagamentos de consultoria fictícia, usando Tiago Mendes para autorizar as transferências e Diego Salum como ponta receptora, desviando parte dos recursos para uma conta que ela controla indiretamente."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Por que a Acelerada enviou recursos à Solenne Capital sem contrapartida clara e quem autorizou cada remessa?",
+      "resposta_esperada": "As remessas à Solenne Capital foram autorizadas por Tiago Mendes a partir de instruções da CFO Beatriz Lacerda, sob o rótulo de consultoria estratégica, sem contrato vigente ou entrega comprovada.",
+      "nao_precisa_resolver_ainda": [
+        "se Beatriz desviou recursos para benefício próprio",
+        "qual é o papel exato de Diego Salum na ponta offshore",
+        "se Júlia Prado ou Marcos Vidal participaram do desvio"
+      ],
+      "criterio_de_avanco": "Liberar E2 quando o grupo formular que a autorização de Tiago seguiu instrução direta da CFO e que o contrato de consultoria não tem serviço comprovado.",
+      "forma_diegetica_de_avanco": "O auditor externo entrega o dossiê de conciliação bancária e os e-mails internos reunidos na varredura de compliance.",
+      "documentos_minimos": [
+        "E1-01",
+        "E1-03",
+        "E1-05",
+        "E1-07"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Para onde foi o dinheiro de fato e quem se beneficia da conta controlada por trás da Solenne Capital?",
+      "resposta_esperada": "O contrato de retrocomissão e a conta vinculada à Beatriz mostram que parte dos recursos retorna a ela via Diego Salum, configurando desvio deliberado planejado e executado com a colaboração de Tiago.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando a hipótese final explicar o mecanismo de retrocomissão, o papel de cada personagem e o descarte de Júlia e Marcos.",
+      "forma_diegetica_de_avanco": "O facilitador confere a hipótese no guia operacional e revela a solução após consenso documentado.",
+      "documentos_minimos": [
+        "E2-01",
+        "E2-02",
+        "E2-04",
+        "E2-06"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Por que a Acelerada Pagamentos enviou R$ 4,2 milhões à Solenne Capital Partners sem contrapartida registrada, e isso é erro operacional ou desvio deliberado?",
+    "solucao_em_5_frases": [
+      "Renato pede apuração porque o auditor externo encontrou remessas sem contrapartida à Solenne Capital antes do fechamento trimestral.",
+      "No E1, a melhor resposta parcial é que Tiago autorizou as remessas por instrução direta de Beatriz, sob rótulo de consultoria sem serviço comprovado.",
+      "No E2, o contrato de retrocomissão e o extrato da conta pessoal vinculada mostram que parte dos recursos retorna a Beatriz via Diego Salum.",
+      "Beatriz planejou o esquema usando a estrutura de aprovação dupla da fintech; Tiago executou as transferências sabendo que o contrato de consultoria era fictício.",
+      "Júlia e Marcos permanecem suspeitos fortes, mas caem quando os registros de auditoria separam falha de checklist, erro de reconciliação e benefício financeiro direto."
+    ],
+    "linha_tempo_aparente_resumo": "Aparentemente as remessas à Solenne Capital eram pagamentos legítimos de consultoria estratégica, atrasados por lentidão de compensação bancária internacional.",
+    "linha_tempo_real_resumo": "Beatriz estrutura contrato de consultoria fictício com a Solenne Capital, Tiago autoriza as remessas trimestrais, e Diego Salum redireciona parte dos valores para uma conta pessoal vinculada a Beatriz por meio de um acordo de retrocomissão não declarado.",
+    "red_herrings_e_descartes": [
+      "Júlia Prado: aprovou o lote de pagamento sem completar o checklist de compliance, mas atuou sob pressão de prazo e sem acesso ao contrato de retrocomissão.",
+      "Marcos Vidal: o erro de reconciliação que ele relatou é real, mas decorre de lançamento manual incorreto, não de participação no desvio.",
+      "Mudança de legislação cambial citada nos e-mails é genuína, mas não explica a ausência de contrapartida nas remessas.",
+      "Atraso de compensação bancária internacional é um fator real do sistema SWIFT, mas documentado separadamente da divergência de valor."
+    ],
+    "quando_usar_dicas": [
+      "Use dica leve se o grupo tratar a divergência apenas como atraso de compensação bancária.",
+      "Use dica média se o grupo não conectar o contrato de consultoria fictício à autorização de Tiago.",
+      "Use dica forte se a mesa não identificar a conta pessoal vinculada a Beatriz por trás de Diego Salum."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Por que a Acelerada enviou recursos à Solenne Capital sem contrapartida clara e quem autorizou cada remessa?",
+        "resposta_esperada": "As remessas à Solenne Capital foram autorizadas por Tiago Mendes a partir de instruções da CFO Beatriz Lacerda, sob o rótulo de consultoria estratégica, sem contrato vigente ou entrega comprovada.",
+        "nao_precisa_resolver_ainda": [
+          "se Beatriz desviou recursos para benefício próprio",
+          "qual é o papel exato de Diego Salum na ponta offshore",
+          "se Júlia Prado ou Marcos Vidal participaram do desvio"
+        ],
+        "criterio_de_avanco": "Liberar E2 quando o grupo formular que a autorização de Tiago seguiu instrução direta da CFO e que o contrato de consultoria não tem serviço comprovado.",
+        "forma_diegetica_de_avanco": "O auditor externo entrega o dossiê de conciliação bancária e os e-mails internos reunidos na varredura de compliance.",
+        "documentos_minimos": [
+          "E1-01",
+          "E1-03",
+          "E1-05",
+          "E1-07"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Para onde foi o dinheiro de fato e quem se beneficia da conta controlada por trás da Solenne Capital?",
+        "resposta_esperada": "O contrato de retrocomissão e a conta vinculada à Beatriz mostram que parte dos recursos retorna a ela via Diego Salum, configurando desvio deliberado planejado e executado com a colaboração de Tiago.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando a hipótese final explicar o mecanismo de retrocomissão, o papel de cada personagem e o descarte de Júlia e Marcos.",
+        "forma_diegetica_de_avanco": "O facilitador confere a hipótese no guia operacional e revela a solução após consenso documentado.",
+        "documentos_minimos": [
+          "E2-01",
+          "E2-02",
+          "E2-04",
+          "E2-06"
+        ]
+      }
+    ]
+  },
+  "verdade_real": "Beatriz Lacerda, CFO da Acelerada Pagamentos, estruturou um contrato de consultoria estratégica com a Solenne Capital Partners (Malta) sem qualquer serviço real prestado. Ela instruiu Tiago Mendes, Diretor de Operações, a autorizar quatro remessas internacionais trimestrais sob o rótulo de 'consultoria de expansão regulatória', usando sua alçada de aprovação dupla para validar o lote sem exigir evidência de entrega. Diego Salum, representante comercial da Solenne Capital, redirecionou 40% de cada remessa para uma conta em nome de uma offshore de fachada, da qual Beatriz é beneficiária final não declarada, via acordo de retrocomissão registrado apenas em planilha pessoal recuperada no notebook corporativo dela. Júlia Prado, analista de compliance, aprovou o lote de pagamento sob pressão de prazo sem completar o checklist de due diligence de fornecedor, mas não tinha acesso ao contrato de retrocomissão. Marcos Vidal, controller, relatou um erro de reconciliação genuíno em paralelo, mas esse erro é lançamento manual incorreto, não participação no esquema.",
+  "executor_id": "02",
+  "planejador_id": "01",
+  "beneficiario_id": "01",
+  "motivacao": "Beatriz enfrentava dívidas pessoais decorrentes de um investimento mal sucedido em criptoativos e viu na estrutura de aprovação dupla da fintech, que ela própria desenhou, uma forma de desviar recursos sem levantar suspeita imediata antes da rodada de investimento.",
+  "metodo_ocultacao": "Contrato de consultoria fictício com linguagem genérica de 'expansão regulatória', divisão das remessas em quatro lotes trimestrais abaixo do limite de alçada que exigiria segunda assinatura do conselho, e retrocomissão registrada apenas em planilha pessoal fora dos sistemas corporativos.",
+  "erro_que_permite_descobrir": "A planilha pessoal de retrocomissão ficou armazenada no notebook corporativo de Beatriz, sincronizada automaticamente com o backup de TI da fintech, e o contrato de consultoria não tem nenhum entregável correspondente nos sistemas de gestão de projetos.",
+  "cadeia_causal": [
+    "Beatriz acumula dívidas pessoais e identifica que a estrutura de aprovação dupla que ela desenhou pode ser usada para desviar recursos sem segunda assinatura do conselho.",
+    "Beatriz negocia com Diego Salum um contrato de consultoria fictício com a Solenne Capital Partners, incluindo cláusula de retrocomissão informal.",
+    "Beatriz instrui Tiago a autorizar quatro remessas trimestrais à Solenne Capital sob o rótulo de consultoria de expansão regulatória.",
+    "Tiago autoriza as remessas usando a alçada operacional, sem exigir evidência de entrega do serviço contratado.",
+    "Diego Salum redireciona 40% de cada remessa para uma offshore de fachada vinculada a Beatriz, registrando o acordo apenas em planilha pessoal.",
+    "O auditor externo Helga Brandt identifica a ausência de nota fiscal e entregável correspondente durante a revisão trimestral e aciona o CEO.",
+    "A varredura de TI recupera a planilha pessoal de retrocomissão no backup do notebook corporativo de Beatriz, revelando o mecanismo completo."
+  ],
+  "personagens": [
+    {
+      "id": "01",
+      "nome": "Beatriz Lacerda",
+      "funcao": "CFO da Acelerada Pagamentos",
+      "papel": "beneficiario",
+      "suspeita_aparente": "Como CFO, é responsável por toda a estrutura de aprovação financeira, mas inicialmente parece apenas zelosa e sobrecarregada pelo fechamento trimestral.",
+      "verdade": "Planejou o esquema de consultoria fictícia e é beneficiária final da retrocomissão paga por Diego Salum através da offshore de fachada.",
+      "documento_ancoragem": [
+        "E1-03",
+        "E2-01",
+        "E2-04"
+      ],
+      "assinatura": {
+        "estilo": "formal",
+        "rubrica_estilo": "administrativa",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "forte",
+        "fluidez": "media",
+        "variacao": "baixa",
+        "ornamentacao": "nenhuma",
+        "amplitude": "media",
+        "seed": "fintech-beatriz"
+      }
+    },
+    {
+      "id": "02",
+      "nome": "Tiago Mendes",
+      "funcao": "Diretor de Operações da Acelerada Pagamentos",
+      "papel": "executor",
+      "suspeita_aparente": "Autorizou pessoalmente todas as remessas internacionais questionadas, parecendo o ponto central da falha de controle.",
+      "verdade": "Executou as autorizações por instrução direta de Beatriz, sabendo que o contrato de consultoria não tinha entrega real, mas sem benefício financeiro próprio identificado.",
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-05",
+        "E2-02"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "seca",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "neutra",
+        "pressao": "media",
+        "fluidez": "baixa",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "curta",
+        "seed": "fintech-tiago"
+      }
+    },
+    {
+      "id": "03",
+      "nome": "Renato Aguilar",
+      "funcao": "CEO da Acelerada Pagamentos",
+      "papel": "narrador",
+      "suspeita_aparente": "Pressiona para resolver o caso rápido antes da rodada de investimento, o que pode parecer interesse em encobrir a divergência.",
+      "verdade": "Convoca a apuração interna de boa-fé, preocupado com a licença de instituição de pagamento e com a confiança dos investidores.",
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-02"
+      ],
+      "assinatura": {
+        "estilo": "minimalista",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "leve",
+        "fluidez": "media",
+        "variacao": "baixa",
+        "ornamentacao": "nenhuma",
+        "amplitude": "curta",
+        "seed": "fintech-renato"
+      }
+    },
+    {
+      "id": "04",
+      "nome": "Helga Brandt",
+      "funcao": "Auditora externa contratada para o fechamento trimestral",
+      "papel": "testemunha",
+      "suspeita_aparente": "Tem acesso irrestrito aos sistemas financeiros e foi a primeira a levantar a divergência, o que gera desconfiança sobre motivação própria.",
+      "verdade": "Identificou a ausência de contrapartida nas remessas durante a revisão de rotina e não tem qualquer participação no esquema.",
+      "documento_ancoragem": [
+        "E1-02",
+        "E1-07"
+      ],
+      "assinatura": {
+        "estilo": "compacta",
+        "rubrica_estilo": "administrativa",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "esquerda",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "baixa",
+        "ornamentacao": "sublinhado",
+        "amplitude": "curta",
+        "seed": "fintech-helga"
+      }
+    },
+    {
+      "id": "05",
+      "nome": "Diego Salum",
+      "funcao": "Representante comercial da Solenne Capital Partners",
+      "papel": "cumplice",
+      "suspeita_aparente": "É a ponta receptora direta dos recursos enviados pela Acelerada, o que o torna alvo natural da investigação.",
+      "verdade": "Operou como intermediário do esquema, redirecionando parte de cada remessa para a offshore de fachada vinculada a Beatriz, sob acordo de retrocomissão.",
+      "documento_ancoragem": [
+        "E2-03",
+        "E2-04"
+      ],
+      "assinatura": {
+        "estilo": "comercial",
+        "rubrica_estilo": "fluida",
+        "legibilidade": "media",
+        "ornamento": "medio",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "alta",
+        "variacao": "media",
+        "ornamentacao": "laco",
+        "amplitude": "longa",
+        "seed": "fintech-diego"
+      }
+    },
+    {
+      "id": "06",
+      "nome": "Júlia Prado",
+      "funcao": "Analista de Compliance da Acelerada Pagamentos",
+      "papel": "red_herring",
+      "suspeita_aparente": "Aprovou o lote de pagamento à Solenne Capital sem concluir o checklist de due diligence de fornecedor, o que parece negligência cúmplice.",
+      "verdade": "Aprovou sob pressão de prazo de fechamento, sem qualquer acesso ao contrato de retrocomissão ou benefício financeiro.",
+      "documento_ancoragem": [
+        "E1-06",
+        "E2-06"
+      ],
+      "assinatura": {
+        "estilo": "curta",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "leve",
+        "fluidez": "media",
+        "variacao": "baixa",
+        "ornamentacao": "nenhuma",
+        "amplitude": "curta",
+        "seed": "fintech-julia"
+      }
+    },
+    {
+      "id": "07",
+      "nome": "Marcos Vidal",
+      "funcao": "Controller da Acelerada Pagamentos",
+      "papel": "red_herring",
+      "suspeita_aparente": "Relatou um erro de reconciliação na mesma janela temporal da divergência, levantando suspeita de tentativa de encobrir o desvio.",
+      "verdade": "O erro de reconciliação que relatou é genuíno e decorre de lançamento manual incorreto, sem qualquer ligação com o esquema de Beatriz.",
+      "documento_ancoragem": [
+        "E1-04",
+        "E2-05"
+      ],
+      "assinatura": {
+        "estilo": "apressada",
+        "rubrica_estilo": "seca",
+        "legibilidade": "baixa",
+        "ornamento": "baixo",
+        "inclinacao": "esquerda",
+        "pressao": "forte",
+        "fluidez": "baixa",
+        "variacao": "alta",
+        "ornamentacao": "nenhuma",
+        "amplitude": "media",
+        "seed": "fintech-marcos"
+      }
+    }
+  ],
+  "documentos": [
+    {
+      "codigo": "E1-01",
+      "titulo": "E-mail de abertura da apuração interna",
+      "envelope": "E1",
+      "tipo": "email_institucional",
+      "emocao_esperada": "urgência corporativa contida",
+      "objetivo_narrativo": "Apresentar a solicitação pública de Renato e a pergunta do Envelope 1 sem indicar culpado.",
+      "pistas_contidas": [
+        "divergência de caixa de R$ 4,2 milhões",
+        "remessas à Solenne Capital Partners",
+        "pressão da rodada de investimento"
+      ],
+      "confirma": [
+        "E1-02",
+        "E1-03"
+      ],
+      "confirmado_por": [
+        "E2-04"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "03",
+        "01",
+        "04"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Renato Aguilar",
+        "REMETENTE_EMAIL": "renato.aguilar@aceleradapag.com",
+        "DESTINATARIO_EMAIL": "comite.apuracao@aceleradapag.com",
+        "COPIA": "juridico@aceleradapag.com; conselho@aceleradapag.com",
+        "DESTINATARIO_LABEL": "Comitê de Apuração Interna",
+        "DATA_HORA": "02/05/2026 08h14",
+        "ASSUNTO": "AP-2026-04 — Abertura de apuração: remessas internacionais sem contrapartida",
+        "AVATAR_INICIAL": "RA",
+        "AVATAR_COR": "#1c3d5a",
+        "CORPO_EMAIL": "<p>Equipe,</p><p>A auditoria externa conduzida por Helga Brandt identificou, na revisão de fechamento do primeiro trimestre, uma divergência de caixa de R$ 4,2 milhões associada a quatro remessas internacionais para a Solenne Capital Partners, sediada em Malta. As remessas foram lançadas como pagamento de consultoria de expansão regulatória, mas nenhuma nota fiscal, contrato vigente atualizado ou entregável correspondente foi localizado nos sistemas de gestão de projetos até o momento.</p><p>Estamos a três semanas do fechamento da rodada de investimento Série B, e a due diligence do fundo já solicitou esclarecimento sobre o item. Preciso que o comitê reúna, antes de qualquer comunicação ao conselho pleno, todos os registros de autorização, conciliação bancária e comunicação interna relacionados a essas remessas, cobrindo o período de 1º de janeiro a 30 de abril de 2026.</p><p>Solicito que o levantamento inicial trate especificamente de quem autorizou cada remessa, sob qual alçada, e qual evidência de prestação de serviço foi exigida antes da liberação. Não quero hipótese de culpado nesta fase — quero fatos documentados.</p><p>Por gentileza, tratem este e-mail e os anexos como confidenciais até decisão do comitê.</p>",
+        "NOTA_RODAPE": "Acelerada Pagamentos Instituição de Pagamento S.A. — Comunicação interna confidencial.",
+        "ANEXOS": true,
+        "TOTAL_ANEXOS": "2",
+        "CADA_ANEXO": [
+          {
+            "NOME_ARQUIVO": "memo_auditoria_helga_brandt.pdf",
+            "TAMANHO_KB": "340"
+          },
+          {
+            "NOME_ARQUIVO": "extrato_consolidado_q1.pdf",
+            "TAMANHO_KB": "512"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "Memorando de auditoria — divergência de remessas internacionais",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "rigor técnico, suspeita comedida",
+      "objetivo_narrativo": "Apresentar o achado técnico da auditora externa em linguagem bruta, sem apontar culpado.",
+      "pistas_contidas": [
+        "ausência de nota fiscal",
+        "contrato sem entregável",
+        "quatro remessas trimestrais idênticas em estrutura"
+      ],
+      "confirma": [
+        "E1-07",
+        "E1-03"
+      ],
+      "confirmado_por": [
+        "E2-01"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "04",
+        "01",
+        "02"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "ORGAO_SUBTITULO": "Auditoria Externa — Fechamento Trimestral",
+        "NUMERO_CASO": "AP-2026-04",
+        "TIPO_DOCUMENTO": "Memorando técnico de auditoria",
+        "TIPO_OCORRENCIA": "Divergência de caixa em remessas internacionais",
+        "DATA": "30/04/2026",
+        "LOCALIZACAO": "Sede da Acelerada Pagamentos, São Paulo",
+        "HORA_OCORRENCIA": "17h20",
+        "DESCRICAO_OCORRENCIA": "<p>Durante a revisão de fechamento do primeiro trimestre de 2026, identifiquei quatro remessas internacionais à Solenne Capital Partners (Malta, registro comercial MT-SC-44210), realizadas em 15/01, 14/02, 13/03 e 12/04, cada uma no valor de R$ 1.050.000,00, totalizando R$ 4.200.000,00. As remessas constam no sistema contábil sob a rubrica 'Consultoria de Expansão Regulatória — Contrato CS-2025-118'.</p><p>Solicitei à área financeira evidência de entregável correspondente: relatório de consultoria, ata de reunião, parecer regulatório ou qualquer artefato de trabalho. Recebi resposta de que a documentação 'está em consolidação' por três pedidos consecutivos, sem entrega até a data deste memorando. Não há nota fiscal de serviço estrangeiro registrada na contabilidade, apenas o comprovante SWIFT de cada remessa.</p><p>Verifiquei o cadastro de fornecedor da Solenne Capital Partners no sistema de compliance: o cadastro foi aprovado em 10/01/2026, quatro dias antes da primeira remessa, com checklist de due diligence marcado como 'parcialmente concluído'. Recomendo apuração formal antes do fechamento do trimestre e da formalização do parecer de auditoria para a rodada de investimento.</p>",
+        "NOME_RESPONSAVEL": "Helga Brandt",
+        "ASSINATURA_RESPONSAVEL": "Helga Brandt",
+        "ASSINATURA_GLIFO": "HB",
+        "DATA_HORA_ASSINATURA": "30/04/2026 — 17h45",
+        "CAMPO_NOME": "Auditora responsável",
+        "NOME_ENVOLVIDO": "Helga Brandt",
+        "DATA_NASC": "informado em contrato de auditoria",
+        "CONDICAO": "Auditora externa contratada",
+        "DOCUMENTO_PESSOAL": "credencial profissional registrada no contrato de prestação de serviços",
+        "MOSTRAR_CARIMBO": false,
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "04"
+      }
+    },
+    {
+      "codigo": "E1-03",
+      "titulo": "Contrato de consultoria de expansão regulatória CS-2025-118",
+      "envelope": "E1",
+      "tipo": "contrato",
+      "emocao_esperada": "formalidade que esconde vazio",
+      "objetivo_narrativo": "Mostrar em linguagem bruta um contrato genérico, sem entregáveis mensuráveis, que sustenta as remessas.",
+      "pistas_contidas": [
+        "objeto contratual vago",
+        "remuneração fixa trimestral",
+        "ausência de cronograma de entregáveis"
+      ],
+      "confirma": [
+        "E1-02"
+      ],
+      "confirmado_por": [
+        "E1-07",
+        "E2-04"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "01",
+        "05"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "SUBTITULO_ORGANIZACAO": "Diretoria Financeira — Arquivo de Contratos",
+        "ENDERECO_LINHA1": "Avenida Faria Lima, 2341, conjunto 1102 — São Paulo, SP",
+        "CONTATO": "juridico@aceleradapag.com | ramal 308",
+        "CNPJ": "Acelerada Pagamentos Instituição de Pagamento S.A. — CNPJ 29.884.117/0001-50",
+        "COR_TOPO": "#1c3d5a",
+        "LOCAL_DATA": "São Paulo, 22 de dezembro de 2025",
+        "SAUDACAO": "Às partes contratantes",
+        "ASSUNTO": "CS-2025-118 — Contrato de prestação de serviços de consultoria",
+        "CORPO_CARTA": "<p><strong>Cláusula 1ª — Objeto.</strong> A CONTRATADA, Solenne Capital Partners Ltd., sediada em Malta sob registro comercial MT-SC-44210, prestará à CONTRATANTE, Acelerada Pagamentos Instituição de Pagamento S.A., serviços de consultoria estratégica para expansão regulatória em mercados europeus, incluindo mapeamento de licenças, análise de risco regulatório e suporte a negociações institucionais.</p><p><strong>Cláusula 2ª — Remuneração.</strong> A CONTRATANTE pagará à CONTRATADA o valor fixo de R$ 1.050.000,00 (um milhão e cinquenta mil reais) por trimestre, independentemente de volume de horas ou entregáveis específicos, mediante remessa internacional via SWIFT para conta indicada pela CONTRATADA.</p><p><strong>Cláusula 3ª — Entregáveis.</strong> A CONTRATADA fornecerá relatórios de acompanhamento 'conforme necessidade identificada pelas partes', sem cronograma fixo ou formato obrigatório de entrega.</p><p><strong>Cláusula 4ª — Vigência.</strong> O presente contrato tem vigência de 12 meses a partir de 1º de janeiro de 2026, renovável por igual período mediante manifestação das partes.</p><p>Representante da CONTRATADA para fins deste contrato: Diego Salum, gerente de relacionamento institucional.</p>",
+        "FORMULA_ENCERRAMENTO": "Documento arquivado sob sigilo contratual da diretoria financeira.",
+        "ASSINATURA_CURSIVA": "Beatriz Lacerda",
+        "NOME_ASSINANTE": "Beatriz Lacerda",
+        "CARGO_ASSINANTE": "Diretora Financeira (CFO)",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Contrato de consultoria CS-2025-118",
+        "NOTAS_RODAPE": "Cópia única retida na diretoria financeira; cópia da contraparte não anexada ao arquivo físico.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "01",
+        "ENDERECO_LINHA2": "São Paulo — circulação restrita"
+      }
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Declaração inicial de Marcos Vidal",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "suspeita operacional plausível",
+      "objetivo_narrativo": "Mostrar um erro de reconciliação real e coincidente em data, plausível como red herring.",
+      "pistas_contidas": [
+        "erro de lançamento manual",
+        "reconciliação trimestral",
+        "coincidência de datas com as remessas"
+      ],
+      "confirma": [
+        "E1-07"
+      ],
+      "confirmado_por": [
+        "E2-05"
+      ],
+      "red_herring_potencial": "Marcos relatou erro de reconciliação na mesma janela das remessas suspeitas",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "07",
+        "01"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "ORGAO_SUBTITULO": "Controladoria — Registro de ocorrência interna",
+        "NUMERO_CASO": "AP-2026-04",
+        "TIPO_DOCUMENTO": "Termo de declaração",
+        "TIPO_OCORRENCIA": "Erro de reconciliação contábil reportado",
+        "DATA": "03/05/2026",
+        "LOCALIZACAO": "Sede da Acelerada Pagamentos, São Paulo",
+        "HORA_OCORRENCIA": "14h30",
+        "DESCRICAO_OCORRENCIA": "<p>Sou responsável pela reconciliação mensal entre o extrato bancário consolidado e o livro-caixa contábil. No fechamento de março, lancei duplicadamente um crédito de recebível de cliente no valor de R$ 380 mil, o que gerou uma diferença temporária no saldo projetado. Identifiquei o erro em 18 de abril e corrigi o lançamento em 19 de abril, com registro no sistema de controladoria.</p><p>Sei que esse erro caiu na mesma janela em que a auditoria está olhando as remessas à Solenne Capital, e entendo que isso levanta dúvida sobre mim. Mas esse lançamento duplicado é sobre recebível de cliente nacional, não tem relação com remessa internacional nenhuma. Posso mostrar o histórico de correção no sistema, com timestamp e log de usuário.</p><p>Não participei de nenhuma decisão sobre o contrato da Solenne Capital. Minha função é registrar o que a diretoria financeira manda lançar, não aprovar remessas.</p>",
+        "NOME_RESPONSAVEL": "Comitê de Apuração Interna",
+        "ASSINATURA_RESPONSAVEL": "Comitê de Apuração Interna",
+        "ASSINATURA_GLIFO": "CAI",
+        "DATA_HORA_ASSINATURA": "03/05/2026 — 14h50",
+        "CAMPO_NOME": "Declarante",
+        "NOME_ENVOLVIDO": "Marcos Vidal",
+        "DATA_NASC": "informado em cadastro de RH",
+        "CONDICAO": "Controller",
+        "DOCUMENTO_PESSOAL": "registro funcional retido pela controladoria",
+        "MOSTRAR_CARIMBO": false
+      }
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Declaração inicial de Tiago Mendes",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "desconforto sob justificativa operacional",
+      "objetivo_narrativo": "Mostrar que Tiago autorizou as remessas seguindo instrução hierárquica, sem assumir conhecimento de fraude.",
+      "pistas_contidas": [
+        "autorização sob alçada operacional",
+        "instrução direta da CFO",
+        "ausência de exigência de entregável"
+      ],
+      "confirma": [
+        "E1-03"
+      ],
+      "confirmado_por": [
+        "E2-02"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio_alto",
+      "ids_citados": [
+        "02",
+        "01"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "ORGAO_SUBTITULO": "Controladoria — Registro de ocorrência interna",
+        "NUMERO_CASO": "AP-2026-04",
+        "TIPO_DOCUMENTO": "Termo de declaração",
+        "TIPO_OCORRENCIA": "Autorização de remessas internacionais questionadas",
+        "DATA": "03/05/2026",
+        "LOCALIZACAO": "Sede da Acelerada Pagamentos, São Paulo",
+        "HORA_OCORRENCIA": "16h10",
+        "DESCRICAO_OCORRENCIA": "<p>Autorizei as quatro remessas à Solenne Capital Partners dentro da minha alçada de Diretor de Operações, que permite liberar pagamentos a fornecedores cadastrados até o limite de R$ 1.100.000,00 por operação sem exigir segunda assinatura do conselho. Beatriz me passou o contrato CS-2025-118 já assinado e me pediu para priorizar a liberação porque a consultoria 'tinha prazo apertado com o regulador europeu'.</p><p>Não exigi relatório de entrega porque o contrato não previa cronograma fixo de entregáveis, e Beatriz disse que acompanharia o conteúdo das consultorias diretamente. Em nenhum momento ela mencionou qualquer arranjo de pagamento de volta para ela ou para terceiros.</p><p>Reconheço que, em retrospecto, deveria ter pedido evidência de serviço prestado antes da segunda remessa, já que a primeira não gerou nenhum relatório visível. Segui a orientação da CFO porque ela tem alçada superior à minha na estrutura de aprovação financeira.</p>",
+        "NOME_RESPONSAVEL": "Comitê de Apuração Interna",
+        "ASSINATURA_RESPONSAVEL": "Comitê de Apuração Interna",
+        "ASSINATURA_GLIFO": "CAI",
+        "DATA_HORA_ASSINATURA": "03/05/2026 — 16h30",
+        "CAMPO_NOME": "Declarante",
+        "NOME_ENVOLVIDO": "Tiago Mendes",
+        "DATA_NASC": "informado em cadastro de RH",
+        "CONDICAO": "Diretor de Operações",
+        "DOCUMENTO_PESSOAL": "registro funcional retido pela controladoria",
+        "MOSTRAR_CARIMBO": false
+      }
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Declaração inicial de Júlia Prado",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "ansiedade profissional, falso caminho forte",
+      "objetivo_narrativo": "Apresentar falha de checklist plausível como red herring, sem acesso ao mecanismo real.",
+      "pistas_contidas": [
+        "checklist de due diligence incompleto",
+        "pressão de prazo de fechamento",
+        "ausência de acesso ao contrato de retrocomissão"
+      ],
+      "confirma": [
+        "E1-02"
+      ],
+      "confirmado_por": [
+        "E2-06"
+      ],
+      "red_herring_potencial": "Júlia aprovou cadastro de fornecedor sem checklist completo",
+      "risco_ambiguidade": "medio_alto",
+      "ids_citados": [
+        "06",
+        "01",
+        "05"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "ORGAO_SUBTITULO": "Controladoria — Registro de ocorrência interna",
+        "NUMERO_CASO": "AP-2026-04",
+        "TIPO_DOCUMENTO": "Termo de declaração",
+        "TIPO_OCORRENCIA": "Aprovação de cadastro de fornecedor sem checklist completo",
+        "DATA": "04/05/2026",
+        "LOCALIZACAO": "Sede da Acelerada Pagamentos, São Paulo",
+        "HORA_OCORRENCIA": "10h05",
+        "DESCRICAO_OCORRENCIA": "<p>Aprovei o cadastro da Solenne Capital Partners em 10 de janeiro de 2026 com o checklist de due diligence marcado como parcialmente concluído porque Beatriz pediu urgência, alegando que o contrato precisava estar ativo antes de uma reunião com o regulador europeu na semana seguinte. Faltava confirmação de referência bancária internacional e verificação de beneficiário final da empresa estrangeira, dois itens que normalmente levam de sete a dez dias úteis.</p><p>Não tive acesso a nenhum documento de retrocomissão, planilha pessoal ou conta vinculada a terceiros. Meu trabalho terminou na aprovação do cadastro; a autorização das remessas em si é do Tiago, e o acompanhamento do contrato é da Beatriz.</p><p>Sei que essa aprovação incompleta pesa contra mim agora, mas posso mostrar o e-mail em que registrei a pendência e pedi para completar o checklist depois, o que nunca foi cobrado de volta por ninguém.</p>",
+        "NOME_RESPONSAVEL": "Comitê de Apuração Interna",
+        "ASSINATURA_RESPONSAVEL": "Comitê de Apuração Interna",
+        "ASSINATURA_GLIFO": "CAI",
+        "DATA_HORA_ASSINATURA": "04/05/2026 — 10h25",
+        "CAMPO_NOME": "Declarante",
+        "NOME_ENVOLVIDO": "Júlia Prado",
+        "DATA_NASC": "informado em cadastro de RH",
+        "CONDICAO": "Analista de Compliance",
+        "DOCUMENTO_PESSOAL": "registro funcional retido pela controladoria",
+        "MOSTRAR_CARIMBO": false
+      }
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Extrato consolidado da conta corrente internacional",
+      "envelope": "E1",
+      "tipo": "extrato",
+      "emocao_esperada": "frieza numérica que confirma o padrão",
+      "objetivo_narrativo": "Mostrar em dado bruto as quatro remessas idênticas em estrutura, sem interpretação.",
+      "pistas_contidas": [
+        "quatro remessas trimestrais de mesmo valor",
+        "destinatário único Solenne Capital Partners",
+        "ausência de outras movimentações para o mesmo destinatário"
+      ],
+      "confirma": [
+        "E1-02",
+        "E1-03"
+      ],
+      "confirmado_por": [
+        "E2-01"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "LOGO_SIGLA": "BIC",
+        "NOME_BANCO": "Banco Internacional de Compensação S.A.",
+        "TAGLINE_BANCO": "Operações corporativas e câmbio",
+        "COR_BANCO": "#1c3d5a",
+        "PERIODO_INICIO": "01/01/2026",
+        "PERIODO_FIM": "30/04/2026",
+        "DATA_GERACAO": "30/04/2026",
+        "HORA_GERACAO": "23h10",
+        "NOME_TITULAR": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "DOC_TITULAR": "CNPJ 29.884.117/0001-50",
+        "AGENCIA": "3301",
+        "NUMERO_CONTA": "88204-7",
+        "TIPO_CONTA": "Conta Corrente Internacional",
+        "SALDO_INICIAL": "R$ 22.630.221,40",
+        "DATA_SALDO_INICIAL": "01/01/2026",
+        "MOVIMENTACAO_LIQUIDA": "- R$ 4.200.000,00",
+        "COR_MOVIMENTACAO": "#a83232",
+        "SALDO_FINAL": "R$ 18.430.221,40",
+        "DATA_SALDO_FINAL": "30/04/2026",
+        "COR_SALDO_FINAL": "#1c3d5a",
+        "TOTAL_CREDITOS": "R$ 0,00",
+        "TOTAL_DEBITOS": "R$ 4.200.000,00",
+        "TOTAL_LANCAMENTOS": "4",
+        "NOTA_LEGAL": "Extrato gerado para fins de auditoria interna. Não substitui o extrato oficial do banco.",
+        "CNPJ_BANCO": "Banco Internacional de Compensação S.A. — CNPJ 33.041.260/0001-19",
+        "ENDERECO_BANCO": "Avenida Paulista, 1900, 12º andar — São Paulo, SP",
+        "LANCAMENTOS": [
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "15/01/2026",
+            "DESCRICAO": "TED Internacional SWIFT",
+            "DETALHE": "Solenne Capital Partners Ltd. — Ref. CS-2025-118/1",
+            "TIPO_LOWER": "debito",
+            "TIPO": "Débito",
+            "DIRECAO": "saida",
+            "VALOR": "R$ 1.050.000,00",
+            "COR_SALDO": "#1c3d5a",
+            "SALDO_ACUMULADO": "R$ 21.580.221,40"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "14/02/2026",
+            "DESCRICAO": "TED Internacional SWIFT",
+            "DETALHE": "Solenne Capital Partners Ltd. — Ref. CS-2025-118/2",
+            "TIPO_LOWER": "debito",
+            "TIPO": "Débito",
+            "DIRECAO": "saida",
+            "VALOR": "R$ 1.050.000,00",
+            "COR_SALDO": "#1c3d5a",
+            "SALDO_ACUMULADO": "R$ 20.530.221,40"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "13/03/2026",
+            "DESCRICAO": "TED Internacional SWIFT",
+            "DETALHE": "Solenne Capital Partners Ltd. — Ref. CS-2025-118/3",
+            "TIPO_LOWER": "debito",
+            "TIPO": "Débito",
+            "DIRECAO": "saida",
+            "VALOR": "R$ 1.050.000,00",
+            "COR_SALDO": "#1c3d5a",
+            "SALDO_ACUMULADO": "R$ 19.480.221,40"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "12/04/2026",
+            "DESCRICAO": "TED Internacional SWIFT",
+            "DETALHE": "Solenne Capital Partners Ltd. — Ref. CS-2025-118/4",
+            "TIPO_LOWER": "debito",
+            "TIPO": "Débito",
+            "DIRECAO": "saida",
+            "VALOR": "R$ 1.050.000,00",
+            "COR_SALDO": "#1c3d5a",
+            "SALDO_ACUMULADO": "R$ 18.430.221,40"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Protocolo de abertura da apuração interna AP-2026-04",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "formalidade institucional",
+      "objetivo_narrativo": "Registrar o escopo formal da apuração e o perímetro de pessoas e documentos envolvidos, sem indicar conclusão.",
+      "pistas_contidas": [
+        "escopo formal da apuração",
+        "perímetro de pessoas envolvidas",
+        "prazo da rodada de investimento"
+      ],
+      "confirma": [
+        "E1-01"
+      ],
+      "confirmado_por": [
+        "E1-02"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "03",
+        "01",
+        "02",
+        "04",
+        "06",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "SUBTITULO_ORGANIZACAO": "Comitê de Apuração Interna — Protocolo de Abertura",
+        "ENDERECO_LINHA1": "Avenida Faria Lima, 2341, conjunto 1102 — São Paulo, SP",
+        "CONTATO": "comite.apuracao@aceleradapag.com | ramal 412",
+        "CNPJ": "Acelerada Pagamentos Instituição de Pagamento S.A. — CNPJ 29.884.117/0001-50",
+        "COR_TOPO": "#1c3d5a",
+        "LOCAL_DATA": "São Paulo, 02 de maio de 2026",
+        "SAUDACAO": "Aos membros do comitê de apuração interna",
+        "ASSUNTO": "AP-2026-04 — Protocolo de abertura de apuração",
+        "CORPO_CARTA": "<p>Fica formalmente aberta a apuração interna referente às quatro remessas internacionais à Solenne Capital Partners Ltd., registradas sob o contrato CS-2025-118, no valor total de R$ 4.200.000,00, identificadas pela auditoria externa como sem contrapartida documentada.</p><p>O perímetro desta apuração cobre o período de 1º de janeiro a 30 de abril de 2026 e abrange os seguintes papéis funcionais: autorização de pagamento (Diretoria de Operações), aprovação de cadastro de fornecedor (Compliance), reconciliação contábil (Controladoria) e auditoria externa de fechamento.</p><p>O comitê é composto por representantes do jurídico, da diretoria financeira e da auditoria externa, sob coordenação direta do CEO Renato Aguilar. O prazo de conclusão é de dez dias úteis, em razão do cronograma da rodada de investimento Série B em curso.</p><p>Este protocolo não pressupõe culpa de qualquer pessoa envolvida; seu único objetivo é organizar a coleta de evidência documental antes de qualquer conclusão.</p>",
+        "FORMULA_ENCERRAMENTO": "Protocolo arquivado para circulação restrita do comitê de apuração.",
+        "ASSINATURA_CURSIVA": "Renato Aguilar",
+        "NOME_ASSINANTE": "Renato Aguilar",
+        "CARGO_ASSINANTE": "Diretor-Presidente (CEO)",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Abertura de apuração AP-2026-04",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "03",
+        "ENDERECO_LINHA2": "São Paulo — circulação restrita"
+      }
+    },
+    {
+      "codigo": "E1-09",
+      "titulo": "Folha de cruzamento de papéis e alçadas financeiras",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "organização social e funcional do caso",
+      "objetivo_narrativo": "Dar nomes, cargos e alçadas em linguagem natural, sem mapa, para orientar quem aprova o quê.",
+      "pistas_contidas": [
+        "estrutura de alçadas de aprovação",
+        "papéis funcionais de cada pessoa envolvida",
+        "limite de aprovação individual de Tiago"
+      ],
+      "confirma": [
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E1-06"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "06",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "SUBTITULO_ORGANIZACAO": "Recursos Humanos — Estrutura de Alçadas Financeiras",
+        "ENDERECO_LINHA1": "Avenida Faria Lima, 2341, conjunto 1102 — São Paulo, SP",
+        "CONTATO": "rh@aceleradapag.com | ramal 220",
+        "CNPJ": "Acelerada Pagamentos Instituição de Pagamento S.A. — CNPJ 29.884.117/0001-50",
+        "COR_TOPO": "#1c3d5a",
+        "LOCAL_DATA": "São Paulo, atualização conferida em 28 de abril de 2026",
+        "SAUDACAO": "Registro interno de estrutura organizacional",
+        "ASSUNTO": "AP-ORG-118 — Papéis e alçadas envolvidos no contrato CS-2025-118",
+        "CORPO_CARTA": "<p><strong>Renato Aguilar</strong> — Diretor-Presidente (CEO). Alçada de aprovação irrestrita, normalmente não envolvido em remessas de rotina abaixo de R$ 5.000.000,00.</p><p><strong>Beatriz Lacerda</strong> — Diretora Financeira (CFO). Alçada de aprovação de contratos com fornecedores estratégicos e de definição de rubrica contábil. Responsável pela assinatura do contrato CS-2025-118.</p><p><strong>Tiago Mendes</strong> — Diretor de Operações. Alçada de liberação de pagamentos a fornecedores cadastrados até R$ 1.100.000,00 por operação, sem exigência de segunda assinatura do conselho.</p><p><strong>Júlia Prado</strong> — Analista de Compliance. Responsável pela aprovação de cadastro de novos fornecedores, sem acesso a contas bancárias de terceiros ou a sistemas de remessa internacional.</p><p><strong>Marcos Vidal</strong> — Controller. Responsável pela reconciliação entre extrato bancário e livro-caixa, sem permissão de acesso ao módulo de remessas internacionais.</p><p><strong>Helga Brandt</strong> — Auditora externa contratada para o fechamento trimestral, com acesso de leitura a todos os sistemas financeiros para fins de revisão.</p>",
+        "FORMULA_ENCERRAMENTO": "Arquivo conferido para circulação restrita da administração.",
+        "ASSINATURA_CURSIVA": "Recursos Humanos",
+        "NOME_ASSINANTE": "Recursos Humanos",
+        "CARGO_ASSINANTE": "Gestão de Pessoas",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Estrutura de alçadas",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ENDERECO_LINHA2": "São Paulo — circulação interna"
+      }
+    },
+    {
+      "codigo": "E1-10",
+      "titulo": "Glossário de termos financeiros e bancários da apuração",
+      "envelope": "E1",
+      "tipo": "glossario",
+      "emocao_esperada": "apoio técnico neutro",
+      "objetivo_narrativo": "Explicar termos técnicos usados nos demais documentos em linguagem bruta, sem interpretar o caso.",
+      "pistas_contidas": [
+        "definição de SWIFT",
+        "definição de retrocomissão",
+        "definição de alçada de aprovação"
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "SUBTITULO_ORGANIZACAO": "Comitê de Apuração Interna — Glossário de Apoio",
+        "ENDERECO_LINHA1": "Avenida Faria Lima, 2341, conjunto 1102 — São Paulo, SP",
+        "CONTATO": "comite.apuracao@aceleradapag.com | ramal 412",
+        "CNPJ": "Acelerada Pagamentos Instituição de Pagamento S.A. — CNPJ 29.884.117/0001-50",
+        "COR_TOPO": "#1c3d5a",
+        "LOCAL_DATA": "São Paulo, 02 de maio de 2026",
+        "SAUDACAO": "Glossário de apoio à apuração",
+        "ASSUNTO": "AP-GLOSS-04 — Termos técnicos utilizados nos documentos",
+        "CORPO_CARTA": "<p><strong>SWIFT:</strong> rede internacional de mensagens financeiras usada para instruir transferências bancárias entre instituições de países diferentes.</p><p><strong>TED Internacional:</strong> transferência eletrônica disponível processada com instrução SWIFT para conta no exterior.</p><p><strong>Alçada de aprovação:</strong> limite de valor até o qual um cargo pode autorizar pagamento sem exigir segunda assinatura.</p><p><strong>Due diligence de fornecedor:</strong> processo de verificação de referências, beneficiário final e regularidade de uma empresa antes de iniciar relação comercial.</p><p><strong>Retrocomissão:</strong> termo usado no mercado financeiro para descrever repasse de parte de um valor recebido para terceiro não declarado no contrato original.</p><p><strong>Beneficiário final:</strong> pessoa física que, em última instância, controla ou se beneficia economicamente de uma estrutura societária ou conta bancária.</p>",
+        "FORMULA_ENCERRAMENTO": "Documento de apoio sem valor probatório isolado.",
+        "ASSINATURA_CURSIVA": "Comitê de Apuração Interna",
+        "NOME_ASSINANTE": "Comitê de Apuração Interna",
+        "CARGO_ASSINANTE": "Secretaria do comitê",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Glossário de apoio",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ENDERECO_LINHA2": "São Paulo — circulação restrita"
+      }
+    },
+    {
+      "codigo": "E2-01",
+      "titulo": "Extrato da conta vinculada à offshore Greymont Holdings",
+      "envelope": "E2",
+      "tipo": "extrato",
+      "emocao_esperada": "virada fria, evidência financeira direta",
+      "objetivo_narrativo": "Mostrar em dado bruto o recebimento de 40% de cada remessa por uma offshore de fachada.",
+      "pistas_contidas": [
+        "recebimentos de 40% de cada remessa",
+        "origem Solenne Capital Partners",
+        "titular Greymont Holdings"
+      ],
+      "confirma": [
+        "E1-07"
+      ],
+      "confirmado_por": [
+        "E2-04"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "05",
+        "01"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "LOGO_SIGLA": "BIM",
+        "NOME_BANCO": "Banco Insular de Malta",
+        "TAGLINE_BANCO": "Private banking internacional",
+        "COR_BANCO": "#7a4f1f",
+        "PERIODO_INICIO": "01/01/2026",
+        "PERIODO_FIM": "30/04/2026",
+        "DATA_GERACAO": "06/05/2026",
+        "HORA_GERACAO": "10h30",
+        "NOME_TITULAR": "Greymont Holdings Ltd.",
+        "DOC_TITULAR": "Registro comercial MT-GH-77310",
+        "AGENCIA": "Sliema Branch",
+        "NUMERO_CONTA": "552031-MT",
+        "TIPO_CONTA": "Conta Corrente Internacional",
+        "SALDO_INICIAL": "R$ 0,00",
+        "DATA_SALDO_INICIAL": "01/01/2026",
+        "MOVIMENTACAO_LIQUIDA": "+ R$ 1.680.000,00",
+        "COR_MOVIMENTACAO": "#2f7a3d",
+        "SALDO_FINAL": "R$ 1.680.000,00",
+        "DATA_SALDO_FINAL": "30/04/2026",
+        "COR_SALDO_FINAL": "#1c3d5a",
+        "TOTAL_CREDITOS": "R$ 1.680.000,00",
+        "TOTAL_DEBITOS": "R$ 0,00",
+        "TOTAL_LANCAMENTOS": "4",
+        "NOTA_LEGAL": "Extrato obtido por cooperação bancária internacional para fins de apuração interna da Acelerada Pagamentos.",
+        "CNPJ_BANCO": "Banco Insular de Malta — Registro MT-BANK-0091",
+        "ENDERECO_BANCO": "Tower Road 14, Sliema, Malta",
+        "LANCAMENTOS": [
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "16/01/2026",
+            "DESCRICAO": "Transferência internacional recebida",
+            "DETALHE": "Solenne Capital Partners Ltd. — Repasse parcial CS-2025-118/1",
+            "TIPO_LOWER": "credito",
+            "TIPO": "Crédito",
+            "DIRECAO": "entrada",
+            "VALOR": "R$ 420.000,00",
+            "COR_SALDO": "#2f7a3d",
+            "SALDO_ACUMULADO": "R$ 420.000,00"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "15/02/2026",
+            "DESCRICAO": "Transferência internacional recebida",
+            "DETALHE": "Solenne Capital Partners Ltd. — Repasse parcial CS-2025-118/2",
+            "TIPO_LOWER": "credito",
+            "TIPO": "Crédito",
+            "DIRECAO": "entrada",
+            "VALOR": "R$ 420.000,00",
+            "COR_SALDO": "#2f7a3d",
+            "SALDO_ACUMULADO": "R$ 840.000,00"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "14/03/2026",
+            "DESCRICAO": "Transferência internacional recebida",
+            "DETALHE": "Solenne Capital Partners Ltd. — Repasse parcial CS-2025-118/3",
+            "TIPO_LOWER": "credito",
+            "TIPO": "Crédito",
+            "DIRECAO": "entrada",
+            "VALOR": "R$ 420.000,00",
+            "COR_SALDO": "#2f7a3d",
+            "SALDO_ACUMULADO": "R$ 1.260.000,00"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "13/04/2026",
+            "DESCRICAO": "Transferência internacional recebida",
+            "DETALHE": "Solenne Capital Partners Ltd. — Repasse parcial CS-2025-118/4",
+            "TIPO_LOWER": "credito",
+            "TIPO": "Crédito",
+            "DIRECAO": "entrada",
+            "VALOR": "R$ 420.000,00",
+            "COR_SALDO": "#2f7a3d",
+            "SALDO_ACUMULADO": "R$ 1.680.000,00"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-02",
+      "titulo": "Exportação de conversa entre Beatriz e Tiago",
+      "envelope": "E2",
+      "tipo": "chat",
+      "emocao_esperada": "instrução hierárquica disfarçada de rotina",
+      "objetivo_narrativo": "Mostrar a instrução direta de Beatriz a Tiago para priorizar as remessas sem exigir entregável, em linguagem bruta.",
+      "pistas_contidas": [
+        "instrução para priorizar remessa",
+        "dispensa de relatório de entrega",
+        "referência a prazo do regulador europeu"
+      ],
+      "confirma": [
+        "E1-05"
+      ],
+      "confirmado_por": [
+        "E2-04"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "01",
+        "02"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "HORA_TELA": "09h42",
+        "NOME_GRUPO": "Beatriz Lacerda",
+        "MEMBROS_LISTA": "Conversa direta",
+        "DATA_CONVERSA": "14 de janeiro de 2026",
+        "CONTADOR_NAOVISTOS": "0",
+        "MENSAGENS": [
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "normal",
+            "TEXTO_MENSAGEM": "Tiago, preciso que a remessa da Solenne saia até amanhã. O regulador europeu tem reunião com eles na quinta.",
+            "HORARIO": "09h12",
+            "MOSTRAR_NOME": true,
+            "NOME_REMETENTE": "Beatriz",
+            "COR_REMETENTE": "#1c3d5a"
+          },
+          {
+            "DIRECAO": "out",
+            "CLASSE_GAP": "normal",
+            "TEXTO_MENSAGEM": "Ok. Vou liberar pela minha alçada. Preciso de relatório da consultoria anterior pra anexar no processo?",
+            "HORARIO": "09h20",
+            "MOSTRAR_NOME": false,
+            "DIRECAO_OUT": true,
+            "TICKS": "✓✓"
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "TEXTO_MENSAGEM": "Não precisa, eu acompanho o conteúdo direto com eles. O contrato não exige cronograma fixo, só libera dentro do valor combinado.",
+            "HORARIO": "09h31",
+            "MOSTRAR_NOME": true,
+            "NOME_REMETENTE": "Beatriz",
+            "COR_REMETENTE": "#1c3d5a"
+          },
+          {
+            "DIRECAO": "out",
+            "CLASSE_GAP": "normal",
+            "TEXTO_MENSAGEM": "Fechado, liberando hoje à tarde.",
+            "HORARIO": "09h42",
+            "MOSTRAR_NOME": false,
+            "DIRECAO_OUT": true,
+            "TICKS": "✓✓"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-03",
+      "titulo": "E-mail de confirmação de recebimento da Solenne Capital",
+      "envelope": "E2",
+      "tipo": "email_institucional",
+      "emocao_esperada": "formalidade comercial que esconde o repasse",
+      "objetivo_narrativo": "Mostrar a confirmação de recebimento de Diego Salum, em linguagem bruta de negócios, sem expor a retrocomissão.",
+      "pistas_contidas": [
+        "confirmação de recebimento da remessa",
+        "linguagem de relacionamento comercial contínuo",
+        "ausência de menção a entregável"
+      ],
+      "confirma": [
+        "E1-07"
+      ],
+      "confirmado_por": [
+        "E2-01"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "05",
+        "01"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Diego Salum",
+        "REMETENTE_EMAIL": "d.salum@solennecapital.mt",
+        "DESTINATARIO_EMAIL": "beatriz.lacerda@aceleradapag.com",
+        "COPIA": "arquivo.comercial@solennecapital.mt",
+        "DESTINATARIO_LABEL": "Beatriz Lacerda",
+        "DATA_HORA": "15/01/2026 14h05",
+        "ASSUNTO": "Confirmação de recebimento — CS-2025-118/1",
+        "AVATAR_INICIAL": "DS",
+        "AVATAR_COR": "#7a4f1f",
+        "CORPO_EMAIL": "<p>Beatriz,</p><p>Confirmamos o recebimento da primeira parcela referente ao contrato CS-2025-118, processada conforme os termos combinados. Seguiremos com o acompanhamento institucional na forma que conversamos.</p><p>Qualquer ajuste de cronograma para os próximos trimestres, me avise com antecedência para alinharmos internamente.</p><p>Abraço,</p>",
+        "NOTA_RODAPE": "Solenne Capital Partners Ltd. — Comunicação comercial confidencial.",
+        "ANEXOS": false
+      }
+    },
+    {
+      "codigo": "E2-04",
+      "titulo": "Planilha pessoal de controle de retrocomissão recuperada do backup",
+      "envelope": "E2",
+      "tipo": "boletim",
+      "emocao_esperada": "evidência fria e definitiva",
+      "objetivo_narrativo": "Mostrar em dado bruto o registro técnico de TI sobre a recuperação da planilha de retrocomissão, sem narrar a solução.",
+      "pistas_contidas": [
+        "planilha pessoal de retrocomissão",
+        "sincronização automática com backup corporativo",
+        "percentual de 40% por remessa"
+      ],
+      "confirma": [
+        "E2-01",
+        "E2-02"
+      ],
+      "confirmado_por": [
+        "E1-01"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "01",
+        "05"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "ORGAO_SUBTITULO": "Tecnologia da Informação — Forense Digital",
+        "NUMERO_CASO": "AP-2026-04",
+        "TIPO_DOCUMENTO": "Laudo de recuperação de arquivo",
+        "TIPO_OCORRENCIA": "Recuperação de planilha em backup de notebook corporativo",
+        "DATA": "06/05/2026",
+        "LOCALIZACAO": "Sala de forense digital, sede da Acelerada Pagamentos",
+        "HORA_OCORRENCIA": "11h40",
+        "DESCRICAO_OCORRENCIA": "<p>A pedido do comitê de apuração, a equipe de TI realizou varredura no backup automático do notebook corporativo atribuído a Beatriz Lacerda, sincronizado diariamente conforme política de segurança da informação. Foi localizado o arquivo 'controle_pessoal_retorno.xlsx', última modificação em 13/04/2026, contendo quatro linhas com as datas 15/01, 14/02, 13/03 e 12/04 de 2026, valores de R$ 1.050.000,00 na coluna 'enviado' e R$ 420.000,00 na coluna 'retorno 40%', com uma coluna adicional identificada como 'conta MT-552031' e nota de rodapé manual 'confirmar com D.S. antes de cada janela'.</p><p>O arquivo não estava nos diretórios compartilhados da empresa nem no sistema contábil, apenas no backup local do equipamento. Hash do arquivo e cadeia de custódia documentados em anexo técnico separado.</p>",
+        "NOME_RESPONSAVEL": "Equipe de Tecnologia da Informação",
+        "ASSINATURA_RESPONSAVEL": "Equipe de Tecnologia da Informação",
+        "ASSINATURA_GLIFO": "TI",
+        "DATA_HORA_ASSINATURA": "06/05/2026 — 12h05",
+        "MOSTRAR_CARIMBO": false
+      }
+    },
+    {
+      "codigo": "E2-05",
+      "titulo": "Registro de correção contábil de Marcos Vidal",
+      "envelope": "E2",
+      "tipo": "log_acesso",
+      "emocao_esperada": "descarte técnico definitivo",
+      "objetivo_narrativo": "Confirmar com dado bruto que o erro de Marcos é lançamento manual isolado, sem ligação com a remessa internacional.",
+      "pistas_contidas": [
+        "log de correção de lançamento duplicado",
+        "timestamp e usuário",
+        "ausência de qualquer acesso ao módulo internacional"
+      ],
+      "confirma": [
+        "E1-04"
+      ],
+      "confirmado_por": [
+        "E2-06"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "Acelerada ERP Contábil",
+        "SUBTITULO_SISTEMA": "Exportação de log — Controladoria",
+        "COR_SISTEMA": "#1c3d5a",
+        "COR_SISTEMA_DARK": "#0d1f2e",
+        "DATA_EXPORTACAO": "05/05/2026",
+        "HORA_EXPORTACAO": "09h15",
+        "OPERADOR_EXPORT": "Equipe de Tecnologia da Informação",
+        "HASH_REGISTRO": "AP-ERP-LOG-2026-04",
+        "PERIODO_INICIO": "18/04/2026",
+        "PERIODO_FIM": "19/04/2026",
+        "LOCALIZACAO_SISTEMA": "Módulo de Contabilidade Geral — Acelerada ERP",
+        "TOTAL_REGISTROS": "3",
+        "TOTAL_USUARIOS": "1",
+        "TOTAL_ENTRADAS": "3",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "COLUNA_NOME": "Usuário",
+        "COLUNA_TERMINAL": "Módulo",
+        "COLUNA_METODO": "Ação",
+        "COLUNA_OBS": "Observação",
+        "REGISTROS": [
+          {
+            "DATA": "18/04/2026",
+            "HORA": "16h22",
+            "PORTA": "ERP-CONT",
+            "ID_USUARIO": "MV-CTRL-07",
+            "NOME_USUARIO": "Marcos Vidal",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Identificação de lançamento duplicado de recebível",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Módulo de Contabilidade Geral",
+            "METODO": "revisão manual",
+            "OBSERVACAO": "Recebível de cliente nacional, valor R$ 380.000,00"
+          },
+          {
+            "DATA": "19/04/2026",
+            "HORA": "08h47",
+            "PORTA": "ERP-CONT",
+            "ID_USUARIO": "MV-CTRL-07",
+            "NOME_USUARIO": "Marcos Vidal",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Correção de lançamento duplicado registrada",
+            "CLASSE_LINHA": "highlight",
+            "TERMINAL": "Módulo de Contabilidade Geral",
+            "METODO": "lançamento de ajuste",
+            "OBSERVACAO": "Estorno aplicado, saldo corrigido"
+          },
+          {
+            "DATA": "19/04/2026",
+            "HORA": "08h50",
+            "PORTA": "ERP-INTL",
+            "ID_USUARIO": "MV-CTRL-07",
+            "NOME_USUARIO": "Marcos Vidal",
+            "TIPO_EVENTO": "NEGADO",
+            "EVENTO": "Tentativa de acesso ao módulo internacional negada",
+            "CLASSE_LINHA": "normal",
+            "TERMINAL": "Módulo de Remessas Internacionais",
+            "METODO": "permissão de perfil",
+            "OBSERVACAO": "Usuário sem permissão de controller para este módulo"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-06",
+      "titulo": "Consolidação de descartes de compliance e controladoria",
+      "envelope": "E2",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "fechamento documental sem revelar veredito",
+      "objetivo_narrativo": "Dar limites documentais para os red herrings sem narrar a solução final.",
+      "pistas_contidas": [
+        "checklist incompleto sem acesso à retrocomissão",
+        "erro de reconciliação isolado",
+        "ausência de qualquer transferência pessoal para Júlia ou Marcos"
+      ],
+      "confirma": [
+        "E1-06",
+        "E1-04"
+      ],
+      "confirmado_por": [
+        "E2-05"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "06",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Acelerada Pagamentos Instituição de Pagamento S.A.",
+        "SUBTITULO_ORGANIZACAO": "Comitê de Apuração Interna — Consolidação",
+        "ENDERECO_LINHA1": "Avenida Faria Lima, 2341, conjunto 1102 — São Paulo, SP",
+        "CONTATO": "comite.apuracao@aceleradapag.com | ramal 412",
+        "CNPJ": "Acelerada Pagamentos Instituição de Pagamento S.A. — CNPJ 29.884.117/0001-50",
+        "COR_TOPO": "#1c3d5a",
+        "LOCAL_DATA": "São Paulo, 07 de maio de 2026",
+        "SAUDACAO": "Registro interno do comitê",
+        "ASSUNTO": "AP-2026-04 — Consolidação de descarte de hipóteses",
+        "CORPO_CARTA": "<p><strong>Júlia Prado (Compliance):</strong> a revisão de permissões do sistema de cadastro de fornecedores confirma que o perfil de analista de compliance não tem visibilidade sobre contas bancárias de terceiros nem sobre arquivos pessoais de outros usuários. Nenhuma transferência ou crédito incomum foi localizado nas contas pessoais de Júlia no período analisado.</p><p><strong>Marcos Vidal (Controladoria):</strong> o log do módulo de remessas internacionais confirma que o perfil de controller de Marcos não tem permissão de acesso a esse módulo, e a tentativa registrada em 19/04 foi negada pelo sistema. Nenhuma transferência ou crédito incomum foi localizado nas contas pessoais de Marcos no período analisado.</p><p>Ambos os descartes constam também no laudo de TI sobre o backup do notebook corporativo, que não identificou qualquer arquivo relacionado a Júlia ou Marcos.</p>",
+        "FORMULA_ENCERRAMENTO": "Documento de uso exclusivo do comitê de apuração interna.",
+        "ASSINATURA_CURSIVA": "Comitê de Apuração Interna",
+        "NOME_ASSINANTE": "Comitê de Apuração Interna",
+        "CARGO_ASSINANTE": "Secretaria do comitê",
+        "ESTILO_LINHAS": "discreto",
+        "PROTOCOLO": "Consolidação de descartes",
+        "NOTAS_RODAPE": "Documento interno sem anexos digitais.",
+        "ENDERECO_LINHA2": "São Paulo — circulação restrita"
+      }
+    }
+  ],
+  "linha_tempo_real": [
+    {
+      "data_hora": "22/12/2025 11h00",
+      "evento": "Beatriz assina o contrato de consultoria fictício CS-2025-118 com a Solenne Capital Partners.",
+      "personagem_id": "01",
+      "documento_prova": "E1-03",
+      "confirmacao_independente": "E1-07"
+    },
+    {
+      "data_hora": "10/01/2026 09h30",
+      "evento": "Júlia aprova o cadastro de fornecedor da Solenne Capital com checklist parcialmente concluído, sob pressão de Beatriz.",
+      "personagem_id": "06",
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E2-06"
+    },
+    {
+      "data_hora": "14/01/2026 09h12",
+      "evento": "Beatriz instrui Tiago a priorizar a primeira remessa sem exigir relatório de entrega.",
+      "personagem_id": "01",
+      "documento_prova": "E2-02",
+      "confirmacao_independente": "E1-05"
+    },
+    {
+      "data_hora": "15/01/2026 10h20",
+      "evento": "Tiago autoriza a primeira remessa internacional à Solenne Capital Partners.",
+      "personagem_id": "02",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-07"
+    },
+    {
+      "data_hora": "16/01/2026 08h05",
+      "evento": "Diego Salum redireciona 40% da primeira remessa para a conta da Greymont Holdings.",
+      "personagem_id": "05",
+      "documento_prova": "E2-01",
+      "confirmacao_independente": "E2-04"
+    },
+    {
+      "data_hora": "12/04/2026 10h20",
+      "evento": "Tiago autoriza a quarta e última remessa do trimestre à Solenne Capital Partners.",
+      "personagem_id": "02",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E2-01"
+    },
+    {
+      "data_hora": "30/04/2026 17h20",
+      "evento": "Helga identifica a ausência de contrapartida nas remessas durante a auditoria de fechamento trimestral.",
+      "personagem_id": "04",
+      "documento_prova": "E1-02",
+      "confirmacao_independente": "E1-07"
+    },
+    {
+      "data_hora": "06/05/2026 11h40",
+      "evento": "TI recupera a planilha pessoal de retrocomissão no backup do notebook corporativo de Beatriz.",
+      "personagem_id": "01",
+      "documento_prova": "E2-04",
+      "confirmacao_independente": "E2-01"
+    }
+  ],
+  "linha_tempo_percebida": [
+    {
+      "data_hora": "15/01/2026 a 12/04/2026",
+      "evento": "As remessas à Solenne Capital parecem pagamentos legítimos de consultoria, apenas com entrega de relatório atrasada.",
+      "personagem_id": "02",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-03"
+    },
+    {
+      "data_hora": "18/04/2026 a 19/04/2026",
+      "evento": "O erro de reconciliação de Marcos parece coincidir suspeitosamente com a janela de fechamento das remessas.",
+      "personagem_id": "07",
+      "documento_prova": "E1-04",
+      "confirmacao_independente": "E2-05"
+    }
+  ],
+  "linha_tempo_documental": [
+    {
+      "data_hora": "10/01/2026 09h30",
+      "evento": "Cadastro de fornecedor da Solenne Capital aprovado com checklist parcial no sistema de compliance.",
+      "personagem_id": "06",
+      "documento_prova": "E1-02",
+      "confirmacao_independente": "E1-06"
+    },
+    {
+      "data_hora": "15/01/2026 a 12/04/2026",
+      "evento": "Quatro lançamentos SWIFT idênticos em estrutura registrados no extrato consolidado internacional.",
+      "personagem_id": "01",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E2-01"
+    },
+    {
+      "data_hora": "16/01/2026 a 13/04/2026",
+      "evento": "Quatro créditos de 40% registrados no extrato da Greymont Holdings em Malta.",
+      "personagem_id": "05",
+      "documento_prova": "E2-01",
+      "confirmacao_independente": "E2-04"
+    }
+  ],
+  "pilares_validacao": [
+    {
+      "nome": "autorizacao_operacional",
+      "documento_principal": "E1-05",
+      "confirmacao": "E2-02",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "instrucao_hierarquica_recebida",
+      "documento_principal": "E2-02",
+      "confirmacao": "E1-05",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "ausencia_de_exigencia_de_entregavel",
+      "documento_principal": "E1-03",
+      "confirmacao": "E1-05",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "execucao_da_quarta_remessa",
+      "documento_principal": "E1-07",
+      "confirmacao": "E2-01",
+      "personagem_id": "02"
+    }
+  ],
+  "intervalo_critico_inicio": "01/04/2026 09h00",
+  "intervalo_critico_fim": "30/04/2026 18h00",
+  "matriz_pistas": [
+    {
+      "descricao": "Quatro remessas trimestrais de valor idêntico à Solenne Capital Partners, sem nota fiscal ou entregável correspondente.",
+      "documento": "E1-07",
+      "o_que_sugere": "Pagamento estruturado de forma recorrente e padronizada, incomum para consultoria sob demanda.",
+      "o_que_prova": "O fluxo financeiro de saída da Acelerada para a Solenne Capital.",
+      "confirmacao": "E1-02",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "frieza numérica"
+    },
+    {
+      "descricao": "Conversa entre Beatriz e Tiago dispensando relatório de entrega antes da liberação da remessa.",
+      "documento": "E2-02",
+      "o_que_sugere": "A CFO instruiu diretamente a dispensa do controle que normalmente exigiria evidência de serviço prestado.",
+      "o_que_prova": "A cadeia de instrução hierárquica entre Beatriz e Tiago.",
+      "confirmacao": "E1-05",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "desconforto crescente"
+    },
+    {
+      "descricao": "Extrato da Greymont Holdings mostrando créditos de exatamente 40% de cada remessa enviada pela Acelerada.",
+      "documento": "E2-01",
+      "o_que_sugere": "Existe uma ponta receptora que se beneficia proporcionalmente de cada remessa.",
+      "o_que_prova": "O mecanismo de retrocomissão entre Diego Salum e a offshore de fachada.",
+      "confirmacao": "E2-04",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "virada fria"
+    },
+    {
+      "descricao": "Planilha pessoal recuperada do backup do notebook de Beatriz, com coluna de retorno de 40% e referência à conta MT-552031.",
+      "documento": "E2-04",
+      "o_que_sugere": "Beatriz mantinha controle pessoal e direto do mecanismo de retrocomissão fora dos sistemas corporativos.",
+      "o_que_prova": "A ligação entre Beatriz e a conta beneficiária final Greymont Holdings.",
+      "confirmacao": "E2-01",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "evidência definitiva"
+    },
+    {
+      "descricao": "Contrato CS-2025-118 sem cronograma de entregáveis fixo e sem exigência de relatório formal.",
+      "documento": "E1-03",
+      "o_que_sugere": "O contrato foi redigido de forma genérica o suficiente para nunca gerar inadimplência formal.",
+      "o_que_prova": "A estrutura contratual fictícia que sustenta as remessas sem entrega real.",
+      "confirmacao": "E1-02",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "formalidade vazia"
+    }
+  ],
+  "red_herrings": [
+    {
+      "personagem_id": "06",
+      "motivo_aparente": "Júlia aprovou o cadastro de fornecedor da Solenne Capital com checklist de due diligence incompleto, sob pressão de prazo.",
+      "como_descartar": "A revisão de permissões do sistema confirma que o perfil de Júlia não tem acesso a contas bancárias de terceiros nem a arquivos pessoais, e nenhuma transferência incomum foi localizada em suas contas.",
+      "documento_descarte": "E2-06",
+      "categoria": "acesso_insuficiente"
+    },
+    {
+      "personagem_id": "07",
+      "motivo_aparente": "Marcos relatou um erro de reconciliação contábil na mesma janela temporal das remessas suspeitas.",
+      "como_descartar": "O log do sistema confirma que o erro é um lançamento duplicado de recebível nacional isolado, e que o perfil de Marcos não tem permissão de acesso ao módulo de remessas internacionais.",
+      "documento_descarte": "E2-05",
+      "categoria": "erro_sem_relacao"
+    },
+    {
+      "personagem_id": "05",
+      "motivo_aparente": "Mudanças na legislação cambial europeia citadas informalmente poderiam justificar atrasos e ajustes nos valores das remessas.",
+      "como_descartar": "O extrato da Greymont Holdings mostra que os créditos seguem um percentual fixo de 40% independentemente de qualquer variação regulatória, descartando a explicação de ajuste cambial.",
+      "documento_descarte": "E2-01",
+      "categoria": "fator_externo_generico"
+    }
+  ],
+  "cadeia_financeira": [
+    {
+      "de": "Acelerada Pagamentos (conta corrente internacional)",
+      "para": "Solenne Capital Partners Ltd.",
+      "valor_ou_item": "R$ 1.050.000,00 por remessa, quatro remessas",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-03",
+      "is_salto_final": false
+    },
+    {
+      "de": "Solenne Capital Partners Ltd.",
+      "para": "Greymont Holdings Ltd.",
+      "valor_ou_item": "R$ 420.000,00 por remessa (40% de retrocomissão), quatro créditos",
+      "documento_prova": "E2-01",
+      "confirmacao_independente": "E2-04",
+      "is_salto_final": true
+    }
+  ],
+  "codigos": [],
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo trata a divergência apenas como atraso de compensação bancária.",
+      "texto": "Compare as datas das quatro remessas no extrato consolidado: elas se repetem com intervalo quase mensal e valor idêntico. Atraso de compensação não costuma gerar esse padrão tão regular.",
+      "o_que_desbloqueia": "Direciona o grupo a questionar a estrutura do contrato de consultoria, não apenas o sistema bancário."
+    },
+    {
+      "numero": 2,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo não percebe que o contrato de consultoria não tem entregável definido.",
+      "texto": "Releia a Cláusula 3ª do contrato CS-2025-118: que tipo de entrega ela exige, exatamente, e em que prazo?",
+      "o_que_desbloqueia": "Evidencia que o contrato foi redigido para nunca configurar inadimplência formal."
+    },
+    {
+      "numero": 3,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo trata Tiago como o único responsável, sem investigar quem o instruiu.",
+      "texto": "A declaração de Tiago menciona que recebeu o contrato já assinado e uma orientação para priorizar a liberação. De quem partiu essa orientação?",
+      "o_que_desbloqueia": "Direciona o grupo a investigar a cadeia de instrução hierárquica acima de Tiago."
+    },
+    {
+      "numero": 4,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não conecta o extrato da Greymont Holdings ao restante do caso.",
+      "texto": "Calcule que percentual da remessa original cada crédito na conta da Greymont Holdings representa. O número se repete em todas as quatro datas?",
+      "o_que_desbloqueia": "Revela o mecanismo fixo de retrocomissão de 40% por remessa."
+    },
+    {
+      "numero": 5,
+      "intensidade": "forte",
+      "envelope": "E2",
+      "condicao_uso": "Grupo identifica o mecanismo de retrocomissão mas não conecta a conta da Greymont Holdings a um responsável dentro da Acelerada.",
+      "texto": "O laudo de TI descreve onde a planilha pessoal foi encontrada e qual conta ela referencia. A quem pertence o equipamento onde o arquivo estava armazenado?",
+      "o_que_desbloqueia": "Conecta diretamente a conta beneficiária final à pessoa responsável pelo esquema."
+    },
+    {
+      "numero": 6,
+      "intensidade": "quase_gabarito",
+      "envelope": "E2",
+      "condicao_uso": "Grupo está a um passo da hipótese final mas ainda hesita entre Tiago e outra pessoa como autor do plano.",
+      "texto": "Tiago autorizou as remessas, mas a instrução, o contrato assinado e a planilha pessoal de retrocomissão apontam para uma única pessoa com alçada superior e acesso direto ao mecanismo de retorno financeiro.",
+      "o_que_desbloqueia": "Conclui a identificação do planejador e beneficiário do esquema, distinguindo-o do executor operacional."
+    }
+  ],
+  "dicas_contextuais": [
+    {
+      "id": "DC-01",
+      "categoria": "financeira",
+      "fase": "E1",
+      "titulo": "Padrão das remessas",
+      "condicao_uso": "Grupo não percebe a regularidade das quatro remessas no extrato consolidado.",
+      "texto": "Compare valor, data e destinatário das quatro remessas no extrato E1-07. O padrão de repetição é compatível com consultoria sob demanda?",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E1-DIVERGENCIA"
+      ],
+      "documentos_relacionados": [
+        "E1-07"
+      ]
+    },
+    {
+      "id": "DC-02",
+      "categoria": "contrato",
+      "fase": "E1",
+      "titulo": "Entregável ausente",
+      "condicao_uso": "Grupo não percebe que o contrato CS-2025-118 não exige entregável formal.",
+      "texto": "Releia a cláusula de entregáveis do contrato E1-03. Existe prazo ou formato obrigatório de entrega?",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E1-AUTORIZACAO"
+      ],
+      "documentos_relacionados": [
+        "E1-03",
+        "E1-05"
+      ]
+    },
+    {
+      "id": "DC-03",
+      "categoria": "financeira",
+      "fase": "E2",
+      "titulo": "Percentual fixo de retorno",
+      "condicao_uso": "Grupo não calcula o percentual de cada crédito na conta Greymont Holdings em relação à remessa original.",
+      "texto": "Divida cada valor recebido pela Greymont Holdings (E2-01) pelo valor enviado pela Acelerada (E1-07) na mesma data de referência.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E2-RETROCOMISSAO"
+      ],
+      "documentos_relacionados": [
+        "E2-01",
+        "E1-07"
+      ]
+    },
+    {
+      "id": "DC-04",
+      "categoria": "personagem",
+      "fase": "final",
+      "titulo": "Conexão final do beneficiário",
+      "condicao_uso": "Grupo identifica o mecanismo de retrocomissão mas hesita em apontar o beneficiário final.",
+      "texto": "O laudo de TI (E2-04) identifica de quem é o equipamento onde a planilha pessoal foi encontrada. Essa pessoa também assina o contrato original (E1-03) e instrui Tiago no chat (E2-02).",
+      "nivel": "quase_gabarito",
+      "contratos_relacionados": [
+        "C-E2-BENEFICIARIO"
+      ],
+      "documentos_relacionados": [
+        "E2-04",
+        "E1-03",
+        "E2-02"
+      ]
+    }
+  ],
+  "contratos_evidencia": [
+    {
+      "id": "C-E1-DIVERGENCIA",
+      "conclusao": "A pergunta do primeiro envelope é por que a Acelerada enviou recursos à Solenne Capital sem contrapartida, sem exigir culpado.",
+      "fase": "E1",
+      "tipo": "criterio_avanco",
+      "prova_principal": "E1-01",
+      "confirmacao_independente": "E1-02",
+      "descarta_alternativas": [
+        "E1-07",
+        "E1-08"
+      ],
+      "personagens_afetados": [
+        "03",
+        "04"
+      ],
+      "acao_esperada_jogador": "Formular o problema como remessas sem contrapartida documentada, antes de apontar culpado.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E1-AUTORIZACAO",
+      "conclusao": "Tiago autorizou as quatro remessas por instrução direta de Beatriz, sem exigir entregável do contrato de consultoria.",
+      "fase": "E1",
+      "tipo": "hipotese_parcial",
+      "prova_principal": "E1-05",
+      "confirmacao_independente": "E1-03",
+      "descarta_alternativas": [
+        "E1-04",
+        "E1-06",
+        "E1-09",
+        "E1-10"
+      ],
+      "personagens_afetados": [
+        "02",
+        "01"
+      ],
+      "acao_esperada_jogador": "Separar quem autorizou operacionalmente das pessoas com falhas de checklist ou reconciliação não relacionadas.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-RETROCOMISSAO",
+      "conclusao": "A conta da Greymont Holdings recebe exatamente 40% de cada remessa enviada pela Acelerada à Solenne Capital.",
+      "fase": "E2",
+      "tipo": "recontextualizacao",
+      "prova_principal": "E2-01",
+      "confirmacao_independente": "E2-04",
+      "descarta_alternativas": [
+        "E2-02",
+        "E2-03"
+      ],
+      "personagens_afetados": [
+        "05",
+        "01"
+      ],
+      "acao_esperada_jogador": "Calcular o percentual de retorno em cada crédito e identificar o padrão fixo de 40%.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-BENEFICIARIO",
+      "conclusao": "A planilha pessoal recuperada do backup do notebook de Beatriz liga diretamente a CFO à conta beneficiária final do esquema.",
+      "fase": "final",
+      "tipo": "solucao_final",
+      "prova_principal": "E2-04",
+      "confirmacao_independente": "E2-01",
+      "descarta_alternativas": [
+        "E2-05",
+        "E2-06"
+      ],
+      "personagens_afetados": [
+        "01",
+        "02",
+        "05"
+      ],
+      "acao_esperada_jogador": "Conectar o equipamento de origem da planilha, o percentual de retrocomissão e a alçada de Beatriz para fechar o gabarito.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    }
+  ],
+  "versao": "0.1",
+  "observacoes_producao": "Caso Fintech criado do zero (Opção B) para ISSUE-29+30, paralelo ao Hotel Aurora, com documentos financeiros mais densos."
+}
