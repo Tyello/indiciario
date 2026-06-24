@@ -382,17 +382,11 @@ Entregou:
 - `generator/blind_solver_report_validator.py` — validador semântico standalone (RV_001–RV_008);
 - `schemas/blind_solve_run_record.schema.yaml` — run record rastreável;
 - `generator/blind_solve_run_record.py` — builder e validador do run record;
-- 990 testes passando.
+- suite completa passando (ver `docs/ESTADO_ATUAL.md` para contagem atual).
 
-Suite total: 990 testes.
+## Fase concluída — Gate Evaluator (Fase D/E)
 
-## Próxima fase — Gate Evaluator (Fase D/E)
-
-Status: **próxima a implementar**.
-
-Issues agrupadas por eficiência:
-
-### ISSUE-19+20 — Gate Evaluator (schema + harness juntos)
+Status: **concluída** (junho 2026) — ISSUE-19+20.
 
 Objetivo: avaliar se o caso é justo dado o bundle cego; classificar problemas; gerar gate decision.
 
@@ -404,25 +398,26 @@ Classificações de problema:
 - quebra de progressão
 - vazamento de solução
 
-Entrega esperada:
-- `schemas/gate_evaluator_run.schema.yaml`
-- `generator/gate_evaluator_harness.py`
-- validador de gate decision
+Entregou:
+- `schemas/gate_evaluation.schema.yaml`
+- `generator/gate_evaluator.py`
 - testes e fixtures
 
-Critério para iniciar ISSUE-21+: gate decision produzida e validada.
+## Fase concluída — Revisores especializados (Fase F)
 
-## Próxima fase — Revisores especializados (Fase F)
-
-Status: **pendente, após Gate Evaluator**.
+Status: **concluída** (junho 2026).
 
 Issues agrupadas por eficiência:
 
 ### ISSUE-21+22 — Narrative Reviewer + Evidence Reviewer (uma PR)
 
+Status: **concluída** (junho 2026).
+
 Narrative avalia: imersão, diegese, motivação, tom, personagens, documentos que parecem dica.
 
 Evidence avalia: cadeia de evidências, pistas órfãs, buracos lógicos, suporte para cada conclusão.
+
+Entregou: `generator/narrative_reviewer.py`, `generator/evidence_reviewer.py`.
 
 ### ISSUE-23 — Visual Reviewer
 
@@ -440,23 +435,29 @@ Avalia: leitura mobile/tablet, contraste, fonte, sobrecarga cognitiva, impressã
 
 **Nota:** desbloqueada por ISSUE-28 (mesma dependência que ISSUE-23).
 
-## Próxima fase — Orquestração de runs (Fase G)
+## Fase concluída — Orquestração de runs (Fase G)
 
-Status: **pendente, após revisores**.
-
-Issues agrupadas por eficiência:
+Status: **concluída** (junho 2026).
 
 ### ISSUE-25+26 — Multiagent Workspace + Manual Orchestrator (uma PR)
+
+Status: **concluída** (junho 2026).
 
 Workspace: diretório padrão por run, artefatos de entrada/saída, logs, findings, gate decisions.
 
 Manual Orchestrator: orquestrar etapas sem LLM automática, comandos manuais, offline, rastreável.
 
+Entregou: `generator/workspace.py`, `generator/manual_orchestrator.py`.
+
 ### ISSUE-27 — Run Manifest / Run Summary
+
+Status: **concluída** (junho 2026).
 
 Consolidar tudo que aconteceu em uma run: bundles, agentes, outputs, findings, decisões, próximos passos.
 
-## Próxima fase — Aplicação em casos reais (Fase H)
+Entregou: `generator/run_manifest.py`.
+
+## Fase concluída — Aplicação em casos reais (Fase H)
 
 Status: **concluída** — ISSUE-28/29/30 concluídas.
 
@@ -487,6 +488,12 @@ Status: **concluída** (junho 2026).
 Medir evolução: antes/depois, clareza, dificuldade, vazamentos, visual, pacing.
 
 Entregável: `generator/quality_comparative_reviewer.py`, `docs/QUALITY_COMPARATIVE_REPORT.md`.
+
+**Limitações reais da Fase H** (ver `docs/ESTADO_ATUAL.md`):
+- o blind solver usado pelo `pipeline_runner.py` é um stub determinístico (`DeterministicPipelineSolver`), não resolve o caso de fato;
+- `pipeline_runner.py` não invoca os visual/accessibility reviewers (por isso `visual_score=0/0` nos relatórios gerados por ele);
+- `compare_to_playtest` só reconhece o caso Aurora.
+- Teste cego humano continua sendo a única prova real de solvabilidade.
 
 ## Fase futura — Automação com LLM (Fase I)
 

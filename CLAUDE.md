@@ -29,13 +29,14 @@ Antes de executar qualquer tarefa:
 
 ### O que existe e funciona
 
-- **990 testes passando** (`pytest tests/ -q`).
+- **~1354 testes** coletados por `pytest tests/ -q` (checar contagem exata antes de citar em PR; ver `docs/ESTADO_ATUAL.md`).
 - Validator strict com guardrails editoriais, anti-obviedade, progressão, cartões, assinaturas e mapas.
 - Package builder com Playwright/Chromium, manifests, guia do facilitador, dicas, printables e PDFs finais.
 - Sistema visual P0/P1/P2/P3 completo.
 - Case Kernel e Case Review como camadas pré-pacote.
 - Visual Library 2.0 mínima com plantas-base genéricas.
 - CI com lint (`ruff`), testes e validators canônicos.
+- Pipeline multiagente offline completo (Gate Evaluator, Reviewers, Workspace, Run Manifest, Pipeline Runner, Quality Comparative) — ver tabela abaixo e `docs/ESTADO_ATUAL.md` para limitações reais.
 
 ### Pipeline multiagente — estado atual
 
@@ -45,13 +46,17 @@ Antes de executar qualquer tarefa:
 | B — Learning Loop | ✅ concluída | schemas sessão/finding/decisão, CLI, exemplos |
 | C — Blind Bundles | ✅ concluída | manifest, policy, generator, leak checker, sanitizer |
 | D — Blind Solver base | ✅ concluída | ISSUE-16, 17, 18 |
-| D/E — Gate Evaluator | 🔜 próxima | ISSUE-19+20 (agrupadas) |
-| F — Revisores | ⏳ pendente | ISSUE-21+22, 23*, 24* |
-| G — Orquestração | ⏳ pendente | ISSUE-25+26, 27 |
-| H — Casos reais | ⏳ pendente | ISSUE-28, 29, 30 |
+| D/E — Gate Evaluator | ✅ concluída | ISSUE-19+20 |
+| F — Revisores | ✅ concluída | ISSUE-21+22, 23, 24 |
+| G — Orquestração | ✅ concluída | ISSUE-25+26, 27 |
+| H — Casos reais | ✅ concluída | ISSUE-28, 29, 30 |
 | I — LLM real | 🔮 futuro | ISSUE-31–34 |
 
-*ISSUE-23 e ISSUE-24 só após ISSUE-28.
+Limitações reais a não esconder (detalhe em `docs/ESTADO_ATUAL.md`):
+- blind solver do `pipeline_runner.py` é stub determinístico, não resolve o caso;
+- `pipeline_runner.py` não invoca visual/accessibility reviewers (`visual_score=0/0` nos relatórios);
+- `compare_to_playtest` só reconhece o Aurora;
+- teste cego humano continua sendo a única prova real de solvabilidade.
 
 ### Casos canônicos
 
@@ -75,11 +80,9 @@ Findings **não geram patch cirúrgico no blueprint**. Alimentam regras do frame
 
 ---
 
-## Próxima issue: ISSUE-19+20 — Gate Evaluator
+## Próxima issue: ISSUE-30.5 — Canonical Quality Gate
 
-Spec em `.ai/issues/ISSUE-19_SPEC.md` (a ser criada).
-
-Branch sugerida: `codex/add-gate-evaluator`
+Spec em `.ai/issues/ISSUE-30.5_SPEC.md`.
 
 ---
 

@@ -74,7 +74,17 @@ Funcionalidades já existentes no repositório incluem:
 - plantas baixas P2 com renderer dedicado, A4 paisagem, P&B first, portas, janelas, câmeras e validações `MAP_*`;
 - suporte P3 a assinatura, rubrica e manuscrito curto por perfil de personagem no blueprint;
 - possibilidade de override SVG para assinatura/rubrica;
-- Visual Library 2.0 mínima (`generator/floor_plan_library.py`) com plantas-base estruturadas genéricas, ainda sem integração automática aos canônicos.
+- Visual Library 2.0 mínima (`generator/floor_plan_library.py`) com plantas-base estruturadas genéricas, ainda sem integração automática aos canônicos;
+- pipeline multiagente offline: Gate Evaluator (`generator/gate_evaluator.py`, `schemas/gate_evaluation.schema.yaml`), Narrative Reviewer (`generator/narrative_reviewer.py`), Evidence Reviewer (`generator/evidence_reviewer.py`), Visual Reviewer (`generator/visual_reviewer.py`), Accessibility Reviewer (`generator/accessibility_reviewer.py`), Multiagent Workspace (`generator/workspace.py`), Manual Orchestrator (`generator/manual_orchestrator.py`), Run Manifest (`generator/run_manifest.py`), Pipeline Runner (`generator/pipeline_runner.py`), Quality Comparative Reviewer (`generator/quality_comparative_reviewer.py`).
+
+Suite de testes: `pytest tests/ -q` reporta cerca de 1354 testes (checar contagem exata antes de citar em PR, ela cresce a cada issue).
+
+Limitações reais do pipeline multiagente, para não prometer mais do que existe:
+
+- o blind solver usado por `pipeline_runner.py` é um stub determinístico (`DeterministicPipelineSolver`) — não resolve o caso de fato, só produz um output estruturalmente válido;
+- `pipeline_runner.py` não invoca os reviewers visual/accessibility — por isso relatórios gerados por ele mostram `visual_score=0/0`;
+- `quality_comparative_reviewer.compare_to_playtest` só reconhece o caso Aurora;
+- teste cego humano continua sendo a única prova real de solvabilidade; aprovação na pipeline não substitui playtest.
 
 Problemas já tratados e que não devem ser reabertos sem evidência nova:
 
