@@ -41,8 +41,15 @@ Ver `.ai/issues/ISSUE-30.5_SPEC.md`
 - Pipeline status: complete (não bloqueado)
 - Playtest: validado por Marcelo
 
-Isso define o intervalo para **intermediário** (±15% densidade, ±3 documentos,
-≤5 findings ER_*, etc.).
+Isso define o intervalo de densidade para **intermediário** (±15%, ≤5 findings ER_*, etc.).
+Contagem de documentos é sinal informativo, não threshold duro — ver justificativa na
+`ISSUE-30.5_SPEC.md` (seção "Fonte única de calibração") e em
+`docs/DIFFICULTY_FRAMEWORK.md`: Mirante (20 docs, Iniciante) e Fintech (16 docs, Avançado)
+provam que contagem de documentos isolada não classifica dificuldade.
+
+Baseline de **iniciante** usa o Iniciante B (9 docs / 12.981 chars), não o Mirante (20 docs /
+36.568 chars, exceção histórica). Baseline de **avançado** usa Fintech (16 docs / 29.647 chars,
+ER_*=4).
 
 ## Steps esperados (orquestrador definirá)
 
