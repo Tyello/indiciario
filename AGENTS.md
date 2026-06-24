@@ -75,6 +75,8 @@ Consulte também, conforme a tarefa:
 - `docs/LLM_OPERATING_MANUAL.md`;
 - `docs/CASE_DESIGN_PIPELINE.md`;
 - `docs/BLUEPRINT_AUTHORING_GUIDE.md`;
+- `docs/DIFFICULTY_FRAMEWORK.md`;
+- `docs/CASE_GENERATION_WORKFLOW.md`;
 - `docs/VISUAL_SYSTEM.md`;
 - `docs/FLOORPLANS.md`;
 - `docs/PRINTABLES.md`;

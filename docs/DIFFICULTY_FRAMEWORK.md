@@ -21,6 +21,28 @@ Canônicos de referência:
 | Especialista | 25–30 | até 8 | até 10 contratos obrigatórios | 150–210 min | Ambiguidade acumulativa; múltiplas hipóteses plausíveis e descartes tardios | Mapear campo de investigação e criar pressão sem fechamento | Reorganizar a teoria do caso; pode exigir revisão de documentos anteriores | Baixo: facilitação robusta, mas documentos com pouca explicação interna |
 | Mestre | 31+ | até 10 | até 12 contratos obrigatórios | 210+ min ou múltiplas sessões | Ambiguidade estrutural; solução depende de cadeia longa, prioridades e releituras | Abrir várias linhas de investigação sem resolver a tese central | Mudar tese, peso de evidências ou escopo do conflito | Muito baixo nos documentos; alto apenas no guia do facilitador e em dicas opcionais bem calibradas |
 
+## Métricas reais dos casos e exceções
+
+Métricas computadas diretamente dos blueprints (`sum(len(str(doc["conteudo"])))` para densidade e contagem de `documentos`):
+
+| Caso | Arquivo | Documentos | Densidade (chars) | Dificuldade declarada | Envelopes |
+|---|---|---:|---:|---|---|
+| Mirante | `examples/caso_canonico_iniciante.json` | 20 | 36.568 | Iniciante | E1, E2 |
+| Iniciante B | `examples/caso_canonico_iniciante_b.json` | 9 | 12.981 | Iniciante | E1 |
+| Aurora | `examples/caso_canonico_intermediario.json` | 17 | 26.464 | Intermediário | E1, E2 |
+| Fintech | `examples/caso_fintech.json` | 16 | 29.647 | Avançado | E1, E2 |
+
+**Mirante é exceção histórica, não referência métrica do nível Iniciante.** O Mirante foi concebido como caso Intermediário e rebaixado a Iniciante por decisão editorial (simplicidade da história, facilidade de resolução, confirmação pelo primeiro playtest). Por isso seu volume documental (20 docs / 36.568 chars) fica acima da faixa esperada de Iniciante (8–10 docs na tabela de calibração). Não usar o Mirante para calibrar limites métricos de Iniciante — usar o **Iniciante B** (9 docs / 12.981 chars), que está dentro da faixa.
+
+**Contagem de documentos não classifica dificuldade de forma confiável.** A tabela acima mostra o problema diretamente: Mirante tem 20 documentos e é Iniciante; Fintech tem 16 documentos e é Avançado. Volume documental por si só não separa os níveis. O que separa os níveis, na prática observada:
+
+- densidade de texto por documento (caracteres por documento, não só contagem total);
+- ambiguidade e quantidade de cruzamentos simultâneos exigidos;
+- findings de evidência (cadeias órfãs, suporte por conclusão);
+- papel do E2 (confirmação simples vs. recontextualização forte vs. síntese entre documentos de naturezas diferentes).
+
+Qualquer critério automatizado de dificuldade (ex.: Gate Evaluator de canonização) deve tratar contagem de documentos e número de envelopes como **sinal informativo**, não como critério duro de aprovação/rejeição.
+
 ## Notas editoriais por eixo
 
 ### Quantidade de documentos
