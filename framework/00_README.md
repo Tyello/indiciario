@@ -10,6 +10,8 @@ Este framework define todas as regras, templates, checklists e guias necessário
 
 O kit foi construído para que um agente de IA possa seguir os arquivos em ordem e gerar casos novos, originais, solvíveis e com qualidade visual consistente — sem furos lógicos, sem pistas insolúveis e sem depender de conhecimento externo ao material impresso.
 
+Este `framework/` cobre apenas a etapa de **geração** do caso. Depois de gerar o blueprint JSON, a validação estrutural, a revisão editorial, a pipeline multiagente e o build visual real ficam em `generator/` — fluxo completo documentado em `docs/CASE_GENERATION_WORKFLOW.md`.
+
 ---
 
 ## Regra de ouro
