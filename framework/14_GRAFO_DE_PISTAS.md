@@ -69,6 +69,16 @@ avaliar a solvabilidade estrutural.
 
 ---
 
+
+## Pilares, descartes e falhas ER
+
+O grafo também deve ser usado como disciplina de autoria para impedir lacunas de cadeia de evidência:
+
+- **Pilar sem pista = ER_002.** Cada pilar de validação do E1 precisa aparecer como pista rastreável: `pista -> documento -> pilar`. Não basta o pilar existir no gabarito ou na explicação do facilitador.
+- **Descarte solto = ER_006.** Cada red herring precisa de uma pista que aponte para o documento de descarte: `pista -> documento -> descarte`. Descarte escrito apenas na prosa do red herring não conta como cadeia investigável.
+
+Forma correta de modelar: declarar a pista na `matriz_pistas`, apontar o documento onde ela aparece e explicitar qual pilar ou descarte ela sustenta. Assim o jogador cruza evidência real em vez de depender de interpretação do autor.
+
 ## Documento órfão
 
 Documento órfão é um documento que não aparece em nenhum contrato como:
