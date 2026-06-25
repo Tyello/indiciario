@@ -10,7 +10,7 @@ Antes de escrever os documentos finais, crie uma matriz interna com todas as pis
 |-------|----------------------|-------------|----------------------|------------------------|---------------------|----------------|
 | Ex.: terminal N3 | Log de sistema | Origem da ação | Ação ocorreu dentro da sala N3 | Acesso físico à sala N3 | Médio | Cruzamento |
 
-**Regra:** nenhuma pista crítica fica sem confirmação independente.
+**Regra:** nenhuma pista crítica fica sem confirmação independente. Cada pilar de validação do E1 precisa ter pelo menos uma pista de suporte declarada na matriz; pilar sem pista vira ER_002.
 
 ---
 
@@ -79,6 +79,7 @@ Red herrings bons desviam sem trapacear. O jogador deve poder descartá-los por 
 - [ ] Tem limite claro quando os documentos são cruzados.
 - [ ] Não possui mais evidências que a solução real.
 - [ ] Pode ser descartado por prova, não por opinião do autor.
+- [ ] A prova de descarte existe como pista na matriz/grafo, apontando o documento que contradiz ou contextualiza o falso suspeito; descarte só como texto do documento ou prosa do red herring vira ER_006.
 - [ ] Não tem os quatro pilares de validação preenchidos.
 
 ---

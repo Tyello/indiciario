@@ -110,3 +110,46 @@ Problemas: a prova principal está em envelope posterior, a ação esperada suge
 ## 8. Contrato final
 
 O contrato `final` integra o caso inteiro. Ele pode usar qualquer envelope existente, mas ainda precisa de prova principal e confirmação independente. A solução final não deve ser uma lista de palpites; deve ser a menor explicação que satisfaz todos os contratos obrigatórios anteriores.
+
+---
+
+## 9. Avanço obrigatório x revelação no E2
+
+`obrigatoria_para_avanco: true` significa que o contrato destrava a abertura do próximo envelope. Por isso, a `prova_principal` de um contrato obrigatório precisa estar no envelope atual: no gate E1→E2, a prova principal fica em E1.
+
+A revelação do E2 e a solução final não são “avanço”; são destino investigativo. Modele esses passos como contrato `fase: "E2"` com `tipo: "recontextualizacao"` e contrato `fase: "final"` ou `tipo: "solucao_final"`, ambos com `obrigatoria_para_avanco: false`. Contratos E2 e final podem usar `prova_principal` em E2, conforme as regras das seções 5 e 8.
+
+Essa separação evita ER_007: contrato obrigatório de E1 com prova em E2 é spoiler fora de fase; revelação/solução do E2 marcada como obrigatória para avanço transforma destino em gate e vaza informação.
+
+Exemplo válido de par:
+
+```json
+[
+  {
+    "id": "C-E1-GATE-01",
+    "conclusao": "A hipótese parcial do E1 identifica a oportunidade operacional durante a janela crítica.",
+    "fase": "E1",
+    "tipo": "oportunidade",
+    "prova_principal": "E1-03",
+    "confirmacao_independente": "E1-05",
+    "descarta_alternativas": ["E1-06"],
+    "personagens_afetados": ["02"],
+    "acao_esperada_jogador": "cruzar log de acesso com escala do turno",
+    "risco_ambiguidade": "baixo",
+    "obrigatoria_para_avanco": true
+  },
+  {
+    "id": "C-FINAL-01",
+    "conclusao": "A solução final combina oportunidade, método e benefício revelado no E2.",
+    "fase": "final",
+    "tipo": "solucao_final",
+    "prova_principal": "E2-04",
+    "confirmacao_independente": "E2-07",
+    "descarta_alternativas": ["E1-06", "E2-02"],
+    "personagens_afetados": ["02", "04"],
+    "acao_esperada_jogador": "recontextualizar a oportunidade do E1 com o benefício documental do E2",
+    "risco_ambiguidade": "baixo",
+    "obrigatoria_para_avanco": false
+  }
+]
+```

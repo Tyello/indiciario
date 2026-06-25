@@ -73,7 +73,12 @@ Antes de gerar qualquer texto de documento final, execute internamente o checkli
 - [ ] O salto final até o beneficiário tem duas confirmações independentes.
 - [ ] Todo personagem do elenco aparece em pelo menos um documento planejado.
 - [ ] Todo personagem suspeito relevante aparece na folha de cruzamento.
-- [ ] Todo red herring tem forma justa de descarte documentada.
+- [ ] Todo red herring tem documento de descarte E uma pista na matriz que aponta esse documento; sem isso, há ER_006.
+- [ ] Cada um dos 4 pilares do E1 tem pelo menos 1 pista que o sustenta na matriz; sem isso, há ER_002.
+- [ ] Todo contrato `obrigatoria_para_avanco: true` tem `prova_principal` no envelope atual; no gate E1→E2, a prova está em E1.
+- [ ] Revelação ou solução do E2 está modelada como contrato E2/final NÃO obrigatório-para-avanço; sem isso, há ER_007.
+- [ ] Nenhum documento isolado responde sozinho quem + como + por quê + benefício; a descoberta é distribuída; sem isso, há OBV_009.
+- [ ] Suspeitos ficam dentro do recomendado para o nível em `docs/DIFFICULTY_FRAMEWORK.md`; Intermediário tem limite recomendado de até 6. Excesso gera PT_003 e deriva de dificuldade.
 - [ ] As dicas cobrem todos os pontos de travamento identificados.
 - [ ] O risco de solvabilidade avaliado é Médio-baixo ou Baixo.
 
@@ -97,12 +102,13 @@ Entregue em Markdown com estas seções exatas:
 8. Estrutura do Envelope 1 (tabela de documentos com tipo e emoção, quatro pilares, critério de avanço)
 9. Estrutura do Envelope 2 (tabela de documentos com tipo e emoção, perguntas respondidas)
 10. Estrutura do Envelope 3, se houver
-11. Matriz de pistas (pista, documento, o que sugere, o que prova, confirmação, risco, emoção)
-12. Red herrings (falso suspeito, motivo aparente, descarte, documento de descarte, categoria)
+11. Matriz de pistas (pista, documento, o que sugere, o que prova, confirmação, risco, emoção). Inclua pelo menos 1 pista para cada pilar do E1 e uma pista para cada documento de descarte de red herring.
+12. Red herrings (falso suspeito, motivo aparente, descarte, documento de descarte, pista da matriz que aponta esse descarte, categoria)
 13. Cadeias financeiras ou logísticas (tabela de saltos com documentação)
 14. Planejamento de dicas (tabela: nº, intensidade, envelope, condição, texto resumido, o que desbloqueia)
 15. Gabarito resumido (resposta curta, papéis, provas principais, por que falsos suspeitos são falsos)
-16. Checklist de solvabilidade preenchido com rubrica de risco
+16. Contratos de evidência, marcando `obrigatoria_para_avanco` apenas quando a `prova_principal` estiver no envelope atual; revelação/solução do E2 entra como contrato E2/final não obrigatório-para-avanço.
+17. Checklist de solvabilidade preenchido com rubrica de risco, OBV_009, PT_003, ER_002, ER_006 e ER_007 verificados
 
 ### Fase 2 — Documentos finais (somente após gate de qualidade aprovado)
 

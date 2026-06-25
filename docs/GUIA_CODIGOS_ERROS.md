@@ -1,8 +1,8 @@
 # Guia de códigos de erro e aviso editorial
 
-Este guia documenta os códigos `OBV_xxx`, `PT_xxx` e `GP_xxx` existentes no código atual. Ele não inventa novos códigos nem severidades. Se um relatório mencionar código não listado aqui, **verificar no código antes de agir**.
+Este guia documenta os códigos `OBV_xxx`, `PT_xxx`, `GP_xxx` e `ER_xxx` existentes no código atual. Ele não inventa novos códigos nem severidades. Se um relatório mencionar código não listado aqui, **verificar no código antes de agir**.
 
-Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `generator/obviousness_checker.py`, `generator/playtest_metrics.py`, `generator/clue_graph.py` e testes relacionados.
+Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `docs/QUALITY_COMPARATIVE_REPORT.md`, `generator/obviousness_checker.py`, `generator/playtest_metrics.py`, `generator/clue_graph.py`, `generator/evidence_reviewer.py` e testes relacionados.
 
 ## Como ler severidade e bloqueio
 
@@ -10,6 +10,7 @@ Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `generator/obviousness_checker.py`, `ge
 - No validator, qualquer crítico bloqueia geração. Quatro ou mais moderados bloqueiam; dois ou três moderados bloqueiam em modo `--strict`; um moderado não bloqueia sozinho.
 - `PT_xxx` é relatório heurístico de playtest/carga. No código atual, os achados são `warning` e não aparecem como erro bloqueante direto do relatório de playtest.
 - `GP_xxx` é relatório de grafo de pistas. O relatório retorna `failed` se houver issue `critical`; retorna `passed` se não houver críticos. Quando não há contratos, retorna `skipped` com `GP_006` como warning.
+- `ER_xxx` vem do `evidence_reviewer` e mede cadeia de evidência, suporte dos pilares, red herrings e vazamento de informação. Findings ER_006, ER_007 e ER_008 compõem métrica de `vazamento_info` em `docs/QUALITY_COMPARATIVE_REPORT.md`; portanto são `lower_is_better`, não metas esperadas.
 
 ## Códigos OBV — anti-obviedade
 
@@ -42,6 +43,16 @@ Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `generator/obviousness_checker.py`, `ge
 | PT_008 | warning | Não bloqueia diretamente no relatório PT | Tempo estimado incompatível com tempo declarado | Promessa de sessão pode frustrar o grupo | Ajustar tempo declarado, carga documental ou estrutura de envelopes |
 | PT_009 | warning | Não bloqueia diretamente no relatório PT | Dificuldade declarada diverge muito da dificuldade estimada | Caso pode estar rotulado incorretamente | Reavaliar dificuldade, contagem de documentos, contratos e suspeitos |
 
+
+## Códigos ER — cadeia de evidência (evidence_reviewer)
+
+| Código | Severidade no código | Bloqueia geração? | Significado | Por que prejudica | Como evitar |
+|---|---|---|---|---|---|
+| ER_002 | major | Não bloqueia sozinho no reviewer; deve barrar aprovação editorial de caso novo | Pilar de validação do E1 sem pista de suporte na `matriz_pistas` | O gate E1→E2 pede defesa documental, mas um dos quatro pilares depende de prosa, intuição ou gabarito interno | Garantir que cada um dos 4 pilares do E1 tenha pelo menos 1 pista na `matriz_pistas` apontando o documento que sustenta esse pilar |
+| ER_006 | major | Não bloqueia sozinho no reviewer; deve barrar aprovação editorial de caso novo | Red herring tem documento de descarte, mas nenhuma pista na `matriz_pistas` aponta ou contradiz esse documento | O descarte existe apenas na explicação do autor; o grupo não recebe trilha investigável para inocentar o falso suspeito | Para cada red herring, referenciar o documento de descarte por uma pista explícita; a pista deve contradizer, limitar ou contextualizar o documento que inocenta. Descarte só na prosa do red herring não conta |
+| ER_007 | major | Não bloqueia sozinho no reviewer; deve barrar aprovação editorial de caso novo | Contrato com `obrigatoria_para_avanco: true` usa `prova_principal` fora do envelope atual | Vaza informação de envelope futuro para um gate anterior ou transforma revelação/solução do E2 em requisito de avanço; é vazamento evitável e deve ser minimizado (`lower_is_better`), não tratado como esperado | Reservar `obrigatoria_para_avanco: true` para contratos cuja `prova_principal` está no envelope atual: em E1→E2, prova em E1. Modelar revelação e solução do E2 como contrato `fase: "E2"`/`tipo: "recontextualizacao"` e contrato `fase: "final"`/`tipo: "solucao_final"`, com `prova_principal` em E2 e `obrigatoria_para_avanco: false` |
+| ER_008 | minor | Não bloqueia sozinho no reviewer; sinaliza dispersão documental | Menos de 40% dos documentos contribuem para alguma pista | O dossiê acumula material órfão, aumenta carga de leitura e dilui a cadeia investigativa | Fazer pelo menos 40% dos documentos contribuírem para alguma pista na `matriz_pistas`, contrato, confirmação ou descarte; documentos de ambientação devem ser minoria consciente |
+
 ## Códigos GP — grafo de pistas
 
 | Código | Severidade no código | Bloqueia geração? | Significado | Impacto editorial | Ação recomendada |
@@ -56,4 +67,4 @@ Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `generator/obviousness_checker.py`, `ge
 ## Lacunas conhecidas
 
 - `GP_005` não foi encontrado em `generator/clue_graph.py` no estado atual. Se aparecer em relatório futuro, **verificar no código antes de agir**.
-- Códigos fora das famílias `OBV_xxx`, `PT_xxx` e `GP_xxx` existem em outros validadores, mas estão fora do escopo deste guia.
+- Códigos fora das famílias `OBV_xxx`, `PT_xxx`, `GP_xxx` e `ER_xxx` podem existir em outros validadores; verificar no código antes de agir.
