@@ -1,0 +1,1709 @@
+{
+  "titulo": "Plantão Sem Rosto",
+  "subtitulo": "A credencial certa no corpo errado",
+  "genero": "mistério institucional hospitalar",
+  "tom": "institucional, policial leve",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "intermediario",
+  "tempo_estimado_min": 95,
+  "numero_jogadores": "3 a 5",
+  "formato_envelopes": 2,
+  "premissa": "Na Clínica São Lázaro, uma paciente sofre reação adversa depois que uma bomba de infusão registra lote incompatível. A diretora administrativa aponta Denise Pacheco, técnica do plantão, porque o crachá H2 aparece nos logs. A investigação deve separar erro de plantão, falha de sistema e uso indevido de identidade.",
+  "conflito_central": {
+    "pergunta_publica": "Quem causou a dose incorreta no posto 2 e por que o sistema aponta Denise Pacheco?",
+    "quem_pede_apuracao": "Clara Nogueira, diretora administrativa da clínica.",
+    "motivo_da_apuracao": "Conter a crise antes da auditoria do convênio e explicar a divergência de lote.",
+    "risco_concreto": "Uma inocente pode ser responsabilizada enquanto a compra emergencial fraudulenta se consolida.",
+    "verdade_aparente": "Denise trocou ou programou o lote errado durante seu plantão.",
+    "verdade_real_resumida": "Rafael Viana usou o crachá H2 reemitido e retirado com rubrica falsa; Marina Lobo planejou a ruptura para beneficiar fornecedor associado."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Por que a falha aponta para Denise e qual hipótese operacional aparente se sustenta?",
+      "resposta_esperada": "O crachá H2 foi usado na janela crítica, tornando Denise a suspeita operacional aparente, mas a fonte inicial deve ser tratada com cautela.",
+      "nao_precisa_resolver_ainda": [
+        "quem usou fisicamente o crachá",
+        "beneficiário financeiro final"
+      ],
+      "criterio_de_avanco": "Liberar E2 quando o grupo formular que crachá e pessoa podem não ser equivalentes.",
+      "forma_diegetica_de_avanco": "A sindicância recebe anexos de RH, portaria e compras após contestação da hipótese inicial.",
+      "documentos_minimos": [
+        "E1-01",
+        "E1-02",
+        "E1-03",
+        "E1-06"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Quem usou a identidade de Denise e quem se beneficiou da crise?",
+      "resposta_esperada": "Rafael usou o crachá H2; Marina planejou e se beneficiou por negociação anterior e repasse posterior.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando executor, identidade trocada, beneficiária e falsos suspeitos estiverem documentados.",
+      "forma_diegetica_de_avanco": "Conferência pelo facilitador com o gabarito operacional.",
+      "documentos_minimos": [
+        "E2-01",
+        "E2-02",
+        "E2-03",
+        "E2-04",
+        "E2-06"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Quem causou a dose incorreta no posto 2 e por que o sistema aponta Denise Pacheco?",
+    "solucao_em_5_frases": [
+      "Clara pede apuração porque a paciente recebeu dose incorreta e o sistema aponta o crachá H2.",
+      "No E1, Denise é suspeita operacional aparente, mas documentos já mostram que crachá não equivale a pessoa.",
+      "No E2, presença externa, descrição física e entrada lateral provam identidade trocada.",
+      "Rafael executou usando H2; Marina planejou e se beneficiou por compra emergencial e repasse.",
+      "João, Lia e Sérgio são descartados por janela ou acesso, não por falta de motivo."
+    ],
+    "linha_tempo_aparente_resumo": "Aparentemente Denise estava escalada e seu crachá executou a ação crítica no posto 2.",
+    "linha_tempo_real_resumo": "Marina preparou a compra emergencial; Rafael usou a identidade de Denise para criar a ruptura; a compra gerou repasse posterior.",
+    "red_herrings_e_descartes": [
+      "João: sensor e bomba geram suspeita, mas bancada e chamado validado limitam sua janela.",
+      "Lia: alterações de recepção geram ruído, mas recibo e livro físico a mantêm no balcão.",
+      "Sérgio: ganha com a venda, mas portaria registra entrada negada e falta de acesso interno."
+    ],
+    "quando_usar_dicas": [
+      "Use dica leve se o grupo tratar crachá como presença física.",
+      "Use dica média se o grupo não cruzar portaria, treinamento e canhoto.",
+      "Use dica forte se a mesa achar executor mas não fechar beneficiário financeiro."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Por que a falha aponta para Denise e qual hipótese operacional aparente se sustenta?",
+        "resposta_esperada": "O crachá H2 foi usado na janela crítica, tornando Denise a suspeita operacional aparente, mas a fonte inicial deve ser tratada com cautela.",
+        "nao_precisa_resolver_ainda": [
+          "quem usou fisicamente o crachá",
+          "beneficiário financeiro final"
+        ],
+        "criterio_de_avanco": "Liberar E2 quando o grupo formular que crachá e pessoa podem não ser equivalentes.",
+        "forma_diegetica_de_avanco": "A sindicância recebe anexos de RH, portaria e compras após contestação da hipótese inicial.",
+        "documentos_minimos": [
+          "E1-01",
+          "E1-02",
+          "E1-03",
+          "E1-06"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Quem usou a identidade de Denise e quem se beneficiou da crise?",
+        "resposta_esperada": "Rafael usou o crachá H2; Marina planejou e se beneficiou por negociação anterior e repasse posterior.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando executor, identidade trocada, beneficiária e falsos suspeitos estiverem documentados.",
+        "forma_diegetica_de_avanco": "Conferência pelo facilitador com o gabarito operacional.",
+        "documentos_minimos": [
+          "E2-01",
+          "E2-02",
+          "E2-03",
+          "E2-04",
+          "E2-06"
+        ]
+      }
+    ]
+  },
+  "verdade_real": "Marina Lobo negociou antes do evento uma compra emergencial com a FarmaNorte. Para criar bloqueio formal do lote interno, acionou Rafael Viana, ex-folguista, que retirou segunda via do crachá de Denise com rubrica falsa e entrou pela portaria lateral. Rafael trocou o lote/programou a bomba no posto 2. Denise estava em treinamento externo, e a identidade real é provável pelo cruzamento entre descrição física, log de negado de Rafael, assinatura divergente e presença externa de Denise.",
+  "executor_id": "H3",
+  "planejador_id": "H4",
+  "beneficiario_id": "H4",
+  "motivacao": "Criar compra emergencial superfaturada e repasse indireto via empresa familiar ligada ao fornecedor.",
+  "metodo_ocultacao": "Uso de credencial H2 reemitida, rubrica imitando iniciais de Denise, atribuição apressada baseada em log e ruído de plantão.",
+  "erro_que_permite_descobrir": "A rubrica do canhoto não combina com Denise, a descrição física coincide com Rafael, Denise aparece fora da clínica no mesmo horário e Marina deixou negociação anterior documentada.",
+  "cadeia_causal": [
+    "Marina negocia condição de compra emergencial antes da crise.",
+    "Rafael retira ou usa crachá H2 reemitido para parecer Denise.",
+    "Rafael entra pela portaria lateral, acessa farmácia e programa lote divergente.",
+    "A reação da paciente gera bloqueio de lote e justificativa de compra.",
+    "Marina direciona compra e recebe repasse indireto.",
+    "A solução aparece por assinatura, descrição física, cronologia externa e vínculo financeiro."
+  ],
+  "personagens": [
+    {
+      "id": "H1",
+      "nome": "Clara Nogueira",
+      "funcao": "Diretora administrativa da Clínica São Lázaro",
+      "papel": "narrador",
+      "suspeita_aparente": "Tem pressa em conter a crise e preservar o convênio; acusa a técnica do plantão pela auditoria inicial.",
+      "verdade": "Fonte interessada: simplifica a ocorrência para proteger a gestão e o contrato com a operadora.",
+      "documento_ancoragem": [
+        "E1-01",
+        "E1-02",
+        "E2-06"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "clara"
+      }
+    },
+    {
+      "id": "H2",
+      "nome": "Denise Pacheco",
+      "funcao": "Técnica de enfermagem cadastrada no turno crítico",
+      "papel": "testemunha",
+      "suspeita_aparente": "Seu crachá H2 aparece na sala de medicação e nos registros da bomba de infusão.",
+      "verdade": "Teve a identidade usada; estava em treinamento externo e vira peça para revelar a troca.",
+      "documento_ancoragem": [
+        "E1-03",
+        "E1-06",
+        "E2-03"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "denise"
+      }
+    },
+    {
+      "id": "H3",
+      "nome": "Rafael Viana",
+      "funcao": "Enfermeiro folguista desligado no mês anterior",
+      "papel": "executor",
+      "suspeita_aparente": "Conhece rotinas e tinha motivo contra a clínica, mas só aparece no E2 por rubrica, descrição e cadastro duplicado.",
+      "verdade": "Usou o crachá reemitido de Denise para acessar a sala, trocar lote e apagar parte da trilha.",
+      "documento_ancoragem": [
+        "E2-01",
+        "E2-03",
+        "E2-05"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "rafael"
+      }
+    },
+    {
+      "id": "H4",
+      "nome": "Marina Lobo",
+      "funcao": "Coordenadora de compras clínicas",
+      "papel": "beneficiario",
+      "suspeita_aparente": "Aprovou compra emergencial após a falha e tem vínculo financeiro com fornecedor de contingência.",
+      "verdade": "Planejou a substituição de lote para justificar compra cara e receber repasse por empresa ligada ao irmão.",
+      "documento_ancoragem": [
+        "E1-07",
+        "E2-04",
+        "E2-08"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "marina"
+      }
+    },
+    {
+      "id": "H5",
+      "nome": "João Furtado",
+      "funcao": "Técnico de manutenção biomédica",
+      "papel": "red_herring",
+      "suspeita_aparente": "Estava perto da bomba e discutiu falhas do equipamento.",
+      "verdade": "Só abriu chamado de sensor; log da bancada e chat o colocam em manutenção visível durante a troca.",
+      "documento_ancoragem": [
+        "E1-05",
+        "E1-08",
+        "E2-07"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "joao"
+      }
+    },
+    {
+      "id": "H6",
+      "nome": "Lia Tavares",
+      "funcao": "Recepcionista do pronto atendimento",
+      "papel": "red_herring",
+      "suspeita_aparente": "Registrou acompanhante sem documento e alterou horários na triagem.",
+      "verdade": "A alteração encobria superlotação, não medicação; câmera descrita e recibo de táxi confirmam outro posto.",
+      "documento_ancoragem": [
+        "E1-04",
+        "E2-02",
+        "E2-07"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "lia"
+      }
+    },
+    {
+      "id": "H7",
+      "nome": "Sérgio Matos",
+      "funcao": "Representante da FarmaNorte",
+      "papel": "red_herring",
+      "suspeita_aparente": "Ofereceu lote emergencial e pressionou por compra.",
+      "verdade": "Beneficia-se comercialmente, mas não tinha acesso interno; entrada negada e mensagens mostram que esperou autorização.",
+      "documento_ancoragem": [
+        "E1-07",
+        "E2-04",
+        "E2-05"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "sergio"
+      }
+    },
+    {
+      "id": "H8",
+      "nome": "Paciente 12 — Helena Cruz",
+      "funcao": "Paciente afetada pela dose incorreta",
+      "papel": "testemunha",
+      "suspeita_aparente": "O prontuário é o evento visível da crise.",
+      "verdade": "Não participa da fraude; seus horários delimitam a janela crítica.",
+      "documento_ancoragem": [
+        "E1-02",
+        "E1-06"
+      ],
+      "assinatura": {
+        "estilo": "angular",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "corte_horizontal",
+        "amplitude": "media",
+        "seed": "helena-cruz"
+      }
+    }
+  ],
+  "documentos": [
+    {
+      "codigo": "E1-01",
+      "titulo": "E-mail de solicitação da diretoria",
+      "envelope": "E1",
+      "tipo": "email_narrador",
+      "emocao_esperada": "urgência institucional",
+      "objetivo_narrativo": "Apresentar a crise e a acusação inicial interessada contra Denise.",
+      "pistas_contidas": [
+        "Clara usa o crachá como se fosse pessoa",
+        "Pressa para fechar antes do convênio"
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-02",
+        "E1-06"
+      ],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H1",
+        "H2",
+        "H8"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Clara Nogueira",
+        "REMETENTE_EMAIL": "diretoria@saolazaro.ficticio",
+        "DESTINATARIO_EMAIL": "investigacao@indiciario.ficticio",
+        "DESTINATARIO_LABEL": "Investigação independente",
+        "DATA_HORA": "18 de maio de 2026 às 21:18",
+        "ASSUNTO": "Auditoria urgente — dose incorreta no posto 2",
+        "AVATAR_INICIAL": "C",
+        "AVATAR_COR": "#24515A",
+        "CORPO_EMAIL": "<p>Solicito revisão externa sobre a falha de medicação ocorrida hoje no posto 2. O relatório preliminar aponta uso do crachá H2, de Denise Pacheco, na sala de medicação às 16h37, minutos antes da paciente Helena Cruz apresentar reação adversa.</p><p>Minha prioridade é confirmar a responsabilidade operacional sem transformar um erro de plantão em crise pública. A auditoria do convênio começa amanhã, e precisamos de uma resposta documentada sobre quem acessou, quem liberou o lote e por que a bomba registrou lote divergente.</p><p>Envio neste envelope a notificação inicial, a escala e registros que sustentam a hipótese de que Denise executou a troca. Peço discrição: a equipe já está tensionada e qualquer conclusão fora dos documentos pode agravar o dano.</p>",
+        "NOTA_RODAPE": "CONFIDENCIAL — E1",
+        "COPIA": "juridico@saolazaro.ficticio",
+        "TOTAL_ANEXOS": "4",
+        "ANEXOS": true,
+        "CADA_ANEXO": [
+          {
+            "NOME_ARQUIVO": "notificacao_preliminar.pdf",
+            "TAMANHO_KB": "96"
+          },
+          {
+            "NOME_ARQUIVO": "escala_turno.pdf",
+            "TAMANHO_KB": "71"
+          },
+          {
+            "NOME_ARQUIVO": "log_farmacia.csv",
+            "TAMANHO_KB": "44"
+          },
+          {
+            "NOME_ARQUIVO": "chat_posto2.pdf",
+            "TAMANHO_KB": "83"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "Notificação preliminar de evento adverso",
+      "envelope": "E1",
+      "tipo": "boletim",
+      "emocao_esperada": "alarme",
+      "objetivo_narrativo": "Evento adverso CSL-2026-118",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H2",
+        "H8"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E1-02",
+        "ASSUNTO": "Evento adverso CSL-2026-118",
+        "SAUDACAO": "Investigadores,",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas.",
+        "ORGAO_NOME": "CLÍNICA SÃO LÁZARO",
+        "ORGAO_SUBTITULO": "Núcleo de Segurança do Paciente",
+        "NUMERO_CASO": "CSL-2026-118",
+        "TIPO_DOCUMENTO": "BOLETIM DE INSPEÇÃO INICIAL",
+        "TIPO_OCORRENCIA": "Evento adverso medicamentoso",
+        "DATA": "18/05/2026",
+        "LOCALIZACAO": "Belo Horizonte — MG",
+        "HORA_OCORRENCIA": "16h49",
+        "DESCRICAO_OCORRENCIA": "<p>Paciente 12, Helena Cruz, recebeu infusão às 16h49 com concentração incompatível com a prescrição validada às 15h55. A reação foi contida às 17h06 sem sequela permanente registrada até o fechamento deste relatório.</p><p>O formulário cita a técnica Denise Pacheco porque o crachá H2 aparece no armário de medicação e na bomba. A anotação clínica, porém, registra apenas “profissional com máscara azul, altura aproximada 1,78 m, manga dobrada”, descrição incomum para Denise, descrita na ficha funcional como 1,61 m.</p><p>O relatório é preliminar. Ele consolida sistemas, não identifica visualmente a pessoa. A assinatura de ciência ao final aparece como “D. Pacheco”, mas com rubrica angular e pressão forte, distinta do padrão arredondado arquivado no RH.</p>",
+        "NOME_RESPONSAVEL": "Clara Nogueira",
+        "ASSINATURA_RESPONSAVEL": "Clara Nogueira",
+        "ASSINATURA_GLIFO": "CN",
+        "DATA_HORA_ASSINATURA": "18/05/2026 20h10",
+        "CAMPO_NOME": false,
+        "MOSTRAR_CARIMBO": true
+      }
+    },
+    {
+      "codigo": "E1-03",
+      "titulo": "Log de acesso da farmácia satélite",
+      "envelope": "E1",
+      "tipo": "log_acesso",
+      "emocao_esperada": "cruzamento frio",
+      "objetivo_narrativo": "Log de acesso da farmácia satélite",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H2",
+        "H4",
+        "H5"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "CONTROLE DE ACESSO — CLÍNICA SÃO LÁZARO",
+        "SUBTITULO_SISTEMA": "Exportação auditada — uso investigativo",
+        "COR_SISTEMA": "#24515A",
+        "COR_SISTEMA_DARK": "#123036",
+        "DATA_EXPORTACAO": "18/05/2026",
+        "HORA_EXPORTACAO": "21:12",
+        "OPERADOR_EXPORT": "SISTEMA",
+        "HASH_REGISTRO": "c9a14f7b",
+        "PERIODO_INICIO": "18/05/2026 13:40",
+        "PERIODO_FIM": "18/05/2026 20:30",
+        "LOCALIZACAO_SISTEMA": "Posto 2 — Farmácia satélite",
+        "TOTAL_REGISTROS": "4",
+        "COLUNA_NOME": true,
+        "COLUNA_TERMINAL": false,
+        "COLUNA_METODO": false,
+        "COLUNA_OBS": true,
+        "TOTAL_USUARIOS": "3",
+        "TOTAL_ENTRADAS": "4",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "1",
+        "REGISTROS": [
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "18/05/2026",
+            "HORA": "15:42:11",
+            "PORTA": "FARM-2",
+            "ID_USUARIO": "H5",
+            "NOME_USUARIO": "João Furtado",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "ENTRADA",
+            "OBSERVACAO": "chamado sensor 44",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "18/05/2026",
+            "HORA": "16:37:28",
+            "PORTA": "FARM-2",
+            "ID_USUARIO": "H2",
+            "NOME_USUARIO": "Denise Pacheco",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "ENTRADA",
+            "OBSERVACAO": "crachá H2 reemitido em 12/05",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "anomaly",
+            "DATA": "18/05/2026",
+            "HORA": "16:44:03",
+            "PORTA": "BOMBA-2",
+            "ID_USUARIO": "H2",
+            "NOME_USUARIO": "Denise Pacheco",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "PROGRAMAÇÃO",
+            "OBSERVACAO": "lote L-77B diverge da prescrição",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "18/05/2026",
+            "HORA": "17:18:55",
+            "PORTA": "FARM-2",
+            "ID_USUARIO": "H4",
+            "NOME_USUARIO": "Marina Lobo",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "ENTRADA",
+            "OBSERVACAO": "conferência após evento",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Folha de cruzamento do plantão",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "organização",
+      "objetivo_narrativo": "Quem tinha motivo, meio e janela?",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H2",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E1-04",
+        "ASSUNTO": "Quem tinha motivo, meio e janela?",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>Use esta folha para separar registro de crachá, presença física e benefício. Não preencha por intuição: cada marca precisa apontar para documento.</p><table><tr><th>Pessoa</th><th>Motivo</th><th>Meio</th><th>Janela</th><th>Descarte possível</th></tr><tr><td>Denise Pacheco (H2)</td><td></td><td></td><td></td><td></td></tr><tr><td>Marina Lobo (H4)</td><td></td><td></td><td></td><td></td></tr><tr><td>João Furtado (H5)</td><td></td><td></td><td></td><td></td></tr><tr><td>Lia Tavares (H6)</td><td></td><td></td><td></td><td></td></tr><tr><td>Sérgio Matos (H7)</td><td></td><td></td><td></td><td></td></tr></table><p>Observação impressa pela comissão: o crachá identifica um meio técnico, não necessariamente a pessoa portadora.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas."
+      }
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Chat do posto 2",
+      "envelope": "E1",
+      "tipo": "chat",
+      "emocao_esperada": "ruído produtivo",
+      "objetivo_narrativo": "Conversas do turno",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H2",
+        "H5",
+        "H6",
+        "H8"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "HORA_TELA": "16:57",
+        "CONTADOR_NAOVISTOS": "18",
+        "NOME_GRUPO": "Posto 2 — turno tarde",
+        "MEMBROS_LISTA": "Denise, João, Lia, Enfermeira-chefe",
+        "DATA_CONVERSA": "18 mai 2026",
+        "MENSAGENS": [
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-1",
+            "NOME_REMETENTE": "Lia Tavares",
+            "TEXTO_MENSAGEM": "Recepção acumulou acompanhante; corrijo horários depois se precisar.",
+            "HORARIO": "15:58",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-2",
+            "NOME_REMETENTE": "João Furtado",
+            "TEXTO_MENSAGEM": "Vou ficar na bancada com o sensor 44. Se a bomba apitar, me chamem.",
+            "HORARIO": "16:12",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-3",
+            "NOME_REMETENTE": "Denise Pacheco",
+            "TEXTO_MENSAGEM": "já peguei na farmácia",
+            "HORARIO": "16:39",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-2",
+            "NOME_REMETENTE": "João Furtado",
+            "TEXTO_MENSAGEM": "Estou com o sensor aberto na bancada, foto anexada no chamado.",
+            "HORARIO": "16:50",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Escala e legenda de credenciais",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "contradição inicial",
+      "objetivo_narrativo": "Escala do dia 18/05/2026",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H1",
+        "H2",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E1-06",
+        "ASSUNTO": "Escala do dia 18/05/2026",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>Legenda: H1 Clara Nogueira — administração; H2 Denise Pacheco — técnica de enfermagem; H4 Marina Lobo — compras; H5 João Furtado — manutenção biomédica; H6 Lia Tavares — recepção; H7 Sérgio Matos — fornecedor externo; H8 Helena Cruz — paciente.</p><p>Escala publicada: Denise H2, 14h às 20h, posto 2. Observação posterior manuscrita: “Denise liberada 13h30 para treinamento externo no Hospital Escola, retorno previsto amanhã”. A anotação está rubricada “M.L.” e data 18/05, 14h02. Não há substituto formal na linha impressa.</p><p>A credencial H2 consta como reemitida em 12/05 por perda comunicada no balcão administrativo. O canhoto de retirada deveria conter assinatura completa do titular, mas a cópia do E1 traz apenas rubrica reduzida.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas."
+      }
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Orçamento emergencial FarmaNorte",
+      "envelope": "E1",
+      "tipo": "orcamento",
+      "emocao_esperada": "suspeita financeira",
+      "objetivo_narrativo": "Cotação emergencial de lote substituto",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H4",
+        "H7"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "42.188.550/0001-20",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E1-07",
+        "ASSUNTO": "Cotação emergencial de lote substituto",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>Proposta FN-8821 emitida às 18h05 para reposição emergencial do lote L-77B. Valor total R$ 48.600,00 para entrega noturna, validade de 24 horas, contato comercial Sérgio Matos.</p><p>A proposta menciona conversa prévia com Marina Lobo sobre “risco de ruptura se o lote interno fosse bloqueado”. Essa frase cria suspeita sobre compras porque foi escrita antes da conclusão da auditoria clínica. O e-mail de Sérgio, entretanto, pede autorização de entrada e reclama que ficou na portaria das 16h20 às 17h10 sem crachá liberado.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas.",
+        "NOME_EMPRESA": "FarmaNorte Distribuidora",
+        "TIPO_EMPRESA": "Insumos hospitalares",
+        "ENDERECO": "Av. Cristiano Machado, 2200 — Belo Horizonte, MG",
+        "SITE_EMAIL": "comercial@farmanorte.ficticio",
+        "COR_PRIMARIA": "#6A3D9A",
+        "COR_SECUNDARIA": "#3D235A",
+        "NUMERO_ORCAMENTO": "FN-8821",
+        "DATA_EMISSAO": "18/05/2026",
+        "DATA_VALIDADE": "19/05/2026",
+        "REVISAO": "1",
+        "NOME_CLIENTE": "Clínica São Lázaro",
+        "ENDERECO_CLIENTE": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "DOC_CLIENTE": "18.204.770/0001-66",
+        "CONTATO_CLIENTE": "compras@saolazaro.ficticio",
+        "TITULO_PROJETO": "Reposição emergencial L-77B",
+        "DESCRICAO_REFERENCIA": "Entrega noturna de lote substituto",
+        "VALOR_TOTAL": "R$ 48.600,00",
+        "ESCOPO": "Reposição de insumo bloqueado após evento adverso.",
+        "CONDICOES": [
+          {
+            "CONDICAO": "Entrega condicionada à autorização de entrada."
+          },
+          {
+            "CONDICAO": "Validade comercial de 24 horas."
+          }
+        ],
+        "UNIDADES": true,
+        "LISTA_UNIDADES": [
+          {
+            "UNIDADE": "Belo Horizonte — MG"
+          }
+        ],
+        "NOTA_MANUSCRITA": "risco de ruptura se L-77B bloquear",
+        "ASSINATURA_RESPONSAVEL": "Sérgio Matos",
+        "NOME_RESPONSAVEL": "Sérgio Matos",
+        "CARGO_RESPONSAVEL": "Representante comercial",
+        "ASSINATURA_CLIENTE": "pendente",
+        "DATA_APROVACAO": "pendente",
+        "ITENS": [
+          {
+            "NUMERO_ITEM": "1",
+            "NOME_ITEM": "Kit infusão lote substituto",
+            "DESC_ITEM": "Entrega noturna",
+            "QUANTIDADE": "30",
+            "VALOR_UNITARIO": "R$ 1.620,00",
+            "VALOR_TOTAL_ITEM": "R$ 48.600,00"
+          }
+        ],
+        "SUBTOTAL": "R$ 48.600,00",
+        "DESCONTO": "R$ 0,00",
+        "IMPOSTOS": "Inclusos"
+      }
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Registro da bancada biomédica",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "descarte parcial",
+      "objetivo_narrativo": "Chamado técnico 44",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H5",
+        "H6"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E1-08",
+        "ASSUNTO": "Chamado técnico 44",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>João Furtado abriu chamado às 15h38 por sensor intermitente na bomba reserva, bancada biomédica. O registro tem foto impressa do sensor com etiqueta de hora 16h42 e assinatura de validação da enfermeira-chefe às 16h55.</p><p>O chamado não permite descartar erro de equipamento, mas reduz a hipótese de que João tenha ido à farmácia satélite no minuto da troca. A bancada fica em área aberta, com duas assinaturas de passagem: Lia às 16h25 levando ficha de acompanhante e Marta da limpeza às 16h47.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas."
+      }
+    },
+    {
+      "codigo": "E2-01",
+      "titulo": "Dossiê de reemissão do crachá H2",
+      "envelope": "E2",
+      "tipo": "protocolo",
+      "emocao_esperada": "virada justa",
+      "objetivo_narrativo": "Crachá perdido e retirada contestada",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H2",
+        "H3"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E2-01",
+        "ASSUNTO": "Crachá perdido e retirada contestada",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>O pedido de segunda via do crachá H2 foi aberto em 12/05 por telefone interno. A retirada física ocorreu às 18h22 do mesmo dia. O campo de descrição do balcão registra “pessoa alta, cabelo raspado, voz baixa, disse estar rouca”. A ficha funcional de Denise informa 1,61 m e cabelo cacheado preso; a ficha de Rafael Viana, desligado em abril, informa 1,79 m e cabelo raspado.</p><p>O canhoto de retirada traz rubrica “D.P.” em ângulo agudo, pressão forte e traço final horizontal. A assinatura de Denise no contrato de treinamento, anexo neste envelope, é arredondada, pressão leve e inicial aberta. A divergência, cruzada com presença externa e portaria, indica retirada da credencial H2 por outra pessoa.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas."
+      }
+    },
+    {
+      "codigo": "E2-02",
+      "titulo": "Comprovante do treinamento externo de Denise",
+      "envelope": "E2",
+      "tipo": "contrato",
+      "emocao_esperada": "alívio e choque",
+      "objetivo_narrativo": "Presença externa de Denise",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H2"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E2-02",
+        "ASSUNTO": "Presença externa de Denise",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>Lista do Hospital Escola Santa Brígida: Denise Pacheco assinou entrada às 13h58, pausa às 16h20 e saída às 18h03 no curso “Atualização em bombas de infusão”. O certificado é assinado por instrutora independente, com telefone institucional impresso apenas para controle interno, sem necessidade de consulta externa.</p><p>A lista contém assinatura completa de Denise, arredondada e legível. Na margem, a instrutora anotou “participante fez pergunta às 16h35 sobre alarme de oclusão”. Esse horário coincide com o uso do crachá H2 na farmácia da Clínica São Lázaro, tornando impossível que Denise tenha feito fisicamente os dois atos.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas."
+      }
+    },
+    {
+      "codigo": "E2-03",
+      "titulo": "Log de portaria e negados",
+      "envelope": "E2",
+      "tipo": "log_acesso",
+      "emocao_esperada": "cruzamento frio",
+      "objetivo_narrativo": "Log de portaria e negados",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H2",
+        "H3",
+        "H6",
+        "H7"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "CONTROLE DE ACESSO — CLÍNICA SÃO LÁZARO",
+        "SUBTITULO_SISTEMA": "Exportação auditada — uso investigativo",
+        "COR_SISTEMA": "#24515A",
+        "COR_SISTEMA_DARK": "#123036",
+        "DATA_EXPORTACAO": "18/05/2026",
+        "HORA_EXPORTACAO": "21:12",
+        "OPERADOR_EXPORT": "SISTEMA",
+        "HASH_REGISTRO": "c9a14f7b",
+        "PERIODO_INICIO": "18/05/2026 13:40",
+        "PERIODO_FIM": "18/05/2026 20:30",
+        "LOCALIZACAO_SISTEMA": "Posto 2 — Farmácia satélite",
+        "TOTAL_REGISTROS": "4",
+        "COLUNA_NOME": true,
+        "COLUNA_TERMINAL": false,
+        "COLUNA_METODO": false,
+        "COLUNA_OBS": true,
+        "TOTAL_USUARIOS": "4",
+        "TOTAL_ENTRADAS": "2",
+        "TOTAL_NEGADOS": "2",
+        "TOTAL_ANOMALIAS": "1",
+        "REGISTROS": [
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "18/05/2026",
+            "HORA": "15:59:10",
+            "PORTA": "PORTARIA",
+            "ID_USUARIO": "H6",
+            "NOME_USUARIO": "Lia Tavares",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "RETORNO BALCÃO",
+            "OBSERVACAO": "posto recepção",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "anomaly",
+            "DATA": "18/05/2026",
+            "HORA": "16:18:44",
+            "PORTA": "PORTARIA",
+            "ID_USUARIO": "H3",
+            "NOME_USUARIO": "Rafael Viana",
+            "TIPO_EVENTO": "denied",
+            "EVENTO": "NEGADO",
+            "OBSERVACAO": "credencial antiga cancelada",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "highlight",
+            "DATA": "18/05/2026",
+            "HORA": "16:25:09",
+            "PORTA": "PORTARIA LATERAL",
+            "ID_USUARIO": "H2",
+            "NOME_USUARIO": "Denise Pacheco",
+            "TIPO_EVENTO": "in",
+            "EVENTO": "ENTRADA",
+            "OBSERVACAO": "crachá H2; câmera descreve pessoa alta de manga dobrada",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "18/05/2026",
+            "HORA": "17:12:31",
+            "PORTA": "PORTARIA",
+            "ID_USUARIO": "H7",
+            "NOME_USUARIO": "Sérgio Matos",
+            "TIPO_EVENTO": "denied",
+            "EVENTO": "NEGADO",
+            "OBSERVACAO": "fornecedor sem autorização",
+            "TERMINAL": "Leitor principal",
+            "METODO": "crachá"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-04",
+      "titulo": "Extrato da Lobo Serviços Administrativos",
+      "envelope": "E2",
+      "tipo": "extrato",
+      "emocao_esperada": "benefício",
+      "objetivo_narrativo": "Repasse pós-evento",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H4",
+        "H7"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E2-04",
+        "ASSUNTO": "Repasse pós-evento",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>Extrato parcial da conta de Marina Lobo mostra crédito de R$ 9.400,00 em 20/05 com descrição “consultoria logística — Norte Ativa”. O contrato social simplificado anexo na própria carta identifica Norte Ativa como empresa de Caio Lobo, irmão de Marina, prestadora administrativa da FarmaNorte.</p><p>O valor não prova a troca de crachá, mas prova benefício: dois dias depois do bloqueio do lote, o fornecedor que ganhou a compra emergencial movimenta pagamento para empresa familiar da responsável interna por compras.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas.",
+        "LOGO_SIGLA": "BC",
+        "NOME_BANCO": "Banco Confiança",
+        "TAGLINE_BANCO": "Extrato simplificado",
+        "COR_BANCO": "#24515A",
+        "PERIODO_INICIO": "18/05/2026",
+        "PERIODO_FIM": "22/05/2026",
+        "DATA_GERACAO": "22/05/2026",
+        "HORA_GERACAO": "10:14",
+        "NOME_TITULAR": "Marina Lobo",
+        "DOC_TITULAR": "***.772.110-**",
+        "AGENCIA": "0144",
+        "NUMERO_CONTA": "58220-1",
+        "TIPO_CONTA": "Conta Corrente",
+        "SALDO_INICIAL": "R$ 2.180,00",
+        "DATA_SALDO_INICIAL": "18/05/2026",
+        "MOVIMENTACAO_LIQUIDA": "R$ 9.400,00",
+        "COR_MOVIMENTACAO": "positive",
+        "SALDO_FINAL": "R$ 11.580,00",
+        "DATA_SALDO_FINAL": "22/05/2026",
+        "COR_SALDO_FINAL": "positive",
+        "TOTAL_CREDITOS": "R$ 9.400,00",
+        "TOTAL_DEBITOS": "R$ 0,00",
+        "TOTAL_LANCAMENTOS": "1",
+        "NOTA_LEGAL": "Documento interno anexado à sindicância",
+        "CNPJ_BANCO": "00.000.000/0001-00",
+        "ENDERECO_BANCO": "Av. Fictícia, 1000 — Belo Horizonte, MG",
+        "LANCAMENTOS": [
+          {
+            "CLASSE_LINHA": "flagged",
+            "DATA": "20/05/2026",
+            "DESCRICAO": "TED RECEBIDA",
+            "DETALHE": "NORTE ATIVA SERVIÇOS — contrato suporte FN",
+            "TIPO": "TED",
+            "TIPO_LOWER": "ted",
+            "DIRECAO": "credit",
+            "VALOR": "R$ 9.400,00",
+            "COR_SALDO": "positive",
+            "SALDO_ACUMULADO": "R$ 11.580,00"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-05",
+      "titulo": "Depoimento de Rafael Viana",
+      "envelope": "E2",
+      "tipo": "depoimento",
+      "emocao_esperada": "pressão",
+      "objetivo_narrativo": "Transcrição de depoimento",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H3",
+        "H4"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E2-05",
+        "ASSUNTO": "Transcrição de depoimento",
+        "SAUDACAO": "Investigadores,",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "DEPOIMENTO",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas.",
+        "ORGAO_NOME": "CLÍNICA SÃO LÁZARO",
+        "ORGAO_SUBTITULO": "Comissão de Sindicância",
+        "NUMERO_CASO": "CSL-2026-118",
+        "TIPO_DOCUMENTO": "TRANSCRIÇÃO DE DEPOIMENTO",
+        "TIPO_OCORRENCIA": "Uso indevido de credencial",
+        "DATA": "19/05/2026",
+        "LOCALIZACAO": "Belo Horizonte — MG",
+        "HORA_OCORRENCIA": "09h20",
+        "DESCRICAO_OCORRENCIA": "<p>Rafael nega ter entrado na clínica e afirma que só tentou retirar documentos trabalhistas na portaria. Quando confrontado com o crachá H2, diz que “qualquer pessoa alta vira culpada se a câmera é ruim”. Ele reconhece conhecer Marina, pois ela o indicou para plantões extras antes do desligamento.</p><p>O depoimento contém uma rubrica espontânea “R.V.” com o mesmo traço final horizontal observado no canhoto D.P. A frase sobre pessoa alta antecipa uma informação que ainda não havia sido lida para ele na transcrição, sugerindo conhecimento da descrição da portaria lateral.</p>",
+        "NOME_RESPONSAVEL": "Clara Nogueira",
+        "ASSINATURA_RESPONSAVEL": "Clara Nogueira",
+        "ASSINATURA_GLIFO": "CN",
+        "DATA_HORA_ASSINATURA": "19/05/2026 10h05",
+        "CAMPO_NOME": true,
+        "NOME_ENVOLVIDO": "Rafael Viana",
+        "DATA_NASC": "14/02/1987",
+        "CONDICAO": "SUSPEITO",
+        "DOCUMENTO_PESSOAL": "MG-44.118.902",
+        "MOSTRAR_CARIMBO": true
+      }
+    },
+    {
+      "codigo": "E2-06",
+      "titulo": "E-mails entre compras e fornecedor",
+      "envelope": "E2",
+      "tipo": "email_institucional",
+      "emocao_esperada": "fonte abalada",
+      "objetivo_narrativo": "Negociação anterior ao evento",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H1",
+        "H4",
+        "H7"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Marina Lobo",
+        "REMETENTE_EMAIL": "compras@saolazaro.ficticio",
+        "DESTINATARIO_EMAIL": "sergio.matos@farmanorte.ficticio",
+        "DESTINATARIO_LABEL": "Sérgio Matos",
+        "DATA_HORA": "14 de maio de 2026 às 11:32",
+        "ASSUNTO": "Condição de contingência — L-77B",
+        "AVATAR_INICIAL": "M",
+        "AVATAR_COR": "#24515A",
+        "CORPO_EMAIL": "<p>Se o lote interno cair, preciso da proposta com entrega noturna e margem já conversada. Em 18/05 às 15h11, Marina também encaminhou minuta de protocolo de ruptura de lote antes do evento adverso.</p><p>Resposta de Sérgio: só consigo segurar o preço se houver bloqueio formal do lote L-77B. A sequência contradiz a versão de que compras apenas reagiu depois da crise.</p>",
+        "NOTA_RODAPE": "Exportação de e-mails — sindicância",
+        "COPIA": "auditoria@saolazaro.ficticio",
+        "TOTAL_ANEXOS": "1",
+        "ANEXOS": true,
+        "CADA_ANEXO": [
+          {
+            "NOME_ARQUIVO": "minuta_ruptura_l77b.pdf",
+            "TAMANHO_KB": "52"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-07",
+      "titulo": "Recibos e passagens de recepção",
+      "envelope": "E2",
+      "tipo": "recibo",
+      "emocao_esperada": "limpeza de hipóteses",
+      "objetivo_narrativo": "Descartes de Lia e João",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H5",
+        "H6"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "11.222.333/0001-44",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E2-07",
+        "ASSUNTO": "Descartes de Lia e João",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>Recibo de táxi de acompanhante registrado por Lia às 16h33 e livro físico de recepção às 16h41 colocam Lia no balcão durante a entrada lateral do crachá H2. O mesmo pacote contém assinatura da enfermeira-chefe no chamado de João às 16h55, confirmando presença dele na bancada após foto de 16h42.</p><p>Esses documentos não inocentam escolhas administrativas, mas descartam que Lia ou João tenham executado a troca do lote na janela crítica. Eles seguem suspeitos por ruído operacional, não por autoria.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas.",
+        "NOME_EMPRESA": "Táxi Pampulha 24h",
+        "TAGLINE_EMPRESA": "Transporte urbano",
+        "ENDERECO_EMPRESA": "Rua Esmeralda, 50 — BH",
+        "CONTATO_EMPRESA": "recibos@taxipampulha.ficticio",
+        "NUMERO_RECIBO": "TX-4418",
+        "WATERMARK_TEXTO": "RECIBO",
+        "COR_EMPRESA": "#24515A",
+        "NOME_CONTRATANTE": "Clínica São Lázaro",
+        "ENDERECO_CONTRATANTE": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "DOC_CONTRATANTE": "18.204.770/0001-66",
+        "CONTATO_CONTRATANTE": "recepcao@saolazaro.ficticio",
+        "DATA_RECIBO": "18/05/2026",
+        "PERIODO_REFERENCIA": "Corrida acompanhante paciente 12",
+        "VALOR_TOTAL": "R$ 38,00",
+        "VALOR_POR_EXTENSO": "Trinta e oito reais",
+        "FORMA_PAGAMENTO": "CARTÃO",
+        "DESCRICAO_PAGAMENTO": "Corrida solicitada no balcão às 16h33 por Lia Tavares. Observação anexa: livro físico 16h41.",
+        "ASSINATURA_PRESTADOR": "Paulo Reis",
+        "ASSINATURA_CONTRATANTE": "Lia Tavares",
+        "DATA_ASSINATURA": "18/05/2026",
+        "ITENS": [
+          {
+            "DESCRICAO_ITEM": "Corrida acompanhante",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 38,00",
+            "VALOR_ITEM": "R$ 38,00"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-08",
+      "titulo": "Síntese de conferência da sindicância",
+      "envelope": "E2",
+      "tipo": "protocolo",
+      "emocao_esperada": "satisfação",
+      "objetivo_narrativo": "Fechamento documental",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "não",
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H7"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Clínica São Lázaro",
+        "SUBTITULO_ORGANIZACAO": "Comissão de Auditoria Interna",
+        "ENDERECO_LINHA1": "Rua dos Lírios, 418 — Belo Horizonte, MG",
+        "ENDERECO_LINHA2": "",
+        "CONTATO": "auditoria@saolazaro.ficticio",
+        "CNPJ": "18.204.770/0001-66",
+        "COR_TOPO": "#24515A",
+        "ESTILO_LINHAS": "",
+        "LOCAL_DATA": "Belo Horizonte, 18 de maio de 2026",
+        "PROTOCOLO": "E2-08",
+        "ASSUNTO": "Síntese de conferência documental",
+        "SAUDACAO": "Investigadores,",
+        "CORPO_CARTA": "<p>A conferência da sindicância lista os documentos que devem ser cruzados na mesa: crachá H2 na janela crítica, presença externa de Denise, portaria lateral, canhoto de retirada e negociação prévia de compra.</p><p>O quadro final reserva campos para anotar executor, identidade usada, responsável interno pelo benefício e documentos de descarte dos falsos suspeitos. A comissão exige ao menos duas confirmações independentes para cada conclusão.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Clara Nogueira",
+        "NOME_ASSINANTE": "Clara Nogueira",
+        "CARGO_ASSINANTE": "Diretora administrativa",
+        "CARIMBO": true,
+        "TEXTO_CARIMBO": "AUDITORIA",
+        "ANOTACAO": "",
+        "NOTAS_RODAPE": "Material autossuficiente; não usar fontes externas."
+      }
+    }
+  ],
+  "linha_tempo_real": [
+    {
+      "data_hora": "18/05/2026 14:02",
+      "evento": "Denise é liberada para treinamento; escala fica ambígua.",
+      "documento_prova": "E1-06"
+    },
+    {
+      "data_hora": "18/05/2026 16:25",
+      "evento": "Pessoa com H2 entra pela lateral após negado de Rafael.",
+      "documento_prova": "E2-03"
+    },
+    {
+      "data_hora": "18/05/2026 16:44",
+      "evento": "Bomba registra lote divergente.",
+      "documento_prova": "E1-03"
+    },
+    {
+      "data_hora": "20/05/2026 09:10",
+      "evento": "Repasse financeiro posterior à compra.",
+      "documento_prova": "E2-04"
+    }
+  ],
+  "linha_tempo_percebida": [
+    {
+      "data_hora": "18/05/2026 14:02",
+      "evento": "Denise é liberada para treinamento; escala fica ambígua.",
+      "documento_prova": "E1-06"
+    },
+    {
+      "data_hora": "18/05/2026 16:25",
+      "evento": "Pessoa com H2 entra pela lateral após negado de Rafael.",
+      "documento_prova": "E2-03"
+    },
+    {
+      "data_hora": "18/05/2026 16:44",
+      "evento": "Bomba registra lote divergente.",
+      "documento_prova": "E1-03"
+    },
+    {
+      "data_hora": "20/05/2026 09:10",
+      "evento": "Repasse financeiro posterior à compra.",
+      "documento_prova": "E2-04"
+    }
+  ],
+  "linha_tempo_documental": [
+    {
+      "data_hora": "18/05/2026 14:02",
+      "evento": "Denise é liberada para treinamento; escala fica ambígua.",
+      "documento_prova": "E1-06"
+    },
+    {
+      "data_hora": "18/05/2026 16:25",
+      "evento": "Pessoa com H2 entra pela lateral após negado de Rafael.",
+      "documento_prova": "E2-03"
+    },
+    {
+      "data_hora": "18/05/2026 16:44",
+      "evento": "Bomba registra lote divergente.",
+      "documento_prova": "E1-03"
+    },
+    {
+      "data_hora": "20/05/2026 09:10",
+      "evento": "Repasse financeiro posterior à compra.",
+      "documento_prova": "E2-04"
+    }
+  ],
+  "pilares_validacao": [
+    {
+      "nome": "pergunta_publica",
+      "documento_principal": "E1-01",
+      "confirmacao": "E1-02",
+      "personagem_id": "H2"
+    },
+    {
+      "nome": "crachá_H2_na_janela",
+      "documento_principal": "E1-03",
+      "confirmacao": "E1-06",
+      "personagem_id": "H2"
+    },
+    {
+      "nome": "fonte_inicial_questionavel",
+      "documento_principal": "E1-02",
+      "confirmacao": "E1-05",
+      "personagem_id": "H2"
+    },
+    {
+      "nome": "compra_emergencial_suspeita",
+      "documento_principal": "E1-07",
+      "confirmacao": "E1-04",
+      "personagem_id": "H2"
+    }
+  ],
+  "intervalo_critico_inicio": "18/05/2026 16:20",
+  "intervalo_critico_fim": "18/05/2026 17:10",
+  "matriz_pistas": [
+    {
+      "descricao": "Crachá H2 aparece na farmácia e bomba, sustentando suspeita aparente contra Denise.",
+      "documento": "E1-03",
+      "o_que_sugere": "Denise executou a troca.",
+      "o_que_prova": "A credencial H2 foi usada, não a presença física de Denise.",
+      "confirmacao": "E1-06",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "suspeita"
+    },
+    {
+      "descricao": "Descrição física do relatório não bate com Denise.",
+      "documento": "E1-02",
+      "o_que_sugere": "A fonte inicial está incompleta.",
+      "o_que_prova": "Há motivo documental para desconfiar da atribuição por crachá.",
+      "confirmacao": "E2-01",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "dúvida"
+    },
+    {
+      "descricao": "Denise estava em treinamento externo no horário crítico.",
+      "documento": "E2-02",
+      "o_que_sugere": "Uso indevido da identidade.",
+      "o_que_prova": "Denise não podia estar fisicamente nos dois lugares.",
+      "confirmacao": "E2-03",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "virada"
+    },
+    {
+      "descricao": "Rafael tentou entrar com credencial antiga e depois entra alguém alto com H2.",
+      "documento": "E2-03",
+      "o_que_sugere": "Rafael usou H2 após falha com a própria credencial.",
+      "o_que_prova": "A sequência liga Rafael à identidade trocada.",
+      "confirmacao": "E2-05",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "encaixe"
+    },
+    {
+      "descricao": "Marina negociou compra antes da crise.",
+      "documento": "E2-06",
+      "o_que_sugere": "Planejamento prévio.",
+      "o_que_prova": "A compra emergencial não foi apenas reação.",
+      "confirmacao": "E2-04",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "indignação"
+    },
+    {
+      "descricao": "Repasse posterior para empresa familiar de Marina.",
+      "documento": "E2-04",
+      "o_que_sugere": "Benefício financeiro.",
+      "o_que_prova": "Marina se beneficiou da compra emergencial.",
+      "confirmacao": "E2-06",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "fechamento"
+    }
+  ],
+  "red_herrings": [
+    {
+      "personagem_id": "H5",
+      "motivo_aparente": "João estava na bomba e discutiu sensor defeituoso.",
+      "como_descartar": "Registro da bancada e recibos de passagem o colocam fora da farmácia na janela crítica.",
+      "documento_descarte": "E2-07",
+      "categoria": "meio_sem_janela"
+    },
+    {
+      "personagem_id": "H6",
+      "motivo_aparente": "Lia alterou horários e estava na recepção da portaria.",
+      "como_descartar": "Recibo de táxi e livro físico confirmam que ficou no balcão durante a entrada lateral.",
+      "documento_descarte": "E2-07",
+      "categoria": "ruido_administrativo"
+    },
+    {
+      "personagem_id": "H7",
+      "motivo_aparente": "Sérgio ganha a venda emergencial.",
+      "como_descartar": "Log de portaria registra entrada negada; seu papel é comercial oportunista, não execução física.",
+      "documento_descarte": "E2-03",
+      "categoria": "beneficio_sem_acesso"
+    }
+  ],
+  "cadeia_financeira": [
+    {
+      "de": "Clínica São Lázaro",
+      "para": "FarmaNorte",
+      "valor_ou_item": "R$ 48.600,00 em lote emergencial",
+      "documento_prova": "E1-07",
+      "is_salto_final": false,
+      "confirmacao_independente": "E2-06"
+    },
+    {
+      "de": "FarmaNorte / Norte Ativa",
+      "para": "Marina Lobo",
+      "valor_ou_item": "R$ 9.400,00 por consultoria logística",
+      "documento_prova": "E2-04",
+      "is_salto_final": true,
+      "confirmacao_independente": "E2-06"
+    }
+  ],
+  "codigos": [
+    {
+      "codigo": "H2",
+      "documento": "E1-03",
+      "criterio": "Credencial interna de Denise usada na janela crítica",
+      "elementos": [
+        "E1-03",
+        "E2-01",
+        "E2-02",
+        "E2-03"
+      ],
+      "chave_em": "E2-01"
+    }
+  ],
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "texto": "Separem credencial, pessoa e horário. Um sistema sabe qual cartão passou, não quem segurava o cartão.",
+      "condicao_uso": "Grupo acusa Denise só pelo log.",
+      "o_que_desbloqueia": "Releitura dos documentos de identidade."
+    },
+    {
+      "numero": 2,
+      "intensidade": "media",
+      "envelope": "E2",
+      "texto": "Procurem primeiro quem não conseguiu entrar com o próprio nome antes de alguém entrar com nome de outra pessoa.",
+      "condicao_uso": "Grupo não encontra Rafael.",
+      "o_que_desbloqueia": "Cruzamento E2-03/E2-01."
+    },
+    {
+      "numero": 3,
+      "intensidade": "forte",
+      "envelope": "E2",
+      "texto": "A pergunta final não é quem vendeu, mas quem dentro da clínica precisava que a compra parecesse inevitável.",
+      "condicao_uso": "Grupo identifica executor mas não beneficiário.",
+      "o_que_desbloqueia": "Cruzamento E2-04/E2-06."
+    },
+    {
+      "numero": 4,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo ignora Clara como fonte interessada.",
+      "texto": "Pergunte o que Clara ganha ao resolver rápido.",
+      "o_que_desbloqueia": "Questionar E1-01 e E2-06."
+    },
+    {
+      "numero": 5,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo mantém Sérgio como executor.",
+      "texto": "Diferencie beneficiar-se de entrar fisicamente na clínica.",
+      "o_que_desbloqueia": "Usar E2-03 para descartar acesso."
+    },
+    {
+      "numero": 6,
+      "intensidade": "forte",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não fecha assinatura/rubrica.",
+      "texto": "Compare a forma do traço final: quem escreve parecido quando não está tentando assinar o próprio nome?",
+      "o_que_desbloqueia": "Cruzar E2-01 com E2-05."
+    },
+    {
+      "numero": 7,
+      "intensidade": "quase_gabarito",
+      "envelope": "E2",
+      "condicao_uso": "Mesa não fecha solução após todas as pistas.",
+      "texto": "A solução combina Rafael como corpo que usou H2 e Marina como pessoa que precisava da ruptura do lote.",
+      "o_que_desbloqueia": "Fechamento final."
+    }
+  ],
+  "contratos_evidencia": [
+    {
+      "id": "C-E1-PERGUNTA",
+      "conclusao": "A crise pública é a dose incorreta e a atribuição inicial por crachá H2.",
+      "fase": "E1",
+      "tipo": "criterio_avanco",
+      "prova_principal": "E1-01",
+      "confirmacao_independente": "E1-02",
+      "descarta_alternativas": [],
+      "personagens_afetados": [
+        "H1",
+        "H2",
+        "H8"
+      ],
+      "acao_esperada_jogador": "Formular a pergunta sobre crachá versus pessoa.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E1-H2",
+      "conclusao": "Denise é suspeita operacional aparente porque H2 aparece na janela crítica.",
+      "fase": "E1",
+      "tipo": "hipotese_parcial",
+      "prova_principal": "E1-03",
+      "confirmacao_independente": "E1-06",
+      "descarta_alternativas": [
+        "E1-05"
+      ],
+      "personagens_afetados": [
+        "H2"
+      ],
+      "acao_esperada_jogador": "Marcar Denise como aparente sem fechar autoria física.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-IDENTIDADE",
+      "conclusao": "A pessoa que usou H2 não era Denise; Rafael é o executor provável.",
+      "fase": "E2",
+      "tipo": "virada_identidade",
+      "prova_principal": "E2-02",
+      "confirmacao_independente": "E2-03",
+      "descarta_alternativas": [
+        "E2-01",
+        "E2-05"
+      ],
+      "personagens_afetados": [
+        "H2",
+        "H3"
+      ],
+      "acao_esperada_jogador": "Cruzar presença externa, descrição física, negado de Rafael e rubrica.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-BENEFICIO",
+      "conclusao": "Marina planejou e se beneficiou financeiramente da compra emergencial.",
+      "fase": "E2",
+      "tipo": "solucao_final",
+      "prova_principal": "E2-06",
+      "confirmacao_independente": "E2-04",
+      "descarta_alternativas": [
+        "E2-03"
+      ],
+      "personagens_afetados": [
+        "H4",
+        "H7"
+      ],
+      "acao_esperada_jogador": "Fechar a cadeia entre evento, fornecedor e repasse familiar.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": true
+    }
+  ],
+  "dicas_contextuais": [
+    {
+      "categoria": "documento",
+      "fase": "E1",
+      "nivel": "leve",
+      "texto": "Crachá e pessoa não são a mesma coisa.",
+      "id": "DC-1",
+      "titulo": "identidade",
+      "condicao_uso": "Quando o grupo travar neste ponto.",
+      "contratos_relacionados": [
+        "C-E2-IDENTIDADE"
+      ],
+      "documentos_relacionados": [
+        "E2-01",
+        "E2-02",
+        "E2-03"
+      ]
+    },
+    {
+      "categoria": "documento",
+      "fase": "E2",
+      "nivel": "media",
+      "texto": "Compare entrada negada, entrada lateral e descrição física.",
+      "id": "DC-2",
+      "titulo": "executor",
+      "condicao_uso": "Quando o grupo travar neste ponto.",
+      "contratos_relacionados": [
+        "C-E2-IDENTIDADE"
+      ],
+      "documentos_relacionados": [
+        "E2-01",
+        "E2-02",
+        "E2-03"
+      ]
+    },
+    {
+      "categoria": "documento",
+      "fase": "E2",
+      "nivel": "forte",
+      "texto": "Siga a compra preparada antes da crise e o pagamento depois.",
+      "id": "DC-3",
+      "titulo": "beneficiario",
+      "condicao_uso": "Quando o grupo travar neste ponto.",
+      "contratos_relacionados": [
+        "C-E2-BENEFICIO"
+      ],
+      "documentos_relacionados": [
+        "E2-04",
+        "E2-06"
+      ]
+    }
+  ],
+  "visual_procedural": {
+    "mapa": false,
+    "observacao": "Caso sem planta/mapa; foco em documentos de credencial, logs e assinaturas."
+  },
+  "playtest": {
+    "status": "nao_realizado",
+    "observacao": "Elegibilidade estrutural não substitui teste cego humano."
+  },
+  "versao": "0.1.0-intermediario-ii",
+  "observacoes_producao": "Colorido digital, sem mapa/planta. Nenhuma pista essencial depende exclusivamente de cor.",
+  "printable_cards": []
+}
