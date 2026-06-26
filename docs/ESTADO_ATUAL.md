@@ -104,6 +104,20 @@ Problemas já tratados e que não devem ser reabertos sem evidência nova:
 
 ## Réguas canônicas atuais
 
+O projeto mantém **duas réguas canônicas validadas por playtest** (Iniciante e Intermediário). Existem outros três casos em `examples/` em estágios anteriores de maturidade: eles são material de trabalho e benchmark, **não réguas validadas**.
+
+Roster completo:
+
+| Caso | Arquivo | Nível | Status / maturidade |
+|---|---|---|---|
+| O Desvio da Reserva Mirante | `examples/caso_canonico_iniciante.json` | Iniciante | **Régua validada por playtest** |
+| O Último Brinde do Hotel Aurora | `examples/caso_canonico_intermediario.json` | Intermediário | **Régua validada por playtest** (sem mapa por decisão) |
+| O Recado da Sala de Leitura | `examples/caso_canonico_iniciante_b.json` | Iniciante | Baseline visual (`docs/baselines/BASELINE_VISUAL_INICIANTE_B.md`) + roda na CI; não playtestado |
+| Plantão Sem Rosto | `examples/caso_canonico_intermediario_ii.json` | Intermediário | Plano editorial (`docs/canonical_plans/PLANO_CANONICO_INTERMEDIARIO_B.md`); sem baseline nem playtest |
+| Desvio de Fundos na Acelerada Pagamentos | `examples/caso_fintech.json` | Avançado | Pipeline E2E (`docs/FINTECH_PIPELINE_RUN.md`, `docs/QUALITY_COMPARATIVE_REPORT.md`); sem playtest |
+
+> Nota de nomenclatura: o plano de "Plantão Sem Rosto" foi escrito como `PLANO_CANONICO_INTERMEDIARIO_B`, mas o arquivo do caso é `intermediario_ii`. Alinhar essa nomenclatura é uma pendência.
+
 O projeto mantém duas réguas canônicas validadas:
 
 ### Iniciante

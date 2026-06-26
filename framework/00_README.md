@@ -35,25 +35,28 @@ Este framework suporta dois modos. Declare o modo no início de cada caso e seja
 
 Leia e internalize nesta ordem antes de gerar qualquer caso:
 
-| # | Arquivo | O que define |
-|---|---------|-------------|
-| 1 | `01_PRINCIPIOS_DO_MODELO.md` | As 8 leis do jogo justo — nunca viole |
-| 2 | `02_ESTRUTURA_ENVELOPES.md` | Arquitetura de envelopes, critérios de avanço |
-| 3 | `03_TIPOS_DE_DOCUMENTOS.md` | Catálogo de 15 tipos com specs visuais |
-| 4 | `04_DESIGN_DE_PISTAS.md` | Regras de pistas, códigos, cadeias, dificuldade |
+| Ordem | Arquivo                         | O que define |
+|---|---------------------------------|-------------|
+| 1 | `01_PRINCIPIOS_DO_MODELO.md`    | As 8 leis do jogo justo — nunca viole |
+| 2 | `02_ESTRUTURA_ENVELOPES.md`     | Arquitetura de envelopes, critérios de avanço |
+| 3 | `03_TIPOS_DE_DOCUMENTOS.md`     | Catálogo de 15 tipos com specs visuais |
+| 4 | `04_DESIGN_DE_PISTAS.md`        | Regras de pistas, códigos, cadeias, dificuldade |
 | 5 | `05_CHECKLIST_SOLVABILIDADE.md` | Gate de qualidade — executar antes de gerar documentos |
-| 6 | `06_TEMPLATE_NOVO_CASO.md` | Template de planejamento completo |
-| 7 | `07_PROMPT_GERADOR_DE_CASO.md` | Prompt expandido para geração via LLM |
-| 8 | `08_MODELO_REFERENCIA.md` | Padrões e anti-padrões dos casos de referência |
-| 9 | `09_TEMPLATE_GABARITO.md` | Template do documento confidencial do mestre |
-| 10 | `10_TEMPLATE_DICAS.md` | Template de dicas progressivas |
-| 11 | `11_GUIA_DO_FACILITADOR.md` | Como conduzir a sessão |
-| 12 | `12_GUIA_DE_PRODUCAO.md` | Design visual, tipografia, impressão |
-| 13 | `13_CONTRATO_EVIDENCIA.md` | Contratos mínimos de prova, confirmação e fase |
-| 14 | `14_GRAFO_DE_PISTAS.md` | Grafo lógico de pistas, contratos e solvabilidade estrutural |
-| 15 | `15_CONTROLES_DA_LLM.md` | Guard rails da LLM e feedback estruturado para correção futura |
-| 16 | `15_GUIA_DE_IMPRESSAO.md` | Regras operacionais do pacote de impressão |
-| 17 | `16_GUIA_FACILITADOR.md` | Guia confidencial de condução e dicas contextuais |
+| 6 | `06_TEMPLATE_NOVO_CASO.md`      | Template de planejamento completo |
+| 7 | `07_PROMPT_GERADOR_DE_CASO.md`  | Prompt expandido para geração via LLM |
+| 8 | `08_MODELO_REFERENCIA.md`       | Padrões e anti-padrões dos casos de referência |
+| 9 | `09_TEMPLATE_GABARITO.md`       | Template do documento confidencial do mestre |
+| 10 | `10_TEMPLATE_DICAS.md`          | Template de dicas progressivas |
+| 11 | `11_GUIA_DO_FACILITADOR.md`     | Como conduzir a sessão |
+| 12 | `12_GUIA_DE_PRODUCAO.md`        | Design visual, tipografia, impressão |
+| 13 | `13_CONTRATO_EVIDENCIA.md`      | Contratos mínimos de prova, confirmação e fase |
+| 14 | `14_GRAFO_DE_PISTAS.md`         | Grafo lógico de pistas, contratos e solvabilidade estrutural |
+| 15 | `15_CONTROLES_DA_LLM.md`        | Guard rails da LLM e feedback estruturado para correção futura |
+| 16 | `16_GUIA_DE_IMPRESSAO.md`       | Regras operacionais do pacote de impressão |
+| 17 | `17_GUIA_FACILITADOR.md`        | Guia confidencial de condução e dicas contextuais |
+| 18 | `18_VISUAL_PROCEDURAL.md`       | Camada de visual procedural controlado (mapas/cartões SVG-HTML) |
+| 19 | `19_PLAYTEST_E_METRICAS.md`     | Métricas heurísticas de playtest (warnings que não bloqueiam geração) |
+| — | `CONTEUDO_SCHEMA.md`            | Schema de conteúdo do blueprint (referência, ler sob demanda) |
 
 ---
 
@@ -104,16 +107,16 @@ Define o grafo lógico de documentos e contratos de evidência. Estabelece o `gr
 ### `15_CONTROLES_DA_LLM.md`
 Define que a LLM não é fonte final de verdade, lista permissões e proibições de correção, estabelece prioridades para códigos `CONT_*`, `DOC_*`, `ENV_*`, `CE_*`, `GP_*` e `QA_*`, e orienta o uso técnico do `llm_feedback.json`.
 
-### `15_GUIA_DE_IMPRESSAO.md`
+### `16_GUIA_DE_IMPRESSAO.md`
 Guia operacional do pacote final: separação entre material de jogador e facilitador, perfis econômico/padrão/premium, escala 100%, confidencialidade, mapas, cartões futuros e interpretação do `print_manifest.json`.
 
-### `16_GUIA_FACILITADOR.md`
+### `17_GUIA_FACILITADOR.md`
 Guia confidencial de condução da sessão: papel do facilitador, diferença entre gabarito e guia, critérios de avanço por contratos de evidência, uso de dicas contextuais e prevenção de spoilers.
 
-### `17_VISUAL_PROCEDURAL.md`
+### `18_VISUAL_PROCEDURAL.md`
 Define a camada de visual procedural controlado: mapas simples em SVG/HTML, cartões de personagens, cartões de locais, limites, proibições e regras de função narrativa.
 
-### `18_PLAYTEST_E_METRICAS.md`
+### `19_PLAYTEST_E_METRICAS.md`
 Define a camada analítica de playtest heurístico: métricas de documentos, envelopes, contratos, suspeitos, red herrings, carga cognitiva, tempo estimado e warnings de experiência que não bloqueiam geração.
 
 ---

@@ -8,12 +8,20 @@ Slogan atual:
 
 ## Estado atual
 
-O framework está tecnicamente funcional, possui duas réguas canônicas e consolidou a entrega inicial do fluxo operacional Indiciário 2.0.
+O framework está tecnicamente funcional, possui duas réguas canônicas validadas por playtest e consolidou a entrega inicial do fluxo operacional Indiciário 2.0.
 
-Casos canônicos atuais:
+Réguas canônicas validadas por playtest:
 
 - **O Desvio da Reserva Mirante** — `examples/caso_canonico_iniciante.json` — régua **Iniciante**.
 - **O Último Brinde do Hotel Aurora** — `examples/caso_canonico_intermediario.json` — régua **Intermediária** validada após playtest e refinamento.
+
+Demais casos em `examples/` (existem, mas ainda não validados por playtest):
+
+- **O Recado da Sala de Leitura** — `examples/caso_canonico_iniciante_b.json` — Iniciante (baseline visual + CI).
+- **Plantão Sem Rosto** — `examples/caso_canonico_intermediario_ii.json` — Intermediário (plano editorial).
+- **Desvio de Fundos na Acelerada Pagamentos** — `examples/caso_fintech.json` — Avançado (pipeline E2E).
+
+Roster e status completos: [`docs/ESTADO_ATUAL.md`](docs/ESTADO_ATUAL.md).
 
 Fluxo operacional oficial:
 
@@ -32,6 +40,7 @@ Use os dois arquivos canônicos como referência em testes, scripts, validaçõe
 
 ## Documentação principal
 
+- [`docs/INDICE_DOCUMENTACAO.md`](docs/INDICE_DOCUMENTACAO.md): índice de toda a documentação — o que cada doc serve, quando é lido e quando deve ser atualizado.
 - [`docs/ESTADO_ATUAL.md`](docs/ESTADO_ATUAL.md): visão atual do produto, stack, decisões recentes, caso canônico e próximos passos.
 - [`docs/DIRETRIZES_EDITORIAIS.md`](docs/DIRETRIZES_EDITORIAIS.md): regras editoriais para evitar documentos com dicas óbvias, voz do autor ou gabarito disfarçado.
 - [`docs/CASE_DESIGN_PIPELINE.md`](docs/CASE_DESIGN_PIPELINE.md): pipeline para planejar pergunta pública, progressão por envelope, motivação e risco antes do blueprint.

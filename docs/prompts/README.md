@@ -1,6 +1,8 @@
 # Prompts reutilizáveis
 
-Esta pasta implementa o nível 3 de uso das skills no Indiciário: prompts especializados versionados no próprio repositório.
+Esta pasta implementa o nível 3 de uso das skills no Indiciário: prompts especializados versionados no próprio repositório, em formato copy-paste para Codex, Claude Code, ChatGPT ou outro agente compatível.
+
+> **Fonte de verdade:** as skills canônicas vivem em `.ai/skills/` — é de lá que `AGENTS.md` manda carregar a skill no protocolo de inicialização. Esta pasta (`docs/prompts/`) é um **espelho** desses mesmos prompts. Ao alterar uma skill, atualize `.ai/skills/` primeiro e reflita aqui, mantendo as duas versões em sincronia. Consolidar as duas pastas em uma só é uma pendência candidata a issue própria.
 
 Use estes arquivos diretamente em Codex, Claude Code, ChatGPT ou outro agente compatível.
 

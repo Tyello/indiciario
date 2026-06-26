@@ -20,8 +20,10 @@ Antes de executar qualquer tarefa:
 1. Ler `AGENTS.md`.
 2. Ler `docs/LLM_CONTEXT.md`.
 3. Identificar a skill adequada em `.ai/skills/`.
-4. Executar seguindo o procedimento da skill.
-5. Informar na resposta: skill usada, motivo, arquivos alterados, comandos executados, resultados.
+4. Declarar o conjunto de impacto documental consultando `docs/INDICE_DOCUMENTACAO.md`.
+5. Executar seguindo o procedimento da skill.
+6. Resolver o impacto documental (atualizar docs listados ou justificar a dispensa).
+7. Informar na resposta: skill usada, motivo, arquivos alterados, comandos executados, resultados, impacto documental resolvido.
 
 ---
 
@@ -60,10 +62,20 @@ Limitações reais a não esconder (detalhe em `docs/ESTADO_ATUAL.md`):
 
 ### Casos canônicos
 
+Réguas **validadas por playtest**:
+
 | Caso | Arquivo | Régua |
 |---|---|---|
 | O Desvio da Reserva Mirante | `examples/caso_canonico_iniciante.json` | Iniciante |
 | O Último Brinde do Hotel Aurora | `examples/caso_canonico_intermediario.json` | Intermediário |
+
+Demais casos em `examples/` (existem, mas **não validados por playtest** — não são régua):
+
+| Caso | Arquivo | Nível | Maturidade |
+|---|---|---|---|
+| O Recado da Sala de Leitura | `examples/caso_canonico_iniciante_b.json` | Iniciante | baseline visual + CI |
+| Plantão Sem Rosto | `examples/caso_canonico_intermediario_ii.json` | Intermediário | plano editorial |
+| Desvio de Fundos na Acelerada Pagamentos | `examples/caso_fintech.json` | Avançado | pipeline E2E |
 
 Hotel Aurora **permanece sem mapa** por decisão de playtest. Não adicionar mapa sem instrução explícita.
 
@@ -80,9 +92,11 @@ Findings **não geram patch cirúrgico no blueprint**. Alimentam regras do frame
 
 ---
 
-## Próxima issue: ISSUE-30.5 — Canonical Quality Gate
+## Estado do Canonical Quality Gate (ISSUE-30.5)
 
-Spec em `.ai/issues/ISSUE-30.5_SPEC.md`.
+ISSUE-30.5 **já implementada**: `generator/canonical_quality_gate.py` (`evaluate_for_canonical`, `get_canonical_criteria`, `CANONICAL_CRITERIA`), documentada em `docs/CANONICAL_CRITERIA.md`, coberta por `tests/test_canonical_quality_gate.py`. Spec: `.ai/issues/ISSUE-30.5_SPEC.md`.
+
+Próxima frente de trabalho: ver `docs/ROADMAP.md`. Não há issue em andamento fixada aqui — confirmar o estado em `docs/ESTADO_ATUAL.md` antes de iniciar.
 
 ---
 
@@ -136,6 +150,7 @@ python -m scripts.build_package examples/caso_canonico_intermediario.json --outp
 ### Critério de tarefa concluída
 
 - skill usada informada com motivo
+- conjunto de impacto documental resolvido (`docs/INDICE_DOCUMENTACAO.md`)
 - arquivos alterados listados
 - comandos executados listados com resultados
 - `pytest tests/ -q` passa sem regressão
@@ -153,4 +168,5 @@ Em conflito sobre roadmap multiagente: `docs/IMPLEMENTATION_PLAN_MULTIAGENT_PIPE
 Leitura obrigatória por ordem:
 1. `AGENTS.md`
 2. `docs/LLM_CONTEXT.md`
-3. Skill selecionada em `.ai/skills/`
+3. `docs/INDICE_DOCUMENTACAO.md` (índice + impacto documental)
+4. Skill selecionada em `.ai/skills/`

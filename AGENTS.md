@@ -10,10 +10,12 @@ Antes de executar qualquer tarefa, o agente deve seguir esta ordem:
 2. Ler `docs/LLM_CONTEXT.md`.
 3. Identificar a skill adequada para a tarefa.
 4. Carregar a skill correspondente em `.ai/skills/`.
-5. Executar seguindo o procedimento da skill carregada.
-6. Informar na resposta final qual skill foi usada e por quê.
+5. **Declarar o conjunto de impacto documental:** consultar `docs/INDICE_DOCUMENTACAO.md` (coluna "Atualizar quando" + gatilhos reversos) e listar quais documentos a entrega provavelmente exigirá atualizar.
+6. Executar seguindo o procedimento da skill carregada.
+7. **Resolver o impacto documental:** atualizar cada doc listado ou justificar por que não foi necessário.
+8. Informar na resposta final qual skill foi usada e por quê.
 
-Nenhuma tarefa deve ser executada sem seleção explícita de skill.
+Nenhuma tarefa deve ser executada sem seleção explícita de skill nem sem declaração de impacto documental.
 
 ## Mapa de skills
 
@@ -63,6 +65,7 @@ A existência de um protocolo ou de uma entrada no roadmap não significa que a 
 Depois deste arquivo, carregue sempre:
 
 - `docs/LLM_CONTEXT.md`;
+- `docs/INDICE_DOCUMENTACAO.md` (índice de documentação e impacto documental);
 - `.ai/skills/README.md`;
 - a skill selecionada em `.ai/skills/`.
 
@@ -123,6 +126,8 @@ Blueprint
 
 ## Casos canônicos
 
+Réguas **validadas por playtest** (referência canônica):
+
 1. **O Desvio da Reserva Mirante**
    - `examples/caso_canonico_iniciante.json`;
    - régua Iniciante.
@@ -131,6 +136,14 @@ Blueprint
    - `examples/caso_canonico_intermediario.json`;
    - régua Intermediária;
    - deve permanecer sem mapa, salvo evidência nova ou instrução explícita.
+
+Demais casos existentes em `examples/` (ainda **não validados por playtest** — não são régua):
+
+3. **O Recado da Sala de Leitura** — `examples/caso_canonico_iniciante_b.json` — Iniciante; tem baseline visual e roda na CI.
+4. **Plantão Sem Rosto** — `examples/caso_canonico_intermediario_ii.json` — Intermediário; plano editorial em `docs/canonical_plans/PLANO_CANONICO_INTERMEDIARIO_B.md`.
+5. **Desvio de Fundos na Acelerada Pagamentos** — `examples/caso_fintech.json` — Avançado; rodou a pipeline E2E (`docs/FINTECH_PIPELINE_RUN.md`).
+
+Roster completo e status de maturidade: `docs/ESTADO_ATUAL.md`.
 
 ## Prioridade atual
 
@@ -198,6 +211,7 @@ Uma tarefa só está concluída quando:
 
 - a skill usada foi informada;
 - o motivo da escolha foi informado;
+- o conjunto de impacto documental foi resolvido (cada doc atualizado ou avaliado como não necessário, com motivo);
 - os arquivos alterados foram listados;
 - os comandos executados foram listados;
 - os resultados ou limitações foram explicitados;
