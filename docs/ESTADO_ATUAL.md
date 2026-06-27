@@ -82,7 +82,7 @@ Suite de testes: `pytest tests/ -q` reporta cerca de 1354 testes (checar contage
 Limitações reais do pipeline multiagente, para não prometer mais do que existe:
 
 - o blind solver usado por `pipeline_runner.py` é um stub determinístico (`DeterministicPipelineSolver`) — não resolve o caso de fato, só produz um output estruturalmente válido;
-- `pipeline_runner.py` não invoca os reviewers visual/accessibility — por isso relatórios gerados por ele mostram `visual_score=0/0`;
+- `pipeline_runner.py` não invoca os reviewers visual/accessibility — por isso relatórios gerados por ele mostram `visual_score=0/0`; desde ISSUE-30.6, o Canonical Quality Gate detecta essa ausência e reporta os critérios `findings_vr_major`/`findings_ar_major` como `not_evaluated`, emitindo veredito `INCOMPLETE_EVALUATION` em vez de `APPROVED` — manifests parciais não recebem aprovação sobre evidência não coletada;
 - `quality_comparative_reviewer.compare_to_playtest` só reconhece o caso Aurora;
 - teste cego humano continua sendo a única prova real de solvabilidade; aprovação na pipeline não substitui playtest.
 

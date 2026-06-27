@@ -93,9 +93,11 @@ def mirante_manifest(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Any]
 def test_aurora_qualifies_approved_as_intermediario(
     aurora_blueprint: dict[str, Any], aurora_manifest: dict[str, Any]
 ) -> None:
+    # Pipeline real nao invoca visual_review/accessibility_review: resultado honesto e
+    # INCOMPLETE_EVALUATION (nao APPROVED com evidencia nao coletada).
     result = evaluate_for_canonical(aurora_blueprint, aurora_manifest, "intermediario")
     assert isinstance(result, CanonicalQualification)
-    assert result.qualification == CuratorQualification.APPROVED
+    assert result.qualification == CuratorQualification.INCOMPLETE_EVALUATION
 
 
 def test_fintech_qualifies_approved_as_avancado_despite_low_document_count(
@@ -103,18 +105,21 @@ def test_fintech_qualifies_approved_as_avancado_despite_low_document_count(
 ) -> None:
     """Fintech tem 16 documentos, fora da faixa informativa avancado (19-24).
 
-    Isso NAO deve bloquear a aprovacao: contagem de documentos e sinal
-    informativo, nao criterio duro (ver DIFFICULTY_FRAMEWORK.md)."""
+    Pipeline real nao invoca visual_review/accessibility_review: resultado
+    honesto e INCOMPLETE_EVALUATION. Contagem de documentos ainda gera
+    observacao informativa (nao bloqueia)."""
     result = evaluate_for_canonical(fintech_blueprint, fintech_manifest, "avancado")
-    assert result.qualification == CuratorQualification.APPROVED
+    assert result.qualification == CuratorQualification.INCOMPLETE_EVALUATION
     assert any("documento" in obs.lower() for obs in result.observations)
 
 
 def test_iniciante_b_qualifies_approved_as_iniciante(
     iniciante_b_blueprint: dict[str, Any], iniciante_b_manifest: dict[str, Any]
 ) -> None:
+    # Pipeline real nao invoca visual_review/accessibility_review: resultado honesto e
+    # INCOMPLETE_EVALUATION (nao APPROVED com evidencia nao coletada).
     result = evaluate_for_canonical(iniciante_b_blueprint, iniciante_b_manifest, "iniciante")
-    assert result.qualification == CuratorQualification.APPROVED
+    assert result.qualification == CuratorQualification.INCOMPLETE_EVALUATION
 
 
 def test_mirante_evaluated_as_iniciante_needs_refinement_documented_exception(
@@ -230,10 +235,10 @@ def test_criterion_with_status_exceeds_max_has_nonempty_recommendation(
     assert all(c.recommendation for c in exceeding)
 
 
-def test_approved_qualification_has_action_if_approved_filled(
-    aurora_blueprint: dict[str, Any], aurora_manifest: dict[str, Any]
-) -> None:
-    result = evaluate_for_canonical(aurora_blueprint, aurora_manifest, "intermediario")
+def test_approved_qualification_has_action_if_approved_filled() -> None:
+    # Manifest sintetico completo (com visual_review e accessibility_review)
+    # para obter APPROVED legitimo — pipeline real nao invoca esses stages.
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, _FULL_MANIFEST, "intermediario")
     assert result.qualification == CuratorQualification.APPROVED
     assert result.action_if_approved
 
@@ -253,3 +258,110 @@ def test_needs_refinement_qualification_has_nonempty_refinement_steps(
 def test_full_suite_runs_without_collection_errors() -> None:
     """Sentinela de import: garante que o modulo carrega sem efeitos colaterais."""
     assert set(CANONICAL_CRITERIA) == {"iniciante", "intermediario", "avancado"}
+
+
+# === ISSUE-30.6: Honestidade de critérios não avaliados =====================
+#
+# Manifests sintéticos usados pelos testes 1-7.
+# Parcial: stages sem visual_review/accessibility_review (pipeline real atual).
+# Completo: stages incluem visual_review e accessibility_review.
+
+_PARTIAL_MANIFEST: dict[str, Any] = {
+    "pipeline_status": "complete",
+    "stages_completed": [
+        "blind_solve",
+        "gate_evaluation",
+        "narrative_review",
+        "evidence_review",
+    ],
+    "findings": [],
+    "gate_outcome": {"justification": "ok"},
+    "case_ref": "SYNTH-PARTIAL-001",
+}
+
+_FULL_MANIFEST: dict[str, Any] = {
+    "pipeline_status": "complete",
+    "stages_completed": [
+        "blind_solve",
+        "gate_evaluation",
+        "narrative_review",
+        "evidence_review",
+        "visual_review",
+        "accessibility_review",
+    ],
+    "findings": [],
+    "gate_outcome": {"justification": "ok"},
+    "case_ref": "SYNTH-FULL-001",
+}
+
+# Blueprint sintético com densidade dentro da faixa intermediário [22500, 30500].
+_SYNTH_BLUEPRINT: dict[str, Any] = {
+    "titulo": "Caso Sintético ISSUE-30.6",
+    "dificuldade": "intermediario",
+    "documentos": [{"conteudo": "x" * 25000}],
+}
+
+
+def test_vr_criterion_not_evaluated_when_visual_review_absent() -> None:
+    """findings_vr_major deve ter status 'not_evaluated' quando visual_review ausente."""
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, _PARTIAL_MANIFEST, "intermediario")
+    vr_criterion = next(c for c in result.criteria_results if c.name == "findings_vr_major")
+    # Com implementação atual, status é 'ok' (falsa confiança); deve ser 'not_evaluated'.
+    assert vr_criterion.status == "not_evaluated"
+
+
+def test_ar_criterion_not_evaluated_when_accessibility_review_absent() -> None:
+    """findings_ar_major deve ter status 'not_evaluated' quando accessibility_review ausente."""
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, _PARTIAL_MANIFEST, "intermediario")
+    ar_criterion = next(c for c in result.criteria_results if c.name == "findings_ar_major")
+    # Com implementação atual, status é 'ok' (falsa confiança); deve ser 'not_evaluated'.
+    assert ar_criterion.status == "not_evaluated"
+
+
+def test_partial_manifest_yields_incomplete_evaluation() -> None:
+    """Manifest sem visual_review/accessibility_review deve produzir INCOMPLETE_EVALUATION."""
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, _PARTIAL_MANIFEST, "intermediario")
+    # CuratorQualification.INCOMPLETE_EVALUATION ainda não existe → AttributeError.
+    assert result.qualification == CuratorQualification.INCOMPLETE_EVALUATION
+
+
+def test_incomplete_evaluation_names_unevaluated_criteria() -> None:
+    """INCOMPLETE_EVALUATION enumera os critérios não avaliados no feedback."""
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, _PARTIAL_MANIFEST, "intermediario")
+    # CuratorQualification.INCOMPLETE_EVALUATION ainda não existe → AttributeError.
+    assert result.qualification == CuratorQualification.INCOMPLETE_EVALUATION
+    feedback = result.detailed_feedback + result.summary
+    assert "not_evaluated" in feedback or "visual" in feedback or "accessibility" in feedback
+
+
+def test_full_manifest_can_still_be_approved() -> None:
+    """Manifest completo (com visual_review e accessibility_review) pode ser APPROVED."""
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, _FULL_MANIFEST, "intermediario")
+    assert result.qualification == CuratorQualification.APPROVED
+    # Referência ao enum novo (ainda ausente) → AttributeError.
+    assert result.qualification != CuratorQualification.INCOMPLETE_EVALUATION
+
+
+def test_not_evaluated_does_not_count_as_out_of_range() -> None:
+    """Critério not_evaluated não gera NEEDS_REFINEMENT (não é out_of_range)."""
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, _PARTIAL_MANIFEST, "intermediario")
+    # Não deve confundir 'not_evaluated' com 'exceeds_max/below_min'.
+    assert result.qualification != CuratorQualification.NEEDS_REFINEMENT
+    # Deve ser INCOMPLETE_EVALUATION — referência ao enum novo → AttributeError.
+    assert result.qualification == CuratorQualification.INCOMPLETE_EVALUATION
+
+
+def test_blocker_precedes_incomplete_evaluation() -> None:
+    """Pipeline bloqueada tem precedência: NOT_READY supera INCOMPLETE_EVALUATION."""
+    blocked_partial: dict[str, Any] = {
+        "pipeline_status": "blocked",
+        "stages_completed": ["blind_solve", "gate_evaluation"],
+        "findings": [],
+        "gate_outcome": {"justification": "GATE_001: bloqueio sintetico."},
+        "case_ref": "SYNTH-BLOCKED-001",
+    }
+    result = evaluate_for_canonical(_SYNTH_BLUEPRINT, blocked_partial, "intermediario")
+    assert result.qualification == CuratorQualification.NOT_READY
+    # INCOMPLETE_EVALUATION não deve surgir quando há bloqueio.
+    # Referência ao enum novo → AttributeError se ainda não implementado.
+    assert result.qualification != CuratorQualification.INCOMPLETE_EVALUATION
