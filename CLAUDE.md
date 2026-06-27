@@ -96,6 +96,8 @@ Findings **não geram patch cirúrgico no blueprint**. Alimentam regras do frame
 
 ISSUE-30.5 **já implementada**: `generator/canonical_quality_gate.py` (`evaluate_for_canonical`, `get_canonical_criteria`, `CANONICAL_CRITERIA`), documentada em `docs/CANONICAL_CRITERIA.md`, coberta por `tests/test_canonical_quality_gate.py`. Spec: `.ai/issues/ISSUE-30.5_SPEC.md`.
 
+ISSUE-30.6 **endureceu o gate**: critérios VR/AR agora são condicionais ao stage (`"visual_review"`/`"accessibility_review"` em `stages_completed`); manifests sem esses stages recebem `not_evaluated` e veredito `INCOMPLETE_EVALUATION`, nunca `APPROVED`.
+
 Próxima frente de trabalho: ver `docs/ROADMAP.md`. Não há issue em andamento fixada aqui — confirmar o estado em `docs/ESTADO_ATUAL.md` antes de iniciar.
 
 ---

@@ -88,6 +88,7 @@ class CuratorQualification(str, Enum):
     APPROVED = "approved"
     NEEDS_REFINEMENT = "needs_refinement"
     NOT_READY = "not_ready"
+    INCOMPLETE_EVALUATION = "incomplete_evaluation"
 
 
 @dataclass(frozen=True)
@@ -97,7 +98,7 @@ class QualificationCriterion:
     min_threshold: Any
     max_threshold: Any
     is_satisfied: bool
-    status: str  # "ok" | "exceeds_max" | "below_min" | "blocker"
+    status: str  # "ok" | "exceeds_max" | "below_min" | "blocker" | "not_evaluated"
     recommendation: str
 
 
@@ -162,6 +163,24 @@ def _range_criterion(
     )
 
 
+def _not_evaluated_criterion(
+    name: str, max_threshold: Any, stage_name: str
+) -> QualificationCriterion:
+    """Criterion that could not be evaluated because its review stage did not run."""
+    return QualificationCriterion(
+        name=name,
+        actual_value=None,
+        min_threshold=None,
+        max_threshold=max_threshold,
+        is_satisfied=False,
+        status="not_evaluated",
+        recommendation=(
+            f"{name}: stage '{stage_name}' ausente no pipeline_result. "
+            "Execute o pipeline completo para avaliar este criterio."
+        ),
+    )
+
+
 def _ceiling_criterion(
     name: str, actual_value: int | float, max_threshold: int | float
 ) -> QualificationCriterion:
@@ -201,6 +220,7 @@ def evaluate_for_canonical(
     criteria = get_canonical_criteria(difficulty_level)
     density, documents = _density_and_document_count(blueprint)
     metrics = _case_metrics(pipeline_result, blueprint)
+    stages_completed_list = list(pipeline_result.get("stages_completed") or [])
 
     blueprint_ref = str(blueprint.get("titulo") or metrics.case_ref or "<sem-titulo>")
 
@@ -216,15 +236,31 @@ def evaluate_for_canonical(
             metrics.findings_by_type.get("ER_*", 0),
             criteria["findings_er_max"],
         ),
-        _ceiling_criterion(
-            "findings_vr_major",
-            metrics.findings_by_type.get("VR_*", 0),
-            criteria["findings_vr_major_max"],
+        (
+            _ceiling_criterion(
+                "findings_vr_major",
+                metrics.findings_by_type.get("VR_*", 0),
+                criteria["findings_vr_major_max"],
+            )
+            if "visual_review" in stages_completed_list
+            else _not_evaluated_criterion(
+                "findings_vr_major",
+                criteria["findings_vr_major_max"],
+                "visual_review",
+            )
         ),
-        _ceiling_criterion(
-            "findings_ar_major",
-            metrics.findings_by_type.get("AR_*", 0),
-            criteria["findings_ar_major_max"],
+        (
+            _ceiling_criterion(
+                "findings_ar_major",
+                metrics.findings_by_type.get("AR_*", 0),
+                criteria["findings_ar_major_max"],
+            )
+            if "accessibility_review" in stages_completed_list
+            else _not_evaluated_criterion(
+                "findings_ar_major",
+                criteria["findings_ar_major_max"],
+                "accessibility_review",
+            )
         ),
     ]
 
@@ -283,13 +319,26 @@ def evaluate_for_canonical(
 
     has_blocker = any(c.status == "blocker" for c in criteria_results)
     has_out_of_range = any(c.status in ("exceeds_max", "below_min") for c in criteria_results)
+    has_unevaluated = any(c.status == "not_evaluated" for c in criteria_results)
 
     if has_blocker:
         qualification = CuratorQualification.NOT_READY
     elif has_out_of_range:
         qualification = CuratorQualification.NEEDS_REFINEMENT
+    elif has_unevaluated:
+        qualification = CuratorQualification.INCOMPLETE_EVALUATION
     else:
         qualification = CuratorQualification.APPROVED
+
+    if has_unevaluated:
+        unevaluated_names = ", ".join(
+            c.name for c in criteria_results if c.status == "not_evaluated"
+        )
+        observations.append(
+            f"Criterios nao avaliados: {unevaluated_names}. "
+            "Pipeline executado sem visual_review e/ou accessibility_review. "
+            "Execute o pipeline completo para obter avaliacao definitiva."
+        )
 
     refinement_steps = tuple(
         c.recommendation

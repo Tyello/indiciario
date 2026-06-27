@@ -36,12 +36,16 @@ se qualificaria automaticamente.
 ## Critérios duros (bloqueiam `APPROVED`)
 
 Avaliados em `evaluate_for_canonical` como `QualificationCriterion` com `status` em
-`"ok" | "exceeds_max" | "below_min" | "blocker"`:
+`"ok" | "exceeds_max" | "below_min" | "blocker" | "not_evaluated"`:
 
 - `density_chars` — dentro de `[density_chars_min, density_chars_max]` do nível.
 - `findings_er` — findings `ER_*` (evidence reviewer) ≤ `findings_er_max`.
 - `findings_vr_major` — findings `VR_*` (visual reviewer) ≤ `findings_vr_major_max`.
+  **Condicional a stage:** só avaliado quando `"visual_review" in stages_completed`; caso
+  contrário recebe `status="not_evaluated"`.
 - `findings_ar_major` — findings `AR_*` (accessibility reviewer) ≤ `findings_ar_major_max`.
+  **Condicional a stage:** só avaliado quando `"accessibility_review" in stages_completed`; caso
+  contrário recebe `status="not_evaluated"`.
 - `stages_completed` — ≥ `stages_completed_min` (4 em todos os níveis hoje).
 - `pipeline_status` — `status="blocker"` quando o manifesto indica `pipeline_status` bloqueado
   (`blocked_by is not None`); qualquer blocker força `NOT_READY`.
@@ -49,9 +53,33 @@ Avaliados em `evaluate_for_canonical` como `QualificationCriterion` com `status`
 Qualquer critério duro fora da faixa (sem blocker) resulta em `NEEDS_REFINEMENT`. Um blocker
 resulta em `NOT_READY`.
 
-**Nota sobre VR/AR:** `generator/pipeline_runner.py` não invoca os reviewers visual/accessibility
-hoje, então `findings_vr_major`/`findings_ar_major` ficam em `0` na prática — os thresholds
-existem para quando essa lacuna for fechada (ver limitações em `docs/ESTADO_ATUAL.md`).
+### Status `not_evaluated`
+
+Quando um stage obrigatório para derivar um critério não está presente em `stages_completed`, o
+critério recebe `status="not_evaluated"`, `is_satisfied=False`, `actual_value=None`. O campo
+`recommendation` explica qual stage está ausente. Critérios `not_evaluated` **não entram** no
+predicado `has_out_of_range` (não geram `NEEDS_REFINEMENT`), mas ativam `has_unevaluated`.
+
+### Veredito `INCOMPLETE_EVALUATION`
+
+Precedência de vereditos (da mais urgente para a menos urgente):
+
+1. **`NOT_READY`** — qualquer critério com `status="blocker"`.
+2. **`NEEDS_REFINEMENT`** — qualquer critério com `status` em `"exceeds_max" | "below_min"`.
+3. **`INCOMPLETE_EVALUATION`** — pelo menos um critério obrigatório com `status="not_evaluated"`.
+4. **`APPROVED`** — todos os critérios obrigatórios avaliados E satisfeitos.
+
+Quando o veredito é `INCOMPLETE_EVALUATION`:
+- `summary` e `detailed_feedback` enumeram os critérios não avaliados e o stage ausente.
+- `action_if_approved` fica vazio (não há aprovação real).
+- Uma observação orienta o usuário a rodar a pipeline completa antes de reavaliar.
+
+**Nota sobre VR/AR no pipeline atual:** `generator/pipeline_runner.py` não invoca os reviewers
+visual/accessibility, portanto manifests gerados por ele não incluem `"visual_review"` nem
+`"accessibility_review"` em `stages_completed`. Nesses casos o gate reporta
+`findings_vr_major` e `findings_ar_major` como `not_evaluated` e emite `INCOMPLETE_EVALUATION`
+— não `APPROVED`. Isso impede que evidência não coletada seja tratada como ausência de problemas.
+Ver limitações completas em `docs/ESTADO_ATUAL.md`.
 
 ## Sinais informativos (não bloqueiam)
 
