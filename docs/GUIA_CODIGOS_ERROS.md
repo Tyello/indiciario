@@ -33,15 +33,15 @@ Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `docs/QUALITY_COMPARATIVE_REPORT.md`, `
 
 | Código | Severidade no código | Bloqueia geração? | Significado | Impacto editorial | Ação recomendada |
 |---|---|---|---|---|---|
-| PT_001 | warning | Não bloqueia diretamente no relatório PT | Documentos acima do recomendado para a dificuldade declarada | Carga de leitura pode exceder a promessa do nível | Reduzir documentos, dividir caso, aumentar dificuldade declarada ou justificar em playtest |
+| PT_001 | warning | Não bloqueia diretamente no relatório PT | Documentos acima do recomendado para a dificuldade declarada (contagem é sinal informativo; profundidade dedutiva determina dificuldade estimada) | Carga de leitura pode exceder a promessa do nível | Reduzir documentos, dividir caso, aumentar dificuldade declarada ou justificar em playtest |
 | PT_002 | warning | Não bloqueia diretamente no relatório PT | Documentos abaixo do recomendado para a dificuldade declarada | Caso pode ficar raso, curto ou com pouca investigação | Adicionar evidência real, falso caminho justo ou recontextualização, sem encher por volume |
-| PT_003 | warning | Não bloqueia diretamente no relatório PT | Suspeitos acima do recomendado para a dificuldade declarada | Grupo pode dispersar hipóteses e perder foco | Fundir personagens, reduzir suspeita aparente ou melhorar descarte |
+| PT_003 | warning | Não bloqueia diretamente no relatório PT | Suspeitos acima do recomendado para a dificuldade declarada (contagem é sinal informativo; profundidade dedutiva determina dificuldade estimada) | Grupo pode dispersar hipóteses e perder foco | Fundir personagens, reduzir suspeita aparente ou melhorar descarte |
 | PT_004 | warning | Não bloqueia diretamente no relatório PT | Envelope desbalanceado | Um envelope concentra documentos demais e alonga uma fase | Redistribuir documentos, dividir progressão ou explicitar critério de avanço |
 | PT_005 | warning | Não bloqueia diretamente no relatório PT | Nenhum red herring identificado | Caso pode ficar linear ou óbvio | Adicionar mentira plausível ou suspeito aparente com descarte justo |
 | PT_006 | warning | Não bloqueia diretamente no relatório PT | Red herrings excessivos em relação aos contratos obrigatórios | Ruído pode superar investigação e parecer injusto | Reduzir falsos caminhos ou criar contratos de descarte mais claros |
-| PT_007 | warning | Não bloqueia diretamente no relatório PT | Contratos obrigatórios excessivos para a dificuldade declarada | Cadeia lógica pode ficar longa demais para o nível | Consolidar contratos, rebaixar obrigatoriedade ou ajustar dificuldade |
+| PT_007 | warning | Não bloqueia diretamente no relatório PT | Contratos obrigatórios excessivos para a dificuldade declarada (contagem é sinal informativo; profundidade dedutiva determina dificuldade estimada) | Cadeia lógica pode ficar longa demais para o nível | Consolidar contratos, rebaixar obrigatoriedade ou ajustar dificuldade |
 | PT_008 | warning | Não bloqueia diretamente no relatório PT | Tempo estimado incompatível com tempo declarado | Promessa de sessão pode frustrar o grupo | Ajustar tempo declarado, carga documental ou estrutura de envelopes |
-| PT_009 | warning | Não bloqueia diretamente no relatório PT | Dificuldade declarada diverge muito da dificuldade estimada | Caso pode estar rotulado incorretamente | Reavaliar dificuldade, contagem de documentos, contratos e suspeitos |
+| PT_009 | warning | Não bloqueia diretamente no relatório PT | Dificuldade declarada diverge muito da dificuldade estimada por profundidade (`clue_graph` depth), densidade textual e papel do E2 | Caso pode estar rotulado incorretamente | Reavaliar dificuldade, profundidade da cadeia de solução, densidade textual e papel do E2 |
 
 
 ## Códigos ER — cadeia de evidência (evidence_reviewer)

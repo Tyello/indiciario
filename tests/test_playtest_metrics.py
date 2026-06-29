@@ -7,6 +7,9 @@ from generator.validator import BlueprintValidator, Severidade
 
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL = ROOT / "examples" / "caso_canonico_iniciante.json"
+INICIANTE_B = ROOT / "examples" / "caso_canonico_iniciante_b.json"
+AURORA = ROOT / "examples" / "caso_canonico_intermediario.json"
+FINTECH = ROOT / "examples" / "caso_fintech.json"
 
 
 def blueprint_data() -> dict:
@@ -124,6 +127,106 @@ def test_pt_009_dispara_quando_dificuldade_diverge():
     report = analyze_playtest(Blueprint(**data))
 
     assert "PT_009" in warning_codes(report)
+
+
+# ---------------------------------------------------------------------------
+# ISSUE-30.7 — Âncoras de regressão: estimador por profundidade (STEP-02 RED)
+# ---------------------------------------------------------------------------
+
+
+def test_iniciante_b_estimated_iniciante():
+    """Iniciante B deve estimar iniciante (hoje: iniciante — GREEN já antes do fix)."""
+    data = json.loads(INICIANTE_B.read_text(encoding="utf-8"))
+    report = analyze_playtest(Blueprint(**data))
+    assert report["summary"]["difficulty_estimated"] == "iniciante"
+
+
+def test_aurora_estimated_intermediario():
+    """Aurora deve estimar intermediario (hoje: intermediario — GREEN já antes do fix)."""
+    data = json.loads(AURORA.read_text(encoding="utf-8"))
+    report = analyze_playtest(Blueprint(**data))
+    assert report["summary"]["difficulty_estimated"] == "intermediario"
+
+
+def test_fintech_estimated_avancado():
+    """Fintech deve estimar avancado (hoje: intermediario — RED; trava regressão pós-fix)."""
+    data = json.loads(FINTECH.read_text(encoding="utf-8"))
+    report = analyze_playtest(Blueprint(**data))
+    assert report["summary"]["difficulty_estimated"] == "avancado"
+
+
+def test_mirante_not_estimated_avancado():
+    """Mirante não deve estimar avancado (hoje: avancado — RED; deve ser iniciante ou intermediario)."""
+    data = json.loads(CANONICAL.read_text(encoding="utf-8"))
+    report = analyze_playtest(Blueprint(**data))
+    assert report["summary"]["difficulty_estimated"] in {"iniciante", "intermediario"}
+
+
+def test_estimator_discriminates_roster():
+    """Estimador deve discriminar o roster: ≥3 valores distintos OU cobre iniciante+avancado.
+
+    Hoje: {iniciante, intermediario, intermediario} → 2 distintos, sem avancado → RED.
+    Após fix: {iniciante, intermediario, avancado} → 3 distintos → GREEN.
+    """
+    ib_data = json.loads(INICIANTE_B.read_text(encoding="utf-8"))
+    aurora_data = json.loads(AURORA.read_text(encoding="utf-8"))
+    fintech_data = json.loads(FINTECH.read_text(encoding="utf-8"))
+
+    ib_est = analyze_playtest(Blueprint(**ib_data))["summary"]["difficulty_estimated"]
+    aurora_est = analyze_playtest(Blueprint(**aurora_data))["summary"]["difficulty_estimated"]
+    fintech_est = analyze_playtest(Blueprint(**fintech_data))["summary"]["difficulty_estimated"]
+
+    estimates = {ib_est, aurora_est, fintech_est}
+    # Prova de poder discriminativo: 3 valores distintos OU cobre iniciante→avancado
+    assert len(estimates) >= 3 or ("iniciante" in estimates and "avancado" in estimates)
+
+
+def test_document_count_does_not_dominate():
+    """Muitos documentos curtos + profundidade rasa devem estimar ≤ intermediario (DF-02).
+
+    Hoje: 22 docs → banda 2 → max=2 → avancado — RED.
+    Após fix: contagem é sinal informativo; densidade/profundidade rasas → ≤ intermediario.
+    """
+    data = json.loads(CANONICAL.read_text(encoding="utf-8"))
+    # 22 documentos todos com conteúdo vazio (densidade mínima)
+    template_doc = dict(data["documentos"][0])
+    template_doc["conteudo"] = {}  # dict vazio → len(str({}))=2 → densidade quase zero
+    data["documentos"] = [
+        dict(template_doc, codigo=f"E1-{i + 1:02d}")
+        for i in range(22)
+    ]
+    # Contratos todos não-obrigatórios → profundidade de solução = 0
+    data["contratos_evidencia"] = [
+        dict(c, obrigatoria_para_avanco=False)
+        for c in data["contratos_evidencia"][:1]
+    ]
+    report = analyze_playtest(Blueprint(**data))
+    assert report["summary"]["difficulty_estimated"] in {"iniciante", "intermediario"}
+
+
+def test_pt009_uses_depth_estimator():
+    """PT_009 não deve disparar para Iniciante B nem Aurora (declarada ≈ estimada pós-fix).
+
+    Hoje: InicianteB estimada=iniciante e Aurora estimada=intermediario → distância 0 → não dispara.
+    Já é GREEN antes do fix; após fix deve continuar GREEN.
+    """
+    ib_data = json.loads(INICIANTE_B.read_text(encoding="utf-8"))
+    aurora_data = json.loads(AURORA.read_text(encoding="utf-8"))
+
+    ib_report = analyze_playtest(Blueprint(**ib_data))
+    aurora_report = analyze_playtest(Blueprint(**aurora_data))
+
+    assert "PT_009" not in warning_codes(ib_report), (
+        f"PT_009 disparou para Iniciante B: {ib_report['summary']}"
+    )
+    assert "PT_009" not in warning_codes(aurora_report), (
+        f"PT_009 disparou para Aurora: {aurora_report['summary']}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# fim dos testes ISSUE-30.7
+# ---------------------------------------------------------------------------
 
 
 def test_validator_registra_pt_como_aviso_nao_critico():

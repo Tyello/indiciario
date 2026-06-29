@@ -11,6 +11,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from generator.clue_graph import analyze_clue_graph, build_clue_graph
 from generator.models import Blueprint, Dificuldade, PapelPersonagem
 
 DIFFICULTY_ORDER = [
@@ -120,20 +121,103 @@ def cognitive_load(documents: int, contracts: int) -> str:
     return ["low", "medium", "high"][score]
 
 
-def estimate_difficulty(documents: int, contracts: int, suspects: int | None) -> str:
-    """Estima dificuldade percebida por faixas simples e coerentes."""
-    if documents > 30 or contracts > 12:
-        return Dificuldade.MESTRE.value
+def estimate_difficulty(
+    blueprint: Blueprint, graph_report: dict[str, Any] | None = None
+) -> str:
+    """Estima dificuldade percebida por profundidade dedutiva, densidade e ambiguidade.
 
-    scores = [
-        0 if documents <= 10 else 1 if documents <= 18 else 2 if documents <= 24 else 3,
-        0 if contracts <= 2 else 1 if contracts <= 5 else 2 if contracts <= 8 else 3,
-    ]
-    if suspects is not None:
-        scores.append(
-            0 if suspects <= 4 else 1 if suspects <= 6 else 2 if suspects <= 8 else 3
+    Sinais primários: profundidade da cadeia de solução (clue_graph depth),
+    concentração de contratos obrigatórios (zero leniência) e papel do E2.
+    Contagem de documentos e suspeitos são sinal informativo secundário (DF-01/DF-02):
+    nenhuma contagem isolada eleva o veredito mais de um nível sozinha.
+    """
+    # Construir grafo se não fornecido
+    if graph_report is None:
+        graph = build_clue_graph(blueprint)
+        graph_report = analyze_clue_graph(graph, blueprint)
+
+    # --- Sinal primário 1: profundidade da cadeia de solução ---
+    solution_paths = graph_report.get("solution_paths", [])
+    depth = max((sp["depth"] for sp in solution_paths), default=0)
+
+    # --- Sinal primário 2: ambiguidade real ---
+    # Apenas risco_ambiguidade "medio" ou superior; "baixo"/"medio_baixo" são ruído
+    # (presentes mesmo em casos simples — DF-02)
+    _HIGH_AMBIGUITY = {"medio", "alto", "muito_alto"}
+    real_ambig_count = sum(
+        1 for c in blueprint.contratos_evidencia
+        if c.risco_ambiguidade in _HIGH_AMBIGUITY
+    )
+
+    # --- Sinal primário 3: concentração obrigatória (zero leniência = mais difícil) ---
+    n_total_contracts = len(blueprint.contratos_evidencia)
+    n_mandatory = sum(1 for c in blueprint.contratos_evidencia if c.obrigatoria_para_avanco)
+    non_mandatory = n_total_contracts - n_mandatory
+
+    # --- Sinal primário 4: papel do E2 ---
+    e2_docs = {doc.codigo for doc in blueprint.documentos if doc.envelope == "E2"}
+    e2_mandatory = sum(
+        1
+        for c in blueprint.contratos_evidencia
+        if c.obrigatoria_para_avanco
+        and (
+            (c.prova_principal and c.prova_principal in e2_docs)
+            or (c.confirmacao_independente and c.confirmacao_independente in e2_docs)
         )
-    return DIFFICULTY_ORDER[max(scores)]
+    )
+
+    # --- Sinal informativo: densidade textual e volume (DF-02) ---
+    n_docs = len(blueprint.documentos)
+    total_chars = sum(len(str(doc.conteudo)) for doc in blueprint.documentos)
+    density = total_chars / max(n_docs, 1)
+
+    # --- Pontuação composta ---
+
+    # Profundidade (dominante; range 0.0–3.5)
+    depth_score: float = (
+        3.5 if depth >= 8
+        else 3.0 if depth >= 6
+        else 2.5 if depth >= 5
+        else 2.0 if depth >= 4
+        else 1.0 if depth >= 3
+        else 0.5 if depth >= 2
+        else 0.0
+    )
+
+    # Ambiguidade real — só risco "medio"+ conta (informativo; range 0.0–0.25)
+    ambiguity_score: float = 0.25 if real_ambig_count >= 1 else 0.0
+
+    # Concentração obrigatória — sem contratos opcionais = mais difícil (range 0.0–1.0)
+    mandatory_bonus: float = (
+        1.0 if non_mandatory == 0
+        else 0.25 if non_mandatory == 1
+        else 0.0
+    )
+
+    # Papel do E2 (secundário; range 0.0–0.5)
+    e2_score: float = (
+        0.5 if e2_mandatory >= 2 else 0.25 if e2_mandatory == 1 else 0.0
+    )
+
+    # Densidade textual (informativo — DF-02; range 0.0–0.1)
+    density_score: float = min(density / 20_000.0, 0.1)
+
+    # Contagem de documentos (informativo — DF-02; nunca dominante; range 0.0–0.1)
+    doc_mod: float = 0.1 if n_docs >= 20 else 0.0
+
+    total = depth_score + ambiguity_score + mandatory_bonus + e2_score + density_score + doc_mod
+
+    # Mapeamento (DF-04: profundidade e estrutura, sem atalho volumétrico)
+    if total >= 6.5:
+        return Dificuldade.MESTRE.value
+    elif total >= 5.0:
+        return Dificuldade.ESPECIALISTA.value
+    elif total >= 3.5:
+        return Dificuldade.AVANCADO.value
+    elif total >= 1.5:
+        return Dificuldade.INTERMEDIARIO.value
+    else:
+        return Dificuldade.INICIANTE.value
 
 
 def _warning(code: str, message: str, detail: str = "") -> dict[str, str]:
@@ -150,7 +234,7 @@ def _document_warnings(declared: str, documents: int) -> list[dict[str, str]]:
         warnings.append(
             _warning(
                 "PT_001",
-                "Documentos acima do recomendado para a dificuldade declarada.",
+                "Documentos acima do recomendado para a dificuldade declarada (contagem é sinal informativo; profundidade dedutiva determina dificuldade estimada).",
                 f"{declared}: recomendado até {maximum}; observado: {documents}.",
             )
         )
@@ -220,7 +304,6 @@ def analyze_playtest(
     blueprint: Blueprint, graph_report: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     """Analisa heurísticas de experiência investigativa e retorna JSON serializável."""
-    del graph_report
     declared = _difficulty_value(blueprint)
     documents = len(blueprint.documentos)
     envelopes = len({doc.envelope for doc in blueprint.documentos})
@@ -229,7 +312,7 @@ def analyze_playtest(
     red_herrings = infer_red_herrings(blueprint)
     estimated_minutes = estimate_minutes(blueprint)
     load = cognitive_load(documents, contracts)
-    estimated_difficulty = estimate_difficulty(documents, contracts, suspects)
+    estimated_difficulty = estimate_difficulty(blueprint, graph_report)
 
     warnings: list[dict[str, str]] = []
     warnings.extend(_document_warnings(declared, documents))
@@ -238,7 +321,7 @@ def analyze_playtest(
         warnings.append(
             _warning(
                 "PT_003",
-                "Suspeitos acima do recomendado para a dificuldade declarada.",
+                "Suspeitos acima do recomendado para a dificuldade declarada (contagem é sinal informativo; profundidade dedutiva determina dificuldade estimada).",
                 f"{declared}: recomendado até {SUSPECT_LIMITS[declared]}; observado: {suspects}.",
             )
         )
@@ -261,7 +344,7 @@ def analyze_playtest(
         warnings.append(
             _warning(
                 "PT_007",
-                "Contratos obrigatórios excessivos para a dificuldade declarada.",
+                "Contratos obrigatórios excessivos para a dificuldade declarada (contagem é sinal informativo; profundidade dedutiva determina dificuldade estimada).",
                 f"{declared}: recomendado até {CONTRACT_LIMITS[declared]}; observado: {contracts}.",
             )
         )

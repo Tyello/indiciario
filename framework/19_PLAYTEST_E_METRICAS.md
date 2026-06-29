@@ -49,7 +49,7 @@ Carga alta não é erro. Ela apenas indica que o caso pode precisar de mais temp
 
 ## Dificuldade percebida
 
-A dificuldade percebida é uma estimativa automática derivada de volume documental, contratos obrigatórios e suspeitos inferidos. Ela pode divergir da dificuldade declarada pelo autor.
+A dificuldade percebida é uma estimativa automática baseada em profundidade da cadeia de solução (`clue_graph` depth), densidade textual, ambiguidade real e papel do E2; volume documental e suspeitos são sinal informativo secundário (ISSUE-30.7). Ela pode divergir da dificuldade declarada pelo autor.
 
 Essa divergência não significa falha narrativa. Ela sinaliza que a promessa feita ao jogador talvez precise ser revisada: um caso declarado como iniciante pode ter densidade de intermediário, ou um caso declarado como avançado pode parecer curto demais para essa etiqueta.
 

@@ -25,12 +25,12 @@ Canônicos de referência:
 
 Métricas computadas diretamente dos blueprints (`sum(len(str(doc["conteudo"])))` para densidade e contagem de `documentos`):
 
-| Caso | Arquivo | Documentos | Densidade (chars) | Dificuldade declarada | Envelopes |
-|---|---|---:|---:|---|---|
-| Mirante | `examples/caso_canonico_iniciante.json` | 20 | 36.568 | Iniciante | E1, E2 |
-| Iniciante B | `examples/caso_canonico_iniciante_b.json` | 9 | 12.981 | Iniciante | E1 |
-| Aurora | `examples/caso_canonico_intermediario.json` | 17 | 26.464 | Intermediário | E1, E2 |
-| Fintech | `examples/caso_fintech.json` | 16 | 29.647 | Avançado | E1, E2 |
+| Caso | Arquivo | Documentos | Densidade (chars) | Dificuldade declarada | Envelopes | Dificuldade estimada (pós-fix ISSUE-30.7) |
+|---|---|---:|---:|---|---|---|
+| Mirante | `examples/caso_canonico_iniciante.json` | 20 | 36.568 | Iniciante | E1, E2 | ≤ intermediário |
+| Iniciante B | `examples/caso_canonico_iniciante_b.json` | 9 | 12.981 | Iniciante | E1 | iniciante |
+| Aurora | `examples/caso_canonico_intermediario.json` | 17 | 26.464 | Intermediário | E1, E2 | intermediário |
+| Fintech | `examples/caso_fintech.json` | 16 | 29.647 | Avançado | E1, E2 | avançado |
 
 **Mirante é exceção histórica, não referência métrica do nível Iniciante.** O Mirante foi concebido como caso Intermediário e rebaixado a Iniciante por decisão editorial (simplicidade da história, facilidade de resolução, confirmação pelo primeiro playtest). Por isso seu volume documental (20 docs / 36.568 chars) fica acima da faixa esperada de Iniciante (8–10 docs na tabela de calibração). Não usar o Mirante para calibrar limites métricos de Iniciante — usar o **Iniciante B** (9 docs / 12.981 chars), que está dentro da faixa.
 
@@ -42,6 +42,8 @@ Métricas computadas diretamente dos blueprints (`sum(len(str(doc["conteudo"])))
 - papel do E2 (confirmação simples vs. recontextualização forte vs. síntese entre documentos de naturezas diferentes).
 
 Qualquer critério automatizado de dificuldade (ex.: Gate Evaluator de canonização) deve tratar contagem de documentos e número de envelopes como **sinal informativo**, não como critério duro de aprovação/rejeição.
+
+`estimate_difficulty` em `generator/playtest_metrics.py` implementa esse princípio desde ISSUE-30.7: profundidade da cadeia de solução (`clue_graph` depth), densidade textual, ambiguidade real e papel do E2 são os sinais primários; contagem de documentos e suspeitos são sinal informativo secundário que nunca domina a classificação sozinho.
 
 ## Notas editoriais por eixo
 
