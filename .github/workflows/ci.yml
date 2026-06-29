@@ -41,6 +41,8 @@ jobs:
           python generator/validator.py examples/caso_canonico_iniciante.json --strict
           python generator/validator.py examples/caso_canonico_intermediario.json --strict
           python generator/validator.py examples/caso_canonico_iniciante_b.json --strict
+          # corpus de calibração externo — validado structural/strict mas não passa pelo Canonical Quality Gate
+          python generator/validator.py examples/caso_referencia_uma_noite_sem_flores.json --strict
 
       - name: Case Review
         run: |

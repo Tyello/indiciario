@@ -116,6 +116,7 @@ Roster completo:
 | O Recado da Sala de Leitura | `examples/caso_canonico_iniciante_b.json` | Iniciante | Baseline visual (`docs/baselines/BASELINE_VISUAL_INICIANTE_B.md`) + roda na CI; não playtestado |
 | Plantão Sem Rosto | `examples/caso_canonico_intermediario_ii.json` | Intermediário | Plano editorial (`docs/canonical_plans/PLANO_CANONICO_INTERMEDIARIO_B.md`); sem baseline nem playtest |
 | Desvio de Fundos na Acelerada Pagamentos | `examples/caso_fintech.json` | Avançado | Pipeline E2E (`docs/FINTECH_PIPELINE_RUN.md`, `docs/QUALITY_COMPARATIVE_REPORT.md`); sem playtest |
+| Uma Noite Sem Flores | `examples/caso_referencia_uma_noite_sem_flores.json` | Intermediário | **Corpus de calibração externo — não é régua canônica.** Baseado em produto externo; incorporado para calibrar estimador (ISSUE-30.8). Não playtestado pelo framework, sem Canonical Quality Gate. |
 
 > Nota de nomenclatura: o plano de "Plantão Sem Rosto" foi escrito como `PLANO_CANONICO_INTERMEDIARIO_B`, mas o arquivo do caso é `intermediario_ii`. Alinhar essa nomenclatura é uma pendência.
 
