@@ -21,6 +21,10 @@ Demais casos em `examples/` (existem, mas ainda não validados por playtest):
 - **Plantão Sem Rosto** — `examples/caso_canonico_intermediario_ii.json` — Intermediário (plano editorial).
 - **Desvio de Fundos na Acelerada Pagamentos** — `examples/caso_fintech.json` — Avançado (pipeline E2E).
 
+Corpus de calibração externo (não é régua canônica, não foi playtestado pelo framework):
+
+- **Uma Noite Sem Flores** — `examples/caso_referencia_uma_noite_sem_flores.json` — Intermediário (calibração de estimador, ISSUE-30.8).
+
 Roster e status completos: [`docs/ESTADO_ATUAL.md`](docs/ESTADO_ATUAL.md).
 
 Fluxo operacional oficial:

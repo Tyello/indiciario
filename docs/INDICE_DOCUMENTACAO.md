@@ -106,6 +106,7 @@ Use esta tabela como atalho. Ela não é exaustiva; na dúvida, confira a coluna
 | `DIEGESE_DOCUMENTAL.md` | Documentos parecem naturais no mundo | LLM-gen/Designer | GEN | Muda regra de diegese |
 | `CASE_FAILURE_PATTERNS.md` | Falhas editoriais já observadas | LLM-gen/Designer | GEN | Surge novo padrão de falha de playtest |
 | `DIFFICULTY_FRAMEWORK.md` | Régua de dificuldade por nível | Designer/LLM-gen | GEN | Muda faixa de dificuldade ou entra caso novo |
+| `CALIBRACAO_REFERENCIA_EXTERNA.md` | Análise do caso externo *Uma Noite Sem Flores* como corpus de calibração do estimador de dificuldade (ISSUE-30.8); não é régua canônica | Dev/Agente | GOV | Surge novo caso de calibração externa ou muda a metodologia de calibração |
 | `CANONICAL_CRITERIA.md` | Critérios do Canonical Quality Gate (`canonical_quality_gate.py`) | Dev/Agente | VAL | Muda critério canônico ou a implementação |
 | `CASE_DESIGN_PIPELINE.md` | Processo editorial pré-blueprint | Designer | GEN | Muda processo de design de caso |
 | `BLUEPRINT_AUTHORING_GUIDE.md` | Contrato mínimo de autoria de blueprint | LLM-gen/Designer | GEN | Muda contrato de autoria ou campo schema-enforced |
@@ -136,6 +137,14 @@ Use esta tabela como atalho. Ela não é exaustiva; na dúvida, confira a coluna
 | `AURORA_PIPELINE_RUN.md` | Registro da run E2E do Aurora (ISSUE-28) | Dev | PIPE | Nova run do Aurora ou mudança no runner relevante |
 | `FINTECH_PIPELINE_RUN.md` | Registro da run E2E do Fintech (ISSUE-29) | Dev | PIPE | Nova run do Fintech |
 | `QUALITY_COMPARATIVE_REPORT.md` | Comparativo Aurora vs Fintech (ISSUE-30) | Dev | PIPE | Novo comparativo entre casos |
+
+## `examples/` — corpus de calibração (não-canônicos)
+
+> Blueprints em `examples/` que **não são réguas canônicas** nem candidatos ao Canonical Quality Gate. Servem como corpus para calibração de métricas e estimadores.
+
+| Arquivo | Propósito | Público | Workflow | Atualizar quando |
+|---|---|---|---|---|
+| `examples/caso_referencia_uma_noite_sem_flores.json` | Corpus de calibração externo: blueprint adaptado do produto *Uma Noite Sem Flores*; calibra estimador de dificuldade (ISSUE-30.8); não é régua canônica, não playtestado pelo framework | Dev/Agente | GOV | Muda o blueprint de calibração ou a metodologia de calibração |
 
 ## `docs/` — subpastas
 

@@ -143,6 +143,10 @@ Demais casos existentes em `examples/` (ainda **não validados por playtest** �
 4. **Plantão Sem Rosto** — `examples/caso_canonico_intermediario_ii.json` — Intermediário; plano editorial em `docs/canonical_plans/PLANO_CANONICO_INTERMEDIARIO_B.md`.
 5. **Desvio de Fundos na Acelerada Pagamentos** — `examples/caso_fintech.json` — Avançado; rodou a pipeline E2E (`docs/FINTECH_PIPELINE_RUN.md`).
 
+Corpus de calibração externo (**não é régua canônica** — não passar pelo Canonical Quality Gate):
+
+6. **Uma Noite Sem Flores** — `examples/caso_referencia_uma_noite_sem_flores.json` — Intermediário; baseado em produto externo; incorporado para calibrar estimador de dificuldade (ISSUE-30.8); não playtestado pelo framework.
+
 Roster completo e status de maturidade: `docs/ESTADO_ATUAL.md`.
 
 ## Prioridade atual
