@@ -1,0 +1,1850 @@
+{
+  "titulo": "Uma Noite Sem Flores",
+  "subtitulo": "Caso de referência externo — corpus de calibração (não canônico)",
+  "genero": "furto de obra de arte / investigação de mesa",
+  "tom": "humano, tenso, investigativo",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "intermediario",
+  "tempo_estimado_min": 100,
+  "numero_jogadores": "2 a 5",
+  "formato_envelopes": 2,
+  "premissa": "Um quadro de alto valor desaparece da galeria principal de um museu em reforma, durante uma queda de energia que derrubou as câmeras. Sem arrombamento, só quem tem credencial interna poderia ter agido. Você precisa identificar o suspeito e, depois, descobrir quem está por trás do roubo e para onde a obra foi levada.",
+  "conflito_central": {
+    "pergunta_publica": "Quem furtou a obra Jardim Noturno do Museu Municipal de Vila Real e para onde ela foi levada?",
+    "quem_pede_apuracao": "A diretoria do museu, pressionada pela seguradora e pela imprensa.",
+    "motivo_da_apuracao": "A obra sumiu da galeria principal durante a reforma, sem arrombamento, e as câmeras estavam fora do ar.",
+    "risco_concreto": "Se a obra não for rastreada antes de ser vendida nos bastidores, torna-se irrecuperável e o museu responde por falha de segurança.",
+    "verdade_aparente": "A culpa parece do vigilante recém-admitido, malvisto pela equipe e presente no turno.",
+    "verdade_real_resumida": "O chefe de segurança Aurélio liberou o acesso interno na janela de queda de energia; Sérgio Brum cortou a moldura-relíquia; a transportadora escoou a obra para a consignação reservada da Arcano Gallery."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Quem é o principal suspeito do furto da obra Jardim Noturno?",
+      "resposta_esperada": "A credencial biométrica interna que cruza a galeria na queda de energia é a do chefe de segurança Aurélio (ID 27); o recém-admitido Rui é descartado por ausência de oportunidade.",
+      "nao_precisa_resolver_ainda": [
+        "por onde a obra saiu do museu",
+        "quem cortou a moldura",
+        "qual o destino de venda"
+      ],
+      "criterio_de_avanco": "Liberar E2 quando o grupo nomear o detentor da credencial 27 como suspeito principal e descartar o recém-admitido pelo log.",
+      "forma_diegetica_de_avanco": "A diretoria envia os materiais dos fornecedores e os cartões achados nos armários.",
+      "documentos_minimos": [
+        "E1-01",
+        "E1-02",
+        "E1-03",
+        "E1-04"
+      ]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Quem está por trás do roubo e qual o destino da obra, já que o suspeito está no museu mas o quadro não?",
+      "resposta_esperada": "Aurélio liberou o acesso interno; Sérgio Brum cortou a moldura-relíquia; a transportadora escoou a obra para a consignação reservada da Arcano Gallery, identificada pela etiqueta #7F004B.",
+      "nao_precisa_resolver_ainda": [],
+      "criterio_de_avanco": "Encerrar quando o grupo articular autor interno, executor do corte, rota de transporte e destino decodificado.",
+      "forma_diegetica_de_avanco": "O delegado confirma a síntese e aciona a apreensão na consignação.",
+      "documentos_minimos": [
+        "E2-02",
+        "E2-03",
+        "E2-07",
+        "E2-08"
+      ]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Quem furtou a obra Jardim Noturno do Museu Municipal de Vila Real e para onde ela foi levada?",
+    "solucao_em_5_frases": [
+      "A queda de energia das 15h era planejada e conhecida; as câmeras caíram e as portas entraram em modo de contenção.",
+      "Na janela sem luz, apenas a credencial biométrica 27 (Aurélio, chefe de segurança) cruza a porta 1 da galeria principal, ida e volta.",
+      "O recém-admitido Rui, apontado por todos, está lotado na sala de segurança e não registra passagem pela galeria — sem oportunidade.",
+      "A moldura-relíquia de carvalho foi cortada por Sérgio Brum (Aço Vivo) e a obra escoada pela transportadora sob o BID da reforma.",
+      "A etiqueta hex #7F004B liga a carga à consignação reservada da Arcano Gallery, que é o destino de venda da obra."
+    ],
+    "linha_tempo_aparente_resumo": "Última ronda às 15h15 com tudo certo; obra some às 16h40; suspeita recai sobre o vigilante novo.",
+    "linha_tempo_real_resumo": "Queda planejada às 15h; credencial 27 cruza a galeria às 15h20 e retorna às 15h58; corte da moldura e saída pela logística; venda combinada por etiqueta hex.",
+    "red_herrings_e_descartes": [
+      "Rui (recém-admitido): descartado pelo log/escala — sem passagem pela galeria.",
+      "Jonas (guarita): negligente, não criminoso; sem acesso interno.",
+      "Otávio (narrador): última ronda coincide com o log; relata a queda, não a causa.",
+      "Acabamentos Vilela: fornecedor sem acesso interno nem vínculo com a saída."
+    ],
+    "quando_usar_dicas": [
+      "Use a dica 1–3 se o grupo fixar a culpa no recém-admitido sem ler o log.",
+      "Use a dica 4 se travarem em 'o suspeito está no museu, logo é ele'.",
+      "Use a dica 5–6 se não ligarem o corte da moldura e a etiqueta hex ao destino."
+    ],
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Quem é o principal suspeito do furto da obra Jardim Noturno?",
+        "resposta_esperada": "A credencial biométrica interna que cruza a galeria na queda de energia é a do chefe de segurança Aurélio (ID 27); o recém-admitido Rui é descartado por ausência de oportunidade.",
+        "nao_precisa_resolver_ainda": [
+          "por onde a obra saiu do museu",
+          "quem cortou a moldura",
+          "qual o destino de venda"
+        ],
+        "criterio_de_avanco": "Liberar E2 quando o grupo nomear o detentor da credencial 27 como suspeito principal e descartar o recém-admitido pelo log.",
+        "forma_diegetica_de_avanco": "A diretoria envia os materiais dos fornecedores e os cartões achados nos armários.",
+        "documentos_minimos": [
+          "E1-01",
+          "E1-02",
+          "E1-03",
+          "E1-04"
+        ]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Quem está por trás do roubo e qual o destino da obra, já que o suspeito está no museu mas o quadro não?",
+        "resposta_esperada": "Aurélio liberou o acesso interno; Sérgio Brum cortou a moldura-relíquia; a transportadora escoou a obra para a consignação reservada da Arcano Gallery, identificada pela etiqueta #7F004B.",
+        "nao_precisa_resolver_ainda": [],
+        "criterio_de_avanco": "Encerrar quando o grupo articular autor interno, executor do corte, rota de transporte e destino decodificado.",
+        "forma_diegetica_de_avanco": "O delegado confirma a síntese e aciona a apreensão na consignação.",
+        "documentos_minimos": [
+          "E2-02",
+          "E2-03",
+          "E2-07",
+          "E2-08"
+        ]
+      }
+    ]
+  },
+  "verdade_real": "Aurélio Penha, chefe da segurança, conhecia a janela da manutenção de energia e a usou para cruzar a porta biométrica da galeria principal e liberar a retirada da obra. Sérgio Brum, maçariqueiro terceirizado, cortou a moldura-relíquia de carvalho para reduzir volume, e a transportadora, sob o BID da reforma, escoou a obra para a consignação reservada da Arcano Gallery, identificada pela etiqueta hex #7F004B. O recém-admitido Rui foi o bode expiatório.",
+  "executor_id": "30538",
+  "planejador_id": "27",
+  "beneficiario_id": "27",
+  "motivacao": "Aurélio acumulava dívidas e enxergou na reforma e na queda de energia programada a oportunidade de liberar a obra para venda no mercado paralelo.",
+  "metodo_ocultacao": "Aproveitar a queda de energia planejada (câmeras fora, portas em modo de contenção) para mover a obra; cortar a moldura para reduzir volume e escoá-la disfarçada na logística da reforma.",
+  "erro_que_permite_descobrir": "A porta 1 só aceita biometria e registra cada passagem; a credencial 27 ficou gravada cruzando a galeria na janela sem energia, e a etiqueta hex do corte reapareceu na folha de consignação.",
+  "cadeia_causal": [
+    "A manutenção de energia foi comunicada com antecedência, fixando a janela de oportunidade.",
+    "Na queda, câmeras caem e o controle de portas entra em modo de contenção.",
+    "A credencial biométrica 27 cruza a porta 1 da galeria, ida e volta, na janela crítica.",
+    "A moldura-relíquia é cortada e a obra preparada para transporte discreto.",
+    "A transportadora escoa a obra sob o BID; a etiqueta hex aponta a consignação reservada."
+  ],
+  "personagens": [
+    {
+      "id": "27",
+      "nome": "Aurélio Penha",
+      "funcao": "Chefe da Segurança Patrimonial",
+      "papel": "planejador",
+      "suspeita_aparente": "Figura de autoridade que assina manual e escala; parece apenas zeloso e acima de suspeita.",
+      "verdade": "Usou a credencial biométrica e a janela da queda de energia, que ele mesmo conhecia, para liberar a retirada da obra.",
+      "documento_ancoragem": [
+        "E1-02",
+        "E1-03",
+        "E2-04"
+      ],
+      "assinatura": {
+        "estilo": "formal",
+        "rubrica_estilo": "administrativa",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "forte",
+        "fluidez": "media",
+        "variacao": "baixa",
+        "ornamentacao": "nenhuma",
+        "amplitude": "media",
+        "seed": "noite-aurelio"
+      }
+    },
+    {
+      "id": "30538",
+      "nome": "Sérgio Brum",
+      "funcao": "Maçariqueiro terceirizado (corte e solda)",
+      "papel": "executor",
+      "suspeita_aparente": "Operário externo da reforma, sem acesso às salas internas à primeira vista.",
+      "verdade": "Cortou a moldura-relíquia e preparou a obra para retirada disfarçada na logística da reforma.",
+      "documento_ancoragem": [
+        "E2-03",
+        "E2-07"
+      ],
+      "assinatura": {
+        "estilo": "curta",
+        "rubrica_estilo": "seca",
+        "legibilidade": "baixa",
+        "ornamento": "baixo",
+        "inclinacao": "neutra",
+        "pressao": "media",
+        "fluidez": "baixa",
+        "variacao": "media",
+        "ornamentacao": "nenhuma",
+        "amplitude": "curta",
+        "seed": "noite-sergio"
+      }
+    },
+    {
+      "id": "33",
+      "nome": "Otávio Pires",
+      "funcao": "Vigilante de turno",
+      "papel": "narrador",
+      "suspeita_aparente": "Foi o último a conferir a sala e tem passado na polícia; escreve em pânico pedindo ajuda.",
+      "verdade": "Não participou do furto; tenta desviar a atenção de si por medo, mas suas informações são reais.",
+      "documento_ancoragem": [
+        "E1-01"
+      ],
+      "assinatura": {
+        "estilo": "leve",
+        "rubrica_estilo": "fluida",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "leve",
+        "fluidez": "alta",
+        "variacao": "media",
+        "ornamentacao": "nenhuma",
+        "amplitude": "media",
+        "seed": "noite-otavio"
+      }
+    },
+    {
+      "id": "14",
+      "nome": "Rui Caldas",
+      "funcao": "Vigilante recém-admitido",
+      "papel": "red_herring",
+      "suspeita_aparente": "Novo na equipe, malvisto pelos colegas e apontado por todos como o provável culpado.",
+      "verdade": "Estava na sala de segurança no horário; sua credencial não registra passagem pela galeria. Sem oportunidade.",
+      "documento_ancoragem": [
+        "E1-03",
+        "E2-06"
+      ],
+      "assinatura": {
+        "estilo": "compacta",
+        "rubrica_estilo": "curta",
+        "legibilidade": "media",
+        "ornamento": "baixo",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "media",
+        "ornamentacao": "nenhuma",
+        "amplitude": "curta",
+        "seed": "noite-rui"
+      }
+    },
+    {
+      "id": "09",
+      "nome": "Heitor Vasques",
+      "funcao": "Gerente comercial da transportadora",
+      "papel": "intermediario",
+      "suspeita_aparente": "Apenas um fornecedor de logística com proposta no BID da reforma.",
+      "verdade": "Forneceu o veículo e a armazenagem que escoaram a obra; ponte entre o corte e o destino de venda.",
+      "documento_ancoragem": [
+        "E2-02",
+        "E2-07"
+      ],
+      "assinatura": {
+        "estilo": "comercial",
+        "rubrica_estilo": "administrativa",
+        "legibilidade": "alta",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "media",
+        "variacao": "baixa",
+        "ornamentacao": "nenhuma",
+        "amplitude": "media",
+        "seed": "noite-heitor"
+      }
+    },
+    {
+      "id": "20",
+      "nome": "Márcio Dantas",
+      "funcao": "Vigilante (sala de câmeras)",
+      "papel": "testemunha",
+      "suspeita_aparente": "Ficou na sala de câmeras o tempo todo; ironiza os colegas no grupo.",
+      "verdade": "Testemunha; suas mensagens situam quem estava onde e quando, sem participação no furto.",
+      "documento_ancoragem": [
+        "E1-05"
+      ],
+      "assinatura": {
+        "estilo": "apressada",
+        "rubrica_estilo": "seca",
+        "legibilidade": "baixa",
+        "ornamento": "baixo",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "fluidez": "alta",
+        "variacao": "alta",
+        "ornamentacao": "nenhuma",
+        "amplitude": "media",
+        "seed": "noite-marcio"
+      }
+    },
+    {
+      "id": "07",
+      "nome": "Jonas Teixeira",
+      "funcao": "Responsável pela guarita",
+      "papel": "red_herring",
+      "suspeita_aparente": "Controla a portaria de forma relapsa; o suspeito aparente joga a culpa nele.",
+      "verdade": "Negligente, não criminoso: registrou mal as entradas, mas não tinha acesso interno nem ligação com a venda.",
+      "documento_ancoragem": [
+        "E2-07"
+      ],
+      "assinatura": {
+        "estilo": "tremida",
+        "rubrica_estilo": "curta",
+        "legibilidade": "baixa",
+        "ornamento": "baixo",
+        "inclinacao": "esquerda",
+        "pressao": "leve",
+        "fluidez": "baixa",
+        "variacao": "alta",
+        "ornamentacao": "nenhuma",
+        "amplitude": "curta",
+        "seed": "noite-jonas"
+      }
+    }
+  ],
+  "linha_tempo_real": [
+    {
+      "data_hora": "09/01/2025 12h13",
+      "evento": "Cronograma de energia comunica a janela de manutenção do gerador para a semana de 01/03.",
+      "personagem_id": null,
+      "documento_prova": "E1-06",
+      "confirmacao_independente": "E1-01"
+    },
+    {
+      "data_hora": "01/03/2025 15h00",
+      "evento": "Queda de energia planejada; câmeras desativadas, controle de portas em modo de contenção.",
+      "personagem_id": "27",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-02"
+    },
+    {
+      "data_hora": "01/03/2025 15h20",
+      "evento": "Credencial biométrica 27 (Aurélio) cruza a porta 1 da galeria principal.",
+      "personagem_id": "27",
+      "documento_prova": "E1-03",
+      "confirmacao_independente": "E1-02"
+    },
+    {
+      "data_hora": "01/03/2025 15h40",
+      "evento": "Sérgio Brum corta a moldura-relíquia e prepara a obra para retirada.",
+      "personagem_id": "30538",
+      "documento_prova": "E2-03",
+      "confirmacao_independente": "E2-07"
+    },
+    {
+      "data_hora": "01/03/2025 15h58",
+      "evento": "Credencial 27 retorna pela porta 1; obra já fora da galeria.",
+      "personagem_id": "27",
+      "documento_prova": "E1-03",
+      "confirmacao_independente": "E2-02"
+    },
+    {
+      "data_hora": "01/03/2025 16h40",
+      "evento": "Obra dada como desaparecida.",
+      "personagem_id": "33",
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-01"
+    }
+  ],
+  "linha_tempo_percebida": [
+    {
+      "data_hora": "01/03/2025 15h15",
+      "evento": "Otávio faz a última ronda e vê a obra no lugar (percepção do suspeito aparente).",
+      "personagem_id": "33",
+      "documento_prova": "E1-01",
+      "confirmacao_independente": "E1-05"
+    },
+    {
+      "data_hora": "01/03/2025 16h40",
+      "evento": "Equipe atribui o sumiço ao recém-admitido Rui.",
+      "personagem_id": "14",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E2-06"
+    }
+  ],
+  "linha_tempo_documental": [
+    {
+      "data_hora": "01/03/2025 17h04",
+      "evento": "Exportação do controle de acessos.",
+      "personagem_id": null,
+      "documento_prova": "E1-03",
+      "confirmacao_independente": "E1-04"
+    },
+    {
+      "data_hora": "01/03/2025 18h24",
+      "evento": "Boletim de inspeção inicial assinado.",
+      "personagem_id": null,
+      "documento_prova": "E1-07",
+      "confirmacao_independente": "E1-01"
+    },
+    {
+      "data_hora": "22/02/2025 00h00",
+      "evento": "Recibo do acabamento quitado.",
+      "personagem_id": null,
+      "documento_prova": "E2-05",
+      "confirmacao_independente": "E2-04"
+    }
+  ],
+  "pilares_validacao": [
+    {
+      "nome": "presenca_credencial_galeria",
+      "documento_principal": "E1-03",
+      "confirmacao": "E1-02",
+      "personagem_id": "27"
+    },
+    {
+      "nome": "biometria_exclusiva_porta1",
+      "documento_principal": "E1-02",
+      "confirmacao": "E1-03",
+      "personagem_id": "27"
+    },
+    {
+      "nome": "janela_na_queda_de_energia",
+      "documento_principal": "E1-03",
+      "confirmacao": "E1-06",
+      "personagem_id": "27"
+    },
+    {
+      "nome": "retorno_com_obra_fora",
+      "documento_principal": "E1-03",
+      "confirmacao": "E2-02",
+      "personagem_id": "27"
+    }
+  ],
+  "intervalo_critico_inicio": "01/03/2025 15h00",
+  "intervalo_critico_fim": "01/03/2025 16h00",
+  "documentos": [
+    {
+      "codigo": "E1-00",
+      "titulo": "Protocolo da investigação",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "expectativa",
+      "objetivo_narrativo": "Abrir o dossiê: instruir o jogador a identificar o suspeito no E1 antes de avançar.",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "MUSEU MUNICIPAL DE VILA REAL",
+        "SUBTITULO_ORGANIZACAO": "Segurança Patrimonial",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "CONTATO": "(11) 3298-1812",
+        "CNPJ": "12.345.678/0001-90",
+        "COR_TOPO": "#7a1f2b",
+        "LOCAL_DATA": "Vila Real, 01/03/2025",
+        "SAUDACAO": "Detetive,",
+        "CORPO_CARTA": "<p>Abra somente o Envelope 1. Confira os documentos: um pedido de ajuda, o manual de acessos, o controle de acessos, a escala de turnos, os prints do grupo, o cronograma de energia, o boletim inicial e um glossário. Seu primeiro objetivo é identificar o principal suspeito do furto com base nas evidências. Leia nas entrelinhas e conecte as pistas. Quando tiver certeza, avance para o Envelope 2.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Coordenação do caso",
+        "NOME_ASSINANTE": "Coordenação do caso",
+        "CARGO_ASSINANTE": "Sob Investigação",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Protocolo — Envelope 1"
+      }
+    },
+    {
+      "codigo": "E1-01",
+      "titulo": "Pedido de ajuda do vigilante",
+      "envelope": "E1",
+      "tipo": "email_narrador",
+      "emocao_esperada": "urgência aflita",
+      "objetivo_narrativo": "Abrir o caso pela voz do suspeito aparente; entregar contexto, IDs e a falha das câmeras.",
+      "pistas_contidas": [
+        "P-OUTAGE-CONHECIDA",
+        "P-ACESSO-RESTRITO"
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-03",
+        "E1-06"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "33",
+        "27",
+        "20",
+        "14",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Otávio Pires",
+        "REMETENTE_EMAIL": "otaviopires@mail.com",
+        "DESTINATARIO_EMAIL": "detetive@sobinvestigacao.com",
+        "DESTINATARIO_LABEL": "Detetive",
+        "COPIA": "—",
+        "DATA_HORA": "01 de março de 2025 às 17:05",
+        "ASSUNTO": "Roubo do quadro Jardim Noturno — preciso da sua ajuda!",
+        "AVATAR_INICIAL": "O",
+        "AVATAR_COR": "#1f7a3a",
+        "CORPO_EMAIL": "<p>Preciso da sua ajuda urgente. Há cerca de vinte minutos um colega viu que o quadro Jardim Noturno não estava mais no lugar. A polícia já vem vindo e tenho medo que sobre para mim, porque fui o último a conferir a sala, por volta das 15h15, e estava tudo certo. Já tive problema com a polícia no passado e isso pode acabar comigo.</p><p>O pior: não temos registro das câmeras. Estamos em obras no pátio externo há quase um mês e de vez em quando cai a energia. Quando o quadro sumiu já fazia uns quinze minutos que estávamos sem luz no museu inteiro, menos nas salas de segurança, que têm gerador à parte. Só que as câmeras não estão nesse gerador. A energia só voltou perto das 16h.</p><p>Só a equipe de segurança e os terceirizados da obra entram aqui agora. Toda passagem interna exige crachá ou biometria, o mesmo sistema que bate o ponto. Anexei o que consegui juntar. Pra te situar, meu ID é o 33; o Aurélio é o 27, o Márcio é o 20, o Rui é o 14 e o Jonas cuida da guarita.</p>",
+        "NOTA_RODAPE": "Mensagem encaminhada no âmbito da apuração interna.",
+        "ANEXOS": true,
+        "TOTAL_ANEXOS": "6",
+        "CADA_ANEXO": [
+          {
+            "NOME_ARQUIVO": "manual_portas.pdf",
+            "TAMANHO_KB": "91"
+          },
+          {
+            "NOME_ARQUIVO": "acessos.pdf",
+            "TAMANHO_KB": "152"
+          },
+          {
+            "NOME_ARQUIVO": "escala_turnos.pdf",
+            "TAMANHO_KB": "134"
+          },
+          {
+            "NOME_ARQUIVO": "prints_grupo.pdf",
+            "TAMANHO_KB": "123"
+          },
+          {
+            "NOME_ARQUIVO": "cronograma_energia.pdf",
+            "TAMANHO_KB": "67"
+          },
+          {
+            "NOME_ARQUIVO": "boletim_inicial.pdf",
+            "TAMANHO_KB": "88"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "Manual de controle de acessos",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "rigor burocrático",
+      "objetivo_narrativo": "Fixar a regra que transforma o log em prova: crachá pessoal; porta 1 só biometria; em queda de energia, passagem só com confirmação manual.",
+      "pistas_contidas": [
+        "P-PORTA1-BIOMETRIA",
+        "P-MODO-CONTENCAO"
+      ],
+      "confirma": [
+        "E1-03"
+      ],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "27"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "MUSEU MUNICIPAL DE VILA REAL",
+        "SUBTITULO_ORGANIZACAO": "Segurança Patrimonial",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "CONTATO": "(11) 3298-1812",
+        "CNPJ": "12.345.678/0001-90",
+        "COR_TOPO": "#7a1f2b",
+        "LOCAL_DATA": "Vila Real, 06/08/2024",
+        "SAUDACAO": "Prezada equipe,",
+        "CORPO_CARTA": "<p>O cartão de acesso é pessoal e intransferível; em nenhuma hipótese se compartilha crachá. Cada pessoa autentica a própria passagem: o sistema exige uma validação por indivíduo, em tempo real e por porta. As portas 2 a 6 aceitam apenas crachá; a porta 1 aceita apenas a biometria cadastrada, e o crachá não tem utilidade nela. O sistema registra cada passagem com identificação, sentido e horário.</p><p>Em queda de energia, o controle entra em modo de contenção: a validação deixa de ser autônoma e toda passagem só é autorizada mediante apresentação do crachá e confirmação manual com a central via rádio. Nesse modo o alarme de porta aberta fica desativado.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Aurélio Penha",
+        "NOME_ASSINANTE": "Aurélio Penha",
+        "CARGO_ASSINANTE": "Chefe da Segurança Patrimonial",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Instruções sobre o novo sistema de controle de portas",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "27"
+      }
+    },
+    {
+      "codigo": "E1-03",
+      "titulo": "Controle de acessos exportado",
+      "envelope": "E1",
+      "tipo": "log_acesso",
+      "emocao_esperada": "frieza investigativa",
+      "objetivo_narrativo": "Pilar de presença: na janela sem energia, só a credencial biométrica 27 cruza a porta 1 da galeria (ida e volta). A do suspeito aparente não aparece lá.",
+      "pistas_contidas": [
+        "P-CRED-27-PORTA1",
+        "P-RUI-NA-SEGURANCA"
+      ],
+      "confirma": [
+        "E1-04"
+      ],
+      "confirmado_por": [
+        "E1-02"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "33",
+        "14",
+        "27",
+        "20"
+      ],
+      "codigos_citados": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3"
+      ],
+      "conteudo": {
+        "NOME_SISTEMA": "CONTROLE DE ACESSOS",
+        "SUBTITULO_SISTEMA": "Dados exportados 09:50–17:04 de 01/03/2025",
+        "COR_SISTEMA": "#7a1f2b",
+        "COR_SISTEMA_DARK": "#3a0f15",
+        "DATA_EXPORTACAO": "01/03/2025",
+        "HORA_EXPORTACAO": "17:04:24",
+        "OPERADOR_EXPORT": "central de segurança",
+        "HASH_REGISTRO": "9f2c-aa10",
+        "PERIODO_INICIO": "01/03/2025 09:50",
+        "PERIODO_FIM": "01/03/2025 17:04",
+        "LOCALIZACAO_SISTEMA": "Museu Municipal de Vila Real",
+        "TOTAL_REGISTROS": "8",
+        "TOTAL_USUARIOS": "6",
+        "TOTAL_ENTRADAS": "0",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "COLUNA_NOME": "ID",
+        "COLUNA_TERMINAL": "Porta",
+        "COLUNA_METODO": "Método",
+        "COLUNA_OBS": "Observação",
+        "REGISTROS": [
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "14:45:05",
+            "PORTA": "1A",
+            "ID_USUARIO": "33",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "ronda",
+            "OBSERVACAO": "ronda interna",
+            "NOME_USUARIO": "Otávio Pires",
+            "TERMINAL": "leitor",
+            "METODO": "biometria"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "15:12:23",
+            "PORTA": "1B",
+            "ID_USUARIO": "33",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "ronda",
+            "OBSERVACAO": "última conferência da galeria",
+            "NOME_USUARIO": "Otávio Pires",
+            "TERMINAL": "leitor",
+            "METODO": "biometria"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "15:18:46",
+            "PORTA": "3",
+            "ID_USUARIO": "14",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "entrada",
+            "OBSERVACAO": "entra na sala de segurança",
+            "NOME_USUARIO": "Rui Caldas",
+            "TERMINAL": "leitor",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "15:20:00",
+            "PORTA": "1",
+            "ID_USUARIO": "27",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "entrada",
+            "OBSERVACAO": "porta biométrica da galeria principal",
+            "NOME_USUARIO": "Aurélio Penha",
+            "TERMINAL": "leitor",
+            "METODO": "biometria"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "15:35:12",
+            "PORTA": "2",
+            "ID_USUARIO": "14",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "passagem",
+            "OBSERVACAO": "permanece na ala de segurança",
+            "NOME_USUARIO": "Rui Caldas",
+            "TERMINAL": "leitor",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "15:58:51",
+            "PORTA": "1",
+            "ID_USUARIO": "27",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "saida",
+            "OBSERVACAO": "retorno pela porta biométrica",
+            "NOME_USUARIO": "Aurélio Penha",
+            "TERMINAL": "leitor",
+            "METODO": "biometria"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "16:08:04",
+            "PORTA": "2",
+            "ID_USUARIO": "20",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "passagem",
+            "OBSERVACAO": "sala de câmeras",
+            "NOME_USUARIO": "Márcio Dantas",
+            "TERMINAL": "leitor",
+            "METODO": "crachá"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "16:20:00",
+            "PORTA": "1B",
+            "ID_USUARIO": "33",
+            "TIPO_EVENTO": "passagem",
+            "EVENTO": "passagem",
+            "OBSERVACAO": "área comum",
+            "NOME_USUARIO": "Otávio Pires",
+            "TERMINAL": "leitor",
+            "METODO": "biometria"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Escala de turnos do dia",
+      "envelope": "E1",
+      "tipo": "escala",
+      "emocao_esperada": "contexto operacional",
+      "objetivo_narrativo": "Confirma quem estava de serviço e em que posto; sustenta o descarte do recém-admitido (posto na sala de segurança, não na galeria).",
+      "pistas_contidas": [
+        "P-RUI-POSTO-SEGURANCA"
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-03"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "27",
+        "20",
+        "33",
+        "14",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "ESCALA DE TURNOS",
+        "SUBTITULO_SISTEMA": "Segurança Patrimonial — 01/03/2025",
+        "COR_SISTEMA": "#7a1f2b",
+        "COR_SISTEMA_DARK": "#3a0f15",
+        "DATA_EXPORTACAO": "01/03/2025",
+        "HORA_EXPORTACAO": "17:04:24",
+        "OPERADOR_EXPORT": "central de segurança",
+        "HASH_REGISTRO": "9f2c-aa10",
+        "PERIODO_INICIO": "01/03/2025 09:50",
+        "PERIODO_FIM": "01/03/2025 17:04",
+        "LOCALIZACAO_SISTEMA": "Museu Municipal de Vila Real",
+        "TOTAL_REGISTROS": "5",
+        "TOTAL_USUARIOS": "6",
+        "TOTAL_ENTRADAS": "0",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "COLUNA_NOME": "ID",
+        "COLUNA_TERMINAL": "Posto",
+        "COLUNA_METODO": "Origem",
+        "COLUNA_OBS": "Observação",
+        "REGISTROS": [
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "10:00-18:00",
+            "PORTA": "TURNO",
+            "ID_USUARIO": "27",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Chefe — turno da tarde",
+            "OBSERVACAO": "posto de chefia",
+            "NOME_USUARIO": "Aurélio Penha",
+            "TERMINAL": "leitor",
+            "METODO": "escala"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "10:00-18:00",
+            "PORTA": "TURNO",
+            "ID_USUARIO": "20",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Sala de câmeras",
+            "OBSERVACAO": "monitoramento",
+            "NOME_USUARIO": "Márcio Dantas",
+            "TERMINAL": "leitor",
+            "METODO": "escala"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "10:00-18:00",
+            "PORTA": "TURNO",
+            "ID_USUARIO": "33",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Rondas internas e externas",
+            "OBSERVACAO": "rondas",
+            "NOME_USUARIO": "Otávio Pires",
+            "TERMINAL": "leitor",
+            "METODO": "escala"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "10:00-18:00",
+            "PORTA": "TURNO",
+            "ID_USUARIO": "14",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Apoio na sala de segurança",
+            "OBSERVACAO": "apoio interno",
+            "NOME_USUARIO": "Rui Caldas",
+            "TERMINAL": "leitor",
+            "METODO": "escala"
+          },
+          {
+            "CLASSE_LINHA": "normal",
+            "DATA": "01-03-2025",
+            "HORA": "10:00-18:00",
+            "PORTA": "GUARITA",
+            "ID_USUARIO": "07",
+            "TIPO_EVENTO": "OPERACAO",
+            "EVENTO": "Portaria/guarita externa",
+            "OBSERVACAO": "controle de portaria",
+            "NOME_USUARIO": "Jonas Teixeira",
+            "TERMINAL": "leitor",
+            "METODO": "escala"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Prints do grupo da segurança",
+      "envelope": "E1",
+      "tipo": "chat",
+      "emocao_esperada": "tensão entre colegas",
+      "objetivo_narrativo": "Textura humana e pistas verbais: situa Rui e Márcio juntos, descarta passagem de objeto grande pela sala de câmeras e planta a suspeita sobre a conveniência da queda.",
+      "pistas_contidas": [
+        "P-RUI-COM-MARCIO",
+        "P-NADA-PELA-SEGURANCA",
+        "P-QUEDA-CONVENIENTE"
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "33",
+        "14",
+        "20",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "HORA_TELA": "16:57",
+        "CONTADOR_NAOVISTOS": "07",
+        "NOME_GRUPO": "[Seg.] Turno da tarde",
+        "MEMBROS_LISTA": "Otávio, Márcio, Rui, Jonas",
+        "DATA_CONVERSA": "01/03/2025",
+        "MENSAGENS": [
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-2",
+            "NOME_REMETENTE": "Otávio Pires",
+            "TEXTO_MENSAGEM": "Passei na galeria umas 15:15 fazendo a ronda e estava tudo certo.",
+            "HORARIO": "16:41",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "nogap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-3",
+            "NOME_REMETENTE": "Rui Caldas",
+            "TEXTO_MENSAGEM": "Eu não fiz nada. Fiquei o tempo todo na sala de segurança com o Márcio; sempre querem jogar a culpa em cima de mim.",
+            "HORARIO": "16:43",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "nogap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-4",
+            "NOME_REMETENTE": "Márcio Dantas",
+            "TEXTO_MENSAGEM": "Fico na sala de câmeras a tarde inteira. O Rui esteve comigo, sim. Se alguém passou carregando coisa grande, não foi pela minha porta.",
+            "HORARIO": "16:43",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "nogap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-4",
+            "NOME_REMETENTE": "Márcio Dantas",
+            "TEXTO_MENSAGEM": "O quadro que sumiu é enorme. Ninguém passou carregando nada pela sala da segurança, isso eu garanto.",
+            "HORARIO": "16:44",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "in",
+            "CLASSE_GAP": "gap",
+            "MOSTRAR_NOME": true,
+            "COR_REMETENTE": "color-5",
+            "NOME_REMETENTE": "Jonas Teixeira",
+            "TEXTO_MENSAGEM": "Vi gente entrando e saindo pelo pátio, tudo normal. Nas câmeras de fora dá pra ver bastante coisa, mas não anotei tudo certinho não.",
+            "HORARIO": "16:54",
+            "DIRECAO_OUT": false,
+            "TICKS": ""
+          },
+          {
+            "DIRECAO": "out",
+            "CLASSE_GAP": "nogap",
+            "MOSTRAR_NOME": false,
+            "COR_REMETENTE": "color-1",
+            "NOME_REMETENTE": "Otávio Pires",
+            "TEXTO_MENSAGEM": "Puts, e ainda estava sem luz nessa hora. Muito conveniente essa queda.",
+            "HORARIO": "16:55",
+            "DIRECAO_OUT": true,
+            "TICKS": "✓✓"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Cronograma de manutenção de energia",
+      "envelope": "E1",
+      "tipo": "email_institucional",
+      "emocao_esperada": "rotina administrativa",
+      "objetivo_narrativo": "Mostra que a queda de energia das 15h era planejada e conhecida com antecedência — oportunidade não foi acaso.",
+      "pistas_contidas": [
+        "P-OUTAGE-CONHECIDA"
+      ],
+      "confirma": [
+        "E1-01"
+      ],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Lucas Maia",
+        "REMETENTE_EMAIL": "lmaia@energiaplena.com",
+        "DESTINATARIO_EMAIL": "diretoria@mvr.com",
+        "DESTINATARIO_LABEL": "Diretoria / Segurança",
+        "COPIA": "—",
+        "DATA_HORA": "09 de janeiro de 2025 às 12:13",
+        "ASSUNTO": "Cronograma de execução dos serviços",
+        "AVATAR_INICIAL": "L",
+        "AVATAR_COR": "#b07a1f",
+        "CORPO_EMAIL": "<p>Conforme contrato, a manutenção do gerador principal ocorre nas semanas de 24/02 a 07/03. Durante esses procedimentos podem ocorrer oscilações e quedas momentâneas no fornecimento interno, com pico previsto para a tarde de 01/03. Recomendamos atenção das equipes em áreas sensíveis a interrupção.</p>",
+        "NOTA_RODAPE": "Mensagem encaminhada no âmbito da apuração interna.",
+        "ANEXOS": false
+      }
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Boletim de inspeção inicial",
+      "envelope": "E1",
+      "tipo": "boletim",
+      "emocao_esperada": "oficialidade contida",
+      "objetivo_narrativo": "Versão da polícia: sem arrombamento, acesso por credencial, hipótese de envolvimento interno.",
+      "pistas_contidas": [
+        "P-SEM-ARROMBAMENTO",
+        "P-ACESSO-RESTRITO"
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-03"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "POLÍCIA CIVIL DO ESTADO",
+        "ORGAO_SUBTITULO": "Delegacia de Vila Real",
+        "NUMERO_CASO": "#519FH",
+        "TIPO_DOCUMENTO": "BOLETIM DE INSPEÇÃO INICIAL",
+        "TIPO_OCORRENCIA": "Furto qualificado",
+        "DATA": "01/03/2025",
+        "LOCALIZACAO": "Vila Real - SP",
+        "HORA_OCORRENCIA": "16h40",
+        "DESCRICAO_OCORRENCIA": "<p>Furto de uma única obra de arte no Museu Municipal de Vila Real, em reforma e fechado à visitação. Não há sinais de arrombamento ou violência, o que indica furto premeditado e de elevada complexidade. Apenas o pátio externo está em obras, com terceirizados. Para acessar a área interna sem dano aparente seria necessário um cartão de acesso funcional. Houve interrupção planejada de energia às 15h, com desativação das câmeras; o controle de portas seguiu em modo de economia. A obra foi dada como desaparecida às 16h40. A hipótese de envolvimento interno não pode ser descartada.</p>",
+        "NOME_RESPONSAVEL": "Helena Brandt",
+        "ASSINATURA_RESPONSAVEL": "Helena Brandt",
+        "ASSINATURA_GLIFO": "HB",
+        "DATA_HORA_ASSINATURA": "01/03/2025 18h24",
+        "MOSTRAR_CARIMBO": true,
+        "TEXTO_CARIMBO": "EM APURAÇÃO"
+      }
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Glossário de controle de acesso",
+      "envelope": "E1",
+      "tipo": "glossario",
+      "emocao_esperada": "apoio à leitura",
+      "objetivo_narrativo": "Traduz termos técnicos do log e do manual para reduzir carga.",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "MUSEU MUNICIPAL DE VILA REAL",
+        "SUBTITULO_ORGANIZACAO": "Apoio à leitura técnica",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "CONTATO": "(11) 3298-1812",
+        "CNPJ": "12.345.678/0001-90",
+        "COR_TOPO": "#7a1f2b",
+        "LOCAL_DATA": "Vila Real, 01/03/2025",
+        "SAUDACAO": "Termos úteis:",
+        "CORPO_CARTA": "<p>Modo de contenção: estado do sistema em queda de energia; passagem só com crachá e confirmação manual por rádio.<br>Sentido de passagem: direção registrada (entrada/saída) em cada leitura.<br>Biometria: leitura de digital cadastrada; exclusiva da porta 1, não aceita crachá.<br>Porta controlada: ponto com leitor que grava identificação, sentido e horário.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Central de Segurança",
+        "NOME_ASSINANTE": "Central de Segurança",
+        "CARGO_ASSINANTE": "Museu Municipal de Vila Real",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Glossário rápido — termos do sistema de portas"
+      }
+    },
+    {
+      "codigo": "E1-09",
+      "titulo": "Folha de cruzamento de credenciais",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "organização",
+      "objetivo_narrativo": "Cruza ID de crachá com nome e posto, ferramenta para o jogador ler o log de acessos sem decorar números.",
+      "pistas_contidas": [
+        "P-MAPA-CREDENCIAIS"
+      ],
+      "confirma": [
+        "E1-03"
+      ],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "27",
+        "33",
+        "20",
+        "14",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "MUSEU MUNICIPAL DE VILA REAL",
+        "SUBTITULO_ORGANIZACAO": "Cruzamento de credenciais — turno 01/03",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "CONTATO": "(11) 3298-1812",
+        "CNPJ": "12.345.678/0001-90",
+        "COR_TOPO": "#7a1f2b",
+        "LOCAL_DATA": "Vila Real, 01/03/2025",
+        "SAUDACAO": "Credenciais ativas:",
+        "CORPO_CARTA": "<p>ID 27 — Aurélio Penha — Chefe da Segurança (biometria porta 1 + crachá).<br>ID 33 — Otávio Pires — Vigilante de ronda (biometria porta 1 + crachá).<br>ID 20 — Márcio Dantas — Sala de câmeras (crachá).<br>ID 14 — Rui Caldas — Apoio na sala de segurança (crachá).<br>ID 07 — Jonas Teixeira — Guarita externa (sem acesso interno).</p><p>Observação: a porta 1 (galeria principal) só abre por biometria cadastrada.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Central de Segurança",
+        "NOME_ASSINANTE": "Central de Segurança",
+        "CARGO_ASSINANTE": "Museu Municipal de Vila Real",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Tabela de credenciais ativas no turno"
+      }
+    },
+    {
+      "codigo": "E2-00",
+      "titulo": "Protocolo do segundo envelope",
+      "envelope": "E2",
+      "tipo": "protocolo",
+      "emocao_esperada": "virada",
+      "objetivo_narrativo": "Reorientar o jogador: o suspeito está no museu, mas a obra não. Achar o culpado e o destino da obra.",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "MUSEU MUNICIPAL DE VILA REAL",
+        "SUBTITULO_ORGANIZACAO": "Segurança Patrimonial",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "CONTATO": "(11) 3298-1812",
+        "CNPJ": "12.345.678/0001-90",
+        "COR_TOPO": "#7a1f2b",
+        "LOCAL_DATA": "Vila Real, 01/03/2025",
+        "SAUDACAO": "Detetive,",
+        "CORPO_CARTA": "<p>Combine as pistas dos dois envelopes. Agora seu objetivo é descobrir quem está por trás do roubo e o destino da obra, já que o suspeito está no museu, mas o quadro não. Identifique o culpado, o executor e para onde a obra foi levada antes que seja tarde.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Coordenação do caso",
+        "NOME_ASSINANTE": "Coordenação do caso",
+        "CARGO_ASSINANTE": "Sob Investigação",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Protocolo — Envelope 2"
+      }
+    },
+    {
+      "codigo": "E2-01",
+      "titulo": "Pedido da diretoria: impedir a venda",
+      "envelope": "E2",
+      "tipo": "email_institucional",
+      "emocao_esperada": "urgência institucional",
+      "objetivo_narrativo": "Vira a leitura: o suspeito está no museu, mas a obra não. O foco passa a ser o destino da obra e quem a escoou.",
+      "pistas_contidas": [
+        "P-OBRA-FORA",
+        "P-CARTAO-FENCE"
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "REMETENTE_NOME": "Diretoria do Museu",
+        "REMETENTE_EMAIL": "diretoria@mvr.com",
+        "DESTINATARIO_EMAIL": "detetive@sobinvestigacao.com",
+        "DESTINATARIO_LABEL": "Detetive",
+        "COPIA": "—",
+        "DATA_HORA": "01 de março de 2025 às 18:02",
+        "ASSUNTO": "Urgente: precisamos impedir a venda do quadro",
+        "AVATAR_INICIAL": "D",
+        "AVATAR_COR": "#7a1f2b",
+        "CORPO_EMAIL": "<p>A polícia revistou o local e confirmou que o quadro não está mais aqui. Precisamos impedir que a obra seja levada para longe e se torne impossível de rastrear. Obras roubadas costumam ser oferecidas rápido, às vezes disfarçadas dentro da logística de encomendas legais. Encontramos dois cartões suspeitos esquecidos nos armários e anexamos os materiais mais recentes de cada fornecedor da reforma. O fornecedor de corte foi contratado em cima da hora; temos o orçamento e a lista de funcionários. Contamos com sua ajuda.</p>",
+        "NOTA_RODAPE": "Mensagem encaminhada no âmbito da apuração interna.",
+        "ANEXOS": true,
+        "TOTAL_ANEXOS": "5",
+        "CADA_ANEXO": [
+          {
+            "NOME_ARQUIVO": "proposta_transporte.pdf",
+            "TAMANHO_KB": "81"
+          },
+          {
+            "NOME_ARQUIVO": "orcamento_corte.pdf",
+            "TAMANHO_KB": "42"
+          },
+          {
+            "NOME_ARQUIVO": "cadastro_terceiros.pdf",
+            "TAMANHO_KB": "65"
+          },
+          {
+            "NOME_ARQUIVO": "recibo_acabamento.pdf",
+            "TAMANHO_KB": "120"
+          },
+          {
+            "NOME_ARQUIVO": "decodificacao_cartao.pdf",
+            "TAMANHO_KB": "54"
+          }
+        ]
+      }
+    },
+    {
+      "codigo": "E2-02",
+      "titulo": "Proposta da transportadora (BID da reforma)",
+      "envelope": "E2",
+      "tipo": "orcamento",
+      "emocao_esperada": "logística fria",
+      "objetivo_narrativo": "Salto logístico: a empresa que move e armazena carga especial sob o BID; a nota de 'não fim de semana' e a unidade próxima ao destino ancoram a rota.",
+      "pistas_contidas": [
+        "P-LOGISTICA-BID",
+        "P-NAO-FDS"
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E2-07"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "09"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_EMPRESA": "TRANSVALE LOGÍSTICA",
+        "TIPO_EMPRESA": "Transporte de cargas especiais",
+        "CNPJ": "31.313.431/0001-87",
+        "ENDERECO": "Av. 4 de Maio, 200 - Porto Lindo - SP",
+        "SITE_EMAIL": "contato@transvale.com",
+        "COR_PRIMARIA": "#b07a1f",
+        "COR_SECUNDARIA": "#222",
+        "NUMERO_ORCAMENTO": "21321.02",
+        "DATA_EMISSAO": "01/2025",
+        "DATA_VALIDADE": "60 dias",
+        "REVISAO": "1",
+        "NOME_CLIENTE": "Museu Municipal de Vila Real",
+        "ENDERECO_CLIENTE": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "DOC_CLIENTE": "12.345.678/0001-90",
+        "CONTATO_CLIENTE": "diretoria@mvr.com",
+        "TITULO_PROJETO": "Reforma Geral 2025 — BID N°1023",
+        "DESCRICAO_REFERENCIA": "BID N°1023",
+        "ITENS": [
+          {
+            "NUMERO_ITEM": "1",
+            "NOME_ITEM": "Movimentação — furgão/van",
+            "DESC_ITEM": "Frete de carga especial, por km",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 5,50",
+            "VALOR_TOTAL_ITEM": "R$ 5,50/km"
+          },
+          {
+            "NUMERO_ITEM": "2",
+            "NOME_ITEM": "Armazenagem (item > 1 m³)",
+            "DESC_ITEM": "Diária em galpão",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 150,00",
+            "VALOR_TOTAL_ITEM": "R$ 150,00/dia"
+          },
+          {
+            "NUMERO_ITEM": "3",
+            "NOME_ITEM": "Escolta de carga de alto valor",
+            "DESC_ITEM": "Serviço opcional, orçamento à parte",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "sob consulta",
+            "VALOR_TOTAL_ITEM": "sob consulta"
+          }
+        ],
+        "SUBTOTAL": "sob medida",
+        "DESCONTO": "R$ 0,00",
+        "IMPOSTOS": "R$ 0,00",
+        "VALOR_TOTAL": "conforme km e diárias",
+        "CONDICOES": [
+          {
+            "CONDICAO": "Preços válidos apenas em dias úteis; não prestamos serviço aos fins de semana e feriados."
+          },
+          {
+            "CONDICAO": "Unidades em Vila Real, Campos do Sul e Porto Lindo."
+          }
+        ],
+        "ASSINATURA_RESPONSAVEL": "Heitor Vasques",
+        "NOME_RESPONSAVEL": "Heitor Vasques",
+        "CARGO_RESPONSAVEL": "Gerente Comercial",
+        "ASSINATURA_CLIENTE": "—",
+        "DATA_APROVACAO": "—",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "09"
+      }
+    },
+    {
+      "codigo": "E2-03",
+      "titulo": "Orçamento de corte e solda",
+      "envelope": "E2",
+      "tipo": "orcamento",
+      "emocao_esperada": "tecnicidade discreta",
+      "objetivo_narrativo": "Quem consegue cortar a moldura-relíquia de carvalho. Carrega o código offline (hex) na nota manuscrita — pista FF-06.",
+      "pistas_contidas": [
+        "P-CORTE-MOLDURA",
+        "P-HEX-ETIQUETA"
+      ],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "30538"
+      ],
+      "codigos_citados": [
+        "7F",
+        "00",
+        "4B"
+      ],
+      "conteudo": {
+        "NOME_EMPRESA": "AÇO VIVO SOLUÇÕES",
+        "TIPO_EMPRESA": "Corte e solda especiais",
+        "CNPJ": "65.742.654/0001-34",
+        "ENDERECO": "Rua Pres. Antônio Moura, 6 - Porto Lindo - SP",
+        "SITE_EMAIL": "contato@acovivo.com",
+        "COR_PRIMARIA": "#1f7a3a",
+        "COR_SECUNDARIA": "#222",
+        "NUMERO_ORCAMENTO": "1532",
+        "DATA_EMISSAO": "01/2025",
+        "DATA_VALIDADE": "60 dias",
+        "REVISAO": "1",
+        "NOME_CLIENTE": "Museu Municipal de Vila Real",
+        "ENDERECO_CLIENTE": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "DOC_CLIENTE": "12.345.678/0001-90",
+        "CONTATO_CLIENTE": "diretoria@mvr.com",
+        "TITULO_PROJETO": "Reforma Geral 2025 — BID N°1023",
+        "DESCRICAO_REFERENCIA": "BID N°1023 — corte de estruturas",
+        "ITENS": [
+          {
+            "NUMERO_ITEM": "1",
+            "NOME_ITEM": "Corte com gases (oxigênio, GLP, acetileno)",
+            "DESC_ITEM": "Diária da equipe",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 8.000",
+            "VALOR_TOTAL_ITEM": "R$ 8.000"
+          },
+          {
+            "NUMERO_ITEM": "2",
+            "NOME_ITEM": "Solda elétrica com argônio",
+            "DESC_ITEM": "Diária da equipe",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 5.500",
+            "VALOR_TOTAL_ITEM": "R$ 5.500"
+          },
+          {
+            "NUMERO_ITEM": "3",
+            "NOME_ITEM": "Corte com serra/esmerilhadeira",
+            "DESC_ITEM": "Diária da equipe",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 3.200",
+            "VALOR_TOTAL_ITEM": "R$ 3.200"
+          }
+        ],
+        "SUBTOTAL": "R$ 16.700",
+        "DESCONTO": "R$ 0,00",
+        "IMPOSTOS": "R$ 0,00",
+        "VALOR_TOTAL": "R$ 16.700",
+        "CONDICOES": [
+          {
+            "CONDICAO": "Apenas funcionários cadastrados ligam os equipamentos ou abrem os compartimentos de carga."
+          },
+          {
+            "CONDICAO": "Serviço de corte para grandes estruturas conforme BID N°1023."
+          }
+        ],
+        "ASSINATURA_RESPONSAVEL": "Sérgio Brum",
+        "NOME_RESPONSAVEL": "Sérgio Brum",
+        "CARGO_RESPONSAVEL": "Maçariqueiro responsável",
+        "ASSINATURA_CLIENTE": "—",
+        "DATA_APROVACAO": "—",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "30538",
+        "NOTA_MANUSCRITA": "cor da etiqueta da carga: #7F004B",
+        "NOTA_MANUSCRITA_PERSONAGEM_ID": "30538"
+      }
+    },
+    {
+      "codigo": "E2-04",
+      "titulo": "Cadastro de terceiros da reforma",
+      "envelope": "E2",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "burocracia de fornecedores",
+      "objetivo_narrativo": "Liga razão social, CNPJ e nº de funcionários por fornecedor; permite cruzar nomes que reaparecem na guarita.",
+      "pistas_contidas": [],
+      "confirma": [
+        "E2-07"
+      ],
+      "confirmado_por": [],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "27"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "MUSEU MUNICIPAL DE VILA REAL",
+        "SUBTITULO_ORGANIZACAO": "Cadastro de terceiros — BID N°1023",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "CONTATO": "(11) 3298-1812",
+        "CNPJ": "12.345.678/0001-90",
+        "COR_TOPO": "#7a1f2b",
+        "LOCAL_DATA": "Vila Real, 01/03/2025",
+        "SAUDACAO": "Fornecedores:",
+        "CORPO_CARTA": "<p>Fornecedor 1 — Transvale Logística (CNPJ 31.313.431/0001-87), 11 funcionários.<br>Fornecedor 2 — Energia Plena Elétrica (CNPJ 51.476.981/0001-54), 7 funcionários.<br>Fornecedor 3 — Aço Vivo Soluções, corte e solda (CNPJ 65.742.654/0001-34), 6 funcionários.<br>Fornecedor 4 — Acabamentos Vilela (CNPJ 21.432.543/0001-23), 1 funcionária.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Aurélio Penha",
+        "NOME_ASSINANTE": "Aurélio Penha",
+        "CARGO_ASSINANTE": "Chefe da Segurança Patrimonial",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Fornecedores contratados para a reforma geral 2025",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "27"
+      }
+    },
+    {
+      "codigo": "E2-05",
+      "titulo": "Recibo do acabamento",
+      "envelope": "E2",
+      "tipo": "recibo",
+      "emocao_esperada": "rotina financeira",
+      "objetivo_narrativo": "Red herring controlado: fornecedor de pintura sem acesso interno nem ligação com a saída da obra.",
+      "pistas_contidas": [],
+      "confirma": [],
+      "confirmado_por": [],
+      "red_herring_potencial": "Fornecedor presente na obra, mas sem acesso interno nem vínculo com a retirada da obra.",
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_EMPRESA": "ACABAMENTOS VILELA",
+        "TAGLINE_EMPRESA": "Pintura e acabamento",
+        "CNPJ": "21.432.543/0001-23",
+        "ENDERECO_EMPRESA": "Rua Luiz Paulo II, 231 - Vila Real - SP",
+        "CONTATO_EMPRESA": "contato@vilela.com",
+        "NUMERO_RECIBO": "0042",
+        "WATERMARK_TEXTO": "RECIBO",
+        "COR_EMPRESA": "#1f3a7a",
+        "NOME_CONTRATANTE": "Museu Municipal de Vila Real",
+        "ENDERECO_CONTRATANTE": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "DOC_CONTRATANTE": "12.345.678/0001-90",
+        "CONTATO_CONTRATANTE": "diretoria@mvr.com",
+        "DATA_RECIBO": "22/02/2025",
+        "PERIODO_REFERENCIA": "fevereiro/2025",
+        "VALOR_TOTAL": "R$ 2.940,00",
+        "VALOR_POR_EXTENSO": "dois mil novecentos e quarenta reais",
+        "FORMA_PAGAMENTO": "Transferência",
+        "DESCRICAO_PAGAMENTO": "Serviços de pintura nas datas de 01, 08, 15 e 22/02 e reembolso de materiais.",
+        "ITENS": [
+          {
+            "DESCRICAO_ITEM": "Serviço de pintura e acabamento (4 datas)",
+            "QUANTIDADE": "4",
+            "VALOR_UNITARIO": "R$ 500,00",
+            "VALOR_ITEM": "R$ 2.000,00"
+          },
+          {
+            "DESCRICAO_ITEM": "Reembolso de materiais (tintas e pincéis)",
+            "QUANTIDADE": "1",
+            "VALOR_UNITARIO": "R$ 820,00",
+            "VALOR_ITEM": "R$ 820,00"
+          }
+        ],
+        "ASSINATURA_PRESTADOR": "Karina Vilela",
+        "ASSINATURA_CONTRATANTE": "—",
+        "DATA_ASSINATURA": "22/02/2025",
+        "ASSINATURA_PRESTADOR_PERSONAGEM_ID": ""
+      }
+    },
+    {
+      "codigo": "E2-06",
+      "titulo": "Depoimento do vigilante recém-admitido",
+      "envelope": "E2",
+      "tipo": "depoimento",
+      "emocao_esperada": "indignação defensiva",
+      "objetivo_narrativo": "O suspeito aparente está no museu e se defende, jogando a culpa no responsável pela guarita — descarte por ausência de oportunidade, não confissão.",
+      "pistas_contidas": [
+        "P-RUI-DEFLECT"
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E1-03"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [
+        "14",
+        "07"
+      ],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "POLÍCIA CIVIL DO ESTADO",
+        "ORGAO_SUBTITULO": "Delegacia de Vila Real",
+        "NUMERO_CASO": "#519FH",
+        "TIPO_DOCUMENTO": "TRANSCRIÇÃO DE DEPOIMENTO",
+        "TIPO_OCORRENCIA": "Furto qualificado",
+        "DATA": "01/03/2025",
+        "LOCALIZACAO": "Vila Real - SP",
+        "HORA_OCORRENCIA": "16h40",
+        "DESCRICAO_OCORRENCIA": "<p>Não tenho nada a ver com isso. Só porque sou novo e o pessoal não vai com a minha cara jogam a culpa em mim. Cheguei às 10h, bati o ponto e passei boa parte do turno apoiando na sala de segurança. Quando deu falta do quadro eu tinha acabado de voltar para lá. Não tem como eu ter carregado um quadro daquele tamanho — ia colocar onde? Se é para investigar alguém, investiguem o Jonas, da guarita; entra e sai gente por ali e ele nem anota direito.</p>",
+        "NOME_RESPONSAVEL": "Helena Brandt",
+        "ASSINATURA_RESPONSAVEL": "Helena Brandt",
+        "ASSINATURA_GLIFO": "HB",
+        "DATA_HORA_ASSINATURA": "01/03/2025 18h13",
+        "CAMPO_NOME": true,
+        "NOME_ENVOLVIDO": "Rui Caldas",
+        "DATA_NASC": "12/05/1996",
+        "CONDICAO": "SUSPEITO",
+        "DOCUMENTO_PESSOAL": "RG 22.114.337-0"
+      }
+    },
+    {
+      "codigo": "E2-07",
+      "titulo": "Controle da guarita — funcionários",
+      "envelope": "E2",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "varredura de nomes",
+      "objetivo_narrativo": "Roster da guarita por empresa; cruza Sérgio Brum (corte) e a equipe da transportadora, ligando executor e intermediário ao acesso físico no dia.",
+      "pistas_contidas": [
+        "P-SERGIO-NA-GUARITA",
+        "P-TRANSVALE-EQUIPE",
+        "P-GUARITA-INCOMPLETA"
+      ],
+      "confirma": [
+        "E2-02",
+        "E2-03"
+      ],
+      "confirmado_por": [
+        "E2-04"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "baixo",
+      "ids_citados": [
+        "30538",
+        "09",
+        "07"
+      ],
+      "codigos_citados": [
+        "30538",
+        "30531",
+        "30541"
+      ],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "MUSEU MUNICIPAL DE VILA REAL",
+        "SUBTITULO_ORGANIZACAO": "Controle da guarita — BID N°1023",
+        "ENDERECO_LINHA1": "Rua das Palmeiras, 410 - Centro, Vila Real - SP",
+        "CONTATO": "(11) 3298-1812",
+        "CNPJ": "12.345.678/0001-90",
+        "COR_TOPO": "#7a1f2b",
+        "LOCAL_DATA": "Vila Real, 01/03/2025",
+        "SAUDACAO": "Registro de terceiros (extrato):",
+        "CORPO_CARTA": "<p>30527 — Carlos Vinícius Duarte — Ajudante — Aço Vivo<br>30533 — Gabriel César Martins — Motorista — Aço Vivo<br>30538 — Sérgio Brum — Maçariqueiro — Aço Vivo<br>30531 — Felipe Renato Siqueira — Motorista — Transvale<br>30541 — Luciano Marcos Cardoso — Embalador — Transvale<br>30521 — Washington Moura — Embalador — Transvale</p><p>Observação da guarita: registro incompleto no fim da tarde; algumas saídas pelo pátio não foram conferidas.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Jonas Teixeira",
+        "NOME_ASSINANTE": "Jonas Teixeira",
+        "CARGO_ASSINANTE": "Responsável pela guarita",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Funcionários terceirizados — válido durante a reforma",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "07"
+      }
+    },
+    {
+      "codigo": "E2-08",
+      "titulo": "Folha de decodificação do cartão",
+      "envelope": "E2",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "revelação cifrada",
+      "objetivo_narrativo": "Chave do código: traduz a etiqueta hex em destino de venda (galeria de fachada), fechando o salto final da obra. FF-06.",
+      "pistas_contidas": [
+        "P-HEX-DESTINO"
+      ],
+      "confirma": [],
+      "confirmado_por": [
+        "E2-03"
+      ],
+      "red_herring_potencial": null,
+      "risco_ambiguidade": "medio",
+      "ids_citados": [],
+      "codigos_citados": [
+        "7F",
+        "00",
+        "4B",
+        "FF",
+        "8B"
+      ],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "ARCANO GALLERY",
+        "SUBTITULO_ORGANIZACAO": "Quadros invisíveis",
+        "ENDERECO_LINHA1": "Endereço sob consignação",
+        "CONTATO": "—",
+        "CNPJ": "—",
+        "COR_TOPO": "#444",
+        "LOCAL_DATA": "—",
+        "SAUDACAO": "Por vezes, a perspectiva leva a mente a lugares antes inacessíveis.",
+        "CORPO_CARTA": "<p>Tabela de etiquetas (hex → consignação):<br>#7F004B → lote 'Jardim', consignação reservada, retirada por intermediário.<br>#004BFF → lote 'Marinha', exposição aberta.<br>#4B8B00 → lote 'Retrato', leilão público.</p><p>Uma boa obra se manifesta em múltiplas camadas.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Arcano Gallery",
+        "NOME_ASSINANTE": "Arcano Gallery",
+        "CARGO_ASSINANTE": "Consignações",
+        "ESTILO_LINHAS": "solido",
+        "ASSUNTO": "Toda cor tem um código. Todo código tem uma cor."
+      }
+    }
+  ],
+  "matriz_pistas": [
+    {
+      "descricao": "Na janela sem energia, só a credencial biométrica 27 cruza a porta 1 da galeria (ida e volta).",
+      "documento": "E1-03",
+      "o_que_sugere": "Acesso interno privilegiado à galeria no momento crítico.",
+      "o_que_prova": "Quem teve presença física autorizada na galeria durante a queda.",
+      "confirmacao": "E1-02",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "frieza investigativa"
+    },
+    {
+      "descricao": "A porta 1 só aceita biometria; crachá não passa nela.",
+      "documento": "E1-02",
+      "o_que_sugere": "A passagem pela galeria não pode ser de crachá emprestado.",
+      "o_que_prova": "A credencial 27 é pessoal e intransferível.",
+      "confirmacao": "E1-03",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "rigor"
+    },
+    {
+      "descricao": "Rui está lotado na sala de segurança e sua credencial não registra a galeria.",
+      "documento": "E1-04",
+      "o_que_sugere": "O suspeito aparente não teve oportunidade.",
+      "o_que_prova": "Descarte do recém-admitido por ausência de passagem.",
+      "confirmacao": "E1-03",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "alívio cauteloso"
+    },
+    {
+      "descricao": "A moldura é carvalho maciço de valor histórico; há fornecedor de corte no BID.",
+      "documento": "E2-03",
+      "o_que_sugere": "A obra pôde ser retirada da moldura para transporte discreto.",
+      "o_que_prova": "Capacidade técnica de cortar a moldura-relíquia.",
+      "confirmacao": "E2-07",
+      "risco_ambiguidade": "medio",
+      "emocao_esperada": "clique de entendimento"
+    },
+    {
+      "descricao": "A etiqueta hex #7F004B no orçamento de corte aparece decodificada como consignação reservada.",
+      "documento": "E2-03",
+      "o_que_sugere": "A obra tem destino de venda combinado.",
+      "o_que_prova": "Ligação entre o corte e o ponto de escoamento da obra.",
+      "confirmacao": "E2-08",
+      "risco_ambiguidade": "medio_alto",
+      "emocao_esperada": "revelação"
+    }
+  ],
+  "red_herrings": [
+    {
+      "personagem_id": "14",
+      "motivo_aparente": "Recém-admitido, malvisto, apontado por todos.",
+      "como_descartar": "A escala o coloca na sala de segurança e o log não registra sua credencial na galeria.",
+      "documento_descarte": "E1-03",
+      "categoria": "motivo_sem_oportunidade"
+    },
+    {
+      "personagem_id": "07",
+      "motivo_aparente": "Guarita relapsa; o suspeito aparente joga a culpa nele.",
+      "como_descartar": "Negligência no registro não é acesso interno; Jonas não cruza portas internas nem tem vínculo com a venda.",
+      "documento_descarte": "E2-07",
+      "categoria": "acesso_insuficiente"
+    },
+    {
+      "personagem_id": "33",
+      "motivo_aparente": "Foi o último a ver a obra e tem passado na polícia.",
+      "como_descartar": "Sua ronda e horários batem com o log; ele relata a queda, não a provoca.",
+      "documento_descarte": "E1-03",
+      "categoria": "coincidencia_temporal"
+    }
+  ],
+  "cadeia_financeira": [
+    {
+      "de": "Galeria principal (moldura-relíquia)",
+      "para": "Carga preparada por Aço Vivo",
+      "valor_ou_item": "Obra Jardim Noturno, retirada da moldura de carvalho",
+      "documento_prova": "E2-03",
+      "confirmacao_independente": "E2-07",
+      "is_salto_final": false
+    },
+    {
+      "de": "Carga preparada por Aço Vivo",
+      "para": "Consignação reservada (Arcano Gallery)",
+      "valor_ou_item": "Lote 'Jardim' #7F004B, retirada por intermediário",
+      "documento_prova": "E2-08",
+      "confirmacao_independente": "E2-02",
+      "is_salto_final": true
+    }
+  ],
+  "codigos": [
+    {
+      "documento": "E2-03",
+      "criterio": "hex",
+      "elementos": [
+        "7F",
+        "00",
+        "4B"
+      ],
+      "chave_em": "E2-08"
+    }
+  ],
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo fixa a culpa no recém-admitido sem checar o log.",
+      "texto": "Releia a escala e o controle de acessos lado a lado: onde a credencial do Rui aparece entre 15h e 16h?",
+      "o_que_desbloqueia": "Move o grupo do palpite para a leitura do log."
+    },
+    {
+      "numero": 2,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo ignora a regra da porta 1.",
+      "texto": "O manual diz algo específico sobre a porta 1. Que tipo de credencial passa por ela?",
+      "o_que_desbloqueia": "Conecta o manual ao log (pilar de presença)."
+    },
+    {
+      "numero": 3,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo não percebe a credencial que cruza a galeria na queda.",
+      "texto": "Na janela sem energia, uma única credencial entra e sai da galeria principal. Qual ID é esse?",
+      "o_que_desbloqueia": "Nomeia o suspeito principal do E1."
+    },
+    {
+      "numero": 4,
+      "intensidade": "leve",
+      "envelope": "E2",
+      "condicao_uso": "Grupo trava em 'o suspeito está no museu, logo é ele'.",
+      "texto": "Se o suspeito está aqui mas a obra não, a pergunta muda: por onde a obra saiu?",
+      "o_que_desbloqueia": "Reorienta o E2 para o salto logístico."
+    },
+    {
+      "numero": 5,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não liga o corte da moldura à saída.",
+      "texto": "A moldura é a parte mais valiosa e pesada. Que fornecedor do BID sabe cortar carvalho maciço?",
+      "o_que_desbloqueia": "Liga executor (corte) ao escoamento."
+    },
+    {
+      "numero": 6,
+      "intensidade": "forte",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não decodifica a etiqueta.",
+      "texto": "A etiqueta #7F004B no orçamento de corte aparece em outra folha. O que ela aponta?",
+      "o_que_desbloqueia": "Fecha o destino da obra (salto final)."
+    },
+    {
+      "numero": 7,
+      "intensidade": "quase_gabarito",
+      "envelope": "E2",
+      "condicao_uso": "Grupo tem todas as peças mas não as junta na conclusão final.",
+      "texto": "Junte: a credencial 27 (Aurélio) abriu a galeria na queda; Sérgio Brum cortou a moldura; a transportadora escoou a obra; a etiqueta #7F004B aponta a consignação reservada da Arcano Gallery. Esse é o autor interno, o executor e o destino.",
+      "o_que_desbloqueia": "Entrega a síntese completa do caso."
+    }
+  ],
+  "dicas_contextuais": [
+    {
+      "id": "DC-01",
+      "categoria": "documento",
+      "fase": "E1",
+      "titulo": "Porta 1 é biometria",
+      "condicao_uso": "Grupo trata todas as portas como iguais.",
+      "texto": "Porta 1 só aceita biometria; crachá não passa. Quem cruza a galeria é, necessariamente, a digital cadastrada.",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E1-SUSPEITO"
+      ],
+      "documentos_relacionados": [
+        "E1-02",
+        "E1-03"
+      ]
+    },
+    {
+      "id": "DC-02",
+      "categoria": "descarte",
+      "fase": "E1",
+      "titulo": "Rui sem oportunidade",
+      "condicao_uso": "Grupo insiste no recém-admitido.",
+      "texto": "Compare escala e log: o posto e as passagens do Rui não incluem a galeria na janela crítica.",
+      "nivel": "leve",
+      "contratos_relacionados": [
+        "C-E1-DESCARTE"
+      ],
+      "documentos_relacionados": [
+        "E1-03",
+        "E1-04"
+      ]
+    },
+    {
+      "id": "DC-03",
+      "categoria": "logistica",
+      "fase": "E2",
+      "titulo": "Caminho da obra",
+      "condicao_uso": "Grupo não cruza guarita com fornecedores.",
+      "texto": "O controle da guarita lista Sérgio Brum (corte) e a equipe da transportadora no dia. Cruze com o cadastro de terceiros.",
+      "nivel": "media",
+      "contratos_relacionados": [
+        "C-E2-SAIDA",
+        "C-FINAL"
+      ],
+      "documentos_relacionados": [
+        "E2-03",
+        "E2-07",
+        "E2-02"
+      ]
+    }
+  ],
+  "contratos_evidencia": [
+    {
+      "id": "C-E1-SUSPEITO",
+      "conclusao": "O acesso à galeria na queda de energia foi por credencial biométrica interna; o suspeito principal é quem detém essa credencial.",
+      "fase": "E1",
+      "tipo": "criterio_avanco",
+      "prova_principal": "E1-03",
+      "confirmacao_independente": "E1-02",
+      "descarta_alternativas": [
+        "E1-04"
+      ],
+      "personagens_afetados": [
+        "27",
+        "14"
+      ],
+      "acao_esperada_jogador": "Cruzar manual e log para nomear quem cruzou a porta 1 na janela crítica.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E1-DESCARTE",
+      "conclusao": "O recém-admitido Rui não teve oportunidade: lotado na sala de segurança, sem passagem registrada pela galeria.",
+      "fase": "E1",
+      "tipo": "descarte",
+      "prova_principal": "E1-04",
+      "confirmacao_independente": "E1-03",
+      "descarta_alternativas": [],
+      "personagens_afetados": [
+        "14"
+      ],
+      "acao_esperada_jogador": "Descartar o suspeito aparente por ausência de oportunidade.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-E2-SAIDA",
+      "conclusao": "A obra saiu pela logística da reforma: corte da moldura por Aço Vivo e movimentação pela transportadora.",
+      "fase": "E2",
+      "tipo": "criterio_avanco",
+      "prova_principal": "E2-02",
+      "confirmacao_independente": "E2-07",
+      "descarta_alternativas": [
+        "E2-05"
+      ],
+      "personagens_afetados": [
+        "30538",
+        "09"
+      ],
+      "acao_esperada_jogador": "Ligar corte, guarita e transporte como rota de saída da obra.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-FINAL",
+      "conclusao": "Aurélio (elo interno) liberou o acesso; Sérgio cortou e preparou; a transportadora escoou para a consignação reservada da Arcano Gallery (#7F004B).",
+      "fase": "final",
+      "tipo": "sintese",
+      "prova_principal": "E2-08",
+      "confirmacao_independente": "E2-03",
+      "descarta_alternativas": [
+        "E2-05"
+      ],
+      "personagens_afetados": [
+        "27",
+        "30538",
+        "09"
+      ],
+      "acao_esperada_jogador": "Sintetizar autor interno, executor e destino da obra.",
+      "risco_ambiguidade": "medio_alto",
+      "obrigatoria_para_avanco": true
+    }
+  ],
+  "visual_procedural": null,
+  "printable_cards": [],
+  "playtest": {
+    "status": "validado_externamente",
+    "rodadas": 1,
+    "observacoes": [
+      "Caso externo validado em playtest físico independente; NÃO validado pela pipeline do Indiciário.",
+      "Mapa do museu adiado (TR-04): referência espacial textual nesta versão."
+    ]
+  },
+  "versao": "0.1",
+  "observacoes_producao": "ISSUE-30.8. Corpus de CALIBRAÇÃO externo, recriado como ficção própria. NÃO canônico, NÃO régua, não entra na promoção canônica. Tradução offline: TR-01/TR-02 descartados (QR/delegado e pistas presas a telefone/e-mail); TR-03 importado (código hex em codigos); TR-04 mapa adiado."
+}
