@@ -3,13 +3,13 @@
 ## Estado
 
 ```
-STATUS: running
-CURRENT_STEP: STEP-01
-NEXT_ACTION: execute
+STATUS: done
+CURRENT_STEP: STEP-06
+NEXT_ACTION: human
 REVIEW_STATUS: none
-LAST_COMPLETED_STEP: STEP-00
-LAST_EXECUTION_REPORT: none
-LAST_REVIEW_REPORT: none
+LAST_COMPLETED_STEP: STEP-06
+LAST_EXECUTION_REPORT: .ai/runs/ISSUE-30.9/STEP-06_EXECUTION.md
+LAST_REVIEW_REPORT: .ai/runs/ISSUE-30.9/STEP-05_REVIEW.md
 BLOCKER: none
 ```
 
@@ -85,3 +85,16 @@ red (STEP-02), green (STEP-03), validation (STEP-05).
 
 ## Histórico
 - STEP-00 gerado em chat; STEP-01 pronto.
+- STEP-01 executado; auto-approved (low-risk, reading).
+- STEP-02 executado; aguardando revisão.
+- STEP-02 aprovado; aguardando orquestrador.
+- Orquestrador avança para STEP-03 (GREEN).
+- STEP-03 executado; 3 testes alvo + suíte completa de clue_graph passam (14/14); aguardando revisão.
+- STEP-03 aprovado; aguardando orquestrador.
+- Orquestrador avança para STEP-04 (DOCS).
+- STEP-04 executado; auto-approved (low-risk, documentation).
+- Orquestrador avança para STEP-05 (VALIDATION).
+- STEP-05 executado; aguardando revisão.
+- STEP-05 aprovado (DVG-EXEC-001 aceita, minor, não-bloqueante: ruff limpo interpretado como escopo dos arquivos tocados pela issue; 51 erros pré-existentes em main confirmados via git stash pelo revisor); aguardando orquestrador.
+- Orquestrador avança para STEP-06 (WRAP-UP).
+- STEP-06 executado; arquivos alterados listados, impacto documental resolvido; STATUS: done.

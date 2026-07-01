@@ -1,10 +1,17 @@
 import json
 from pathlib import Path
 
+from generator.case_review import load_blueprint
 from generator.clue_graph import analyze_clue_graph, build_clue_graph, write_graph_report
 from generator.models import Blueprint, ContratoEvidencia
 from tests.test_generator_validator import blueprint_valido, _documento
 from generator.models import Envelope, TipoDocumento
+
+_CASO_REFERENCIA_UMA_NOITE_SEM_FLORES = (
+    Path(__file__).resolve().parent.parent
+    / "examples"
+    / "caso_referencia_uma_noite_sem_flores.json"
+)
 
 
 def _contrato(
@@ -147,6 +154,50 @@ def test_contrato_final_valido_gera_solution_paths():
         "documents": ["E1-04", "E1-06"],
         "contracts": ["C-E1-01", "C-FINAL-01"],
     }]
+
+
+def test_gp004_nao_dispara_para_descarte_calibracao():
+    blueprint = load_blueprint(_CASO_REFERENCIA_UMA_NOITE_SEM_FLORES)
+    graph = build_clue_graph(blueprint)
+
+    report = analyze_clue_graph(graph, blueprint)
+
+    assert "C-E1-DESCARTE" not in report["orphan_contracts"]
+    assert "C-E1-DESCARTE" not in report["dead_ends"]
+    assert not any(
+        issue["code"] == "GP_004" and issue.get("contract") == "C-E1-DESCARTE"
+        for issue in report["issues"]
+    )
+
+
+def test_gp004_ainda_dispara_para_orfao_real():
+    contrato = _contrato("C-E1-ORFAO-REAL", fase="E1", tipo="oportunidade", obrigatorio=False)
+    blueprint = _blueprint_com_contratos(contrato, _contrato())
+    graph = build_clue_graph(blueprint)
+
+    report = analyze_clue_graph(graph, blueprint)
+
+    assert "C-E1-ORFAO-REAL" in report["orphan_contracts"]
+    assert "C-E1-ORFAO-REAL" in report["dead_ends"]
+    assert any(
+        issue["code"] == "GP_004" and issue["contract"] == "C-E1-ORFAO-REAL"
+        for issue in report["issues"]
+    )
+
+
+def test_gp004_descarte_sintetico_isento():
+    contrato = _contrato("C-E1-DESCARTE-SINTETICO", fase="E1", tipo="descarte", obrigatorio=False)
+    blueprint = _blueprint_com_contratos(contrato, _contrato())
+    graph = build_clue_graph(blueprint)
+
+    report = analyze_clue_graph(graph, blueprint)
+
+    assert "C-E1-DESCARTE-SINTETICO" not in report["orphan_contracts"]
+    assert "C-E1-DESCARTE-SINTETICO" not in report["dead_ends"]
+    assert not any(
+        issue["code"] == "GP_004" and issue.get("contract") == "C-E1-DESCARTE-SINTETICO"
+        for issue in report["issues"]
+    )
 
 
 def test_write_graph_report_escreve_json_valido(tmp_path: Path):

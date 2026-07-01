@@ -218,7 +218,9 @@ def analyze_clue_graph(graph: ClueGraph, blueprint: Blueprint) -> dict[str, Any]
     orphan_contracts = sorted(
         contrato.id
         for contrato in graph.contracts.values()
-        if not contrato.obrigatoria_para_avanco and not _is_final_contract(contrato)
+        if not contrato.obrigatoria_para_avanco
+        and not _is_final_contract(contrato)
+        and contrato.tipo != "descarte"
     )
     dead_ends = list(orphan_contracts)
     for contrato_id in orphan_contracts:
