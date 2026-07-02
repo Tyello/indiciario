@@ -59,6 +59,7 @@ Siga rigorosamente todos os princípios abaixo. Violar qualquer um invalida o ca
 - A contagem de documentos no protocolo bate com a contagem real.
 - O período do log cobre o intervalo crítico com margem.
 - Nenhuma pista essencial depende exclusivamente de cor.
+- Considere deliberadamente os padrões destilados em `framework/08_MODELO_REFERENCIA.md` (Parte 1, 1.8–1.11) ao planejar pilares, red herrings, códigos e a virada entre envelopes: PAT-01 (pilar de presença: credencial × regra), PAT-02 (descarte por motivo-sem-oportunidade), PAT-03 (pista-código offline: elemento em A, chave em B), PAT-04 (virada de envelope: suspeito presente / objeto ausente).
 
 ---
 

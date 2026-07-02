@@ -3,13 +3,13 @@
 ## Estado
 
 ```
-STATUS: running
-CURRENT_STEP: STEP-01
-NEXT_ACTION: execute
+STATUS: done
+CURRENT_STEP: STEP-06
+NEXT_ACTION: none
 REVIEW_STATUS: none
-LAST_COMPLETED_STEP: STEP-00
-LAST_EXECUTION_REPORT: none
-LAST_REVIEW_REPORT: none
+LAST_COMPLETED_STEP: STEP-06
+LAST_EXECUTION_REPORT: .ai/runs/ISSUE-30.10/STEP-06_EXECUTION.md
+LAST_REVIEW_REPORT: .ai/runs/ISSUE-30.10/STEP-05_REVIEW.md
 BLOCKER: none
 ```
 
@@ -24,7 +24,7 @@ Destila os padrões PAT-01..04 da calibração (30.8) para o modelo de referênc
 ## Steps
 
 ### STEP-01 — Leitura e mapa de integração
-Status: pending | Owner: executor | Type: reading
+Status: done (auto-approved) | Owner: executor | Type: reading
 - Ler SPEC, `framework/08` inteiro, `framework/07`, `docs/CALIBRACAO_REFERENCIA_EXTERNA.md`, e o blueprint de calibração.
 - Para cada PAT-01..04, identificar a subseção da Parte 1 com que se sobrepõe (1.2/1.3/1.5) e decidir integrar vs. nova subseção, registrando o mapa no report.
 - Confirmar que os campos que cada padrão cita existem no schema.
@@ -94,3 +94,12 @@ documentation de conteúdo (STEP-02), validation (STEP-05).
 
 ## Histórico
 - STEP-00 gerado em chat; STEP-01 pronto.
+- STEP-01 executado; aguardando revisão.
+- STEP-01 auto-aprovado (reading). STEP-02 pronto.
+- STEP-02 executado; aguardando revisão.
+- STEP-02 aprovado; aguardando orquestrador.
+- STEP-03 executado; aguardando revisão.
+- STEP-04 executado; aguardando revisão.
+- STEP-05 executado; aguardando revisão.
+- STEP-05 aprovado; aguardando orquestrador.
+- STEP-06 executado (wrap-up); impacto documental resolvido; STATUS: done.

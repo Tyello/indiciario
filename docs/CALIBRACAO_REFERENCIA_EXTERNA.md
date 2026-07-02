@@ -115,4 +115,10 @@ O único finding que pode ser **sinal real** é o tempo estimado: `analyze_playt
 
 ---
 
+## CR-04 — Fechamento: padrões destilados codificados no modelo de referência
+
+Os padrões reutilizáveis identificados neste corpus de calibração (pilar de presença credencial×regra, descarte por motivo-sem-oportunidade, pista-código offline, virada de envelope) foram codificados como PAT-01..04 em `framework/08_MODELO_REFERENCIA.md` (ISSUE-30.10), com cross-link nomeado em `framework/07_PROMPT_GERADOR_DE_CASO.md` (PAT-05). Fecha o ciclo deste relatório: conhecimento tácito do blueprint de calibração agora é regra explícita consultada pelo gerador.
+
+---
+
 *Documento gerado automaticamente pelo STEP-04 da ISSUE-30.8. Não altera blueprint nem código.*

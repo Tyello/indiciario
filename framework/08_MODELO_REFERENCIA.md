@@ -103,6 +103,62 @@ O boletim de inspeção e o depoimento confirmam fatos objetivos e introduzem ve
 
 ---
 
+### 1.8 PAT-01 — Pilar de presença (credencial × regra)
+
+**Definição:** um registro de presença (log de acesso: ator + ponto + horário) só vira prova quando confirmado por um documento de regra independente que declara a credencial pessoal/intransferível e o ponto de acesso exclusivo por autenticação.
+
+**Quando usar:** sempre que um vetor de "credencial / autenticação" da tabela de 1.2 precisar sustentar sozinho a presença de um suspeito — o log nunca basta isolado, precisa do manual ou política que define a regra de exclusividade da credencial.
+
+**Campos:** `pilares_validacao` (`documento_principal` = log, `confirmacao` = manual/política, `personagem_id` = ator); `documentos` do tipo `log_acesso` e `manual`.
+
+**Exemplo:** calibração — E1-03 (log de acesso) × E1-02 (manual da porta biométrica), caso `examples/caso_referencia_uma_noite_sem_flores.json`.
+
+**Modo de falha:** log sem documento de regra que confirme exclusividade da credencial → a presença vira coincidência, não prova (cross-ref 2.7 — período do log que não cobre o evento crítico agrava o mesmo problema). Aprofunda 1.2 (vetor credencial/autenticação) e 1.3 (mecanismo de exceção).
+
+---
+
+### 1.9 PAT-02 — Descarte por motivo-sem-oportunidade
+
+**Definição:** o suspeito aparente tem motivo e esteve presente, mas um documento prova que não teve oportunidade física — posto ou credencial não o colocam no local durante o intervalo crítico.
+
+**Quando usar:** para descartar um suspeito plausível sem depender de afirmação do facilitador — o descarte precisa nascer de um documento que o jogador possa cruzar sozinho.
+
+**Campos:** `red_herrings` (categoria `motivo_sem_oportunidade`); `contratos_evidencia` (tipo `descarte`) ancorado num documento de descarte.
+
+**Exemplo:** calibração — Rui, com posto fixo na sala de segurança, sem registro de passagem pela galeria no intervalo crítico, caso `examples/caso_referencia_uma_noite_sem_flores.json`.
+
+**Modo de falha:** descarte sem documento que o ancore vira afirmação do facilitador, não dedução do jogador (tema adjacente a 2.3 — vínculo por sobrenome sem confirmação: ambos falham por faltar o terceiro documento que fecha a inferência).
+
+---
+
+### 1.10 PAT-03 — Pista-código offline (elemento em A, chave em B)
+
+**Definição:** um código impresso num documento (etiqueta, sequência, cor→hex) só se resolve cruzando com a chave de decodificação presente em outro documento — pista não óbvia, 100% offline.
+
+**Quando usar:** quando o caso precisa de uma pista de dedução pura, sem depender de ferramenta externa, mas que não seja resolvível olhando só o documento onde o código aparece.
+
+**Campos:** `codigos` (`documento` = onde o código aparece, `chave_em` = onde a chave de decodificação aparece, `elementos`); os dois `documentos` que carregam código e chave.
+
+**Exemplo:** calibração — `#7F004B` no orçamento de corte cruzado com o catálogo da Arcano (E2-08), caso `examples/caso_referencia_uma_noite_sem_flores.json`.
+
+**Modo de falha:** chave no mesmo documento do código deixa de ser dedução — vira leitura direta (cross-ref 2.4 — critério misto em código sem aviso: mesma família de erro, código que não exige cruzamento real).
+
+---
+
+### 1.11 PAT-04 — Virada de envelope: suspeito presente / objeto ausente
+
+**Definição:** o Envelope 1 fecha num suspeito plausível e presente; o Envelope 2 vira a leitura ao constatar que o objeto do crime já não está onde o suspeito está, reorientando a pergunta de "quem parece" para "como saiu / para onde foi".
+
+**Quando usar:** para dar ao E2 uma razão de existir além de confirmar o E1 — o segundo envelope precisa mudar a pergunta central, não só adicionar prova ao mesmo nome.
+
+**Campos:** `objetivos_por_envelope` (E1 = identificar suspeito; E2 = culpado + destino do objeto); `conflito_central.verdade_aparente` vs. `verdade_real_resumida`; salto documentado em `cadeia_financeira`.
+
+**Exemplo:** calibração — E1 nomeia a credencial interna que abriu a porta; E2 segue a obra pela logística de escoamento, caso `examples/caso_referencia_uma_noite_sem_flores.json`. Adjacente a 1.4 (documentos com data anterior provam premeditação), mas PAT-04 é sobre a reorientação da pergunta entre envelopes, não sobre a prova documental em si.
+
+**Modo de falha:** E2 que só confirma o E1 sem virar a leitura → o segundo envelope não justifica sua existência.
+
+---
+
 ## Parte 2 — Anti-padrões a evitar
 
 ### 2.1 ❌ ID inexistente em código
