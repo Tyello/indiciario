@@ -1,0 +1,1006 @@
+{
+  "titulo": "O Grão que Faltou",
+  "subtitulo": "Uma fraude na báscula da Cooperativa Vale Novo",
+  "genero": "fraude institucional",
+  "tom": "sóbrio, rural, tenso",
+  "modo_validacao": "offline_puro",
+  "dificuldade": "intermediario",
+  "tempo_estimado_min": 100,
+  "numero_jogadores": "4-6",
+  "formato_envelopes": 2,
+  "premissa": "A Cooperativa Agrícola Vale Novo recebeu uma denúncia anônima: pequenos produtores dizem que o peso registrado na entrega de soja não bate com o que carregaram. A diretoria abriu uma apuração interna antes de acionar a polícia. Vocês foram chamados para revisar os registros da báscula, as escalas de trabalho e os documentos financeiros do último mês e apontar o que realmente aconteceu.",
+  "conflito_central": {
+    "pergunta_publica": "Por que o peso de soja registrado na báscula da cooperativa não corresponde ao que os produtores entregaram?",
+    "quem_pede_apuracao": "Renata Kolb, presidente da Cooperativa Vale Novo, após reclamações formais de associados.",
+    "motivo_da_apuracao": "Três produtores pequenos apresentaram recibos de transporte com peso maior do que o peso final lançado no sistema da cooperativa.",
+    "risco_concreto": "Se a divergência for confirmada e não explicada, a cooperativa perde a certificação do convênio de crédito rural e pode responder a processo dos associados lesados.",
+    "verdade_aparente": "Parece um erro de calibração da báscula ou uma falha de lançamento no sistema durante o período de maior movimento da colheita.",
+    "verdade_real_resumida": "Joaquim Petter, supervisor da báscula, subregistrava manualmente o peso de cargas específicas, revendia a diferença por fora a um comprador fixo e escondia o pagamento recebido atrás de um contrato de serviço pré-datado."
+  },
+  "objetivos_por_envelope": [
+    {
+      "envelope": "E1",
+      "pergunta_diegetica": "Quem estava na báscula nos horários em que a divergência de peso aconteceu, e por que ninguém notou antes?",
+      "resposta_esperada": "Cruzando o log de acesso da báscula com a escala de trabalho, Joaquim Petter é o único funcionário presente em todos os horários de divergência registrados; o vigia Sérgio Amable também viu movimentação de caminhão fora do horário normal.",
+      "nao_precisa_resolver_ainda": [
+        "Como o peso foi exatamente alterado nos formulários",
+        "Para onde foi o dinheiro da diferença vendida",
+        "Se Tiago Bessa tem relação direta com a divergência"
+      ],
+      "criterio_de_avanco": "Grupo identifica Joaquim como presente em todos os horários de divergência e percebe que o caso não se resolve apenas com o depoimento do vigia.",
+      "forma_diegetica_de_avanco": "Ao cruzar log de acesso, escala e depoimento, o grupo recebe o Envelope 2 com os documentos financeiros e técnicos da báscula.",
+      "documentos_minimos": ["E1-01", "E1-03", "E1-04", "E1-05"]
+    },
+    {
+      "envelope": "E2",
+      "pergunta_diegetica": "Como a diferença de peso virou dinheiro, e quem embolsou o valor?",
+      "resposta_esperada": "O boletim de pesagem mostra lote com peso abaixo do informado pelo transportador; o código de lote do glossário técnico liga esse lote a um contrato de prestação de serviço pré-datado em nome de Joaquim, cujo valor aparece como depósito no extrato bancário pessoal dele na mesma semana da venda irregular.",
+      "nao_precisa_resolver_ainda": [
+        "O nome completo do comprador externo da soja desviada",
+        "Se algum outro funcionário recebeu parte do valor"
+      ],
+      "criterio_de_avanco": "Grupo liga o boletim de pesagem, o código de lote, o contrato pré-datado e o extrato bancário em uma cadeia única apontando para Joaquim.",
+      "forma_diegetica_de_avanco": "Com a cadeia financeira fechada, o grupo apresenta a conclusão final à diretoria da cooperativa.",
+      "documentos_minimos": ["E2-02", "E2-03", "E2-04", "E2-05"]
+    }
+  ],
+  "guia_operacional": {
+    "pergunta_publica": "Por que o peso de soja registrado na báscula da cooperativa não corresponde ao que os produtores entregaram?",
+    "resposta_esperada_por_envelope": [
+      {
+        "envelope": "E1",
+        "pergunta_diegetica": "Quem estava na báscula nos horários em que a divergência de peso aconteceu, e por que ninguém notou antes?",
+        "resposta_esperada": "Cruzando o log de acesso da báscula com a escala de trabalho, Joaquim Petter é o único funcionário presente em todos os horários de divergência registrados; o vigia Sérgio Amable também viu movimentação de caminhão fora do horário normal.",
+        "nao_precisa_resolver_ainda": [
+          "Como o peso foi exatamente alterado nos formulários",
+          "Para onde foi o dinheiro da diferença vendida",
+          "Se Tiago Bessa tem relação direta com a divergência"
+        ],
+        "criterio_de_avanco": "Grupo identifica Joaquim como presente em todos os horários de divergência e percebe que o caso não se resolve apenas com o depoimento do vigia.",
+        "forma_diegetica_de_avanco": "Ao cruzar log de acesso, escala e depoimento, o grupo recebe o Envelope 2 com os documentos financeiros e técnicos da báscula.",
+        "documentos_minimos": ["E1-01", "E1-03", "E1-04", "E1-05"]
+      },
+      {
+        "envelope": "E2",
+        "pergunta_diegetica": "Como a diferença de peso virou dinheiro, e quem embolsou o valor?",
+        "resposta_esperada": "O boletim de pesagem mostra lote com peso abaixo do informado pelo transportador; o código de lote do glossário técnico liga esse lote a um contrato de prestação de serviço pré-datado em nome de Joaquim, cujo valor aparece como depósito no extrato bancário pessoal dele na mesma semana da venda irregular.",
+        "nao_precisa_resolver_ainda": [
+          "O nome completo do comprador externo da soja desviada",
+          "Se algum outro funcionário recebeu parte do valor"
+        ],
+        "criterio_de_avanco": "Grupo liga o boletim de pesagem, o código de lote, o contrato pré-datado e o extrato bancário em uma cadeia única apontando para Joaquim.",
+        "forma_diegetica_de_avanco": "Com a cadeia financeira fechada, o grupo apresenta a conclusão final à diretoria da cooperativa.",
+        "documentos_minimos": ["E2-02", "E2-03", "E2-04", "E2-05"]
+      }
+    ],
+    "solucao_em_5_frases": [
+      "Joaquim Petter, supervisor da báscula, subregistrava manualmente o peso de cargas específicas de soja.",
+      "A diferença de peso era revendida por fora a um comprador fixo fora do sistema da cooperativa.",
+      "O valor recebido foi disfarçado através de um contrato de prestação de serviço pré-datado em nome de Joaquim.",
+      "O depósito correspondente apareceu no extrato bancário pessoal dele na mesma semana da venda irregular.",
+      "O log de acesso, a escala de trabalho, o boletim de pesagem e o extrato bancário, juntos, fecham a cadeia contra Joaquim."
+    ],
+    "linha_tempo_aparente_resumo": "Parece uma sequência de erros de calibração da báscula e lançamentos manuais equivocados durante o pico da colheita.",
+    "linha_tempo_real_resumo": "Joaquim alterou manualmente o peso de cargas específicas em três datas, vendeu a diferença a um comprador fixo e disfarçou o pagamento com um contrato de serviço pré-datado.",
+    "red_herrings_e_descartes": [
+      "Tiago Bessa, associado endividado com atrito público com a diretoria, é descartado por não ter acesso físico à báscula nos horários da divergência.",
+      "Vinícius Andrade, ex-funcionário demitido que fez ameaças públicas, é descartado por estar em outra cidade nas datas da divergência, conforme folha de cruzamento."
+    ],
+    "quando_usar_dicas": [
+      "Se o grupo não cruzar log de acesso com escala em 20 minutos, ofereça a dica leve do Envelope 1.",
+      "Se o grupo suspeitar apenas de Tiago Bessa sem checar o horário dele, ofereça a dica média do Envelope 1.",
+      "Se o grupo não ligar o código de lote ao contrato pré-datado, ofereça a dica forte do Envelope 2.",
+      "Se o grupo estiver travado a poucos minutos do fim, ofereça a dica de quase-gabarito."
+    ]
+  },
+  "verdade_real": "Joaquim Petter usou seu acesso exclusivo à báscula para subregistrar o peso de cargas de soja em três datas, revendeu a diferença a um comprador fixo fora do sistema da cooperativa e escondeu o pagamento recebido atrás de um contrato de prestação de serviço pré-datado, com o valor caindo em sua conta pessoal na mesma semana.",
+  "executor_id": "02",
+  "planejador_id": "02",
+  "beneficiario_id": "02",
+  "motivacao": "Joaquim vinha acumulando dívidas pessoais e viu na função de supervisor da báscula, sem supervisão direta nos horários de pico, uma oportunidade recorrente de complementar renda às custas dos produtores.",
+  "metodo_ocultacao": "Registrava o peso correto no papel entregue ao produtor, mas lançava um valor menor no sistema da cooperativa; a diferença era retirada fisicamente em um caminhão à parte e vendida a um comprador fixo. O pagamento recebido foi disfarçado como honorário de um contrato de prestação de serviço pré-datado.",
+  "erro_que_permite_descobrir": "Joaquim usou o mesmo código de lote interno tanto no boletim de pesagem adulterado quanto no glossário técnico da cooperativa, permitindo cruzar os dois documentos e expor a divergência de peso.",
+  "cadeia_causal": [
+    "Joaquim tem acesso exclusivo à báscula nos horários de menor movimento.",
+    "Ele subregistra o peso de cargas específicas de soja no sistema da cooperativa.",
+    "A diferença de peso é retirada e vendida por fora a um comprador fixo.",
+    "O pagamento é disfarçado com um contrato de prestação de serviço pré-datado em nome de Joaquim.",
+    "O valor correspondente aparece no extrato bancário pessoal dele na mesma semana da venda irregular."
+  ],
+  "personagens": [
+    {
+      "id": "01",
+      "nome": "Sérgio Amable",
+      "funcao": "Vigia noturno da cooperativa",
+      "papel": "testemunha",
+      "suspeita_aparente": "É a última pessoa a circular pela área da báscula antes do fechamento e não relatou nada por semanas.",
+      "verdade": "Viu um caminhão fazendo manobra na área da báscula fora do horário normal, mas achou que fosse entrega atrasada e não deu importância até ser questionado.",
+      "documento_ancoragem": ["E1-05"],
+      "assinatura": {
+        "estilo": "curta",
+        "legibilidade": "media",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "seed": "cooperativa-sergio"
+      }
+    },
+    {
+      "id": "02",
+      "nome": "Joaquim Petter",
+      "funcao": "Supervisor da báscula de recebimento",
+      "papel": "executor",
+      "suspeita_aparente": "É o único funcionário com acesso liberado à báscula em todos os horários em que a divergência de peso foi registrada.",
+      "verdade": "Subregistrava o peso de cargas específicas de soja, vendia a diferença por fora e escondia o pagamento atrás de um contrato de prestação de serviço pré-datado.",
+      "documento_ancoragem": ["E1-04", "E2-04"],
+      "assinatura": {
+        "estilo": "apressada",
+        "legibilidade": "baixa",
+        "inclinacao": "direita",
+        "pressao": "forte",
+        "fluidez": "alta",
+        "seed": "cooperativa-joaquim"
+      }
+    },
+    {
+      "id": "03",
+      "nome": "Renata Kolb",
+      "funcao": "Presidente da Cooperativa Vale Novo",
+      "papel": "narrador",
+      "suspeita_aparente": "Demorou para abrir a apuração mesmo após as primeiras reclamações informais dos associados.",
+      "verdade": "Só formalizou a apuração depois de receber recibos comparativos de três produtores diferentes, quando o padrão ficou claro demais para ignorar.",
+      "documento_ancoragem": ["E1-01", "E2-01"],
+      "assinatura": {
+        "estilo": "formal",
+        "legibilidade": "alta",
+        "inclinacao": "reta",
+        "pressao": "media",
+        "seed": "cooperativa-renata"
+      }
+    },
+    {
+      "id": "04",
+      "nome": "Márcio Teixeira",
+      "funcao": "Motorista transportador terceirizado",
+      "papel": "testemunha",
+      "suspeita_aparente": "Fez entregas nos três dias em que a divergência de peso foi registrada.",
+      "verdade": "Transportou as cargas normalmente; o recibo de peso que ele carrega bate com o que saiu da propriedade do produtor, não com o que Joaquim lançou no sistema.",
+      "documento_ancoragem": ["E1-03", "E2-02"],
+      "assinatura": {
+        "estilo": "compacta",
+        "legibilidade": "media",
+        "inclinacao": "esquerda",
+        "pressao": "media",
+        "seed": "cooperativa-marcio"
+      }
+    },
+    {
+      "id": "05",
+      "nome": "Tiago Bessa",
+      "funcao": "Associado produtor rural",
+      "papel": "red_herring",
+      "suspeita_aparente": "Está endividado com a cooperativa e teve atrito público com a diretoria em assembleia recente.",
+      "verdade": "Não tem qualquer acesso à área da báscula fora do horário de entrega da própria carga e não esteve presente em nenhum dos horários de divergência.",
+      "documento_ancoragem": ["E1-08"],
+      "assinatura": {
+        "estilo": "tremida",
+        "legibilidade": "baixa",
+        "inclinacao": "esquerda",
+        "pressao": "leve",
+        "seed": "cooperativa-tiago"
+      }
+    },
+    {
+      "id": "06",
+      "nome": "Cristiane Dorneles",
+      "funcao": "Contadora terceirizada da cooperativa",
+      "papel": "testemunha",
+      "suspeita_aparente": "Foi ela quem processou o pagamento do contrato de prestação de serviço suspeito.",
+      "verdade": "Processou o pagamento seguindo a documentação apresentada por Joaquim, sem saber que o contrato era pré-datado para disfarçar um pagamento irregular.",
+      "documento_ancoragem": ["E2-04", "E2-05"],
+      "assinatura": {
+        "estilo": "administrativa",
+        "legibilidade": "alta",
+        "inclinacao": "reta",
+        "pressao": "leve",
+        "seed": "cooperativa-cristiane"
+      }
+    },
+    {
+      "id": "07",
+      "nome": "Vinícius Andrade",
+      "funcao": "Ex-funcionário da cooperativa",
+      "papel": "red_herring",
+      "suspeita_aparente": "Foi demitido três meses antes e fez ameaças públicas contra a diretoria em rede social.",
+      "verdade": "Estava em outra cidade, trabalhando em outro emprego, durante todo o período em que a divergência de peso ocorreu.",
+      "documento_ancoragem": ["E1-09"],
+      "assinatura": {
+        "estilo": "angular",
+        "legibilidade": "media",
+        "inclinacao": "direita",
+        "pressao": "media",
+        "seed": "cooperativa-vinicius"
+      }
+    }
+  ],
+  "linha_tempo_real": [
+    {
+      "data_hora": "2026-04-15 18:40",
+      "evento": "Joaquim subregistra o peso de uma carga de soja de pequeno produtor pela primeira vez, retirando a diferença em caminhão à parte.",
+      "personagem_id": "02",
+      "documento_prova": "E1-04",
+      "confirmacao_independente": "E1-03"
+    },
+    {
+      "data_hora": "2026-04-22 19:15",
+      "evento": "Sérgio Amable observa movimentação de caminhão na área da báscula fora do horário normal de entregas.",
+      "personagem_id": "01",
+      "documento_prova": "E1-05",
+      "confirmacao_independente": "E1-04"
+    },
+    {
+      "data_hora": "2026-04-24 09:30",
+      "evento": "Contrato de prestação de serviço pré-datado é assinado em nome de Joaquim para justificar o pagamento recebido.",
+      "personagem_id": "02",
+      "documento_prova": "E2-04",
+      "confirmacao_independente": "E2-05"
+    },
+    {
+      "data_hora": "2026-04-27 11:00",
+      "evento": "Depósito referente à venda irregular de soja aparece na conta pessoal de Joaquim.",
+      "personagem_id": "02",
+      "documento_prova": "E2-05",
+      "confirmacao_independente": "E2-04"
+    }
+  ],
+  "pilares_validacao": [
+    {
+      "nome": "presença física",
+      "documento_principal": "E1-04",
+      "confirmacao": "E1-02",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "escala de turno (reforço)",
+      "documento_principal": "E1-04",
+      "confirmacao": "E1-03",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "registro no terminal da báscula",
+      "documento_principal": "E2-02",
+      "confirmacao": "E2-03",
+      "personagem_id": "02"
+    },
+    {
+      "nome": "ação financeira",
+      "documento_principal": "E2-04",
+      "confirmacao": "E2-05",
+      "personagem_id": "02"
+    }
+  ],
+  "intervalo_critico_inicio": "2026-04-15 18:00",
+  "intervalo_critico_fim": "2026-04-27 12:00",
+  "documentos": [
+    {
+      "codigo": "E1-01",
+      "titulo": "Ofício de abertura de apuração interna",
+      "envelope": "E1",
+      "tipo": "protocolo",
+      "emocao_esperada": "seriedade institucional",
+      "objetivo_narrativo": "Estabelecer o pedido formal de apuração e o risco concreto para a cooperativa.",
+      "pistas_contidas": ["A apuração foi aberta após reclamações de três produtores diferentes."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["03"],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Cooperativa Agrícola Vale Novo",
+        "SUBTITULO_ORGANIZACAO": "Recebimento e Classificação de Grãos",
+        "ENDERECO_LINHA1": "Rodovia RS-330, km 12, Vale Novo/RS",
+        "CONTATO": "(54) 3333-1010 | secretaria@cooperativavalenovo.com.br",
+        "CNPJ": "78.112.445/0001-30",
+        "COR_TOPO": "#2e5d3c",
+        "LOCAL_DATA": "Vale Novo, 23 de abril de 2026",
+        "SAUDACAO": "À equipe de apuração interna,",
+        "ASSUNTO": "Abertura de apuração sobre divergência de peso na báscula",
+        "CORPO_CARTA": "<p>Determino a abertura de apuração interna sobre divergências de peso registradas na báscula de recebimento nas últimas semanas.</p><p>Três associados apresentaram recibos de transporte com peso superior ao lançado no sistema da cooperativa. Solicito revisão completa dos registros de acesso, escalas de trabalho e documentos financeiros relacionados ao período.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Renata Kolb",
+        "NOME_ASSINANTE": "Renata Kolb",
+        "CARGO_ASSINANTE": "Presidente da Cooperativa Vale Novo",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "03"
+      }
+    },
+    {
+      "codigo": "E1-02",
+      "titulo": "Manual de operação da báscula de recebimento",
+      "envelope": "E1",
+      "tipo": "manual",
+      "emocao_esperada": "neutralidade técnica",
+      "objetivo_narrativo": "Explicar o procedimento correto de pesagem para que o grupo perceba o desvio depois.",
+      "pistas_contidas": ["O procedimento exige dupla conferência de peso, mas permite lançamento manual em caso de falha do sensor.", "Crachás de acesso ao terminal da báscula são pessoais e intransferíveis; nenhum lançamento manual pode ser feito com o crachá de outro operador."],
+      "confirma": ["E1-04"],
+      "confirmado_por": ["E1-04"],
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Cooperativa Agrícola Vale Novo",
+        "SUBTITULO_ORGANIZACAO": "Manual de Procedimentos Operacionais",
+        "ENDERECO_LINHA1": "Rodovia RS-330, km 12, Vale Novo/RS",
+        "CONTATO": "(54) 3333-1010 | operacoes@cooperativavalenovo.com.br",
+        "CNPJ": "78.112.445/0001-30",
+        "COR_TOPO": "#2e5d3c",
+        "LOCAL_DATA": "Vale Novo, 02 de março de 2026",
+        "SAUDACAO": "Aos operadores da báscula,",
+        "ASSUNTO": "Procedimento padrão de pesagem de grãos",
+        "CORPO_CARTA": "<p>O peso bruto é registrado automaticamente pelo sensor da báscula. Em caso de falha do sensor, o operador responsável deve lançar o peso manualmente no sistema, informando o motivo do lançamento manual no campo de observação.</p><p>Todo lançamento manual deve ser conferido por um segundo operador em até 24 horas.</p><p>Os crachás de acesso ao terminal são pessoais e intransferíveis: cada operador só pode autenticar lançamentos com o próprio crachá, e o sistema não permite lançamento manual sem autenticação do crachá do operador responsável pelo turno.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Renata Kolb",
+        "NOME_ASSINANTE": "Renata Kolb",
+        "CARGO_ASSINANTE": "Presidente da Cooperativa Vale Novo",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "03"
+      }
+    },
+    {
+      "codigo": "E1-03",
+      "titulo": "Escala de trabalho da báscula — abril/2026",
+      "envelope": "E1",
+      "tipo": "escala",
+      "emocao_esperada": "atenção analítica",
+      "objetivo_narrativo": "Permitir cruzamento de horários com o log de acesso para isolar Joaquim.",
+      "pistas_contidas": ["Joaquim é o único operador escalado em todos os horários de divergência."],
+      "confirma": ["E1-04"],
+      "confirmado_por": ["E1-04"],
+      "ids_citados": ["02", "04"],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "Sistema de Escalas Vale Novo",
+        "SUBTITULO_SISTEMA": "Recebimento e Báscula",
+        "COR_SISTEMA": "#2e5d3c",
+        "COR_SISTEMA_DARK": "#1c3d26",
+        "DATA_EXPORTACAO": "23/04/2026",
+        "HORA_EXPORTACAO": "08:10",
+        "OPERADOR_EXPORT": "Cristiane Dorneles",
+        "HASH_REGISTRO": "ESC-4C1A9F",
+        "PERIODO_INICIO": "15/04/2026",
+        "PERIODO_FIM": "27/04/2026",
+        "LOCALIZACAO_SISTEMA": "Báscula de Recebimento - Setor 2",
+        "TOTAL_REGISTROS": "6",
+        "TOTAL_USUARIOS": "2",
+        "TOTAL_ENTRADAS": "6",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "0",
+        "REGISTROS": [
+          {"DATA": "15/04/2026", "HORA": "17:00-19:00", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "turno", "EVENTO": "Turno da tarde", "CLASSE_LINHA": "normal", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Turno regular"},
+          {"DATA": "22/04/2026", "HORA": "18:00-20:00", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "turno", "EVENTO": "Turno estendido", "CLASSE_LINHA": "normal", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Turno estendido por volume de colheita"},
+          {"DATA": "24/04/2026", "HORA": "08:00-18:00", "PORTA": "Báscula", "ID_USUARIO": "OP-04", "NOME_USUARIO": "Márcio Teixeira", "TIPO_EVENTO": "turno", "EVENTO": "Transporte externo", "CLASSE_LINHA": "normal", "TERMINAL": "T-02", "METODO": "crachá", "OBSERVACAO": "Rota de entrega"},
+          {"DATA": "24/04/2026", "HORA": "08:30-18:30", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "turno", "EVENTO": "Turno regular", "CLASSE_LINHA": "normal", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Turno regular"},
+          {"DATA": "26/04/2026", "HORA": "08:00-17:00", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "turno", "EVENTO": "Turno regular", "CLASSE_LINHA": "normal", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Turno regular"},
+          {"DATA": "27/04/2026", "HORA": "08:00-12:00", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "turno", "EVENTO": "Turno reduzido", "CLASSE_LINHA": "normal", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Turno reduzido"}
+        ]
+      }
+    },
+    {
+      "codigo": "E1-04",
+      "titulo": "Log de acesso — Terminal da báscula",
+      "envelope": "E1",
+      "tipo": "log_acesso",
+      "emocao_esperada": "suspeita crescente",
+      "objetivo_narrativo": "Mostrar que Joaquim é o único presente nos horários exatos de divergência de peso.",
+      "pistas_contidas": ["Joaquim acessa o terminal da báscula em todos os horários de divergência registrados."],
+      "confirma": ["E1-02", "E1-03"],
+      "confirmado_por": ["E1-02", "E1-03"],
+      "ids_citados": ["02"],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_SISTEMA": "SGA Vale Novo",
+        "SUBTITULO_SISTEMA": "Sistema de Gestão de Acesso",
+        "COR_SISTEMA": "#2e5d3c",
+        "COR_SISTEMA_DARK": "#1c3d26",
+        "DATA_EXPORTACAO": "23/04/2026",
+        "HORA_EXPORTACAO": "08:20",
+        "OPERADOR_EXPORT": "Cristiane Dorneles",
+        "HASH_REGISTRO": "LOG-8B21DD",
+        "PERIODO_INICIO": "15/04/2026",
+        "PERIODO_FIM": "27/04/2026",
+        "LOCALIZACAO_SISTEMA": "Terminal Báscula T-01",
+        "TOTAL_REGISTROS": "5",
+        "TOTAL_USUARIOS": "2",
+        "TOTAL_ENTRADAS": "5",
+        "TOTAL_NEGADOS": "0",
+        "TOTAL_ANOMALIAS": "2",
+        "COLUNA_NOME": true,
+        "COLUNA_TERMINAL": true,
+        "COLUNA_METODO": true,
+        "COLUNA_OBS": true,
+        "REGISTROS": [
+          {"DATA": "15/04/2026", "HORA": "18:40", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "operacao", "EVENTO": "Lançamento manual de peso", "CLASSE_LINHA": "anomalia", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Lançamento manual fora do padrão automático"},
+          {"DATA": "22/04/2026", "HORA": "19:15", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "operacao", "EVENTO": "Lançamento manual de peso", "CLASSE_LINHA": "anomalia", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Lançamento manual fora do horário de pico"},
+          {"DATA": "24/04/2026", "HORA": "09:05", "PORTA": "Báscula", "ID_USUARIO": "OP-04", "NOME_USUARIO": "Márcio Teixeira", "TIPO_EVENTO": "entrada", "EVENTO": "Entrega de carga", "CLASSE_LINHA": "normal", "TERMINAL": "T-02", "METODO": "crachá", "OBSERVACAO": "Entrega registrada normalmente"},
+          {"DATA": "26/04/2026", "HORA": "10:02", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "entrada", "EVENTO": "Início de turno", "CLASSE_LINHA": "normal", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Turno regular"},
+          {"DATA": "27/04/2026", "HORA": "11:00", "PORTA": "Báscula", "ID_USUARIO": "OP-02", "NOME_USUARIO": "Joaquim Petter", "TIPO_EVENTO": "operacao", "EVENTO": "Conferência final de lote", "CLASSE_LINHA": "normal", "TERMINAL": "T-01", "METODO": "crachá", "OBSERVACAO": "Conferência de fechamento do mês"}
+        ]
+      }
+    },
+    {
+      "codigo": "E1-05",
+      "titulo": "Depoimento do vigia noturno",
+      "envelope": "E1",
+      "tipo": "depoimento",
+      "emocao_esperada": "incerteza testemunhal",
+      "objetivo_narrativo": "Fornecer testemunho ocular indireto de movimentação irregular sem apontar diretamente para Joaquim.",
+      "pistas_contidas": ["Um caminhão fez manobra na área da báscula fora do horário normal de entregas."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["01"],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Cooperativa Agrícola Vale Novo",
+        "ORGAO_SUBTITULO": "Apuração Interna",
+        "NUMERO_CASO": "AI-2026-014",
+        "TIPO_DOCUMENTO": "Depoimento",
+        "TIPO_OCORRENCIA": "Movimentação irregular",
+        "DATA": "23/04/2026",
+        "LOCALIZACAO": "Área externa da báscula",
+        "HORA_OCORRENCIA": "19:15",
+        "DESCRICAO_OCORRENCIA": "<p>Eu tava na guarita perto das sete da noite do dia 22 e vi um caminhão fazendo manobra do lado da báscula, sem luz de ré ligada. Achei estranho porque não tinha entrega marcada pra aquele horário. Não anotei o dia porque pensei que fosse entrega atrasada de algum produtor.</p>",
+        "NOME_RESPONSAVEL": "Sérgio Amable",
+        "ASSINATURA_RESPONSAVEL": "Sérgio Amable",
+        "ASSINATURA_GLIFO": "S.Amable",
+        "DATA_HORA_ASSINATURA": "23/04/2026 09:40",
+        "CAMPO_NOME": true,
+        "NOME_ENVOLVIDO": "Sérgio Amable",
+        "DATA_NASC": "14/02/1979",
+        "CONDICAO": "Testemunha",
+        "DOCUMENTO_PESSOAL": "RG 3.201.554",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "01"
+      }
+    },
+    {
+      "codigo": "E1-06",
+      "titulo": "Cadastro de compradores externos autorizados",
+      "envelope": "E1",
+      "tipo": "cadastro_terceiros",
+      "emocao_esperada": "curiosidade administrativa",
+      "objetivo_narrativo": "Mostrar que não há comprador externo autorizado a receber grãos diretamente, reforçando que qualquer venda por fora é irregular.",
+      "pistas_contidas": ["Nenhum comprador externo tem autorização para retirar grãos diretamente da báscula."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": [],
+      "conteudo": {
+        "TITULO": "Cadastro de compradores externos autorizados — Cooperativa Vale Novo",
+        "DATA_ATUALIZACAO": "10/01/2026",
+        "COMPRADORES": [
+          {"NOME": "Cerealista Bom Grão Ltda", "STATUS": "autorizado", "MODALIDADE": "retirada via nota fiscal"},
+          {"NOME": "Agroindústria Rio Claro", "STATUS": "autorizado", "MODALIDADE": "retirada via nota fiscal"}
+        ],
+        "OBSERVACAO": "Nenhum comprador está autorizado a retirar carga diretamente na báscula sem nota fiscal emitida pela cooperativa."
+      }
+    },
+    {
+      "codigo": "E1-07",
+      "titulo": "Conversa — Grupo Operação Báscula",
+      "envelope": "E1",
+      "tipo": "chat",
+      "emocao_esperada": "tensão cotidiana",
+      "objetivo_narrativo": "Mostrar o clima de rotina na báscula e uma menção casual à sobrecarga de Joaquim nos turnos estendidos.",
+      "pistas_contidas": ["Joaquim vinha pedindo para fechar a báscula sozinho nos turnos estendidos."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["02", "04"],
+      "codigos_citados": [],
+      "conteudo": {
+        "HORA_TELA": "09:41",
+        "NOME_GRUPO": "Operação Báscula",
+        "MEMBROS_LISTA": "Joaquim Petter, Márcio Teixeira, Cristiane Dorneles",
+        "DATA_CONVERSA": "20 de abril de 2026",
+        "MENSAGENS": [
+          {"DIRECAO": "in", "CLASSE_GAP": "novo", "TEXTO_MENSAGEM": "Bom dia, semana de colheita cheia essa aqui hein", "HORARIO": "08:02", "MOSTRAR_NOME": true, "NOME_REMETENTE": "Márcio Teixeira", "COR_REMETENTE": "#2e5d3c"},
+          {"DIRECAO": "in", "CLASSE_GAP": "continuacao", "TEXTO_MENSAGEM": "Pode deixar que eu fecho sozinho o turno da noite, vocês podem ir mais cedo", "HORARIO": "08:05", "MOSTRAR_NOME": true, "NOME_REMETENTE": "Joaquim Petter", "COR_REMETENTE": "#8a5a2e"},
+          {"DIRECAO": "out", "CLASSE_GAP": "novo", "TEXTO_MENSAGEM": "Beleza Joaquim, valeu por cobrir", "HORARIO": "08:07", "TICKS": "lido"}
+        ]
+      }
+    },
+    {
+      "codigo": "E1-08",
+      "titulo": "Boletim de ocorrência — Atrito em assembleia",
+      "envelope": "E1",
+      "tipo": "boletim",
+      "emocao_esperada": "distração investigativa",
+      "objetivo_narrativo": "Reforçar Tiago Bessa como suspeito aparente, para ser descartado depois pela folha de cruzamento.",
+      "pistas_contidas": ["Tiago teve atrito público com a diretoria em assembleia recente."],
+      "confirma": [],
+      "confirmado_por": ["E1-09"],
+      "ids_citados": ["05"],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Cooperativa Agrícola Vale Novo",
+        "ORGAO_SUBTITULO": "Registro de Ocorrência Interna",
+        "NUMERO_CASO": "AI-2026-009",
+        "TIPO_DOCUMENTO": "Boletim",
+        "TIPO_OCORRENCIA": "Atrito em assembleia",
+        "DATA": "02/04/2026",
+        "LOCALIZACAO": "Salão de assembleias da cooperativa",
+        "HORA_OCORRENCIA": "20:15",
+        "DESCRICAO_OCORRENCIA": "<p>Durante a assembleia mensal, o associado Tiago Bessa questionou publicamente os prazos de pagamento de dívidas da cooperativa e trocou palavras ríspidas com membros da diretoria antes de se retirar.</p>",
+        "NOME_RESPONSAVEL": "Renata Kolb",
+        "ASSINATURA_RESPONSAVEL": "Renata Kolb",
+        "ASSINATURA_GLIFO": "R.Kolb",
+        "DATA_HORA_ASSINATURA": "02/04/2026 21:00",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "03"
+      }
+    },
+    {
+      "codigo": "E1-09",
+      "titulo": "Folha de cruzamento — Presença de associados e ex-funcionários",
+      "envelope": "E1",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "alívio parcial",
+      "objetivo_narrativo": "Permitir descartar Tiago Bessa e Vinícius Andrade cruzando presença física com os horários de divergência.",
+      "pistas_contidas": ["Nem Tiago nem Vinícius estavam na área da báscula nos horários de divergência registrados."],
+      "confirma": ["E1-08"],
+      "confirmado_por": [],
+      "ids_citados": ["05", "07"],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Cooperativa Agrícola Vale Novo",
+        "SUBTITULO_ORGANIZACAO": "Setor de Apuração Interna",
+        "ENDERECO_LINHA1": "Rodovia RS-330, km 12, Vale Novo/RS",
+        "CONTATO": "(54) 3333-1010 | apuracao@cooperativavalenovo.com.br",
+        "CNPJ": "78.112.445/0001-30",
+        "COR_TOPO": "#2e5d3c",
+        "LOCAL_DATA": "Vale Novo, 25 de abril de 2026",
+        "SAUDACAO": "Ao processo de apuração interna,",
+        "ASSUNTO": "Cruzamento de presença — associados e ex-funcionários citados",
+        "CORPO_CARTA": "<p>Tiago Bessa: sem registro de entrada na área da báscula em nenhuma das datas de divergência; sua única presença registrada corresponde à entrega da própria carga, fora dos horários anômalos.</p><p>Vinícius Andrade: registros de outro empregador em outra cidade cobrem integralmente o período de 15 a 27 de abril de 2026, tornando sua presença na cooperativa impossível nas datas analisadas.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Cristiane Dorneles",
+        "NOME_ASSINANTE": "Cristiane Dorneles",
+        "CARGO_ASSINANTE": "Contadora terceirizada",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "06"
+      }
+    },
+    {
+      "codigo": "E2-01",
+      "titulo": "Ofício de encaminhamento dos documentos financeiros",
+      "envelope": "E2",
+      "tipo": "protocolo",
+      "emocao_esperada": "seriedade institucional",
+      "objetivo_narrativo": "Formalizar a entrega dos documentos financeiros e técnicos ao grupo para a segunda fase da apuração.",
+      "pistas_contidas": ["A diretoria autoriza acesso aos documentos financeiros de Joaquim relacionados ao período apurado."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["03"],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Cooperativa Agrícola Vale Novo",
+        "SUBTITULO_ORGANIZACAO": "Recebimento e Classificação de Grãos",
+        "ENDERECO_LINHA1": "Rodovia RS-330, km 12, Vale Novo/RS",
+        "CONTATO": "(54) 3333-1010 | secretaria@cooperativavalenovo.com.br",
+        "CNPJ": "78.112.445/0001-30",
+        "COR_TOPO": "#2e5d3c",
+        "LOCAL_DATA": "Vale Novo, 25 de abril de 2026",
+        "SAUDACAO": "À equipe de apuração interna,",
+        "ASSUNTO": "Encaminhamento de documentos financeiros e técnicos complementares",
+        "CORPO_CARTA": "<p>Com base nos indícios levantados na primeira fase da apuração, autorizo o acesso aos boletins de pesagem, glossário técnico do sistema, contratos de prestação de serviço e extratos bancários relacionados ao período de 15 a 27 de abril de 2026.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Renata Kolb",
+        "NOME_ASSINANTE": "Renata Kolb",
+        "CARGO_ASSINANTE": "Presidente da Cooperativa Vale Novo",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "03"
+      }
+    },
+    {
+      "codigo": "E2-02",
+      "titulo": "Boletim de pesagem — Lote LT-04-02-C",
+      "envelope": "E2",
+      "tipo": "boletim",
+      "emocao_esperada": "clareza reveladora",
+      "objetivo_narrativo": "Mostrar a divergência concreta de peso no lote associado ao código citado no glossário técnico.",
+      "pistas_contidas": ["O peso líquido lançado no sistema é menor que o peso do recibo de transporte para o mesmo lote."],
+      "confirma": [],
+      "confirmado_por": ["E1-04"],
+      "ids_citados": ["02", "04"],
+      "codigos_citados": ["LT-04-02-C"],
+      "conteudo": {
+        "ORGAO_NOME": "Cooperativa Agrícola Vale Novo",
+        "ORGAO_SUBTITULO": "Boletim Técnico de Pesagem",
+        "NUMERO_CASO": "BP-2026-0402",
+        "TIPO_DOCUMENTO": "Boletim de Pesagem",
+        "TIPO_OCORRENCIA": "Divergência de peso líquido",
+        "DATA": "24/04/2026",
+        "LOCALIZACAO": "Báscula de Recebimento - Setor 2",
+        "HORA_OCORRENCIA": "09:30",
+        "DESCRICAO_OCORRENCIA": "<p>Lote LT-04-02-C: peso bruto registrado no recibo de transporte de 18.400 kg; peso líquido lançado manualmente no sistema pelo operador OP-02 de 16.850 kg. Diferença de 1.550 kg não justificada por tara adicional.</p>",
+        "NOME_RESPONSAVEL": "Joaquim Petter",
+        "ASSINATURA_RESPONSAVEL": "Joaquim Petter",
+        "ASSINATURA_GLIFO": "J.Petter",
+        "DATA_HORA_ASSINATURA": "24/04/2026 18:30",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "02"
+      }
+    },
+    {
+      "codigo": "E2-03",
+      "titulo": "Glossário técnico do sistema de pesagem",
+      "envelope": "E2",
+      "tipo": "glossario",
+      "emocao_esperada": "compreensão técnica",
+      "objetivo_narrativo": "Explicar o formato do código de lote para que o grupo consiga ligar o boletim de pesagem ao lote específico.",
+      "pistas_contidas": ["O código de lote segue o formato LT-[dia]-[operador]-[turno], permitindo identificar o operador responsável pelo lançamento."],
+      "confirma": ["E2-02"],
+      "confirmado_por": [],
+      "ids_citados": [],
+      "codigos_citados": ["LT-04-02-C"],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Cooperativa Agrícola Vale Novo",
+        "SUBTITULO_ORGANIZACAO": "Manual do Sistema de Pesagem",
+        "ENDERECO_LINHA1": "Rodovia RS-330, km 12, Vale Novo/RS",
+        "CONTATO": "(54) 3333-1010 | ti@cooperativavalenovo.com.br",
+        "CNPJ": "78.112.445/0001-30",
+        "COR_TOPO": "#2e5d3c",
+        "LOCAL_DATA": "Vale Novo, 05 de fevereiro de 2026",
+        "SAUDACAO": "Aos operadores do sistema,",
+        "ASSUNTO": "Glossário de códigos de lote",
+        "CORPO_CARTA": "<p>Cada lote recebido gera um código no formato LT-[dia do mês]-[identificador do operador]-[turno]. Exemplo: LT-04-02-C corresponde ao lote registrado no dia 04, pelo operador de identificador 02, no turno C (noturno estendido).</p><p>O identificador de operador corresponde diretamente ao número de crachá cadastrado no sistema de acesso.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Cristiane Dorneles",
+        "NOME_ASSINANTE": "Cristiane Dorneles",
+        "CARGO_ASSINANTE": "Contadora terceirizada",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "06"
+      }
+    },
+    {
+      "codigo": "E2-04",
+      "titulo": "Contrato de prestação de serviço pré-datado",
+      "envelope": "E2",
+      "tipo": "contrato",
+      "emocao_esperada": "desconfiança financeira",
+      "objetivo_narrativo": "Mostrar o contrato usado para disfarçar o pagamento recebido pela venda irregular.",
+      "pistas_contidas": ["O contrato foi assinado em data que não coincide com nenhum serviço efetivamente prestado."],
+      "confirma": [],
+      "confirmado_por": ["E2-05"],
+      "ids_citados": ["02"],
+      "codigos_citados": [],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Cooperativa Agrícola Vale Novo",
+        "SUBTITULO_ORGANIZACAO": "Departamento Administrativo-Financeiro",
+        "ENDERECO_LINHA1": "Rodovia RS-330, km 12, Vale Novo/RS",
+        "CONTATO": "(54) 3333-1010 | financeiro@cooperativavalenovo.com.br",
+        "CNPJ": "78.112.445/0001-30",
+        "COR_TOPO": "#2e5d3c",
+        "LOCAL_DATA": "Vale Novo, 24 de abril de 2026",
+        "SAUDACAO": "Contrato de prestação de serviço,",
+        "ASSUNTO": "Prestação de serviço de manutenção preventiva de equipamentos",
+        "CORPO_CARTA": "<p>Pelo presente instrumento, a Cooperativa Vale Novo contrata Joaquim Petter para serviço extraordinário de manutenção preventiva de equipamentos da báscula, no valor de R$ 1.550,00, a ser pago em parcela única.</p><p>Não consta nos registros de manutenção da cooperativa qualquer ordem de serviço correspondente a este contrato.</p>",
+        "FORMULA_ENCERRAMENTO": "Assinam as partes,",
+        "ASSINATURA_CURSIVA": "Joaquim Petter",
+        "NOME_ASSINANTE": "Joaquim Petter",
+        "CARGO_ASSINANTE": "Prestador de serviço",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "02"
+      }
+    },
+    {
+      "codigo": "E2-05",
+      "titulo": "Extrato bancário pessoal — Joaquim Petter",
+      "envelope": "E2",
+      "tipo": "extrato",
+      "emocao_esperada": "confirmação fria",
+      "objetivo_narrativo": "Confirmar de forma independente que o valor do contrato pré-datado caiu na conta pessoal de Joaquim na mesma semana da venda irregular.",
+      "pistas_contidas": ["Um depósito de R$ 1.550,00 aparece na conta na mesma semana da venda irregular de soja."],
+      "confirma": ["E2-04"],
+      "confirmado_por": [],
+      "ids_citados": ["02"],
+      "codigos_citados": [],
+      "conteudo": {
+        "LOGO_SIGLA": "BRC",
+        "NOME_BANCO": "Banco Regional do Campo",
+        "TAGLINE_BANCO": "Crédito Rural e Cooperativo",
+        "COR_BANCO": "#1c3d26",
+        "PERIODO_INICIO": "20/04/2026",
+        "PERIODO_FIM": "27/04/2026",
+        "DATA_GERACAO": "28/04/2026",
+        "HORA_GERACAO": "07:45",
+        "NOME_TITULAR": "Joaquim Petter",
+        "DOC_TITULAR": "CPF 041.552.330-19",
+        "AGENCIA": "0021",
+        "NUMERO_CONTA": "44219-5",
+        "TIPO_CONTA": "Conta corrente",
+        "SALDO_INICIAL": "2.662,30",
+        "DATA_SALDO_INICIAL": "20/04/2026",
+        "MOVIMENTACAO_LIQUIDA": "1.550,00",
+        "COR_MOVIMENTACAO": "#2e7d32",
+        "SALDO_FINAL": "4.212,30",
+        "DATA_SALDO_FINAL": "27/04/2026",
+        "COR_SALDO_FINAL": "#2e7d32",
+        "TOTAL_CREDITOS": "1.550,00",
+        "TOTAL_DEBITOS": "0,00",
+        "TOTAL_LANCAMENTOS": "1",
+        "NOTA_LEGAL": "Extrato de uso interno para fins de apuração administrativa.",
+        "CNPJ_BANCO": "10.223.445/0001-77",
+        "ENDERECO_BANCO": "Av. Central, 400, Vale Novo/RS",
+        "LANCAMENTOS": [
+          {"CLASSE_LINHA": "credito", "DATA": "24/04/2026", "DESCRICAO": "Depósito em conta", "DETALHE": "Ref. contrato de prestação de serviço", "TIPO_LOWER": "credito", "TIPO": "Crédito", "DIRECAO": "entrada", "VALOR": "1.550,00", "COR_SALDO": "#2e7d32", "SALDO_ACUMULADO": "4.212,30"}
+        ]
+      }
+    },
+    {
+      "codigo": "E2-06",
+      "titulo": "Depoimento da contadora terceirizada",
+      "envelope": "E2",
+      "tipo": "depoimento",
+      "emocao_esperada": "desconforto profissional",
+      "objetivo_narrativo": "Mostrar que a contadora processou o pagamento de boa-fé, sem saber da irregularidade do contrato.",
+      "pistas_contidas": ["A contadora processou o pagamento com base na documentação apresentada por Joaquim, sem checar ordem de serviço correspondente."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["06", "02"],
+      "codigos_citados": [],
+      "conteudo": {
+        "ORGAO_NOME": "Cooperativa Agrícola Vale Novo",
+        "ORGAO_SUBTITULO": "Apuração Interna",
+        "NUMERO_CASO": "AI-2026-014",
+        "TIPO_DOCUMENTO": "Depoimento",
+        "TIPO_OCORRENCIA": "Processamento de pagamento",
+        "DATA": "26/04/2026",
+        "LOCALIZACAO": "Escritório administrativo",
+        "HORA_OCORRENCIA": "14:20",
+        "DESCRICAO_OCORRENCIA": "<p>O Joaquim me passou o contrato assinado e pediu para eu processar o pagamento ainda naquela semana, disse que era urgente por causa de um serviço de manutenção que ele tinha feito. Eu processei porque o contrato estava assinado e ele é funcionário de confiança há anos. Não fui checar se tinha ordem de serviço aberta, isso normalmente é conferido por outro setor.</p>",
+        "NOME_RESPONSAVEL": "Cristiane Dorneles",
+        "ASSINATURA_RESPONSAVEL": "Cristiane Dorneles",
+        "ASSINATURA_GLIFO": "C.Dorneles",
+        "DATA_HORA_ASSINATURA": "26/04/2026 15:00",
+        "CAMPO_NOME": true,
+        "NOME_ENVOLVIDO": "Cristiane Dorneles",
+        "DATA_NASC": "09/11/1985",
+        "CONDICAO": "Testemunha",
+        "DOCUMENTO_PESSOAL": "RG 2.884.117",
+        "ASSINATURA_RESPONSAVEL_PERSONAGEM_ID": "06"
+      }
+    },
+    {
+      "codigo": "E2-07",
+      "titulo": "Folha de cruzamento — Lote, operador e pagamento",
+      "envelope": "E2",
+      "tipo": "folha_cruzamento",
+      "emocao_esperada": "fechamento lógico",
+      "objetivo_narrativo": "Amarrar o código de lote, o operador responsável e o pagamento suspeito em um único documento de apoio.",
+      "pistas_contidas": ["O identificador de operador do código de lote corresponde ao crachá de Joaquim, e a data do contrato coincide com a semana da divergência."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["02"],
+      "codigos_citados": ["LT-04-02-C"],
+      "conteudo": {
+        "NOME_ORGANIZACAO": "Cooperativa Agrícola Vale Novo",
+        "SUBTITULO_ORGANIZACAO": "Setor de Apuração Interna",
+        "ENDERECO_LINHA1": "Rodovia RS-330, km 12, Vale Novo/RS",
+        "CONTATO": "(54) 3333-1010 | apuracao@cooperativavalenovo.com.br",
+        "CNPJ": "78.112.445/0001-30",
+        "COR_TOPO": "#2e5d3c",
+        "LOCAL_DATA": "Vale Novo, 27 de abril de 2026",
+        "SAUDACAO": "Ao processo de apuração interna,",
+        "ASSUNTO": "Cruzamento de código de lote, operador e pagamento",
+        "CORPO_CARTA": "<p>O identificador de operador presente no código do lote LT-04-02-C corresponde ao crachá OP-02, cadastrado em nome do responsável pelo turno registrado na escala do período.</p><p>A data de assinatura do contrato de prestação de serviço coincide com a mesma semana em que a divergência de peso foi registrada nesse lote.</p>",
+        "FORMULA_ENCERRAMENTO": "Atenciosamente,",
+        "ASSINATURA_CURSIVA": "Cristiane Dorneles",
+        "NOME_ASSINANTE": "Cristiane Dorneles",
+        "CARGO_ASSINANTE": "Contadora terceirizada",
+        "ASSINATURA_CURSIVA_PERSONAGEM_ID": "06"
+      }
+    },
+    {
+      "codigo": "E2-08",
+      "titulo": "Conversa — Grupo Diretoria Vale Novo",
+      "envelope": "E2",
+      "tipo": "chat",
+      "emocao_esperada": "urgência institucional",
+      "objetivo_narrativo": "Mostrar a pressão da diretoria para fechar a apuração com base em documentos, não em suposições.",
+      "pistas_contidas": ["A diretoria pede que qualquer conclusão venha acompanhada de documento financeiro comprobatório."],
+      "confirma": [],
+      "confirmado_por": [],
+      "ids_citados": ["03"],
+      "codigos_citados": [],
+      "conteudo": {
+        "HORA_TELA": "16:12",
+        "NOME_GRUPO": "Diretoria Vale Novo",
+        "MEMBROS_LISTA": "Renata Kolb, Diretoria Financeira",
+        "DATA_CONVERSA": "26 de abril de 2026",
+        "MENSAGENS": [
+          {"DIRECAO": "in", "CLASSE_GAP": "novo", "TEXTO_MENSAGEM": "Renata, os produtores estão cobrando um posicionamento até sexta", "HORARIO": "16:05", "MOSTRAR_NOME": true, "NOME_REMETENTE": "Diretoria Financeira", "COR_REMETENTE": "#2e5d3c"},
+          {"DIRECAO": "out", "CLASSE_GAP": "novo", "TEXTO_MENSAGEM": "Entendo, mas só fecho isso com documento financeiro comprobatório, não com achismo", "HORARIO": "16:10", "TICKS": "lido"}
+        ]
+      }
+    }
+  ],
+  "matriz_pistas": [
+    {
+      "descricao": "Joaquim é o único operador presente em todos os horários de lançamento manual de peso.",
+      "documento": "E1-04",
+      "o_que_sugere": "Que ele teve oportunidade exclusiva de alterar o peso registrado.",
+      "o_que_prova": "Presença física e acesso ao terminal nos horários de divergência.",
+      "confirmacao": "E1-03",
+      "risco_ambiguidade": "baixo",
+      "emocao_esperada": "suspeita crescente"
+    },
+    {
+      "descricao": "O boletim de pesagem do lote LT-04-02-C mostra peso líquido menor que o peso do recibo de transporte.",
+      "documento": "E2-02",
+      "o_que_sugere": "Que houve subregistro deliberado de peso naquele lote.",
+      "o_que_prova": "A divergência concreta de peso no lote citado.",
+      "confirmacao": "E2-03",
+      "risco_ambiguidade": "medio_baixo",
+      "emocao_esperada": "clareza reveladora"
+    },
+    {
+      "descricao": "O contrato de prestação de serviço pré-datado não corresponde a nenhuma ordem de serviço real.",
+      "documento": "E2-04",
+      "o_que_sugere": "Que o pagamento foi um disfarce para o valor da venda irregular de soja.",
+      "o_que_prova": "O mecanismo usado para disfarçar o recebimento do dinheiro.",
+      "confirmacao": "E2-05",
+      "risco_ambiguidade": "medio_baixo",
+      "emocao_esperada": "desconfiança financeira"
+    }
+  ],
+  "red_herrings": [
+    {
+      "personagem_id": "05",
+      "motivo_aparente": "Está endividado com a cooperativa e teve atrito público com a diretoria em assembleia recente.",
+      "como_descartar": "A folha de cruzamento mostra que ele não tem registro de presença na área da báscula em nenhum horário de divergência.",
+      "documento_descarte": "E1-09",
+      "categoria": "motivo_sem_oportunidade"
+    },
+    {
+      "personagem_id": "07",
+      "motivo_aparente": "Foi demitido e fez ameaças públicas contra a diretoria em rede social.",
+      "como_descartar": "A folha de cruzamento mostra que ele estava em outra cidade, empregado em outro local, durante todo o período apurado.",
+      "documento_descarte": "E1-09",
+      "categoria": "motivo_sem_oportunidade"
+    }
+  ],
+  "cadeia_financeira": [
+    {
+      "de": "Comprador externo não autorizado",
+      "para": "Joaquim Petter",
+      "valor_ou_item": "Diferença de peso do lote LT-04-02-C (aprox. 1.550 kg de soja)",
+      "documento_prova": "E2-02",
+      "confirmacao_independente": "E2-03",
+      "is_salto_final": false
+    },
+    {
+      "de": "Cooperativa Vale Novo",
+      "para": "Joaquim Petter",
+      "valor_ou_item": "R$ 1.550,00 via contrato de prestação de serviço pré-datado",
+      "documento_prova": "E2-04",
+      "confirmacao_independente": "E2-05",
+      "is_salto_final": true
+    }
+  ],
+  "codigos": [
+    {
+      "documento": "E2-02",
+      "criterio": "codigo_lote",
+      "elementos": ["LT-04-02-C"],
+      "chave_em": "E2-03"
+    }
+  ],
+  "dicas": [
+    {
+      "numero": 1,
+      "intensidade": "leve",
+      "envelope": "E1",
+      "condicao_uso": "Grupo não cruzou log de acesso com escala de trabalho após 20 minutos.",
+      "texto": "Comparem os horários do log de acesso da báscula com a escala de trabalho: alguém aparece em todos eles?",
+      "o_que_desbloqueia": "Percepção de que um único operador está presente em todos os horários de divergência."
+    },
+    {
+      "numero": 2,
+      "intensidade": "media",
+      "envelope": "E1",
+      "condicao_uso": "Grupo suspeita apenas do associado endividado sem checar presença física.",
+      "texto": "A folha de cruzamento existe justamente para checar se quem parece suspeito realmente esteve no local. Já consultaram ela para os associados citados?",
+      "o_que_desbloqueia": "Descarte formal dos suspeitos aparentes."
+    },
+    {
+      "numero": 3,
+      "intensidade": "forte",
+      "envelope": "E1",
+      "condicao_uso": "Grupo não avança para o Envelope 2 mesmo após identificar o operador presente em todos os horários.",
+      "texto": "Vocês já sabem quem estava lá em todos os horários. Falta entender o que ele fez com a diferença de peso — isso está no próximo envelope.",
+      "o_que_desbloqueia": "Avanço formal para o Envelope 2."
+    },
+    {
+      "numero": 4,
+      "intensidade": "leve",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não percebeu a função do código de lote.",
+      "texto": "O glossário técnico explica como ler o código de lote do boletim de pesagem. Ele aponta para um identificador específico.",
+      "o_que_desbloqueia": "Compreensão de que o código de lote identifica o operador responsável."
+    },
+    {
+      "numero": 5,
+      "intensidade": "media",
+      "envelope": "E2",
+      "condicao_uso": "Grupo não ligou o contrato pré-datado ao extrato bancário.",
+      "texto": "Comparem a data do contrato de prestação de serviço com os lançamentos do extrato bancário pessoal. Alguma coisa bate?",
+      "o_que_desbloqueia": "Ligação entre o pagamento disfarçado e o depósito na conta pessoal."
+    },
+    {
+      "numero": 6,
+      "intensidade": "quase_gabarito",
+      "envelope": "E2",
+      "condicao_uso": "Grupo está a poucos minutos do fim sem fechar a cadeia completa.",
+      "texto": "Juntem estes quatro documentos na ordem: log de acesso, boletim de pesagem, contrato pré-datado e extrato bancário. Eles formam uma cadeia única sobre a mesma pessoa.",
+      "o_que_desbloqueia": "Fechamento da cadeia completa de evidências."
+    }
+  ],
+  "contratos_evidencia": [
+    {
+      "id": "C-E1-01",
+      "conclusao": "Joaquim Petter é o único operador presente em todos os horários de lançamento manual de peso registrados.",
+      "fase": "E1",
+      "tipo": "presenca_exclusiva",
+      "prova_principal": "E1-04",
+      "confirmacao_independente": "E1-02",
+      "descarta_alternativas": [],
+      "personagens_afetados": ["02"],
+      "acao_esperada_jogador": "Cruzar o log de acesso do terminal da báscula com a regra do manual de procedimentos (crachá pessoal e intransferível) para confirmar que só Joaquim poderia ter feito os lançamentos manuais registrados em seu nome.",
+      "risco_ambiguidade": "medio",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E1-02",
+      "conclusao": "Tiago Bessa e Vinícius Andrade não tiveram oportunidade física de causar a divergência de peso.",
+      "fase": "E1",
+      "tipo": "descarte",
+      "prova_principal": "E1-05",
+      "confirmacao_independente": "E1-09",
+      "descarta_alternativas": ["E1-09"],
+      "personagens_afetados": ["05", "07"],
+      "acao_esperada_jogador": "Confirmar, pela folha de cruzamento, que nenhum dos dois suspeitos aparentes esteve fisicamente presente nos horários de divergência.",
+      "risco_ambiguidade": "baixo",
+      "obrigatoria_para_avanco": false
+    },
+    {
+      "id": "C-E2-01",
+      "conclusao": "O lote LT-04-02-C teve peso subregistrado por um operador identificável pelo código de lote.",
+      "fase": "E2",
+      "tipo": "adulteracao_pesagem",
+      "prova_principal": "E2-02",
+      "confirmacao_independente": "E2-03",
+      "descarta_alternativas": [],
+      "personagens_afetados": ["02"],
+      "acao_esperada_jogador": "Comparar o peso líquido registrado no boletim com o código de lote documentado no glossário técnico para identificar o operador responsável.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-E2-02",
+      "conclusao": "O pagamento recebido por Joaquim foi disfarçado por um contrato de prestação de serviço pré-datado.",
+      "fase": "E2",
+      "tipo": "fraude_financeira",
+      "prova_principal": "E2-04",
+      "confirmacao_independente": "E2-05",
+      "descarta_alternativas": [],
+      "personagens_afetados": ["02"],
+      "acao_esperada_jogador": "Confirmar que o contrato pré-datado corresponde ao depósito extra identificado no extrato bancário pessoal de Joaquim.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": true
+    },
+    {
+      "id": "C-FINAL",
+      "conclusao": "Joaquim Petter fraudou a pesagem de grãos na Cooperativa Vale Novo e desviou os recursos por meio de um contrato pré-datado e depósito pessoal correspondente.",
+      "fase": "final",
+      "tipo": "solucao_final",
+      "prova_principal": "E2-04",
+      "confirmacao_independente": "E2-05",
+      "descarta_alternativas": ["E1-09"],
+      "personagens_afetados": ["02"],
+      "acao_esperada_jogador": "Apresentar a cadeia completa: divergência de peso, código de lote, contrato pré-datado e extrato bancário como prova conclusiva.",
+      "risco_ambiguidade": "medio_baixo",
+      "obrigatoria_para_avanco": true
+    }
+  ],
+  "printable_cards": [],
+  "versao": "0.1",
+  "observacoes_producao": "Blueprint gerado do zero para ISSUE-30.11 (STEP-03), usando padrões PAT-01..04 codificados em ISSUE-30.10 sobre o domínio de cooperativa agrícola. Reescrita estrutural completa para conformidade com generator/models.py."
+}
