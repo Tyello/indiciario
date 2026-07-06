@@ -27,11 +27,11 @@ Antes de executar qualquer tarefa:
 
 ---
 
-## Estado atual do projeto (junho 2026)
+## Estado atual do projeto (julho 2026)
 
 ### O que existe e funciona
 
-- **~1354 testes** coletados por `pytest tests/ -q` (checar contagem exata antes de citar em PR; ver `docs/ESTADO_ATUAL.md`).
+- **~1385 testes** coletados por `pytest tests/ -q` (checar contagem exata antes de citar em PR; ver `docs/ESTADO_ATUAL.md`).
 - Validator strict com guardrails editoriais, anti-obviedade, progressão, cartões, assinaturas e mapas.
 - Package builder com Playwright/Chromium, manifests, guia do facilitador, dicas, printables e PDFs finais.
 - Sistema visual P0/P1/P2/P3 completo.
@@ -83,6 +83,12 @@ Corpus de calibração externo (**não é régua canônica** — não passar pel
 |---|---|---|---|
 | Uma Noite Sem Flores | `examples/caso_referencia_uma_noite_sem_flores.json` | Intermediário | calibração de estimador (ISSUE-30.8); baseado em produto externo |
 
+Experimento de geração-do-zero (**não é régua canônica** — bloqueado aguardando playtest humano, ISSUE-30.11; fora do Canonical Quality Gate):
+
+| Caso | Arquivo | Nível | Maturidade |
+|---|---|---|---|
+| O Grão que Faltou | `examples/caso_gerado_cooperativa.json` | Intermediário | gerado do zero (não transcrito), domínio cooperativa agrícola; métricas de pipeline OK (`docs/EXPERIMENTO_GERACAO_DO_ZERO.md`, faixa a); rubrica humana (faixa b) pendente |
+
 Hotel Aurora **permanece sem mapa** por decisão de playtest. Não adicionar mapa sem instrução explícita.
 
 ### Playtest do Aurora (Rodada 01)
@@ -104,7 +110,17 @@ ISSUE-30.5 **já implementada**: `generator/canonical_quality_gate.py` (`evaluat
 
 ISSUE-30.6 **endureceu o gate**: critérios VR/AR agora são condicionais ao stage (`"visual_review"`/`"accessibility_review"` em `stages_completed`); manifests sem esses stages recebem `not_evaluated` e veredito `INCOMPLETE_EVALUATION`, nunca `APPROVED`.
 
-Próxima frente de trabalho: ver `docs/ROADMAP.md`. Não há issue em andamento fixada aqui — confirmar o estado em `docs/ESTADO_ATUAL.md` antes de iniciar.
+### Série de calibração (ISSUE-30.7 a 30.11)
+
+Exercício de calibração usando um caso comercial externo já validado em mesa como benchmark. Todas concluídas exceto a última, que está bloqueada aguardando ação humana:
+
+- **ISSUE-30.7** concluída: `generator/playtest_metrics.estimate_difficulty` deixou de retornar sempre `"avancado"`; usa profundidade do grafo de pistas com âncoras de regressão (Iniciante B → iniciante, Aurora → intermediário).
+- **ISSUE-30.8** concluída: corpus de calibração externo codificado como blueprint não-canônico (`examples/caso_referencia_uma_noite_sem_flores.json`, ficção original preservando a espinha dedutiva do produto comercial). Relatório: `docs/CALIBRACAO_REFERENCIA_EXTERNA.md`.
+- **ISSUE-30.9** concluída: corrigido falso-positivo de `GP_004` em contratos de descarte (`generator/clue_graph.py`).
+- **ISSUE-30.10** concluída: padrões PAT-01..04 destilados da calibração, codificados em `framework/08_MODELO_REFERENCIA.md` (cross-link em `framework/07_PROMPT_GERADOR_DE_CASO.md`).
+- **ISSUE-30.11 bloqueada em `STEP-05`, `NEXT_ACTION: human`.** Geração-do-zero: caso novo (não transcrito), domínio cooperativa agrícola, `examples/caso_gerado_cooperativa.json`, usando PAT-01 e PAT-04 deliberadamente. Métricas de pipeline preenchidas em `docs/EXPERIMENTO_GERACAO_DO_ZERO.md` (faixa a — strict, estimador, `clue_graph`, `obviousness_checker`, todas OK). Falta a faixa b: rubrica humana (RUB-01/02), preenchida só após o playtest de mesa. **O orquestrador não simula nem pula esse playtest.** Pipeline-verde é necessário, não suficiente — o veredito é o playtest.
+
+Próxima frente de trabalho: ver `docs/ROADMAP.md`. Além da 30.11 bloqueada, não há issue em andamento fixada aqui — confirmar o estado em `docs/ESTADO_ATUAL.md` antes de iniciar.
 
 ---
 
