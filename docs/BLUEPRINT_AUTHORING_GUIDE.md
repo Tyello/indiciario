@@ -324,6 +324,11 @@ Antes de gerar PDF, confirme:
 
 Se qualquer item falhar, corrija o plano antes de ajustar templates, renderer ou validator.
 
+Este checklist é editorial/narrativo. Existe também um gate de forma (schema/Pydantic),
+distinto deste — confirma que o esqueleto do blueprint instancia contra o schema antes da
+Fase 2 (documentos finais). Ele mora em `framework/07_PROMPT_GERADOR_DE_CASO.md`, seção
+`## GATE ESTRUTURAL — OBRIGATÓRIO ENTRE A FASE 1 E A FASE 2`.
+
 ## Guardrails visuais de autoria
 
 Além do validator estrutural e do Case Review, blueprints devem passar pelo sanity check visual/editorial quando criarem ou alterarem documentos com HTML, tabelas ou folhas de apoio.

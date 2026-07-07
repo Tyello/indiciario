@@ -136,3 +136,9 @@ balanço de calibração 2026-06-29.)_
   nas métricas objetivas, mas isso não responde ao experimento — falta a faixa (b), rubrica humana (RUB-01/02),
   que segue como placeholder até o playtest. Rubrica RUB-01/02 (seção 2) conferida íntegra, não reescrita.
   Issue pausada: `NEXT_ACTION: human`, aguardando playtest humano (STEP-05).
+- ISSUE-30.12 (2026-07-07): o achado do STEP-02/STEP-03 desta issue (blueprint completo escrito numa
+  única passada, 327 erros de construção Pydantic só descobertos depois dos 17 documentos prontos,
+  exigindo reescrita estrutural total) virou regra de processo — `## GATE ESTRUTURAL — OBRIGATÓRIO
+  ENTRE A FASE 1 E A FASE 2` em `framework/07_PROMPT_GERADOR_DE_CASO.md`, exigindo checar o esqueleto
+  contra o schema antes de escrever conteúdo final de documento. Correção de processo, não reabre nem
+  depende do playtest humano pendente (STEP-05) desta issue.

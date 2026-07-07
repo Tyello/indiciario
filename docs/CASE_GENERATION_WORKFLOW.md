@@ -31,6 +31,12 @@ o teste cego humano.
 - **O que NÃO valida**: o prompt não garante que o JSON gerado é estruturalmente válido. O
   campo `conteudo` é obrigatório em cada documento do blueprint, com as chaves exatas definidas
   no template — sem isso o build de PDF não renderiza o documento.
+- **Gate estrutural entre Fase 1 e Fase 2**: o mesmo comando da etapa 3 abaixo
+  (`python -m generator.validator <arquivo>.json --strict`) pode e deve rodar antes, sobre o
+  esqueleto do blueprint — não só depois de tudo escrito. Ver
+  `## GATE ESTRUTURAL — OBRIGATÓRIO ENTRE A FASE 1 E A FASE 2` em
+  `framework/07_PROMPT_GERADOR_DE_CASO.md`. Mais barato corrigir a forma no esqueleto do que
+  descobrir o erro depois dos 17 documentos finais escritos.
 
 ### 3. Validação estrutural/editorial (generator, código)
 

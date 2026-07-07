@@ -87,7 +87,24 @@ Se o risco for Médio ou superior: sinalize explicitamente, corrija o blueprint 
 
 ---
 
+## GATE ESTRUTURAL — OBRIGATÓRIO ENTRE A FASE 1 E A FASE 2
+
+O gate acima cobre solvabilidade e narrativa. Este cobre forma: antes de escrever o conteúdo final de qualquer documento (Fase 2), confirme que o esqueleto do blueprint — elenco, `objetivos_por_envelope`, `pilares_validacao`, `contratos_evidencia`, `red_herrings`, `codigos`, `linha_tempo_real`/`linha_tempo_percebida`/`linha_tempo_documental`, `cadeia_financeira`/cadeia logística — instancia contra o schema do projeto. Documentos podem ter `conteudo` placeholder de uma linha nesta etapa; o que precisa estar certo agora é a forma, não a prosa final.
+
+Motivo: escrever os documentos finais sobre uma estrutura que ainda pode estar errada custa caro — o erro só aparece depois de todo o texto pronto, e a correção vira reescrita estrutural completa em vez de ajuste pontual no esqueleto.
+
+Como executar o gate, dependendo de quem está gerando:
+
+- **Com Claude Code ou outro agente com acesso ao repositório:** salve o esqueleto e rode `python -m generator.validator <arquivo>.json --strict`. Erros de schema (nome de campo errado, tipo errado, `envelope` como texto em vez de número, chave trocada em linha do tempo) aparecem antes de qualquer prosa final ser escrita.
+- **Gerando só em chat, sem execução de código:** releia cada campo do esqueleto contra os nomes exatos de `framework/CONTEUDO_SCHEMA.md` e a lista de tipos em `framework/03_TIPOS_DE_DOCUMENTOS.md`; declare explicitamente, campo por campo, que o nome e o tipo batem, antes de prosseguir para a Fase 2.
+
+Se o esqueleto falhar o gate: corrija a estrutura primeiro. Não escreva conteúdo final de documento sobre uma estrutura que ainda pode mudar de forma.
+
+---
+
 ## ENTREGÁVEIS — NESTA ORDEM
+
+A Fase 1 só está concluída depois do GATE ESTRUTURAL acima. Não pule para a Fase 2 com um esqueleto ainda não verificado contra o schema.
 
 ### Fase 1 — Blueprint (planejamento interno)
 

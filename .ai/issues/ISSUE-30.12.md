@@ -3,13 +3,13 @@
 ## Estado
 
 ```
-STATUS: pending
-CURRENT_STEP: STEP-01
-NEXT_ACTION: executor
-REVIEW_STATUS: none
-LAST_COMPLETED_STEP: none
-LAST_EXECUTION_REPORT: none
-LAST_REVIEW_REPORT: none
+STATUS: done
+CURRENT_STEP: STEP-06 (concluído)
+NEXT_ACTION: none
+REVIEW_STATUS: approved
+LAST_COMPLETED_STEP: STEP-06
+LAST_EXECUTION_REPORT: .ai/runs/ISSUE-30.12/STEP-06_EXECUTION.md
+LAST_REVIEW_REPORT: .ai/runs/ISSUE-30.12/STEP-05_REVIEW.md
 BLOCKER: none
 ```
 
@@ -98,3 +98,9 @@ documentation de conteúdo (STEP-02), validation (STEP-05).
 
 ## Histórico
 - STEP-00 gerado em chat; STEP-01 pronto.
+- STEP-03 executado; aguardando revisão.
+- STEP-03 aprovado. Cross-links em CASE_GENERATION_WORKFLOW.md e BLUEPRINT_AUTHORING_GUIDE.md conferidos: local certo, referência exata ao GATE ESTRUTURAL do framework/07, sem duplicação. Nenhum arquivo fora do escopo.
+- STEP-04 executado (documentation, auto-approve): docs/EXPERIMENTO_GERACAO_DO_ZERO.md, docs/ESTADO_ATUAL.md e CLAUDE.md atualizados; docs/INDICE_DOCUMENTACAO.md marcado ⏭️ (coluna "Atualizar quando" do 07 já cobre). Aguardando aprovação do orquestrador (auto-approve, sem revisor separado).
+- STEP-05 executado (validation): `pytest tests/ -q` → 1376 passed, 6 failed (pré-existentes, sem código tocado por esta issue), 3 skipped. `python -m generator.validator examples/caso_canonico_iniciante.json --strict` sem erro de construção (positivo). Cópia temporária malformada (`tempo_estimado_min` int→string) fora do repo produziu erro de construção Pydantic esperado (negativo); cópia deletada após o teste. Report: `.ai/runs/ISSUE-30.12/STEP-05_EXECUTION.md`.
+- STEP-05 aprovado. Revisor confirmou independentemente via `git status`/`git diff --name-only` (só docs/framework tocados, falhas de pytest pré-existentes no Windows), re-rodou o validator positivo (0 críticos, "Pode gerar: SIM") e buscou `malformado*` no repo (nada encontrado). Report: `.ai/runs/ISSUE-30.12/STEP-05_REVIEW.md`.
+- STEP-06 executado (wrap-up, auto-approve): arquivos alterados listados, impacto documental e critério de aceite conferidos item a item, todos ✅/⏭️ justificados. Report: `.ai/runs/ISSUE-30.12/STEP-06_EXECUTION.md`. STATUS: done.

@@ -120,7 +120,9 @@ Exercício de calibração usando um caso comercial externo já validado em mesa
 - **ISSUE-30.10** concluída: padrões PAT-01..04 destilados da calibração, codificados em `framework/08_MODELO_REFERENCIA.md` (cross-link em `framework/07_PROMPT_GERADOR_DE_CASO.md`).
 - **ISSUE-30.11 bloqueada em `STEP-05`, `NEXT_ACTION: human`.** Geração-do-zero: caso novo (não transcrito), domínio cooperativa agrícola, `examples/caso_gerado_cooperativa.json`, usando PAT-01 e PAT-04 deliberadamente. Métricas de pipeline preenchidas em `docs/EXPERIMENTO_GERACAO_DO_ZERO.md` (faixa a — strict, estimador, `clue_graph`, `obviousness_checker`, todas OK). Falta a faixa b: rubrica humana (RUB-01/02), preenchida só após o playtest de mesa. **O orquestrador não simula nem pula esse playtest.** Pipeline-verde é necessário, não suficiente — o veredito é o playtest.
 
-Próxima frente de trabalho: ver `docs/ROADMAP.md`. Além da 30.11 bloqueada, não há issue em andamento fixada aqui — confirmar o estado em `docs/ESTADO_ATUAL.md` antes de iniciar.
+**ISSUE-30.12 em andamento**: gate estrutural entre Fase 1 e Fase 2 do `framework/07_PROMPT_GERADOR_DE_CASO.md` (achado dos 327 erros Pydantic da 30.11 STEP-02/03, virado regra de processo). Sem código, sem depender do playtest pendente da 30.11.
+
+Próxima frente de trabalho: ver `docs/ROADMAP.md`. Além da 30.11 bloqueada e da 30.12 em andamento, não há outra issue em andamento fixada aqui — confirmar o estado em `docs/ESTADO_ATUAL.md` antes de iniciar.
 
 ---
 

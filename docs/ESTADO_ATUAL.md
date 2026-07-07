@@ -104,6 +104,7 @@ Problemas já tratados e que não devem ser reabertos sem evidência nova:
 - estimador degenerado de dificuldade corrigido (ISSUE-30.7) — classificava por contagem de documentos; agora classifica por profundidade/densidade/ambiguidade/papel do E2; contagem é sinal informativo;
 - `GP_004` isenta contratos `tipo == "descarte"` (ISSUE-30.9) — falso positivo identificado na calibração de "Uma Noite Sem Flores" (ISSUE-30.8); contrato de descarte não é obrigatório nem final por design, não é beco sem saída.
 - padrões destilados da calibração de "Uma Noite Sem Flores" (ISSUE-30.8) agora codificados como PAT-01..04 em `framework/08_MODELO_REFERENCIA.md`, com cross-link nomeado (PAT-05) em `framework/07_PROMPT_GERADOR_DE_CASO.md` (ISSUE-30.10).
+- novo gate estrutural entre Fase 1 e Fase 2 da geração de caso (ISSUE-30.12) — `framework/07_PROMPT_GERADOR_DE_CASO.md` passa a exigir checar o esqueleto do blueprint contra o schema (`generator.validator --strict`) antes de escrever documentos finais; achado veio dos 327 erros Pydantic da ISSUE-30.11 (STEP-02/STEP-03).
 
 ## Réguas canônicas atuais
 
