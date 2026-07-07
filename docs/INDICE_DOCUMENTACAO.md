@@ -80,6 +80,7 @@ Use esta tabela como atalho. Ela não é exaustiva; na dúvida, confira a coluna
 | `06_TEMPLATE_NOVO_CASO.md`      | Template de planejamento (14 seções) | Designer/LLM-gen | GEN | Muda o que um caso precisa planejar |
 | `07_PROMPT_GERADOR_DE_CASO.md`  | Prompt expandido p/ gerar caso via LLM | LLM-gen | GEN | Muda entregáveis, formato ou gate da geração |
 | `08_MODELO_REFERENCIA.md`       | Padrões e anti-padrões de referência | LLM-gen | GEN | Surge novo padrão/anti-padrão validado |
+| `20_SISTEMA_VISUAL.md`          | Doutrina de repaginação documental; gate de fidelidade de fonte (ISSUE-40.2), camada e microidentidade (40.3/40.6) | Designer/Dev/LLM-gen | GEN/VAL | Novo check visual entra no gate ou muda regra de camada/fonte/microidentidade |
 | `09_TEMPLATE_GABARITO.md`       | Template do gabarito do mestre | LLM-gen/Facilitador | GEN | Muda estrutura do gabarito |
 | `10_TEMPLATE_DICAS.md`          | Template de dicas progressivas | LLM-gen/Facilitador | GEN | Muda intensidade/estrutura de dicas |
 | `11_GUIA_DO_FACILITADOR.md`     | Como conduzir a sessão (operação de mesa) | Facilitador | PLAY | Muda condução de sessão |

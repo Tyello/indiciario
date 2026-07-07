@@ -40,56 +40,12 @@ from __future__ import annotations
 import pytest
 from playwright.sync_api import sync_playwright
 
-from generator.renderer import (
-    TEMPLATES_DIR,
-    _injetar_cabecalho_rodape_documental,
-    _injetar_classes_body,
-    _injetar_css_documental,
-    _preparar_dados_documentais,
-    renderizar_html,
-)
-
-# Inventário corrigido pós-STEP-01 (ver ISSUE-40.1.md, nota de decisão do
-# orquestrador). `Inter` (03_twitter.html) fica FORA de escopo: mimetismo
-# intencional de UI nativa do SO no template estilo Twitter, não identidade
-# de marca — vendorizar quebraria o propósito visual do template.
-CUSTOM_FONTS: dict[str, list[str]] = {
-    "01_email.html": ["DM Sans"],
-    "04_boletim.html": ["Source Serif 4"],
-    "06_log_acesso.html": ["JetBrains Mono"],
-    "07_recibo.html": ["DM Sans", "Caveat"],
-    "08_orcamento.html": ["DM Sans"],
-    "09_extrato.html": ["DM Sans", "JetBrains Mono"],
-    "10_bilhete.html": ["Caveat"],
-    "11_testamento_rascunho.html": ["Caveat", "Libre Baskerville", "Playfair Display"],
-}
-
-
-def _montar_html(template_nome: str) -> str:
-    """Reproduz o pipeline de injeção de `renderer.renderizar_documento` até o
-    HTML final, sem passar pela etapa de PDF, para inspecionar a fonte
-    computada com o Chromium do Playwright diretamente."""
-    template_path = TEMPLATES_DIR / template_nome
-    dados = _preparar_dados_documentais(template_nome, {})
-    html_raw = template_path.read_text(encoding="utf-8")
-    html_raw = _injetar_css_documental(html_raw)
-    html_raw = _injetar_classes_body(html_raw, template_nome, dados)
-    html_raw = _injetar_cabecalho_rodape_documental(html_raw, template_nome, dados)
-    return renderizar_html(html_raw, dados)
-
-
-_MEDIR_FONTE_JS = """
-(fontName) => {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  const texto = 'mmmmmmmmmmlliWQOX0123456789';
-  ctx.font = `48px '${fontName}', monospace`;
-  const larguraComFonte = ctx.measureText(texto).width;
-  ctx.font = '48px monospace';
-  const larguraFallback = ctx.measureText(texto).width;
-  return larguraComFonte !== larguraFallback;
-}
-"""
+# CUSTOM_FONTS / _montar_html / _MEDIR_FONTE_JS extraídos para
+# generator/font_fidelity.py no STEP-03 da ISSUE-40.2, para serem reusados
+# pelo Canonical Quality Gate (generator.canonical_quality_gate,
+# evaluate_font_fidelity) sem duplicar a técnica de medição. Import no lugar
+# da definição local -- asserts abaixo inalterados.
+from generator.font_fidelity import CUSTOM_FONTS, _MEDIR_FONTE_JS, _montar_html
 
 
 @pytest.fixture(scope="module")

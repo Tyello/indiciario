@@ -32,6 +32,7 @@ __all__ = [
     "CanonicalQualification",
     "CuratorQualification",
     "QualificationCriterion",
+    "evaluate_font_fidelity",
     "evaluate_for_canonical",
     "get_canonical_criteria",
 ]
@@ -127,6 +128,57 @@ def get_canonical_criteria(difficulty_level: str) -> dict[str, Any]:
         ) from exc
 
 
+def evaluate_font_fidelity(
+    *,
+    templates: list[str] | None = None,
+    browser: Any,
+) -> QualificationCriterion:
+    """Check de fidelidade de fonte (ISSUE-40.2): falha explicitamente se
+    algum template renderizado usa uma fonte custom que caiu em fallback
+    silencioso de fonte de sistema (``@font-face`` ausente/quebrado em
+    ``templates/styles/document_system.css``).
+
+    Reusa a técnica de medição (``canvas.measureText`` via Chromium real)
+    extraída em ``generator.font_fidelity`` (ISSUE-40.1). ``templates``
+    restringe a checagem a um subconjunto do inventário
+    ``generator.font_fidelity.CUSTOM_FONTS``; por padrão checa todos os
+    templates do inventário.
+
+    A ``recommendation`` nomeia cada par template+fonte que falhou (critério
+    de aceite #2 da ISSUE-40.2) -- nunca um booleano agregado.
+    """
+    from generator.font_fidelity import CUSTOM_FONTS, fonte_aplicada
+
+    template_names = templates if templates is not None else list(CUSTOM_FONTS)
+
+    fallbacks: list[str] = []
+    for template_nome in template_names:
+        for fonte in CUSTOM_FONTS.get(template_nome, []):
+            if not fonte_aplicada(browser, template_nome, fonte):
+                fallbacks.append(f"{template_nome}: '{fonte}'")
+
+    is_satisfied = not fallbacks
+    recommendation = (
+        ""
+        if is_satisfied
+        else (
+            "font_fidelity: fallback silencioso de fonte custom para fonte de "
+            "sistema em -- " + "; ".join(fallbacks) + ". Confirme o bloco "
+            "@font-face correspondente em templates/styles/document_system.css."
+        )
+    )
+
+    return QualificationCriterion(
+        name="font_fidelity",
+        actual_value=fallbacks,
+        min_threshold=None,
+        max_threshold=None,
+        is_satisfied=is_satisfied,
+        status="blocker" if fallbacks else "ok",
+        recommendation=recommendation,
+    )
+
+
 def _density_and_document_count(blueprint: Mapping[str, Any]) -> tuple[int, int]:
     """Derive density (chars) and document count, reusing the existing helpers
     from ``quality_comparative_reviewer`` instead of duplicating the formula."""
@@ -205,12 +257,23 @@ def evaluate_for_canonical(
     blueprint: Mapping[str, Any],
     pipeline_result: Mapping[str, Any],
     difficulty_level: str,
+    *,
+    font_fidelity_criterion: QualificationCriterion | None = None,
 ) -> CanonicalQualification:
     """Evaluate whether ``blueprint``/``pipeline_result`` is structurally
     eligible for canonization at ``difficulty_level``.
 
     ``pipeline_result`` is a run manifest dict (the shape produced by
     ``generator.run_manifest`` / ``PipelineRunResult.manifest``).
+
+    ``font_fidelity_criterion`` (ISSUE-40.2, STEP-03_FIX-01): critério opcional
+    já construído por quem invoca o gate (ex. ``pipeline_runner`` chamando
+    ``evaluate_font_fidelity`` com um ``Browser`` do Playwright vivo). Este
+    módulo não invoca Playwright diretamente -- quando fornecido, o critério
+    é apenas anexado a ``criteria_results`` e participa normalmente do
+    cálculo de ``qualification`` via ``has_blocker``/status, igual aos
+    demais critérios. Chamadas sem esse parâmetro mantêm o comportamento
+    anterior inalterado.
 
     Returns a :class:`CanonicalQualification`. ``APPROVED`` here means
     "structurally eligible", not "canonical" -- promotion still requires a
@@ -305,6 +368,9 @@ def evaluate_for_canonical(
             ),
         )
     )
+
+    if font_fidelity_criterion is not None:
+        criteria_results.append(font_fidelity_criterion)
 
     observations: list[str] = []
     doc_min = criteria["documents_informational_min"]
