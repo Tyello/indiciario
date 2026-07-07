@@ -15,6 +15,7 @@ Interface pública (ver AGENTS.md):
 from __future__ import annotations
 
 import asyncio
+import base64
 import importlib
 import json
 import logging
@@ -35,6 +36,7 @@ OUTPUT_DIR = Path(__file__).parent.parent / "output"
 ASSETS_DIR = Path(__file__).parent.parent / "assets"
 SIGNATURES_DIR = ASSETS_DIR / "signatures"
 DOCUMENT_SYSTEM_CSS_PATH = TEMPLATES_DIR / "styles" / "document_system.css"
+FONTS_DIR = ASSETS_DIR / "fonts"
 
 
 logger = logging.getLogger(__name__)
@@ -92,19 +94,43 @@ DOCUMENT_TYPE_FAMILIES = {
 }
 
 
+_FONTFACE_URL_RE = re.compile(r"url\('\.\./\.\./assets/fonts/([^']+\.woff2)'\)")
+
+
+def _inline_fontface_urls(css: str) -> str:
+    """Substitui os `url('../../assets/fonts/X.woff2')` do CSS por data URIs
+    base64 embutidos, lendo os arquivos reais em `assets/fonts/`.
+
+    `page.set_content()` do Playwright (usado pelo renderer e pelos testes de
+    fonte) não define uma base URL `file://` para a página — um caminho
+    relativo/absoluto de disco no `@font-face` simplesmente não carregaria.
+    Embutir como data URI garante fonte local, sem depender de base URL nem
+    de rede, e sem exigir servir os assets via HTTP."""
+
+    def sub(match: re.Match) -> str:
+        nome_arquivo = match.group(1)
+        font_path = FONTS_DIR / nome_arquivo
+        if not font_path.is_file():
+            logger.warning("Fonte vendorizada não encontrada: %s", font_path)
+            return match.group(0)
+        dados_b64 = base64.b64encode(font_path.read_bytes()).decode("ascii")
+        return f"url('data:font/woff2;base64,{dados_b64}')"
+
+    return _FONTFACE_URL_RE.sub(sub, css)
+
+
 def _document_system_css() -> str:
     if not DOCUMENT_SYSTEM_CSS_PATH.is_file():
         return ""
     css = DOCUMENT_SYSTEM_CSS_PATH.read_text(encoding="utf-8")
+    css = _inline_fontface_urls(css)
     return f"\n<style data-indiciario-visual-system>\n{css}\n</style>\n"
 
 
 def _injetar_css_documental(html: str) -> str:
     css = _document_system_css()
-    if not css:
-        return html
-    if "</head>" in html:
-        return html.replace("</head>", f"{css}</head>", 1)
+    if css and "</head>" in html:
+        html = html.replace("</head>", f"{css}</head>", 1)
     return html
 
 
@@ -622,6 +648,10 @@ async def _html_para_pdf(html: str, output_path: Path, landscape: bool = False) 
         browser = await p.chromium.launch()
         page = await browser.new_page()
         await page.set_content(html, wait_until="networkidle")
+        # Garante que as fontes vendorizadas (@font-face local, ISSUE-40.1)
+        # terminaram de carregar/decodificar antes do screenshot/PDF —
+        # sem isso, o Chromium pode capturar um frame ainda em fallback.
+        await page.evaluate("document.fonts.ready")
         await page.pdf(
             path=str(output_path),
             format="A4",
