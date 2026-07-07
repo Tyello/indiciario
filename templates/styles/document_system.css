@@ -1,5 +1,60 @@
 /* Indiciário — Sistema Visual Documental v1 (P0)
-   Base offline, P&B first, sem fontes externas ou imagens remotas. */
+   Base offline, P&B first. Fontes custom vendorizadas localmente em
+   assets/fonts/ (nunca de rede/sistema em runtime) — ver ISSUE-40.1. */
+
+/* Os caminhos abaixo são relativos a assets/fonts/ a partir deste arquivo
+   (templates/styles/document_system.css). O renderer (generator/renderer.py,
+   _inline_fontface_urls) reescreve estes `url(...)` para data URIs base64 no
+   momento da injeção — page.set_content() do Playwright não define base URL
+   file://, então um caminho relativo puro não resolveria em runtime. */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url('../../assets/fonts/dm-sans-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url('../../assets/fonts/caveat-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url('../../assets/fonts/jetbrains-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url('../../assets/fonts/source-serif-4-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url('../../assets/fonts/libre-baskerville-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url('../../assets/fonts/playfair-display-400.woff2') format('woff2');
+}
+
 :root {
   --ind-font-institutional: Arial, Helvetica, "Segoe UI", sans-serif;
   --ind-font-technical: "Courier New", Courier, "Lucida Console", monospace;
