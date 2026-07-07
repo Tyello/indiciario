@@ -30,5 +30,36 @@ de fonte (comportamento pré-40.2 preservado por compatibilidade).
 `evaluate_for_canonical` não chama Playwright diretamente — a integração com
 browser vivo é responsabilidade do caller do gate, não do gate em si.
 
-<!-- Seções de Camada (40.3) e Microidentidade (40.6) serão adicionadas
-     quando essas issues forem concluídas. -->
+## Sistema de Camadas (ISSUE-40.3)
+
+Todo template diegético pertence a uma de duas camadas visuais — misturar os
+dois vocabulários (chrome de app aplicado a papel, ou vice-versa) é o defeito
+que a 40.3 corrigiu.
+
+- **Camada 1 — Tela** (`layer-screen`): documentos que simulam print de tela
+  (e-mail, WhatsApp, rede social). Sombra, `border-radius` e chrome de app são
+  corretos e esperados: é vocabulário de UI, não de papel.
+- **Camada 2 — Papel** (`layer-paper`): documentos impressos (boletim, carta,
+  log de acesso, recibo, orçamento, extrato, bilhete, testamento e demais
+  evidências físicas). Papel não projeta sombra de si mesmo, não tem cantos
+  arredondados nem gradiente. A origem desses efeitos foi removida
+  diretamente de cada template; `.layer-paper` em `document_system.css`
+  reseta `box-shadow`/`border-radius`/`background-image` com `!important`
+  como rede de segurança, não como mecanismo primário.
+- **Camada 0 — Jogo/facilitador**: chrome de protocolo (`doc-code`, título de
+  envelope, "Envelope N") só pode aparecer aqui, nunca em Camada 1 ou 2.
+  `templates/base.html` contém esse chrome mas é código órfão — nenhum
+  template ativo o estende e `generator/renderer.py` não o carrega.
+
+Mecanismo: a classe `layer-screen`/`layer-paper` é injetada no `<body>` de
+cada template por `generator/renderer.py` (`_injetar_classes_body`, tabelas
+`TEMPLATE_LAYER_SCREEN`/`TEMPLATE_LAYER_PAPER`), o mesmo mecanismo usado para
+`doc-type-*`/`doc-family-*`/`doc-player`. Não é herança Jinja.
+
+Teste de regressão: `tests/test_layer_rules.py`
+(`test_paper_layer_has_no_screen_chrome`,
+`test_diegetic_view_has_no_game_chrome`). Doutrina completa e checklist de
+template novo: `templates/README.md#sistema-de-camadas-issue-403`.
+
+<!-- Seção de Microidentidade (40.6) será adicionada quando essa issue for
+     concluída. -->

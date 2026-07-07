@@ -70,6 +70,35 @@ TEMPLATE_DOCUMENT_CLASS = {
     "print_guide.html": "facilitator",
 }
 
+# Sistema de Camadas (ISSUE-40.3): Camada 1 (tela, prints de app — sombra/
+# radius/gradiente são vocabulário correto) vs. Camada 2 (papel, documento
+# impresso — não projeta sombra de si mesmo, sem cantos arredondados, sem
+# gradiente). Injetado via `_injetar_classes_body` (mesmo mecanismo de
+# `doc-type-*`/`doc-family-*`), não por edição manual do `<body>` de cada
+# template — o motor de render não é Jinja2 com herança, é substituição por
+# string sobre cada `.html` standalone (achado do STEP-01).
+TEMPLATE_LAYER_SCREEN = {
+    "01_email.html",
+    "02_whatsapp.html",
+    "02_whatsapp2.html",
+    "03_twitter.html",
+}
+
+TEMPLATE_LAYER_PAPER = {
+    "04_boletim.html",
+    "05_carta.html",
+    "06_log_acesso.html",
+    "07_recibo.html",
+    "08_orcamento.html",
+    "09_extrato.html",
+    "10_bilhete.html",
+    "11_testamento_rascunho.html",
+    "floorplan.html",
+    "visual_map.html",
+    "visual_character_card.html",
+    "visual_location_card.html",
+}
+
 DOCUMENT_TYPE_FAMILIES = {
     "email_narrador": "email",
     "email_institucional": "email",
@@ -159,6 +188,10 @@ def _injetar_classes_body(html: str, template_nome: str, dados: dict[str, Any]) 
         classes.append("doc-player")
     if familia == "facilitator":
         classes.append("facilitator-doc")
+    if template_nome in TEMPLATE_LAYER_SCREEN:
+        classes.append("layer-screen")
+    elif template_nome in TEMPLATE_LAYER_PAPER:
+        classes.append("layer-paper")
 
     def sub(match: re.Match) -> str:
         attrs = match.group(1) or ""

@@ -207,6 +207,27 @@ body { color: var(--ind-ink); }
 .doc-player .ind-doc-meta-footer {
   display: none !important;
 }
+
+/* Sistema de Camadas (ISSUE-40.3) — Camada 1 (tela) vs. Camada 2 (papel).
+   `.layer-screen`: prints de e-mail/WhatsApp/rede social — sombra,
+   `border-radius` e chrome de app são vocabulário correto ali, esta classe
+   não restringe nada (documenta a intenção, não bloqueia).
+   `.layer-paper`: documento impresso (boletim, carta, recibo, orçamento,
+   extrato, bilhete, testamento, plantas/cartões-prop) — papel não projeta
+   sombra de si mesmo, não tem cantos arredondados nem gradiente. O reset
+   abaixo é rede de segurança (`!important`); a origem de cada violação deve
+   ser limpa no próprio template, não depender só deste reset. */
+.layer-screen {
+  /* Camada 1: nenhuma restrição — chrome de app (sombra, radius, gradiente)
+     é esperado e correto. */
+}
+
+.layer-paper,
+.layer-paper * {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background-image: none !important;
+}
 body.doc-family-log { font-family: var(--ind-font-system); }
 .doc-family-admin .page { background: var(--ind-paper-cool); border: var(--ind-line-strong); }
 .doc-family-commercial .page { background: var(--ind-paper); border: var(--ind-line); }

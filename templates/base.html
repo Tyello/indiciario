@@ -1,4 +1,15 @@
 <!doctype html>
+<!--
+  ISSUE-40.3 (Sistema de Camadas), decisão de STEP-03: `base.html` é órfão —
+  nenhum template `{% extends %}` este arquivo, e `generator/renderer.py`
+  não o carrega (motor de render real é substituição por string sobre cada
+  `.html` standalone, achado do STEP-01: `.ai/runs/ISSUE-40.3/STEP-01_EXECUTION.md`).
+  Chrome de jogo (`doc-code`, título, "Envelope N") impresso abaixo é
+  Camada 0 por definição, exatamente porque nunca é herdado por templates
+  diegéticos de Camada 1/2 -- não introduzir flag `SHOW_GAME_CHROME` nem
+  extrair partial: seria mecanismo novo para um problema que não existe no
+  pipeline ativo. Mantido como scaffold/exemplo documentado, não deletado.
+-->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">

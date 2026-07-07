@@ -26,7 +26,6 @@
     min-height: 320px;
     padding: 28px 24px 36px;
     position: relative;
-    box-shadow: 3px 4px 16px rgba(0,0,0,.25), inset 0 -2px 4px rgba(0,0,0,.08);
     transform: rotate({{ROTACAO_STICKY}}deg);
     background: {{COR_STICKY}};
   }
@@ -46,10 +45,6 @@
     position: absolute;
     inset: 0;
     padding: 28px 24px;
-    background-image: repeating-linear-gradient(
-      transparent, transparent 35px,
-      rgba(0,0,0,.06) 35px, rgba(0,0,0,.06) 36px
-    );
     pointer-events: none;
   }
 
@@ -78,7 +73,6 @@
     background: #fefdf8;
     padding: 24px 28px 28px;
     position: relative;
-    box-shadow: 2px 3px 12px rgba(0,0,0,.2);
     transform: rotate({{ROTACAO_TORN}}deg);
   }
 
@@ -104,10 +98,6 @@
   .torn-note-lines {
     position: absolute;
     inset: 0;
-    background-image: repeating-linear-gradient(
-      transparent, transparent 29px,
-      #e0d8c0 29px, #e0d8c0 30px
-    );
     pointer-events: none;
   }
 
@@ -149,7 +139,6 @@
     background: #fff;
     border: 1px solid #d8d0c0;
     position: relative;
-    box-shadow: 2px 3px 10px rgba(0,0,0,.15);
     transform: rotate({{ROTACAO_NOTECARD}}deg);
     overflow: hidden;
   }
@@ -161,9 +150,6 @@
 
   .notecard-body {
     padding: 18px 20px 20px;
-    background-image: repeating-linear-gradient(
-      transparent, transparent 27px, #d4cfc0 27px, #d4cfc0 28px
-    );
   }
 
   .notecard-subject {
@@ -213,7 +199,6 @@
     width: 60px;
     height: 20px;
     background: rgba(220,200,120,.45);
-    border-radius: 2px;
     z-index: 10;
   }
 
@@ -232,7 +217,6 @@
   .circle-mark {
     position: absolute;
     border: 2px solid #dc2626;
-    border-radius: 50%;
     opacity: .7;
     pointer-events: none;
   }
