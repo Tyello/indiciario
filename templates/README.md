@@ -49,6 +49,34 @@ não por família (`.doc-family-admin`, que os dois tipos compartilham e por
 isso não diferencia cor). `tests/test_paper_color_taxonomy.py` cobre isso via
 CSS computado (Playwright), renderizando o mesmo template com cada slug.
 
+## Isolamento de Marca (ISSUE-40.5)
+
+A cor de marca do Indiciário (`--accent`, `#8b1a1a`) só existe dentro da
+Camada 0 (envelope, protocolo, dicas, gabarito). Nenhum documento diegético
+(Camada 1/2) herda essa variável. Identidade visual dentro do caso (cor de
+uma empresa fictícia, de uma instituição do caso) é função da microidentidade
+de cada entidade (ver `framework/09_SISTEMA_VISUAL.md`), nunca da marca do
+produto.
+
+**Mecanismo:** `--accent` é declarada em `templates/base.html` dentro do
+seletor `.camada-0`, não em `:root` global. `base.html` é código órfão (ver
+seção "Sistema de Camadas" acima) e é o único consumidor atual da variável
+(`.doc-code { color: var(--accent); }`), via `<body class="camada-0">`.
+Nenhum dos 16 templates diegéticos ativos (Camada 1/2) referencia
+`var(--accent)`; `08_orcamento.html` tem `.accent-bar`, mas essa classe usa
+`{{COR_PRIMARIA}}` (variável Jinja per-instituição), não a CSS var
+`--accent` — coincidência de nome, não vazamento de marca.
+
+**Teste de regressão:** `tests/test_brand_isolation.py` cobre os dois
+critérios — `test_diegetic_template_does_not_inherit_brand_accent`
+(parametrizado pelos 16 templates de Camada 1/2; nenhum elemento visível
+pode resolver `color`/`background-color`/`border-color` para
+`rgb(139, 26, 26)` nem herdar `--accent` no computed style) e
+`test_accent_variable_scoped_to_camada_0` (`--accent` só pode estar
+declarada dentro de um seletor `.camada-0` em `base.html`, nunca em
+`:root`). Rode `pytest tests/test_brand_isolation.py -q` antes de mexer em
+`base.html` ou introduzir cor de marca em template novo.
+
 ## Próximos templates recomendados
 
 1. `envelope_cover.html`

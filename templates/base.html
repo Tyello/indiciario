@@ -21,6 +21,13 @@
       --ink: #161616;
       --muted: #666666;
       --line: #c8bda8;
+    }
+
+    /* Marca Indiciário (ISSUE-40.5): --accent só existe dentro do escopo
+       .camada-0 (envelope, protocolo, dicas, gabarito). Documentos
+       diegéticos (Camada 1/2) não herdam esta variável -- não a declare
+       em :root global. */
+    .camada-0 {
       --accent: #8b1a1a;
     }
 
@@ -99,7 +106,7 @@
     }
   </style>
 </head>
-<body>
+<body class="camada-0">
   <main class="page">
     <header class="doc-header">
       <div class="doc-code">{{ document_code | default('DOC-000') }}</div>
