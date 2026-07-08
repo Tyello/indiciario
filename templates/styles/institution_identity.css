@@ -1,0 +1,68 @@
+/* Indiciário — Microidentidades Institucionais (ISSUE-40.6)
+   Cada instituição fictícia de um caso (museu, empresa, órgão) define sua
+   própria cor de destaque, fonte de título e forma de header. Todo
+   documento institucional (manual, log de acesso, cadastro/listas) herda
+   esses tokens via classe `.institution`, criando coesão intra-instituição
+   e variação inter-instituição — a mesma assinatura visual do benchmark
+   (ver framework/09_SISTEMA_VISUAL.md).
+
+   Mecanismo: o renderer (`generator/renderer.py`, Mustache-lite) injeta os
+   valores por-instituição como custom properties inline no elemento raiz
+   `.institution` de cada template:
+
+     <div class="institution"
+          style="--inst-color:{{INST_COLOR}};
+                 --inst-font-display:'{{INST_FONT_DISPLAY}}';">
+
+   e a forma de header como classe utilitária no próprio elemento `.header`:
+
+     <div class="header shape-{{INST_HEADER_SHAPE}}">
+
+   Este arquivo só declara fallbacks neutros e a lógica de aplicação —
+   nunca hardcoda cor/fonte/forma de uma instituição específica. */
+
+.institution {
+  --inst-color: #333;
+  --inst-font-display: Georgia, serif;
+  --inst-header-shape: reto;
+}
+
+/* Reset de base: todo `.header` dentro de `.institution` parte do mesmo
+   estado neutro (sem borda dupla, sem recorte diagonal) antes das formas
+   específicas abaixo — garante que documentos de templates diferentes
+   (manual, log de acesso, cadastro) produzam o mesmo estado computado
+   quando a instituição é a mesma, mesmo que o template legado já defina
+   sua própria borda/clip-path local (a especificidade de duas classes
+   `.institution .header` vence a de uma classe só). */
+.institution .header {
+  background: var(--inst-color);
+  color: #fff;
+  font-family: var(--inst-font-display), Georgia, serif;
+  border-top: 0;
+  border-bottom: 0;
+  clip-path: none;
+}
+
+.institution .header.shape-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.institution .header.shape-faixa-dupla {
+  border-top: 4px solid var(--inst-color);
+  border-bottom: 2px solid var(--inst-color);
+}
+
+/* shape-reto: sem clip-path, sem borda dupla — já é o default do reset acima. */
+
+.institution .inst-logo {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.institution .inst-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

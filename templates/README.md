@@ -55,7 +55,7 @@ A cor de marca do Indiciário (`--accent`, `#8b1a1a`) só existe dentro da
 Camada 0 (envelope, protocolo, dicas, gabarito). Nenhum documento diegético
 (Camada 1/2) herda essa variável. Identidade visual dentro do caso (cor de
 uma empresa fictícia, de uma instituição do caso) é função da microidentidade
-de cada entidade (ver `framework/09_SISTEMA_VISUAL.md`), nunca da marca do
+de cada entidade (ver `framework/20_SISTEMA_VISUAL.md`), nunca da marca do
 produto.
 
 **Mecanismo:** `--accent` é declarada em `templates/base.html` dentro do
@@ -76,6 +76,49 @@ pode resolver `color`/`background-color`/`border-color` para
 declarada dentro de um seletor `.camada-0` em `base.html`, nunca em
 `:root`). Rode `pytest tests/test_brand_isolation.py -q` antes de mexer em
 `base.html` ou introduzir cor de marca em template novo.
+
+## Microidentidades Institucionais (ISSUE-40.6)
+
+Cada instituição fictícia dentro de um caso (museu, empresa, órgão) pode ter
+sua própria identidade visual — cor, tipografia de destaque e forma de
+header — para que o jogador reconheça "isto veio da mesma instituição" em
+meio segundo, sem precisar reler o remetente.
+
+- **Arquivo de tokens:** `templates/styles/institution_identity.css`.
+  Declara `--inst-color`, `--inst-font-display`, `--inst-header-shape` (com
+  fallback neutro em `.institution`) e as regras de `.institution .header`
+  que consomem esses tokens. Injetado automaticamente em todo documento pelo
+  `generator/renderer.py` (`_institution_identity_css`, ao lado de
+  `_document_system_css`), mesmo mecanismo do `document_system.css`.
+- **3 formas de header** (`--inst-header-shape`, classe `shape-*` em
+  `.institution .header`):
+  - `reto` — default do reset de base, sem regra própria.
+  - `diagonal` — corte via `clip-path`.
+  - `faixa-dupla` — borda dupla.
+- **Biblioteca de glifos:** `assets/logos/glifo-01.svg` .. `glifo-15.svg`,
+  flat (sem subpastas, mesma convenção de `assets/fonts/`), formas
+  geométricas abstratas (círculo, losango, hexágono, cruz etc.),
+  `fill="currentColor"` — nenhuma semelhança com marca/logo real.
+- **Templates institucionais hoje:** `templates/06_log_acesso.html`,
+  `templates/manual.html`, `templates/cadastro.html` (os dois últimos
+  novos, nascidos nesta issue).
+- **Variáveis de contexto que o gerador de caso precisa fornecer** para
+  ativar a identidade de uma instituição: `INST_COLOR`, `INST_FONT_DISPLAY`,
+  `INST_HEADER_SHAPE` (valor um de `reto`/`diagonal`/`faixa-dupla`). Todos
+  os documentos da mesma instituição devem receber o mesmo trio de valores
+  para compartilhar a identidade.
+- **Fallback (correção pós-STEP-03):** se essas variáveis não forem
+  fornecidas (caso de hoje de todo blueprint canônico, que não usa
+  microidentidade), o documento **não** fica com placeholder residual
+  (`{{INST_COLOR}}` literal no HTML) — `generator/renderer.py` aplica
+  valores neutros padrão (`#333`, `Georgia, serif`, `reto`) via
+  `_aplicar_fallback_institucional`, chamada tanto no caminho de
+  `renderizar_documento` quanto no motor de baixo nível `renderizar_html`.
+  Quando o contexto de instituição É fornecido, os valores reais
+  prevalecem — o fallback só entra via `setdefault`.
+
+Ver `framework/20_SISTEMA_VISUAL.md` para a doutrina completa (fonte,
+camada, microidentidade).
 
 ## Próximos templates recomendados
 

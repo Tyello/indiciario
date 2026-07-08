@@ -94,6 +94,12 @@ Use esta tabela como atalho. Ela não é exaustiva; na dúvida, confira a coluna
 | `19_PLAYTEST_E_METRICAS.md`     | Métricas heurísticas de playtest | Dev/Designer | PLAY | Muda métrica/faixa heurística |
 | `CONTEUDO_SCHEMA.md`            | Schema de conteúdo do blueprint | Dev/LLM-gen | GEN/VAL | Muda contrato de conteúdo do blueprint |
 
+## `templates/` — biblioteca de templates de renderização
+
+| Arquivo | Propósito | Público | Workflow | Atualizar quando |
+|---|---|---|---|---|
+| `templates/README.md` | Doutrina prática de renderização: sistema de camadas, paleta papel-cor, isolamento de marca, microidentidades institucionais, checklist de template novo | Designer/Dev/Agente | GEN/VAL | Novo template entra, ou muda regra de camada/paleta/isolamento de marca/microidentidade institucional |
+
 ## `docs/` — núcleo de processo, editorial e governança
 
 | Arquivo | Propósito | Público | Workflow | Atualizar quando |

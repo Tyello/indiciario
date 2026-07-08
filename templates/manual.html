@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual — {{NOME_INSTITUICAO}}</title>
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page { size: A4; margin: 14mm; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #e8e4dc;
+    color: #1a1a1a;
+    font-size: 12px;
+    line-height: 1.55;
+    padding: 0;
+  }
+
+  .page {
+    background: #fffdf8;
+    max-width: 720px;
+    margin: 0 auto;
+    border: 1px solid #b9b2a6;
+    overflow: hidden;
+  }
+
+  /* Header (identidade institucional — cor/fonte/forma vêm de
+     templates/styles/institution_identity.css via .institution .header) */
+  .header {
+    padding: 22px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .header .inst-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header .inst-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.2px;
+  }
+
+  .header .inst-subtitle {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    opacity: .85;
+    margin-top: 3px;
+  }
+
+  .header .revision {
+    text-align: right;
+    font-size: 11px;
+    line-height: 1.7;
+    opacity: .95;
+  }
+
+  .header .revision .label {
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    font-size: 9px;
+    opacity: .8;
+  }
+
+  /* Body */
+  .body-content {
+    padding: 26px 30px;
+  }
+
+  .section {
+    margin-bottom: 18px;
+  }
+
+  .section-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .section-text {
+    font-size: 12px;
+    color: #222;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .section-text p { margin-bottom: 8px; }
+
+  /* Footer — assinatura do responsável */
+  .footer {
+    padding: 18px 30px;
+    border-top: 1px solid #c8bea0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .assinatura-responsavel {
+    min-width: 200px;
+  }
+
+  .assinatura-responsavel .signature-slot {
+    min-height: 46px;
+    margin-bottom: 4px;
+  }
+
+  .assinatura-responsavel .signer-name {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: #333;
+    border-top: 1px solid #999;
+    padding-top: 4px;
+  }
+
+  .footer .doc-code {
+    text-align: right;
+    font-size: 10px;
+    color: #888;
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+<div class="institution" style="--inst-color:{{INST_COLOR}}; --inst-font-display:'{{INST_FONT_DISPLAY}}';">
+<div class="page">
+
+  <!-- Header -->
+  <div class="header shape-{{INST_HEADER_SHAPE}}">
+    <div class="inst-badge">
+      {{#INST_LOGO_SVG}}<span class="inst-logo">{{INST_LOGO_SVG}}</span>{{/INST_LOGO_SVG}}
+      <div>
+        <div class="inst-name">{{NOME_INSTITUICAO}}</div>
+        <div class="inst-subtitle">{{SUBTITULO_INSTITUICAO}}</div>
+      </div>
+    </div>
+    <div class="revision">
+      <div class="label">Revisão</div>
+      <div>{{INST_REVISAO}} — {{INST_REVISAO_DATA}}</div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body-content">
+    {{#SECOES}}
+    <div class="section">
+      <div class="section-title">{{TITULO_SECAO}}</div>
+      <div class="section-text">{{TEXTO_SECAO}}</div>
+    </div>
+    {{/SECOES}}
+    {{^SECOES}}
+    <div class="section">
+      <div class="section-title">{{TITULO_MANUAL}}</div>
+      <div class="section-text">{{TEXTO_MANUAL}}</div>
+    </div>
+    {{/SECOES}}
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="assinatura-responsavel">
+      <div class="signature-slot">{{ASSINATURA_RESPONSAVEL_VISUAL}}</div>
+      <div class="signer-name">{{ASSINATURA_RESPONSAVEL_NOME}}</div>
+    </div>
+    <div class="doc-code">{{CODIGO_DOCUMENTO}}</div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>

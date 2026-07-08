@@ -274,11 +274,14 @@
 </style>
 </head>
 <body>
+<div class="institution" style="--inst-color:{{INST_COLOR}}; --inst-font-display:'{{INST_FONT_DISPLAY}}';">
 <div class="page">
 
-  <!-- Header -->
-  <div class="log-header">
+  <!-- Header (identidade institucional — cor/fonte/forma vêm de
+       templates/styles/institution_identity.css via .institution .header) -->
+  <div class="log-header header shape-{{INST_HEADER_SHAPE}}">
     <div class="system-badge">
+      {{#INST_LOGO_SVG}}<span class="inst-logo">{{INST_LOGO_SVG}}</span>{{/INST_LOGO_SVG}}
       <div class="system-icon">🔐</div>
       <div>
         <div class="system-name">{{NOME_SISTEMA}}</div>
@@ -286,7 +289,7 @@
       </div>
     </div>
     <div class="export-info">
-      <div>EXPORTADO EM <span class="highlight">{{DATA_EXPORTACAO}} ÀS {{HORA_EXPORTACAO}}</span></div>
+      <div>EXPORTADOS EM <span class="highlight">{{DATA_EXPORTACAO}} ÀS {{HORA_COM_SEGUNDOS}}</span></div>
       <div>OPERADOR: <span class="highlight">{{OPERADOR_EXPORT}}</span></div>
       <div>HASH: <span class="highlight">{{HASH_REGISTRO}}</span></div>
     </div>
@@ -369,6 +372,7 @@
     <div class="legend-item"><div class="legend-dot" style="background:#f85149; opacity:.4"></div> Linha com anomalia</div>
   </div>
 
+</div>
 </div>
 </body>
 </html>

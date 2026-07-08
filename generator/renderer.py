@@ -36,6 +36,7 @@ OUTPUT_DIR = Path(__file__).parent.parent / "output"
 ASSETS_DIR = Path(__file__).parent.parent / "assets"
 SIGNATURES_DIR = ASSETS_DIR / "signatures"
 DOCUMENT_SYSTEM_CSS_PATH = TEMPLATES_DIR / "styles" / "document_system.css"
+INSTITUTION_IDENTITY_CSS_PATH = TEMPLATES_DIR / "styles" / "institution_identity.css"
 FONTS_DIR = ASSETS_DIR / "fonts"
 
 
@@ -54,6 +55,8 @@ DOCUMENT_PLAYER_TEMPLATES = {
     "07_recibo.html",
     "08_orcamento.html",
     "09_extrato.html",
+    "manual.html",
+    "cadastro.html",
 }
 
 TEMPLATE_DOCUMENT_CLASS = {
@@ -65,6 +68,8 @@ TEMPLATE_DOCUMENT_CLASS = {
     "07_recibo.html": "recibo",
     "08_orcamento.html": "orcamento",
     "09_extrato.html": "extrato",
+    "manual.html": "manual",
+    "cadastro.html": "cadastro",
     "facilitator_guide.html": "facilitator",
     "dicas_contextuais.html": "facilitator",
     "print_guide.html": "facilitator",
@@ -97,6 +102,8 @@ TEMPLATE_LAYER_PAPER = {
     "visual_map.html",
     "visual_character_card.html",
     "visual_location_card.html",
+    "manual.html",
+    "cadastro.html",
 }
 
 DOCUMENT_TYPE_FAMILIES = {
@@ -118,6 +125,7 @@ DOCUMENT_TYPE_FAMILIES = {
     "glossario": "letter",
     "folha_cruzamento": "letter",
     "manual": "letter",
+    "cadastro": "admin",
     "outro": "letter",
     "facilitator": "facilitator",
 }
@@ -156,8 +164,18 @@ def _document_system_css() -> str:
     return f"\n<style data-indiciario-visual-system>\n{css}\n</style>\n"
 
 
+def _institution_identity_css() -> str:
+    """Tokens de microidentidade institucional (ISSUE-40.6) — cor, fonte de
+    destaque e forma de header configuráveis por instituição via custom
+    properties injetadas no wrapper `.institution` de cada documento."""
+    if not INSTITUTION_IDENTITY_CSS_PATH.is_file():
+        return ""
+    css = INSTITUTION_IDENTITY_CSS_PATH.read_text(encoding="utf-8")
+    return f"\n<style data-indiciario-institution-identity>\n{css}\n</style>\n"
+
+
 def _injetar_css_documental(html: str) -> str:
-    css = _document_system_css()
+    css = _document_system_css() + _institution_identity_css()
     if css and "</head>" in html:
         html = html.replace("</head>", f"{css}</head>", 1)
     return html
@@ -272,9 +290,41 @@ def _preparar_dados_documentais(
     preparados.setdefault("DOC_CONTROLE", preparados.get("CONTROLE_DOCUMENTAL") or "controle de dossiê")
     preparados.setdefault("DOC_STAMP_LABEL", preparados.get("CARIMBO_DOCUMENTAL") or "")
     preparados.setdefault("CODIGO_DOCUMENTO", preparados.get("CODIGO_DOCUMENTO") or "DOC-S/C")
+    # ISSUE-40.6: manual institucional referencia ASSINATURA_RESPONSAVEL_NOME
+    # (rótulo legível); o pipeline de assinaturas (`preparar_assinaturas_visuais`,
+    # via ASSINATURA_KEYS) gera o SVG a partir de ASSINATURA_RESPONSAVEL — se
+    # só o nome for fornecido, promove-o para a chave que o pipeline entende,
+    # sem sobrescrever um ASSINATURA_RESPONSAVEL explícito já presente.
+    if preparados.get("ASSINATURA_RESPONSAVEL_NOME") and not preparados.get("ASSINATURA_RESPONSAVEL"):
+        preparados["ASSINATURA_RESPONSAVEL"] = preparados["ASSINATURA_RESPONSAVEL_NOME"]
     preparados.setdefault("NOME_CASO", preparados.get("NOME_CASO") or "Indiciário")
     preparados.setdefault("ENVELOPE", preparados.get("ENVELOPE") or "Envelope")
+    preparados = _aplicar_fallback_institucional(preparados)
     return preparados
+
+
+# ISSUE-40.6/STEP-05: microidentidade institucional (STEP-03) é opcional —
+# quando o blueprint não fornece contexto de instituição (caso de todo
+# canônico hoje), os 4 tokens injetados em `templates/06_log_acesso.html`
+# (`INST_COLOR`, `INST_FONT_DISPLAY`, `INST_HEADER_SHAPE`,
+# `HORA_COM_SEGUNDOS`) precisam de fallback neutro para não sobreviver como
+# resíduo técnico em modo strict. Valores batem com o reset neutro de
+# `templates/styles/institution_identity.css` (`--inst-color: #333`,
+# `--inst-font-display: Georgia, serif`, `--inst-header-shape: reto`).
+#
+# Aplicado tanto por `_preparar_dados_documentais` (caminho de
+# `renderizar_documento`) quanto diretamente por `renderizar_html` (caminho
+# usado por chamadores de baixo nível que não passam pela preparação de
+# dados documentais), para cobrir os dois pontos de entrada do engine.
+def _aplicar_fallback_institucional(dados: dict[str, Any]) -> dict[str, Any]:
+    dados.setdefault("INST_COLOR", dados.get("INST_COLOR") or "#333")
+    dados.setdefault("INST_FONT_DISPLAY", dados.get("INST_FONT_DISPLAY") or "Georgia, serif")
+    dados.setdefault("INST_HEADER_SHAPE", dados.get("INST_HEADER_SHAPE") or "reto")
+    dados.setdefault(
+        "HORA_COM_SEGUNDOS",
+        dados.get("HORA_COM_SEGUNDOS") or dados.get("HORA") or "00:00:00",
+    )
+    return dados
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -559,6 +609,7 @@ def renderizar_html(
     """
     dados = preparar_assinaturas_visuais(dados, personagens=personagens)
     dados = preparar_manuscritos_visuais(dados, personagens=personagens)
+    dados = _aplicar_fallback_institucional(dict(dados))
 
     # Padrão: captura nome da seção e conteúdo (não-greedy, DOTALL)
     SECAO_RE = re.compile(r"\{\{([#\^])(\w+)\}\}(.*?)\{\{/\2\}\}", re.DOTALL)
