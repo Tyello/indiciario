@@ -89,6 +89,9 @@
   --ind-stamp-ink: #5d2b2b;
   --ind-control-footer: #77736a;
   --ind-copy-mark: rgba(30, 30, 30, .065);
+  --paper-boletim: #e4f2e4;    /* verde — documentos policiais oficiais */
+  --paper-depoimento: #fdf7d8; /* amarelo — depoimentos/transcrições */
+  --paper-laudo: #eef0f6;      /* azulado — reservado para laudo pericial (P3) */
 }
 
 html { color-adjust: exact; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
@@ -230,6 +233,8 @@ body { color: var(--ind-ink); }
 }
 body.doc-family-log { font-family: var(--ind-font-system); }
 .doc-family-admin .page { background: var(--ind-paper-cool); border: var(--ind-line-strong); }
+.doc-type-boletim .page { background: var(--paper-boletim); }
+.doc-type-depoimento .page { background: var(--paper-depoimento); }
 .doc-family-commercial .page { background: var(--ind-paper); border: var(--ind-line); }
 .doc-family-finance .page { border: var(--ind-line); }
 body.facilitator-doc,

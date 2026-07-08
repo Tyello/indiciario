@@ -26,6 +26,29 @@ Todo template diegético (documento que o jogador lê dentro da ficção) perten
 
 Ver `framework/20_SISTEMA_VISUAL.md` para a doutrina completa (fonte, camada, microidentidade).
 
+## Paleta Papel-Cor (ISSUE-40.4)
+
+A cor de fundo de documentos de Camada 2 (papel) codifica o tipo de documento,
+não é decoração:
+- `--paper-boletim` (`#e4f2e4`, verde) — boletins e formulários policiais oficiais.
+- `--paper-depoimento` (`#fdf7d8`, amarelo) — depoimentos e transcrições.
+- `--paper-laudo` (`#eef0f6`, azulado) — reservado para laudo pericial (ver `framework/09_...`, P3; token existe em `document_system.css` sem template consumindo ainda).
+
+Sempre chapado, nunca gradiente. Envelhecimento artificial (`radial-gradient`
+âmbar, `box-shadow: inset`) é proibido — documento recente é limpo; o que
+comunica burocracia é o formulário (linhas, campos, carimbo), não a textura
+do papel.
+
+**Boletim e depoimento são o MESMO arquivo físico** (`04_boletim.html`), não
+dois templates separados. `generator/renderer.py` renderiza esse arquivo com
+`dados["TIPO_DOCUMENTAL_SLUG"]` igual a `"boletim"` ou `"depoimento"`, e
+`_injetar_classes_body` injeta a classe `doc-type-boletim` ou
+`doc-type-depoimento` no `<body>` de acordo. `document_system.css` aplica a
+cor por essa classe (`.doc-type-boletim .page` / `.doc-type-depoimento .page`),
+não por família (`.doc-family-admin`, que os dois tipos compartilham e por
+isso não diferencia cor). `tests/test_paper_color_taxonomy.py` cobre isso via
+CSS computado (Playwright), renderizando o mesmo template com cada slug.
+
 ## Próximos templates recomendados
 
 1. `envelope_cover.html`
