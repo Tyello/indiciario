@@ -77,7 +77,9 @@ Funcionalidades já existentes no repositório incluem:
 - Visual Library 2.0 mínima (`generator/floor_plan_library.py`) com plantas-base estruturadas genéricas, ainda sem integração automática aos canônicos;
 - pipeline multiagente offline: Gate Evaluator (`generator/gate_evaluator.py`, `schemas/gate_evaluation.schema.yaml`), Narrative Reviewer (`generator/narrative_reviewer.py`), Evidence Reviewer (`generator/evidence_reviewer.py`), Visual Reviewer (`generator/visual_reviewer.py`), Accessibility Reviewer (`generator/accessibility_reviewer.py`), Multiagent Workspace (`generator/workspace.py`), Manual Orchestrator (`generator/manual_orchestrator.py`), Run Manifest (`generator/run_manifest.py`), Pipeline Runner (`generator/pipeline_runner.py`), Quality Comparative Reviewer (`generator/quality_comparative_reviewer.py`).
 
-Suite de testes: `pytest tests/ -q` reporta cerca de 1354 testes (checar contagem exata antes de citar em PR, ela cresce a cada issue).
+Suite de testes: `pytest tests/ -q` reporta cerca de 1464 testes (checar contagem exata antes de citar em PR, ela cresce a cada issue).
+
+Fase Provider (ISSUE-31–34, LLM real): iniciada. ISSUE-31 concluída — `generator/llm_provider.py` define o contrato neutro de provider (`Protocol` `LLMProvider`, dataclasses `ProviderRequest`/`ProviderResponse`, hierarquia de erro, `validate_provider_request`). Nenhuma chamada de rede, nenhuma implementação concreta ainda — isso é ISSUE-32 (fake provider) e ISSUE-33 (adapter do blind solver). `pipeline_runner.py` continua usando o stub determinístico; esta issue não altera consumidores.
 
 Limitações reais do pipeline multiagente, para não prometer mais do que existe:
 

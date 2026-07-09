@@ -499,9 +499,11 @@ Entregável: `generator/quality_comparative_reviewer.py`, `docs/QUALITY_COMPARAT
 
 Status: **futuro, só depois da base testável offline**.
 
-### ISSUE-31 — Provider Interface
+### ISSUE-31 — Provider Interface ✅ concluída
 
 Interface para chamar LLM sem acoplar a OpenAI/Claude/Ollama.
+
+Entregável: `generator/llm_provider.py` — dataclasses frozen (`ProviderRequest`, `ProviderResponse`), `Protocol` runtime_checkable `LLMProvider`, hierarquia de erro (`ProviderError` → `ProviderTransportError`, `ProviderResponseError`), `validate_provider_request` (PV_001–PV_004). Sem chamada de rede, sem implementação concreta de provider (fica pra ISSUE-32). Testes: `tests/test_llm_provider.py` (15 casos). Spec: `.ai/issues/ISSUE-31_SPEC.md`.
 
 ### ISSUE-32 — Fake Provider para testes
 
