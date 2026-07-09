@@ -79,7 +79,7 @@ Funcionalidades já existentes no repositório incluem:
 
 Suite de testes: `pytest tests/ -q` reporta cerca de 1464 testes (checar contagem exata antes de citar em PR, ela cresce a cada issue).
 
-Fase Provider (ISSUE-31–34, LLM real): iniciada. ISSUE-31 concluída — `generator/llm_provider.py` define o contrato neutro de provider (`Protocol` `LLMProvider`, dataclasses `ProviderRequest`/`ProviderResponse`, hierarquia de erro, `validate_provider_request`). Nenhuma chamada de rede, nenhuma implementação concreta ainda — isso é ISSUE-32 (fake provider) e ISSUE-33 (adapter do blind solver). `pipeline_runner.py` continua usando o stub determinístico; esta issue não altera consumidores.
+Fase Provider (ISSUE-31–34, LLM real): iniciada. ISSUE-31 concluída — `generator/llm_provider.py` define o contrato neutro de provider (`Protocol` `LLMProvider`, dataclasses `ProviderRequest`/`ProviderResponse`, hierarquia de erro, `validate_provider_request`). ISSUE-32 concluída — `generator/fake_provider.py` implementa `FakeProvider` (satisfaz `LLMProvider` estruturalmente, sem herança), devolvendo respostas roteirizadas (`ScriptedResponse`) ou erros injetados (`ProviderError`) em ordem determinística, sem rede; garante CI determinística para os adapters LLM que a ISSUE-33+ vai introduzir. Nenhuma implementação concreta de provider real ainda — isso é ISSUE-33 (adapter do blind solver). `pipeline_runner.py` continua usando o stub determinístico; esta issue não altera consumidores.
 
 Limitações reais do pipeline multiagente, para não prometer mais do que existe:
 

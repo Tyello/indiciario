@@ -505,9 +505,11 @@ Interface para chamar LLM sem acoplar a OpenAI/Claude/Ollama.
 
 Entregável: `generator/llm_provider.py` — dataclasses frozen (`ProviderRequest`, `ProviderResponse`), `Protocol` runtime_checkable `LLMProvider`, hierarquia de erro (`ProviderError` → `ProviderTransportError`, `ProviderResponseError`), `validate_provider_request` (PV_001–PV_004). Sem chamada de rede, sem implementação concreta de provider (fica pra ISSUE-32). Testes: `tests/test_llm_provider.py` (15 casos). Spec: `.ai/issues/ISSUE-31_SPEC.md`.
 
-### ISSUE-32 — Fake Provider para testes
+### ISSUE-32 — Fake Provider para testes ✅ concluída
 
 Simular respostas previsíveis; CI determinística.
+
+Entregável: `generator/fake_provider.py` — `FakeProvider` satisfaz `LLMProvider` (Protocol da ISSUE-31, sem herança nominal), consome `ScriptedResponse`/`ProviderError` em ordem, injeta falhas (`FP_003`), rejeita request inválido sem consumir roteiro (`FP_001`), esgota roteiro com `ProviderResponseError` (`FP_002`), ecoa `request_id` (`FP_004`). `calls` expõe tupla imutável dos requests recebidos (inclui os que geraram erro injetado, exclui os rejeitados por `FP_001`). Sem rede, sem mutação de `ScriptedResponse`. Testes: `tests/test_fake_provider.py` (7 casos). Spec: `.ai/issues/ISSUE-32_SPEC.md`.
 
 ### ISSUE-33 — LLM Blind Solver Adapter
 
