@@ -649,6 +649,30 @@ O protocolo operacional define papéis, etapas, gates e governança. Este protoc
 - gate apropriado acionado;
 - nova execução planejada quando necessário.
 
+## 23.1. LLM Blind Solver Isolation (ISSUE-33)
+
+A implementação de LLM Blind Solver adiciona uma regra de isolamento de ambiente ao
+protocolo de cegueira:
+
+### Regra: Segregação de contexto por sessão
+
+- **Solver de produção via API**: o `LLMBlindSolver` conecta um modelo real (Claude via
+  `LLMProvider` injected) ao harness cego.
+- **Bundle como única entrada**: o prompt contém apenas template versionado + artefatos
+  do bundle (via `context.read_artifact_text`) + metadados de run.
+- **Proibido em sessão com acesso ao repo**: o solver **NÃO DEVE** executar numa sessão
+  de agente que tenha acesso ao repositório, pois o repo contém o gabarito.
+- **Segregação obrigatória**: ambientes de execução devem ser segregados:
+  - Sessão cega: sem acesso a repo, sem git history, sem memória anterior.
+  - Sessão de autoria/revisão: acesso total, usado para design e validação não cega.
+
+### Implicações
+
+1. Ci determinística: testes usam `FakeProvider` (ISSUE-32), sem rede, sem acesso ao repo.
+2. Produção: `LLMProvider` concreta (ISSUE-34+) injetada em contexto segregado.
+3. Rastreabilidade: cada run registra `prompt_template_sha256` (LS_005) e metadados de run.
+4. Auditoria: comportamento cego validável; não confiado apenas a autocontrole do modelo.
+
 ## 24. Limitações
 
 Este protocolo possui limitações explícitas:

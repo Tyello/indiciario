@@ -21,6 +21,7 @@ from generator.blind_bundle_generator import (
 )
 from generator.blind_solve_run_record import build_run_record
 from generator.blind_solver_harness import (
+    BlindSolver,
     BlindSolverContext,
     BlindSolverEvidence,
     BlindSolverHarnessRequest,
@@ -211,6 +212,7 @@ def run_pipeline(
     *,
     output_root: str | Path | None = None,
     created_at: str | None = None,
+    solver: BlindSolver | None = None,
 ) -> PipelineRunResult:
     """Run the full offline multiagent pipeline over a blueprint."""
 
@@ -230,6 +232,7 @@ def run_pipeline(
         run_id,
         root,
         timestamp,
+        solver=solver,
     )
     gate_evaluation = _run_gate(
         run_record,
@@ -344,6 +347,7 @@ def _blind_solve(
     run_id: str,
     output_root: Path,
     timestamp: str,
+    solver: BlindSolver | None = None,
 ) -> tuple[Any, Any, BlindSolverHarnessRequest, dict[str, Any]]:
     bundle_result = _build_bundle(blueprint, blueprint_ref, run_id, output_root, timestamp)
     harness_request = BlindSolverHarnessRequest(
@@ -353,9 +357,10 @@ def _blind_solve(
         created_by="ORCHESTRATOR",
         created_at=timestamp,
     )
+    effective_solver = solver if solver is not None else DeterministicPipelineSolver(created_at=timestamp)
     harness_result = run_blind_solver_harness(
         harness_request,
-        DeterministicPipelineSolver(created_at=timestamp),
+        effective_solver,
     )
     validator_result = validate_report(harness_result.report)
     run_record = build_run_record(

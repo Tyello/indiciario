@@ -136,6 +136,11 @@ Para cada resposta final esperada, responda:
 
 **Execute antes de gerar os documentos finais. Se qualquer item abaixo falhar, corrija o planejamento.**
 
+Este gate é complementado por uma verificação automatizada via Conclusion Judge (ISSUE-33.1),
+que confere se as conclusões esperadas podem ser derivadas do bundle cego. Porém, **o juiz
+automatizado é complementar ao este checklist humano — o playtest humano permanece sendo o
+veredito final de solvabilidade.**
+
 - [ ] Toda conclusão crítica tem pelo menos duas pistas independentes.
 - [ ] Toda pista essencial tem pelo menos uma confirmação forte.
 - [ ] Todo vínculo entre entidades tem âncora em pelo menos dois documentos diferentes.

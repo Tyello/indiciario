@@ -490,7 +490,7 @@ Medir evolução: antes/depois, clareza, dificuldade, vazamentos, visual, pacing
 Entregável: `generator/quality_comparative_reviewer.py`, `docs/QUALITY_COMPARATIVE_REPORT.md`.
 
 **Limitações reais da Fase H** (ver `docs/ESTADO_ATUAL.md`):
-- o blind solver usado pelo `pipeline_runner.py` é um stub determinístico (`DeterministicPipelineSolver`), não resolve o caso de fato;
+- o blind solver padrão no `pipeline_runner.py` é um stub determinístico (`DeterministicPipelineSolver`), não resolve o caso de fato. A partir de ISSUE-33, é possível injetar um solver real via parâmetro `solver` (default mantém backward compatibility com o stub);
 - `pipeline_runner.py` não invoca os visual/accessibility reviewers (por isso `visual_score=0/0` nos relatórios gerados por ele);
 - `compare_to_playtest` só reconhece o caso Aurora.
 - Teste cego humano continua sendo a única prova real de solvabilidade.
@@ -511,9 +511,39 @@ Simular respostas previsíveis; CI determinística.
 
 Entregável: `generator/fake_provider.py` — `FakeProvider` satisfaz `LLMProvider` (Protocol da ISSUE-31, sem herança nominal), consome `ScriptedResponse`/`ProviderError` em ordem, injeta falhas (`FP_003`), rejeita request inválido sem consumir roteiro (`FP_001`), esgota roteiro com `ProviderResponseError` (`FP_002`), ecoa `request_id` (`FP_004`). `calls` expõe tupla imutável dos requests recebidos (inclui os que geraram erro injetado, exclui os rejeitados por `FP_001`). Sem rede, sem mutação de `ScriptedResponse`. Testes: `tests/test_fake_provider.py` (7 casos). Spec: `.ai/issues/ISSUE-32_SPEC.md`.
 
-### ISSUE-33 — LLM Blind Solver Adapter
+### ISSUE-33 — LLM Blind Solver Adapter ✅ concluída
 
 Conectar modelo real ao harness, mantendo blind bundle como única entrada.
+
+Entregável: `generator/llm_blind_solver.py` — classe `LLMBlindSolver` que satisfaz
+`Protocol BlindSolver`. Template versionado em `generator/prompts/blind_solver_v1.md`.
+Integração opt-in em `generator/pipeline_runner.py` (parâmetro `solver`, default `None`
+preserva stub). Contrato LS_001–LS_005, regra de isolamento (solver nunca com acesso
+ao repo). Testes: `tests/test_llm_blind_solver.py`. Spec: `.ai/issues/ISSUE-33_SPEC.md`.
+
+### ISSUE-33.1 — Conclusion Judge ✅ concluída
+
+Avaliar conclusões esperadas contra o relatório do blind solver usando LLM provider.
+
+Entregável: `generator/conclusion_judge.py` — função `judge_conclusions` que recebe
+`BlindSolverReport` + lista de `ExpectedConclusionInput` + `LLMProvider`, retorna
+`JudgeVerdict` contendo `Conclusion` (id, met, evidence_cited, rationale) para cada
+conclusão esperada. Contrato CJ_001–CJ_005, loop de reparo JSON, classificação
+(resolvido/nao_resolvido/vazamento/ambiguo) derivada em Python puro. Alimenta campo `met`
+do Gate Evaluator. Schema: `schemas/judge_verdict.schema.yaml`. Testes:
+`tests/test_conclusion_judge.py`. Spec: `.ai/issues/ISSUE-33.1_SPEC.md`.
+
+### ISSUE-33.2 — Solvability Meter ✅ concluída
+
+Dificuldade calibrada por múltiplas execuções cegas: rodar N vezes solver→juiz sobre o
+mesmo bundle e transformar a taxa de resolução em medidor de dificuldade.
+
+Entregável: `generator/solvability_meter.py` — função `measure_solvability` orquestra
+N rounds `LLMBlindSolver` + `judge_conclusions` sobre o mesmo bundle, agrega em
+`SolvabilityReport` (`solve_rate`, `classification_counts`, `difficulty_estimate`,
+`flags`). Contrato SM_001–SM_005; só orquestra e agrega — não altera solver, juiz,
+harness ou gate; não decide aprovação. Schema: `schemas/solvability_report.schema.yaml`.
+Testes: `tests/test_solvability_meter.py`. Spec: `.ai/issues/ISSUE-33.2_SPEC.md`.
 
 ### ISSUE-34 — LLM Reviewers Adapter
 

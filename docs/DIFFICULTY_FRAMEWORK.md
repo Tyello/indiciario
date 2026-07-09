@@ -86,6 +86,16 @@ Handholding aceitável depende do local:
 - **Dicas contextuais:** podem orientar ação mental e tipo de cruzamento, sem listar gabarito.
 - **Guia do facilitador:** pode explicar cadeia completa, códigos, documentos relacionados, descarte de hipóteses e condução.
 
+## Solvability Meter (proxy LLM)
+
+`generator/solvability_meter.py` (ISSUE-33.2) roda N execuções blind solver → Conclusion
+Judge sobre o mesmo bundle e deriva uma faixa de dificuldade (`facil`/`medio`/`dificil`/`injusto`)
+a partir da taxa de resolução (`solve_rate`). Os limiares (`SM_003`) são independentes das
+faixas editoriais desta tabela — medem dificuldade **para um solver LLM**, não para grupo humano
+de mesa. Ver `docs/BLIND_SOLVER_HARNESS.md` e `framework/19_PLAYTEST_E_METRICAS.md` para o
+contrato completo. Não usar o Solvability Meter para substituir playtest nem para recalibrar
+esta tabela sem evidência humana.
+
 ## Uso recomendado
 
 1. Escolha a dificuldade antes de escrever documentos finais.

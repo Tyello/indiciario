@@ -409,6 +409,111 @@ julgamento permanece com o Gate Evaluator. Como o harness, os revisores e o Gate
 Evaluator, nenhum dos dois módulos chama LLM/internet nem muta artefatos de
 entrada.
 
+## LLM Blind Solver Adapter (ISSUE-33)
+
+O **LLM Blind Solver Adapter** conecta um modelo real (Claude via API) ao harness,
+mantendo o blind bundle como única entrada. A implementação preserva o contrato de
+isolamento: o solver **nunca** executa em sessão com acesso ao repositório
+(que contém o gabarito).
+
+### Contrato LS_001–LS_005
+
+| Código | Regra |
+|---|---|
+| **LS_001** | Prompt contém apenas template versionado + artefatos via `context.read_artifact_text` + metadados (solver_run_id, solver_id, bundle_id, manifest_id, included_artifacts). Nunca lê arquivo fora do bundle. |
+| **LS_002** | Resposta inválida → 1 reparo (reenvio com erro anexado); falha nas 2 → `BlindSolverHarnessError`. |
+| **LS_003** | Campos solver_run_id, solver_id, bundle_id, manifest_id do report SEMPRE sobrescritos a partir do context, nunca confiados ao modelo. |
+| **LS_004** | Campos extras no JSON de resposta descartados antes da validação; descarte registrado em `warnings`. |
+| **LS_005** | Hash sha256 do template registrado em `warnings` (formato `prompt_template_sha256:<hash>`) para rastreabilidade de versão de prompt. |
+
+### Regra de isolamento
+
+O solver de produção é injetado como `LLMProvider` (ISSUE-31). Decisão de produto:
+
+- O solver **NÃO DEVE** executar numa sessão de agente com acesso ao confronto.
+- O repositório contém o gabarito e violaria o protocolo cego.
+- Nos testes CI, o provider é sempre `FakeProvider` (ISSUE-32): determinístico, sem rede.
+- Ambientes de execução devem ser segregados: sessão cega sem acesso ao repo.
+
+### Implementação
+
+`generator/llm_blind_solver.py` expõe a classe `LLMBlindSolver` que satisfaz o
+Protocol `BlindSolver`. O template é versionado em `generator/prompts/blind_solver_v1.md`.
+
+A integração é **opt-in** em `generator/pipeline_runner.py`:
+```python
+run_pipeline(..., solver: BlindSolver | None = None)
+```
+
+Default é `None`, que preserva o stub determinístico `DeterministicPipelineSolver`.
+Zero regressão no comportamento padrão.
+
+## Conclusion Judge (ISSUE-33.1)
+
+O **Conclusion Judge** avalia as conclusões esperadas do autor contra o relatório do
+blind solver usando um LLM provider, com loop de reparo JSON e validação de schema.
+
+### O que o módulo faz
+
+`generator/conclusion_judge.py` expõe a função `judge_conclusions`, que:
+
+- Recebe um `BlindSolverReport` (mapping do output cego do solver) + lista de
+  `ExpectedConclusionInput` (gabarito em prosa: as conclusões esperadas do autor)
+  + `LLMProvider` (modelo para fazer o julgamento).
+- Chama o provider com um prompt estruturado (`generator/prompts/conclusion_judge_v1.md`)
+  contendo apenas o relatório do solver e as conclusões esperadas (isolamento garantido).
+- Obtém um `JudgeVerdict` contendo um `Conclusion` para cada conclusão esperada, com campos
+  `id`, `met` (booleano), `evidence_cited` (lista de artifact IDs citados), `rationale` (explicação).
+- Retorna também `alternative_solution_detected` (booleano), `classification` (resolvido/nao_resolvido/vazamento/ambiguo)
+  e `warnings` (lista de problemas detectados).
+
+### Contrato CJ_001–CJ_005
+
+| Código | Regra |
+|---|---|
+| **CJ_001** | Prompt contém apenas template versionado + report + expected statements. Nunca lê gabarito privado do blueprint. |
+| **CJ_002** | JSON inválido → 1 reparo (reenvio com erro anexado); falha nas 2 → `ConclusionJudgeError`. |
+| **CJ_003** | Todas as conclusões esperadas DEVEM aparecer no verdict do modelo (ordem preservada, ids correspondidos exatamente). |
+| **CJ_004** | Classificação derivada em Python puro (precedência: ambiguo > vazamento > nao_resolvido > resolvido). |
+| **CJ_005** | Se `met=true` mas `evidence_cited` vazio → rebaixar para `met=false` + warning. |
+
+### Integração com Gate Evaluator
+
+O `JudgeVerdict` alimenta o campo `met` de cada `ExpectedConclusion` em
+`build_gate_evaluation` (Fase E, ISSUE-19+20). O juiz **NÃO substitui** o Gate Evaluator;
+é uma camada de suporte automática que fornece evidência estruturada para a decisão
+(aprovação/rejeição/rollback) que permanece sob responsabilidade do Gate Evaluator.
+
+### Schema
+
+Estrutura validada contra `schemas/judge_verdict.schema.yaml` (JSON Schema Draft 2012).
+Datalclasses imutáveis (`frozen=True`): `ExpectedConclusionInput`, `Conclusion`, `JudgeVerdict`.
+
+## Solvability Meter (ISSUE-33.2)
+
+`generator/solvability_meter.py` expõe `measure_solvability`, que orquestra N execuções
+solver→juiz (`LLMBlindSolver` + `judge_conclusions`) sobre o **mesmo bundle**, variando
+apenas a resposta do provider por chamada, e agrega os vereditos num `SolvabilityReport`:
+taxa de resolução (`solve_rate`), contagem por classificação, `difficulty_estimate`
+(`facil`/`medio`/`dificil`/`injusto`) e `flags` de alerta.
+
+O meter só orquestra e agrega — **não altera** solver, juiz, harness ou gate, e **não decide**
+aprovação; o report é insumo, a decisão continua no Gate Evaluator/humano.
+
+| Código | Regra |
+|---|---|
+| **SM_001** | `runs < 1` ou `temperature` fora de `[0, 2]` → `ValueError` antes de qualquer execução. |
+| **SM_002** | Run que falha (provider/harness) é registrada como incompleta, não derruba o meter — salvo se **todas** falharem → `SolvabilityMeterError`. |
+| **SM_003** | `solve_rate == 1.0` → `facil`; `>= 0.5` → `medio`; `> 0.0` → `dificil`; `== 0.0` → `injusto` (derivação Python pura). |
+| **SM_004** | Qualquer run `ambiguo` → flag `AMBIGUIDADE_DETECTADA`; qualquer `vazamento` → `VAZAMENTO_DETECTADO`; `runs_completed < runs_requested` → `RUNS_INCOMPLETAS`. |
+| **SM_005** | `difficulty_framework_ref` cross-linka `docs/DIFFICULTY_FRAMEWORK.md`. |
+
+Schema: `schemas/solvability_report.schema.yaml` (`additionalProperties: false`). Testes:
+`tests/test_solvability_meter.py`. Spec: `.ai/issues/ISSUE-33.2_SPEC.md`.
+
+Honestidade: mede dificuldade **para um solver LLM**, proxy — playtest humano continua
+sendo o veredito real de dificuldade e solvabilidade.
+
 ## Próximos passos
 
 - **ISSUE-17 — Blind Solver Report Validator**: validador dedicado que aprofunda

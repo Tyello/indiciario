@@ -1,0 +1,81 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/judge_verdict/1.0
+title: Indiciário Conclusion Judge Verdict
+description: >-
+  Structural contract for the output of the Conclusion Judge phase (ISSUE-33.1).
+  The judge evaluates expected conclusions against the blind solver's report and
+  produces a verdict with classifications and evidence citations. Schema is
+  structural and forbids additional properties.
+type: object
+additionalProperties: false
+required:
+  - verdict_id
+  - report_run_id
+  - prompt_hash
+  - conclusions
+  - alternative_solution_detected
+  - alternative_solution_summary
+properties:
+  verdict_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+  report_run_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+  prompt_hash:
+    type: string
+    minLength: 6
+    maxLength: 256
+  conclusions:
+    type: array
+    items:
+      $ref: '#/$defs/conclusion_item'
+  alternative_solution_detected:
+    type: boolean
+  alternative_solution_summary:
+    type: [string, 'null']
+    maxLength: 2000
+  classification:
+    enum:
+      - resolvido
+      - nao_resolvido
+      - vazamento
+      - ambiguo
+  warnings:
+    $ref: '#/$defs/text_list'
+$defs:
+  conclusion_item:
+    type: object
+    additionalProperties: false
+    required:
+      - id
+      - met
+      - evidence_cited
+      - rationale
+    properties:
+      id:
+        type: string
+        minLength: 1
+        maxLength: 64
+      met:
+        type: boolean
+      evidence_cited:
+        type: array
+        items:
+          type: string
+          minLength: 2
+          maxLength: 64
+      rationale:
+        type: string
+        minLength: 1
+        maxLength: 2000
+  short_text:
+    type: string
+    minLength: 1
+    maxLength: 2000
+  text_list:
+    type: array
+    items:
+      $ref: '#/$defs/short_text'

@@ -3,12 +3,12 @@
 ## Estado
 
 ```
-STATUS: blocked
-CURRENT_STEP: STEP-01
-NEXT_ACTION: aguardar merge da ISSUE-33.1
-REVIEW_STATUS: n/a
-LAST_COMPLETED_STEP: none
-BLOCKER: ISSUE-33, ISSUE-33.1 (orquestra solver + juiz)
+STATUS: done
+CURRENT_STEP: STEP-07
+NEXT_ACTION: none
+REVIEW_STATUS: STEP-07 concluído — todos os steps aprovados
+LAST_COMPLETED_STEP: STEP-07
+BLOCKER: none
 ```
 
 ## Contexto
@@ -96,3 +96,4 @@ red (STEP-02), green (STEP-03), refactor (STEP-04), validation (STEP-06).
 
 ## Histórico
 - STEP-00 gerado em chat; bloqueada até merge da ISSUE-33.1.
+- Desbloqueada e executada STEP-01–STEP-07 em sessão única (ISSUE-33 e ISSUE-33.1 já com STATUS: done na árvore de trabalho local). STATUS: done.

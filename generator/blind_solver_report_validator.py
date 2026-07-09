@@ -17,7 +17,7 @@ conclusion is *correct*, and never mutates the report it receives.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field, is_dataclass
 from enum import Enum
 from typing import Any, Mapping
 
@@ -148,14 +148,20 @@ def _quality(code: str, field_name: str, message: str) -> ReportValidationError:
     )
 
 
-def validate_report(report: Mapping[str, Any]) -> ReportValidationResult:
+def validate_report(report: Mapping[str, Any] | Any) -> ReportValidationResult:
     """Validate a blind solver report mapping without bundle/manifest/context.
+
+    Accepts either a Mapping (dict) or a BlindSolverReport dataclass.
 
     Returns a :class:`ReportValidationResult`. ``RV_001`` (structural) is
     delegated to the schema validator and, when present, short-circuits the
     semantic/quality checks. ``RV_006``/``RV_007`` are warnings and never make
     the result invalid. The input mapping is never modified.
     """
+
+    # Convert BlindSolverReport dataclass to dict if needed
+    if is_dataclass(report):
+        report = asdict(report)
 
     # The schema validator expects a JSON ``object`` (a plain ``dict``); a
     # read-only ``Mapping`` such as ``MappingProxyType`` is not recognised. Pass

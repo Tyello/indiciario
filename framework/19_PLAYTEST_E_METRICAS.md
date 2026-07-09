@@ -53,6 +53,21 @@ A dificuldade percebida é uma estimativa automática baseada em profundidade da
 
 Essa divergência não significa falha narrativa. Ela sinaliza que a promessa feita ao jogador talvez precise ser revisada: um caso declarado como iniciante pode ter densidade de intermediário, ou um caso declarado como avançado pode parecer curto demais para essa etiqueta.
 
+## Solvability Meter (ISSUE-33.2)
+
+Além das métricas heurísticas acima (sem LLM), existe uma segunda camada opcional
+de sinalização pré-playtest: o **Solvability Meter** (`generator/solvability_meter.py`),
+que roda N execuções blind solver → Conclusion Judge (ISSUE-33/33.1) sobre o mesmo
+bundle cego, variando apenas a execução do provider, e agrega a taxa de resolução
+(`solve_rate`) numa estimativa de dificuldade (`facil`/`medio`/`dificil`/`injusto`).
+
+Nota de honestidade: essa estimativa mede dificuldade **para um solver LLM**, que é
+proxy — assim como as métricas heurísticas desta seção, ela sinaliza, não decide.
+**O teste cego humano continua sendo o veredito real de dificuldade e solvabilidade.**
+Os limiares usados (`SM_003` em `generator/solvability_meter.py`) são iniciais e
+calibráveis contra playtests futuros, do mesmo jeito que a dificuldade percebida
+por heurística acima também é. Cross-link de faixas: `docs/DIFFICULTY_FRAMEWORK.md`.
+
 ## Interpretação
 
 Warnings de playtest não são falhas. Eles são sinais para revisão.

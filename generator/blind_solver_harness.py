@@ -137,17 +137,30 @@ class BlindSolverContext:
     def __init__(
         self,
         *,
-        manifest: Mapping[str, Any],
-        bundle_path: Path,
+        manifest: Mapping[str, Any] | None = None,
+        bundle_path: Path | None = None,
         solver_id: str,
         solver_run_id: str,
-        max_bytes_per_artifact: int,
+        max_bytes_per_artifact: int = DEFAULT_MAX_BYTES_PER_ARTIFACT,
+        bundle_root: Path | None = None,
+        bundle_id: str | None = None,
+        manifest_id: str | None = None,
     ) -> None:
+        # Support both old and new call signatures
+        # Old: manifest=dict, bundle_path=Path
+        # New: bundle_root=Path, bundle_id=str, manifest_id=str (reads manifest internally)
+        if bundle_root is not None:
+            bundle_path = bundle_root
+            manifest_path = bundle_path / MANIFEST_FILENAME
+            manifest = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
+        elif manifest is None or bundle_path is None:
+            raise ValueError("Either (manifest, bundle_path) or bundle_root must be provided")
+
         self._bundle_path = bundle_path
         self._solver_id = solver_id
         self._solver_run_id = solver_run_id
-        self._bundle_id = str(manifest.get("bundle_id"))
-        self._manifest_id = str(manifest.get("manifest_id"))
+        self._bundle_id = bundle_id or str(manifest.get("bundle_id"))
+        self._manifest_id = manifest_id or str(manifest.get("manifest_id"))
         self._max_bytes_per_artifact = max_bytes_per_artifact
         self._descriptors: tuple[ArtifactDescriptor, ...] = _build_descriptors(manifest)
         self._by_id: dict[str, ArtifactDescriptor] = {d.artifact_id: d for d in self._descriptors}

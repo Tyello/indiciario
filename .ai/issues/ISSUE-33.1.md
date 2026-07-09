@@ -3,12 +3,12 @@
 ## Estado
 
 ```
-STATUS: blocked
-CURRENT_STEP: STEP-01
-NEXT_ACTION: aguardar merge da ISSUE-33
-REVIEW_STATUS: n/a
-LAST_COMPLETED_STEP: none
-BLOCKER: ISSUE-33 (consome BlindSolverReport real e prompts versionados)
+STATUS: done
+CURRENT_STEP: STEP-07
+NEXT_ACTION: none
+REVIEW_STATUS: STEP-07 concluído — todos os steps aprovados
+LAST_COMPLETED_STEP: STEP-07
+BLOCKER: none
 ```
 
 ## Contexto

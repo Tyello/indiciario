@@ -1,0 +1,108 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://indiciario.local/schemas/solvability_report/1.0
+title: Indiciário Solvability Report
+description: >-
+  Structural contract for the output of the Solvability Meter (ISSUE-33.2).
+  Aggregates N solver->judge runs over the same bundle into a solve-rate
+  based difficulty estimate. This measures difficulty for an LLM solver
+  proxy; human playtest remains the real difficulty verdict. Schema is
+  structural and forbids additional properties.
+type: object
+additionalProperties: false
+required:
+  - meter_id
+  - bundle_id
+  - runs_requested
+  - runs_completed
+  - run_results
+  - solve_rate
+  - classification_counts
+  - difficulty_estimate
+  - flags
+  - difficulty_framework_ref
+properties:
+  meter_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+  bundle_id:
+    type: string
+    minLength: 2
+    maxLength: 64
+  runs_requested:
+    type: integer
+    minimum: 1
+  runs_completed:
+    type: integer
+    minimum: 0
+  run_results:
+    type: array
+    items:
+      $ref: '#/$defs/run_result'
+  solve_rate:
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+  classification_counts:
+    type: object
+    additionalProperties: false
+    required:
+      - resolvido
+      - nao_resolvido
+      - vazamento
+      - ambiguo
+    properties:
+      resolvido:
+        type: integer
+        minimum: 0
+      nao_resolvido:
+        type: integer
+        minimum: 0
+      vazamento:
+        type: integer
+        minimum: 0
+      ambiguo:
+        type: integer
+        minimum: 0
+  difficulty_estimate:
+    enum:
+      - facil
+      - medio
+      - dificil
+      - injusto
+  flags:
+    type: array
+    items:
+      type: string
+      minLength: 2
+      maxLength: 64
+  difficulty_framework_ref:
+    type: string
+    minLength: 2
+    maxLength: 256
+$defs:
+  run_result:
+    type: object
+    additionalProperties: false
+    required:
+      - run_id
+      - classification
+      - required_met_count
+      - required_total
+    properties:
+      run_id:
+        type: string
+        minLength: 2
+        maxLength: 64
+      classification:
+        enum:
+          - resolvido
+          - nao_resolvido
+          - vazamento
+          - ambiguo
+      required_met_count:
+        type: integer
+        minimum: 0
+      required_total:
+        type: integer
+        minimum: 0
