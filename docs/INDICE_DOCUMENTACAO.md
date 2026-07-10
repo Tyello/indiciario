@@ -37,7 +37,7 @@ Use esta tabela como atalho. Ela não é exaustiva; na dúvida, confira a coluna
 | Regra editorial / anti-obviedade / diegese | `docs/DIRETRIZES_EDITORIAIS.md` (fonte), e refletir em `ANTI_OBVIEDADE`, `DIEGESE_DOCUMENTAL`, `CASE_FAILURE_PATTERNS` |
 | Catálogo de tipos de documento / specs visuais | `framework/03_TIPOS_DE_DOCUMENTOS.md`, `framework/12_GUIA_DE_PRODUCAO.md`, `docs/VISUAL_SYSTEM.md` |
 | Camada visual (tokens, plantas, assinaturas, printables) | `docs/VISUAL_SYSTEM.md`, `docs/VISUAL_LIBRARY_2_0.md`, `docs/FLOORPLANS.md`, `docs/SIGNATURES_AND_HANDWRITING.md`, `docs/PRINTABLES.md` |
-| Skill nova/alterada | `.ai/skills/` (fonte), `.ai/skills/README.md`, `AGENTS.md` (mapa), `docs/AGENT_SKILLS.md`, e o espelho `docs/prompts/` |
+| Skill nova/alterada | `.ai/skills/` (fonte única), `.ai/skills/README.md`, `AGENTS.md` (mapa), `docs/AGENT_SKILLS.md` |
 | Ordem/numeração de arquivos do `framework/` | `framework/00_README.md` (tabela de ordem) |
 | Run E2E do pipeline em um caso | doc `docs/*_PIPELINE_RUN.md` do caso, e `docs/QUALITY_COMPARATIVE_REPORT.md` se for comparativo |
 | Workflow de agente (orchestrator/executor/reviewer) | `.ai/workflows/`, e `CLAUDE.md` se mudar auto-approve/obrigatoriedade de revisor |
@@ -160,7 +160,6 @@ Use esta tabela como atalho. Ela não é exaustiva; na dúvida, confira a coluna
 | `docs/baselines/` | Baselines operacional/visual por caso | Dev/Designer | Gera-se baseline novo de um caso (falta II e Fintech) |
 | `docs/canonical_plans/` | Planos editoriais por caso | Designer/LLM-gen | Cria/revisa o plano de um caso |
 | `docs/playtests/` | Registros de playtest (entrada do Learning Loop) | Designer/Facilitador | Roda novo playtest |
-| `docs/prompts/` | **Espelho** copy-paste das skills de `.ai/skills/` | Agente | Muda uma skill em `.ai/skills/` (manter em sincronia) |
 
 ## `.ai/` — automação de agentes
 

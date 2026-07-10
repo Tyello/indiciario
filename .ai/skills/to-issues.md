@@ -34,6 +34,8 @@ Use para quebrar PRD, roadmap, relatório de playtest, auditoria ou proposta gra
 - Não misturar novo caso, renderer e validator na mesma issue.
 - Issues P0/P1 devem ter validação objetiva.
 - Tarefa de PDF deve mencionar build real com Playwright/Chromium.
+- Cada issue deve proteger a experiência offline-first.
+- Cada issue que tocar jogador deve preservar evidência bruta sem interpretação do autor.
 
 ## Resposta final
 

@@ -19,14 +19,14 @@ A existência de um protocolo ou de uma entrada no roadmap não significa que a 
 
 | Skill | Quando usar no Indiciário | Prompt reutilizável | Saída esperada |
 |---|---|---|---|
-| `diagnose` | Bugs difíceis de PDF, Playwright, merge, layout, placeholders, manifests, validação ou regressão visual. | [`docs/prompts/diagnose.md`](prompts/diagnose.md) | Reprodução mínima, hipótese, instrumentação, correção pequena e teste de regressão. |
-| `tdd` | Mudanças em `validator`, schemas YAML, `case_kernel`, `case_review`, renderer, package builder, manifests e casos canônicos. | [`docs/prompts/tdd.md`](prompts/tdd.md) | Red → green → refactor, com teste protegendo a regra editorial/técnica. |
-| `grill-with-docs` | Antes de alterar regra editorial, progressão de envelopes, mapas, dicas, guia do facilitador, contrato de blueprint ou documentação que oriente seleção de skills. | [`docs/prompts/grill_with_docs.md`](prompts/grill_with_docs.md) | Decisão confrontada com docs atuais e, se necessário, atualização de documentação. |
-| `to-prd` | Features médias/grandes: novo sistema de playtest, biblioteca visual, novo caso canônico, mudança no pipeline de geração. | [`docs/prompts/to_prd.md`](prompts/to_prd.md) | PRD curto, com objetivo, não-objetivos, escopo, critérios de aceitação e riscos. |
-| `to-issues` | Quebrar PRD, roadmap ou revisão de playtest em tarefas executáveis para Codex. | [`docs/prompts/to_issues.md`](prompts/to_issues.md) | Issues pequenas, independentes e verticais. |
-| `handoff` | Encerrar uma rodada de Codex/Claude/ChatGPT deixando contexto seguro para a próxima. | [`docs/prompts/handoff.md`](prompts/handoff.md) | Resumo do estado, arquivos alterados, validações, pendências e próximos passos. |
-| `zoom-out` | Quando o agente estiver preso em detalhe de implementação ou risco de refatorar sem entender o fluxo. | [`docs/prompts/zoom_out.md`](prompts/zoom_out.md) | Explicação de alto nível do fluxo afetado e do menor ponto correto de mudança. |
-| `improve-codebase-architecture` | Apenas em ciclos específicos de arquitetura, não durante hardening pré-playtest. | [`docs/prompts/improve_codebase_architecture.md`](prompts/improve_codebase_architecture.md) | Diagnóstico arquitetural com mudanças incrementais e reversíveis. |
+| `diagnose` | Bugs difíceis de PDF, Playwright, merge, layout, placeholders, manifests, validação ou regressão visual. | [`.ai/skills/diagnose.md`](../.ai/skills/diagnose.md) | Reprodução mínima, hipótese, instrumentação, correção pequena e teste de regressão. |
+| `tdd` | Mudanças em `validator`, schemas YAML, `case_kernel`, `case_review`, renderer, package builder, manifests e casos canônicos. | [`.ai/skills/tdd.md`](../.ai/skills/tdd.md) | Red → green → refactor, com teste protegendo a regra editorial/técnica. |
+| `grill-with-docs` | Antes de alterar regra editorial, progressão de envelopes, mapas, dicas, guia do facilitador, contrato de blueprint ou documentação que oriente seleção de skills. | [`.ai/skills/grill-with-docs.md`](../.ai/skills/grill-with-docs.md) | Decisão confrontada com docs atuais e, se necessário, atualização de documentação. |
+| `to-prd` | Features médias/grandes: novo sistema de playtest, biblioteca visual, novo caso canônico, mudança no pipeline de geração. | [`.ai/skills/to-prd.md`](../.ai/skills/to-prd.md) | PRD curto, com objetivo, não-objetivos, escopo, critérios de aceitação e riscos. |
+| `to-issues` | Quebrar PRD, roadmap ou revisão de playtest em tarefas executáveis para Codex. | [`.ai/skills/to-issues.md`](../.ai/skills/to-issues.md) | Issues pequenas, independentes e verticais. |
+| `handoff` | Encerrar uma rodada de Codex/Claude/ChatGPT deixando contexto seguro para a próxima. | [`.ai/skills/handoff.md`](../.ai/skills/handoff.md) | Resumo do estado, arquivos alterados, validações, pendências e próximos passos. |
+| `zoom-out` | Quando o agente estiver preso em detalhe de implementação ou risco de refatorar sem entender o fluxo. | [`.ai/skills/zoom-out.md`](../.ai/skills/zoom-out.md) | Explicação de alto nível do fluxo afetado e do menor ponto correto de mudança. |
+| `improve-codebase-architecture` | Apenas em ciclos específicos de arquitetura, não durante hardening pré-playtest. | [`.ai/skills/improve-codebase-architecture.md`](../.ai/skills/improve-codebase-architecture.md) | Diagnóstico arquitetural com mudanças incrementais e reversíveis. |
 
 ## Skills multiagente planejadas
 
@@ -323,21 +323,21 @@ Use esta matriz antes de iniciar uma tarefa:
 ### Forma curta
 
 ```text
-Use docs/prompts/diagnose.md para investigar o problema abaixo.
+Use .ai/skills/diagnose.md para investigar o problema abaixo.
 
 Problema:
 ...
 ```
 
 ```text
-Use docs/prompts/tdd.md para implementar a regra abaixo.
+Use .ai/skills/tdd.md para implementar a regra abaixo.
 
 Regra:
 ...
 ```
 
 ```text
-Use docs/prompts/grill_with_docs.md antes de propor mudança editorial.
+Use .ai/skills/grill-with-docs.md antes de propor mudança editorial.
 
 Mudança desejada:
 ...
@@ -351,7 +351,7 @@ Quando o agente já conhece este repositório, também pode ser chamado assim:
 Use a skill diagnose.
 ```
 
-O agente deve resolver o nome da skill para o prompt correspondente em `docs/prompts/` ou para o arquivo existente correspondente em `.ai/skills/`. Se o nome se referir a uma skill planejada, o agente deve declarar que ela não está disponível e selecionar a skill existente adequada.
+O agente deve resolver o nome da skill para o arquivo correspondente em `.ai/skills/`. Se o nome se referir a uma skill planejada, o agente deve declarar que ela não está disponível e selecionar a skill existente adequada.
 
 ## Guardrails do Indiciário
 

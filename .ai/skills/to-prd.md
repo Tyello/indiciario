@@ -31,6 +31,7 @@ Use quando a tarefa for maior que uma PR pequena ou envolver nova capacidade de 
 - Não criar especificação gigante.
 - Cada critério deve ser verificável.
 - Rebaixar prioridade se não ajudar caso, solvabilidade, diversão, facilitador, baseline ou playtest.
+- Não incluir marketplace, dashboard, banco, Telegram comercial, pagamento ou IA de imagem sem instrução explícita.
 
 ## Resposta final
 

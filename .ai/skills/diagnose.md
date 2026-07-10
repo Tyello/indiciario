@@ -30,6 +30,7 @@ python -m scripts.build_package examples/caso_canonico_intermediario.json --outp
 - Não use PDF fake como prova de baseline visual real.
 - Não transforme documento de jogador em gabarito.
 - Não abra feature nova durante diagnóstico.
+- Não reabra decisões já estabilizadas sem evidência nova de teste, PDF ou playtest.
 
 ## Resposta final
 

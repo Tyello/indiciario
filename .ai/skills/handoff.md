@@ -29,6 +29,7 @@ Use ao encerrar uma rodada de trabalho, passar contexto para outro agente ou reg
 - Não esconda falha de Playwright/Chromium, build PDF, validator ou teste.
 - Se usou PDF fake, diga que não prova baseline visual real.
 - Diferencie pendência real de ideia futura.
+- Se a mudança foi docs-only, diga que testes não foram necessários ou não foram executados por esse motivo.
 
 ## Resposta final
 
