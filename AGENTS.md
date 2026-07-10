@@ -184,7 +184,7 @@ pytest tests/ -q
 Lint quando tocar Python:
 
 ```bash
-ruff check generator/
+ruff check generator/ scripts/ tests/
 ```
 
 Validator strict dos canônicos quando tocar blueprint, schema, validator, documentação de estado ou pacote:

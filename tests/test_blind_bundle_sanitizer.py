@@ -246,7 +246,10 @@ def test_source_symlink_invalid_manifest_hash_mismatch_and_undeclared_file_fail(
 ) -> None:
     source_bundle = build_blind_bundle(build_request(source_tree, source_output, artifact_specs=[public_spec()])).output_path
     link = tmp_path / "source_link"
-    link.symlink_to(source_bundle, target_is_directory=True)
+    try:
+        link.symlink_to(source_bundle, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks not supported")
     with pytest.raises(BlindBundleSanitizeError, match="symlink"):
         sanitize_blind_bundle(sanitize_request(link, sanitized_output))
 

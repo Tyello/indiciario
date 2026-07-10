@@ -33,12 +33,13 @@ from generator.blind_solve_run_record import build_run_record
 
 # Reuse the real harness test helpers (bundle building + deterministic stub
 # solver) so the run record is built from a genuine harness result, not a mock.
+# source_tree / output_root: fixtures vêm de tests/conftest.py (ISSUE-41.1,
+# CI_001) — não são importadas aqui para não colidir com os parâmetros de
+# mesmo nome nas funções de teste abaixo.
 from tests.test_blind_solver_harness import (  # noqa: E402
     DeterministicStubBlindSolver,
     harness_request,
     make_bundle,
-    output_root,  # noqa: F401  (pytest fixture)
-    source_tree,  # noqa: F401  (pytest fixture)
 )
 
 

@@ -28,13 +28,13 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Any
 
 import pytest
 
 from generator.pipeline_runner import run_pipeline
 
-from tests.test_font_vendoring import _MEDIR_FONTE_JS, _montar_html, browser  # noqa: F401
+# browser: fixture vem de tests/conftest.py (ISSUE-41.1, CI_001).
+from tests.test_font_vendoring import _MEDIR_FONTE_JS, _montar_html
 
 MIRANTE_BLUEPRINT_PATH = Path("examples/caso_canonico_iniciante.json")
 TEMPLATE_COM_FONTE_QUEBRADA = "01_email.html"

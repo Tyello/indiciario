@@ -366,6 +366,7 @@ def test_validator_cli_accepts_example_blueprint_from_examples_folder():
         cwd=ROOT,
         check=False,
         text=True,
+        encoding="utf-8",
         capture_output=True,
     )
 

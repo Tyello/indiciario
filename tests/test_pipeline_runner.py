@@ -13,7 +13,6 @@ from generator.blind_solver_harness import validate_blind_solver_report
 from generator.gate_evaluator import validate_gate_evaluation
 from generator.narrative_reviewer import validate_review_report
 from generator.pipeline_runner import (
-    AURORA_PLAYTEST_DEFECTS,
     DefectMatch,
     PipelineRunResult,
     PlaytestDefect,

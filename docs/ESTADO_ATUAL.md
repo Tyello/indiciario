@@ -422,3 +422,5 @@ A automação atual separa validação rápida de build visual real:
 - `Visual Build` (`.github/workflows/visual-build.yml`) roda manualmente por `workflow_dispatch` e em PRs que alterem exemplos, templates, geradores, scripts, baselines visuais ou dependências. Ele instala Playwright/Chromium, gera o pacote real do Iniciante B e publica o artifact `iniciante-b-visual-package` com `output/iniciante_b/**`.
 
 O build visual automatizado ajuda a preservar evidência de PDF real em PRs, mas baseline visual continua exigindo download do artifact, revisão humana dos PDFs, leitura de manifests/relatórios e, quando aplicável, playtest. GitHub Actions não substitui a etapa de playtest.
+
+`CI` restabelecida verde em 2026-07-09 (ISSUE-41.1): lint local passou a cobrir `generator/ scripts/ tests/` (igual ao gate remoto), eliminando os 55 erros de `ruff` em `tests/` que bloqueavam o step Lint desde ≥2026-07-07.

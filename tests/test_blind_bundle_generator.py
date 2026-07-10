@@ -247,7 +247,10 @@ def test_unsafe_paths_fail_without_publishing_partial_bundle(
 def test_symlink_source_is_rejected_and_not_followed(source_tree: Path, output_root: Path) -> None:
     target = source_tree / "public/envelope_1/depoimento.md"
     link = source_tree / "public/link.md"
-    link.symlink_to(target)
+    try:
+        link.symlink_to(target)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks not supported")
 
     with pytest.raises(BlindBundleBuildError):
         build_blind_bundle(request(source_tree, output_root, artifact_specs=[public_spec(source_path="public/link.md")]))

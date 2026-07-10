@@ -37,21 +37,8 @@ def write_bytes(path: Path, content: bytes) -> Path:
     path.write_bytes(content)
     return path
 
-
-@pytest.fixture
-def source_tree(tmp_path: Path) -> Path:
-    source = tmp_path / "source"
-    write(source / "public/envelope_1/depoimento.md", "Depoimento publico bruto\n")
-    write(source / "public/envelope_1/recibo.md", "Recibo publico bruto\n")
-    write(source / "private/solution.md", "Solucao privada\n")
-    return source
-
-
-@pytest.fixture
-def output_root(tmp_path: Path) -> Path:
-    root = tmp_path / "bundles"
-    root.mkdir()
-    return root
+# source_tree / output_root: fixtures movidas para tests/conftest.py
+# (ISSUE-41.1, CI_001).
 
 
 def public_spec(**overrides: object) -> ArtifactSpec:

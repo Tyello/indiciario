@@ -1,0 +1,59 @@
+........................................................................ [  4%]
+....s............ss.............s....................................... [  9%]
+.............................................................s.......... [ 14%]
+........................................................................ [ 19%]
+........................................................................ [ 23%]
+........................................................................ [ 28%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 42%]
+........................................................................ [ 47%]
+..................................................................s..... [ 52%]
+.........s.............................................................. [ 57%]
+..................s..................................................... [ 61%]
+........................................................................ [ 66%]
+..........................................F............................. [ 71%]
+........................................................................ [ 76%]
+........................................................................ [ 81%]
+........................................................................ [ 85%]
+........................................................................ [ 90%]
+........................................................................ [ 95%]
+.......................................................................  [100%]
+================================== FAILURES ===================================
+___________ test_run_pipeline_is_deterministic_with_same_created_at ___________
+
+minimal_blueprint_path = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-321/test_run_pipeline_is_determini0/minimal_blueprint.json')
+output_root = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-321/test_run_pipeline_is_determini0/pipeline-output')
+tmp_path = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-321/test_run_pipeline_is_determini0')
+
+    def test_run_pipeline_is_deterministic_with_same_created_at(
+        minimal_blueprint_path: Path, output_root: Path, tmp_path: Path
+    ) -> None:
+        out_a = tmp_path / "out-a"
+        out_b = tmp_path / "out-b"
+        out_a.mkdir()
+        out_b.mkdir()
+        result_a = run_pipeline(
+            minimal_blueprint_path,
+            RUN_ID,
+            output_root=out_a,
+            created_at=FIXED_CREATED_AT,
+        )
+        result_b = run_pipeline(
+            minimal_blueprint_path,
+            RUN_ID,
+            output_root=out_b,
+            created_at=FIXED_CREATED_AT,
+        )
+>       assert result_a.manifest == result_b.manifest
+E       AssertionError: assert {'artifacts_s...', ...}], ...} == {'artifacts_s...', ...}], ...}
+E         
+E         Omitting 13 identical items, use -vv to show
+E         Differing items:
+E         {'artifacts_summary': [{'artifact_id': 'BUNDLE-RUN-PIPELINE-TEST-001', 'artifact_type': 'blind_bundle', 'sha256': '495...ce_review', 'sha256': 'a17f7373e3ff97c69bfe79dc2096de3ed8191becf8fa3860fa6d52ddb6a7e068', 'stage': 'evidence_review'}]} != {'artifacts_summary': [{'artifact_id': 'BUNDLE-RUN-PIPELINE-TEST-001', 'artifact_type': 'blind_bundle', 'sha256': '495...ce_review', 'sha256': 'ff8cc592fd31c8a2b2d3ad755498c3e116445e60b834f412018b701409169972', 'stage': 'evidence_review'}]}
+E         Use -v to get more diff
+
+tests\test_pipeline_runner.py:350: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_pipeline_runner.py::test_run_pipeline_is_deterministic_with_same_created_at
+1 failed, 1502 passed, 8 skipped in 216.27s (0:03:36)

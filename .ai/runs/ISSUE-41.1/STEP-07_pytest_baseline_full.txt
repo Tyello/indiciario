@@ -1,0 +1,171 @@
+........................................................................ [  4%]
+....F............FF.............F....................................... [  9%]
+.............................................................F.......... [ 14%]
+........................................................................ [ 19%]
+........................................................................ [ 23%]
+........................................................................ [ 28%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 42%]
+........................................................................ [ 47%]
+..................................................................s..... [ 52%]
+.........s.............................................................. [ 57%]
+..................s..................................................... [ 61%]
+........................................................................ [ 66%]
+........................................................................ [ 71%]
+........................................................................ [ 76%]
+........................................................................ [ 81%]
+........................................................................ [ 85%]
+........................................................................ [ 90%]
+........................................................................ [ 95%]
+.......................................................................  [100%]
+================================== FAILURES ===================================
+______________ test_symlink_source_is_rejected_and_not_followed _______________
+
+source_tree = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_source_is_rejecte0/source')
+output_root = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_source_is_rejecte0/bundles')
+
+    def test_symlink_source_is_rejected_and_not_followed(source_tree: Path, output_root: Path) -> None:
+        target = source_tree / "public/envelope_1/depoimento.md"
+        link = source_tree / "public/link.md"
+>       link.symlink_to(target)
+
+tests\test_blind_bundle_generator.py:250: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_source_is_rejecte0/source/public/link.md')
+target = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_source_is_rejecte0/source/public/envelope_1/depoimento.md')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+>       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] O cliente não tem o privilégio necessário: 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_symlink_source_is_rejecte0\\source\\public\\envelope_1\\depoimento.md' -> 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_symlink_source_is_rejecte0\\source\\public\\link.md'
+
+..\..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:789: OSError
+______________________ test_symlink_inside_bundle_fails _______________________
+
+valid_bundle = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_inside_bundle_fai0/bundles/BUNDLE_TEST_001')
+
+    def test_symlink_inside_bundle_fails(valid_bundle: Path) -> None:
+>       (valid_bundle / "player/link.md").symlink_to(valid_bundle / "player/depoimento.md")
+
+tests\test_blind_bundle_leak_checker.py:187: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_inside_bundle_fai0/bundles/BUNDLE_TEST_001/player/link.md')
+target = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_inside_bundle_fai0/bundles/BUNDLE_TEST_001/player/depoimento.md')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+>       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] O cliente não tem o privilégio necessário: 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_symlink_inside_bundle_fai0\\bundles\\BUNDLE_TEST_001\\player\\depoimento.md' -> 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_symlink_inside_bundle_fai0\\bundles\\BUNDLE_TEST_001\\player\\link.md'
+
+..\..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:789: OSError
+_________________________ test_symlink_manifest_fails _________________________
+
+valid_bundle = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_manifest_fails0/bundles/BUNDLE_TEST_001')
+tmp_path = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_manifest_fails0')
+
+    def test_symlink_manifest_fails(valid_bundle: Path, tmp_path: Path) -> None:
+        manifest_path = valid_bundle / "blind_bundle_manifest.yaml"
+        outside_manifest = tmp_path / "outside_manifest.yaml"
+        outside_manifest.write_text(manifest_path.read_text(encoding="utf-8"), encoding="utf-8")
+        manifest_path.unlink()
+>       manifest_path.symlink_to(outside_manifest)
+
+tests\test_blind_bundle_leak_checker.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_manifest_fails0/bundles/BUNDLE_TEST_001/blind_bundle_manifest.yaml')
+target = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_symlink_manifest_fails0/outside_manifest.yaml')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+>       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] O cliente não tem o privilégio necessário: 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_symlink_manifest_fails0\\outside_manifest.yaml' -> 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_symlink_manifest_fails0\\bundles\\BUNDLE_TEST_001\\blind_bundle_manifest.yaml'
+
+..\..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:789: OSError
+_______________ test_bundle_path_missing_file_and_symlink_fail ________________
+
+tmp_path = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_bundle_path_missing_file_0')
+
+    def test_bundle_path_missing_file_and_symlink_fail(tmp_path: Path) -> None:
+        missing = check_blind_bundle(tmp_path / "missing")
+        assert not missing.valid
+        assert "LEAK_BUNDLE_PATH_MISSING" in issue_codes(missing)
+    
+        file_path = write(tmp_path / "file.txt", "not a bundle")
+        file_report = check_blind_bundle(file_path)
+        assert not file_report.valid
+        assert "LEAK_BUNDLE_PATH_NOT_DIRECTORY" in issue_codes(file_report)
+    
+        real_dir = tmp_path / "real"
+        real_dir.mkdir()
+        link_dir = tmp_path / "link"
+>       link_dir.symlink_to(real_dir, target_is_directory=True)
+
+tests\test_blind_bundle_leak_checker.py:357: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_bundle_path_missing_file_0/link')
+target = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_bundle_path_missing_file_0/real')
+target_is_directory = True
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+>       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] O cliente não tem o privilégio necessário: 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_bundle_path_missing_file_0\\real' -> 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_bundle_path_missing_file_0\\link'
+
+..\..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:789: OSError
+_ test_source_symlink_invalid_manifest_hash_mismatch_and_undeclared_file_fail _
+
+source_tree = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_source_symlink_invalid_ma0/source')
+source_output = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_source_symlink_invalid_ma0/source_bundles')
+sanitized_output = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_source_symlink_invalid_ma0/sanitized_bundles')
+tmp_path = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_source_symlink_invalid_ma0')
+
+    def test_source_symlink_invalid_manifest_hash_mismatch_and_undeclared_file_fail(
+        source_tree: Path, source_output: Path, sanitized_output: Path, tmp_path: Path
+    ) -> None:
+        source_bundle = build_blind_bundle(build_request(source_tree, source_output, artifact_specs=[public_spec()])).output_path
+        link = tmp_path / "source_link"
+>       link.symlink_to(source_bundle, target_is_directory=True)
+
+tests\test_blind_bundle_sanitizer.py:249: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_source_symlink_invalid_ma0/source_link')
+target = WindowsPath('C:/Users/Marcelo/AppData/Local/Temp/pytest-of-Marcelo/pytest-323/test_source_symlink_invalid_ma0/source_bundles/BUNDLE_SOURCE_001')
+target_is_directory = True
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+>       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] O cliente não tem o privilégio necessário: 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_source_symlink_invalid_ma0\\source_bundles\\BUNDLE_SOURCE_001' -> 'C:\\Users\\Marcelo\\AppData\\Local\\Temp\\pytest-of-Marcelo\\pytest-323\\test_source_symlink_invalid_ma0\\source_link'
+
+..\..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:789: OSError
+=========================== short test summary info ===========================
+FAILED tests/test_blind_bundle_generator.py::test_symlink_source_is_rejected_and_not_followed
+FAILED tests/test_blind_bundle_leak_checker.py::test_symlink_inside_bundle_fails
+FAILED tests/test_blind_bundle_leak_checker.py::test_symlink_manifest_fails
+FAILED tests/test_blind_bundle_leak_checker.py::test_bundle_path_missing_file_and_symlink_fail
+FAILED tests/test_blind_bundle_sanitizer.py::test_source_symlink_invalid_manifest_hash_mismatch_and_undeclared_file_fail
+5 failed, 1503 passed, 3 skipped in 215.91s (0:03:35)

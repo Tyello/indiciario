@@ -1753,6 +1753,11 @@ class BlueprintValidator:
 
 
 def main() -> None:
+    # Console cp1252 (padrão em terminal Windows) corrompe acentos do
+    # output do validator (ISSUE-41.1, CI_005); forçar UTF-8 quando o stream
+    # suportar reconfigure evita o mojibake sem afetar Linux/mac.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description="Valida um blueprint de caso antes de gerar documentos.")
     parser.add_argument("arquivo", help="Caminho para o blueprint em JSON")
     parser.add_argument("--strict", action="store_true", help="Falha também em risco Médio")

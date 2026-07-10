@@ -19,7 +19,6 @@ from generator.pipeline_runner import run_pipeline
 # Modulo sob teste -- ainda nao existe (RED esperado: ImportError).
 from generator.quality_comparative_reviewer import (
     CaseMetrics,
-    MetricComparison,
     QualityComparativeReport,
     generate_quality_report,
     validate_quality_comparative_report,

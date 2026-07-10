@@ -38,7 +38,6 @@ ficar GREEN mesmo em ambiente sem nenhuma das fontes instaladas no SO.
 from __future__ import annotations
 
 import pytest
-from playwright.sync_api import sync_playwright
 
 # CUSTOM_FONTS / _montar_html / _MEDIR_FONTE_JS extraídos para
 # generator/font_fidelity.py no STEP-03 da ISSUE-40.2, para serem reusados
@@ -47,13 +46,7 @@ from playwright.sync_api import sync_playwright
 # da definição local -- asserts abaixo inalterados.
 from generator.font_fidelity import CUSTOM_FONTS, _MEDIR_FONTE_JS, _montar_html
 
-
-@pytest.fixture(scope="module")
-def browser():
-    with sync_playwright() as p:
-        navegador = p.chromium.launch()
-        yield navegador
-        navegador.close()
+# browser: fixture movida para tests/conftest.py (ISSUE-41.1, CI_001).
 
 
 @pytest.mark.parametrize("template_nome,fontes", CUSTOM_FONTS.items())

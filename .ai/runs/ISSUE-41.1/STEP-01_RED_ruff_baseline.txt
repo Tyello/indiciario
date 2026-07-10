@@ -1,0 +1,1028 @@
+F401 [*] `pytest` imported but unused
+  --> tests\test_accessibility_reviewer.py:35:8
+   |
+33 | from typing import Any
+34 |
+35 | import pytest
+   |        ^^^^^^
+36 |
+37 | from generator.models import (
+   |
+help: Remove unused import: `pytest`
+
+F811 Redefinition of unused `source_tree` from line 41
+  --> tests\test_blind_solve_run_record.py:48:18
+   |
+46 | # Helpers: build a real harness result + validator result                      #
+47 | # --------------------------------------------------------------------------- #
+48 | def _run_harness(source_tree: Path, output_root: Path) -> tuple[
+   |                  ^^^^^^^^^^^ `source_tree` redefined here
+49 |     BlindSolverHarnessResult, BlindSolverHarnessRequest
+50 | ]:
+   |
+  ::: tests\test_blind_solve_run_record.py:41:5
+   |
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `source_tree` here
+42 | )
+   |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+  --> tests\test_blind_solve_run_record.py:48:37
+   |
+46 | # Helpers: build a real harness result + validator result                      #
+47 | # --------------------------------------------------------------------------- #
+48 | def _run_harness(source_tree: Path, output_root: Path) -> tuple[
+   |                                     ^^^^^^^^^^^ `output_root` redefined here
+49 |     BlindSolverHarnessResult, BlindSolverHarnessRequest
+50 | ]:
+   |
+  ::: tests\test_blind_solve_run_record.py:40:5
+   |
+38 |     harness_request,
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `output_root` here
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+42 | )
+   |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+  --> tests\test_blind_solve_run_record.py:61:12
+   |
+61 | def _build(source_tree: Path, output_root: Path) -> dict:
+   |            ^^^^^^^^^^^ `source_tree` redefined here
+62 |     result, request = _run_harness(source_tree, output_root)
+63 |     validator_result = _validator_result(result)
+   |
+  ::: tests\test_blind_solve_run_record.py:41:5
+   |
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `source_tree` here
+42 | )
+   |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+  --> tests\test_blind_solve_run_record.py:61:31
+   |
+61 | def _build(source_tree: Path, output_root: Path) -> dict:
+   |                               ^^^^^^^^^^^ `output_root` redefined here
+62 |     result, request = _run_harness(source_tree, output_root)
+63 |     validator_result = _validator_result(result)
+   |
+  ::: tests\test_blind_solve_run_record.py:40:5
+   |
+38 |     harness_request,
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `output_root` here
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+42 | )
+   |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+  --> tests\test_blind_solve_run_record.py:70:40
+   |
+68 | # Tests 16-23                                                                   #
+69 | # --------------------------------------------------------------------------- #
+70 | def test_build_run_record_returns_dict(source_tree: Path, output_root: Path) -> None:
+   |                                        ^^^^^^^^^^^ `source_tree` redefined here
+71 |     # 16. build_run_record com harness_result válido retorna dict
+72 |     record = _build(source_tree, output_root)
+   |
+  ::: tests\test_blind_solve_run_record.py:41:5
+   |
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `source_tree` here
+42 | )
+   |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+  --> tests\test_blind_solve_run_record.py:70:59
+   |
+68 | # Tests 16-23                                                                   #
+69 | # --------------------------------------------------------------------------- #
+70 | def test_build_run_record_returns_dict(source_tree: Path, output_root: Path) -> None:
+   |                                                           ^^^^^^^^^^^ `output_root` redefined here
+71 |     # 16. build_run_record com harness_result válido retorna dict
+72 |     record = _build(source_tree, output_root)
+   |
+  ::: tests\test_blind_solve_run_record.py:40:5
+   |
+38 |     harness_request,
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `output_root` here
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+42 | )
+   |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+  --> tests\test_blind_solve_run_record.py:76:50
+   |
+76 | def test_built_record_passes_validate_run_record(source_tree: Path, output_root: Path) -> None:
+   |                                                  ^^^^^^^^^^^ `source_tree` redefined here
+77 |     # 17. record retornado passa validate_run_record
+78 |     from generator.blind_solve_run_record import validate_run_record
+   |
+  ::: tests\test_blind_solve_run_record.py:41:5
+   |
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `source_tree` here
+42 | )
+   |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+  --> tests\test_blind_solve_run_record.py:76:69
+   |
+76 | def test_built_record_passes_validate_run_record(source_tree: Path, output_root: Path) -> None:
+   |                                                                     ^^^^^^^^^^^ `output_root` redefined here
+77 |     # 17. record retornado passa validate_run_record
+78 |     from generator.blind_solve_run_record import validate_run_record
+   |
+  ::: tests\test_blind_solve_run_record.py:40:5
+   |
+38 |     harness_request,
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `output_root` here
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+42 | )
+   |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+  --> tests\test_blind_solve_run_record.py:84:46
+   |
+84 | def test_run_id_matches_report_solver_run_id(source_tree: Path, output_root: Path) -> None:
+   |                                              ^^^^^^^^^^^ `source_tree` redefined here
+85 |     # 18. run_id do record bate com solver_run_id do report
+86 |     result, request = _run_harness(source_tree, output_root)
+   |
+  ::: tests\test_blind_solve_run_record.py:41:5
+   |
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `source_tree` here
+42 | )
+   |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+  --> tests\test_blind_solve_run_record.py:84:65
+   |
+84 | def test_run_id_matches_report_solver_run_id(source_tree: Path, output_root: Path) -> None:
+   |                                                                 ^^^^^^^^^^^ `output_root` redefined here
+85 |     # 18. run_id do record bate com solver_run_id do report
+86 |     result, request = _run_harness(source_tree, output_root)
+   |
+  ::: tests\test_blind_solve_run_record.py:40:5
+   |
+38 |     harness_request,
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `output_root` here
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+42 | )
+   |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+  --> tests\test_blind_solve_run_record.py:91:45
+   |
+91 | def test_bundle_id_matches_report_bundle_id(source_tree: Path, output_root: Path) -> None:
+   |                                             ^^^^^^^^^^^ `source_tree` redefined here
+92 |     # 19. bundle_id do record bate com bundle_id do report
+93 |     result, request = _run_harness(source_tree, output_root)
+   |
+  ::: tests\test_blind_solve_run_record.py:41:5
+   |
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `source_tree` here
+42 | )
+   |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+  --> tests\test_blind_solve_run_record.py:91:64
+   |
+91 | def test_bundle_id_matches_report_bundle_id(source_tree: Path, output_root: Path) -> None:
+   |                                                                ^^^^^^^^^^^ `output_root` redefined here
+92 |     # 19. bundle_id do record bate com bundle_id do report
+93 |     result, request = _run_harness(source_tree, output_root)
+   |
+  ::: tests\test_blind_solve_run_record.py:40:5
+   |
+38 |     harness_request,
+39 |     make_bundle,
+40 |     output_root,  # noqa: F401  (pytest fixture)
+   |     ----------- previous definition of `output_root` here
+41 |     source_tree,  # noqa: F401  (pytest fixture)
+42 | )
+   |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:98:49
+    |
+ 98 | def test_manifest_id_matches_report_manifest_id(source_tree: Path, output_root: Path) -> None:
+    |                                                 ^^^^^^^^^^^ `source_tree` redefined here
+ 99 |     # 20. manifest_id do record bate com manifest_id do report
+100 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:98:68
+    |
+ 98 | def test_manifest_id_matches_report_manifest_id(source_tree: Path, output_root: Path) -> None:
+    |                                                                    ^^^^^^^^^^^ `output_root` redefined here
+ 99 |     # 20. manifest_id do record bate com manifest_id do report
+100 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:105:45
+    |
+105 | def test_accessed_artifacts_reflect_harness(source_tree: Path, output_root: Path) -> None:
+    |                                             ^^^^^^^^^^^ `source_tree` redefined here
+106 |     # 21. accessed_artifacts reflete acessos do harness
+107 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:105:64
+    |
+105 | def test_accessed_artifacts_reflect_harness(source_tree: Path, output_root: Path) -> None:
+    |                                                                ^^^^^^^^^^^ `output_root` redefined here
+106 |     # 21. accessed_artifacts reflete acessos do harness
+107 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:113:49
+    |
+113 | def test_denied_access_attempts_reflect_harness(source_tree: Path, output_root: Path) -> None:
+    |                                                 ^^^^^^^^^^^ `source_tree` redefined here
+114 |     # 22. denied_access_attempts reflete negações do harness
+115 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:113:68
+    |
+113 | def test_denied_access_attempts_reflect_harness(source_tree: Path, output_root: Path) -> None:
+    |                                                                    ^^^^^^^^^^^ `output_root` redefined here
+114 |     # 22. denied_access_attempts reflete negações do harness
+115 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:121:43
+    |
+121 | def test_harness_warnings_reflect_harness(source_tree: Path, output_root: Path) -> None:
+    |                                           ^^^^^^^^^^^ `source_tree` redefined here
+122 |     # 23. harness_warnings reflete warnings do harness
+123 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:121:62
+    |
+121 | def test_harness_warnings_reflect_harness(source_tree: Path, output_root: Path) -> None:
+    |                                                              ^^^^^^^^^^^ `output_root` redefined here
+122 |     # 23. harness_warnings reflete warnings do harness
+123 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:131:46
+    |
+129 | # Tests 24-31 (STEP-07)                                                         #
+130 | # --------------------------------------------------------------------------- #
+131 | def test_validation_report_schema_valid_true(source_tree: Path, output_root: Path) -> None:
+    |                                              ^^^^^^^^^^^ `source_tree` redefined here
+132 |     # 24. validation.report_schema_valid é True para report válido.
+133 |     # The harness only emits a report after structural validation passes, so a
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:131:65
+    |
+129 | # Tests 24-31 (STEP-07)                                                         #
+130 | # --------------------------------------------------------------------------- #
+131 | def test_validation_report_schema_valid_true(source_tree: Path, output_root: Path) -> None:
+    |                                                                 ^^^^^^^^^^^ `output_root` redefined here
+132 |     # 24. validation.report_schema_valid é True para report válido.
+133 |     # The harness only emits a report after structural validation passes, so a
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:140:48
+    |
+140 | def test_validation_report_semantic_valid_true(source_tree: Path, output_root: Path) -> None:
+    |                                                ^^^^^^^^^^^ `source_tree` redefined here
+141 |     # 25. validation.report_semantic_valid é True para report semanticamente válido.
+142 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:140:67
+    |
+140 | def test_validation_report_semantic_valid_true(source_tree: Path, output_root: Path) -> None:
+    |                                                                   ^^^^^^^^^^^ `output_root` redefined here
+141 |     # 25. validation.report_semantic_valid é True para report semanticamente válido.
+142 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:152:5
+    |
+151 | def test_validation_semantic_errors_empty_for_clean_report(
+152 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+153 | ) -> None:
+154 |     # 26. validation.semantic_errors é lista vazia para report sem erros.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:152:24
+    |
+151 | def test_validation_semantic_errors_empty_for_clean_report(
+152 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+153 | ) -> None:
+154 |     # 26. validation.semantic_errors é lista vazia para report sem erros.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:163:5
+    |
+162 | def test_validation_semantic_warnings_reflect_validator(
+163 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+164 | ) -> None:
+165 |     # 27. validation.semantic_warnings reflete warnings do validator.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:163:24
+    |
+162 | def test_validation_semantic_warnings_reflect_validator(
+163 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+164 | ) -> None:
+165 |     # 27. validation.semantic_warnings reflete warnings do validator.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:186:43
+    |
+186 | def test_environment_offline_default_true(source_tree: Path, output_root: Path) -> None:
+    |                                           ^^^^^^^^^^^ `source_tree` redefined here
+187 |     # 28. environment.offline é True por padrão.
+188 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:186:62
+    |
+186 | def test_environment_offline_default_true(source_tree: Path, output_root: Path) -> None:
+    |                                                              ^^^^^^^^^^^ `output_root` redefined here
+187 |     # 28. environment.offline é True por padrão.
+188 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:193:45
+    |
+193 | def test_environment_llm_used_default_false(source_tree: Path, output_root: Path) -> None:
+    |                                             ^^^^^^^^^^^ `source_tree` redefined here
+194 |     # 29. environment.llm_used é False por padrão.
+195 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:193:64
+    |
+193 | def test_environment_llm_used_default_false(source_tree: Path, output_root: Path) -> None:
+    |                                                                ^^^^^^^^^^^ `output_root` redefined here
+194 |     # 29. environment.llm_used é False por padrão.
+195 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:201:5
+    |
+200 | def test_environment_internet_used_default_false(
+201 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+202 | ) -> None:
+203 |     # 30. environment.internet_used é False por padrão.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:201:24
+    |
+200 | def test_environment_internet_used_default_false(
+201 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+202 | ) -> None:
+203 |     # 30. environment.internet_used é False por padrão.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:209:37
+    |
+209 | def test_gate_decision_default_null(source_tree: Path, output_root: Path) -> None:
+    |                                     ^^^^^^^^^^^ `source_tree` redefined here
+210 |     # 31. gate_decision é null por padrão.
+211 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:209:56
+    |
+209 | def test_gate_decision_default_null(source_tree: Path, output_root: Path) -> None:
+    |                                                        ^^^^^^^^^^^ `output_root` redefined here
+210 |     # 31. gate_decision é null por padrão.
+211 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:219:42
+    |
+217 | # Tests 32-37 (STEP-08)                                                         #
+218 | # --------------------------------------------------------------------------- #
+219 | def test_reviewer_findings_default_empty(source_tree: Path, output_root: Path) -> None:
+    |                                          ^^^^^^^^^^^ `source_tree` redefined here
+220 |     # 32. reviewer_findings é lista vazia por padrão.
+221 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:219:61
+    |
+217 | # Tests 32-37 (STEP-08)                                                         #
+218 | # --------------------------------------------------------------------------- #
+219 | def test_reviewer_findings_default_empty(source_tree: Path, output_root: Path) -> None:
+    |                                                             ^^^^^^^^^^^ `output_root` redefined here
+220 |     # 32. reviewer_findings é lista vazia por padrão.
+221 |     result, request = _run_harness(source_tree, output_root)
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:227:5
+    |
+226 | def test_build_run_record_does_not_mutate_inputs(
+227 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+228 | ) -> None:
+229 |     # 33. build_run_record não muta os inputs.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:227:24
+    |
+226 | def test_build_run_record_does_not_mutate_inputs(
+227 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+228 | ) -> None:
+229 |     # 33. build_run_record não muta os inputs.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:251:5
+    |
+250 | def test_validate_run_record_returns_empty_for_valid_record(
+251 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+252 | ) -> None:
+253 |     # 34. validate_run_record retorna lista vazia para record válido.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:251:24
+    |
+250 | def test_validate_run_record_returns_empty_for_valid_record(
+251 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+252 | ) -> None:
+253 |     # 34. validate_run_record retorna lista vazia para record válido.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:261:5
+    |
+260 | def test_validate_run_record_returns_errors_for_invalid_record(
+261 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+262 | ) -> None:
+263 |     # 35. validate_run_record retorna erros para record inválido.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:261:24
+    |
+260 | def test_validate_run_record_returns_errors_for_invalid_record(
+261 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+262 | ) -> None:
+263 |     # 35. validate_run_record retorna erros para record inválido.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:274:5
+    |
+273 | def test_execution_duration_seconds_is_non_negative_int(
+274 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+275 | ) -> None:
+276 |     # 36. execution.duration_seconds é inteiro >= 0.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:274:24
+    |
+273 | def test_execution_duration_seconds_is_non_negative_int(
+274 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+275 | ) -> None:
+276 |     # 36. execution.duration_seconds é inteiro >= 0.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F811 Redefinition of unused `source_tree` from line 41
+   --> tests\test_blind_solve_run_record.py:286:5
+    |
+285 | def test_execution_status_completed_for_normal_run(
+286 |     source_tree: Path, output_root: Path
+    |     ^^^^^^^^^^^ `source_tree` redefined here
+287 | ) -> None:
+288 |     # 37. execution.status é "completed" para execução normal.
+    |
+   ::: tests\test_blind_solve_run_record.py:41:5
+    |
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `source_tree` here
+ 42 | )
+    |
+help: Remove definition: `source_tree`
+
+F811 Redefinition of unused `output_root` from line 40
+   --> tests\test_blind_solve_run_record.py:286:24
+    |
+285 | def test_execution_status_completed_for_normal_run(
+286 |     source_tree: Path, output_root: Path
+    |                        ^^^^^^^^^^^ `output_root` redefined here
+287 | ) -> None:
+288 |     # 37. execution.status é "completed" para execução normal.
+    |
+   ::: tests\test_blind_solve_run_record.py:40:5
+    |
+ 38 |     harness_request,
+ 39 |     make_bundle,
+ 40 |     output_root,  # noqa: F401  (pytest fixture)
+    |     ----------- previous definition of `output_root` here
+ 41 |     source_tree,  # noqa: F401  (pytest fixture)
+ 42 | )
+    |
+help: Remove definition: `output_root`
+
+F401 [*] `typing.Any` imported but unused
+  --> tests\test_gate_font_fidelity.py:31:20
+   |
+29 | import re
+30 | from pathlib import Path
+31 | from typing import Any
+   |                    ^^^
+32 |
+33 | import pytest
+   |
+help: Remove unused import: `typing.Any`
+
+F811 Redefinition of unused `browser` from line 37
+  --> tests\test_gate_font_fidelity.py:90:70
+   |
+90 | def test_gate_currently_misses_font_fallback(css_com_fonte_removida, browser, tmp_path):
+   |                                                                      ^^^^^^^ `browser` redefined here
+91 |     """Evidencia a lacuna original (RED, STEP-02): com @font-face removido, a
+92 |     fonte de fato cai em fallback (confirmado via medição real do Chromium)
+   |
+  ::: tests\test_gate_font_fidelity.py:37:70
+   |
+35 | from generator.pipeline_runner import run_pipeline
+36 |
+37 | from tests.test_font_vendoring import _MEDIR_FONTE_JS, _montar_html, browser  # noqa: F401
+   |                                                                      ------- previous definition of `browser` here
+38 |
+39 | MIRANTE_BLUEPRINT_PATH = Path("examples/caso_canonico_iniciante.json")
+   |
+help: Remove definition: `browser`
+
+F811 Redefinition of unused `browser` from line 37
+   --> tests\test_gate_font_fidelity.py:133:61
+    |
+133 | def test_gate_catches_font_fallback(css_com_fonte_removida, browser):
+    |                                                             ^^^^^^^ `browser` redefined here
+134 |     """Critério real da issue: depois do STEP-03, o gate precisa reportar
+135 |     falha explícita nomeando template + fonte quando falta o @font-face
+    |
+   ::: tests\test_gate_font_fidelity.py:37:70
+    |
+ 35 | from generator.pipeline_runner import run_pipeline
+ 36 |
+ 37 | from tests.test_font_vendoring import _MEDIR_FONTE_JS, _montar_html, browser  # noqa: F401
+    |                                                                      ------- previous definition of `browser` here
+ 38 |
+ 39 | MIRANTE_BLUEPRINT_PATH = Path("examples/caso_canonico_iniciante.json")
+    |
+help: Remove definition: `browser`
+
+F811 Redefinition of unused `browser` from line 37
+   --> tests\test_gate_font_fidelity.py:153:29
+    |
+152 | def test_gate_wires_font_fidelity_into_evaluate_for_canonical(
+153 |     css_com_fonte_removida, browser, tmp_path
+    |                             ^^^^^^^ `browser` redefined here
+154 | ):
+155 |     """STEP-03_FIX-01: `evaluate_font_fidelity` não pode ficar como função
+    |
+   ::: tests\test_gate_font_fidelity.py:37:70
+    |
+ 35 | from generator.pipeline_runner import run_pipeline
+ 36 |
+ 37 | from tests.test_font_vendoring import _MEDIR_FONTE_JS, _montar_html, browser  # noqa: F401
+    |                                                                      ------- previous definition of `browser` here
+ 38 |
+ 39 | MIRANTE_BLUEPRINT_PATH = Path("examples/caso_canonico_iniciante.json")
+    |
+help: Remove definition: `browser`
+
+F401 [*] `generator.pipeline_runner.AURORA_PLAYTEST_DEFECTS` imported but unused
+  --> tests\test_pipeline_runner.py:16:5
+   |
+14 | from generator.narrative_reviewer import validate_review_report
+15 | from generator.pipeline_runner import (
+16 |     AURORA_PLAYTEST_DEFECTS,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+17 |     DefectMatch,
+18 |     PipelineRunResult,
+   |
+help: Remove unused import: `generator.pipeline_runner.AURORA_PLAYTEST_DEFECTS`
+
+F401 [*] `generator.quality_comparative_reviewer.MetricComparison` imported but unused
+  --> tests\test_quality_comparative_reviewer.py:22:5
+   |
+20 | from generator.quality_comparative_reviewer import (
+21 |     CaseMetrics,
+22 |     MetricComparison,
+   |     ^^^^^^^^^^^^^^^^
+23 |     QualityComparativeReport,
+24 |     generate_quality_report,
+   |
+help: Remove unused import: `generator.quality_comparative_reviewer.MetricComparison`
+
+Found 55 errors.
+[*] 4 fixable with the `--fix` option.

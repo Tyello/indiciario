@@ -1,0 +1,1056 @@
+[
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 14,
+      "row": 35
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_accessibility_reviewer.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 36
+          },
+          "location": {
+            "column": 1,
+            "row": 35
+          }
+        }
+      ],
+      "message": "Remove unused import: `pytest`"
+    },
+    "location": {
+      "column": 8,
+      "row": 35
+    },
+    "message": "`pytest` imported but unused",
+    "noqa_row": 35,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 29,
+      "row": 48
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 18,
+      "row": 48
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 48,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 48,
+      "row": 48
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 37,
+      "row": 48
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 48,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 23,
+      "row": 61
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 12,
+      "row": 61
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 61,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 42,
+      "row": 61
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 31,
+      "row": 61
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 61,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 51,
+      "row": 70
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 40,
+      "row": 70
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 70,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 70,
+      "row": 70
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 59,
+      "row": 70
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 70,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 61,
+      "row": 76
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 50,
+      "row": 76
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 76,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 80,
+      "row": 76
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 69,
+      "row": 76
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 76,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 57,
+      "row": 84
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 46,
+      "row": 84
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 84,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 76,
+      "row": 84
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 65,
+      "row": 84
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 84,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 56,
+      "row": 91
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 45,
+      "row": 91
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 91,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 75,
+      "row": 91
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 64,
+      "row": 91
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 91,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 60,
+      "row": 98
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 49,
+      "row": 98
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 98,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 79,
+      "row": 98
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 68,
+      "row": 98
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 98,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 56,
+      "row": 105
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 45,
+      "row": 105
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 105,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 75,
+      "row": 105
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 64,
+      "row": 105
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 105,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 60,
+      "row": 113
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 49,
+      "row": 113
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 113,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 79,
+      "row": 113
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 68,
+      "row": 113
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 113,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 54,
+      "row": 121
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 43,
+      "row": 121
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 121,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 73,
+      "row": 121
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 62,
+      "row": 121
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 121,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 57,
+      "row": 131
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 46,
+      "row": 131
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 131,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 76,
+      "row": 131
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 65,
+      "row": 131
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 131,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 59,
+      "row": 140
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 48,
+      "row": 140
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 140,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 78,
+      "row": 140
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 67,
+      "row": 140
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 140,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 152
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 152
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 152,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 152
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 152
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 152,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 163
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 163
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 163,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 163
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 163
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 163,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 54,
+      "row": 186
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 43,
+      "row": 186
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 186,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 73,
+      "row": 186
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 62,
+      "row": 186
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 186,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 56,
+      "row": 193
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 45,
+      "row": 193
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 193,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 75,
+      "row": 193
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 64,
+      "row": 193
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 193,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 201
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 201
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 201,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 201
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 201
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 201,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 48,
+      "row": 209
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 37,
+      "row": 209
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 209,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 67,
+      "row": 209
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 56,
+      "row": 209
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 209,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 53,
+      "row": 219
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 42,
+      "row": 219
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 219,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 72,
+      "row": 219
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 61,
+      "row": 219
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 219,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 227
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 227
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 227,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 227
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 227
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 227,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 251
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 251
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 251,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 251
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 251
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 251,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 261
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 261
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 261,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 261
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 261
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 261,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 274
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 274
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 274,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 274
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 274
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 274,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 16,
+      "row": 286
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 286
+    },
+    "message": "Redefinition of unused `source_tree` from line 41: `source_tree` redefined here",
+    "noqa_row": 286,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 35,
+      "row": 286
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_blind_solve_run_record.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 286
+    },
+    "message": "Redefinition of unused `output_root` from line 40: `output_root` redefined here",
+    "noqa_row": 286,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 23,
+      "row": 31
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_gate_font_fidelity.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 32
+          },
+          "location": {
+            "column": 1,
+            "row": 31
+          }
+        }
+      ],
+      "message": "Remove unused import: `typing.Any`"
+    },
+    "location": {
+      "column": 20,
+      "row": 31
+    },
+    "message": "`typing.Any` imported but unused",
+    "noqa_row": 31,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 77,
+      "row": 90
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_gate_font_fidelity.py",
+    "fix": null,
+    "location": {
+      "column": 70,
+      "row": 90
+    },
+    "message": "Redefinition of unused `browser` from line 37: `browser` redefined here",
+    "noqa_row": 90,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 68,
+      "row": 133
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_gate_font_fidelity.py",
+    "fix": null,
+    "location": {
+      "column": 61,
+      "row": 133
+    },
+    "message": "Redefinition of unused `browser` from line 37: `browser` redefined here",
+    "noqa_row": 133,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 36,
+      "row": 153
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_gate_font_fidelity.py",
+    "fix": null,
+    "location": {
+      "column": 29,
+      "row": 153
+    },
+    "message": "Redefinition of unused `browser` from line 37: `browser` redefined here",
+    "noqa_row": 153,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 28,
+      "row": 16
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_pipeline_runner.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from generator.pipeline_runner import (\r\n    DefectMatch,\r\n    PipelineRunResult,\r\n    PlaytestDefect,\r\n    compare_to_playtest,\r\n    run_pipeline,\r\n)",
+          "end_location": {
+            "column": 2,
+            "row": 22
+          },
+          "location": {
+            "column": 1,
+            "row": 15
+          }
+        }
+      ],
+      "message": "Remove unused import: `generator.pipeline_runner.AURORA_PLAYTEST_DEFECTS`"
+    },
+    "location": {
+      "column": 5,
+      "row": 16
+    },
+    "message": "`generator.pipeline_runner.AURORA_PLAYTEST_DEFECTS` imported but unused",
+    "noqa_row": 16,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 21,
+      "row": 22
+    },
+    "filename": "C:\\Users\\Marcelo\\OneDrive\\Documentos\\Projetos\\indiciario\\tests\\test_quality_comparative_reviewer.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from generator.quality_comparative_reviewer import (\r\n    CaseMetrics,\r\n    QualityComparativeReport,\r\n    generate_quality_report,\r\n    validate_quality_comparative_report,\r\n)",
+          "end_location": {
+            "column": 2,
+            "row": 26
+          },
+          "location": {
+            "column": 1,
+            "row": 20
+          }
+        }
+      ],
+      "message": "Remove unused import: `generator.quality_comparative_reviewer.MetricComparison`"
+    },
+    "location": {
+      "column": 5,
+      "row": 22
+    },
+    "message": "`generator.quality_comparative_reviewer.MetricComparison` imported but unused",
+    "noqa_row": 22,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  }
+]

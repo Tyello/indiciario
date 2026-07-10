@@ -184,7 +184,10 @@ def test_hash_mismatch_fails(valid_bundle: Path) -> None:
 
 
 def test_symlink_inside_bundle_fails(valid_bundle: Path) -> None:
-    (valid_bundle / "player/link.md").symlink_to(valid_bundle / "player/depoimento.md")
+    try:
+        (valid_bundle / "player/link.md").symlink_to(valid_bundle / "player/depoimento.md")
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks not supported")
 
     report = check_blind_bundle(valid_bundle)
 
@@ -197,7 +200,10 @@ def test_symlink_manifest_fails(valid_bundle: Path, tmp_path: Path) -> None:
     outside_manifest = tmp_path / "outside_manifest.yaml"
     outside_manifest.write_text(manifest_path.read_text(encoding="utf-8"), encoding="utf-8")
     manifest_path.unlink()
-    manifest_path.symlink_to(outside_manifest)
+    try:
+        manifest_path.symlink_to(outside_manifest)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks not supported")
 
     report = check_blind_bundle(valid_bundle)
 
@@ -354,7 +360,10 @@ def test_bundle_path_missing_file_and_symlink_fail(tmp_path: Path) -> None:
     real_dir = tmp_path / "real"
     real_dir.mkdir()
     link_dir = tmp_path / "link"
-    link_dir.symlink_to(real_dir, target_is_directory=True)
+    try:
+        link_dir.symlink_to(real_dir, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks not supported")
     link_report = check_blind_bundle(link_dir)
     assert not link_report.valid
     assert "LEAK_BUNDLE_PATH_SYMLINK" in issue_codes(link_report)
