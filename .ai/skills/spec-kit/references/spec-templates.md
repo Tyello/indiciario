@@ -1,6 +1,6 @@
 # Templates de Spec por Tier
 
-Nota geral: não existe mais marcação `[sonnet]` por etapa. Toda etapa é executada pelo Haiku. O Sonnet entra apenas via escalação. Se ao escrever uma etapa você pensar "isso precisa do Sonnet", a etapa está subespecificada — decida agora o que falta decidir e reescreva.
+Nota geral: não existe marcação `[sonnet]` de execução por etapa. Toda etapa é executada pelo Haiku; o Sonnet entra via escalação e via revisão sênior. A única marcação de etapa é **`[sensível]`**, que muda quem REVISA (spec-reviewer-senior/Sonnet em vez de spec-reviewer/Haiku). Marque `[sensível]` quando a etapa tocar: schema/contrato público, migração ou remoção de dados, segurança/auth, concorrência, ou algo difícil de reverter. Se ao escrever uma etapa você pensar "isso precisa do Sonnet para executar", a etapa está subespecificada — decida agora o que falta decidir e reescreva.
 
 ## Formato EARS para critérios de aceitação
 
@@ -66,7 +66,7 @@ Salve como `SPEC.md` na raiz da tarefa (ou apresente no chat se o fluxo for conv
 - <cada escolha em aberto, já resolvida, com justificativa de 1 linha>
 
 ## Etapas
-### Etapa 1: <nome>
+### Etapa 1: <nome>   ← acrescente [sensível] se aplicável
 - FAZ: <instrução mecânica completa>
 - TOCA: <arquivos>
 - VALIDA COM: <comando + resultado esperado; use EARS para comportamento>
@@ -118,7 +118,7 @@ Onda 2: etapa 3 (depende de 1) | etapa 4 (depende de 2)
 Onda 3: etapa 5 (depende de 3 e 4)
 
 ## Etapas
-### Etapa 1: <nome>
+### Etapa 1: <nome>   ← acrescente [sensível] se aplicável
 - FAZ: <instrução mecânica completa>
 - TOCA: <arquivos>
 - EXEMPLO E/S: <par concreto de entrada/saída, se não-trivial>

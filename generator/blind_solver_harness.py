@@ -288,7 +288,7 @@ def run_blind_solver_harness(request: BlindSolverHarnessRequest, solver: BlindSo
     _validate_report_schema(report)
     _validate_report_semantics(report, manifest, request, context)
 
-    warnings = _result_warnings(report, bundle_report)
+    warnings = _result_warnings(report, bundle_report, context)
     return BlindSolverHarnessResult(
         report=report,
         bundle_report=bundle_report,
@@ -445,7 +445,11 @@ def _validate_report_semantics(
             )
 
 
-def _result_warnings(report: Mapping[str, Any], bundle_report: LeakCheckReport) -> tuple[str, ...]:
+def _result_warnings(
+    report: Mapping[str, Any],
+    bundle_report: LeakCheckReport,
+    context: BlindSolverContext,
+) -> tuple[str, ...]:
     messages: list[str] = []
     for warning in report.get("warnings") or []:
         if isinstance(warning, str) and warning not in messages:
@@ -453,4 +457,33 @@ def _result_warnings(report: Mapping[str, Any], bundle_report: LeakCheckReport) 
     for issue in bundle_report.issues:
         if issue.severity == "warning" and issue.message not in messages:
             messages.append(issue.message)
+    messages.extend(_citation_without_read_warnings(report, context))
     return tuple(messages)
+
+
+def _citation_without_read_warnings(
+    report: Mapping[str, Any],
+    context: BlindSolverContext,
+) -> tuple[str, ...]:
+    """RV_009: flag evidence_used citations for artifacts never read this round.
+
+    Purely auditable warning (RISCO-02, ISSUE-33.6): never blocks the run, never
+    changes any gate decision. Today the LLMBlindSolver reads every included
+    artifact to build its prompt, so this never fires on the current solver
+    (RV_011); it exists for future selective-read solvers.
+    """
+
+    accessed = set(context.accessed_artifacts)
+    offenders: list[str] = []
+    for item in report.get("evidence_used") or []:
+        if not isinstance(item, Mapping):
+            continue
+        artifact_id = item.get("artifact_id")
+        if isinstance(artifact_id, str) and artifact_id not in accessed and artifact_id not in offenders:
+            offenders.append(artifact_id)
+    if not offenders:
+        return ()
+    return (
+        "RV_009: citacao_sem_leitura: evidence_used cita artifact_id(s) fora de "
+        f"accessed_artifacts do round: {', '.join(offenders)}",
+    )

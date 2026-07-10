@@ -506,6 +506,198 @@ def test_ls_008_pipeline_regression_without_solver_param(output_root: Path) -> N
     assert "SOLVER-LS_008_TEST_RUN" in result.blind_solver_report["solver_id"]
 
 
+# ============================================================================ #
+# HD_001-HD_005: hardening against hostile provider responses (ISSUE-33.4)    #
+# ============================================================================ #
+
+
+def _context_for(bundle: Path, request: BlindSolverHarnessRequest) -> BlindSolverContext:
+    from generator.blind_bundle_decoder import decode_blind_bundle
+
+    bundle_meta = decode_blind_bundle(bundle)
+    return BlindSolverContext(
+        solver_run_id=request.run_id,
+        solver_id=request.solver_id,
+        bundle_id=bundle_meta.bundle_id,
+        manifest_id=bundle_meta.manifest_id,
+        bundle_root=bundle,
+    )
+
+
+def test_hd001_non_dict_json_triggers_repair_then_succeeds(source_tree: Path, output_root: Path) -> None:
+    """HD_001: valid JSON that isn't an object triggers repair, not AttributeError."""
+    bundle = make_bundle(source_tree, output_root)
+    request = harness_request(bundle)
+
+    non_dict_json = json.dumps([1, 2, 3])
+    valid_json = build_solver_response_json()
+    provider = FakeProvider([ScriptedResponse(text=non_dict_json), ScriptedResponse(text=valid_json)])
+    solver = LLMBlindSolver(provider=provider, max_repair_attempts=1)
+
+    context = _context_for(bundle, request)
+    report = solver.solve(context)
+
+    assert len(provider.calls) == 2
+    assert validate_report(report).valid
+
+
+def test_hd001_two_non_dict_responses_raise_contract_error(source_tree: Path, output_root: Path) -> None:
+    """HD_001: both attempts non-dict -> BlindSolverHarnessError, never AttributeError."""
+    bundle = make_bundle(source_tree, output_root)
+    request = harness_request(bundle)
+
+    non_dict_json = json.dumps([1, 2, 3])
+    provider = FakeProvider([ScriptedResponse(text=non_dict_json), ScriptedResponse(text=non_dict_json)])
+    solver = LLMBlindSolver(provider=provider, max_repair_attempts=1)
+
+    context = _context_for(bundle, request)
+
+    with pytest.raises(BlindSolverHarnessError):
+        solver.solve(context)
+
+
+def test_hd001_warnings_non_list_normalized_with_warning(source_tree: Path, output_root: Path) -> None:
+    """HD_001: warnings='nenhum' (not a list) -> report.warnings is a list with a normalization notice."""
+    bundle = make_bundle(source_tree, output_root)
+    request = harness_request(bundle)
+
+    response_json = build_solver_response_json(warnings="nenhum")
+    provider = FakeProvider([ScriptedResponse(text=response_json)])
+    solver = LLMBlindSolver(provider=provider)
+
+    context = _context_for(bundle, request)
+    report = solver.solve(context)
+
+    assert isinstance(report.warnings, (list, tuple))
+    assert any("normaliz" in w.lower() for w in report.warnings)
+
+
+def test_hd002_evidence_extra_field_filtered_with_warning(source_tree: Path, output_root: Path) -> None:
+    """HD_002: evidence_used item with extra field 'page' -> field filtered, warning logged."""
+    bundle = make_bundle(source_tree, output_root)
+    request = harness_request(bundle)
+
+    response_json = build_solver_response_json(
+        evidence_used=[
+            {
+                "artifact_id": "ART_PUBLIC_001",
+                "path": "player/depoimento.md",
+                "quote_or_summary": "Key evidence.",
+                "relevance": "Supports hypothesis.",
+                "confidence": "high",
+                "page": 2,
+            }
+        ]
+    )
+    provider = FakeProvider([ScriptedResponse(text=response_json)])
+    solver = LLMBlindSolver(provider=provider)
+
+    context = _context_for(bundle, request)
+    report = solver.solve(context)
+
+    assert not hasattr(report.evidence_used[0], "page")
+    assert any("page" in w for w in report.warnings)
+
+
+def test_hd002_evidence_non_dict_item_triggers_repair_then_contract_error(
+    source_tree: Path, output_root: Path
+) -> None:
+    """HD_002: evidence_used item is a bare string -> repair/contract error, not TypeError."""
+    bundle = make_bundle(source_tree, output_root)
+    request = harness_request(bundle)
+
+    bad_json = build_solver_response_json(evidence_used=["string solta"])
+    provider = FakeProvider([ScriptedResponse(text=bad_json), ScriptedResponse(text=bad_json)])
+    solver = LLMBlindSolver(provider=provider, max_repair_attempts=1)
+
+    context = _context_for(bundle, request)
+
+    with pytest.raises(BlindSolverHarnessError):
+        solver.solve(context)
+    assert len(provider.calls) == 2
+
+
+def test_hd003_max_repair_attempts_two_makes_three_calls_before_error(
+    source_tree: Path, output_root: Path
+) -> None:
+    """HD_003: max_repair_attempts=2 with 3 invalid responses -> exactly 3 calls, then contract error."""
+    bundle = make_bundle(source_tree, output_root)
+    request = harness_request(bundle)
+
+    invalid = "not valid json {{{"
+    provider = FakeProvider([ScriptedResponse(text=invalid) for _ in range(3)])
+    solver = LLMBlindSolver(provider=provider, max_repair_attempts=2)
+
+    context = _context_for(bundle, request)
+
+    with pytest.raises(BlindSolverHarnessError):
+        solver.solve(context)
+    assert len(provider.calls) == 3
+
+
+def test_hd003_max_repair_attempts_two_succeeds_on_third_response(
+    source_tree: Path, output_root: Path
+) -> None:
+    """HD_003: max_repair_attempts=2, valid response on 3rd attempt -> success with 3 calls."""
+    bundle = make_bundle(source_tree, output_root)
+    request = harness_request(bundle)
+
+    invalid = "not valid json {{{"
+    valid = build_solver_response_json()
+    provider = FakeProvider(
+        [ScriptedResponse(text=invalid), ScriptedResponse(text=invalid), ScriptedResponse(text=valid)]
+    )
+    solver = LLMBlindSolver(provider=provider, max_repair_attempts=2)
+
+    context = _context_for(bundle, request)
+    report = solver.solve(context)
+
+    assert len(provider.calls) == 3
+    assert validate_report(report).valid
+
+
+def test_hd004_literal_bundle_id_placeholder_in_artifact_stays_literal(
+    tmp_path: Path, output_root: Path
+) -> None:
+    """HD_004: artifact content containing the literal '{bundle_id}' stays literal in the prompt."""
+    source = tmp_path / "source_hd004"
+    write(
+        source / "public/envelope_1/nota.md",
+        "Nota contem o literal {bundle_id} dentro do texto.\n",
+    )
+    bundle = make_bundle(
+        source,
+        output_root,
+        artifact_specs=[
+            public_spec(
+                source_path="public/envelope_1/nota.md",
+                bundle_path="player/nota.md",
+            )
+        ],
+    )
+    request = harness_request(bundle)
+
+    response_json = build_solver_response_json(
+        evidence_used=[
+            {
+                "artifact_id": "ART_PUBLIC_001",
+                "path": "player/nota.md",
+                "quote_or_summary": "Nota com placeholder literal.",
+                "relevance": "Teste HD_004.",
+                "confidence": "high",
+            }
+        ]
+    )
+    provider = FakeProvider([ScriptedResponse(text=response_json)])
+    solver = LLMBlindSolver(provider=provider)
+
+    context = _context_for(bundle, request)
+    solver.solve(context)
+
+    prompt = provider.calls[0].prompt
+    assert "Nota contem o literal {bundle_id} dentro do texto." in prompt
+
+
 def test_ls_008_pipeline_with_injected_solver_uses_adapter(output_root: Path) -> None:
     """LS_008: With solver injected, the pipeline's report comes from the adapter, not the stub.
 

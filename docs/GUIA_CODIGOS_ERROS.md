@@ -78,6 +78,8 @@ Famílias nascidas nas ISSUE-17/31/32/33/33.1/33.2. Não fazem parte do `validat
 | RV_006 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | `reasoning_summary` só placeholder — warning, não bloqueia |
 | RV_007 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Evidência presente mas conclusão vazia — warning, não bloqueia |
 | RV_008 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Baixa confiança com evidência majoritariamente `high` — bloqueia |
+| RV_009 | `generator/blind_solver_harness.py` | `.ai/issues/ISSUE-33.6_SPEC.md` | `evidence_used` cita `artifact_id` fora de `context.accessed_artifacts` do round — warning `citacao_sem_leitura`, nunca bloqueia. Vive no harness (não no `blind_solver_report_validator.py`) porque só o harness tem acesso ao log de acessos do round |
+| RV_010 | `generator/blind_solve_run_record.py` | `.ai/issues/ISSUE-33.6_SPEC.md` | Trilha auditável do RV_009: o warning propaga para `harness_warnings` do run record (campo já existente, sem mudança de schema) |
 | PV_001 | `generator/llm_provider.py` | `.ai/issues/ISSUE-31_SPEC.md` | `ProviderRequest.prompt` vazio ou só whitespace |
 | PV_002 | `generator/llm_provider.py` | `.ai/issues/ISSUE-31_SPEC.md` | `max_tokens` não é maior que zero |
 | PV_003 | `generator/llm_provider.py` | `.ai/issues/ISSUE-31_SPEC.md` | `temperature` fora do intervalo `[0.0, 2.0]` |
@@ -98,6 +100,11 @@ Famílias nascidas nas ISSUE-17/31/32/33/33.1/33.2. Não fazem parte do `validat
 | SM_003 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | `solve_rate == 1.0` → `facil`; `>= 0.5` → `medio`; `> 0.0` → `dificil`; senão mais severo |
 | SM_004 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | Flags derivadas das classificações de run e completude |
 | SM_005 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | `difficulty_framework_ref` faz cross-link com `docs/DIFFICULTY_FRAMEWORK.md` |
+| HD_001 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | Resultado não-dict entra em reparo, esgotado vira `BlindSolverHarnessError`; `warnings` não-lista normalizado para lista com warning |
+| HD_002 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | Item de `evidence_used` não-dict → reparo/erro contratual; campos extras filtrados por `fields(BlindSolverEvidence)` com warning |
+| HD_003 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | Loop de reparo real até `max_repair_attempts` reenvios antes do erro contratual |
+| HD_004 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | Ids/metadados substituídos antes de inserir conteúdo de artefatos — literal tipo `{bundle_id}` em artefato não é substituído |
+| HD_005 | `generator/conclusion_judge.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | `JudgeVerdict` final revalidado contra `judge_verdict.schema.yaml`; `report_run_id` com fallback conforme (`minLength`) |
 
 ## Lacunas conhecidas
 

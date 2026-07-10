@@ -3,13 +3,19 @@
 ## Estado
 
 ```
-STATUS: blocked
-CURRENT_STEP: STEP-01
-NEXT_ACTION: aguardar merge da ISSUE-33.4 (mesmos módulos; evitar conflito)
-REVIEW_STATUS: n/a
-LAST_COMPLETED_STEP: none
-BLOCKER: ISSUE-33.4
+STATUS: done
+CURRENT_STEP: n/a (executado via skill spec-kit, não via STEP-01..07 abaixo)
+NEXT_ACTION: none
+REVIEW_STATUS: n/a (validação mecânica: pytest + ruff em cada etapa, sem revisor humano/agente separado)
+LAST_COMPLETED_STEP: n/a
+BLOCKER: none (ISSUE-33.4 concluída)
 ```
+
+Execução real: usuário pediu explicitamente skill `spec-kit` em vez do fluxo `tdd`
+descrito nos STEP-01..07 abaixo. Spec compacta T2 gerada e executada em
+`.ai/runs/ISSUE-33.5/SPEC_KIT_T2.md` (5 etapas via `spec-executor`). Contrato
+RM_001–RM_004 implementado; STEP-01..07 abaixo ficam como histórico do plano
+original (não seguido literalmente).
 
 ## Contexto
 

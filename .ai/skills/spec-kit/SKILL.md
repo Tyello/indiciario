@@ -15,19 +15,38 @@ Regras de ouro:
 
 ## Roteamento automático de modelo
 
-Esta skill vem com dois subagentes prontos (instale-os em `.claude/agents/` do projeto — ver seção "Instalação"):
+Esta skill vem com quatro subagentes prontos (instale-os em `.claude/agents/` do projeto — ver seção "Instalação"):
 
 - **`spec-executor`** (`model: haiku`) — executa etapas da spec. Recebe APENAS: a etapa atual, os arquivos que ela toca e o critério de validação. Nunca recebe o histórico da conversa.
-- **`spec-resolver`** (`model: sonnet`) — acionado SOMENTE quando o executor devolve um relatório de escalação. Resolve a decisão/bloqueio, atualiza a spec e devolve a etapa corrigida ao executor.
+- **`spec-reviewer`** (`model: haiku`) — revisão mecânica pós-execução: `git diff` ⊆ arquivos autorizados, nada de brinde, evidência de validação obrigatória. Não julga design.
+- **`spec-reviewer-senior`** (`model: sonnet`) — revisão de etapas marcadas `[sensível]`: checklist mecânico + análise de consequências (compatibilidade, dados, segurança, concorrência, irreversibilidade).
+- **`spec-resolver`** (`model: sonnet`) — acionado quando o executor escala OU quando um revisor reprova com `Causa provável: spec`. Resolve, atualiza a spec, devolve a etapa.
 
-O ciclo automático é:
+O ciclo automático por etapa é:
 
 ```
-planejar (sonnet) → executar etapa (haiku) → validou? → próxima etapa (haiku)
-                                          ↘ escalou? → resolver (sonnet) → volta ao haiku
+planejar (sonnet)
+  → executar etapa (haiku)
+      → escalou? → resolver (sonnet) → volta ao haiku
+      → validou? → revisão conforme risco:
+            etapa auto-aprovada (T1/leitura/doc) → próxima etapa
+            etapa comum de código (T2/T3)       → spec-reviewer (haiku)
+            etapa [sensível]                    → spec-reviewer-senior (sonnet)
+                → APROVADO → próxima etapa
+                → REPROVADO minor/major → correção (haiku, máx. 2 ciclos)
+                → REPROVADO critical, ou 3ª reprovação → humano
+                → Causa provável: spec → resolver (sonnet)
 ```
 
-**Regra dura:** o orquestrador NUNCA envia uma etapa direto ao Sonnet "por precaução". Se a etapa parece exigir julgamento, isso é sinal de que a spec está incompleta — volte ao planejamento e elimine o julgamento, depois mande ao Haiku. A única exceção: uma etapa que já escalou 2 vezes vai direto ao Sonnet para execução completa (limite de ping-pong).
+### Classificação de risco para revisão (decide quem revisa)
+
+- **Auto-aprovada (sem revisor):** toda etapa T1; etapas T2/T3 que só leem, documentam ou registram baseline. O critério `VALIDA COM` passando é o gate. Registre `auto-aprovada (low-risk)` no fluxo.
+- **Revisão mecânica (`spec-reviewer`, Haiku):** etapas T2/T3 que alteram código ou testes, não marcadas `[sensível]`.
+- **Revisão sênior (`spec-reviewer-senior`, Sonnet):** etapas marcadas `[sensível]` na spec. Marque `[sensível]` quando a etapa tocar: schema/contrato público, migração ou remoção de dados, segurança/auth, concorrência, ou qualquer coisa difícil de reverter depois de integrada.
+
+Se você se pegar marcando a maioria das etapas como `[sensível]`, ou a tarefa é realmente crítica (ok, pague a revisão Sonnet) ou você está usando `[sensível]` como muleta para spec rasa — nesse caso, aprofunde a spec.
+
+**Regra dura:** o orquestrador NUNCA envia uma etapa direto ao Sonnet para execução "por precaução". Se a etapa parece exigir julgamento, isso é sinal de que a spec está incompleta — volte ao planejamento e elimine o julgamento, depois mande ao Haiku. A única exceção: uma etapa que já escalou 2 vezes vai direto ao Sonnet para execução completa (limite de ping-pong). O mesmo limite vale para reprovações: na 3ª reprovação da mesma etapa, pare e envolva o usuário — ciclo de correção infinito queima mais token que fazer no modelo grande.
 
 ### Protocolo de escalação (o que faz o Haiku parar)
 
@@ -104,12 +123,16 @@ Copie os subagentes para o projeto:
 ```bash
 mkdir -p .claude/agents
 cp <skill>/agents/spec-executor.md .claude/agents/
+cp <skill>/agents/spec-reviewer.md .claude/agents/
+cp <skill>/agents/spec-reviewer-senior.md .claude/agents/
 cp <skill>/agents/spec-resolver.md .claude/agents/
 ```
-Fora do Claude Code (sem subagentes), simule o roteamento: escreva a spec com todo o rigor, execute as etapas mecanicamente como se fosse o executor, e trate escalações explicitamente no fluxo.
+Fora do Claude Code (sem subagentes), simule o roteamento: escreva a spec com todo o rigor, execute as etapas mecanicamente como se fosse o executor, revise o diff contra o checklist do revisor, e trate escalações explicitamente no fluxo.
 
 ## Referências
 
 - `references/spec-templates.md` — templates T1/T2/T3 + variante bugfix + checklist de qualidade. Leia ao gerar qualquer spec T2/T3.
-- `agents/spec-executor.md` — definição do subagente executor (Haiku) e formato do relatório de escalação.
-- `agents/spec-resolver.md` — definição do subagente resolvedor (Sonnet).
+- `agents/spec-executor.md` — executor (Haiku) e formato do relatório de escalação.
+- `agents/spec-reviewer.md` — revisor mecânico (Haiku): escopo via git diff, evidência de validação, DVGs com severidade.
+- `agents/spec-reviewer-senior.md` — revisor sênior (Sonnet) para etapas `[sensível]`: consequências, compatibilidade, reversibilidade.
+- `agents/spec-resolver.md` — resolvedor (Sonnet) de escalações e defeitos de spec.

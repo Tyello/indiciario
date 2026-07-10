@@ -67,6 +67,22 @@ permitido.
 - Cada `evidence_used` tem de referenciar um `artifact_id`/`path` realmente
   presente em `included_artifacts`.
 
+### Auditabilidade de citação (RV_009/RV_010, ISSUE-33.6)
+
+O harness também cruza `evidence_used[].artifact_id` contra
+`context.accessed_artifacts` — o log de leituras reais do round. Um
+`artifact_id` citado como evidência mas nunca lido gera um **warning**
+estruturado (`RV_009: citacao_sem_leitura: ...`) em `BlindSolverHarnessResult.warnings`,
+listando só os ids ofensores. Não bloqueia o run nem muda `bundle_report.valid`
+— hoje é puramente auditável, porque o `LLMBlindSolver` lê todos os artefatos
+incluídos para montar o prompt (RV_011: zero falso positivo no fluxo atual,
+coberto por teste de regressão). Fica pronto para o dia em que existir um
+solver de leitura seletiva.
+
+O warning propaga automaticamente para `harness_warnings` no run record
+(RV_010, `generator/blind_solve_run_record.py`) porque esse campo já espelha
+`harness_result.warnings` — nenhuma mudança de schema foi necessária.
+
 ## Limites
 
 - `max_artifacts` (default `100`): bundles maiores são bloqueados antes do solver.
@@ -426,6 +442,17 @@ isolamento: o solver **nunca** executa em sessão com acesso ao repositório
 | **LS_004** | Campos extras no JSON de resposta descartados antes da validação; descarte registrado em `warnings`. |
 | **LS_005** | Hash sha256 do template registrado em `warnings` (formato `prompt_template_sha256:<hash>`) para rastreabilidade de versão de prompt. |
 
+### Contrato HD_001–HD_004 — hardening de respostas hostis (ISSUE-33.4)
+
+Fecha BUG-03/04/05/07 da auditoria (`docs/AUDITORIA_FABLE_2026-07.md`).
+
+| Código | Regra |
+|---|---|
+| **HD_001** | Pós-parse: `isinstance(result, dict)` obrigatório; não-dict entra no loop de reparo e, esgotado, `BlindSolverHarnessError` (nunca `AttributeError` cru). `warnings` não-lista é normalizado para lista de str, com warning de normalização registrado. |
+| **HD_002** | Cada item de `evidence_used`: não-dict → reparo/erro contratual (nunca `TypeError` cru); dict com campos extras → filtrado por `fields(BlindSolverEvidence)` com warning, mesmo tratamento de LS_004. |
+| **HD_003** | Loop real de reparo em `_call_provider_with_repair`: até `max_repair_attempts` reenvios com erro anexado ao prompt, seguindo o padrão já usado no Conclusion Judge; `max_repair_attempts=N` gera até N+1 chamadas ao provider antes do erro contratual. |
+| **HD_004** | Builder de prompt substitui ids/metadados em `template_content` antes de inserir `{included_artifacts}`; conteúdo de artefato contendo literais como `{bundle_id}` permanece literal (fecha injeção via bundle). |
+
 ### Regra de isolamento
 
 O solver de produção é injetado como `LLMProvider` (ISSUE-31). Decisão de produto:
@@ -476,6 +503,7 @@ blind solver usando um LLM provider, com loop de reparo JSON e validação de sc
 | **CJ_003** | Todas as conclusões esperadas DEVEM aparecer no verdict do modelo (ordem preservada, ids correspondidos exatamente). |
 | **CJ_004** | Classificação derivada em Python puro (precedência: ambiguo > vazamento > nao_resolvido > resolvido). |
 | **CJ_005** | Se `met=true` mas `evidence_cited` vazio → rebaixar para `met=false` + warning. |
+| **HD_005** | Fecha RISCO-04 (ISSUE-33.4). `JudgeVerdict` final é serializado (`asdict`) e revalidado contra `judge_verdict.schema.yaml` antes do retorno — nunca retorna silenciosamente um veredito fora de schema. `report_run_id` usa fallback conforme (`_resolve_report_run_id`: `solver_run_id` ou `run_id` do report; `"UNKNOWN_RUN"` se nenhum existir), sempre respeitando `minLength`. |
 
 ### Integração com Gate Evaluator
 
@@ -488,6 +516,25 @@ O `JudgeVerdict` alimenta o campo `met` de cada `ExpectedConclusion` em
 
 Estrutura validada contra `schemas/judge_verdict.schema.yaml` (JSON Schema Draft 2012).
 Datalclasses imutáveis (`frozen=True`): `ExpectedConclusionInput`, `Conclusion`, `JudgeVerdict`.
+
+### Wiring no pipeline_runner (ISSUE-33.3)
+
+`generator/pipeline_runner.py` (`run_pipeline`/`_run_gate`) ganha `judge_provider:
+LLMProvider | None = None`. Fecha RISCO-01/DIV-12/BUG-08 (`docs/AUDITORIA_FABLE_2026-07.md`):
+antes, o gate fabricava `decision="approved"` incondicionalmente mesmo com solver real
+injetado — `judge_conclusions` existia mas não tinha chamador no runner.
+
+| Código | Regra |
+|---|---|
+| **PJ_001** | Com `judge_provider` fornecido, `_run_gate` chama `judge_conclusions(report, expected, judge_provider)` de fato e mapeia o veredito para `met` real de cada `ExpectedConclusion`. |
+| **PJ_002** | `decision` é derivada em Python puro do veredito + regras GE existentes (todos required `met` e sem ambiguidade/vazamento → `approved`; caso contrário → `rejected` com `gaps` preenchidos). Nunca confiada ao modelo. |
+| **PJ_003** | `judge_provider=None` preserva o comportamento stub byte a byte (zero regressão). O manifest registra `gate_mode: "stub" \| "judged"`. |
+| **PJ_004** | Typo `EC-GUia-` corrigido para `EC-GUIA-` em `_derive_expected_conclusions`. |
+| **PJ_005** | O `judge_verdict` serializado é anexado como artefato (`judge_verdict`) ao workspace do run, ao lado do run record. |
+
+Erro do provider (`ProviderResponseError`/`ConclusionJudgeError`) nunca vira aprovação
+silenciosa: propaga como falha rastreável do stage de gate (nunca `decision="approved"`
+por omissão). Testes: `tests/test_pipeline_runner.py`. Spec: `.ai/issues/ISSUE-33.3_SPEC.md`.
 
 ## Solvability Meter (ISSUE-33.2)
 
@@ -510,6 +557,31 @@ aprovação; o report é insumo, a decisão continua no Gate Evaluator/humano.
 
 Schema: `schemas/solvability_report.schema.yaml` (`additionalProperties: false`). Testes:
 `tests/test_solvability_meter.py`. Spec: `.ai/issues/ISSUE-33.2_SPEC.md`.
+
+### Reprodutibilidade e temperatura real (ISSUE-33.5)
+
+`temperature` deixou de ser um parâmetro morto: `measure_solvability` repassa-o de fato
+a cada `ProviderRequest` do **solver** (via campo `temperature` em `LLMBlindSolver`,
+default `0.0` para preservar chamadores existentes). O **juiz permanece fixo em
+`temperature=0.0`** — decisão deliberada, não bug: julgamento deve ser determinístico
+mesmo quando o solver varia por temperatura/seed.
+
+`SolvabilityReport` ganhou o bloco `reproducibility` (dict, obrigatório no schema):
+
+| Campo | Origem |
+|---|---|
+| `temperature` | valor recebido em `measure_solvability(..., temperature=X)` |
+| `provider_id` | `provider.provider_id` |
+| `solver_prompt_sha256` | sha256 de `generator/prompts/blind_solver_v1.md` (mesmo template usado pelo solver) |
+| `judge_prompt_sha256` | `verdict.prompt_hash` do primeiro run bem-sucedido |
+| `runs_requested` | mesmo valor do campo top-level `runs_requested` |
+
+`solvability_meter.estimate_difficulty` foi renomeado para
+`estimate_difficulty_from_solve_rate` para desfazer a colisão de nome com
+`playtest_metrics.estimate_difficulty` (semânticas diferentes: um deriva de
+`solve_rate` do meter, o outro de profundidade do grafo de pistas). Sem alias de
+compatibilidade — único consumidor era o próprio módulo. Contrato RM_001–RM_004 e
+testes em `tests/test_solvability_meter.py`. Spec: `.ai/issues/ISSUE-33.5_SPEC.md`.
 
 Honestidade: mede dificuldade **para um solver LLM**, proxy — playtest humano continua
 sendo o veredito real de dificuldade e solvabilidade.

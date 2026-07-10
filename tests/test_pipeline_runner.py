@@ -1,16 +1,22 @@
-"""Tests for generator.pipeline_runner (ISSUE-28)."""
+"""Tests for generator.pipeline_runner (ISSUE-28, ISSUE-33.3)."""
 
 from __future__ import annotations
 
 import copy
 import json
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
+from jsonschema import Draft202012Validator, FormatChecker
 
 from generator.blind_solver_harness import validate_blind_solver_report
+from generator.conclusion_judge import ExpectedConclusionInput, judge_conclusions
+from generator.fake_provider import FakeProvider, ScriptedResponse
 from generator.gate_evaluator import validate_gate_evaluation
+from generator.llm_provider import ProviderResponseError
 from generator.narrative_reviewer import validate_review_report
 from generator.pipeline_runner import (
     DefectMatch,
@@ -25,6 +31,37 @@ from generator.run_manifest import (
 )
 from generator.workspace import VALID_STAGES, validate_workspace_run
 from tests.test_narrative_reviewer import _blueprint as minimal_blueprint
+
+_JUDGE_VERDICT_SCHEMA_PATH = (
+    Path(__file__).resolve().parents[1] / "schemas" / "judge_verdict.schema.yaml"
+)
+_PIPELINE_RUNNER_SOURCE = (
+    Path(__file__).resolve().parents[1] / "generator" / "pipeline_runner.py"
+)
+
+
+def _validate_judge_verdict_schema(verdict: dict[str, Any]) -> list[str]:
+    schema = yaml.safe_load(_JUDGE_VERDICT_SCHEMA_PATH.read_text(encoding="utf-8"))
+    validator = Draft202012Validator(schema, format_checker=FormatChecker())
+    return sorted(error.message for error in validator.iter_errors(verdict))
+
+
+def _judge_response_text(
+    conclusions: list[dict[str, Any]],
+    *,
+    alternative_solution_detected: bool = False,
+    alternative_solution_summary: str | None = None,
+) -> str:
+    return json.dumps(
+        {
+            "verdict_id": "VERDICT-001",
+            "report_run_id": RUN_ID,
+            "prompt_hash": "abcdef0123",
+            "conclusions": conclusions,
+            "alternative_solution_detected": alternative_solution_detected,
+            "alternative_solution_summary": alternative_solution_summary,
+        }
+    )
 
 
 FIXED_CREATED_AT = "2026-06-22T12:00:00Z"
@@ -349,3 +386,201 @@ def test_run_pipeline_is_deterministic_with_same_created_at(
     )
     assert result_a.manifest == result_b.manifest
     assert result_a.comparison == result_b.comparison
+
+
+# === Cases 23-29: ISSUE-33.3 judge-backed gate (PJ_001-PJ_005) =============
+
+
+def test_run_pipeline_without_judge_provider_preserves_stub_gate(
+    minimal_blueprint_path: Path, output_root: Path
+) -> None:
+    """PJ_003: judge_provider=None keeps the pre-33.3 fabricated stub gate."""
+    result = run_pipeline(
+        minimal_blueprint_path,
+        RUN_ID,
+        output_root=output_root,
+        created_at=FIXED_CREATED_AT,
+    )
+    assert result.manifest["gate_mode"] == "stub"
+    assert result.gate_evaluation["decision"] == "approved"
+    assert result.gate_evaluation["justification"] == (
+        "ISSUE-28 plumbing run: run record schema-valid; explicit approved "
+        "decision to exercise reviewers and manifest consolidation."
+    )
+    gate_decision = next(
+        decision
+        for decision in result.workspace_run["decisions"]
+        if decision["stage"] == "gate_evaluation"
+    )
+    assert gate_decision["outcome"] == "approved"
+    assert gate_decision["justification"] == (
+        "ISSUE-28 plumbing run: explicit approved gate decision."
+    )
+    assert all(
+        artifact["artifact_type"] != "judge_verdict"
+        for artifact in result.workspace_run["artifacts"]
+    )
+
+
+def test_run_pipeline_judged_happy_path_approves_from_verdict(
+    minimal_blueprint_path: Path, output_root: Path
+) -> None:
+    """PJ_001/PJ_002: judge confirms all required conclusions -> approved."""
+    provider = FakeProvider(
+        [
+            ScriptedResponse(
+                text=_judge_response_text(
+                    [
+                        {
+                            "id": "EC-E1",
+                            "met": True,
+                            "evidence_cited": ["EV-1"],
+                            "rationale": "Conclusion supported by evidence.",
+                        }
+                    ]
+                )
+            )
+        ]
+    )
+    result = run_pipeline(
+        minimal_blueprint_path,
+        RUN_ID,
+        output_root=output_root,
+        created_at=FIXED_CREATED_AT,
+        judge_provider=provider,
+    )
+    assert result.manifest["gate_mode"] == "judged"
+    assert result.gate_evaluation["decision"] == "approved"
+    assert all(
+        conclusion["met"] is True
+        for conclusion in result.gate_evaluation["expected_conclusions"]
+    )
+    assert validate_gate_evaluation(result.gate_evaluation) == []
+
+
+def test_run_pipeline_judged_rejects_on_unmet_required_conclusion(
+    minimal_blueprint_path: Path, output_root: Path
+) -> None:
+    """PJ_002: judge denies a required conclusion -> rejected with a gap."""
+    provider = FakeProvider(
+        [
+            ScriptedResponse(
+                text=_judge_response_text(
+                    [
+                        {
+                            "id": "EC-E1",
+                            "met": False,
+                            "evidence_cited": [],
+                            "rationale": "Report never addresses this conclusion.",
+                        }
+                    ]
+                )
+            )
+        ]
+    )
+    result = run_pipeline(
+        minimal_blueprint_path,
+        RUN_ID,
+        output_root=output_root,
+        created_at=FIXED_CREATED_AT,
+        judge_provider=provider,
+    )
+    assert result.gate_evaluation["decision"] == "rejected"
+    gap_ids = {gap["id"] for gap in result.gate_evaluation["gaps"]}
+    assert "GAP-EC-E1" in gap_ids
+    assert validate_gate_evaluation(result.gate_evaluation) == []
+
+
+def test_run_pipeline_judged_rejects_on_ambiguous_classification(
+    minimal_blueprint_path: Path, output_root: Path
+) -> None:
+    """PJ_002: verdict classification 'ambiguo' -> rejected with GAP-AMBIGUOUS."""
+    provider = FakeProvider(
+        [
+            ScriptedResponse(
+                text=_judge_response_text(
+                    [
+                        {
+                            "id": "EC-E1",
+                            "met": True,
+                            "evidence_cited": ["EV-1"],
+                            "rationale": "Conclusion supported by evidence.",
+                        }
+                    ],
+                    alternative_solution_detected=True,
+                    alternative_solution_summary="Plausible alternative culprit found.",
+                )
+            )
+        ]
+    )
+    result = run_pipeline(
+        minimal_blueprint_path,
+        RUN_ID,
+        output_root=output_root,
+        created_at=FIXED_CREATED_AT,
+        judge_provider=provider,
+    )
+    assert result.gate_evaluation["decision"] == "rejected"
+    gap_ids = {gap["id"] for gap in result.gate_evaluation["gaps"]}
+    assert "GAP-AMBIGUOUS" in gap_ids
+    assert validate_gate_evaluation(result.gate_evaluation) == []
+
+
+def test_run_pipeline_judged_verdict_artifact_present_and_schema_valid(
+    minimal_blueprint_path: Path, output_root: Path
+) -> None:
+    """PJ_005: judge_verdict is ingested into the run workspace and schema-valid."""
+    conclusions = [
+        {
+            "id": "EC-E1",
+            "met": True,
+            "evidence_cited": ["EV-1"],
+            "rationale": "Conclusion supported by evidence.",
+        }
+    ]
+    provider = FakeProvider([ScriptedResponse(text=_judge_response_text(conclusions))])
+    result = run_pipeline(
+        minimal_blueprint_path,
+        RUN_ID,
+        output_root=output_root,
+        created_at=FIXED_CREATED_AT,
+        judge_provider=provider,
+    )
+    jv_artifacts = [
+        artifact
+        for artifact in result.workspace_run["artifacts"]
+        if artifact["artifact_type"] == "judge_verdict"
+    ]
+    assert len(jv_artifacts) == 1
+    assert jv_artifacts[0]["artifact_id"] == f"JV-{RUN_ID}"
+    assert jv_artifacts[0]["stage"] == "gate_evaluation"
+    assert validate_workspace_run(result.workspace_run) == []
+
+    verdict = judge_conclusions(
+        result.blind_solver_report,
+        [ExpectedConclusionInput(id="EC-E1", statement="stmt", required=True)],
+        FakeProvider([ScriptedResponse(text=_judge_response_text(conclusions))]),
+    )
+    assert _validate_judge_verdict_schema(asdict(verdict)) == []
+
+
+def test_no_legacy_ec_guia_typo_in_pipeline_runner_source() -> None:
+    """PJ_004: the EC-GUia- typo was fixed and never reappears."""
+    source = _PIPELINE_RUNNER_SOURCE.read_text(encoding="utf-8")
+    assert "EC-GUia" not in source
+    assert 'f"EC-GUIA-{index}"' in source
+
+
+def test_run_pipeline_judge_error_never_approves_silently(
+    minimal_blueprint_path: Path, output_root: Path
+) -> None:
+    """Case 7: a judge provider failure must fail loudly, never fabricate approval."""
+    provider = FakeProvider([ProviderResponseError("provider unavailable")])
+    with pytest.raises(RuntimeError, match="gate judge failed"):
+        run_pipeline(
+            minimal_blueprint_path,
+            RUN_ID,
+            output_root=output_root,
+            created_at=FIXED_CREATED_AT,
+            judge_provider=provider,
+        )

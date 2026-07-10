@@ -53,6 +53,7 @@ VALID_ARTIFACT_TYPES: tuple[str, ...] = (
     "blind_solver_report",
     "run_record",
     "gate_evaluation",
+    "judge_verdict",
     "narrative_review",
     "evidence_review",
 )

@@ -4,9 +4,10 @@ This module implements ISSUE-33.2. It orchestrates N solver->judge rounds
 (LLMBlindSolver + Conclusion Judge) over the same bundle and aggregates the
 verdicts into a solve-rate based difficulty estimate.
 
-Out of scope (SM contract): it does not alter solver, judge, harness or gate
-behavior, and it does not decide approval — the report is an input, the
-decision stays with the gate/human.
+Out of scope (SM contract): it does not alter harness or gate behavior,
+and it does not decide approval — the report is an input, the decision stays
+with the gate/human. The temperature parameter is passed to the solver; the
+judge uses fixed temperature 0.0.
 
 Honesty note: this measures difficulty *for an LLM solver*, a proxy. Human
 playtest remains the real difficulty verdict. SM_003 thresholds are initial
@@ -25,6 +26,7 @@ Contracts:
 
 from __future__ import annotations
 
+import hashlib
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -76,10 +78,11 @@ class SolvabilityReport:
     classification_counts: dict[str, int]
     difficulty_estimate: str
     flags: list[str]
+    reproducibility: dict[str, object]
     difficulty_framework_ref: str = DIFFICULTY_FRAMEWORK_REF
 
 
-def estimate_difficulty(solve_rate: float) -> str:
+def estimate_difficulty_from_solve_rate(solve_rate: float) -> str:
     """Derive a difficulty estimate from a solve_rate (SM_003, pure Python)."""
     if solve_rate == 1.0:
         return "facil"
@@ -105,10 +108,9 @@ def measure_solvability(
         expected: Expected conclusions to judge each run's report against.
         provider: LLMProvider shared by every solver and judge call.
         runs: Number of rounds to attempt (must be >= 1).
-        temperature: Recorded for reproducibility (must be in [0.0, 2.0]);
-            not threaded into the solver/judge provider calls, since both
-            hardcode their own request temperature and altering that is out
-            of scope for this issue.
+        temperature: Passed to the solver's provider requests (must be in [0.0, 2.0]).
+            The judge uses a fixed temperature of 0.0 as per its design;
+            this parameter controls solver behavior only.
         key_evidence_ids: Optional artifact ids forwarded to the judge's
             leak check on each run.
 
@@ -130,6 +132,11 @@ def measure_solvability(
     meter_id = f"METER_{int(time.time() * 1000)}"
     required_total = sum(1 for e in expected if e.required)
 
+    solver_prompt_sha256 = hashlib.sha256(
+        (Path(__file__).parent / "prompts" / "blind_solver_v1.md").read_bytes()
+    ).hexdigest()
+    judge_prompt_sha256 = None
+
     run_results: list[RunResult] = []
 
     for i in range(runs):
@@ -143,7 +150,7 @@ def measure_solvability(
                 run_id=run_id,
                 created_by="SOLVABILITY_METER",
             )
-            solver = LLMBlindSolver(provider=provider)
+            solver = LLMBlindSolver(provider=provider, temperature=temperature)
             harness_result = run_blind_solver_harness(harness_request, solver)
 
             verdict = judge_conclusions(
@@ -154,6 +161,9 @@ def measure_solvability(
             )
         except (ProviderError, BlindSolverHarnessError, ConclusionJudgeError):
             continue
+
+        if judge_prompt_sha256 is None:
+            judge_prompt_sha256 = verdict.prompt_hash
 
         required_met_count = sum(
             1
@@ -197,6 +207,13 @@ def measure_solvability(
         run_results=run_results,
         solve_rate=solve_rate,
         classification_counts=classification_counts,
-        difficulty_estimate=estimate_difficulty(solve_rate),
+        difficulty_estimate=estimate_difficulty_from_solve_rate(solve_rate),
         flags=flags,
+        reproducibility={
+            "temperature": temperature,
+            "provider_id": provider.provider_id,
+            "solver_prompt_sha256": solver_prompt_sha256,
+            "judge_prompt_sha256": judge_prompt_sha256,
+            "runs_requested": runs,
+        },
     )

@@ -545,6 +545,23 @@ N rounds `LLMBlindSolver` + `judge_conclusions` sobre o mesmo bundle, agrega em
 harness ou gate; não decide aprovação. Schema: `schemas/solvability_report.schema.yaml`.
 Testes: `tests/test_solvability_meter.py`. Spec: `.ai/issues/ISSUE-33.2_SPEC.md`.
 
+### ISSUE-33.3 — Ligar o Conclusion Judge ao pipeline_runner ✅ concluída
+
+Fecha RISCO-01, DIV-12 e BUG-08 da auditoria (`docs/AUDITORIA_FABLE_2026-07.md`): antes
+desta issue, `pipeline_runner._run_gate` fabricava `decision="approved"` incondicionalmente,
+mesmo com um `LLMBlindSolver` real injetado — o `judge_conclusions` (ISSUE-33.1) existia mas
+não tinha chamador.
+
+Entregável: com `judge_provider: LLMProvider | None = None` injetado em `run_pipeline`/
+`_run_gate`, o gate chama `judge_conclusions` de fato e deriva `met` real por conclusão;
+`decision`/`gaps` são derivados em Python puro do veredito + regras GE existentes (nunca
+confiados ao modelo). Sem `judge_provider`, o comportamento stub é preservado byte a byte.
+Manifest ganha `gate_mode: "stub" | "judged"`. Artefato `judge_verdict` passa a ser anexado
+ao workspace do run. Falha do provider nunca vira aprovação silenciosa — propaga como falha
+rastreável do stage. Typo `EC-GUia-` corrigido para `EC-GUIA-`. Schemas atualizados:
+`schemas/run_manifest.schema.yaml`, `schemas/workspace_run.schema.yaml`. Testes:
+`tests/test_pipeline_runner.py`. Spec: `.ai/issues/ISSUE-33.3_SPEC.md`.
+
 ### ISSUE-34 — LLM Reviewers Adapter
 
 Conectar narrative/evidence/visual reviewers a modelo real.

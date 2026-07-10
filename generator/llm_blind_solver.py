@@ -49,6 +49,17 @@ from generator.blind_solver_report_validator import validate_report
 from generator.llm_provider import LLMProvider, ProviderRequest
 
 
+def _validate_evidence_used_shape(parsed: Mapping[str, Any]) -> str | None:
+    """Return an error message if evidence_used isn't a list of objects (HD_002)."""
+    evidence_used = parsed.get("evidence_used", [])
+    if not isinstance(evidence_used, list):
+        return f"evidence_used must be a list, got {type(evidence_used).__name__}"
+    for item in evidence_used:
+        if not isinstance(item, dict):
+            return f"evidence_used item must be an object, got {type(item).__name__}: {item!r}"
+    return None
+
+
 @dataclass
 class LLMBlindSolver:
     """LLM-based blind solver that builds prompts, calls provider, and validates responses."""
@@ -56,6 +67,7 @@ class LLMBlindSolver:
     provider: LLMProvider
     prompt_version: str = "v1"
     max_repair_attempts: int = 1
+    temperature: float = 0.0
     _template_path: Path = field(default_factory=lambda: Path(__file__).parent / "prompts" / "blind_solver_v1.md", init=False, repr=False)
 
     def solve(self, context: BlindSolverContext) -> BlindSolverReport:
@@ -83,33 +95,30 @@ class LLMBlindSolver:
         artifact_ids = [desc.artifact_id for desc in artifacts_list]
         artifacts_section = self._build_artifacts_section(artifacts_list, context)
 
-        # Build prompt by substituting placeholders
-        prompt = template_content.replace(
-            "{included_artifacts}",
-            artifacts_section,
-        )
-        prompt = prompt.replace("{solver_run_id}", context.solver_run_id)
+        # Build prompt: substitute id/metadata placeholders FIRST, insert artifact
+        # content LAST (HD_004). Otherwise a literal "{bundle_id}"-style token
+        # inside an artifact's own text would get overwritten by a later
+        # .replace() pass, letting bundle content inject real ids into the prompt.
+        prompt = template_content.replace("{solver_run_id}", context.solver_run_id)
         prompt = prompt.replace("{solver_id}", context.solver_id)
         prompt = prompt.replace("{bundle_id}", context.bundle_id)
         prompt = prompt.replace("{manifest_id}", context.manifest_id)
+        prompt = prompt.replace("{included_artifacts}", artifacts_section)
 
-        # Call provider (attempt 1)
-        request = ProviderRequest(
-            prompt=prompt,
-            system=None,
-            max_tokens=4096,
-            temperature=0.0,
-            request_id=context.solver_run_id,
-        )
-
-        response = self.provider.complete(request)
-        response_text = response.text.strip()
-
-        # Parse JSON (with repair on first failure)
-        result_dict = self._parse_json_with_repair(response_text, prompt, context)
+        # Call provider, parsing/repairing JSON as needed (HD_001, HD_002, HD_003)
+        result_dict = dict(self._call_provider_with_repair(prompt, context))
 
         # Discard extra fields and collect warnings
-        warnings_list: list[str] = result_dict.pop("warnings", [])
+        raw_warnings = result_dict.pop("warnings", [])
+        if isinstance(raw_warnings, list):
+            warnings_list: list[str] = [str(item) for item in raw_warnings]
+        else:
+            # HD_001: warnings must be a list; normalize non-list values instead
+            # of letting list-only operations (e.g. .extend) crash downstream.
+            warnings_list = [
+                str(raw_warnings),
+                f"HD_001: warnings field was not a list (got {type(raw_warnings).__name__}); normalized to a list",
+            ]
         extra_field_warnings = self._discard_extra_fields(result_dict)
         warnings_list.extend(extra_field_warnings)
 
@@ -124,9 +133,26 @@ class LLMBlindSolver:
         result_dict["warnings"] = warnings_list
         result_dict["open_questions"] = list(result_dict.get("open_questions", []))
         result_dict["assumptions"] = list(result_dict.get("assumptions", []))
-        result_dict["evidence_used"] = [
-            BlindSolverEvidence(**evidence) for evidence in result_dict.get("evidence_used", [])
-        ]
+
+        # HD_002: filter unknown fields per evidence item (with warning) instead
+        # of letting BlindSolverEvidence(**evidence) raise a raw TypeError.
+        evidence_field_names = {f.name for f in fields(BlindSolverEvidence)}
+        evidence_objects: list[BlindSolverEvidence] = []
+        for evidence in result_dict.get("evidence_used", []):
+            extra_evidence_fields = set(evidence.keys()) - evidence_field_names
+            if extra_evidence_fields:
+                evidence = {k: v for k, v in evidence.items() if k in evidence_field_names}
+                warnings_list.append(
+                    "Discarded extra field(s) from evidence_used item: "
+                    f"{', '.join(sorted(extra_evidence_fields))}"
+                )
+            try:
+                evidence_objects.append(BlindSolverEvidence(**evidence))
+            except TypeError as exc:
+                raise BlindSolverHarnessError(
+                    f"evidence_used item is missing required fields: {exc}"
+                ) from exc
+        result_dict["evidence_used"] = evidence_objects
         report = BlindSolverReport(**result_dict)
 
         # Override IDs from context (LS_003)
@@ -172,54 +198,65 @@ class LLMBlindSolver:
 
         return "\n".join(lines)
 
-    def _parse_json_with_repair(self, response_text: str, original_prompt: str, context: BlindSolverContext) -> Mapping[str, Any]:
-        """Parse JSON response, repairing if needed (1 retry with error attached).
+    def _call_provider_with_repair(self, prompt: str, context: BlindSolverContext) -> Mapping[str, Any]:
+        """Call the provider, repairing malformed responses up to max_repair_attempts (HD_003).
 
-        Returns:
-            Dict with parsed JSON content.
+        A response is accepted only if it parses as JSON, is a JSON object
+        (HD_001), and its ``evidence_used`` (when present) is a list of
+        objects (HD_002). Anything else triggers a repair reenqueue with the
+        error attached; when attempts are exhausted a contractual error is
+        raised instead of letting a downstream AttributeError/TypeError escape.
 
         Raises:
-            BlindSolverHarnessError: If both attempts fail.
+            BlindSolverHarnessError: If no attempt yields an acceptable response.
         """
-        # Attempt 1: Parse original response
-        try:
-            return json.loads(response_text)
-        except (json.JSONDecodeError, ValueError) as e:
-            first_error = str(e)
+        current_prompt = prompt
+        last_error: str | None = None
+        response_text = ""
 
-            # Attempt 2: Repair with error context (if max_repair_attempts > 0)
-            if self.max_repair_attempts > 0:
-                repair_prompt = (
-                    f"{original_prompt}\n\n"
+        for attempt in range(self.max_repair_attempts + 1):
+            request = ProviderRequest(
+                prompt=current_prompt,
+                system=None,
+                max_tokens=4096,
+                temperature=self.temperature,
+                request_id=context.solver_run_id,
+            )
+            response = self.provider.complete(request)
+            response_text = response.text.strip()
+
+            parsed: Any = None
+            try:
+                parsed = json.loads(response_text)
+            except (json.JSONDecodeError, ValueError) as exc:
+                last_error = str(exc)
+                parsed = None
+            else:
+                if not isinstance(parsed, dict):
+                    last_error = f"expected a JSON object, got {type(parsed).__name__}"
+                    parsed = None
+                else:
+                    validation_error = _validate_evidence_used_shape(parsed)
+                    if validation_error:
+                        last_error = validation_error
+                        parsed = None
+
+            if parsed is not None:
+                return parsed
+
+            if attempt < self.max_repair_attempts:
+                current_prompt = (
+                    f"{prompt}\n\n"
                     f"[REPAIR ATTEMPT]\n"
-                    f"Previous response was invalid JSON. Error: {first_error}\n"
+                    f"Previous response was invalid. Error: {last_error}\n"
                     f"Please respond with valid JSON only."
                 )
-                request = ProviderRequest(
-                    prompt=repair_prompt,
-                    system=None,
-                    max_tokens=4096,
-                    temperature=0.0,
-                    request_id=context.solver_run_id,
-                )
-                response = self.provider.complete(request)
-                response_text = response.text.strip()
 
-                try:
-                    return json.loads(response_text)
-                except (json.JSONDecodeError, ValueError) as e2:
-                    raise BlindSolverHarnessError(
-                        f"JSON parsing failed on both attempts. "
-                        f"First error: {first_error}. "
-                        f"Second error: {str(e2)}. "
-                        f"Last response: {response_text[:200]}..."
-                    ) from e2
-            else:
-                raise BlindSolverHarnessError(
-                    f"JSON parsing failed and max_repair_attempts=0. "
-                    f"Error: {first_error}. "
-                    f"Response: {response_text[:200]}..."
-                ) from e
+        raise BlindSolverHarnessError(
+            f"JSON parsing/validation failed after {self.max_repair_attempts + 1} attempt(s). "
+            f"Last error: {last_error}. "
+            f"Last response: {response_text[:200]}..."
+        )
 
     def _discard_extra_fields(self, result_dict: dict[str, Any]) -> list[str]:
         """Discard fields not in BlindSolverReport schema, return warning messages."""

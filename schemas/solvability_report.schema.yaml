@@ -20,6 +20,7 @@ required:
   - difficulty_estimate
   - flags
   - difficulty_framework_ref
+  - reproducibility
 properties:
   meter_id:
     type: string
@@ -80,6 +81,35 @@ properties:
     type: string
     minLength: 2
     maxLength: 256
+  reproducibility:
+    type: object
+    additionalProperties: false
+    required:
+      - temperature
+      - provider_id
+      - solver_prompt_sha256
+      - judge_prompt_sha256
+      - runs_requested
+    properties:
+      temperature:
+        type: number
+        minimum: 0.0
+        maximum: 2.0
+      provider_id:
+        type: string
+        minLength: 1
+        maxLength: 64
+      solver_prompt_sha256:
+        type: string
+        minLength: 64
+        maxLength: 64
+      judge_prompt_sha256:
+        type: string
+        minLength: 64
+        maxLength: 64
+      runs_requested:
+        type: integer
+        minimum: 1
 $defs:
   run_result:
     type: object

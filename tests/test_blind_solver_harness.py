@@ -438,3 +438,113 @@ def test_harness_only_reads_inside_the_bundle(source_tree: Path, output_root: Pa
     solver = AccessAttemptSolver(lambda ctx: ctx.read_artifact_path(str(outside)))
     with pytest.raises(BlindSolverHarnessError):
         run_blind_solver_harness(harness_request(bundle), solver)
+
+
+# --------------------------------------------------------------------------- #
+# RV_009 / RV_010: citacao_sem_leitura (ISSUE-33.6)                            #
+# --------------------------------------------------------------------------- #
+def test_evidence_citing_unread_artifact_produces_rv009_warning(source_tree: Path, output_root: Path) -> None:
+    """Case 1: evidence cites an artifact that is in the bundle but was never read."""
+    bundle = make_bundle(source_tree, output_root, artifact_specs=[public_spec(), second_public_spec()])
+
+    def mutate(report: BlindSolverReport) -> BlindSolverReport:
+        # DeterministicStubBlindSolver only reads ART_PUBLIC_001; point evidence at
+        # ART_PUBLIC_002 instead, which is declared in the bundle but never read.
+        bad = replace(report.evidence_used[0], artifact_id="ART_PUBLIC_002", path="player/recibo.md")
+        return replace(report, evidence_used=(bad,))
+
+    solver = ReportMutatingSolver(mutate)
+    result = run_blind_solver_harness(harness_request(bundle), solver)
+
+    rv009 = [w for w in result.warnings if "RV_009" in w]
+    assert len(rv009) == 1
+    assert "citacao_sem_leitura" in rv009[0]
+    assert "ART_PUBLIC_002" in rv009[0]
+
+
+def test_evidence_citing_read_and_unread_artifact_lists_only_unread(source_tree: Path, output_root: Path) -> None:
+    """Case 4: mixed evidence (read + unread) -> warning lists only the unread id."""
+    bundle = make_bundle(source_tree, output_root, artifact_specs=[public_spec(), second_public_spec()])
+
+    def mutate(report: BlindSolverReport) -> BlindSolverReport:
+        read_evidence = report.evidence_used[0]  # ART_PUBLIC_001, actually read
+        unread_evidence = replace(read_evidence, artifact_id="ART_PUBLIC_002", path="player/recibo.md")
+        return replace(report, evidence_used=(read_evidence, unread_evidence))
+
+    solver = ReportMutatingSolver(mutate)
+    result = run_blind_solver_harness(harness_request(bundle), solver)
+
+    rv009 = [w for w in result.warnings if "RV_009" in w]
+    assert len(rv009) == 1
+    assert "ART_PUBLIC_002" in rv009[0]
+    assert "ART_PUBLIC_001" not in rv009[0]
+
+
+def test_rv010_warning_is_present_in_run_record(source_tree: Path, output_root: Path) -> None:
+    """RV_010: the RV_009 warning also lands in the run record's harness_warnings."""
+    from generator.blind_solve_run_record import build_run_record, validate_run_record
+    from generator.blind_solver_report_validator import validate_report
+
+    bundle = make_bundle(source_tree, output_root, artifact_specs=[public_spec(), second_public_spec()])
+
+    def mutate(report: BlindSolverReport) -> BlindSolverReport:
+        bad = replace(report.evidence_used[0], artifact_id="ART_PUBLIC_002", path="player/recibo.md")
+        return replace(report, evidence_used=(bad,))
+
+    solver = ReportMutatingSolver(mutate)
+    request = harness_request(bundle)
+    result = run_blind_solver_harness(request, solver)
+    validator_result = validate_report(result.report)
+
+    record = build_run_record(result, request, validator_result)
+
+    assert any("RV_009" in w for w in record["harness_warnings"])
+    assert validate_run_record(record) == []
+
+
+def test_rv011_llm_blind_solver_never_triggers_rv009(source_tree: Path, output_root: Path) -> None:
+    """RV_011: LLMBlindSolver reads every artifact, so it must never trigger RV_009."""
+    from generator.fake_provider import FakeProvider, ScriptedResponse
+    from generator.llm_blind_solver import LLMBlindSolver
+
+    bundle = make_bundle(source_tree, output_root, artifact_specs=[public_spec(), second_public_spec()])
+    request = harness_request(bundle)
+
+    response = {
+        "schema_version": "1.0",
+        "solver_run_id": request.run_id,
+        "solver_id": request.solver_id,
+        "bundle_id": "BUNDLE_TEST_001",
+        "manifest_id": "MANIFEST_TEST_001",
+        "created_at": FIXED_CREATED_AT,
+        "conclusion": "Conclusao de teste.",
+        "confidence": "low",
+        "reasoning_summary": "LLM leu todos os artefatos do bundle.",
+        "evidence_used": [
+            {
+                "artifact_id": "ART_PUBLIC_001",
+                "path": "player/depoimento.md",
+                "quote_or_summary": "Trecho 1.",
+                "relevance": "Relevante.",
+                "confidence": "low",
+            },
+            {
+                "artifact_id": "ART_PUBLIC_002",
+                "path": "player/recibo.md",
+                "quote_or_summary": "Trecho 2.",
+                "relevance": "Relevante.",
+                "confidence": "low",
+            },
+        ],
+        "open_questions": [],
+        "assumptions": [],
+        "warnings": [],
+    }
+    import json
+
+    provider = FakeProvider([ScriptedResponse(text=json.dumps(response))])
+    solver = LLMBlindSolver(provider=provider)
+
+    result = run_blind_solver_harness(request, solver)
+
+    assert not [w for w in result.warnings if "RV_009" in w]

@@ -461,6 +461,46 @@ def test_cj007_schema_rejects_additional_properties() -> None:
 
 
 # ============================================================================ #
+# HD_005: final verdict always schema-valid (ISSUE-33.4)                      #
+# ============================================================================ #
+
+
+def test_hd005_missing_run_id_falls_back_to_schema_valid_default() -> None:
+    """HD_005: report without solver_run_id/run_id -> verdict still schema-valid."""
+    report = minimal_report()
+    del report["solver_run_id"]
+    expected = [minimal_expected_conclusion()]
+
+    verdict_json = build_valid_verdict_json()
+    provider = FakeProvider([ScriptedResponse(text=json.dumps(verdict_json))])
+
+    result = judge_conclusions(report, expected, provider)
+
+    assert len(result.report_run_id) >= 2
+
+    schema = _load_judge_verdict_schema()
+    from jsonschema import Draft202012Validator
+
+    Draft202012Validator(schema).validate(asdict(result))
+
+
+def test_hd005_broken_default_fails_revalidation_not_silent_return(monkeypatch: pytest.MonkeyPatch) -> None:
+    """HD_005: a broken default (report_run_id shorter than minLength) must raise, not return silently."""
+    import generator.conclusion_judge as conclusion_judge_module
+
+    monkeypatch.setattr(conclusion_judge_module, "_resolve_report_run_id", lambda report: "")
+
+    report = minimal_report()
+    expected = [minimal_expected_conclusion()]
+
+    verdict_json = build_valid_verdict_json()
+    provider = FakeProvider([ScriptedResponse(text=json.dumps(verdict_json))])
+
+    with pytest.raises(ConclusionJudgeError):
+        judge_conclusions(report, expected, provider)
+
+
+# ============================================================================ #
 # CJ_008: Bridge to gate evaluator                                            #
 # ============================================================================ #
 

@@ -58,8 +58,12 @@ Essa divergência não significa falha narrativa. Ela sinaliza que a promessa fe
 Além das métricas heurísticas acima (sem LLM), existe uma segunda camada opcional
 de sinalização pré-playtest: o **Solvability Meter** (`generator/solvability_meter.py`),
 que roda N execuções blind solver → Conclusion Judge (ISSUE-33/33.1) sobre o mesmo
-bundle cego, variando apenas a execução do provider, e agrega a taxa de resolução
-(`solve_rate`) numa estimativa de dificuldade (`facil`/`medio`/`dificil`/`injusto`).
+bundle cego e agrega a taxa de resolução (`solve_rate`) numa estimativa de dificuldade
+(`facil`/`medio`/`dificil`/`injusto`, via `estimate_difficulty_from_solve_rate`).
+Desde a ISSUE-33.5, a variação intencional entre runs é a **temperatura real do
+provider** (repassada ao solver; o juiz permanece determinístico a `0.0`) — a
+estimativa agora reage a `temperature`, não é mais degenerada com provider
+determinístico. Detalhe do bloco `reproducibility` em `docs/BLIND_SOLVER_HARNESS.md`.
 
 Nota de honestidade: essa estimativa mede dificuldade **para um solver LLM**, que é
 proxy — assim como as métricas heurísticas desta seção, ela sinaliza, não decide.

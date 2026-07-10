@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass, field, replace
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -141,8 +141,9 @@ def judge_conclusions(
     # Validate JSON structure against schema
     _validate_verdict_schema(raw_verdict_dict)
 
-    # Extract report_run_id from report (try common keys)
-    report_run_id = report.get("solver_run_id") or report.get("run_id") or ""
+    # Extract report_run_id from report (try common keys), with a schema-conformant
+    # fallback (HD_005): the schema requires minLength: 2, so "" is not an option.
+    report_run_id = _resolve_report_run_id(report)
 
     # Build verdicts list in the order of expected (CJ_003)
     verdict_conclusions_dict = {
@@ -202,12 +203,24 @@ def judge_conclusions(
         warnings=warnings,
     )
 
+    # HD_005: the final verdict (including generated defaults) must itself be
+    # schema-valid; never return it unchecked just because raw_verdict_dict was.
+    _validate_verdict_schema(asdict(verdict))
+
     return verdict
 
 
 # --------------------------------------------------------------------------- #
 # Private helpers                                                             #
 # --------------------------------------------------------------------------- #
+
+def _resolve_report_run_id(report: Mapping[str, Any]) -> str:
+    """Resolve report_run_id with a schema-conformant fallback (HD_005)."""
+    candidate = report.get("solver_run_id") or report.get("run_id")
+    if candidate:
+        return str(candidate)
+    return "UNKNOWN_RUN"
+
 
 def _load_prompt_template(version: str) -> str:
     """Load the prompt template for the given version."""

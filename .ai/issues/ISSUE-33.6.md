@@ -3,12 +3,12 @@
 ## Estado
 
 ```
-STATUS: blocked
-CURRENT_STEP: STEP-01
-NEXT_ACTION: aguardar merge da ISSUE-41.1
+STATUS: done
+CURRENT_STEP: STEP-07
+NEXT_ACTION: none
 REVIEW_STATUS: n/a
-LAST_COMPLETED_STEP: none
-BLOCKER: ISSUE-41.1 (CI verde); independente das 33.3–33.5
+LAST_COMPLETED_STEP: STEP-07
+BLOCKER: none
 ```
 
 ## Contexto

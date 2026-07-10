@@ -10,7 +10,13 @@ Você é acionado apenas quando o executor Haiku escalou. Seu trabalho é destra
 
 ## Entrada esperada
 
-O relatório de escalação do executor (formato `[executor: ESCALAÇÃO]`) mais, se necessário, o SPEC.md referenciado. Não peça o histórico da conversa.
+Um destes dois:
+- Relatório de escalação do executor (formato `[executor: ESCALAÇÃO]`);
+- Reprovação de revisor com `Causa provável: spec` (formato `[reviewer: REPROVADO]` + DVGs).
+
+Mais, se necessário, o SPEC.md referenciado. Não peça o histórico da conversa.
+
+No caso de reprovação com causa na spec: trate o DVG como gatilho 2 ou 3 conforme o defeito (spec desatualizada vs. decisão não tomada), corrija a spec e devolva a etapa reformulada ao executor — a correção do código virá do ciclo normal, não de você.
 
 ## Procedimento por tipo de gatilho
 

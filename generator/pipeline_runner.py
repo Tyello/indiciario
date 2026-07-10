@@ -10,7 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import tempfile
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -30,6 +30,12 @@ from generator.blind_solver_harness import (
 )
 from generator.blind_solver_report_validator import validate_report
 from generator.case_review import load_blueprint
+from generator.conclusion_judge import (
+    ConclusionJudgeError,
+    ExpectedConclusionInput,
+    JudgeVerdict,
+    judge_conclusions,
+)
 from generator.evidence_reviewer import report_to_dict as evidence_report_to_dict
 from generator.evidence_reviewer import review_evidence
 from generator.gate_evaluator import (
@@ -39,6 +45,7 @@ from generator.gate_evaluator import (
     GateEvaluationRequest,
     build_gate_evaluation,
 )
+from generator.llm_provider import LLMProvider
 from generator.manual_orchestrator import (
     DecisionRequest,
     IngestRequest,
@@ -213,6 +220,7 @@ def run_pipeline(
     output_root: str | Path | None = None,
     created_at: str | None = None,
     solver: BlindSolver | None = None,
+    judge_provider: LLMProvider | None = None,
 ) -> PipelineRunResult:
     """Run the full offline multiagent pipeline over a blueprint."""
 
@@ -234,12 +242,13 @@ def run_pipeline(
         timestamp,
         solver=solver,
     )
-    gate_evaluation = _run_gate(
+    gate_evaluation, gate_mode, judge_verdict = _run_gate(
         run_record,
         blueprint,
         blueprint_ref,
         run_id,
         timestamp,
+        judge_provider=judge_provider,
     )
     narrative_report, evidence_report = _run_reviews(
         blueprint,
@@ -257,12 +266,18 @@ def run_pipeline(
         gate_evaluation=gate_evaluation,
         narrative_report=narrative_report,
         evidence_report=evidence_report,
+        gate_mode=gate_mode,
+        judge_verdict=judge_verdict,
     )
 
-    findings_by_artifact = {
-        f"NR-{run_id}": list(narrative_report.get("findings") or []),
-        f"ER-{run_id}": list(evidence_report.get("findings") or []),
+    ingested_artifact_ids = {
+        artifact.get("artifact_id") for artifact in workspace_run.get("artifacts") or []
     }
+    findings_by_artifact: dict[str, list[dict[str, Any]]] = {}
+    if f"NR-{run_id}" in ingested_artifact_ids:
+        findings_by_artifact[f"NR-{run_id}"] = list(narrative_report.get("findings") or [])
+    if f"ER-{run_id}" in ingested_artifact_ids:
+        findings_by_artifact[f"ER-{run_id}"] = list(evidence_report.get("findings") or [])
     consolidated_findings = tuple(
         finding
         for artifact_findings in findings_by_artifact.values()
@@ -274,6 +289,7 @@ def run_pipeline(
         run_id=run_id,
         findings_by_artifact=findings_by_artifact,
         timestamp=timestamp,
+        gate_mode=gate_mode,
     )
 
     playtest_defects = (
@@ -378,7 +394,17 @@ def _run_gate(
     blueprint_ref: str,
     run_id: str,
     timestamp: str,
-) -> dict[str, Any]:
+    judge_provider: LLMProvider | None = None,
+) -> tuple[dict[str, Any], str, dict[str, Any] | None]:
+    """Build the gate evaluation for a run.
+
+    Without ``judge_provider`` (stub mode, PJ_003), preserves the previous
+    fabricated-approval plumbing byte-for-byte. With ``judge_provider``
+    (judged mode, PJ_001/PJ_002), the decision is derived in Python from the
+    real ``judge_conclusions`` verdict: a judge failure is never swallowed
+    into a silent approval (PJ_005's case 7) — it propagates as a traceable
+    ``RuntimeError``.
+    """
     expected = _derive_expected_conclusions(blueprint)
     request = GateEvaluationRequest(
         run_record=run_record,
@@ -388,32 +414,132 @@ def _run_gate(
         created_by="ORCHESTRATOR",
         created_at=timestamp,
     )
-    return build_gate_evaluation(
-        request,
-        expected_conclusions=expected,
-        unexpected_valid_hypotheses=[],
-        gaps=[
-            GapItem(
-                id="GAP-STUB-01",
-                description="Stub solver does not evaluate private solution semantics.",
-                required_conclusion_id=None,
-                severity="minor",
-                impact="Expected for ISSUE-28 offline plumbing run.",
+
+    if judge_provider is None:
+        gate_evaluation = build_gate_evaluation(
+            request,
+            expected_conclusions=expected,
+            unexpected_valid_hypotheses=[],
+            gaps=[
+                GapItem(
+                    id="GAP-STUB-01",
+                    description="Stub solver does not evaluate private solution semantics.",
+                    required_conclusion_id=None,
+                    severity="minor",
+                    impact="Expected for ISSUE-28 offline plumbing run.",
+                )
+            ],
+            confidence_assessment=ConfidenceAssessment(
+                solver_confidence="low",
+                evaluator_agreement="partial",
+                notes="Deterministic stub run; gate decision is explicit plumbing, not LLM quality.",
+            ),
+            decision="approved",
+            justification=(
+                "ISSUE-28 plumbing run: run record schema-valid; explicit approved "
+                "decision to exercise reviewers and manifest consolidation."
+            ),
+            leak_detected=False,
+            rollback_target=None,
+        )
+        return gate_evaluation, "stub", None
+
+    try:
+        verdict = judge_conclusions(
+            run_record["report"],
+            [
+                ExpectedConclusionInput(id=item.id, statement=item.description, required=item.required)
+                for item in expected
+            ],
+            judge_provider,
+        )
+    except ConclusionJudgeError as exc:
+        raise RuntimeError(
+            f"gate judge failed for run {run_id!r}: {exc}"
+        ) from exc
+
+    gate_evaluation, judge_verdict_dict = _build_judged_gate_evaluation(
+        request, expected, verdict, run_record
+    )
+    return gate_evaluation, "judged", judge_verdict_dict
+
+
+def _build_judged_gate_evaluation(
+    request: GateEvaluationRequest,
+    expected: list[ExpectedConclusion],
+    verdict: JudgeVerdict,
+    run_record: Mapping[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Derive expected conclusions, gaps and decision from a JudgeVerdict (PJ_002).
+
+    The decision is never taken from the model: only ``resolvido``/``met``
+    values feed Python conditionals that mirror GE_003-GE_006.
+    """
+    met_by_id = {conclusion.id: conclusion.met for conclusion in verdict.conclusions}
+    rationale_by_id = {conclusion.id: conclusion.rationale for conclusion in verdict.conclusions}
+    judged_expected = [
+        replace(item, met=met_by_id.get(item.id, False)) for item in expected
+    ]
+
+    leak_detected = verdict.classification == "vazamento"
+    ambiguous = verdict.classification == "ambiguo"
+
+    gaps: list[GapItem] = []
+    for item in judged_expected:
+        if item.required and not item.met:
+            gaps.append(
+                GapItem(
+                    id=f"GAP-{item.id}",
+                    description=f"Required conclusion {item.id!r} not met by judge verdict.",
+                    required_conclusion_id=item.id,
+                    severity="critical",
+                    impact=rationale_by_id.get(item.id, "Judge did not confirm this conclusion."),
+                )
             )
-        ],
+    if ambiguous:
+        gaps.append(
+            GapItem(
+                id="GAP-AMBIGUOUS",
+                description="Judge detected a plausible alternative solution.",
+                required_conclusion_id=None,
+                severity="major",
+                impact=verdict.alternative_solution_summary or "classification=ambiguo",
+            )
+        )
+    if leak_detected and not any(gap.id == "GAP-LEAK" for gap in gaps):
+        gaps.append(
+            GapItem(
+                id="GAP-LEAK",
+                description="Judge classified the run as a solution leak.",
+                required_conclusion_id=None,
+                severity="critical",
+                impact="classification=vazamento",
+            )
+        )
+
+    has_unmet_required = any(item.required and not item.met for item in judged_expected)
+    decision = "approved" if not has_unmet_required and not leak_detected and not ambiguous else "rejected"
+
+    report_confidence = str((run_record.get("report") or {}).get("confidence", "low"))
+    gate_evaluation = build_gate_evaluation(
+        request,
+        expected_conclusions=judged_expected,
+        unexpected_valid_hypotheses=[],
+        gaps=gaps,
         confidence_assessment=ConfidenceAssessment(
-            solver_confidence="low",
-            evaluator_agreement="partial",
-            notes="Deterministic stub run; gate decision is explicit plumbing, not LLM quality.",
+            solver_confidence=report_confidence,
+            evaluator_agreement="agree" if decision == "approved" else "disagree",
+            notes=f"Judged run; classification={verdict.classification}.",
         ),
-        decision="approved",
+        decision=decision,
         justification=(
-            "ISSUE-28 plumbing run: run record schema-valid; explicit approved "
-            "decision to exercise reviewers and manifest consolidation."
+            f"Judged run: classification={verdict.classification}; "
+            f"{len(gaps)} gap(s) derived from judge verdict."
         ),
-        leak_detected=False,
+        leak_detected=leak_detected,
         rollback_target=None,
     )
+    return gate_evaluation, asdict(verdict)
 
 
 def _run_reviews(
@@ -451,6 +577,8 @@ def _assemble_workspace(
     gate_evaluation: Mapping[str, Any],
     narrative_report: Mapping[str, Any],
     evidence_report: Mapping[str, Any],
+    gate_mode: str = "stub",
+    judge_verdict: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     run = build_workspace_run(
         run_id=run_id,
@@ -503,7 +631,39 @@ def _assemble_workspace(
         visible_to=("human_operator",),
         timestamp=timestamp,
     )
-    run = _record_gate_decision(run, run_id, timestamp)
+    if gate_mode == "judged" and judge_verdict is not None:
+        run = _ingest(
+            run,
+            artifact_id=f"JV-{run_id}",
+            artifact_type="judge_verdict",
+            path=f"workspace/{run_id}/judge_verdict.json",
+            content_ref=json.dumps(dict(judge_verdict), sort_keys=True),
+            stage="gate_evaluation",
+            visible_to=("human_operator",),
+            timestamp=timestamp,
+        )
+    if gate_mode == "judged":
+        decision_outcome = str(gate_evaluation["decision"])
+        decision_justification = str(gate_evaluation["justification"])
+    else:
+        # PJ_003: byte-for-byte preservation of the pre-33.3 stub decision record.
+        decision_outcome = "approved"
+        decision_justification = "ISSUE-28 plumbing run: explicit approved gate decision."
+    run = _record_gate_decision(
+        run,
+        run_id,
+        timestamp,
+        outcome=decision_outcome,
+        justification=decision_justification,
+    )
+
+    if gate_mode == "judged" and decision_outcome != "approved":
+        # A judged rejection blocks the run at gate_evaluation: the
+        # orchestrator's own state machine (OR_003/OR_008) forbids advancing
+        # to narrative_review without an approved gate decision, and this
+        # module must not weaken that invariant to force the linear stub
+        # flow through a real rejection.
+        return run
 
     run = _apply_transition(run, "gate_evaluation", "narrative_review")
     run = _ingest(
@@ -541,6 +701,7 @@ def _consolidate_manifest(
     run_id: str,
     findings_by_artifact: Mapping[str, list[Mapping[str, Any]]],
     timestamp: str,
+    gate_mode: str = "stub",
 ) -> dict[str, Any]:
     return build_run_manifest(
         workspace_run,
@@ -549,6 +710,7 @@ def _consolidate_manifest(
         generated_by="ORCHESTRATOR",
         generated_at=timestamp,
         notes="ISSUE-28 deterministic pipeline run.",
+        gate_mode=gate_mode,
     )
 
 
@@ -599,16 +761,16 @@ def _record_gate_decision(
     run: Mapping[str, Any],
     run_id: str,
     timestamp: str,
+    outcome: str,
+    justification: str,
 ) -> dict[str, Any]:
     result = record_decision(
         DecisionRequest(
             run=run,
             decision_id=f"DEC-{run_id}",
             stage="gate_evaluation",
-            outcome="approved",
-            justification=(
-                "ISSUE-28 plumbing run: explicit approved gate decision."
-            ),
+            outcome=outcome,
+            justification=justification,
             decided_at=timestamp,
             decided_by="ORCHESTRATOR",
             rollback_to_stage=None,
@@ -643,7 +805,7 @@ def _derive_expected_conclusions(blueprint: Any) -> list[ExpectedConclusion]:
         for index, frase in enumerate(solucao[:3], 1):
             conclusions.append(
                 ExpectedConclusion(
-                    id=f"EC-GUia-{index}",
+                    id=f"EC-GUIA-{index}",
                     description=str(frase),
                     required=index == 1,
                     met=True,

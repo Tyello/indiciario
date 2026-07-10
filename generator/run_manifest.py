@@ -112,6 +112,7 @@ class RunManifest:
     gate_outcome: ManifestGateOutcome | None
     next_steps: tuple[str, ...]
     notes: str
+    gate_mode: str = "stub"
 
 
 @dataclass(frozen=True)
@@ -319,6 +320,7 @@ def build_run_manifest(
     generated_by: str = "orchestrator",
     notes: str = "",
     generated_at: str | None = None,
+    gate_mode: str = "stub",
 ) -> dict[str, Any]:
     """Build a run manifest dict from a ``WorkspaceRun`` dict.
 
@@ -405,6 +407,7 @@ def build_run_manifest(
         "gate_outcome": gate_outcome,
         "next_steps": next_steps,
         "notes": notes,
+        "gate_mode": gate_mode,
     }
 
 
@@ -460,4 +463,5 @@ def manifest_to_dict(manifest: RunManifest) -> dict[str, Any]:
         "gate_outcome": gate_outcome,
         "next_steps": list(manifest.next_steps),
         "notes": manifest.notes,
+        "gate_mode": manifest.gate_mode,
     }

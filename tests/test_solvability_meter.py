@@ -11,6 +11,7 @@ Cases cover:
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import asdict
 from pathlib import Path
@@ -31,7 +32,7 @@ from generator.llm_provider import ProviderTransportError
 from generator.solvability_meter import (
     SolvabilityMeterError,
     SolvabilityReport,
-    estimate_difficulty,
+    estimate_difficulty_from_solve_rate,
     measure_solvability,
 )
 
@@ -337,6 +338,26 @@ def test_sm002_one_failed_run_is_incomplete_not_fatal(source_tree: Path, output_
     assert "RUNS_INCOMPLETAS" in report.flags
 
 
+def test_hd_non_object_json_counts_as_incomplete_run_not_fatal(
+    source_tree: Path, output_root: Path
+) -> None:
+    """HD_001 integration: a run whose solver returns non-object JSON is incomplete, not fatal."""
+    bundle = make_bundle(source_tree, output_root)
+    non_dict_json = json.dumps([1, 2, 3])
+    script: list[Any] = []
+    script.extend(run_pair(met=True))  # run 0 ok
+    script.append(ScriptedResponse(text=non_dict_json))  # run 1: solver attempt 1, non-object
+    script.append(ScriptedResponse(text=non_dict_json))  # run 1: solver repair attempt, still non-object
+    script.extend(run_pair(met=True))  # run 2 ok
+    provider = FakeProvider(script)
+
+    report = measure_solvability(bundle, expected_conclusions(), provider, runs=3)
+
+    assert report.runs_completed == 2
+    assert report.runs_requested == 3
+    assert "RUNS_INCOMPLETAS" in report.flags
+
+
 def test_sm002_all_runs_failed_raises_error(source_tree: Path, output_root: Path) -> None:
     bundle = make_bundle(source_tree, output_root)
     script: list[Any] = [
@@ -364,7 +385,68 @@ def test_sm002_all_runs_failed_raises_error(source_tree: Path, output_root: Path
     ],
 )
 def test_sm003_difficulty_threshold_table(solve_rate: float, expected_difficulty: str) -> None:
-    assert estimate_difficulty(solve_rate) == expected_difficulty
+    assert estimate_difficulty_from_solve_rate(solve_rate) == expected_difficulty
+
+
+# ============================================================================ #
+# RM_001, RM_002, RM_004: Reproducibility block and provider calls           #
+# ============================================================================ #
+
+
+def test_rm001_temperature_reaches_solver_provider_requests_not_judge(
+    source_tree: Path, output_root: Path
+) -> None:
+    """RM_001: solver receives configured temperature; judge uses fixed 0.0."""
+    bundle = make_bundle(source_tree, output_root)
+    script: list[ScriptedResponse] = []
+    script.extend(run_pair(met=True))
+    provider = FakeProvider(script)
+
+    measure_solvability(bundle, expected_conclusions(), provider, runs=1, temperature=0.7)
+
+    # Check provider.calls order and temperature values
+    assert len(provider.calls) == 2, f"Expected 2 calls (solver + judge), got {len(provider.calls)}"
+    assert provider.calls[0].temperature == 0.7, f"Solver call should have temperature=0.7, got {provider.calls[0].temperature}"
+    assert provider.calls[-1].temperature == 0.0, f"Judge call should have temperature=0.0, got {provider.calls[-1].temperature}"
+
+
+def test_rm002_reproducibility_block_populated(source_tree: Path, output_root: Path) -> None:
+    """RM_002: reproducibility block is fully populated with all expected fields."""
+    bundle = make_bundle(source_tree, output_root)
+    script: list[ScriptedResponse] = []
+    script.extend(run_pair(met=True))
+    script.extend(run_pair(met=True))
+    provider = FakeProvider(script)
+
+    report = measure_solvability(bundle, expected_conclusions(), provider, runs=2, temperature=0.5)
+
+    assert report.reproducibility["temperature"] == 0.5
+    assert report.reproducibility["provider_id"] == provider.provider_id
+    assert report.reproducibility["runs_requested"] == 2
+
+    solver_sha = report.reproducibility["solver_prompt_sha256"]
+    judge_sha = report.reproducibility["judge_prompt_sha256"]
+    assert isinstance(solver_sha, str) and len(solver_sha) == 64, \
+        f"solver_prompt_sha256 should be 64-char hex string, got {solver_sha}"
+    assert isinstance(judge_sha, str) and len(judge_sha) == 64, \
+        f"judge_prompt_sha256 should be 64-char hex string, got {judge_sha}"
+
+
+def test_rm004_solver_prompt_sha256_matches_template_file(source_tree: Path, output_root: Path) -> None:
+    """RM_004: solver_prompt_sha256 matches the actual blind_solver_v1.md file hash."""
+    bundle = make_bundle(source_tree, output_root)
+    script: list[ScriptedResponse] = []
+    script.extend(run_pair(met=True))
+    provider = FakeProvider(script)
+
+    report = measure_solvability(bundle, expected_conclusions(), provider, runs=1)
+
+    # Compute the hash independently from the template file
+    template_path = Path(__file__).resolve().parents[1] / "generator" / "prompts" / "blind_solver_v1.md"
+    expected_hash = hashlib.sha256(template_path.read_bytes()).hexdigest()
+
+    assert report.reproducibility["solver_prompt_sha256"] == expected_hash, \
+        f"solver_prompt_sha256 mismatch: got {report.reproducibility['solver_prompt_sha256']}, expected {expected_hash}"
 
 
 # ============================================================================ #
