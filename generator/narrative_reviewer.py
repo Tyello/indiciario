@@ -366,6 +366,7 @@ def review_narrative(
     created_by: str = "orchestrator",
     overall_confidence: str = "medium",
     notes: str = "",
+    created_at: str | None = None,
 ) -> ReviewReport:
     """Apply rules NR_001-NR_008 and return a :class:`ReviewReport`.
 
@@ -382,7 +383,7 @@ def review_narrative(
         report_id=report_id,
         reviewer_type="narrative",
         blueprint_ref=blueprint_ref,
-        created_at=_now_iso(),
+        created_at=created_at if created_at is not None else _now_iso(),
         created_by=created_by,
         status=status,
         summary=_summary_for("narrative", findings, status),

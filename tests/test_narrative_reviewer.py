@@ -50,6 +50,7 @@ from generator.models import (
 )
 from generator.narrative_reviewer import (
     ReviewReport,
+    _now_iso,
     report_to_dict,
     review_narrative,
     validate_review_report,
@@ -572,3 +573,17 @@ def test_case45_smoke_does_not_raise() -> None:
         _review(_blueprint())
     except Exception as exc:  # noqa: BLE001
         pytest.fail(f"review_narrative raised unexpectedly: {exc!r}")
+
+
+# --- Case 46: explicit created_at is used literally -------------------------
+def test_case46_explicit_created_at_used_literally() -> None:
+    report = _review(_blueprint(), created_at="2026-01-01T00:00:00Z")
+    assert report.created_at == "2026-01-01T00:00:00Z"
+
+
+# --- Case 47: omitted created_at preserves current _now_iso() behaviour -----
+def test_case47_default_created_at_preserved() -> None:
+    before = _now_iso()
+    report = _review(_blueprint())
+    after = _now_iso()
+    assert before <= report.created_at <= after

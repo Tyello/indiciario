@@ -313,6 +313,7 @@ def review_evidence(
     created_by: str = "orchestrator",
     overall_confidence: str = "medium",
     notes: str = "",
+    created_at: str | None = None,
 ) -> ReviewReport:
     """Apply rules ER_001-ER_008 and return a :class:`ReviewReport`.
 
@@ -329,7 +330,7 @@ def review_evidence(
         report_id=report_id,
         reviewer_type="evidence",
         blueprint_ref=blueprint_ref,
-        created_at=_now_iso(),
+        created_at=created_at if created_at is not None else _now_iso(),
         created_by=created_by,
         status=status,
         summary=_summary_for("evidence", findings, status),

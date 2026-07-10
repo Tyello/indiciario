@@ -62,7 +62,7 @@ pipeline (parâmetro novo é opcional, default preserva comportamento). `ruff` l
 
 ## Critério de aceite
 
-- [ ] `NC_001`–`NC_003` implementadas e cobertas
-- [ ] `test_run_pipeline_is_deterministic_with_same_created_at` deixa de ser intermitente (caso 4)
-- [ ] pytest tests/ -q sem regressão; ruff limpo
-- [ ] impacto documental resolvido
+- [x] `NC_001`–`NC_003` implementadas e cobertas
+- [x] `test_run_pipeline_is_deterministic_with_same_created_at` deixa de ser intermitente (caso 4)
+- [x] pytest tests/ -q sem regressão; ruff limpo
+- [x] impacto documental resolvido

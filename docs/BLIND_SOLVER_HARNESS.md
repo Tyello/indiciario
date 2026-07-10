@@ -536,6 +536,17 @@ Erro do provider (`ProviderResponseError`/`ConclusionJudgeError`) nunca vira apr
 silenciosa: propaga como falha rastreável do stage de gate (nunca `decision="approved"`
 por omissão). Testes: `tests/test_pipeline_runner.py`. Spec: `.ai/issues/ISSUE-33.3_SPEC.md`.
 
+### created_at propagado a narrative/evidence review (ISSUE-33.7)
+
+`generator.narrative_reviewer.review_narrative` e `generator.evidence_reviewer.review_evidence`
+ganham `created_at: str | None = None`. Fora do `pipeline_runner`, chamadores continuam
+sem passar o argumento e o comportamento é idêntico (`_now_iso()`). Dentro de
+`pipeline_runner._run_reviews`, o `created_at` do run (mesmo `timestamp` usado no resto
+do manifest) é repassado às duas chamadas, eliminando o `created_at` de relógio real que
+tornava o manifest não-determinístico quando as duas chamadas cruzavam a fronteira de
+segundo. Testes: `tests/test_narrative_reviewer.py`, `tests/test_evidence_reviewer.py`,
+`tests/test_pipeline_runner.py`. Spec: `.ai/issues/ISSUE-33.7_SPEC.md`.
+
 ## Solvability Meter (ISSUE-33.2)
 
 `generator/solvability_meter.py` expõe `measure_solvability`, que orquestra N execuções

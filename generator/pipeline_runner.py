@@ -254,6 +254,7 @@ def run_pipeline(
         blueprint,
         blueprint_ref,
         run_id,
+        timestamp,
     )
 
     workspace_run = _assemble_workspace(
@@ -546,6 +547,7 @@ def _run_reviews(
     blueprint: Any,
     blueprint_ref: str,
     run_id: str,
+    created_at: str,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     narrative = narrative_report_to_dict(
         review_narrative(
@@ -553,6 +555,7 @@ def _run_reviews(
             blueprint_ref,
             report_id=f"NR-{run_id}",
             created_by="ORCHESTRATOR",
+            created_at=created_at,
         )
     )
     evidence = evidence_report_to_dict(
@@ -561,6 +564,7 @@ def _run_reviews(
             blueprint_ref,
             report_id=f"ER-{run_id}",
             created_by="ORCHESTRATOR",
+            created_at=created_at,
         )
     )
     return narrative, evidence

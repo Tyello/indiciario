@@ -562,6 +562,49 @@ rastreável do stage. Typo `EC-GUia-` corrigido para `EC-GUIA-`. Schemas atualiz
 `schemas/run_manifest.schema.yaml`, `schemas/workspace_run.schema.yaml`. Testes:
 `tests/test_pipeline_runner.py`. Spec: `.ai/issues/ISSUE-33.3_SPEC.md`.
 
+### ISSUE-33.4 — Hardening contra resposta hostil do modelo ✅ concluída
+
+Fecha BUG-03/04/05/07 e RISCO-04 da auditoria (`docs/AUDITORIA_FABLE_2026-07.md`).
+
+Entregável: hardening de `generator/llm_blind_solver.py` e `generator/conclusion_judge.py`
+contra resposta hostil/malformada do provider (contrato HD_001–HD_005) — nenhum caminho
+malformado escapa como `AttributeError`/`TypeError` cru, e o veredito final do judge é
+sempre revalidado contra o schema. Spec: `.ai/issues/ISSUE-33.4_SPEC.md`.
+
+### ISSUE-33.5 — `temperature` deixa de ser parâmetro morto ✅ concluída
+
+Fecha BUG-06 (colisão de nome entre `solvability_meter.estimate_difficulty` e
+`playtest_metrics.estimate_difficulty`).
+
+Entregável: `measure_solvability` repassa `temperature` de fato ao `ProviderRequest` do
+solver (juiz permanece fixo em `0.0`, decisão documentada); `SolvabilityReport` ganha
+bloco `reproducibility` (temperature/provider_id/solver_prompt_sha256/judge_prompt_sha256/
+runs_requested); `solvability_meter.estimate_difficulty` renomeado para
+`estimate_difficulty_from_solve_rate`. Schema atualizado. Spec:
+`.ai/issues/ISSUE-33.5_SPEC.md`.
+
+### ISSUE-33.6 — Warning de citação sem leitura ✅ concluída
+
+Fecha RISCO-02 da auditoria.
+
+Entregável: `blind_solver_harness.py` cruza `evidence_used[].artifact_id` contra
+`context.accessed_artifacts` do round e emite warning auditável `RV_009`
+(`citacao_sem_leitura`) quando um artefato citado nunca foi lido; propaga para
+`harness_warnings` no run record (`RV_010`, sem mudança de schema); zero falso positivo
+confirmado no fluxo atual do `LLMBlindSolver` (`RV_011`). Spec:
+`.ai/issues/ISSUE-33.6_SPEC.md`.
+
+### ISSUE-33.7 — Determinismo de `created_at` no manifest ✅ concluída
+
+Fecha o flake de determinismo intermitente registrado em
+`.ai/runs/ISSUE-33.3/STEP-06_EXECUTION.md`.
+
+Entregável: `review_narrative`/`review_evidence` ganham `created_at: str | None = None`
+(opt-in, default preserva `_now_iso()`); `pipeline_runner._run_reviews` passa a repassar
+o `created_at` do run às duas chamadas, eliminando a dependência de relógio real que
+tornava o manifest não-determinístico quando as duas chamadas cruzavam a fronteira de
+segundo. Spec: `.ai/issues/ISSUE-33.7_SPEC.md`.
+
 ### ISSUE-34 — LLM Reviewers Adapter
 
 Conectar narrative/evidence/visual reviewers a modelo real.
