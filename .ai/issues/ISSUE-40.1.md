@@ -1,6 +1,6 @@
 # ISSUE-40.1 — Vendorizar fontes com `@font-face` local
 
-**Status:** especificada, pronta para execução
+**Status:** concluída (ver `STATUS: done` abaixo)
 **Prioridade:** P0 (fundação — bloqueia 40.2)
 **Depende de:** —
 **Bloqueia:** 40.2

@@ -549,6 +549,36 @@ Testes: `tests/test_solvability_meter.py`. Spec: `.ai/issues/ISSUE-33.2_SPEC.md`
 
 Conectar narrative/evidence/visual reviewers a modelo real.
 
+## Fase concluída — Sistema visual (40.1–40.6)
+
+Status: **concluída** (julho 2026).
+
+Fecha lacunas de fidelidade visual/institucional identificadas na auditoria de junho/2026, fora da série Provider (33.x).
+
+### ISSUE-40.1 — Vendorizar fontes com `@font-face` local
+
+Entregou: fontes locais servidas via `@font-face` no `generator/renderer.py` e `templates/styles/document_system.css`, eliminando dependência de fonte externa no PDF renderizado. Testes: `tests/test_font_vendoring.py`.
+
+### ISSUE-40.2 — Gate visual: detectar fallback de fonte
+
+Entregou: `generator/font_fidelity.py` (`evaluate_font_fidelity`), integrado ao `generator/canonical_quality_gate.py`; detecta fallback silencioso de fonte no PDF gerado. Testes: `tests/test_gate_font_fidelity.py`.
+
+### ISSUE-40.3 — Regras de camada: Tela vs. Papel + remoção do chrome do jogo
+
+Entregou: regras de camada (Camada 0 = chrome do jogo, demais = documento diegético) em `generator/renderer.py`, `templates/base.html` e `templates/styles/document_system.css`; remoção de chrome de UI residual nos templates de documento. Documentado em `framework/20_SISTEMA_VISUAL.md` e `templates/README.md`. Testes: `tests/test_layer_rules.py`.
+
+### ISSUE-40.4 — Papel-cor como taxonomia + remoção do envelhecimento artificial do boletim
+
+Entregou: papel-cor tratado como taxonomia editorial (não efeito decorativo solto) em `templates/styles/document_system.css`; removido envelhecimento artificial do boletim. Documentado em `templates/README.md`. Testes: `tests/test_paper_color_taxonomy.py`.
+
+### ISSUE-40.5 — Isolar `--accent` da marca Indiciário na Camada 0
+
+Entregou: token `--accent` isolado à Camada 0 (`templates/base.html`), impedindo vazamento da marca do produto para dentro do documento diegético. Testes: `tests/test_brand_isolation.py`.
+
+### ISSUE-40.6 — Microidentidades institucionais
+
+Entregou: tokens de microidentidade por instituição (`--inst-color`, `--inst-font-display`, `--inst-header-shape`) em `templates/styles/institution_identity.css`, aplicados em `generator/renderer.py` e templates `cadastro.html`/`manual.html`. Documentado em `framework/20_SISTEMA_VISUAL.md`. Testes: `tests/test_institution_identity.py`.
+
 ---
 
 ## Workflow multiagente — otimizações ativas

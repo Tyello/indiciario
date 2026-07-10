@@ -114,6 +114,7 @@ Use esta tabela como atalho. Ela não é exaustiva; na dúvida, confira a coluna
 | `CASE_FAILURE_PATTERNS.md` | Falhas editoriais já observadas | LLM-gen/Designer | GEN | Surge novo padrão de falha de playtest |
 | `DIFFICULTY_FRAMEWORK.md` | Régua de dificuldade por nível | Designer/LLM-gen | GEN | Muda faixa de dificuldade ou entra caso novo |
 | `CALIBRACAO_REFERENCIA_EXTERNA.md` | Análise do caso externo *Uma Noite Sem Flores* como corpus de calibração do estimador de dificuldade (ISSUE-30.8); não é régua canônica | Dev/Agente | GOV | Surge novo caso de calibração externa ou muda a metodologia de calibração |
+| `EXPERIMENTO_GERACAO_DO_ZERO.md` | Registro do experimento de geração-do-zero (ISSUE-30.11): métricas de pipeline do `caso_gerado_cooperativa.json`; playtest humano pendente, fora do Canonical Quality Gate até lá | Dev/Agente | GOV | Muda métrica de pipeline ou entra resultado do playtest humano (faixa b) |
 | `CANONICAL_CRITERIA.md` | Critérios do Canonical Quality Gate (`canonical_quality_gate.py`) | Dev/Agente | VAL | Muda critério canônico ou a implementação |
 | `CASE_DESIGN_PIPELINE.md` | Processo editorial pré-blueprint | Designer | GEN | Muda processo de design de caso |
 | `BLUEPRINT_AUTHORING_GUIDE.md` | Contrato mínimo de autoria de blueprint | LLM-gen/Designer | GEN | Muda contrato de autoria ou campo schema-enforced |

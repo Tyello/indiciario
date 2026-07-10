@@ -1,6 +1,6 @@
 # Guia de códigos de erro e aviso editorial
 
-Este guia documenta os códigos `OBV_xxx`, `PT_xxx`, `GP_xxx` e `ER_xxx` existentes no código atual. Ele não inventa novos códigos nem severidades. Se um relatório mencionar código não listado aqui, **verificar no código antes de agir**.
+Este guia documenta os códigos `OBV_xxx`, `PT_xxx`, `GP_xxx`, `ER_xxx` (validator/qualidade editorial) e `RV_xxx`, `PV_xxx`, `FP_xxx`, `LS_xxx`, `CJ_xxx`, `SM_xxx` (pipeline multiagente/Provider) existentes no código atual. Ele não inventa novos códigos nem severidades. Se um relatório mencionar código não listado aqui, **verificar no código antes de agir**.
 
 Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `docs/QUALITY_COMPARATIVE_REPORT.md`, `generator/obviousness_checker.py`, `generator/playtest_metrics.py`, `generator/clue_graph.py`, `generator/evidence_reviewer.py` e testes relacionados.
 
@@ -64,7 +64,43 @@ Fontes usadas: `docs/ANTI_OBVIEDADE.md`, `docs/QUALITY_COMPARATIVE_REPORT.md`, `
 | GP_006 | warning ou critical | Warning quando nenhum contrato existe; critical quando nenhum contrato final existe | Grafo não avaliado por ausência de contratos, ou ausência de contrato de solução final | Sem contratos não há análise; sem final não há alvo claro de solução | Criar contratos de evidência; garantir contrato final com prova e confirmação independentes |
 | GP_007 | critical | O relatório GP fica `failed` | Contrato final não tem caminho documental mínimo válido | Solução final não tem prova principal e confirmação independente válidas | Definir prova principal e confirmação independente distintas, existentes e suficientes |
 
+## Códigos RV/PV/FP/LS/CJ/SM — pipeline multiagente (Provider)
+
+Famílias nascidas nas ISSUE-17/31/32/33/33.1/33.2. Não fazem parte do `validator` strict dos blueprints — atuam no pipeline cego (blind bundle → solver → judge → meter). Tabela resumida; contrato completo em cada spec/módulo de origem.
+
+| Código | Módulo | Spec de origem | Significado resumido |
+|---|---|---|---|
+| RV_001 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Falha estrutural delegada ao validador de schema do report |
+| RV_002 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Conclusão presente sem `evidence_used` — bloqueia |
+| RV_003 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Alta confiança sem evidência — bloqueia |
+| RV_004 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Alta confiança com `open_questions` ainda abertas — bloqueia |
+| RV_005 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Sem conclusão e sem `open_questions` — bloqueia |
+| RV_006 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | `reasoning_summary` só placeholder — warning, não bloqueia |
+| RV_007 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Evidência presente mas conclusão vazia — warning, não bloqueia |
+| RV_008 | `generator/blind_solver_report_validator.py` | `.ai/issues/ISSUE-18_SPEC.md` | Baixa confiança com evidência majoritariamente `high` — bloqueia |
+| PV_001 | `generator/llm_provider.py` | `.ai/issues/ISSUE-31_SPEC.md` | `ProviderRequest.prompt` vazio ou só whitespace |
+| PV_002 | `generator/llm_provider.py` | `.ai/issues/ISSUE-31_SPEC.md` | `max_tokens` não é maior que zero |
+| PV_003 | `generator/llm_provider.py` | `.ai/issues/ISSUE-31_SPEC.md` | `temperature` fora do intervalo `[0.0, 2.0]` |
+| PV_004 | `generator/llm_provider.py` | `.ai/issues/ISSUE-31_SPEC.md` | `system`, quando fornecido, vazio ou só whitespace |
+| FP_001 | `generator/fake_provider.py` | `.ai/issues/ISSUE-32_SPEC.md` | Request inválido rejeitado antes de consumir roteiro; não registra em `calls` |
+| FP_002 | `generator/fake_provider.py` | `.ai/issues/ISSUE-32_SPEC.md` | Roteiro esgotado — `ProviderResponseError("script exhausted")` |
+| FP_003 | `generator/fake_provider.py` | `.ai/issues/ISSUE-32_SPEC.md` | Item do roteiro é `ProviderError` — injeta o erro, mas registra em `calls` |
+| FP_004 | `generator/fake_provider.py` | `.ai/issues/ISSUE-32_SPEC.md` | `ProviderResponse.request_id` sempre ecoa o `request_id` recebido |
+| LS_001 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33_SPEC.md` | Sentinela de vazamento: conteúdo fora de `included_artifacts` não pode aparecer no prompt |
+| LS_003 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33_SPEC.md` | Ids sempre sobrescritos a partir do contexto do harness, nunca aceitos do modelo |
+| CJ_001 | `generator/conclusion_judge.py` | `.ai/issues/ISSUE-33.1_SPEC.md` | Prompt do judge contém só dados do report + conclusões esperadas, nada mais |
+| CJ_002 | `generator/conclusion_judge.py` | `.ai/issues/ISSUE-33.1_SPEC.md` | Reparo de JSON com `max_repair_attempts` |
+| CJ_003 | `generator/conclusion_judge.py` | `.ai/issues/ISSUE-33.1_SPEC.md` | Toda conclusão esperada precisa aparecer na resposta do modelo |
+| CJ_004 | `generator/conclusion_judge.py` | `.ai/issues/ISSUE-33.1_SPEC.md` | Classificação (`resolvido`/`nao_resolvido`/`vazamento`/`ambiguo`) derivada em Python puro |
+| CJ_005 | `generator/conclusion_judge.py` | `.ai/issues/ISSUE-33.1_SPEC.md` | `met=true` com `evidence_cited` vazio é rebaixado para `met=false` + warning |
+| SM_001 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | `runs < 1` ou `temperature` fora de `[0, 2]` — `ValueError` antes de qualquer run |
+| SM_002 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | Cada run usa o mesmo bundle/prompt; run que falha (erro de provider/harness/judge) conta como incompleta, não derruba a medição inteira |
+| SM_003 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | `solve_rate == 1.0` → `facil`; `>= 0.5` → `medio`; `> 0.0` → `dificil`; senão mais severo |
+| SM_004 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | Flags derivadas das classificações de run e completude |
+| SM_005 | `generator/solvability_meter.py` | `.ai/issues/ISSUE-33.2_SPEC.md` | `difficulty_framework_ref` faz cross-link com `docs/DIFFICULTY_FRAMEWORK.md` |
+
 ## Lacunas conhecidas
 
 - `GP_005` não foi encontrado em `generator/clue_graph.py` no estado atual. Se aparecer em relatório futuro, **verificar no código antes de agir**.
-- Códigos fora das famílias `OBV_xxx`, `PT_xxx`, `GP_xxx` e `ER_xxx` podem existir em outros validadores; verificar no código antes de agir.
+- `LS_002`, `LS_004` e `LS_005` são citados em docstrings/specs como parte do contrato de isolamento, mas não aparecem como código de finding rastreável em `generator/llm_blind_solver.py` no estado atual — comportamento coberto por teste-sentinela (`tests/test_llm_blind_solver.py`), não por código de erro emitido. Verificar no código antes de agir.
+- Códigos fora das famílias `OBV_xxx`, `PT_xxx`, `GP_xxx`, `ER_xxx`, `RV_xxx`, `PV_xxx`, `FP_xxx`, `LS_xxx`, `CJ_xxx` e `SM_xxx` podem existir em outros validadores; verificar no código antes de agir.

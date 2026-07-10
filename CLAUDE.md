@@ -31,7 +31,7 @@ Antes de executar qualquer tarefa:
 
 ### O que existe e funciona
 
-- **~1385 testes** coletados por `pytest tests/ -q` (checar contagem exata antes de citar em PR; ver `docs/ESTADO_ATUAL.md`).
+- Contagem de testes: ver `docs/ESTADO_ATUAL.md` (única fonte da contagem fixada; não repetir número aqui, ele cresce a cada issue).
 - Validator strict com guardrails editoriais, anti-obviedade, progressão, cartões, assinaturas e mapas.
 - Package builder com Playwright/Chromium, manifests, guia do facilitador, dicas, printables e PDFs finais.
 - Sistema visual P0/P1/P2/P3 completo.
@@ -120,9 +120,13 @@ Exercício de calibração usando um caso comercial externo já validado em mesa
 - **ISSUE-30.10** concluída: padrões PAT-01..04 destilados da calibração, codificados em `framework/08_MODELO_REFERENCIA.md` (cross-link em `framework/07_PROMPT_GERADOR_DE_CASO.md`).
 - **ISSUE-30.11 bloqueada em `STEP-05`, `NEXT_ACTION: human`.** Geração-do-zero: caso novo (não transcrito), domínio cooperativa agrícola, `examples/caso_gerado_cooperativa.json`, usando PAT-01 e PAT-04 deliberadamente. Métricas de pipeline preenchidas em `docs/EXPERIMENTO_GERACAO_DO_ZERO.md` (faixa a — strict, estimador, `clue_graph`, `obviousness_checker`, todas OK). Falta a faixa b: rubrica humana (RUB-01/02), preenchida só após o playtest de mesa. **O orquestrador não simula nem pula esse playtest.** Pipeline-verde é necessário, não suficiente — o veredito é o playtest.
 
-**ISSUE-30.12 em andamento**: gate estrutural entre Fase 1 e Fase 2 do `framework/07_PROMPT_GERADOR_DE_CASO.md` (achado dos 327 erros Pydantic da 30.11 STEP-02/03, virado regra de processo). Sem código, sem depender do playtest pendente da 30.11.
+**ISSUE-30.12 concluída** (`STATUS: done`): gate estrutural entre Fase 1 e Fase 2 do `framework/07_PROMPT_GERADOR_DE_CASO.md` (achado dos 327 erros Pydantic da 30.11 STEP-02/03, virado regra de processo). Sem código, não dependeu do playtest pendente da 30.11.
 
-Próxima frente de trabalho: ver `docs/ROADMAP.md`. Além da 30.11 bloqueada e da 30.12 em andamento, não há outra issue em andamento fixada aqui — confirmar o estado em `docs/ESTADO_ATUAL.md` antes de iniciar.
+**Fase Sistema visual (ISSUE-40.1–40.6) concluída** — ver `docs/ROADMAP.md` e `docs/ESTADO_ATUAL.md`.
+
+**ISSUE-41.1 (CI verde) e ISSUE-41.2 (guard de sincronia docs/prompts) concluídas.** ISSUE-41.3 (esta reconciliação documental) em execução.
+
+Próxima frente de trabalho candidata: **ISSUE-33.3 — Ligar Conclusion Judge ao pipeline_runner** (blocker registrado era ISSUE-41.1, já concluída; confirmar `STATUS` atualizado em `.ai/issues/ISSUE-33.3.md` antes de iniciar, pois o campo pode não refletir o desbloqueio ainda). 30.11 segue bloqueada em `NEXT_ACTION: human`. Confirmar sempre o estado exato em `docs/ESTADO_ATUAL.md` antes de iniciar.
 
 ---
 

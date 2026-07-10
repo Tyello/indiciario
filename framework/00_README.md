@@ -56,6 +56,7 @@ Leia e internalize nesta ordem antes de gerar qualquer caso:
 | 17 | `17_GUIA_FACILITADOR.md`        | Guia confidencial de condução e dicas contextuais |
 | 18 | `18_VISUAL_PROCEDURAL.md`       | Camada de visual procedural controlado (mapas/cartões SVG-HTML) |
 | 19 | `19_PLAYTEST_E_METRICAS.md`     | Métricas heurísticas de playtest (warnings que não bloqueiam geração) |
+| 20 | `20_SISTEMA_VISUAL.md`          | Sistema visual: camadas Tela vs. Papel, fidelidade de fonte, papel-cor, isolamento de marca, microidentidades institucionais |
 | — | `CONTEUDO_SCHEMA.md`            | Schema de conteúdo do blueprint (referência, ler sob demanda) |
 
 ---

@@ -18,8 +18,8 @@ Use quando houver bug, regressão, falha de build, problema visual, erro de PDF,
 ```bash
 pytest tests/ -q
 ruff check generator/
-python generator/validator.py examples/caso_canonico_iniciante.json --strict
-python generator/validator.py examples/caso_canonico_intermediario.json --strict
+python -m generator.validator examples/caso_canonico_iniciante.json --strict
+python -m generator.validator examples/caso_canonico_intermediario.json --strict
 python -m scripts.build_package examples/caso_canonico_iniciante.json --output output/iniciante --strict
 python -m scripts.build_package examples/caso_canonico_intermediario.json --output output/intermediario --strict
 ```

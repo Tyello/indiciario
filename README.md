@@ -60,8 +60,8 @@ Use os dois arquivos canônicos como referência em testes, scripts, validaçõe
 Validação estrutural e editorial do blueprint:
 
 ```bash
-python generator/validator.py examples/caso_canonico_iniciante.json --strict
-python generator/validator.py examples/caso_canonico_intermediario.json --strict
+python -m generator.validator examples/caso_canonico_iniciante.json --strict
+python -m generator.validator examples/caso_canonico_intermediario.json --strict
 ```
 
 Testes automatizados:

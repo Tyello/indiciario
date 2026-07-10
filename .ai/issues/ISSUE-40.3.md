@@ -9,7 +9,7 @@ LAST_EXECUTION_REPORT: .ai/runs/ISSUE-40.3/STEP-05_EXECUTION.md
 LAST_REVIEW_REPORT: .ai/runs/ISSUE-40.3/STEP-04_REVIEW.md
 BLOCKER: none
 
-**Status:** especificada, pronta para execução
+**Status:** concluída (ver `STATUS: done` acima)
 **Prioridade:** P1
 **Depende de:** 40.1
 **Bloqueia:** 40.4, 40.5, 40.6

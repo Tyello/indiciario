@@ -147,7 +147,11 @@ Corpus de calibração externo (**não é régua canônica** — não passar pel
 
 6. **Uma Noite Sem Flores** — `examples/caso_referencia_uma_noite_sem_flores.json` — Intermediário; baseado em produto externo; incorporado para calibrar estimador de dificuldade (ISSUE-30.8); não playtestado pelo framework.
 
-Roster completo e status de maturidade: `docs/ESTADO_ATUAL.md`.
+Experimento de geração-do-zero (**não é régua canônica** — playtest humano pendente, fora do Canonical Quality Gate):
+
+7. **O Grão que Faltou** — `examples/caso_gerado_cooperativa.json` — Intermediário; gerado do zero (ISSUE-30.11), domínio cooperativa agrícola; métricas de pipeline OK, playtest humano pendente (`NEXT_ACTION: human`).
+
+Roster completo, fixtures técnicas (`showcase_tecnico.json`, `sinal_verde_demo_blueprint.json`) e status de maturidade: `docs/ESTADO_ATUAL.md` (fonte que prevalece).
 
 ## Prioridade atual
 
@@ -190,8 +194,8 @@ ruff check generator/ scripts/ tests/
 Validator strict dos canônicos quando tocar blueprint, schema, validator, documentação de estado ou pacote:
 
 ```bash
-python generator/validator.py examples/caso_canonico_iniciante.json --strict
-python generator/validator.py examples/caso_canonico_intermediario.json --strict
+python -m generator.validator examples/caso_canonico_iniciante.json --strict
+python -m generator.validator examples/caso_canonico_intermediario.json --strict
 ```
 
 Build real quando tocar renderização ou pacote:

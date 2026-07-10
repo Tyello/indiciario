@@ -9,7 +9,7 @@ LAST_EXECUTION_REPORT: .ai/runs/ISSUE-40.5/STEP-05_EXECUTION.md
 LAST_REVIEW_REPORT: n/a (auto-approve, low-risk, documentation)
 BLOCKER: none
 
-**Status:** especificada, pronta para execução
+**Status:** concluída (ver `STATUS: done` acima)
 **Prioridade:** P1
 **Depende de:** 40.3
 **Bloqueia:** 40.6

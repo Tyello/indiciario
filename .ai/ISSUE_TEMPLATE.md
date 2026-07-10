@@ -96,6 +96,8 @@ Revisor obrigatório: red, green, refactor, validation, correction.
 
 > Note o **STEP-05 docs** dedicado: o impacto documental declarado no SPEC vira um passo executável, não uma lembrança opcional.
 
+> **Campo `STATUS` único.** Cada `ISSUE-XX.md` carrega só um campo `STATUS` machine-readable (bloco no topo: `ready`/`done`/`blocked`), atualizado a cada wrap-up. Não repetir estado em prosa solta tipo "**Status:** especificada, pronta para execução" em outro ponto do arquivo — vira header contraditório quando a issue evolui e a prosa não acompanha (ver DIV-11 da auditoria de julho/2026).
+
 ---
 
 ## Checklist de fechamento (reflete o critério de tarefa concluída de `AGENTS.md`)
