@@ -597,6 +597,46 @@ testes em `tests/test_solvability_meter.py`. Spec: `.ai/issues/ISSUE-33.5_SPEC.m
 Honestidade: mede dificuldade **para um solver LLM**, proxy — playtest humano continua
 sendo o veredito real de dificuldade e solvabilidade.
 
+### Execução real (ISSUE-33.8)
+
+Toda a cadeia 31→33.6 rodou exclusivamente contra `FakeProvider`. A ISSUE-33.8 fecha essa
+lacuna com um provider concreto e um CLI executável, sem alterar o contrato do harness.
+
+**Decisão de produto**: provider via API HTTP com `ANTHROPIC_API_KEY` foi **rejeitado**
+(fora de escopo — custo de API por chamada, gestão de chave). A rota escolhida é headless
+Claude Code (`claude -p`), autenticado pela sessão/assinatura do próprio operador, sem
+API key nenhuma.
+
+- `generator/claude_code_provider.py` — `ClaudeCodeProvider` satisfaz `LLMProvider`
+  chamando o binário `claude` em modo headless via subprocess (`claude -p --model
+  <model_id> --output-format text --tools ""`), prompt sempre via stdin (nunca argv, para
+  não vazar conteúdo do bundle em listagem de processos). Confinamento: cwd temporário
+  descartável por chamada, `--tools ""` bloqueia acesso a ferramentas/arquivos.
+  `supports_temperature = False` — o parâmetro de temperatura não existe no canal
+  headless; o `solvability_meter` reflete isso em `reproducibility.temperature = None` +
+  `temperature_note: "provider-controlled"`. Contrato CC_001–CC_005 (confinamento,
+  injeção via stdin, mapeamento de erro, argv, temperatura ignorada). Ver
+  `docs/GUIA_CODIGOS_ERROS.md`.
+- `generator/solvability_cli.py` — CLI que chama `measure_solvability` contra um bundle
+  real e grava o `SolvabilityReport` em `--out`, com resumo humano no stdout. Guards
+  CC_006–CC_008: `--out` nunca dentro do bundle (bundle comprovadamente imutável),
+  `--expected` nunca pode ser um blueprint completo (gabarito) — só um arquivo de
+  conclusões esperadas fornecido pelo operador.
+
+Fluxo operacional e regra de isolamento em produção: a execução real do CLI é **ato do
+operador humano**, nunca de um agente de IA — custo de execução e protocolo (ver
+`AGENTS.md`/`CLAUDE.md`). O binário `claude` precisa estar instalado e autenticado na
+máquina do operador; nenhuma chave de API entra em arquivo do repositório.
+Testes: `tests/test_claude_code_provider.py`, `tests/test_solvability_cli.py`. Spec:
+`.ai/issues/ISSUE-33.8_SPEC.md`.
+
+Smoke real (STEP-06, `.ai/runs/ISSUE-33.8/STEP-06_EXECUTION.md`) rodou o CLI fim-a-fim
+contra Claude Code real (modelo `sonnet`) e expôs, além do provider em si, dois achados de
+robustez pré-existentes em `llm_blind_solver.py`/`conclusion_judge.py` (parse de JSON
+envolto em fence markdown) e no template `prompts/blind_solver_v1.md` (falta de instrução
+sobre coerência `confidence`/`open_questions`, regra RV_004) — corrigidos, pois só um
+modelo real (nunca `FakeProvider`) produz essas variações de saída.
+
 ## Próximos passos
 
 - **ISSUE-17 — Blind Solver Report Validator**: validador dedicado que aprofunda

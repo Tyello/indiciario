@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import asdict, dataclass, field, fields, replace
 from pathlib import Path
 from typing import Any, Mapping
@@ -58,6 +59,15 @@ def _validate_evidence_used_shape(parsed: Mapping[str, Any]) -> str | None:
         if not isinstance(item, dict):
             return f"evidence_used item must be an object, got {type(item).__name__}: {item!r}"
     return None
+
+
+_MARKDOWN_FENCE_RE = re.compile(r"^```(?:json)?\s*\n(.*)\n```\s*$", re.DOTALL)
+
+
+def _strip_markdown_fence(text: str) -> str:
+    """Strip a ```json ... ``` (or bare ```) fence real providers commonly wrap JSON in."""
+    match = _MARKDOWN_FENCE_RE.match(text.strip())
+    return match.group(1).strip() if match else text
 
 
 @dataclass
@@ -223,7 +233,7 @@ class LLMBlindSolver:
                 request_id=context.solver_run_id,
             )
             response = self.provider.complete(request)
-            response_text = response.text.strip()
+            response_text = _strip_markdown_fence(response.text.strip())
 
             parsed: Any = None
             try:

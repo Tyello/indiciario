@@ -175,7 +175,8 @@ Não implementar por iniciativa própria:
 - geração em massa;
 - pagamento;
 - IA gerando imagens;
-- canônico Avançado antes de baseline visual e novo playtest.
+- canônico Avançado antes de baseline visual e novo playtest;
+- executar `generator/solvability_cli.py` (ou `ClaudeCodeProvider`) contra o binário `claude` real — execução real é ato do operador humano (custo de execução e protocolo, ISSUE-33.8); provider é headless Claude Code autenticado pela sessão do operador, sem API key.
 
 ## Comandos obrigatórios
 

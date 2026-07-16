@@ -1,0 +1,463 @@
+schema_version: '1.0'
+manifest_id: MANIFEST-CALIB-UMANOITESEMFLORES-01
+run_id: CALIB-UMANOITESEMFLORES-01
+bundle_id: BUNDLE-CALIB-UMANOITESEMFLORES-01
+case_id: UMA-NOITE-SEM-FLORES-CALIBRACAO
+case_version: 1-0
+created_at: '2026-07-12T00:00:00Z'
+created_by: ISSUE_33_9_STEP_01
+role: blind_solver
+stage: blind_solve
+bundle_context:
+  purpose: Prepare explicit artifacts for a role-scoped blind bundle.
+  source_root: source
+  bundle_root: BUNDLE-CALIB-UMANOITESEMFLORES-01
+  generated_by: ISSUE_33_9_STEP_01
+  generated_at: '2026-07-12T00:00:00Z'
+  generation_mode: manual
+  offline_safe: true
+visibility_policy:
+  allowed_categories:
+  - public_player
+  prohibited_categories:
+  - private_author
+  - facilitator
+  - review_private
+  - playtest_anonymized
+  - technical_metadata
+  allow_solution: false
+  allow_future_envelopes: false
+  allow_private_notes: false
+  allow_other_agents_outputs: false
+  allow_source_metadata: false
+  contains_solution: false
+  contains_future_envelopes: false
+  contains_private_author_notes: false
+  contains_other_agents_outputs: false
+  rationale: Blind solver bundles are restricted to structurally safe player-visible
+    or sanitized derived artifacts.
+included_artifacts:
+- artifact_id: ART-E1-00
+  path: player/E1-00.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 3f839aaa156e3c58703f8eccbc06c94514f744459a0a0b9ecda12cc147e0089c
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-00 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-01
+  path: player/E1-01.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 1b887ac9087b00ac96aed856455679068087058007799079f6d6ea7cf73f102f
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-01 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-02
+  path: player/E1-02.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 77441c13526e2b374cb206d3c1a28f88ee4b93ff8daa3fb9e3fb7c60d71a564f
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-02 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-03
+  path: player/E1-03.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 2050d315b6930847bd2e218ef9288f6b16ed39217545af4317028481b318d174
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-03 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-04
+  path: player/E1-04.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 54cf5ea08478c544695f0840209a9de669375c4fe378fc5717dbbd236e553c43
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-04 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-05
+  path: player/E1-05.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 24a7a7a9c689d7741c7f52679858faa0a5f57b2b680fa794a146fc60739c53e8
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-05 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-06
+  path: player/E1-06.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 7f2f5e3789593e208d245b439e23a76278f67a93b7945f512c96fa16955bbbd5
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-06 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-07
+  path: player/E1-07.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 14a1f3a84182c778c84d428b6789b90e8ae48182d79db6c98a8210e9954175c7
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-07 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-08
+  path: player/E1-08.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: a8dd116d6b41edff8dcee79366bd26556642113ea0931c61a414e87b20f09fe5
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-08 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E1-09
+  path: player/E1-09.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: db87fcee006d40ce8ff63843d85d2ceac6707c89869fc75b247a794a9dc0785e
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E1-09 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-00
+  path: player/E2-00.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 34ee807d934531ce100280b94f1ffd37e469aa5b3de15189a3126473ab006a9d
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-00 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-01
+  path: player/E2-01.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 6583bd35519b17112ae8bd9c9df13bfb29ecde689002b50b7c61e0c368662451
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-01 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-02
+  path: player/E2-02.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 48afa58149e382a22061d5c8482ddbdae826a6177516de3e9e575e3626de12af
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-02 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-03
+  path: player/E2-03.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: e9b76535a9dd0611d8f65a99cbbcb5d81aace9491aeb4b83196284412cbf7c5d
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-03 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-04
+  path: player/E2-04.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: f179cbc524e33b7c13cdd10f120008187a4d9dcc3377c66d99ef95efdbf2d9f8
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-04 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-05
+  path: player/E2-05.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 4542c419998a960e4402dfef54cc0255adf49b705bc57421087345c4eb0ac439
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-05 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-06
+  path: player/E2-06.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 94c20385b6fd65c6617abc3376ecc217fa5858ae16207200afdacbc58adb12cc
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-06 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-07
+  path: player/E2-07.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: e44172666453e7474945bf0c4275e0e4eaca0a7e212f2dea6f609f734552f9e8
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-07 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+- artifact_id: ART-E2-08
+  path: player/E2-08.md
+  artifact_type: player_document
+  visibility: public_player
+  envelope_scope: current_envelope
+  hash: 1a9cd0b38e68c44cc706c9633e0e0f609510b892fe226e7538463f05eb33fe7e
+  hash_algorithm: sha256
+  source_role: author
+  included_reason: Documento E2-08 do blueprint de calibracao (ISSUE-33.9), cego para
+    o solver.
+excluded_artifacts: []
+transformations:
+- transformation_id: TRANSFORMATION_001
+  type: copy
+  source_path: source/public/E1-00.md
+  target_path: bundle/player/E1-00.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 3f839aaa156e3c58703f8eccbc06c94514f744459a0a0b9ecda12cc147e0089c
+  hash_after: 3f839aaa156e3c58703f8eccbc06c94514f744459a0a0b9ecda12cc147e0089c
+- transformation_id: TRANSFORMATION_002
+  type: copy
+  source_path: source/public/E1-01.md
+  target_path: bundle/player/E1-01.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 1b887ac9087b00ac96aed856455679068087058007799079f6d6ea7cf73f102f
+  hash_after: 1b887ac9087b00ac96aed856455679068087058007799079f6d6ea7cf73f102f
+- transformation_id: TRANSFORMATION_003
+  type: copy
+  source_path: source/public/E1-02.md
+  target_path: bundle/player/E1-02.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 77441c13526e2b374cb206d3c1a28f88ee4b93ff8daa3fb9e3fb7c60d71a564f
+  hash_after: 77441c13526e2b374cb206d3c1a28f88ee4b93ff8daa3fb9e3fb7c60d71a564f
+- transformation_id: TRANSFORMATION_004
+  type: copy
+  source_path: source/public/E1-03.md
+  target_path: bundle/player/E1-03.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 2050d315b6930847bd2e218ef9288f6b16ed39217545af4317028481b318d174
+  hash_after: 2050d315b6930847bd2e218ef9288f6b16ed39217545af4317028481b318d174
+- transformation_id: TRANSFORMATION_005
+  type: copy
+  source_path: source/public/E1-04.md
+  target_path: bundle/player/E1-04.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 54cf5ea08478c544695f0840209a9de669375c4fe378fc5717dbbd236e553c43
+  hash_after: 54cf5ea08478c544695f0840209a9de669375c4fe378fc5717dbbd236e553c43
+- transformation_id: TRANSFORMATION_006
+  type: copy
+  source_path: source/public/E1-05.md
+  target_path: bundle/player/E1-05.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 24a7a7a9c689d7741c7f52679858faa0a5f57b2b680fa794a146fc60739c53e8
+  hash_after: 24a7a7a9c689d7741c7f52679858faa0a5f57b2b680fa794a146fc60739c53e8
+- transformation_id: TRANSFORMATION_007
+  type: copy
+  source_path: source/public/E1-06.md
+  target_path: bundle/player/E1-06.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 7f2f5e3789593e208d245b439e23a76278f67a93b7945f512c96fa16955bbbd5
+  hash_after: 7f2f5e3789593e208d245b439e23a76278f67a93b7945f512c96fa16955bbbd5
+- transformation_id: TRANSFORMATION_008
+  type: copy
+  source_path: source/public/E1-07.md
+  target_path: bundle/player/E1-07.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 14a1f3a84182c778c84d428b6789b90e8ae48182d79db6c98a8210e9954175c7
+  hash_after: 14a1f3a84182c778c84d428b6789b90e8ae48182d79db6c98a8210e9954175c7
+- transformation_id: TRANSFORMATION_009
+  type: copy
+  source_path: source/public/E1-08.md
+  target_path: bundle/player/E1-08.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: a8dd116d6b41edff8dcee79366bd26556642113ea0931c61a414e87b20f09fe5
+  hash_after: a8dd116d6b41edff8dcee79366bd26556642113ea0931c61a414e87b20f09fe5
+- transformation_id: TRANSFORMATION_010
+  type: copy
+  source_path: source/public/E1-09.md
+  target_path: bundle/player/E1-09.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: db87fcee006d40ce8ff63843d85d2ceac6707c89869fc75b247a794a9dc0785e
+  hash_after: db87fcee006d40ce8ff63843d85d2ceac6707c89869fc75b247a794a9dc0785e
+- transformation_id: TRANSFORMATION_011
+  type: copy
+  source_path: source/public/E2-00.md
+  target_path: bundle/player/E2-00.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 34ee807d934531ce100280b94f1ffd37e469aa5b3de15189a3126473ab006a9d
+  hash_after: 34ee807d934531ce100280b94f1ffd37e469aa5b3de15189a3126473ab006a9d
+- transformation_id: TRANSFORMATION_012
+  type: copy
+  source_path: source/public/E2-01.md
+  target_path: bundle/player/E2-01.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 6583bd35519b17112ae8bd9c9df13bfb29ecde689002b50b7c61e0c368662451
+  hash_after: 6583bd35519b17112ae8bd9c9df13bfb29ecde689002b50b7c61e0c368662451
+- transformation_id: TRANSFORMATION_013
+  type: copy
+  source_path: source/public/E2-02.md
+  target_path: bundle/player/E2-02.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 48afa58149e382a22061d5c8482ddbdae826a6177516de3e9e575e3626de12af
+  hash_after: 48afa58149e382a22061d5c8482ddbdae826a6177516de3e9e575e3626de12af
+- transformation_id: TRANSFORMATION_014
+  type: copy
+  source_path: source/public/E2-03.md
+  target_path: bundle/player/E2-03.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: e9b76535a9dd0611d8f65a99cbbcb5d81aace9491aeb4b83196284412cbf7c5d
+  hash_after: e9b76535a9dd0611d8f65a99cbbcb5d81aace9491aeb4b83196284412cbf7c5d
+- transformation_id: TRANSFORMATION_015
+  type: copy
+  source_path: source/public/E2-04.md
+  target_path: bundle/player/E2-04.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: f179cbc524e33b7c13cdd10f120008187a4d9dcc3377c66d99ef95efdbf2d9f8
+  hash_after: f179cbc524e33b7c13cdd10f120008187a4d9dcc3377c66d99ef95efdbf2d9f8
+- transformation_id: TRANSFORMATION_016
+  type: copy
+  source_path: source/public/E2-05.md
+  target_path: bundle/player/E2-05.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 4542c419998a960e4402dfef54cc0255adf49b705bc57421087345c4eb0ac439
+  hash_after: 4542c419998a960e4402dfef54cc0255adf49b705bc57421087345c4eb0ac439
+- transformation_id: TRANSFORMATION_017
+  type: copy
+  source_path: source/public/E2-06.md
+  target_path: bundle/player/E2-06.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 94c20385b6fd65c6617abc3376ecc217fa5858ae16207200afdacbc58adb12cc
+  hash_after: 94c20385b6fd65c6617abc3376ecc217fa5858ae16207200afdacbc58adb12cc
+- transformation_id: TRANSFORMATION_018
+  type: copy
+  source_path: source/public/E2-07.md
+  target_path: bundle/player/E2-07.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: e44172666453e7474945bf0c4275e0e4eaca0a7e212f2dea6f609f734552f9e8
+  hash_after: e44172666453e7474945bf0c4275e0e4eaca0a7e212f2dea6f609f734552f9e8
+- transformation_id: TRANSFORMATION_019
+  type: copy
+  source_path: source/public/E2-08.md
+  target_path: bundle/player/E2-08.md
+  description: Copied the artifact byte-for-byte without changing player-visible content.
+  preserves_player_visible_content: true
+  hash_before: 1a9cd0b38e68c44cc706c9633e0e0f609510b892fe226e7538463f05eb33fe7e
+  hash_after: 1a9cd0b38e68c44cc706c9633e0e0f609510b892fe226e7538463f05eb33fe7e
+output_contract:
+  expected_output_type: blind_solution
+  required_sections:
+  - facts
+  - hypotheses
+  - answer
+  prohibited_content:
+  - solution
+  - future_envelopes
+  - private_author_notes
+  - other_agents_outputs
+  must_not_reveal:
+  - solution
+  - future_envelopes
+  - private_author_notes
+  - other_agents_outputs
+  output_visibility: derived_report
+  instructions: Return a blind solution using only the bundled artifacts and do not
+    reveal prohibited material.
+isolation_check:
+  status: passed
+  checked_at: '2026-07-12T00:00:00Z'
+  checked_by: ISSUE_33_9_STEP_01
+  checks:
+  - check_id: CHECK_NO_SYMLINK_SOURCE
+    status: passed
+    description: Confirmed listed source artifacts are not symlinks.
+    evidence: Each source path was checked with Path.is_symlink before copying.
+  - check_id: CHECK_SAFE_SOURCE_PATH
+    status: passed
+    description: Confirmed source paths are relative POSIX paths inside source_root.
+    evidence: Absolute paths, parent traversal, backslashes, missing files, and directories
+      are rejected.
+  - check_id: CHECK_SAFE_BUNDLE_PATH
+    status: passed
+    description: Confirmed bundle paths are relative POSIX paths inside the bundle
+      root.
+    evidence: Bundle target parents are resolved and checked for containment under
+      the bundle directory.
+  - check_id: CHECK_POLICY_VISIBILITY_ALLOWED
+    status: passed
+    description: Applied artifact_visibility_policy to every explicit artifact spec.
+    evidence: Denied artifacts are excluded from included_artifacts and copied files.
+  - check_id: CHECK_COPIED_HASH_RECORDED
+    status: passed
+    description: Recorded sha256 hashes for every copied artifact.
+    evidence: Each copied artifact has matching hash_before, hash_after, and included_artifacts
+      hash values.
+  - check_id: CHECK_MANIFEST_SCHEMA_VALID
+    status: passed
+    description: Validated generated manifest against schemas/blind_bundle_manifest.schema.yaml.
+    evidence: Draft202012Validator with FormatChecker is run before bundle publication.
+integrity:
+  hash_algorithm: sha256
+  artifact_count: 19
+  included_count: 19
+  excluded_count: 0
+  transformation_count: 19
+semantic_limitations_acknowledged:
+- artifact_paths_exist
+- artifact_hashes_match_file_content
+- manifest_hash_matches_content
+- role_visibility_matrix_complete
+- allowed_and_prohibited_categories_do_not_overlap
+- transformation_hash_chain_valid
+- source_artifacts_exist
+- target_artifacts_exist
+- isolation_check_was_actually_run
+- no_semantic_solution_leak
+- no_filename_based_solution_leak
+- no_metadata_leak
+- no_future_envelope_semantic_leak
+- output_contract_enforced_by_runner
+- bundle_root_exists
+- role_instructions_exist
+- artifact_count_matches_lists
+- transformations_are_non_destructive
+- manifest_id_unique
+- bundle_id_unique
+- run_id_exists

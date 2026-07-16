@@ -100,19 +100,24 @@ def measure_solvability(
     runs: int = 3,
     temperature: float = 0.7,
     key_evidence_ids: Sequence[str] | None = None,
+    judge_provider: LLMProvider | None = None,
 ) -> SolvabilityReport:
     """Run N solver->judge rounds over the same bundle and aggregate a report.
 
     Args:
         bundle_path: Path to the blind bundle (same bundle for every run).
         expected: Expected conclusions to judge each run's report against.
-        provider: LLMProvider shared by every solver and judge call.
+        provider: LLMProvider used by the solver (and by the judge too,
+            unless judge_provider is given).
         runs: Number of rounds to attempt (must be >= 1).
         temperature: Passed to the solver's provider requests (must be in [0.0, 2.0]).
             The judge uses a fixed temperature of 0.0 as per its design;
             this parameter controls solver behavior only.
         key_evidence_ids: Optional artifact ids forwarded to the judge's
             leak check on each run.
+        judge_provider: Optional distinct LLMProvider for judge calls
+            (e.g. a different model_id). Defaults to `provider` when omitted;
+            `reproducibility.provider_id` always reflects the solver's provider.
 
     Returns:
         SolvabilityReport with per-run results, solve_rate, classification
@@ -138,6 +143,7 @@ def measure_solvability(
     judge_prompt_sha256 = None
 
     run_results: list[RunResult] = []
+    effective_judge_provider = judge_provider or provider
 
     for i in range(runs):
         run_id = f"{meter_id}_RUN_{i}"
@@ -156,7 +162,7 @@ def measure_solvability(
             verdict = judge_conclusions(
                 harness_result.report,
                 expected,
-                provider,
+                effective_judge_provider,
                 key_evidence_ids=key_evidence_ids,
             )
         except (ProviderError, BlindSolverHarnessError, ConclusionJudgeError):
@@ -199,6 +205,17 @@ def measure_solvability(
     if runs_completed < runs:
         flags.append("RUNS_INCOMPLETAS")
 
+    supports_temperature = getattr(provider, "supports_temperature", True)
+    reproducibility: dict[str, object] = {
+        "temperature": temperature if supports_temperature else None,
+        "provider_id": provider.provider_id,
+        "solver_prompt_sha256": solver_prompt_sha256,
+        "judge_prompt_sha256": judge_prompt_sha256,
+        "runs_requested": runs,
+    }
+    if not supports_temperature:
+        reproducibility["temperature_note"] = "provider-controlled"
+
     return SolvabilityReport(
         meter_id=meter_id,
         bundle_id=bundle_meta.bundle_id,
@@ -209,11 +226,5 @@ def measure_solvability(
         classification_counts=classification_counts,
         difficulty_estimate=estimate_difficulty_from_solve_rate(solve_rate),
         flags=flags,
-        reproducibility={
-            "temperature": temperature,
-            "provider_id": provider.provider_id,
-            "solver_prompt_sha256": solver_prompt_sha256,
-            "judge_prompt_sha256": judge_prompt_sha256,
-            "runs_requested": runs,
-        },
+        reproducibility=reproducibility,
     )

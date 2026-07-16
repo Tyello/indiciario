@@ -491,3 +491,36 @@ def test_schema_rejects_additional_properties(source_tree: Path, output_root: Pa
     schema = _load_solvability_report_schema()
     with pytest.raises(ValidationError):
         Draft202012Validator(schema).validate(report_dict)
+
+
+# ============================================================================ #
+# RM_003: provider with supports_temperature=False                           #
+# ============================================================================ #
+
+
+def test_rm003_provider_temperature_support_false_sets_none_and_note(
+    source_tree: Path, output_root: Path
+) -> None:
+    """RM_003: when provider.supports_temperature is False, reproducibility.temperature should be None.
+
+    This tests the expected behavior after STEP-04 implementation: if a provider
+    declares it does not support temperature control, the meter should not record
+    a temperature value in the report, even if one was requested.
+    """
+    bundle = make_bundle(source_tree, output_root)
+    script: list[ScriptedResponse] = []
+    script.extend(run_pair(met=True))
+    provider = FakeProvider(script)
+
+    # Force provider to declare it does not support temperature
+    # (Python allows setting attributes on instances without __slots__)
+    provider.supports_temperature = False
+
+    report = measure_solvability(
+        bundle, expected_conclusions(), provider, runs=1, temperature=0.7
+    )
+
+    # When provider does not support temperature control, the meter should
+    # not record a temperature value in reproducibility
+    assert report.reproducibility.get("temperature") is None
+    assert report.reproducibility.get("temperature_note") == "provider-controlled"

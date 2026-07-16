@@ -52,7 +52,7 @@ Antes de executar qualquer tarefa:
 | F — Revisores | ✅ concluída | ISSUE-21+22, 23, 24 |
 | G — Orquestração | ✅ concluída | ISSUE-25+26, 27 |
 | H — Casos reais | ✅ concluída | ISSUE-28, 29, 30 |
-| I — LLM real | 🔄 em andamento | ISSUE-31–33.7 concluídas; ISSUE-34 candidata |
+| I — LLM real | 🔄 em andamento | ISSUE-31–33.8 concluídas; ISSUE-34 candidata |
 
 Limitações reais a não esconder (detalhe em `docs/ESTADO_ATUAL.md`):
 - blind solver do `pipeline_runner.py` é stub determinístico, não resolve o caso;
@@ -124,7 +124,9 @@ Exercício de calibração usando um caso comercial externo já validado em mesa
 
 **Fase Sistema visual (ISSUE-40.1–40.6) concluída** — ver `docs/ROADMAP.md` e `docs/ESTADO_ATUAL.md`.
 
-**ISSUE-41.1 (CI verde), ISSUE-41.2 (guard de sincronia docs/prompts) e ISSUE-41.3 (reconciliação documental) concluídas.** Série 33.x (Provider) concluída até **ISSUE-33.7** — Conclusion Judge ligado ao pipeline (33.3), hardening contra resposta hostil (33.4), `temperature` real no solver (33.5), warning de citação sem leitura (33.6) e determinismo de `created_at` no manifest (33.7).
+**ISSUE-41.1 (CI verde), ISSUE-41.2 (guard de sincronia docs/prompts) e ISSUE-41.3 (reconciliação documental) concluídas.** Série 33.x (Provider) concluída até **ISSUE-33.8** — Conclusion Judge ligado ao pipeline (33.3), hardening contra resposta hostil (33.4), `temperature` real no solver (33.5), warning de citação sem leitura (33.6), determinismo de `created_at` no manifest (33.7) e provider real + CLI de medição de solvabilidade (33.8).
+
+**ISSUE-33.8** entregou `generator/claude_code_provider.py` (`ClaudeCodeProvider`, primeiro `LLMProvider` concreto, headless Claude Code via `claude -p`, autenticado pela sessão/assinatura do operador, sem API key — decisão de produto rejeitou a rota via API HTTP/`ANTHROPIC_API_KEY`) e `generator/solvability_cli.py` (CLI que roda `measure_solvability` fim-a-fim contra um bundle real). **Agentes de IA não executam este CLI contra o binário real**: execução real é ato do operador humano (custo de execução e protocolo). Smoke real feito (`.ai/runs/ISSUE-33.8/STEP-06_EXECUTION.md`): 3/3 runs contra `sonnet`, `solve_rate=1.00`; achados corrigidos no processo — bug de PATHEXT/encoding no provider (Windows), parse de JSON com fence markdown no solver/judge, e falta de instrução de coerência `confidence`/`open_questions` no prompt do solver. ISSUE-33.9 (calibração usando o CLI) segue com seu próprio STATUS em `.ai/issues/ISSUE-33.9.md`.
 
 Próxima frente de trabalho candidata: **ISSUE-34 — LLM Reviewers Adapter** (conectar narrative/evidence/visual reviewers a modelo real; ver `docs/ROADMAP.md`). Não há `.ai/issues/ISSUE-34.md` ainda — spec precisa ser gerada antes de iniciar. 30.11 segue bloqueada em `NEXT_ACTION: human`. Confirmar sempre o estado exato em `docs/ESTADO_ATUAL.md` antes de iniciar.
 

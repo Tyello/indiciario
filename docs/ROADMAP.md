@@ -605,6 +605,51 @@ o `created_at` do run às duas chamadas, eliminando a dependência de relógio r
 tornava o manifest não-determinístico quando as duas chamadas cruzavam a fronteira de
 segundo. Spec: `.ai/issues/ISSUE-33.7_SPEC.md`.
 
+### ISSUE-33.8 — ClaudeCodeProvider concreto + CLI de medição de solvabilidade ✅ concluída
+
+Toda a cadeia 31→33.6 rodou exclusivamente contra `FakeProvider` — nenhum modelo real
+executou o circuito. Fecha essa lacuna com um provider concreto e um CLI executável.
+
+**Decisão de produto**: provider via API HTTP com `ANTHROPIC_API_KEY` foi descartado
+(fora de escopo — custo de API por chamada). Rota escolhida: headless Claude Code
+(`claude -p`), autenticado pela sessão/assinatura do operador, sem API key.
+
+Entregável: `generator/claude_code_provider.py` — `ClaudeCodeProvider` satisfaz
+`LLMProvider` chamando o binário `claude` via subprocess (`claude -p --model <model_id>
+--output-format text --tools ""`), prompt sempre via stdin (nunca argv, evita vazar
+conteúdo do bundle em listagem de processos). Runner injetável para testes 100% offline;
+default resolve o binário via `shutil.which` (necessário no Windows, onde `claude` é um
+shim `.CMD` do npm que `subprocess.run` sem `shell=True` não resolve por PATHEXT) e chama
+`subprocess.run(..., encoding="utf-8")` explícito (o encoding padrão do console Windows,
+cp1252, não cobre todo o alfabeto de respostas reais em português). Contrato
+CC_001–CC_005: confinamento via cwd temporário descartável + `--tools ""`; binário
+ausente/timeout/`returncode != 0` viram `ProviderTransportError` (1 retentativa); stdout
+vazio vira `ProviderResponseError` sem retry; `supports_temperature = False` (parâmetro
+não existe no canal headless).
+
+`generator/solvability_cli.py` — CLI (`--bundle`, `--expected`, `--runs`, `--temperature`,
+`--solver-model`, `--judge-model`, `--out`) que chama `measure_solvability` e grava o
+`SolvabilityReport` em `--out`, com resumo humano no stdout. `measure_solvability` ganhou o
+parâmetro opcional `judge_provider` (default = `provider`, compatível com todos os chamadores
+existentes) para permitir solver e juiz em modelos distintos via CLI, sem tocar o contrato
+SM_001–SM_005. Contrato CC_006–CC_008: `--out` nunca pode apontar para dentro do bundle
+(bundle comprovadamente imutável); `--expected` nunca pode ser um blueprint completo
+— guard heurístico por assinatura de campos aborta com mensagem orientando extrair só os
+statements; `--temperature` vira no-op com warning (provider ignora). Injeção de provider
+fake para teste via monkeypatch de `solvability_cli.build_provider` (sem flag oculta
+exposta ao usuário final).
+
+Regra operacional: agentes de IA **não executam** este CLI contra o binário real — ato do
+operador humano (ver `AGENTS.md`/`CLAUDE.md`). Smoke real (STEP-06,
+`.ai/runs/ISSUE-33.8/STEP-06_EXECUTION.md`) rodou o CLI fim-a-fim contra Claude Code real
+(`sonnet`, 3/3 runs, `solve_rate=1.00`) e, além dos 2 bugs do provider acima, expôs dois
+achados de robustez só visíveis com modelo real (nunca com `FakeProvider`): parse de JSON
+envolto em fence markdown (corrigido em `llm_blind_solver.py`/`conclusion_judge.py`) e
+falta de instrução de coerência `confidence`/`open_questions` no prompt do solver
+(corrigida em `prompts/blind_solver_v1.md`, regra RV_004). Testes:
+`tests/test_claude_code_provider.py`, `tests/test_solvability_cli.py`. Spec:
+`.ai/issues/ISSUE-33.8_SPEC.md`.
+
 ### ISSUE-34 — LLM Reviewers Adapter
 
 Conectar narrative/evidence/visual reviewers a modelo real.

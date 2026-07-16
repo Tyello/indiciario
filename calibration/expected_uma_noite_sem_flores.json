@@ -1,0 +1,25 @@
+{
+  "conclusions": [
+    {
+      "id": "culpado",
+      "statement": "O chefe de segurança Aurélio Penha (credencial biométrica 27) é quem liberou o acesso interno à galeria principal na janela da queda de energia, permitindo a retirada da obra.",
+      "required": true
+    },
+    {
+      "id": "metodo",
+      "statement": "Aurélio usou a janela da queda de energia planejada para cruzar a porta biométrica da galeria com a credencial 27; Sérgio Brum, maçariqueiro terceirizado, cortou a moldura-relíquia de carvalho para reduzir o volume da obra; a transportadora escoou a peça sob o BID da reforma até a consignação reservada da Arcano Gallery, identificada pela etiqueta hex #7F004B.",
+      "required": true
+    },
+    {
+      "id": "motivo",
+      "statement": "Aurélio acumulava dívidas e viu na reforma e na queda de energia programada a oportunidade de liberar a obra para venda no mercado paralelo.",
+      "required": true
+    },
+    {
+      "id": "descarte_rui",
+      "statement": "O recém-admitido Rui Caldas não é o autor: sua credencial não registra passagem pela galeria durante a janela crítica, apenas presença na sala de segurança.",
+      "required": false
+    }
+  ],
+  "key_evidence_ids": ["ART-E1-02", "ART-E1-03", "ART-E2-04", "ART-E2-03", "ART-E2-07", "ART-E2-08"]
+}

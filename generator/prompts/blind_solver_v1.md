@@ -24,6 +24,7 @@ Os seguintes artefatos foram fornecidos para análise:
 3. **Solução alternativa**: Se existir mais de uma solução que satisfaz as evidências, declare isso em `open_questions` em vez de fingir certeza.
 4. **Não inventar artefatos**: Você PODE APENAS referenciar artifact_ids da lista acima. Nenhum arquivo além dos listados existe.
 5. **Proibido fabricar evidências**: Tudo que você citar deve estar realmente nos artefatos fornecidos.
+6. **Coerência entre confidence e open_questions**: Se `confidence` for `"high"`, `open_questions` deve ser uma lista vazia — alta confiança e lacuna de evidência pendente são contraditórios. Se ainda restar alguma dúvida real, use `confidence: "medium"` ou `"low"` em vez de `"high"`.
 
 ## Formato de Resposta
 

@@ -105,6 +105,14 @@ Famílias nascidas nas ISSUE-17/31/32/33/33.1/33.2. Não fazem parte do `validat
 | HD_003 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | Loop de reparo real até `max_repair_attempts` reenvios antes do erro contratual |
 | HD_004 | `generator/llm_blind_solver.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | Ids/metadados substituídos antes de inserir conteúdo de artefatos — literal tipo `{bundle_id}` em artefato não é substituído |
 | HD_005 | `generator/conclusion_judge.py` | `.ai/issues/ISSUE-33.4_SPEC.md` | `JudgeVerdict` final revalidado contra `judge_verdict.schema.yaml`; `report_run_id` com fallback conforme (`minLength`) |
+| CC_001 | `generator/claude_code_provider.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | Confinamento: cwd temporário descartável por chamada + `--tools ""`; nenhum path de repo/bundle entra no argv |
+| CC_002 | `generator/claude_code_provider.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | Runner injetável (`Callable[[list[str], str, Path], CompletedRun]`); default via subprocess contra o binário `claude` real (`shutil.which` resolve `claude.CMD` no Windows); testes sempre injetam runner fake, nenhum invoca o binário real |
+| CC_003 | `generator/claude_code_provider.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | Binário ausente (`FileNotFoundError`) ou falha de transporte genérica → `ProviderTransportError` (1 retentativa se `max_transport_retries>0`); `returncode != 0` → `ProviderTransportError` com trecho de stderr; stdout vazio → `ProviderResponseError`, sem retry |
+| CC_004 | `generator/claude_code_provider.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | argv base `["claude", "-p", "--model", model_id, "--output-format", "text", "--tools", ""]`; `system`, quando fornecido, vira `--system-prompt <texto>`; prompt sempre via stdin, nunca argv |
+| CC_005 | `generator/claude_code_provider.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | `supports_temperature = False` — parâmetro de temperatura não existe no canal headless; `solvability_meter` reflete com `reproducibility.temperature = None` + `temperature_note: "provider-controlled"` |
+| CC_006 | `generator/solvability_cli.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | CLI (`--bundle`, `--expected`, `--runs`, `--temperature`, `--solver-model`, `--judge-model`, `--out`) executa `measure_solvability` e grava o `SolvabilityReport`; `--temperature` é no-op com warning (provider ignora); resumo humano no stdout |
+| CC_007 | `generator/solvability_cli.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | `--out` nunca aponta para dentro do bundle; bundle de entrada nunca é escrito (imutabilidade comprovada por hash) |
+| CC_008 | `generator/solvability_cli.py` | `.ai/issues/ISSUE-33.8_SPEC.md` | `--expected` nunca pode ser um blueprint completo (gabarito); guard por assinatura de campos característicos (2+ de `titulo, documentos, personagens, verdade_real, contratos_evidencia, matriz_pistas`) aborta com mensagem orientando extrair só os statements |
 
 ## Lacunas conhecidas
 

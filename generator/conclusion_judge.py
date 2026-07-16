@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
@@ -283,6 +284,15 @@ def _render_prompt(
     return rendered
 
 
+_MARKDOWN_FENCE_RE = re.compile(r"^```(?:json)?\s*\n(.*)\n```\s*$", re.DOTALL)
+
+
+def _strip_markdown_fence(text: str) -> str:
+    """Strip a ```json ... ``` (or bare ```) fence real providers commonly wrap JSON in."""
+    match = _MARKDOWN_FENCE_RE.match(text.strip())
+    return match.group(1).strip() if match else text
+
+
 def _call_provider_with_repair(
     provider: LLMProvider,
     prompt: str,
@@ -296,7 +306,7 @@ def _call_provider_with_repair(
         try:
             request = ProviderRequest(prompt=current_prompt, temperature=0.0)
             response = provider.complete(request)
-            result_dict = json.loads(response.text)
+            result_dict = json.loads(_strip_markdown_fence(response.text))
             return result_dict
         except json.JSONDecodeError as exc:
             last_error = str(exc)

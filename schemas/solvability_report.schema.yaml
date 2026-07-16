@@ -92,9 +92,13 @@ properties:
       - runs_requested
     properties:
       temperature:
-        type: number
+        type: ["number", "null"]
         minimum: 0.0
         maximum: 2.0
+      temperature_note:
+        type: string
+        minLength: 1
+        maxLength: 64
       provider_id:
         type: string
         minLength: 1
