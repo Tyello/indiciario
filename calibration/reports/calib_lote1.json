@@ -1,0 +1,54 @@
+{
+  "meter_id": "METER_1784293071639",
+  "bundle_id": "BUNDLE-CALIB-UMANOITESEMFLORES-01",
+  "runs_requested": 5,
+  "runs_completed": 4,
+  "run_results": [
+    {
+      "run_id": "METER_1784293071639_RUN_0",
+      "classification": "ambiguo",
+      "required_met_count": 1,
+      "required_total": 3
+    },
+    {
+      "run_id": "METER_1784293071639_RUN_1",
+      "classification": "vazamento",
+      "required_met_count": 2,
+      "required_total": 3
+    },
+    {
+      "run_id": "METER_1784293071639_RUN_2",
+      "classification": "nao_resolvido",
+      "required_met_count": 2,
+      "required_total": 3
+    },
+    {
+      "run_id": "METER_1784293071639_RUN_4",
+      "classification": "ambiguo",
+      "required_met_count": 2,
+      "required_total": 3
+    }
+  ],
+  "solve_rate": 0.0,
+  "classification_counts": {
+    "resolvido": 0,
+    "nao_resolvido": 1,
+    "vazamento": 1,
+    "ambiguo": 2
+  },
+  "difficulty_estimate": "injusto",
+  "flags": [
+    "AMBIGUIDADE_DETECTADA",
+    "VAZAMENTO_DETECTADO",
+    "RUNS_INCOMPLETAS"
+  ],
+  "reproducibility": {
+    "temperature": null,
+    "provider_id": "claude-code",
+    "solver_prompt_sha256": "ceb187f3520fe4e98642ce76e892586284caf49c048cda5dc8a41ac2bb1625b8",
+    "judge_prompt_sha256": "ae7a023895bdd9d6fad82df2ccbb342b795dc6b9dc0864b4bcc15c9928050c93",
+    "runs_requested": 5,
+    "temperature_note": "provider-controlled"
+  },
+  "difficulty_framework_ref": "docs/DIFFICULTY_FRAMEWORK.md#solvability-meter-proxy-llm"
+}
